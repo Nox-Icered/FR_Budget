@@ -4,7 +4,9 @@ version = "0.0.0"
 description = "Moteur de calcul du simulateur public du budget des administrations publiques françaises"
 license = "AGPL-3.0-or-later"
 requires-python = ">=3.12,<3.13"
-dependencies = []
+dependencies = [
+    "openfisca-france==176.1.2",
+]
 
 [dependency-groups]
 dev = [
@@ -44,3 +46,8 @@ markers = [
     "validation: test qui compare le modèle à un chiffrage de référence officiel ou académique",
 ]
 addopts = "--strict-markers"
+
+[[tool.mypy.overrides]]
+# OpenFisca ne publie pas d'annotations de types.
+module = ["openfisca_core.*", "openfisca_france.*"]
+ignore_missing_imports = true

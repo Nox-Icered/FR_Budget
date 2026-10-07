@@ -1,0 +1,14 @@
+{
+  "name": "references-urssaf",
+  "private": true,
+  "description": "Génère les valeurs de référence des ménages types avec le modèle de calcul de mon-entreprise.urssaf.fr",
+  "type": "module",
+  "license": "AGPL-3.0-or-later",
+  "scripts": {
+    "generer": "node generer.mjs"
+  },
+  "dependencies": {
+    "modele-social": "11.1.0",
+    "publicodes": "1.10.3"
+  }
+}

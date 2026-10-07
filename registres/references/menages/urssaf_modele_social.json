@@ -1,0 +1,73 @@
+{
+  "source": {
+    "nom": "Modèle de calcul de mon-entreprise.urssaf.fr (paquet npm modele-social)",
+    "editeur": "Urssaf Caisse nationale (betagouv/mon-entreprise)",
+    "url": "https://www.npmjs.com/package/modele-social",
+    "depot": "https://github.com/betagouv/mon-entreprise",
+    "licence": "MIT",
+    "version_modele_social": "11.1.0",
+    "version_publicodes": "1.10.3",
+    "script": "outils/references_urssaf/generer.mjs"
+  },
+  "cas": [
+    {
+      "id": "celibataire_smic_2026_01_sans_mutuelle",
+      "mois": "2026-01",
+      "situation": {
+        "salarié . contrat . salaire brut": "SMIC",
+        "salarié . cotisations . prévoyances . santé . montant": "0 €/mois"
+      },
+      "hypotheses": {
+        "effectif_entreprise": 4,
+        "taux_accident_travail": 0.0208,
+        "mutuelle_montant_mensuel": 0,
+        "mutuelle_part_employeur": 0.5
+      },
+      "resultats_mensuels": {
+        "salaire_brut": 1823.033333333333,
+        "cout_employeur": 1879.2921419999998,
+        "net_avant_impot": 1443.1086290833332,
+        "net_imposable": 1495.0514063333333
+      }
+    },
+    {
+      "id": "celibataire_smic_2026_01_mutuelle_par_defaut",
+      "mois": "2026-01",
+      "situation": {
+        "salarié . contrat . salaire brut": "SMIC"
+      },
+      "hypotheses": {
+        "effectif_entreprise": 4,
+        "taux_accident_travail": 0.0208,
+        "mutuelle_montant_mensuel": 40,
+        "mutuelle_part_employeur": 0.5
+      },
+      "resultats_mensuels": {
+        "salaire_brut": 1823.033333333333,
+        "cout_employeur": 1899.2921419999998,
+        "net_avant_impot": 1421.1686290833331,
+        "net_imposable": 1493.6914063333331
+      }
+    },
+    {
+      "id": "celibataire_smic_2026_07_sans_mutuelle",
+      "mois": "2026-07",
+      "situation": {
+        "salarié . contrat . salaire brut": "SMIC",
+        "salarié . cotisations . prévoyances . santé . montant": "0 €/mois"
+      },
+      "hypotheses": {
+        "effectif_entreprise": 4,
+        "taux_accident_travail": 0.0208,
+        "mutuelle_montant_mensuel": 0,
+        "mutuelle_part_employeur": 0.5
+      },
+      "resultats_mensuels": {
+        "salaire_brut": 1867.0166666666667,
+        "cout_employeur": 1924.632801,
+        "net_avant_impot": 1477.9257257916665,
+        "net_imposable": 1531.1216981666666
+      }
+    }
+  ]
+}

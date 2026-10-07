@@ -6,6 +6,7 @@ Elles sont appliquées sous forme de réforme OpenFisca : le paquet installé n'
 
 from __future__ import annotations
 
+from importlib.resources import files
 from pathlib import Path
 from typing import Any
 
@@ -15,12 +16,20 @@ from openfisca_core.reforms import Reform
 from openfisca_core.taxbenefitsystems import TaxBenefitSystem
 from openfisca_core.variables import Variable
 
-FICHIER_CORRECTIONS = Path(__file__).parents[4] / "registres" / "corrections_openfisca.yaml"
+NOM_REGISTRE = "corrections_openfisca.yaml"
+# Dans le dépôt, le registre est à la racine ; un paquet installé en embarque une copie.
+REGISTRE_DEPOT = Path(__file__).parents[4] / "registres" / NOM_REGISTRE
 
 
-def charger_corrections(fichier: Path = FICHIER_CORRECTIONS) -> dict[str, Any]:
-    """Lit le registre des corrections."""
-    contenu: dict[str, Any] = yaml.safe_load(fichier.read_text(encoding="utf-8"))
+def charger_corrections(fichier: Path | None = None) -> dict[str, Any]:
+    """Lit le registre des corrections : celui du dépôt s'il existe, sinon celui du paquet."""
+    if fichier is not None:
+        texte = fichier.read_text(encoding="utf-8")
+    elif REGISTRE_DEPOT.is_file():
+        texte = REGISTRE_DEPOT.read_text(encoding="utf-8")
+    else:
+        texte = files("fr_budget").joinpath("registres", NOM_REGISTRE).read_text(encoding="utf-8")
+    contenu: dict[str, Any] = yaml.safe_load(texte)
     return contenu
 
 

@@ -1,3 +1,4 @@
+import hashlib
 from pathlib import Path
 from typing import Any
 
@@ -125,3 +126,48 @@ def test_empreinte_differente_refusee(tmp_path: Path) -> None:
     }
     resultat = erreurs(ecrire_registres(tmp_path, datasets=[dataset]))
     assert any("empreinte" in e for e in resultat)
+
+
+def test_cle_racine_mal_orthographiee_refusee(tmp_path: Path) -> None:
+    registres = ecrire_registres(tmp_path)
+    (registres / "hypotheses.yaml").write_text(
+        yaml.safe_dump({"hypotheeses": [HYPOTHESE]}), encoding="utf-8"
+    )
+    assert any("clé racine" in e for e in erreurs(registres))
+
+
+def test_instrument_inconnu_refuse(tmp_path: Path) -> None:
+    hypothese = {**HYPOTHESE, "instruments": ["levier_absent"]}
+    resultat = erreurs(ecrire_registres(tmp_path, hypotheses=[hypothese]))
+    assert any("levier_absent" in e for e in resultat)
+
+
+@pytest.mark.parametrize("contenu", [None, {"termes": []}, {"terms": ["effort"]}])
+def test_liste_de_termes_interdits_absente_ou_vide_refusee(
+    tmp_path: Path, contenu: dict[str, Any] | None
+) -> None:
+    registres = ecrire_registres(tmp_path)
+    fichier = registres / "libelles_interdits.yaml"
+    if contenu is None:
+        fichier.unlink()
+    else:
+        fichier.write_text(yaml.safe_dump(contenu), encoding="utf-8")
+    assert any("libelles_interdits.yaml" in e for e in erreurs(registres))
+
+
+@pytest.mark.parametrize("chemin", ["data/processed/a.csv", "data/raw/../processed/a.csv"])
+def test_fichier_hors_de_data_raw_refuse(tmp_path: Path, chemin: str) -> None:
+    fichier = tmp_path / "data" / "processed" / "a.csv"
+    fichier.parent.mkdir(parents=True)
+    fichier.write_text("colonne\n1\n", encoding="utf-8")
+    dataset = {
+        "id": "dataset_a",
+        "source": "source_a",
+        "description": "Tableau A",
+        "fichier": chemin,
+        "empreinte_sha256": hashlib.sha256(fichier.read_bytes()).hexdigest(),
+        "methode_transformation": "pipelines/a.py",
+        "telecharge_le": "2026-10-07",
+    }
+    resultat = erreurs(ecrire_registres(tmp_path, datasets=[dataset]))
+    assert any("data/raw/" in e for e in resultat)

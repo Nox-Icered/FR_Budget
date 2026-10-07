@@ -52,13 +52,28 @@ def _lire(fichier: Path) -> Any:
     return yaml.safe_load(fichier.read_text(encoding="utf-8"))
 
 
-def _liste[M: BaseModel](fichier: Path, cle: str, modele: type[M], rapport: Rapport) -> list[M]:
+def _racine(fichier: Path, cle: str, rapport: Rapport) -> list[Any] | None:
+    """Contenu de la clé racine ``cle``, seule clé admise ; ``None`` (et une erreur) sinon."""
     contenu = _lire(fichier)
     if contenu is None:
         rapport.erreurs.append(f"{fichier.name} : fichier absent ou vide")
+        return None
+    if not isinstance(contenu, dict) or set(contenu) != {cle}:
+        rapport.erreurs.append(f"{fichier.name} : une seule clé racine attendue, « {cle} »")
+        return None
+    valeur = contenu[cle]
+    if not isinstance(valeur, list):
+        rapport.erreurs.append(f"{fichier.name} : « {cle} » doit être une liste")
+        return None
+    return valeur
+
+
+def _liste[M: BaseModel](fichier: Path, cle: str, modele: type[M], rapport: Rapport) -> list[M]:
+    contenu = _racine(fichier, cle, rapport)
+    if contenu is None:
         return []
     elements = []
-    for i, brut in enumerate(contenu.get(cle) or []):
+    for i, brut in enumerate(contenu):
         try:
             elements.append(modele.model_validate(brut))
         except ValidationError as erreur:
@@ -79,7 +94,11 @@ def charger(dossier: Path, rapport: Rapport) -> Registres:
             for detail in erreur.errors():
                 lieu = ".".join(str(x) for x in detail["loc"])
                 rapport.erreurs.append(f"corrections_openfisca.yaml / {lieu} : {detail['msg']}")
-    interdits = _lire(dossier / "libelles_interdits.yaml") or {}
+    interdits = _racine(dossier / "libelles_interdits.yaml", "termes", rapport) or []
+    if not interdits:
+        rapport.erreurs.append(
+            "libelles_interdits.yaml : aucun terme, contrôle de neutralité inactif"
+        )
     return Registres(
         sources=_liste(dossier / "sources.yaml", "sources", Source, rapport),
         datasets=_liste(dossier / "datasets.yaml", "datasets", Dataset, rapport),
@@ -89,7 +108,7 @@ def charger(dossier: Path, rapport: Rapport) -> Registres:
             dossier / "references" / "chiffrages.yaml", "chiffrages", Chiffrage, rapport
         ),
         corrections=corrections,
-        libelles_interdits=list(interdits.get("termes") or []),
+        libelles_interdits=[str(terme) for terme in interdits],
     )
 
 
@@ -116,14 +135,19 @@ def verifier(registres: Registres, racine: Path, rapport: Rapport) -> None:
 
     for d in registres.datasets:
         _renvoi(f"datasets.yaml / {d.id}", d.source, sources, "source", rapport)
-        fichier = racine / d.fichier
-        if not fichier.is_file():
+        donnees_brutes = (racine / "data" / "raw").resolve()
+        fichier = (racine / d.fichier).resolve()
+        if Path(d.fichier).is_absolute() or not fichier.is_relative_to(donnees_brutes):
+            rapport.erreurs.append(f"datasets.yaml / {d.id} : le fichier doit être sous data/raw/")
+        elif not fichier.is_file():
             rapport.avertissements.append(f"datasets.yaml / {d.id} : fichier absent ({d.fichier})")
         elif hashlib.sha256(fichier.read_bytes()).hexdigest() != d.empreinte_sha256:
             rapport.erreurs.append(f"datasets.yaml / {d.id} : empreinte différente du fichier")
     for h in registres.hypotheses:
         for s in h.sources:
             _renvoi(f"hypotheses.yaml / {h.id}", s, sources, "source", rapport)
+        for instrument in h.instruments:
+            _renvoi(f"hypotheses.yaml / {h.id}", instrument, leviers, "levier", rapport)
     for c in registres.chiffrages:
         _renvoi(f"chiffrages.yaml / {c.id}", c.levier, leviers, "levier", rapport)
         _renvoi(f"chiffrages.yaml / {c.id}", c.source, sources, "source", rapport)

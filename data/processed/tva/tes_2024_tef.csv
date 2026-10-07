@@ -1,0 +1,630 @@
+produit,emploi,millions_euros
+AZ,CF Ménages,35514.3
+AZ,CF Collective APU,0.0
+AZ,CF Individuelle APU,0.0
+AZ,CF Total APU,0.0
+AZ,CF ISBLSM,0.0
+AZ,CF DEPENSE TOTALE,35514.3
+AZ,FBCF SNFEI,1259.5
+AZ,FBCF Ménages hors EI,0.0
+AZ,FBCF SFEI,0.0
+AZ,FBCF APU,0.0
+AZ,FBCF ISBLSM,0.0
+AZ,FBCF FBCF TOTALE,1259.5
+AZ,Acq. moins ces. d'objets de valeur,0.0
+AZ,Variation des stocks,1283.6
+AZ,FBC totale,2543.1
+AZ,Exportations de biens et de services,19898.0
+AZ,Total des emplois finals,57955.4
+BZ,CF Ménages,19.4
+BZ,CF Collective APU,0.0
+BZ,CF Individuelle APU,0.0
+BZ,CF Total APU,0.0
+BZ,CF ISBLSM,0.0
+BZ,CF DEPENSE TOTALE,19.4
+BZ,FBCF SNFEI,0.0
+BZ,FBCF Ménages hors EI,0.0
+BZ,FBCF SFEI,0.0
+BZ,FBCF APU,0.0
+BZ,FBCF ISBLSM,0.0
+BZ,FBCF FBCF TOTALE,0.0
+BZ,Acq. moins ces. d'objets de valeur,0.0
+BZ,Variation des stocks,-3175.1
+BZ,FBC totale,-3175.1
+BZ,Exportations de biens et de services,10393.0
+BZ,Total des emplois finals,7237.3
+CA,CF Ménages,210816.2
+CA,CF Collective APU,0.0
+CA,CF Individuelle APU,570.0
+CA,CF Total APU,570.0
+CA,CF ISBLSM,0.0
+CA,CF DEPENSE TOTALE,211386.2
+CA,FBCF SNFEI,0.0
+CA,FBCF Ménages hors EI,0.0
+CA,FBCF SFEI,0.0
+CA,FBCF APU,0.0
+CA,FBCF ISBLSM,0.0
+CA,FBCF FBCF TOTALE,0.0
+CA,Acq. moins ces. d'objets de valeur,0.0
+CA,Variation des stocks,-3007.0
+CA,FBC totale,-3007.0
+CA,Exportations de biens et de services,64502.0
+CA,Total des emplois finals,272881.2
+CB,CF Ménages,51838.0
+CB,CF Collective APU,0.0
+CB,CF Individuelle APU,9.8
+CB,CF Total APU,9.8
+CB,CF ISBLSM,0.0
+CB,CF DEPENSE TOTALE,51847.8
+CB,FBCF SNFEI,0.0
+CB,FBCF Ménages hors EI,0.0
+CB,FBCF SFEI,0.0
+CB,FBCF APU,0.0
+CB,FBCF ISBLSM,0.0
+CB,FBCF FBCF TOTALE,0.0
+CB,Acq. moins ces. d'objets de valeur,0.0
+CB,Variation des stocks,-886.1
+CB,FBC totale,-886.1
+CB,Exportations de biens et de services,38924.0
+CB,Total des emplois finals,89885.7
+CC,CF Ménages,8845.8
+CC,CF Collective APU,0.0
+CC,CF Individuelle APU,0.0
+CC,CF Total APU,0.0
+CC,CF ISBLSM,0.0
+CC,CF DEPENSE TOTALE,8845.8
+CC,FBCF SNFEI,0.0
+CC,FBCF Ménages hors EI,0.0
+CC,FBCF SFEI,0.0
+CC,FBCF APU,0.0
+CC,FBCF ISBLSM,0.0
+CC,FBCF FBCF TOTALE,0.0
+CC,Acq. moins ces. d'objets de valeur,0.0
+CC,Variation des stocks,-662.7
+CC,FBC totale,-662.7
+CC,Exportations de biens et de services,10092.0
+CC,Total des emplois finals,18275.1
+CD,CF Ménages,56741.0
+CD,CF Collective APU,0.0
+CD,CF Individuelle APU,0.0
+CD,CF Total APU,0.0
+CD,CF ISBLSM,0.0
+CD,CF DEPENSE TOTALE,56741.0
+CD,FBCF SNFEI,0.0
+CD,FBCF Ménages hors EI,0.0
+CD,FBCF SFEI,0.0
+CD,FBCF APU,0.0
+CD,FBCF ISBLSM,0.0
+CD,FBCF FBCF TOTALE,0.0
+CD,Acq. moins ces. d'objets de valeur,0.0
+CD,Variation des stocks,465.0
+CD,FBC totale,465.0
+CD,Exportations de biens et de services,16361.0
+CD,Total des emplois finals,73567.0
+CE,CF Ménages,24480.7
+CE,CF Collective APU,0.0
+CE,CF Individuelle APU,0.0
+CE,CF Total APU,0.0
+CE,CF ISBLSM,0.0
+CE,CF DEPENSE TOTALE,24480.7
+CE,FBCF SNFEI,0.0
+CE,FBCF Ménages hors EI,0.0
+CE,FBCF SFEI,0.0
+CE,FBCF APU,0.0
+CE,FBCF ISBLSM,0.0
+CE,FBCF FBCF TOTALE,0.0
+CE,Acq. moins ces. d'objets de valeur,0.0
+CE,Variation des stocks,876.1
+CE,FBC totale,876.1
+CE,Exportations de biens et de services,80216.0
+CE,Total des emplois finals,105572.8
+CF,CF Ménages,15579.5
+CF,CF Collective APU,0.0
+CF,CF Individuelle APU,34308.9
+CF,CF Total APU,34308.9
+CF,CF ISBLSM,0.0
+CF,CF DEPENSE TOTALE,49888.4
+CF,FBCF SNFEI,0.0
+CF,FBCF Ménages hors EI,0.0
+CF,FBCF SFEI,0.0
+CF,FBCF APU,0.0
+CF,FBCF ISBLSM,0.0
+CF,FBCF FBCF TOTALE,0.0
+CF,Acq. moins ces. d'objets de valeur,0.0
+CF,Variation des stocks,1190.3
+CF,FBC totale,1190.3
+CF,Exportations de biens et de services,39234.0
+CF,Total des emplois finals,90312.7
+CG,CF Ménages,9012.5
+CG,CF Collective APU,0.0
+CG,CF Individuelle APU,0.0
+CG,CF Total APU,0.0
+CG,CF ISBLSM,0.0
+CG,CF DEPENSE TOTALE,9012.5
+CG,FBCF SNFEI,0.0
+CG,FBCF Ménages hors EI,0.0
+CG,FBCF SFEI,0.0
+CG,FBCF APU,0.0
+CG,FBCF ISBLSM,0.0
+CG,FBCF FBCF TOTALE,0.0
+CG,Acq. moins ces. d'objets de valeur,0.0
+CG,Variation des stocks,-1793.3
+CG,FBC totale,-1793.3
+CG,Exportations de biens et de services,24247.0
+CG,Total des emplois finals,31466.2
+CH,CF Ménages,5270.7
+CH,CF Collective APU,0.0
+CH,CF Individuelle APU,0.0
+CH,CF Total APU,0.0
+CH,CF ISBLSM,0.0
+CH,CF DEPENSE TOTALE,5270.7
+CH,FBCF SNFEI,5947.6
+CH,FBCF Ménages hors EI,0.0
+CH,FBCF SFEI,241.0
+CH,FBCF APU,102.0
+CH,FBCF ISBLSM,0.0
+CH,FBCF FBCF TOTALE,6290.6
+CH,Acq. moins ces. d'objets de valeur,304.2
+CH,Variation des stocks,-465.4
+CH,FBC totale,6129.4
+CH,Exportations de biens et de services,38929.0
+CH,Total des emplois finals,50329.1
+CI,CF Ménages,19903.0
+CI,CF Collective APU,0.0
+CI,CF Individuelle APU,666.5
+CI,CF Total APU,666.5
+CI,CF ISBLSM,0.0
+CI,CF DEPENSE TOTALE,20569.5
+CI,FBCF SNFEI,10089.3
+CI,FBCF Ménages hors EI,0.0
+CI,FBCF SFEI,2583.0
+CI,FBCF APU,1567.8
+CI,FBCF ISBLSM,928.4
+CI,FBCF FBCF TOTALE,15168.5
+CI,Acq. moins ces. d'objets de valeur,0.0
+CI,Variation des stocks,545.3
+CI,FBC totale,15713.8
+CI,Exportations de biens et de services,31718.0
+CI,Total des emplois finals,68001.3
+CJ,CF Ménages,15984.2
+CJ,CF Collective APU,0.0
+CJ,CF Individuelle APU,0.0
+CJ,CF Total APU,0.0
+CJ,CF ISBLSM,0.0
+CJ,CF DEPENSE TOTALE,15984.2
+CJ,FBCF SNFEI,5029.0
+CJ,FBCF Ménages hors EI,0.0
+CJ,FBCF SFEI,12.7
+CJ,FBCF APU,192.4
+CJ,FBCF ISBLSM,0.0
+CJ,FBCF FBCF TOTALE,5234.1
+CJ,Acq. moins ces. d'objets de valeur,0.0
+CJ,Variation des stocks,2.8
+CJ,FBC totale,5236.9
+CJ,Exportations de biens et de services,28008.0
+CJ,Total des emplois finals,49229.1
+CK,CF Ménages,2228.9
+CK,CF Collective APU,0.0
+CK,CF Individuelle APU,0.0
+CK,CF Total APU,0.0
+CK,CF ISBLSM,0.0
+CK,CF DEPENSE TOTALE,2228.9
+CK,FBCF SNFEI,28113.2
+CK,FBCF Ménages hors EI,0.0
+CK,FBCF SFEI,787.0
+CK,FBCF APU,903.0
+CK,FBCF ISBLSM,238.9
+CK,FBCF FBCF TOTALE,30042.1
+CK,Acq. moins ces. d'objets de valeur,0.0
+CK,Variation des stocks,-655.6
+CK,FBC totale,29386.5
+CK,Exportations de biens et de services,45221.0
+CK,Total des emplois finals,76836.4
+CL,CF Ménages,76183.0
+CL,CF Collective APU,0.0
+CL,CF Individuelle APU,194.2
+CL,CF Total APU,194.2
+CL,CF ISBLSM,0.0
+CL,CF DEPENSE TOTALE,76377.2
+CL,FBCF SNFEI,37564.1
+CL,FBCF Ménages hors EI,0.0
+CL,FBCF SFEI,995.9
+CL,FBCF APU,8940.8
+CL,FBCF ISBLSM,597.5
+CL,FBCF FBCF TOTALE,48098.3
+CL,Acq. moins ces. d'objets de valeur,0.0
+CL,Variation des stocks,665.9
+CL,FBC totale,48764.2
+CL,Exportations de biens et de services,151525.0
+CL,Total des emplois finals,276666.4
+CM,CF Ménages,47636.6
+CM,CF Collective APU,0.0
+CM,CF Individuelle APU,7251.9
+CM,CF Total APU,7251.9
+CM,CF ISBLSM,0.0
+CM,CF DEPENSE TOTALE,54888.5
+CM,FBCF SNFEI,39807.6
+CM,FBCF Ménages hors EI,0.0
+CM,FBCF SFEI,821.1
+CM,FBCF APU,2471.0
+CM,FBCF ISBLSM,537.5
+CM,FBCF FBCF TOTALE,43637.2
+CM,Acq. moins ces. d'objets de valeur,1040.6
+CM,Variation des stocks,-2751.9
+CM,FBC totale,41925.9
+CM,Exportations de biens et de services,38887.0
+CM,Total des emplois finals,135701.4
+DZ,CF Ménages,60175.8
+DZ,CF Collective APU,0.0
+DZ,CF Individuelle APU,788.8
+DZ,CF Total APU,788.8
+DZ,CF ISBLSM,0.0
+DZ,CF DEPENSE TOTALE,60964.6
+DZ,FBCF SNFEI,0.0
+DZ,FBCF Ménages hors EI,0.0
+DZ,FBCF SFEI,0.0
+DZ,FBCF APU,0.0
+DZ,FBCF ISBLSM,0.0
+DZ,FBCF FBCF TOTALE,0.0
+DZ,Acq. moins ces. d'objets de valeur,0.0
+DZ,Variation des stocks,0.0
+DZ,FBC totale,0.0
+DZ,Exportations de biens et de services,8710.0
+DZ,Total des emplois finals,69674.6
+EZ,CF Ménages,18476.3
+EZ,CF Collective APU,0.0
+EZ,CF Individuelle APU,0.0
+EZ,CF Total APU,0.0
+EZ,CF ISBLSM,0.0
+EZ,CF DEPENSE TOTALE,18476.3
+EZ,FBCF SNFEI,0.0
+EZ,FBCF Ménages hors EI,0.0
+EZ,FBCF SFEI,0.0
+EZ,FBCF APU,0.0
+EZ,FBCF ISBLSM,0.0
+EZ,FBCF FBCF TOTALE,0.0
+EZ,Acq. moins ces. d'objets de valeur,0.0
+EZ,Variation des stocks,-9.9
+EZ,FBC totale,-9.9
+EZ,Exportations de biens et de services,6113.0
+EZ,Total des emplois finals,24579.4
+FZ,CF Ménages,29707.4
+FZ,CF Collective APU,0.0
+FZ,CF Individuelle APU,0.0
+FZ,CF Total APU,0.0
+FZ,CF ISBLSM,0.0
+FZ,CF DEPENSE TOTALE,29707.4
+FZ,FBCF SNFEI,99178.2
+FZ,FBCF Ménages hors EI,102732.0
+FZ,FBCF SFEI,12103.2
+FZ,FBCF APU,73942.8
+FZ,FBCF ISBLSM,3655.8
+FZ,FBCF FBCF TOTALE,291612.0
+FZ,Acq. moins ces. d'objets de valeur,0.0
+FZ,Variation des stocks,-838.2
+FZ,FBC totale,290773.8
+FZ,Exportations de biens et de services,856.0
+FZ,Total des emplois finals,321337.2
+GZ,CF Ménages,6573.6
+GZ,CF Collective APU,0.0
+GZ,CF Individuelle APU,0.0
+GZ,CF Total APU,0.0
+GZ,CF ISBLSM,0.0
+GZ,CF DEPENSE TOTALE,6573.6
+GZ,FBCF SNFEI,0.0
+GZ,FBCF Ménages hors EI,0.0
+GZ,FBCF SFEI,0.0
+GZ,FBCF APU,0.0
+GZ,FBCF ISBLSM,0.0
+GZ,FBCF FBCF TOTALE,0.0
+GZ,Acq. moins ces. d'objets de valeur,0.0
+GZ,Variation des stocks,0.0
+GZ,FBC totale,0.0
+GZ,Exportations de biens et de services,8149.0
+GZ,Total des emplois finals,14722.6
+HZ,CF Ménages,53489.5
+HZ,CF Collective APU,5422.5
+HZ,CF Individuelle APU,5133.2
+HZ,CF Total APU,10555.7
+HZ,CF ISBLSM,0.0
+HZ,CF DEPENSE TOTALE,64045.2
+HZ,FBCF SNFEI,0.0
+HZ,FBCF Ménages hors EI,0.0
+HZ,FBCF SFEI,0.0
+HZ,FBCF APU,0.0
+HZ,FBCF ISBLSM,0.0
+HZ,FBCF FBCF TOTALE,0.0
+HZ,Acq. moins ces. d'objets de valeur,0.0
+HZ,Variation des stocks,0.0
+HZ,FBC totale,0.0
+HZ,Exportations de biens et de services,58772.0
+HZ,Total des emplois finals,122817.2
+IZ,CF Ménages,134666.2
+IZ,CF Collective APU,0.0
+IZ,CF Individuelle APU,213.0
+IZ,CF Total APU,213.0
+IZ,CF ISBLSM,0.0
+IZ,CF DEPENSE TOTALE,134879.2
+IZ,FBCF SNFEI,0.0
+IZ,FBCF Ménages hors EI,0.0
+IZ,FBCF SFEI,0.0
+IZ,FBCF APU,0.0
+IZ,FBCF ISBLSM,0.0
+IZ,FBCF FBCF TOTALE,0.0
+IZ,Acq. moins ces. d'objets de valeur,0.0
+IZ,Variation des stocks,0.0
+IZ,FBC totale,0.0
+IZ,Exportations de biens et de services,0.0
+IZ,Total des emplois finals,134879.2
+JA,CF Ménages,16230.8
+JA,CF Collective APU,4044.2
+JA,CF Individuelle APU,0.0
+JA,CF Total APU,4044.2
+JA,CF ISBLSM,0.0
+JA,CF DEPENSE TOTALE,20275.0
+JA,FBCF SNFEI,11351.5
+JA,FBCF Ménages hors EI,0.0
+JA,FBCF SFEI,1030.6
+JA,FBCF APU,2603.8
+JA,FBCF ISBLSM,0.0
+JA,FBCF FBCF TOTALE,14985.9
+JA,Acq. moins ces. d'objets de valeur,0.0
+JA,Variation des stocks,-54.2
+JA,FBC totale,14931.7
+JA,Exportations de biens et de services,4345.0
+JA,Total des emplois finals,39551.7
+JB,CF Ménages,32715.2
+JB,CF Collective APU,0.0
+JB,CF Individuelle APU,0.0
+JB,CF Total APU,0.0
+JB,CF ISBLSM,0.0
+JB,CF DEPENSE TOTALE,32715.2
+JB,FBCF SNFEI,0.0
+JB,FBCF Ménages hors EI,0.0
+JB,FBCF SFEI,0.0
+JB,FBCF APU,0.0
+JB,FBCF ISBLSM,0.0
+JB,FBCF FBCF TOTALE,0.0
+JB,Acq. moins ces. d'objets de valeur,0.0
+JB,Variation des stocks,0.0
+JB,FBC totale,0.0
+JB,Exportations de biens et de services,4130.0
+JB,Total des emplois finals,36845.2
+JC,CF Ménages,5562.2
+JC,CF Collective APU,0.0
+JC,CF Individuelle APU,0.0
+JC,CF Total APU,0.0
+JC,CF ISBLSM,0.0
+JC,CF DEPENSE TOTALE,5562.2
+JC,FBCF SNFEI,68214.5
+JC,FBCF Ménages hors EI,0.0
+JC,FBCF SFEI,7918.1
+JC,FBCF APU,5933.2
+JC,FBCF ISBLSM,93.2
+JC,FBCF FBCF TOTALE,82159.0
+JC,Acq. moins ces. d'objets de valeur,0.0
+JC,Variation des stocks,-162.9
+JC,FBC totale,81996.1
+JC,Exportations de biens et de services,21209.0
+JC,Total des emplois finals,108767.3
+KZ,CF Ménages,121586.9
+KZ,CF Collective APU,0.0
+KZ,CF Individuelle APU,0.0
+KZ,CF Total APU,0.0
+KZ,CF ISBLSM,0.0
+KZ,CF DEPENSE TOTALE,121586.9
+KZ,FBCF SNFEI,0.0
+KZ,FBCF Ménages hors EI,0.0
+KZ,FBCF SFEI,0.0
+KZ,FBCF APU,0.0
+KZ,FBCF ISBLSM,0.0
+KZ,FBCF FBCF TOTALE,0.0
+KZ,Acq. moins ces. d'objets de valeur,0.0
+KZ,Variation des stocks,0.0
+KZ,FBC totale,0.0
+KZ,Exportations de biens et de services,44806.4
+KZ,Total des emplois finals,166393.3
+LZ,CF Ménages,299412.0
+LZ,CF Collective APU,0.0
+LZ,CF Individuelle APU,14611.0
+LZ,CF Total APU,14611.0
+LZ,CF ISBLSM,0.0
+LZ,CF DEPENSE TOTALE,314023.0
+LZ,FBCF SNFEI,1449.8
+LZ,FBCF Ménages hors EI,6008.0
+LZ,FBCF SFEI,202.1
+LZ,FBCF APU,0.0
+LZ,FBCF ISBLSM,0.0
+LZ,FBCF FBCF TOTALE,7659.9
+LZ,Acq. moins ces. d'objets de valeur,0.0
+LZ,Variation des stocks,0.0
+LZ,FBC totale,7659.9
+LZ,Exportations de biens et de services,0.0
+LZ,Total des emplois finals,321682.9
+MA,CF Ménages,11520.6
+MA,CF Collective APU,0.0
+MA,CF Individuelle APU,0.0
+MA,CF Total APU,0.0
+MA,CF ISBLSM,0.0
+MA,CF DEPENSE TOTALE,11520.6
+MA,FBCF SNFEI,24878.1
+MA,FBCF Ménages hors EI,22777.7
+MA,FBCF SFEI,835.8
+MA,FBCF APU,2638.0
+MA,FBCF ISBLSM,411.5
+MA,FBCF FBCF TOTALE,51541.1
+MA,Acq. moins ces. d'objets de valeur,0.0
+MA,Variation des stocks,332.3
+MA,FBC totale,51873.4
+MA,Exportations de biens et de services,45607.0
+MA,Total des emplois finals,109001.0
+MB,CF Ménages,0.0
+MB,CF Collective APU,17614.6
+MB,CF Individuelle APU,0.0
+MB,CF Total APU,17614.6
+MB,CF ISBLSM,0.0
+MB,CF DEPENSE TOTALE,17614.6
+MB,FBCF SNFEI,24125.5
+MB,FBCF Ménages hors EI,0.0
+MB,FBCF SFEI,328.1
+MB,FBCF APU,27796.0
+MB,FBCF ISBLSM,0.0
+MB,FBCF FBCF TOTALE,52249.6
+MB,Acq. moins ces. d'objets de valeur,0.0
+MB,Variation des stocks,-190.8
+MB,FBC totale,52058.8
+MB,Exportations de biens et de services,16377.0
+MB,Total des emplois finals,86050.4
+MC,CF Ménages,6492.1
+MC,CF Collective APU,0.0
+MC,CF Individuelle APU,0.0
+MC,CF Total APU,0.0
+MC,CF ISBLSM,0.0
+MC,CF DEPENSE TOTALE,6492.1
+MC,FBCF SNFEI,0.0
+MC,FBCF Ménages hors EI,0.0
+MC,FBCF SFEI,0.0
+MC,FBCF APU,0.0
+MC,FBCF ISBLSM,0.0
+MC,FBCF FBCF TOTALE,0.0
+MC,Acq. moins ces. d'objets de valeur,0.0
+MC,Variation des stocks,73.4
+MC,FBC totale,73.4
+MC,Exportations de biens et de services,10259.0
+MC,Total des emplois finals,16824.5
+NZ,CF Ménages,26123.3
+NZ,CF Collective APU,0.0
+NZ,CF Individuelle APU,695.7
+NZ,CF Total APU,695.7
+NZ,CF ISBLSM,0.0
+NZ,CF DEPENSE TOTALE,26819.0
+NZ,FBCF SNFEI,0.0
+NZ,FBCF Ménages hors EI,0.0
+NZ,FBCF SFEI,0.0
+NZ,FBCF APU,0.0
+NZ,FBCF ISBLSM,0.0
+NZ,FBCF FBCF TOTALE,0.0
+NZ,Acq. moins ces. d'objets de valeur,0.0
+NZ,Variation des stocks,-8.2
+NZ,FBC totale,-8.2
+NZ,Exportations de biens et de services,50694.0
+NZ,Total des emplois finals,77504.8
+OZ,CF Ménages,403.0
+OZ,CF Collective APU,222123.9
+OZ,CF Individuelle APU,19714.9
+OZ,CF Total APU,241838.8
+OZ,CF ISBLSM,0.0
+OZ,CF DEPENSE TOTALE,242241.8
+OZ,FBCF SNFEI,0.0
+OZ,FBCF Ménages hors EI,0.0
+OZ,FBCF SFEI,0.0
+OZ,FBCF APU,0.0
+OZ,FBCF ISBLSM,0.0
+OZ,FBCF FBCF TOTALE,0.0
+OZ,Acq. moins ces. d'objets de valeur,0.0
+OZ,Variation des stocks,0.0
+OZ,FBC totale,0.0
+OZ,Exportations de biens et de services,665.0
+OZ,Total des emplois finals,242906.8
+PZ,CF Ménages,15744.6
+PZ,CF Collective APU,0.0
+PZ,CF Individuelle APU,126167.7
+PZ,CF Total APU,126167.7
+PZ,CF ISBLSM,5553.5
+PZ,CF DEPENSE TOTALE,147465.8
+PZ,FBCF SNFEI,0.0
+PZ,FBCF Ménages hors EI,0.0
+PZ,FBCF SFEI,0.0
+PZ,FBCF APU,0.0
+PZ,FBCF ISBLSM,0.0
+PZ,FBCF FBCF TOTALE,0.0
+PZ,Acq. moins ces. d'objets de valeur,0.0
+PZ,Variation des stocks,0.0
+PZ,FBC totale,0.0
+PZ,Exportations de biens et de services,0.0
+PZ,Total des emplois finals,147465.8
+QA,CF Ménages,35155.2
+QA,CF Collective APU,0.0
+QA,CF Individuelle APU,168775.1
+QA,CF Total APU,168775.1
+QA,CF ISBLSM,0.0
+QA,CF DEPENSE TOTALE,203930.3
+QA,FBCF SNFEI,0.0
+QA,FBCF Ménages hors EI,0.0
+QA,FBCF SFEI,0.0
+QA,FBCF APU,0.0
+QA,FBCF ISBLSM,0.0
+QA,FBCF FBCF TOTALE,0.0
+QA,Acq. moins ces. d'objets de valeur,0.0
+QA,Variation des stocks,0.0
+QA,FBC totale,0.0
+QA,Exportations de biens et de services,1110.0
+QA,Total des emplois finals,205040.3
+QB,CF Ménages,25115.4
+QB,CF Collective APU,0.0
+QB,CF Individuelle APU,50430.9
+QB,CF Total APU,50430.9
+QB,CF ISBLSM,32991.0
+QB,CF DEPENSE TOTALE,108537.3
+QB,FBCF SNFEI,0.0
+QB,FBCF Ménages hors EI,0.0
+QB,FBCF SFEI,0.0
+QB,FBCF APU,0.0
+QB,FBCF ISBLSM,0.0
+QB,FBCF FBCF TOTALE,0.0
+QB,Acq. moins ces. d'objets de valeur,0.0
+QB,Variation des stocks,0.0
+QB,FBC totale,0.0
+QB,Exportations de biens et de services,0.0
+QB,Total des emplois finals,108537.3
+RZ,CF Ménages,34926.3
+RZ,CF Collective APU,0.0
+RZ,CF Individuelle APU,25200.6
+RZ,CF Total APU,25200.6
+RZ,CF ISBLSM,8776.1
+RZ,CF DEPENSE TOTALE,68903.0
+RZ,FBCF SNFEI,40.3
+RZ,FBCF Ménages hors EI,0.0
+RZ,FBCF SFEI,0.0
+RZ,FBCF APU,146.0
+RZ,FBCF ISBLSM,0.0
+RZ,FBCF FBCF TOTALE,186.3
+RZ,Acq. moins ces. d'objets de valeur,0.0
+RZ,Variation des stocks,10.0
+RZ,FBC totale,196.3
+RZ,Exportations de biens et de services,1615.0
+RZ,Total des emplois finals,70714.3
+SZ,CF Ménages,26558.6
+SZ,CF Collective APU,886.3
+SZ,CF Individuelle APU,240.2
+SZ,CF Total APU,1126.5
+SZ,CF ISBLSM,21077.2
+SZ,CF DEPENSE TOTALE,48762.3
+SZ,FBCF SNFEI,2040.6
+SZ,FBCF Ménages hors EI,0.0
+SZ,FBCF SFEI,285.7
+SZ,FBCF APU,293.0
+SZ,FBCF ISBLSM,0.0
+SZ,FBCF FBCF TOTALE,2619.3
+SZ,Acq. moins ces. d'objets de valeur,0.0
+SZ,Variation des stocks,-48.2
+SZ,FBC totale,2571.1
+SZ,Exportations de biens et de services,3829.0
+SZ,Total des emplois finals,55162.4
+TZ,CF Ménages,2813.1
+TZ,CF Collective APU,0.0
+TZ,CF Individuelle APU,515.1
+TZ,CF Total APU,515.1
+TZ,CF ISBLSM,0.0
+TZ,CF DEPENSE TOTALE,3328.2
+TZ,FBCF SNFEI,0.0
+TZ,FBCF Ménages hors EI,0.0
+TZ,FBCF SFEI,0.0
+TZ,FBCF APU,0.0
+TZ,FBCF ISBLSM,0.0
+TZ,FBCF FBCF TOTALE,0.0
+TZ,Acq. moins ces. d'objets de valeur,0.0
+TZ,Variation des stocks,0.0
+TZ,FBC totale,0.0
+TZ,Exportations de biens et de services,0.0
+TZ,Total des emplois finals,3328.2

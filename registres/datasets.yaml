@@ -25,3 +25,59 @@ datasets:
     empreinte_sha256: c01eccd5eb0a96912b0ad84b5db354fc3c9eaf80bd7db20c023e10057ab5648b
     methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-07
+
+  - id: dgtresor_cahier_2016_02_pdf
+    source: dgtresor_cahier_2016_02
+    description: Cahier de la DG Trésor 2016-02 (PDF)
+    fichier: data/raw/tva/dgtresor_cahier_2016-02_tva_theorique.pdf
+    empreinte_sha256: 6a60d41d1b61f613eff8deac02619405c1ecd8553ffb1a5eef7e2acd68614fda
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-07
+
+  - id: insee_conso_produits_menages
+    source: insee_consommation_produits_2024
+    description: Consommation effective par produit, dépenses des ménages, millions d'euros courants (feuille MEURcour)
+    fichier: data/raw/tva/insee/T_CONSO_EFF_PRODUITS_MENAGES.xlsx
+    empreinte_sha256: 652884d95f675aa919cf9a65167a9e8fed49bf184b3cd59e50291fe612f55f47
+    methode_transformation: pipelines/tva/extraire_consommation.py
+    telecharge_le: 2026-10-07
+
+  - id: insee_conso_produits_apu
+    source: insee_consommation_produits_2024
+    description: Consommation effective par produit, dépenses des APU, millions d'euros courants (feuille MEURcour)
+    fichier: data/raw/tva/insee/T_CONSO_EFF_PRODUITS_APU.xlsx
+    empreinte_sha256: f386a9b9af059e0c6636bade4e0e17b551728382a9d02046acd8c55441e2985b
+    methode_transformation: pipelines/tva/extraire_consommation.py
+    telecharge_le: 2026-10-07
+
+  - id: insee_conso_produits_isblsm
+    source: insee_consommation_produits_2024
+    description: Consommation effective par produit, dépenses des ISBLSM, millions d'euros courants (feuille MEURcour)
+    fichier: data/raw/tva/insee/T_CONSO_EFF_PRODUITS_ISBLSM.xlsx
+    empreinte_sha256: a5f9864d3609147873776a94f399d2063c4596ba376ff6c04b42cd85498d2f43
+    methode_transformation: pipelines/tva/extraire_consommation.py
+    telecharge_le: 2026-10-07
+
+  - id: insee_tes_38_2022
+    source: insee_tes_2025
+    description: TES A38 2022 (TRP, TEF, TEI, CPR_CEB), prix d'acquisition
+    fichier: data/raw/tva/insee/TES_38_2022_fr.xlsx
+    empreinte_sha256: 1a9d587e3a70590a42210f10bca15a63dd85d18dc9946ca654d77e50970a29ed
+    methode_transformation: pipelines/tva/extraire_tes.py
+    telecharge_le: 2026-10-07
+
+  - id: insee_tes_38_2024
+    source: insee_tes_2025
+    description: TES A38 2024 (TRP, TEF, TEI, CPR_CEB), prix d'acquisition
+    fichier: data/raw/tva/insee/TES_38_2024_fr.xlsx
+    empreinte_sha256: 474b9875bfdaea9f377be3a7132d67f7ad487669bd36627001939813d2bc3d19
+    methode_transformation: pipelines/tva/extraire_tes.py
+    telecharge_le: 2026-10-07
+
+  - id: insee_tes_38_1978_2019
+    source: insee_tes_2025
+    description: Archive des TES A38 1978-2019 (dont TES_38_2015.xlsx)
+    fichier: data/raw/tva/insee/TES_38_1978_2019_fr.zip
+    empreinte_sha256: e87d2a1e6513dfde921e0ec70f201fb37e3b95bc157fe5f6863ecdefe0397027
+    methode_transformation: pipelines/tva/extraire_tes.py
+    telecharge_le: 2026-10-07

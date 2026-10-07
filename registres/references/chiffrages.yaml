@@ -133,3 +133,80 @@ chiffrages:
     localisation: Tableau « TVA brute totale… », page 30 (section « Taxe sur la valeur ajoutée nette »)
     saisi_le: 2026-10-07
     relecture: a_relire
+
+  - id: tva_point_brut_2015_ensemble
+    levier: tva
+    source: dgtresor_cahier_2016_02
+    millesime: 2015 (estimation du PLF pour 2016)
+    mesure: Rendement d'une hausse d'un point de tous les taux, statique, hors hausse des dépenses publiques induite (arrondi au quart de milliard dans la source)
+    valeur: 9.75
+    unite: Md€
+    localisation: Tableau 8, page 24 (page 26 du PDF)
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2015_taux_2_1
+    levier: tva
+    source: dgtresor_cahier_2016_02
+    millesime: 2015 (estimation du PLF pour 2016)
+    mesure: Rendement d'une hausse d'un point de le taux super-réduit (2,1 %), statique, hors hausse des dépenses publiques induite (arrondi au quart de milliard dans la source)
+    valeur: 0.5
+    unite: Md€
+    localisation: Tableau 8, page 24 (page 26 du PDF)
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2015_taux_5_5
+    levier: tva
+    source: dgtresor_cahier_2016_02
+    millesime: 2015 (estimation du PLF pour 2016)
+    mesure: Rendement d'une hausse d'un point de le taux réduit (5,5 %), statique, hors hausse des dépenses publiques induite (arrondi au quart de milliard dans la source)
+    valeur: 1.75
+    unite: Md€
+    localisation: Tableau 8, page 24 (page 26 du PDF)
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2015_taux_10
+    levier: tva
+    source: dgtresor_cahier_2016_02
+    millesime: 2015 (estimation du PLF pour 2016)
+    mesure: Rendement d'une hausse d'un point de le taux intermédiaire (10 %), statique, hors hausse des dépenses publiques induite (arrondi au quart de milliard dans la source)
+    valeur: 1.25
+    unite: Md€
+    localisation: Tableau 8, page 24 (page 26 du PDF)
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2015_taux_20
+    levier: tva
+    source: dgtresor_cahier_2016_02
+    millesime: 2015 (estimation du PLF pour 2016)
+    mesure: Rendement d'une hausse d'un point de le taux normal (20 %), statique, hors hausse des dépenses publiques induite (arrondi au quart de milliard dans la source)
+    valeur: 6.5
+    unite: Md€
+    localisation: Tableau 8, page 24 (page 26 du PDF)
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_nette_totale_2022_dgtresor
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: "2022"
+    mesure: TVA nette en comptabilité budgétaire, toutes administrations publiques, 2022 (sert au vieillissement 2022 → 2025)
+    valeur: 202.7
+    unite: Md€
+    localisation: Page 2, section 1
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_nette_totale_prevision_2025
+    levier: tva
+    source: plf2026_voies_et_moyens_tome1
+    millesime: PLF 2026
+    mesure: TVA nette totale en comptabilité budgétaire, prévision 2025 (sert au vieillissement 2022 → 2025)
+    valeur: 210.0
+    unite: Md€
+    localisation: Tableau « TVA brute totale… », page 33 (section « Taxe sur la valeur ajoutée nette »)
+    saisi_le: 2026-10-07
+    relecture: a_relire

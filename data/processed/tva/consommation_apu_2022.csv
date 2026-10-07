@@ -1,0 +1,38 @@
+code,libelle,a38,millions_euros
+138G_D35A,"Électricité, transport et distribution d'électricité",DZ,925.5
+H_D35B2,Distribution de combustibles gazeux par conduites,DZ,618.0
+H_C10H2,"Cacao, chocolat et produits de confiserie",CA,0.0
+HI_C10H7A,Soupes et potages,CA,505.0
+HI_C14Z1F,Sous-vêtements et vêtements de nuit,CB,0.0
+HI_C14Z1C_B2020,Vêtements de dessus pour hommes et garçonnets,CB,0.0
+HI_C14Z1D_B2020,Vêtements de dessus pour femmes et fillettes,CB,0.0
+HI_C14Z1H_B2020,Layette,CB,0.0
+HI_C14Z2A,"Chaussettes, bas et collants",CB,7.8
+HI_C14Z2B,Pull-overs et articles similaires,CB,0.0
+H_C21Z2,Préparations pharmaceutiques,CF,30976.0
+H_C32B1,Matériel médico-chirurgical et dentaire,CM,6317.6
+HI_C32B2A,Lunettes correctrices,CM,88.5
+138G_C26F,"Équipements d'irradiation médicale, électromédicaux et électrothérapeutiques",CI,697.5
+HI_C30E0E_B2020,Véhicules pour invalides,CL,185.2
+138G_H49A,Transport ferroviaire,HZ,26.6
+H_H49B2,Transports de voyageurs par taxis,HZ,2804.0
+H_H49B3,Transports routiers réguliers de voyageurs,HZ,1656.0
+138G_H51Z,Transports aériens,HZ,10.4
+HI_I55Z1A,"Hôtels, centres ou villages de vacances avec service de chambre",IZ,200.0
+H_I55Z3,Hébergements divers,IZ,97.9
+HI_L68R1A_B2020,Location de logements (loyers réels),LZ,14126.8
+H_N77Z2,Location et location-bail de biens personnels et domestiques,NZ,680.7
+138G_O84Z,Services d'administration publique et de défense ; services de sécurité sociale obligatoire,OZ,18874.7
+HI_P85M2C,Formation des adultes et formation continue,PZ,5228.0
+138G_P85N,Services de l'enseignement (non marchand),PZ,110327.1
+138G_Q86M,Services de santé humaine (marchand),QA,72163.5
+138G_Q86N,Services de santé humaine (non marchand),QA,86602.5
+138G_Q87M,Services d'hébergement médico-social et social (marchand),QB,16995.6
+138G_Q87N,Services d'hébergement médico-social et social (non marchand),QB,2422.0
+138G_Q88M,Services d'action sociale sans hébergement (marchand),QB,10759.9
+138G_Q88N,Services d'action sociale sans hébergement (non marchand),QB,15826.2
+138G_R90N,"Services créatifs, artistiques et du spectacle (non marchand)",RZ,8186.2
+138G_R91N,"Services des bibliothèques, archives, musées et autres services culturels (non marchand)",RZ,4342.1
+138G_R93N,"Services sportifs, récréatifs et de loisirs (non marchand)",RZ,9922.3
+HI_S96Z5A,Cures thermales,SZ,205.3
+138G_T97Z,Services des ménages en tant qu'employeurs de personnel domestique,TZ,483.1

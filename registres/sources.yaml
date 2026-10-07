@@ -105,3 +105,32 @@ sources:
     millesime: PLF 2025
     acces: direct
     consulte_le: 2026-10-07
+
+  - id: dgtresor_cahier_2016_02
+    nom: Les Cahiers de la DG Trésor n° 2016-02, « Le modèle d'estimation de la TVA théorique » (J.-A. Andrivon, C. Geay, É. Janbon)
+    editeur: Direction générale du Trésor
+    url: https://www.tresor.economie.gouv.fr/Articles/8a0808ef-32d9-487c-87f3-8b86a5e65785/files/8c114556-bf7a-4ee1-a827-3cdda0107371
+    licence: non précisée
+    date_publication: 2016-04-01
+    millesime: point TVA 2015 (estimation du PLF pour 2016)
+    acces: direct
+    consulte_le: 2026-10-07
+
+  - id: insee_consommation_produits_2024
+    nom: Comptes nationaux annuels base 2020, « Consommation des ménages en 2024 », consommation effective par produit (ménages, APU, ISBLSM)
+    editeur: INSEE
+    url: https://www.insee.fr/fr/statistiques/8574673
+    licence: Licence Ouverte 2.0
+    date_publication: 2025-05-28
+    millesime: comptes 2024 (série 1959-2024, 2022 semi-définitif)
+    acces: direct
+    consulte_le: 2026-10-07
+
+  - id: insee_tes_2025
+    nom: Comptes nationaux annuels base 2020, « Tableaux de synthèse - TES et TEE », TES A38
+    editeur: INSEE
+    url: https://www.insee.fr/fr/statistiques/8988861
+    licence: Licence Ouverte 2.0
+    millesime: TES A38 1978-2024
+    acces: direct
+    consulte_le: 2026-10-07

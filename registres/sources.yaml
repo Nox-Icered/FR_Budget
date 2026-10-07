@@ -77,3 +77,31 @@ sources:
     date_publication: 2026-06-14
     acces: recherche_web
     consulte_le: 2026-10-07
+
+  - id: dgtresor_tresor_eco_371
+    nom: Trésor-Éco n° 371, « Analyse de la composition des recettes de TVA » (M. Gesta)
+    editeur: Direction générale du Trésor
+    url: https://www.tresor.economie.gouv.fr/Articles/2025/09/25/analyse-de-la-composition-des-recettes-de-tva
+    licence: non précisée
+    date_publication: 2025-09-25
+    millesime: modèle TVA théorique sur le compte semi-définitif 2022, point TVA vieilli à 2025
+    acces: direct
+    consulte_le: 2026-10-07
+
+  - id: plf2026_voies_et_moyens_tome1
+    nom: Projet de loi de finances pour 2026, annexe « Évaluation des voies et moyens », tome I (recettes)
+    editeur: Ministère de l'Économie et des Finances (document publié par l'Assemblée nationale)
+    url: https://www.assemblee-nationale.fr/dyn/contenu/visualisation/1087930/file/PLF%202026%20-%20V%26M%20TI%20-%20Evaluations%20des%20recettes.pdf
+    licence: Licence Ouverte 2.0
+    millesime: PLF 2026
+    acces: direct
+    consulte_le: 2026-10-07
+
+  - id: plf2025_voies_et_moyens_tome1
+    nom: Projet de loi de finances pour 2025, annexe « Évaluation des voies et moyens », tome I (recettes)
+    editeur: Ministère de l'Économie et des Finances (document publié par l'Assemblée nationale)
+    url: https://www2.assemblee-nationale.fr/static/17/Annexes-DL/PLF-2025/Voies_et_moyens_Tome_1_2025.pdf
+    licence: Licence Ouverte 2.0
+    millesime: PLF 2025
+    acces: direct
+    consulte_le: 2026-10-07

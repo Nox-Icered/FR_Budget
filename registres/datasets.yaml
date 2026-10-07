@@ -1,4 +1,27 @@
 # Registre des jeux de données extraits des sources (fichier dans data/raw/, empreinte
-# SHA-256, script de transformation). Premier contenu : tâche 0.5 du plan (prototype TVA).
+# SHA-256, script de transformation).
 
-datasets: []
+datasets:
+  - id: dgtresor_tresor_eco_371_pdf
+    source: dgtresor_tresor_eco_371
+    description: Note Trésor-Éco n° 371 (PDF, 8 pages)
+    fichier: data/raw/tva/dgtresor_tresor_eco_371_2025-09.pdf
+    empreinte_sha256: d3daa52ccfdc05978c7939d97ece4018803c0d0a868191c5c538699dc6bcadfb
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-07
+
+  - id: plf2026_voies_et_moyens_tome1_pdf
+    source: plf2026_voies_et_moyens_tome1
+    description: Voies et Moyens tome I du PLF 2026 (PDF, 102 pages)
+    fichier: data/raw/tva/plf2026_voies_et_moyens_tome1.pdf
+    empreinte_sha256: 4703605df8bfd1b4a20b1889839ebc1ea5a9b434eb4460eb2b40749e107371a0
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-07
+
+  - id: plf2025_voies_et_moyens_tome1_pdf
+    source: plf2025_voies_et_moyens_tome1
+    description: Voies et Moyens tome I du PLF 2025 (PDF, 125 pages)
+    fichier: data/raw/tva/plf2025_voies_et_moyens_tome1.pdf
+    empreinte_sha256: c01eccd5eb0a96912b0ad84b5db354fc3c9eaf80bd7db20c023e10057ab5648b
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-07

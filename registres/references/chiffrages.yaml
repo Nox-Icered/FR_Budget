@@ -1,5 +1,135 @@
 # Chiffrages officiels et académiques des leviers, saisis pour la validation.
 # Chaque valeur est relue par le responsable du projet (relecture: a_relire puis relu).
-# Premier contenu : tâche 0.4 du plan (Voies et Moyens, trois derniers PLF).
 
-chiffrages: []
+chiffrages:
+  - id: tva_point_net_2025_ensemble
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement net (après TVA payée par les APU) d'une hausse d'un point de tous les taux, statique
+    valeur: 11.4
+    unite: Md€
+    localisation: Tableau 2, page 5
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2025_ensemble
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement brut d'une hausse d'un point de tous les taux, statique
+    valeur: 13.7
+    unite: Md€
+    localisation: Tableau 1, page 4
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_net_2025_taux_2_1
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement net (après TVA payée par les APU) d'une hausse d'un point de le taux super-réduit (2,1 %), statique
+    valeur: 0.4
+    unite: Md€
+    localisation: Tableau 2, page 5
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2025_taux_2_1
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement brut d'une hausse d'un point de le taux super-réduit (2,1 %), statique
+    valeur: 0.4
+    unite: Md€
+    localisation: Tableau 1, page 4
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_net_2025_taux_5_5
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement net (après TVA payée par les APU) d'une hausse d'un point de le taux réduit (5,5 %), statique
+    valeur: 2.0
+    unite: Md€
+    localisation: Tableau 2, page 5
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2025_taux_5_5
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement brut d'une hausse d'un point de le taux réduit (5,5 %), statique
+    valeur: 2.4
+    unite: Md€
+    localisation: Tableau 1, page 4
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_net_2025_taux_10
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement net (après TVA payée par les APU) d'une hausse d'un point de le taux intermédiaire (10 %), statique
+    valeur: 1.6
+    unite: Md€
+    localisation: Tableau 2, page 5
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2025_taux_10
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement brut d'une hausse d'un point de le taux intermédiaire (10 %), statique
+    valeur: 1.9
+    unite: Md€
+    localisation: Tableau 1, page 4
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_net_2025_taux_20
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement net (après TVA payée par les APU) d'une hausse d'un point de le taux normal (20 %), statique
+    valeur: 7.5
+    unite: Md€
+    localisation: Tableau 2, page 5
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2025_taux_20
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement brut d'une hausse d'un point de le taux normal (20 %), statique
+    valeur: 8.9
+    unite: Md€
+    localisation: Tableau 1, page 4
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_nette_totale_execution_2024
+    levier: tva
+    source: plf2026_voies_et_moyens_tome1
+    millesime: PLF 2026
+    mesure: TVA nette totale en comptabilité budgétaire, exécution 2024
+    valeur: 210.7
+    unite: Md€
+    localisation: Tableau « TVA brute totale… », page 33 (section « Taxe sur la valeur ajoutée nette »)
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_nette_totale_execution_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome1
+    millesime: PLF 2025
+    mesure: TVA nette totale en comptabilité budgétaire, exécution 2023
+    valeur: 208.4
+    unite: Md€
+    localisation: Tableau « TVA brute totale… », page 30 (section « Taxe sur la valeur ajoutée nette »)
+    saisi_le: 2026-10-07
+    relecture: a_relire

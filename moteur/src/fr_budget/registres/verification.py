@@ -27,6 +27,7 @@ from fr_budget.registres.schemas import (
 )
 
 RACINE_DEPOT = Path(__file__).parents[4]
+IDENTIFIANT = re.compile(r"[a-z0-9][a-z0-9_]*")
 
 
 @dataclass
@@ -180,6 +181,8 @@ def verifier_fiches(dossier_fiches: Path, leviers: set[str], rapport: Rapport) -
             rapport.erreurs.append(f"fiches / {fiche.name} : en-tête avec « levier » ou « module »")
         elif "levier" in en_tete:
             _renvoi(f"fiches / {fiche.name}", str(en_tete["levier"]), leviers, "levier", rapport)
+        elif not isinstance(en_tete["module"], str) or not IDENTIFIANT.fullmatch(en_tete["module"]):
+            rapport.erreurs.append(f"fiches / {fiche.name} : identifiant de module invalide")
 
 
 def main(dossier: Path = RACINE_DEPOT / "registres") -> int:

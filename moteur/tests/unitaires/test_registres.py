@@ -180,6 +180,9 @@ def test_fichier_hors_de_data_raw_refuse(tmp_path: Path, chemin: str) -> None:
         ("---\nmodule: cascade\n---\n# Fiche\n", True),
         ("---\nlevier: levier_absent\n---\n# Fiche\n", False),
         ("---\nlevier: levier_a\nmodule: cascade\n---\n# Fiche\n", False),
+        ("---\nmodule:\n---\n# Fiche\n", False),
+        ("---\nmodule: [a, b]\n---\n# Fiche\n", False),
+        ("---\nmodule: Module Invalide\n---\n# Fiche\n", False),
         ("# Fiche sans en-tête\n", False),
     ],
 )

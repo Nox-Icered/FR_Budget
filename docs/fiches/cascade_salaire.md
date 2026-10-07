@@ -54,7 +54,7 @@ L'incidence des cotisations patronales (part répercutée sur le salaire) sera u
 - Référence : modèle de calcul de mon-entreprise.urssaf.fr (`modele_social_11_1_0`), exécuté par `outils/references_urssaf/generer.mjs`.
 - Tolérance : 0,50 € par mois et par ligne (validée le 7 octobre 2026).
 - Test : `moteur/tests/validation/test_menage_type_urssaf.py`.
-- Résultat au 7 octobre 2026 : 12 comparaisons sur 12 dans la tolérance (célibataire au SMIC, janvier et juillet 2026, avec et sans mutuelle). Détail et écarts trouvés : `docs/validation/menage_type_smic.md`.
+- Résultat au 7 octobre 2026 : 12 comparaisons sur 12 dans la tolérance, sur trois cas du célibataire au SMIC : janvier 2026 sans mutuelle, janvier 2026 avec mutuelle, juillet 2026 sans mutuelle (4 lignes par cas). Juillet 2026 avec mutuelle n'est pas testé. Détail et écarts trouvés : `docs/validation/menage_type_smic.md`.
 - Source indépendante : à faire (simulateurs officiels d'impots.gouv.fr et de la CAF pour le net après impôt).
 
 ## 7. Limites connues

@@ -18,6 +18,8 @@ from openfisca_core.simulation_builder import SimulationBuilder
 from openfisca_core.taxbenefitsystems import TaxBenefitSystem
 from openfisca_france import FranceTaxBenefitSystem
 
+from fr_budget.menages.corrections import CorrectionsOpenFisca, charger_corrections
+
 
 @dataclass(frozen=True)
 class HypothesesEmploi:
@@ -50,9 +52,16 @@ class CascadeSalaire:
 
 
 @cache
-def systeme_socio_fiscal() -> TaxBenefitSystem:
-    """Charge le système socio-fiscal français une seule fois par processus."""
-    return FranceTaxBenefitSystem()
+def systeme_socio_fiscal(corrige: bool = True) -> TaxBenefitSystem:
+    """Charge le système socio-fiscal français une seule fois par processus.
+
+    Par défaut, les corrections de ``registres/corrections_openfisca.yaml`` sont appliquées.
+    ``corrige=False`` donne OpenFisca tel que publié, pour mesurer l'effet des corrections.
+    """
+    systeme = FranceTaxBenefitSystem()
+    if not corrige:
+        return systeme
+    return CorrectionsOpenFisca(systeme, charger_corrections())
 
 
 def smic_mensuel_brut(mois: str) -> float:
@@ -68,7 +77,7 @@ def smic_mensuel_brut(mois: str) -> float:
 
 
 def cascade_salaire_mensuelle(
-    salaire_brut: float, mois: str, hypotheses: HypothesesEmploi
+    salaire_brut: float, mois: str, hypotheses: HypothesesEmploi, *, corrige: bool = True
 ) -> CascadeSalaire:
     """Calcule la cascade du salaire d'un salarié célibataire du privé, à temps plein.
 
@@ -88,7 +97,7 @@ def cascade_salaire_mensuelle(
         "familles": {"famille": {"parents": ["salarie"]}},
         "menages": {"menage": {"personne_de_reference": ["salarie"]}},
     }
-    simulation = SimulationBuilder().build_from_entities(systeme_socio_fiscal(), situation)
+    simulation = SimulationBuilder().build_from_entities(systeme_socio_fiscal(corrige), situation)
 
     def calcul(variable: str) -> float:
         # OpenFisca émet des avertissements numpy sur des divisions par zéro qu'il

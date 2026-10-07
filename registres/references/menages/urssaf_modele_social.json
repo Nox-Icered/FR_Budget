@@ -53,9 +53,11 @@
       "id": "celibataire_smic_2026_07_sans_mutuelle",
       "mois": "2026-07",
       "situation": {
-        "salarié . contrat . salaire brut": "SMIC",
-        "salarié . cotisations . prévoyances . santé . montant": "0 €/mois"
+        "salarié . contrat . salaire brut": "1867.0166666666667 €/mois",
+        "salarié . cotisations . prévoyances . santé . montant": "0 €/mois",
+        "SMIC . horaire": "12.02 €/heure"
       },
+      "correction_appliquee": "SMIC du 1er janvier 2026 pour la réduction générale (décret n° 2026-509 ; correction annoncée dans le CHANGELOG de modele-social, section next)",
       "hypotheses": {
         "effectif_entreprise": 4,
         "taux_accident_travail": 0.0208,
@@ -64,7 +66,7 @@
       },
       "resultats_mensuels": {
         "salaire_brut": 1867.0166666666667,
-        "cout_employeur": 1924.632801,
+        "cout_employeur": 1967.760886,
         "net_avant_impot": 1477.9257257916665,
         "net_imposable": 1531.1216981666666
       }

@@ -6,6 +6,7 @@ license = "AGPL-3.0-or-later"
 requires-python = ">=3.12,<3.13"
 dependencies = [
     "openfisca-france==176.1.2",
+    "pyyaml>=6.0.3",
 ]
 
 [dependency-groups]
@@ -13,6 +14,7 @@ dev = [
     "mypy",
     "pytest",
     "ruff",
+    "types-pyyaml>=6.0.12.20260906",
 ]
 
 [build-system]

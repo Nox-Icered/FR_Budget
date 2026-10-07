@@ -15,11 +15,12 @@ Relevés dans le paquet installé `openfisca-france` 176.1.2 (`openfisca-core` 4
 | `contrat_de_travail` | individu | mois | Type de durée de travail | `temps_plein` | Laissée par défaut |
 | `salaire_super_brut` | individu | mois | Coût du travail à court terme. Inclut les exonérations et allègements de charges | 0 | Sortie : coût employeur |
 | `salaire_net_a_payer` | individu | mois | Salaire net à payer (fiche de paie) | 0 | Sortie : net avant impôt |
-| `salaire_imposable` | individu | mois | Salaires imposables | 0 | Sortie : net imposable |
+| `salaire_imposable` | individu | mois | Salaires imposables | 0 | Sortie : net imposable (corrigée, voir `registres/corrections_openfisca.yaml`) |
 | `allegement_general` | individu | mois | Réduction générale des cotisations patronales (dite réduction Fillon) | 0 | Diagnostic |
 | `ags` | individu | mois | Contribution AGS (employeur) | 0 | Diagnostic |
+| `complementaire_sante_employeur` | individu | mois | Couverture complémentaire santé collective d'entreprise - part employeur (montant négatif) | 0 | Correction du net imposable |
 | `cout_du_travail` | individu | mois | Coût du travail à long terme. Inclut les charges, aides et crédits différés | 0 | Non utilisée (voir ci-dessous) |
-| `salaire_net` | individu | mois | Salaires nets d'après définition INSEE | 0 | Non utilisée |
+| `salaire_net` | individu | mois | Salaires nets d'après définition INSEE | 0 | Corrigée en même temps que `salaire_imposable`, dont elle dépend |
 | `impot_revenu_restant_a_payer` | foyer fiscal | année | Impôt sur le revenu restant à payer | 0 | Prochaine étape : net après impôt |
 | `ppa` | famille | mois | Prime pour l'activité | 0 | Prochaine étape : net après impôt |
 | `revenu_disponible` | ménage | année | Revenu disponible du ménage | 0 | Prochaine étape |
@@ -35,4 +36,4 @@ Deux définitions du coût employeur existent : `salaire_super_brut` (court term
 | `marche_travail.salaire_minimum.smic.smic_b_horaire` | SMIC horaire brut | Décrets et arrêtés de revalorisation (Légifrance), dans les métadonnées du paramètre |
 | `marche_travail.salaire_minimum.smic.nb_heures_travail_mensuel` | Heures mensuelles à temps plein | Métadonnées du paramètre |
 | `prelevements_sociaux.reductions_cotisations_sociales.allegement_general.ensemble_des_entreprises.smic_reference` | SMIC horaire retenu pour la réduction générale 2026 | Article D241-7 du code de la sécurité sociale ; décret n° 2026-509 du 12 juin 2026 ; décret n° 2025-1228 du 17 décembre 2025 |
-| `prelevements_sociaux.cotisations_regime_assurance_chomage.ags.employeur.ags` | Taux AGS employeur | Métadonnées du paramètre ; dernière vérification notée par OpenFisca : 14 mars 2024 |
+| `prelevements_sociaux.cotisations_regime_assurance_chomage.ags.employeur.ags` | Taux AGS employeur | Métadonnées du paramètre ; dernière vérification notée par OpenFisca : 14 mars 2024. Corrigé par le projet (0,25 % au 1er juillet 2024) |

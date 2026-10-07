@@ -41,8 +41,35 @@ const CAS = [
 			'salarié . contrat . salaire brut': 'SMIC',
 			'salarié . cotisations . prévoyances . santé . montant': '0 €/mois',
 		},
+		correction: 'smic_reduction_generale_2026',
 	},
 ]
+
+// Corrections appliquées à la version figée du modèle Urssaf, quand l'éditeur a publié
+// la correction dans son journal des modifications sans encore la diffuser sur npm.
+const CORRECTIONS = {
+	// Le décret n° 2026-509 du 12 juin 2026 maintient, pour la réduction générale (RGDU)
+	// de 2026, le SMIC applicable au 1er janvier 2026. modele-social 11.1.0 utilise le SMIC
+	// en vigueur ; la version suivante (section « next » de modele-social/CHANGELOG.md du
+	// dépôt betagouv/mon-entreprise, consultée le 7 octobre 2026) corrige :
+	// « Utilisation du Smic au 1er janvier 2026 dans les calculs de la RGDU et de la Lodeom ».
+	// On fixe le salaire brut à sa valeur au SMIC du mois, puis on remplace le SMIC horaire
+	// par celui du début d'année. Valable seulement pour un salaire éloigné des seuils
+	// exprimés en SMIC autres que celui de la RGDU.
+	smic_reduction_generale_2026: {
+		description:
+			"SMIC du 1er janvier 2026 pour la réduction générale (décret n° 2026-509 ; correction annoncée dans le CHANGELOG de modele-social, section next)",
+		appliquer(situation) {
+			const brut = valeur('salarié . contrat . salaire brut')
+			const smicDebutAnnee = valeur("SMIC . horaire . début d'année")
+			return {
+				...situation,
+				'salarié . contrat . salaire brut': `${brut} €/mois`,
+				'SMIC . horaire': `${smicDebutAnnee} €/heure`,
+			}
+		},
+	},
+}
 
 // Hypothèses relues dans le modèle, avec l'unité attendue par le moteur.
 const HYPOTHESES = {
@@ -68,13 +95,20 @@ const valeur = (regle) => {
 	return v
 }
 
-const cas = CAS.map(({ id, mois, situation }) => {
+const cas = CAS.map(({ id, mois, situation, correction }) => {
 	const [annee, m] = mois.split('-')
-	moteur.setSituation({ date: `'01/${m}/${annee}'`, ...situation })
+	const date = { date: `'01/${m}/${annee}'` }
+	moteur.setSituation({ ...date, ...situation })
+	let situationFinale = situation
+	if (correction) {
+		situationFinale = CORRECTIONS[correction].appliquer(situation)
+		moteur.setSituation({ ...date, ...situationFinale })
+	}
 	return {
 		id,
 		mois,
-		situation,
+		situation: situationFinale,
+		...(correction && { correction_appliquee: CORRECTIONS[correction].description }),
 		hypotheses: Object.fromEntries(
 			Object.entries(HYPOTHESES).map(([nom, [regle, facteur]]) => [nom, Number((valeur(regle) * facteur).toPrecision(12))]),
 		),

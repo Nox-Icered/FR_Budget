@@ -32,4 +32,4 @@ repos:
         entry: uv run --directory moteur python -m fr_budget.registres.verification
         language: system
         pass_filenames: false
-        files: ^(registres/|data/raw/|moteur/src/fr_budget/registres/)
+        files: ^(registres/|data/raw/|docs/fiches/|moteur/src/fr_budget/registres/)

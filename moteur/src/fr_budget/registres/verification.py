@@ -167,10 +167,28 @@ def verifier(registres: Registres, racine: Path, rapport: Rapport) -> None:
                 )
 
 
+def verifier_fiches(dossier_fiches: Path, leviers: set[str], rapport: Rapport) -> None:
+    """Chaque fiche (hors modèle) désigne un levier du registre ou un module, dans son en-tête."""
+    if not dossier_fiches.is_dir():
+        return
+    for fiche in sorted(dossier_fiches.glob("*.md")):
+        if fiche.name.startswith("_") or fiche.name == "README.md":
+            continue
+        bloc = re.match(r"---\n(.*?)\n---\n", fiche.read_text(encoding="utf-8"), re.DOTALL)
+        en_tete = yaml.safe_load(bloc.group(1)) if bloc else None
+        if not isinstance(en_tete, dict) or ("levier" in en_tete) == ("module" in en_tete):
+            rapport.erreurs.append(f"fiches / {fiche.name} : en-tête avec « levier » ou « module »")
+        elif "levier" in en_tete:
+            _renvoi(f"fiches / {fiche.name}", str(en_tete["levier"]), leviers, "levier", rapport)
+
+
 def main(dossier: Path = RACINE_DEPOT / "registres") -> int:
     rapport = Rapport()
     registres = charger(dossier, rapport)
     verifier(registres, dossier.parent, rapport)
+    verifier_fiches(
+        dossier.parent / "docs" / "fiches", {lv.id for lv in registres.leviers}, rapport
+    )
     for message in rapport.avertissements:
         print(f"avertissement : {message}")
     for message in rapport.erreurs:

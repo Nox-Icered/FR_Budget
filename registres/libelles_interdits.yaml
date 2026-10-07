@@ -1,0 +1,18 @@
+# Termes refusés dans les libellés affichés (règle de neutralité, CLAUDE.md). La
+# vérification des registres rejette un libellé de levier qui contient l'un d'eux.
+# Liste de départ proposée le 7 octobre 2026, à compléter par la relecture externe des
+# libellés ; elle ne remplace pas cette relecture.
+
+termes:
+  - effort
+  - juste
+  - injuste
+  - équitable
+  - nécessaire
+  - indispensable
+  - courageux
+  - responsable
+  - cadeau
+  - gaspillage
+  - matraquage
+  - assistanat

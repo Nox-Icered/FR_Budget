@@ -1,0 +1,79 @@
+# Registre des sources. Chaque chiffre du projet renvoie à une entrée de ce fichier.
+# acces : direct (document primaire consulté), recherche_web (cité d'après des résultats
+# de recherche, à confirmer sur le document primaire), paquet (logiciel installé).
+
+sources:
+  - id: openfisca_france_176_1_2
+    nom: OpenFisca-France 176.1.2 (paramètres et formules de la législation socio-fiscale)
+    editeur: OpenFisca
+    url: https://pypi.org/project/OpenFisca-France/176.1.2/
+    licence: AGPL-3.0
+    acces: paquet
+    consulte_le: 2026-10-07
+
+  - id: openfisca_france_changelog
+    nom: Journal des modifications d'OpenFisca-France (branche master)
+    editeur: OpenFisca
+    url: https://github.com/openfisca/openfisca-france/blob/master/CHANGELOG.md
+    licence: AGPL-3.0
+    acces: direct
+    consulte_le: 2026-10-07
+
+  - id: modele_social_11_1_0
+    nom: Modèle de calcul de mon-entreprise.urssaf.fr (paquet npm modele-social 11.1.0)
+    editeur: Urssaf Caisse nationale (betagouv/mon-entreprise)
+    url: https://www.npmjs.com/package/modele-social/v/11.1.0
+    licence: MIT
+    date_publication: 2026-07-16
+    acces: paquet
+    consulte_le: 2026-10-07
+
+  - id: modele_social_changelog
+    nom: Journal des modifications de modele-social (branche master, section « next »)
+    editeur: Urssaf Caisse nationale (betagouv/mon-entreprise)
+    url: https://github.com/betagouv/mon-entreprise/blob/master/modele-social/CHANGELOG.md
+    licence: MIT
+    acces: direct
+    consulte_le: 2026-10-07
+
+  - id: ags_communique_taux_2024_07
+    nom: Communiqué de presse de l'AGS sur le taux de cotisation à 0,25 %
+    editeur: AGS (Association pour la gestion du régime de garantie des créances des salariés)
+    url: https://ags-garantie-salaires.org/files/ags-theme/ags/2024/CP taux de cotisation AGS 025 .pdf
+    licence: non précisée
+    date_publication: 2024-06-18
+    acces: recherche_web
+    consulte_le: 2026-10-07
+
+  - id: legisocial_ags_2024_07
+    nom: « Taux de cotisation AGS relevé à 0,25 % au 1er juillet 2024 »
+    editeur: Legisocial
+    url: https://www.legisocial.fr/actualites-sociales/6778-taux-cotisation-ags-releve-025-1er-juillet-2024.html
+    licence: non précisée
+    acces: recherche_web
+    consulte_le: 2026-10-07
+
+  - id: bofip_prevoyance_complementaire
+    nom: BOFiP, régime fiscal des cotisations de prévoyance complémentaire et de frais de santé
+    editeur: Direction générale des finances publiques
+    url: https://bofip.impots.gouv.fr/node/17262
+    licence: Licence Ouverte 2.0
+    acces: recherche_web
+    consulte_le: 2026-10-07
+
+  - id: ag2r_sort_fiscal_contributions
+    nom: « Le sort fiscal et social des contributions »
+    editeur: AG2R La Mondiale
+    url: https://www.ag2rlamondiale.fr/culture-branches/reperes-pour-negocier/obligations-a-respecter/conseil-le-sort-fiscal-et-social-des-contributions
+    licence: non précisée
+    acces: recherche_web
+    consulte_le: 2026-10-07
+
+  - id: decret_2026_509
+    nom: Décret n° 2026-509 du 12 juin 2026 (SMIC retenu pour la réduction générale de 2026)
+    editeur: Journal officiel de la République française
+    url: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054248488
+    licence: Licence Ouverte 2.0
+    date_publication: 2026-06-14
+    acces: recherche_web
+    consulte_le: 2026-10-07

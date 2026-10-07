@@ -1,0 +1,4 @@
+# Registre des jeux de données extraits des sources (fichier dans data/raw/, empreinte
+# SHA-256, script de transformation). Premier contenu : tâche 0.5 du plan (prototype TVA).
+
+datasets: []

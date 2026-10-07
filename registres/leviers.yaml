@@ -1,0 +1,88 @@
+# Registre des leviers paramétriques de la V1 (docs/specification.md, « Leviers
+# paramétriques V1 »). Aucun levier n'est publié tant qu'il n'a pas passé la règle de
+# publication (CLAUDE.md) : statut valide, beta ou non_publie.
+
+leviers:
+  - id: tva
+    libelle: TVA
+    parametres_reglables: [Taux normal, Taux réduits, Taux super-réduit]
+    moteur: agrege
+    references_visees: [Évaluations de rendement dans Voies et Moyens (PLF)]
+    statut: non_publie
+
+  - id: impot_revenu
+    libelle: Impôt sur le revenu
+    parametres_reglables: [Tranches, Taux, Plafond du quotient familial, Décote]
+    moteur: openfisca_et_agrege
+    references_visees: [Voies et Moyens, TAXIPP (IPP)]
+    statut: non_publie
+
+  - id: impot_societes
+    libelle: Impôt sur les sociétés
+    parametres_reglables: [Taux normal, Taux PME, Seuils]
+    moteur: agrege
+    references_visees: [Voies et Moyens, Rapports du Conseil des prélèvements obligatoires]
+    statut: non_publie
+
+  - id: csg
+    libelle: CSG
+    parametres_reglables: [Taux sur les revenus d'activité, Taux sur les revenus du capital, Taux sur les pensions de retraite]
+    moteur: openfisca_et_agrege
+    references_visees: [Voies et Moyens, Chiffrages ACOSS]
+    statut: non_publie
+
+  - id: cotisations_patronales
+    libelle: Cotisations patronales
+    parametres_reglables: [Taux, Réduction générale, Seuils]
+    moteur: openfisca
+    references_visees: [Chiffrages Urssaf / ACOSS, Cour des comptes]
+    statut: non_publie
+
+  - id: accises_energie
+    libelle: Accises et taxes sur l'énergie
+    parametres_reglables: [Taux sur les carburants, Taux sur le tabac, Taux sur l'alcool]
+    moteur: agrege
+    references_visees: [Voies et Moyens]
+    statut: non_publie
+
+  - id: depenses_fiscales
+    libelle: Dépenses fiscales (niches fiscales)
+    parametres_reglables: [Suppression, Plafonnement ou réduction d'une dépense fiscale du catalogue]
+    moteur: agrege
+    references_visees: [Voies et Moyens, tome 2 (coût des dépenses fiscales)]
+    statut: non_publie
+
+  - id: credits_missions
+    libelle: Crédits par mission du budget de l'État
+    parametres_reglables: [Gel ou variation en pourcentage d'une mission]
+    moteur: agrege
+    references_visees: [Annexes budgétaires du PLF]
+    statut: non_publie
+
+  - id: remunerations_publiques
+    libelle: Rémunérations publiques
+    parametres_reglables: [Point d'indice, Effectifs]
+    moteur: agrege
+    references_visees: [Annexe « Rémunérations de la fonction publique », Cour des comptes]
+    statut: non_publie
+
+  - id: indexation_pensions_prestations
+    libelle: Revalorisation des pensions et prestations
+    parametres_reglables: [Règle de revalorisation (inflation, salaires, gel)]
+    moteur: agrege
+    references_visees: [Rapport annuel du COR, CNAV, CNAF]
+    statut: non_publie
+
+  - id: minima_prime_activite
+    libelle: Minima sociaux et prime d'activité
+    parametres_reglables: [Montants, Barèmes]
+    moteur: openfisca
+    references_visees: [DREES, CNAF]
+    statut: non_publie
+
+  - id: dotations_collectivites
+    libelle: Dotations de l'État aux collectivités
+    parametres_reglables: [Variation de la DGF, Variation des compensations]
+    moteur: agrege
+    references_visees: [Annexe « Transferts financiers de l'État aux collectivités », DGCL]
+    statut: non_publie

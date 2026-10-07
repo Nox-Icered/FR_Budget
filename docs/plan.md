@@ -10,11 +10,13 @@ Aucun chiffre n'apparaît dans ce plan : les valeurs viendront des registres, av
 - Environnement : Python 3.11, 3.12 et 3.13 disponibles, Node 22, `uv`, `pandoc`.
 - `openfisca-france` est disponible sur PyPI en version 176.1.2 (dépend de `openfisca-core` ≥ 43, < 45). La résolution des dépendances passe sous Python 3.13 ; l'installation réelle et un premier calcul restent à faire (tâche 0.2).
 
-## 1. Décisions à prendre avant de coder
+## 1. Décisions
 
-| # | Question | Proposition par défaut | Pourquoi |
+Validées le 7 octobre 2026, sauf D7 (en attente).
+
+| # | Question | Choix | Pourquoi |
 |---|----------|------------------------|----------|
-| D1 | Licence du code | AGPL-3.0 | OpenFisca-France est sous AGPL-3.0 (à vérifier dans le paquet installé) ; une API publique qui l'utilise doit rester compatible. |
+| D1 | Licence du code | AGPL-3.0 | OpenFisca-France est sous AGPL-3.0 (vérifié dans les métadonnées du paquet 176.1.2) ; une API publique qui l'utilise doit rester compatible. |
 | D2 | Licence des données et registres produits | Licence Ouverte Etalab 2.0 | Même licence que la plupart des sources publiques françaises ; chaque source garde sa propre licence dans le registre. |
 | D3 | Version de Python | 3.12 | Plus éprouvée avec l'écosystème scientifique ; passage en 3.13 quand la CI le confirme. |
 | D4 | Gestionnaire de paquets Python | `uv` avec `pyproject.toml` et fichier de verrouillage | Rapide, reproductible, un seul outil. |

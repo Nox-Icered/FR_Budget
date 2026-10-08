@@ -78,10 +78,36 @@ La première variante applique une part calculée sur 7,8 Md€ à une assiette 
 ## Écarts expliqués et suite
 
 - **Produits mixtes encore affectés au taux dominant** (`statut: mixte_simplifie` dans les correspondances) : abonnements d'électricité et de gaz (5,5 % en 2022 affectés à 20 %), eau (affectée à 10 % au niveau A38), boissons servies, médicaments remboursables ou non. Le tome II de Voies et Moyens ne les chiffre pas : ce ne sont pas des dépenses fiscales.
-- **Taux de 2,1 %** : le modèle met tous les médicaments au taux de 2,1 % et attribue aux APU les médicaments remboursés (31 Md€ de consommation individuelle des APU) et les achats de médicaments des hôpitaux ; la DG Trésor affiche un point net égal au point brut sur ce taux, donc une part APU quasi nulle. La séparation des médicaments non remboursables (10 %) a été essayée et n'est pas retenue (section suivante). La convention d'attribution aux APU reste à éclaircir. La référence « 0,4 Md€ » est arrondie au dixième : la valeur publiée couvre de 0,35 à 0,45 Md€, soit ±12,5 %, plus que la tolérance.
+- **Taux de 2,1 %** : le modèle met tous les médicaments au taux de 2,1 % et attribue aux APU les médicaments remboursés (31 Md€ de consommation individuelle des APU) et les achats de médicaments des hôpitaux ; la DG Trésor affiche un point net égal au point brut sur ce taux, donc une part APU quasi nulle. La séparation des médicaments non remboursables (10 %) a été essayée et n'est pas retenue (section suivante). La convention d'attribution aux APU reste à éclaircir. La référence « 0,4 Md€ » est arrondie au dixième, soit ±12,5 %, plus que la tolérance (voir « Précision des références »).
 - **Recette totale** : le modèle calcule une TVA théorique ; la recette réelle est plus faible (écart de TVA : fraude, erreurs, défaillances), que la DG Trésor corrige par un recalage que nous ne faisons pas.
 - **Banque et immobilier** : la TVA facturée par ces branches sur option (locations professionnelles, certaines commissions) n'est pas comptée ; les comptes nationaux en enregistrent 8 Md€ en 2022.
 - **Correspondances à vérifier** : 747 Md€ de consommation des ménages ont un rattachement « à vérifier » (taux connu, texte non relu) ; seuls les taux de l'alimentation ont été vérifiés dans le BOFiP.
+
+## Précision des références
+
+Décision du mainteneur (8 octobre 2026) : la tolérance reste de ±10 % pour tous les tests, y compris quand l'arrondi de la source est plus large ; la limite est signalée ici.
+
+Les points de TVA 2025 sont publiés au dixième de milliard, ceux de 2015 au quart de milliard. La vraie valeur peut donc s'écarter de la valeur publiée d'un demi-pas. Pour les petits montants, cette incertitude dépasse la tolérance : un écart de quelques pour cent au-delà de ±10 % sur ces lignes ne prouve pas à lui seul que le modèle est faux, et un résultat dans la tolérance ne prouve pas qu'il est juste.
+
+| Référence | Taux | Valeur publiée (Md€) | Pas d'arrondi | Incertitude d'arrondi | Supérieure à ±10 % ? |
+|---|---|---|---|---|---|
+| Point brut 2025 | Ensemble | 13,7 | 0,1 | ±0,4 % | non |
+|  | 2,1 % | 0,4 | 0,1 | ±12,5 % | oui |
+|  | 5,5 % | 2,4 | 0,1 | ±2,1 % | non |
+|  | 10 % | 1,9 | 0,1 | ±2,6 % | non |
+|  | 20 % | 8,9 | 0,1 | ±0,6 % | non |
+| Point net 2025 | Ensemble | 11,4 | 0,1 | ±0,4 % | non |
+|  | 2,1 % | 0,4 | 0,1 | ±12,5 % | oui |
+|  | 5,5 % | 2,0 | 0,1 | ±2,5 % | non |
+|  | 10 % | 1,6 | 0,1 | ±3,1 % | non |
+|  | 20 % | 7,5 | 0,1 | ±0,7 % | non |
+| Point brut 2015 | Ensemble | 9,75 | 0,25 | ±1,3 % | non |
+|  | 2,1 % | 0,5 | 0,25 | ±25,0 % | oui |
+|  | 5,5 % | 1,75 | 0,25 | ±7,1 % | non |
+|  | 10 % | 1,25 | 0,25 | ±10,0 % | non |
+|  | 20 % | 6,5 | 0,25 | ±1,9 % | non |
+
+Les recettes totales (202,7 et 210,7 Md€) sont publiées au dixième de milliard : incertitude d'arrondi négligeable.
 
 ## Indépendance de la validation
 

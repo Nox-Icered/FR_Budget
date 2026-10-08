@@ -87,3 +87,4 @@ Leurs plages serviront au calcul des fourchettes. Restent à créer, une fois so
 | 2026-10-07 | Premier modèle (`agrege/tva.py`) | 17 tests de validation créés : 8 réussis, 9 échoués |
 | 2026-10-08 | Travaux répartis entre 10 % et 5,5 % et écart d'outre-mer et de Corse retranché de la recette (tome II de Voies et Moyens, PLF 2025) ; répartition de la restauration essayée et écartée | 2 tests passent (point brut 2015 au taux de 5,5 % : -11,5 % → -9,0 % ; recette 2024 : +10,2 % → +9,0 %) ; 10 réussis, 7 échoués ; détail dans `docs/validation/levier_tva.md` |
 | 2026-10-08 | Séparation des médicaments non remboursables (comptes de la santé de la DREES) essayée et non retenue ; diagnostic publié dans `docs/validation/levier_tva.md` | aucun (modèle inchangé) |
+| 2026-10-08 | Tolérance maintenue à ±10 % (décision du mainteneur) ; précision des références publiée dans `docs/validation/levier_tva.md` | aucun |

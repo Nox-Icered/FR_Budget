@@ -73,3 +73,25 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
 def comparaisons() -> list[Comparaison]:
     """Toutes les comparaisons modèle-référence, dans l'ordre des tests de validation."""
     return [comparer(reference, calcul()) for reference, calcul in _definitions()]
+
+
+def tableau_markdown(liste: list[Comparaison]) -> str:
+    """Tableau des écarts, publié par la CI dans le résumé de chaque exécution."""
+    hors = sum(not c.dans_la_tolerance for c in liste)
+    lignes = [
+        f"## Écarts aux références : {len(liste) - hors} sur {len(liste)} dans la tolérance",
+        "",
+        "| Référence | Modèle | Référence | Écart | Résultat |",
+        "|---|---|---|---|---|",
+    ]
+    for c in liste:
+        resultat = "dans la tolérance" if c.dans_la_tolerance else "**hors tolérance**"
+        lignes.append(
+            f"| {c.reference} | {c.modele:.3f} | {c.valeur_reference:.3f} | {c.ecart:+.1%} "
+            f"(±{c.tolerance:.0%}) | {resultat} |"
+        )
+    return "\n".join(lignes) + "\n"
+
+
+if __name__ == "__main__":
+    print(tableau_markdown(comparaisons()))

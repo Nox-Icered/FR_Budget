@@ -148,6 +148,12 @@ sources:
     url: https://www.assemblee-nationale.fr/dyn/contenu/visualisation/1128231/file/PAP%202027%20-%20Engagements%20financiers%20de%20l%27Etat.pdf
     licence: Licence Ouverte 2.0
     millesime: PLF 2027
+  - id: eurostat_gov_10a_exp
+    nom: Eurostat, dépenses des administrations publiques par fonction (CFAP/COFOG), tableau gov_10a_exp
+    editeur: Eurostat (données transmises par l'INSEE)
+    url: https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10a_exp?geo=FR&unit=MIO_EUR&na_item=TE&format=JSON&lang=fr
+    licence: "Réutilisation autorisée avec mention de la source, décision 2011/833/UE ; signaler les modifications et inclure un avertissement de non-responsabilité d'Eurostat (https://ec.europa.eu/eurostat/help/copyright-notice)"
+    millesime: mise à jour du 16 septembre 2026 (années 1990-2024)
     acces: direct
     consulte_le: 2026-10-08
 

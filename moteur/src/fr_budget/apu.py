@@ -22,6 +22,7 @@ from functools import cache
 from fr_budget.registres.verification import RACINE_DEPOT
 
 FICHIER = RACINE_DEPOT / "data" / "processed" / "apu" / "comptes_apu.csv"
+FICHIER_COFOG = RACINE_DEPOT / "data" / "processed" / "apu" / "cofog.csv"
 POURCENT = 100
 
 
@@ -45,6 +46,20 @@ def comptes_apu() -> ComptesApu:
                 for r in csv.DictReader(f)
             }
         )
+
+
+@cache
+def depenses_par_fonction() -> dict[tuple[int, str, str], float]:
+    """Dépenses des APU par fonction COFOG, en Md€ : clé (année, sous-secteur, code COFOG).
+
+    Source : Eurostat, gov_10a_exp (``pipelines/apu/extraire_cofog.py``). Codes : ``TOTAL``,
+    ``GF01`` à ``GF10`` (divisions) et leurs groupes (``GF0101``…).
+    """
+    with FICHIER_COFOG.open(encoding="utf-8") as f:
+        return {
+            (int(r["annee"]), r["sous_secteur"], r["cofog"]): float(r["milliards_euros"])
+            for r in csv.DictReader(f)
+        }
 
 
 def solde_primaire(capacite_financement: float, interets_verses: float) -> float:

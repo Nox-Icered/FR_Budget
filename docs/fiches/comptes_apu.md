@@ -29,6 +29,7 @@ Rien : ce sont des données observées.
 | `solde_maastricht` | Déficit au sens de Maastricht | 3.106 |
 | `dette_maastricht` | Dette au sens de Maastricht | 3.101 |
 | `pib` | Produit intérieur brut (B1GQ) | 1.101 |
+| Dépenses par fonction (COFOG) | Total des dépenses par division et groupe COFOG, 1990-2024 | Eurostat, gov_10a_exp (`depenses_par_fonction`) |
 
 Les dépenses et recettes de chaque sous-secteur sont consolidées à l'intérieur du sous-secteur, pas entre sous-secteurs : leur somme ne donne pas celle des APU (note du tableau 3.215). Les soldes, eux, s'additionnent.
 
@@ -54,14 +55,16 @@ Tests `moteur/tests/validation/test_comptes_apu.py` (reproduction des publicatio
 - capacité de financement = recettes - dépenses, chaque sous-secteur, chaque année (0,01 Md€) ;
 - capacité de financement = déficit au sens de Maastricht depuis 2014 (0,01 Md€) ;
 - solde des APU = somme des soldes de l'administration centrale, des administrations locales et de la sécurité sociale, 2015-2025 (0,01 Md€) ;
-- dette en % du PIB recalculée = ratio publié, 2015-2025 (0,055 point : arrondi du ratio au dixième et de la dette au dixième de milliard).
+- dette en % du PIB recalculée = ratio publié, 2015-2025 (0,055 point : arrondi du ratio au dixième et de la dette au dixième de milliard) ;
+- total COFOG d'Eurostat = total des dépenses de l'INSEE, 2010-2022, par sous-secteur (0,05 Md€).
 
 Constat : avant 2020, la ligne « Série du PIB utilisée » du tableau 3.101 ne reproduit pas le ratio de dette publié dans le même tableau (écart jusqu'à 0,30 point en 2018) ; le PIB du tableau 1.101 le reproduit. Le modèle utilise donc le PIB du tableau 1.101.
 
 ## 7. Limites
 
 - Données annuelles seulement ; l'année la plus récente (2025) est un compte semi-définitif, révisable.
-- Dépenses par fonction (COFOG) pas encore extraites : le fichier n'est pas proposé sur la page de l'INSEE ; à reprendre depuis Eurostat (tableau gov_10a_exp, alimenté par l'INSEE).
+- Dépenses par fonction (COFOG) : Eurostat s'arrête à 2024 et reprend un millésime antérieur à l'actualisation de l'INSEE du 28 août 2026. Écart du total COFOG aux dépenses de l'INSEE : nul jusqu'en 2022 ; en 2023, -0,05 % (APU), -0,02 % (administration centrale), +0,00 % (locales), -0,07 % (sécurité sociale) ; en 2024, -0,05 %, -0,14 %, -0,22 %, +0,15 %.
+- Conditions d'Eurostat : mention de la source, signalement des modifications (ici, conversion en milliards d'euros et format long), avertissement que la responsabilité d'Eurostat n'est pas engagée par l'usage qui en est fait ; à reprendre sur le site.
 
 ## 8. Journal
 
@@ -69,3 +72,4 @@ Constat : avant 2020, la ligne « Série du PIB utilisée » du tableau 3.101 ne
 |------|------------|---------------------|
 | 2026-10-08 | Extraction des comptes des APU 2025 et premiers contrôles | 14 tests de contrôle créés, tous réussis |
 | 2026-10-08 | Convention du solde primaire : intérêts versés (décision du mainteneur) | aucun |
+| 2026-10-08 | Dépenses par fonction (COFOG, Eurostat) et contrôle de cohérence avec l'INSEE | 4 tests de contrôle créés, tous réussis |

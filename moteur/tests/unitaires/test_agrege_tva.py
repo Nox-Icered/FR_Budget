@@ -3,11 +3,13 @@ import pytest
 from fr_budget.agrege.tva import (
     Assiette,
     assiette_consommation_finale,
+    assiette_depense_fiscale,
     assiette_remanente,
     base_hors_taxe,
     point_tva,
     prorata_non_deductibilite,
     recette,
+    repartition_par_taux,
     taux_tva,
 )
 
@@ -62,3 +64,43 @@ def test_point_et_recette() -> None:
 
 def test_taux_2022_lus_dans_openfisca() -> None:
     assert taux_tva(2022) == TAUX
+
+
+def test_assiette_deduite_du_cout_d_un_taux_reduit() -> None:
+    # Coût de 2 150 M€ d'un taux de 10 % par rapport au taux normal de 20 % : 21 500 M€ HT.
+    assert assiette_depense_fiscale(2150.0, 0.1, 0.2) == pytest.approx(21_500.0)
+
+
+def test_repartition_avec_reste_au_taux_normal() -> None:
+    # 100 M€ HT au taux de 10 % (110 TTC) dans une consommation de 330 TTC.
+    repartition = repartition_par_taux(330.0, {"intermediaire": 100.0}, TAUX)
+    assert repartition.parts == {
+        "intermediaire": pytest.approx(1 / 3),
+        "normal": pytest.approx(2 / 3),
+    }
+    assert repartition.exces == 0.0
+
+
+def test_repartition_quand_les_taux_reduits_depassent_la_consommation() -> None:
+    # 110 TTC au taux de 10 % et 105,5 TTC au taux de 5,5 %, pour 200 TTC consommés :
+    # tout est aux taux réduits, au prorata, et l'excès est signalé.
+    repartition = repartition_par_taux(200.0, {"intermediaire": 100.0, "reduit": 100.0}, TAUX)
+    assert repartition.parts == {
+        "intermediaire": pytest.approx(110 / 215.5),
+        "reduit": pytest.approx(105.5 / 215.5),
+    }
+    assert repartition.exces == pytest.approx(215.5 / 200 - 1)
+
+
+def test_assiette_consommation_finale_d_un_produit_reparti() -> None:
+    assiette = assiette_consommation_finale(
+        [("p1", "FZ", 330.0)],
+        {"p1": "intermediaire"},
+        TAUX,
+        "menages",
+        {"p1": {"intermediaire": 1 / 3, "normal": 2 / 3}},
+    )
+    assert dict(assiette) == {
+        ("intermediaire", "menages"): pytest.approx(100.0),
+        ("normal", "menages"): pytest.approx(183.33, abs=0.01),
+    }

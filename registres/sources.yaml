@@ -106,6 +106,15 @@ sources:
     acces: direct
     consulte_le: 2026-10-07
 
+  - id: plf2025_voies_et_moyens_tome2
+    nom: Projet de loi de finances pour 2025, annexe « Évaluation des voies et moyens », tome II (dépenses fiscales)
+    editeur: Ministère de l'Économie et des Finances (document publié par l'Assemblée nationale)
+    url: https://www2.assemblee-nationale.fr/static/17/Annexes-DL/PLF-2025/Voies_et_moyens_Tome_2_2025.pdf
+    licence: Licence Ouverte 2.0
+    millesime: PLF 2025
+    acces: direct
+    consulte_le: 2026-10-08
+
   - id: dgtresor_cahier_2016_02
     nom: Les Cahiers de la DG Trésor n° 2016-02, « Le modèle d'estimation de la TVA théorique » (J.-A. Andrivon, C. Geay, É. Janbon)
     editeur: Direction générale du Trésor

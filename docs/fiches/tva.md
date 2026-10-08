@@ -1,7 +1,7 @@
 ---
 levier: tva
 statut: non_publie
-mise_a_jour: 2026-10-07
+mise_a_jour: 2026-10-08
 ---
 
 # Fiche : TVA
@@ -21,7 +21,7 @@ Combien rapporte ou coûte aux administrations publiques une variation d'un taux
 | Taux réduit | à relever | idem |
 | Taux super-réduit | à relever | idem |
 
-Les taux particuliers (Corse, outre-mer) sont hors du périmètre de la V1. Cette limite est indiquée au § 7.
+Les taux particuliers (Corse, outre-mer) ne sont pas réglables en V1. Leur effet sur la recette est retranché à partir du tome II de Voies et Moyens (§ 5 et 7).
 
 ## 3. Méthode de calcul (proposée, à valider)
 
@@ -57,7 +57,12 @@ La TVA est encaissée avec un décalage. Une hausse au 1er janvier rapporte donc
 
 ## 5. Hypothèses
 
-À créer dans `registres/hypotheses.yaml` une fois sourcées : coefficient de première année ; fourchette d'incertitude sur l'assiette.
+Dans `registres/hypotheses.yaml` :
+
+- `tva_repartition_produits_mixtes_stable` : la répartition des travaux entre 10 % et 5,5 %, calculée sur 2023 à partir du tome II de Voies et Moyens (PLF 2025), vaut pour les autres années ;
+- `tva_ecart_territorial_stable` : l'écart dû aux taux d'outre-mer et de Corse (2 297 M€ en 2023) est retranché de la recette de chaque année.
+
+Leurs plages serviront au calcul des fourchettes. Restent à créer, une fois sourcées : coefficient de première année ; fourchette d'incertitude sur le reste de l'assiette.
 
 ## 6. Validation
 
@@ -70,7 +75,8 @@ La TVA est encaissée avec un décalage. Une hausse au 1er janvier rapporte donc
 ## 7. Limites connues
 
 - Rendement statique : aucune réaction des prix ni des quantités consommées.
-- Taux particuliers (Corse, outre-mer) non modélisés en V1.
+- Taux particuliers (Corse, outre-mer) non modélisés en V1 : leur effet global sur la recette est retranché (tome II de Voies et Moyens), mais pas leur effet sur le point de TVA.
+- Médicaments tous au taux de 2,1 %, restauration toute au taux de 10 % : voir `docs/validation/levier_tva.md`.
 - L'effet sur le pouvoir d'achat (indicateur séparé de la spécification) demande les budgets de famille de l'INSEE.
 
 ## 8. Journal
@@ -79,3 +85,4 @@ La TVA est encaissée avec un décalage. Une hausse au 1er janvier rapporte donc
 |------|------------|---------------------|
 | 2026-10-07 | Fiche créée : méthode proposée, données à réunir | aucun |
 | 2026-10-07 | Premier modèle (`agrege/tva.py`) | 17 tests de validation créés : 8 réussis, 9 échoués |
+| 2026-10-08 | Travaux répartis entre 10 % et 5,5 % et écart d'outre-mer et de Corse retranché de la recette (tome II de Voies et Moyens, PLF 2025) ; répartition de la restauration essayée et écartée | 2 tests passent (point brut 2015 au taux de 5,5 % : -11,5 % → -9,0 % ; recette 2024 : +10,2 % → +9,0 %) ; 10 réussis, 7 échoués ; détail dans `docs/validation/levier_tva.md` |

@@ -192,3 +192,45 @@ def test_en_tete_des_fiches(tmp_path: Path, contenu: str, valide: bool) -> None:
     rapport = Rapport()
     verifier_fiches(tmp_path, {"levier_a"}, rapport)
     assert (rapport.erreurs == []) is valide
+
+
+CHIFFRAGE: dict[str, Any] = {
+    "id": "chiffrage_a",
+    "levier": "levier_a",
+    "source": "source_a",
+    "millesime": "2023",
+    "mesure": "Coût du taux réduit A",
+    "valeur": 100.0,
+    "unite": "M€",
+    "localisation": "page 1",
+    "saisi_le": "2026-10-08",
+    "relecture": "a_relire",
+}
+
+
+@pytest.mark.parametrize(
+    ("entree", "message"),
+    [
+        ({"chiffrage": "inconnu", "usage": "ecart_territorial", "annee": 2023}, "inconnu"),
+        ({"chiffrage": "chiffrage_a", "usage": "repartition", "annee": 2023}, "produit"),
+        (
+            {
+                "chiffrage": "chiffrage_a",
+                "usage": "ecart_territorial",
+                "annee": 2023,
+                "produit": "P1",
+                "regime": "reduit",
+            },
+            "produit",
+        ),
+    ],
+)
+def test_depenses_fiscales_tva_controlees(
+    tmp_path: Path, entree: dict[str, Any], message: str
+) -> None:
+    registres = ecrire_registres(tmp_path, chiffrages=[CHIFFRAGE])
+    (registres / "tva").mkdir()
+    (registres / "tva" / "depenses_fiscales.yaml").write_text(
+        yaml.safe_dump({"depenses_fiscales": [entree]}), encoding="utf-8"
+    )
+    assert any(message in e for e in erreurs(registres))

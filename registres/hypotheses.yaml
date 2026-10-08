@@ -1,4 +1,38 @@
 # Registre des hypothèses (identifiant, libellé, valeur centrale, plage, sources,
-# justification, instruments concernés). Premier contenu : tâche 0.6 du plan.
+# justification, instruments concernés).
 
-hypotheses: []
+hypotheses:
+  - id: tva_repartition_produits_mixtes_stable
+    libelle: Répartition par taux des produits relevant de plusieurs taux de TVA, stable d'une année à l'autre
+    unite: écart relatif de la part au taux réduit par rapport à l'année de référence (2023)
+    valeur_centrale: 0.0
+    plage:
+      basse: -0.004
+      haute: 0.004
+    sources: [plf2025_voies_et_moyens_tome2]
+    justification: >-
+      Les parts par taux des travaux de construction spécialisés sont calculées à partir des
+      dépenses fiscales 730213 et 730223 de 2023 (tome II du PLF 2025, pages 165 et 167), puis
+      appliquées aux comptes de 2015, 2022 et 2024. La part de l'assiette au taux de 5,5 %
+      vaut 0,2373 avec les montants de 2023 (2 150 et 970 M€), 0,2366 avec ceux de 2024
+      (2 170 et 975 M€) et 0,2375 avec ceux de 2025 (2 280 et 1 030 M€) : la plage couvre
+      l'écart maximal observé (0,32 %), arrondi à 0,4 %. Elle ne couvre pas les années antérieures au taux de
+      5,5 % sur la rénovation énergétique (2014).
+    instruments: [tva]
+
+  - id: tva_ecart_territorial_stable
+    libelle: Écart de TVA dû aux taux particuliers d'outre-mer et de Corse, au niveau de 2023 pour toutes les années
+    unite: écart relatif par rapport au montant de 2023
+    valeur_centrale: 0.0
+    plage:
+      basse: -0.062
+      haute: 0.062
+    sources: [plf2025_voies_et_moyens_tome2]
+    justification: >-
+      Le modèle applique les taux de la France métropolitaine à toute la consommation. Les
+      dépenses fiscales 710103, 710105 et 730306 (tome II du PLF 2025, pages 159 et 172)
+      mesurent l'écart dû aux taux d'outre-mer et de Corse : 2 297 M€ en 2023 (réalisation),
+      2 308 M€ en 2024 et 2 439 M€ en 2025 (prévisions). Le montant de 2023 est retranché de la
+      recette théorique de chaque année ; la plage reprend l'écart maximal observé entre ces
+      trois années (6,2 %), dans les deux sens.
+    instruments: [tva]

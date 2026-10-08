@@ -26,6 +26,14 @@ datasets:
     methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-07
 
+  - id: plf2025_voies_et_moyens_tome2_pdf
+    source: plf2025_voies_et_moyens_tome2
+    description: Voies et Moyens tome II du PLF 2025 (PDF, 247 pages)
+    fichier: data/raw/tva/plf2025_voies_et_moyens_tome2.pdf
+    empreinte_sha256: 037fa53f1d04a07a6fd2f79e2d2bf25f063bc94f3e21ea8750bf1b81d66e4d45
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-08
+
   - id: dgtresor_cahier_2016_02_pdf
     source: dgtresor_cahier_2016_02
     description: Cahier de la DG Trésor 2016-02 (PDF)

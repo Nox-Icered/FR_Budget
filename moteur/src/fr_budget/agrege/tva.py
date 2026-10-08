@@ -13,7 +13,11 @@ publiques de l'INSEE (comptes nationaux annuels base 2020) :
    vendue et ne porte pas de TVA ;
 4. TVA non déductible (rémanente) des producteurs : prorata de non-déductibilité de chaque
    branche égal à la part exonérée ou hors champ de la consommation finale de son produit
-   (assimilation produit-branche, Cahier 2016-02 § 2.2.3).
+   (assimilation produit-branche, Cahier 2016-02 § 2.2.3) ;
+5. produits relevant de plusieurs taux : répartis à l'aide du coût des taux réduits publié dans
+   le tome II de Voies et Moyens (``registres/tva/depenses_fiscales.yaml``) ;
+6. recette : diminuée de l'écart dû aux taux d'outre-mer et de Corse, chiffré dans le même
+   tome II (le modèle applique les taux de la France métropolitaine à toute la consommation).
 
 Les montants des comptes nationaux sont aux prix d'acquisition, TVA non déductible comprise :
 l'assiette hors taxe s'obtient en divisant par (1 + taux * part non déductible).
@@ -34,6 +38,7 @@ from pathlib import Path
 import yaml
 
 from fr_budget.menages.openfisca import systeme_socio_fiscal
+from fr_budget.registres.schemas import DepenseFiscaleTva, UsageDepenseFiscale
 from fr_budget.registres.verification import RACINE_DEPOT
 
 DONNEES = RACINE_DEPOT / "data" / "processed" / "tva"
@@ -54,6 +59,7 @@ PARAMETRES_OPENFISCA = {
     "normal": "taux_normal",
 }
 PAYEURS = ("menages", "apu", "isblsm", "entreprises")
+SECTEURS_FINALS = ("menages", "apu", "isblsm")
 MILLIONS_PAR_MILLIARD = 1000
 UN_POINT = 0.01
 
@@ -66,6 +72,19 @@ class Assiette:
 
     def par_regime(self, regime: str, payeurs: Iterable[str] = PAYEURS) -> float:
         return sum(self.montants.get((regime, p), 0.0) for p in payeurs)
+
+
+@dataclass(frozen=True)
+class Repartition:
+    """Parts de la consommation (TTC) d'un produit par régime de TVA.
+
+    ``exces`` : part de l'assiette des taux réduits qui dépasse la consommation du produit
+    (0 si elle y tient). Un excès signale que la dépense fiscale couvre aussi d'autres emplois
+    que la consommation finale (par exemple l'investissement des ménages).
+    """
+
+    parts: Mapping[str, float]
+    exces: float
 
 
 @dataclass(frozen=True)
@@ -119,6 +138,13 @@ def tes(annee: int, table: str) -> dict[tuple[str, str], float]:
     return {(r[colonnes[0]], r[colonnes[1]]): float(r["millions_euros"]) for r in lignes}
 
 
+def depenses_fiscales() -> list[DepenseFiscaleTva]:
+    contenu = yaml.safe_load(
+        (REGISTRES / "tva" / "depenses_fiscales.yaml").read_text(encoding="utf-8")
+    )
+    return [DepenseFiscaleTva.model_validate(d) for d in contenu["depenses_fiscales"]]
+
+
 def chiffrage(identifiant: str) -> float:
     contenu = yaml.safe_load(
         (REGISTRES / "references" / "chiffrages.yaml").read_text(encoding="utf-8")
@@ -156,18 +182,54 @@ def prorata_non_deductibilite(
     }
 
 
+def assiette_depense_fiscale(cout: float, taux_reduit: float, taux_norme: float) -> float:
+    """Assiette hors taxe d'un taux réduit, déduite de son coût : coût / (norme - taux réduit).
+
+    Le tome II de Voies et Moyens chiffre le coût d'un taux réduit par rapport à une norme (le
+    taux normal pour les dépenses utilisées ici). Le chiffrage est statique : la même assiette
+    est taxée au taux réduit et à la norme.
+    """
+    return cout / (taux_norme - taux_reduit)
+
+
+def repartition_par_taux(
+    consommation_ttc: float,
+    assiettes_reduites: Mapping[str, float],
+    taux: Mapping[str, float],
+) -> Repartition:
+    """Parts de la consommation TTC d'un produit aux taux réduits et au taux normal.
+
+    Chaque assiette hors taxe au taux réduit est convertie en montant TTC. Si leur total tient
+    dans la consommation, le reste est au taux normal ; sinon toute la consommation est aux
+    taux réduits, au prorata, et l'excès est renvoyé.
+    """
+    ttc = {r: a * (1 + taux[r]) for r, a in assiettes_reduites.items()}
+    total = sum(ttc.values())
+    if total >= consommation_ttc:
+        return Repartition({r: v / total for r, v in ttc.items()}, total / consommation_ttc - 1)
+    parts = {r: v / consommation_ttc for r, v in ttc.items()}
+    parts["normal"] = 1 - total / consommation_ttc
+    return Repartition(parts, 0.0)
+
+
 def assiette_consommation_finale(
     consommations: Iterable[tuple[str, str, float]],
     regime_produit: Mapping[str, str],
     taux: Mapping[str, float],
     payeur: str,
+    repartitions: Mapping[str, Mapping[str, float]] | None = None,
 ) -> dict[tuple[str, str], float]:
-    """Assiette hors taxe de la consommation finale d'un secteur non assujetti."""
+    """Assiette hors taxe de la consommation finale d'un secteur non assujetti.
+
+    ``repartitions`` donne, pour les produits relevant de plusieurs taux, la part de chaque
+    régime ; les autres produits suivent ``regime_produit``.
+    """
     assiette: dict[tuple[str, str], float] = defaultdict(float)
     for code, _, montant in consommations:
-        regime = regime_produit[code]
-        if regime in TAUX_TAXES:
-            assiette[(regime, payeur)] += base_hors_taxe(montant, taux[regime])
+        parts = (repartitions or {}).get(code, {regime_produit[code]: 1.0})
+        for regime, part in parts.items():
+            if regime in TAUX_TAXES:
+                assiette[(regime, payeur)] += base_hors_taxe(montant * part, taux[regime])
     return assiette
 
 
@@ -189,12 +251,55 @@ def assiette_remanente(
     return assiette
 
 
+@cache
+def repartitions_produits_mixtes() -> dict[str, Repartition]:
+    """Répartition par taux des produits relevant de plusieurs taux.
+
+    Calculée sur la consommation de l'année des dépenses fiscales (tous secteurs), puis
+    appliquée telle quelle aux autres années (hypothèse ``tva_repartition_produits_mixtes_stable``).
+    """
+    par_produit: dict[tuple[str, int], dict[str, float]] = defaultdict(dict)
+    for df in depenses_fiscales():
+        if df.usage == UsageDepenseFiscale.REPARTITION:
+            assert df.produit is not None and df.regime is not None  # garanti par le schéma
+            taux = taux_tva(df.annee)
+            par_produit[(df.produit, df.annee)][df.regime.value] = assiette_depense_fiscale(
+                chiffrage(df.chiffrage), taux[df.regime.value], taux["normal"]
+            )
+    repartitions = {}
+    for (produit, annee), assiettes in par_produit.items():
+        consommation = sum(
+            montant
+            for secteur in SECTEURS_FINALS
+            for code, _, montant in consommation_fine(secteur, annee)
+            if code == produit
+        )
+        repartitions[produit] = repartition_par_taux(consommation, assiettes, taux_tva(annee))
+    return repartitions
+
+
+def ecart_territorial() -> float:
+    """Écart de TVA dû aux taux d'outre-mer et de Corse, en Md€ (année des chiffrages).
+
+    Retranché de la recette de chaque année (hypothèse ``tva_ecart_territorial_stable``).
+    """
+    return (
+        sum(
+            chiffrage(df.chiffrage)
+            for df in depenses_fiscales()
+            if df.usage == UsageDepenseFiscale.ECART_TERRITORIAL
+        )
+        / MILLIONS_PAR_MILLIARD
+    )
+
+
 def estimer_assiette(annee_comptes: int) -> Assiette:
     """Assiette hors taxe portant de la TVA, par régime et par payeur, pour une année de comptes."""
     taux = taux_tva(annee_comptes)
     regime_produit = regimes_produits()
     regime_a38 = regimes_a38()
-    fines = {s: consommation_fine(s, annee_comptes) for s in ("menages", "apu", "isblsm")}
+    repartitions = {p: r.parts for p, r in repartitions_produits_mixtes().items()}
+    fines = {s: consommation_fine(s, annee_comptes) for s in SECTEURS_FINALS}
     tef = tes(annee_comptes, "tef")
     tei = tes(annee_comptes, "tei")
     cpr = tes(annee_comptes, "cpr")
@@ -203,7 +308,7 @@ def estimer_assiette(annee_comptes: int) -> Assiette:
     montants: dict[tuple[str, str], float] = defaultdict(float)
     for secteur, consommations in fines.items():
         for cle, valeur in assiette_consommation_finale(
-            consommations, regime_produit, taux, secteur
+            consommations, regime_produit, taux, secteur, repartitions
         ).items():
             montants[cle] += valeur
 
@@ -314,4 +419,5 @@ def estimer_point_tva(annee_comptes: int, annee_cible: int) -> PointTva:
 
 @cache
 def estimer_recette_totale(annee_comptes: int) -> float:
-    return recette(estimer_assiette(annee_comptes), taux_tva(annee_comptes))
+    """Recette de TVA reconstituée, diminuée de l'écart dû aux taux d'outre-mer et de Corse."""
+    return recette(estimer_assiette(annee_comptes), taux_tva(annee_comptes)) - ecart_territorial()

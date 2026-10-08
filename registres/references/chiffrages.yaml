@@ -210,3 +210,80 @@ chiffrages:
     localisation: Tableau « TVA brute totale… », page 33 (section « Taxe sur la valeur ajoutée nette »)
     saisi_le: 2026-10-07
     relecture: a_relire
+
+  - id: tva_depense_fiscale_730213_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome2
+    millesime: 2023 (réalisation, PLF 2025)
+    mesure: Taux de 10 % pour les travaux d'amélioration, de transformation, d'aménagement et d'entretien des logements achevés depuis plus de deux ans (hors rénovation énergétique) ; coût par rapport au taux normal de 20 %
+    valeur: 2150
+    unite: M€
+    localisation: Tome II, page 165, dépense fiscale n° 730213, colonne « Réalisation 2023 »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: tva_depense_fiscale_730223_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome2
+    millesime: 2023 (réalisation, PLF 2025)
+    mesure: Taux de 5,5 % pour les travaux d'amélioration de la qualité énergétique des logements achevés depuis plus de deux ans ; coût par rapport au taux normal de 20 %
+    valeur: 970
+    unite: M€
+    localisation: Tome II, page 167, dépense fiscale n° 730223, colonne « Réalisation 2023 »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: tva_depense_fiscale_710103_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome2
+    millesime: 2023 (réalisation, PLF 2025)
+    mesure: Niveau des taux en Guadeloupe, en Martinique et à La Réunion (8,5 % et 2,1 %) ; coût par rapport aux taux de la France métropolitaine
+    valeur: 1940
+    unite: M€
+    localisation: Tome II, page 159, dépense fiscale n° 710103, colonne « Réalisation 2023 »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: tva_depense_fiscale_710105_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome2
+    millesime: 2023 (réalisation, PLF 2025)
+    mesure: Non-application provisoire de la TVA en Guyane et à Mayotte ; coût par rapport à l'application de la TVA
+    valeur: 160
+    unite: M€
+    localisation: Tome II, page 159, dépense fiscale n° 710105, colonne « Réalisation 2023 »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: tva_depense_fiscale_730306_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome2
+    millesime: 2023 (réalisation, PLF 2025)
+    mesure: Taux particuliers applicables en Corse ; coût par rapport aux taux de la France continentale
+    valeur: 197
+    unite: M€
+    localisation: Tome II, page 172, dépense fiscale n° 730306, colonne « Réalisation 2023 »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: tva_depense_fiscale_730221_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome2
+    millesime: 2023 (réalisation, PLF 2025)
+    mesure: Taux de 10 % pour la restauration commerciale ; coût par rapport au taux normal de 20 % (contrôle, non utilisé par le modèle)
+    valeur: 2000
+    unite: M€
+    localisation: Tome II, page 166, dépense fiscale n° 730221, colonne « Réalisation 2023 »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: tva_depense_fiscale_730207_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome2
+    millesime: 2023 (réalisation, PLF 2025)
+    mesure: Taux de 10 % pour les repas des cantines d'entreprises ou d'administrations ; coût par rapport au taux normal de 20 % (contrôle, non utilisé par le modèle)
+    valeur: 171
+    unite: M€
+    localisation: Tome II, page 164, dépense fiscale n° 730207, colonne « Réalisation 2023 »
+    saisi_le: 2026-10-08
+    relecture: a_relire

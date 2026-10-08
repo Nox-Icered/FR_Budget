@@ -200,7 +200,7 @@ HI_C30E0C_B2020,Autres engins électriques (hors véhicules pour invalides),norm
 HI_C30E0D_B2020,Bicyclettes non électriques,normal,a_verifier,"CGI art. 278 (taux normal, régime par défaut)",
 HI_C30E0E_B2020,Véhicules pour invalides,reduit,a_verifier,CGI art. 278-0 bis A (véhicules pour personnes handicapées),
 HI_C30E0F_B2020,Landaus et poussettes,normal,a_verifier,"CGI art. 278 (taux normal, régime par défaut)",
-H_F43Z0,Travaux de construction spécialisés,intermediaire,mixte_simplifie,"CGI art. 279-0 bis (travaux dans les logements de plus de deux ans) et art. 278-0 bis A (travaux de rénovation énergétique à 5,5 %)","Mélange de 20 %, 10 % et 5,5 % ; affecté au taux intermédiaire en attendant la répartition par le tome 2 de Voies et Moyens"
+H_F43Z0,Travaux de construction spécialisés,intermediaire,mixte_reparti,"CGI art. 279-0 bis (travaux dans les logements de plus de deux ans) et art. 278-0 bis A (travaux de rénovation énergétique à 5,5 %)","Réparti entre 10 % et 5,5 % par les dépenses fiscales 730213 et 730223 (registres/tva/depenses_fiscales.yaml) ; le régime de cette ligne ne sert que si la répartition est absente"
 H_G45Z2,Services d’entretien de véhicules automobiles,normal,a_verifier,"CGI art. 278 (taux normal, régime par défaut)",
 H_G45Z3,Services d’entretien de motocycles,normal,a_verifier,"CGI art. 278 (taux normal, régime par défaut)",
 138G_H49A,Transport ferroviaire,intermediaire,a_verifier,CGI art. 279 b quater (transports de voyageurs),

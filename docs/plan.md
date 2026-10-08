@@ -154,7 +154,7 @@ Porte 3 : mise en ligne avec tests et écarts publics.
 ## 7. Tests et CI
 
 - `tests/unitaires/` : chaque fonction de calcul, sur des cas construits à la main.
-- `tests/validation/` : un test par levier et par millésime. Chaque test nomme la référence, son millésime et la tolérance, et écrit l'écart dans un rapport publié par la CI, réussite ou échec.
+- `tests/validation/` : un test par levier et par millésime. Chaque test nomme la référence, son millésime et la tolérance, et écrit l'écart dans un rapport publié par la CI, réussite ou échec. Décision du 8 octobre 2026 : le job de validation est non bloquant ; la CI publie le tableau des écarts dans le résumé de chaque exécution et un avertissement quand un écart dépasse la tolérance.
 - Contrôles de registre : toute valeur numérique utilisée par le moteur doit exister dans un registre avec une source.
 - Contrôle de neutralité : liste de termes interdits dans les libellés (« effort », « juste », « nécessaire »…), complétée par la relecture humaine.
 - Contrôle de confidentialité : aucun champ de profil dans les journaux de l'API.

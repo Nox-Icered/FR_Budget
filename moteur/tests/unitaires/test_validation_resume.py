@@ -3,7 +3,7 @@ import re
 import pytest
 
 from fr_budget.registres.verification import RACINE_DEPOT
-from fr_budget.validation import Comparaison, _definitions, comparer
+from fr_budget.validation import Comparaison, _definitions, comparer, tableau_markdown
 
 
 def test_ecart_et_tolerance() -> None:
@@ -32,3 +32,11 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
     }
     attendues = {a for a in attendues if not a.endswith("_") and "{" not in a}
     assert {r for r, _ in _definitions()} == attendues
+
+
+def test_tableau_markdown() -> None:
+    tableau = tableau_markdown(
+        [Comparaison("a", 1.0, 1.0, 0.0, 0.1), Comparaison("b", 1.5, 1.0, 0.5, 0.1)]
+    )
+    assert "1 sur 2 dans la tolérance" in tableau
+    assert "| b | 1.500 | 1.000 | +50.0% (±10%) | **hors tolérance** |" in tableau

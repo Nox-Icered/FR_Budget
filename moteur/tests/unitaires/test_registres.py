@@ -5,7 +5,14 @@ from typing import Any
 import pytest
 import yaml
 
-from fr_budget.registres.verification import Rapport, charger, main, verifier, verifier_fiches
+from fr_budget.registres.verification import (
+    Rapport,
+    charger,
+    main,
+    modules_documentes,
+    verifier,
+    verifier_fiches,
+)
 
 SOURCE: dict[str, Any] = {
     "id": "source_a",
@@ -247,3 +254,16 @@ def test_chiffrage_avec_levier_et_module_refuse(tmp_path: Path) -> None:
     assert any(
         "exactement" in e for e in erreurs(ecrire_registres(tmp_path, chiffrages=[chiffrage]))
     )
+
+
+def test_en_tete_yaml_illisible_signale_sans_planter(tmp_path: Path) -> None:
+    fiches = tmp_path / "fiches"
+    fiches.mkdir()
+    (fiches / "casse.md").write_text("---\nmodule: [non ferme\n---\n# Fiche\n", encoding="utf-8")
+    (fiches / "_modele.md").write_text(
+        "---\nmodule: identifiant_du_module\n---\n", encoding="utf-8"
+    )
+    rapport = Rapport()
+    verifier_fiches(fiches, set(), rapport)
+    assert any("casse.md" in e for e in rapport.erreurs)
+    assert modules_documentes(fiches) == set()

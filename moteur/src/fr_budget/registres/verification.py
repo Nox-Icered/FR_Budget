@@ -137,16 +137,30 @@ def _renvoi(lieu: str, cible: str, connus: set[str], nature: str, rapport: Rappo
         rapport.erreurs.append(f"{lieu} : {nature} inconnu(e) « {cible} »")
 
 
+def _en_tetes_fiches(dossier_fiches: Path) -> list[tuple[str, Any]]:
+    """(nom, en-tête YAML) de chaque fiche, hors modèle et README ; ``None`` si illisible."""
+    en_tetes: list[tuple[str, Any]] = []
+    if not dossier_fiches.is_dir():
+        return en_tetes
+    for fiche in sorted(dossier_fiches.glob("*.md")):
+        if fiche.name.startswith("_") or fiche.name == "README.md":
+            continue
+        bloc = re.match(r"---\n(.*?)\n---\n", fiche.read_text(encoding="utf-8"), re.DOTALL)
+        try:
+            en_tete = yaml.safe_load(bloc.group(1)) if bloc else None
+        except yaml.YAMLError:
+            en_tete = None
+        en_tetes.append((fiche.name, en_tete))
+    return en_tetes
+
+
 def modules_documentes(dossier_fiches: Path) -> set[str]:
     """Identifiants de module déclarés dans l'en-tête des fiches (``module: …``)."""
-    modules: set[str] = set()
-    if dossier_fiches.is_dir():
-        for fiche in dossier_fiches.glob("*.md"):
-            bloc = re.match(r"---\n(.*?)\n---\n", fiche.read_text(encoding="utf-8"), re.DOTALL)
-            en_tete = yaml.safe_load(bloc.group(1)) if bloc else None
-            if isinstance(en_tete, dict) and isinstance(en_tete.get("module"), str):
-                modules.add(en_tete["module"])
-    return modules
+    return {
+        en_tete["module"]
+        for _, en_tete in _en_tetes_fiches(dossier_fiches)
+        if isinstance(en_tete, dict) and isinstance(en_tete.get("module"), str)
+    }
 
 
 def verifier(registres: Registres, racine: Path, rapport: Rapport) -> None:
@@ -208,19 +222,13 @@ def verifier(registres: Registres, racine: Path, rapport: Rapport) -> None:
 
 def verifier_fiches(dossier_fiches: Path, leviers: set[str], rapport: Rapport) -> None:
     """Chaque fiche (hors modèle) désigne un levier du registre ou un module, dans son en-tête."""
-    if not dossier_fiches.is_dir():
-        return
-    for fiche in sorted(dossier_fiches.glob("*.md")):
-        if fiche.name.startswith("_") or fiche.name == "README.md":
-            continue
-        bloc = re.match(r"---\n(.*?)\n---\n", fiche.read_text(encoding="utf-8"), re.DOTALL)
-        en_tete = yaml.safe_load(bloc.group(1)) if bloc else None
+    for nom, en_tete in _en_tetes_fiches(dossier_fiches):
         if not isinstance(en_tete, dict) or ("levier" in en_tete) == ("module" in en_tete):
-            rapport.erreurs.append(f"fiches / {fiche.name} : en-tête avec « levier » ou « module »")
+            rapport.erreurs.append(f"fiches / {nom} : en-tête avec « levier » ou « module »")
         elif "levier" in en_tete:
-            _renvoi(f"fiches / {fiche.name}", str(en_tete["levier"]), leviers, "levier", rapport)
+            _renvoi(f"fiches / {nom}", str(en_tete["levier"]), leviers, "levier", rapport)
         elif not isinstance(en_tete["module"], str) or not IDENTIFIANT.fullmatch(en_tete["module"]):
-            rapport.erreurs.append(f"fiches / {fiche.name} : identifiant de module invalide")
+            rapport.erreurs.append(f"fiches / {nom} : identifiant de module invalide")
 
 
 def main(dossier: Path = RACINE_DEPOT / "registres") -> int:

@@ -25,6 +25,7 @@ Code : `moteur/src/fr_budget/dette.py` (fonctions pures).
 - d : dette au sens de Maastricht en ratio de PIB ; r : taux apparent (intérêts versés rapportés à la dette de l'année précédente) ; g : croissance du PIB en valeur ; pb : solde primaire en ratio de PIB ; sfa : ajustement stock-flux.
 - Taux apparent : chaque année, la part refinancée de la dette (titres arrivant à échéance et emprunts nouveaux) prend le taux de marché, le reste garde son taux : r(t+1) = (1 - s) * r(t) + s * i(t).
 - Solde primaire stabilisant : pb* = d * (r - g) / (1 + g).
+- Choc de taux : la part de la dette au nouveau taux après t années est 1 - (1 - s)^t ; le surcoût de l'année k est évalué en t = k - 1 + f, f étant la part de la première année exposée (0,5 pour des émissions étalées). Avec f = 0,5, c'est une approximation de la moyenne sur l'année d'un refinancement continu, 1 - ((1 - s)^k - (1 - s)^(k-1)) / ln(1 - s) : pour s = 19,4 %, elle la dépasse de 1,7 % la première année (2,89 Md€ au lieu de 2,84 Md€), 0,5 % la deuxième et 0,1 % la cinquième. Changer de formule reste à décider par le mainteneur.
 - Ajustement stock-flux implicite : ce qui referme la formule sur une dette observée.
 
 ## 4. Données
@@ -76,3 +77,4 @@ L'ajustement stock-flux n'est pas négligeable certaines années (+3,0 points en
 |------|------------|---------------------|
 | 2026-10-08 | Formules de la dynamique de la dette et du taux apparent ; décomposition observée 2015-2025 | 10 tests unitaires créés, tous réussis |
 | 2026-10-08 | Part refinancée et choc de taux sur la dette de l'État (PLF 2027) | 2 tests unitaires créés, réussis ; 1 test de validation créé, en échec (-15,1 %) |
+| 2026-10-08 | Relecture finale : description de la formule du choc de taux précisée (approximation en milieu d'année, écart à la moyenne exacte publié) | aucun |

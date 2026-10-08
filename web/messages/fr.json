@@ -1,0 +1,86 @@
+{
+  "site": {
+    "titre": "Budget public : simulateur",
+    "description": "Simulateur public et open source du budget des administrations publiques françaises. Chaque chiffre renvoie à sa source.",
+    "avertissement": "Version de développement. Aucun levier n'est validé ; les résultats ne sont pas publiés.",
+    "pied": "Code sous licence AGPL-3.0, données sous Licence Ouverte 2.0 sauf mention contraire de la source."
+  },
+  "navigation": {
+    "accueil": "Accueil",
+    "sources": "Sources",
+    "hypotheses": "Hypothèses",
+    "validation": "Validation"
+  },
+  "accueil": {
+    "titre": "Les comptes des administrations publiques",
+    "intro": "État, organismes divers d'administration centrale, administrations locales et sécurité sociale. Données observées, sans projection.",
+    "annee": "Année {annee}",
+    "milliards": "{valeur} Md€",
+    "pourcent_pib": "{valeur} % du PIB",
+    "source": "Source : {source}",
+    "indicateurs": {
+      "depenses": "Dépenses",
+      "recettes": "Recettes",
+      "capacite_financement": "Solde (capacité ou besoin de financement)",
+      "interets_verses": "Intérêts versés",
+      "dette_maastricht": "Dette au sens de Maastricht"
+    },
+    "sous_secteurs": {
+      "S13": "Ensemble des administrations publiques",
+      "S1311": "Administration centrale",
+      "S1313": "Administrations locales",
+      "S1314": "Sécurité sociale"
+    },
+    "fonctions_titre": "Dépenses par fonction en {annee}",
+    "fonction": "Fonction",
+    "montant": "Montant",
+    "mention_eurostat": "Données Eurostat converties en milliards d'euros par ce site. L'usage qui en est fait n'engage pas Eurostat."
+  },
+  "sources": {
+    "titre": "Sources",
+    "intro": "Documents et jeux de données utilisés, tels que téléchargés. L'empreinte permet de vérifier que le fichier n'a pas changé.",
+    "editeur": "Éditeur",
+    "millesime": "Millésime",
+    "licence": "Licence",
+    "consulte_le": "Consulté le {date}",
+    "lien": "Ouvrir la source"
+  },
+  "hypotheses": {
+    "titre": "Hypothèses",
+    "intro": "Chaque hypothèse a une valeur centrale et une plage. Les résultats sont donnés en fourchette à partir de ces plages.",
+    "valeur_centrale": "Valeur centrale",
+    "plage": "Plage : de {basse} à {haute}",
+    "justification": "Justification",
+    "sources": "Sources"
+  },
+  "validation": {
+    "titre": "Validation",
+    "intro": "Un levier n'est publié qu'après comparaison avec un chiffrage officiel. Les écarts sont publiés, y compris quand le modèle est moins bon.",
+    "levier": "Levier",
+    "statut": "Statut",
+    "statuts": {
+      "valide": "Validé",
+      "beta": "Bêta, non validé",
+      "non_publie": "Non publié"
+    },
+    "references_titre": "Références saisies pour la validation",
+    "reference": "Référence",
+    "valeur": "Valeur",
+    "relecture": "Relecture",
+    "relectures": {
+      "a_relire": "À relire",
+      "relu": "Relu"
+    },
+    "comparaisons_titre": "Comparaison du modèle aux références",
+    "comparaisons_intro": "Écart relatif entre la valeur du modèle et la référence officielle, tolérance de ±{tolerance} %. Les écarts hors tolérance sont publiés tels quels.",
+    "modele": "Modèle",
+    "ecart": "Écart",
+    "resultat": "Résultat",
+    "dans_tolerance": "Dans la tolérance",
+    "hors_tolerance": "Hors tolérance",
+    "pourcent": "{valeur} %"
+  },
+  "version": {
+    "texte": "Version du moteur {moteur} ; registres {registres} ; données {donnees}"
+  }
+}

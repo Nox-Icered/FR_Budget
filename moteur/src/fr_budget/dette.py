@@ -94,10 +94,14 @@ def surcout_choc_taux(
 ) -> float:
     """Surcoût d'intérêts, l'année ``annee`` (1 = première), d'un choc de taux sur toute la courbe.
 
-    Application de ``taux_apparent_suivant`` à un écart de taux : après k années de
-    refinancement à la part constante s, l'écart de taux apparent vaut
-    choc * (1 - (1 - s) ** k). La première année ne compte que ``fraction_premiere_annee``
-    d'exposition (émissions étalées dans l'année). L'encours est tenu constant.
+    Application de ``taux_apparent_suivant`` à un écart de taux : après t années de
+    refinancement à la part annuelle constante s, la part de la dette au nouveau taux vaut
+    1 - (1 - s) ** t. Le surcoût de l'année k est évalué en un seul point de l'année,
+    t = k - 1 + ``fraction_premiere_annee`` : 0,5 (milieu d'année) pour des émissions étalées,
+    1 (fin d'année) si tout est refinancé en début d'année. Avec 0,5, c'est une approximation
+    de la moyenne sur l'année d'un refinancement continu, 1 - ((1 - s) ** k - (1 - s) **
+    (k - 1)) / ln(1 - s) : pour s = 19,4 %, elle la dépasse de 1,7 % la première année et de
+    0,1 % la cinquième (docs/fiches/dynamique_dette.md). L'encours est tenu constant.
     """
     exposition = annee - 1 + fraction_premiere_annee
     return float(encours * choc * (1 - (1 - part) ** exposition))

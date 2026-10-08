@@ -3,6 +3,8 @@
 Formule (CLAUDE.md) : d(t+1) = d(t) * (1 + r) / (1 + g) - pb + sfa, en ratio de PIB.
 """
 
+import math
+
 import pytest
 
 from fr_budget.dette import (
@@ -80,6 +82,25 @@ def test_part_refinancee() -> None:
 
 def test_surcout_d_un_choc_de_taux() -> None:
     # Choc de 1 point, 20 % refinancés par an, encours 1 000.
+    # Tout refinancé le 1er janvier (part en début d'année = 1) : 20 % de la dette dès l'année 1.
     assert surcout_choc_taux(1000.0, 0.2, 0.01, 1, 1.0) == pytest.approx(2.0)
-    assert surcout_choc_taux(1000.0, 0.2, 0.01, 1, 0.5) == pytest.approx(10 * (1 - 0.8**0.5))
     assert surcout_choc_taux(1000.0, 0.2, 0.01, 5, 1.0) == pytest.approx(10 * (1 - 0.8**5))
+    # Refinancement continu (part en début d'année = 0) : moyenne exacte de 1 - 0,8 ** t sur
+    # l'année, soit 1 - (0,8 ** k - 0,8 ** (k - 1)) / ln(0,8).
+    for k in (1, 2, 5):
+        moyenne = 1 - (0.8**k - 0.8 ** (k - 1)) / math.log(0.8)
+        assert surcout_choc_taux(1000.0, 0.2, 0.01, k, 0.0) == pytest.approx(10 * moyenne)
+    # Mélange : moyenne pondérée des deux cas.
+    attendu = 0.25 * 2.0 + 0.75 * surcout_choc_taux(1000.0, 0.2, 0.01, 1, 0.0)
+    assert surcout_choc_taux(1000.0, 0.2, 0.01, 1, 0.25) == pytest.approx(attendu)
+
+
+def test_surcout_cas_limites_de_la_part_refinancee() -> None:
+    assert surcout_choc_taux(1000.0, 0.0, 0.01, 3, 0.0) == 0.0
+    assert surcout_choc_taux(1000.0, 1.0, 0.01, 1, 0.0) == pytest.approx(10.0)
+
+
+def test_moyenne_exacte_verifiee_par_integration_numerique() -> None:
+    s, k, n = 0.194, 1, 100_000
+    numerique = sum(1 - (1 - s) ** (k - 1 + (i + 0.5) / n) for i in range(n)) / n
+    assert surcout_choc_taux(1.0, s, 1.0, k, 0.0) == pytest.approx(numerique, rel=1e-6)

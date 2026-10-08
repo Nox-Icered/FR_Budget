@@ -37,19 +37,19 @@ hypotheses:
       trois années (6,2 %), dans les deux sens.
     instruments: [tva]
 
-  - id: dette_fraction_premiere_annee_exposee
-    libelle: Part de la première année pendant laquelle la dette refinancée porte déjà le nouveau taux
-    unite: fraction d'année
-    valeur_centrale: 0.5
+  - id: dette_part_refinancement_debut_annee
+    libelle: Part du refinancement de l'année réalisée dès le 1er janvier plutôt qu'au fil de l'année
+    unite: fraction du refinancement annuel
+    valeur_centrale: 0.0
     plage:
-      basse: 0.5
+      basse: 0.0
       haute: 1.0
     sources: [plf2027_pap_engagements_financiers_etat]
     justification: >-
-      Le programme d'émission (340 Md€ en 2027, page 32) est réalisé au fil de l'année : avec des
-      émissions réparties uniformément, la dette refinancée porte le nouveau taux la moitié de
-      l'année en moyenne (valeur centrale 0,5). Les titres à court terme renouvelés tôt dans
-      l'année et les émissions concentrées en début d'année rapprochent cette part de 1 (borne
-      haute). Aucune source publiée ne donne le calendrier des émissions : la plage est large.
+      Le programme d'émission (340 Md€ en 2027, page 32) est réalisé au fil de l'année : la
+      valeur centrale suppose un refinancement continu, dont le surcoût d'un choc de taux est la
+      moyenne exacte sur l'année (décision du mainteneur du 8 octobre 2026). Les titres à court
+      terme renouvelés tôt dans l'année et les émissions concentrées en début d'année
+      rapprochent le calendrier d'un refinancement au 1er janvier (borne haute). Aucune source
+      publiée ne donne le calendrier des émissions : la plage est large.
     instruments: [dynamique_dette]
-

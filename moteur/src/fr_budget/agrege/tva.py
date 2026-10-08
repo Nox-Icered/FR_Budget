@@ -37,7 +37,9 @@ from pathlib import Path
 
 import yaml
 
+from fr_budget.fourchette import Fourchette, encadrer
 from fr_budget.menages.openfisca import systeme_socio_fiscal
+from fr_budget.registres.acces import hypothese
 from fr_budget.registres.schemas import DepenseFiscaleTva, UsageDepenseFiscale
 from fr_budget.registres.verification import RACINE_DEPOT
 
@@ -62,6 +64,10 @@ PAYEURS = ("menages", "apu", "isblsm", "entreprises")
 SECTEURS_FINALS = ("menages", "apu", "isblsm")
 MILLIONS_PAR_MILLIARD = 1000
 UN_POINT = 0.01
+HYPOTHESE_REPARTITION = "tva_repartition_produits_mixtes_stable"
+HYPOTHESE_TERRITORIALE = "tva_ecart_territorial_stable"
+REGIME_AJUSTE = "reduit"
+"""Régime dont la part varie avec l'hypothèse de répartition (taux de 5,5 % des travaux)."""
 
 
 @dataclass(frozen=True)
@@ -212,6 +218,21 @@ def repartition_par_taux(
     return Repartition(parts, 0.0)
 
 
+def ajuster_part(parts: Mapping[str, float], regime: str, ecart: float) -> dict[str, float]:
+    """Multiplie la part d'un régime par (1 + ecart) ; les autres parts gardent leurs proportions.
+
+    Un produit sans part pour ce régime est renvoyé tel quel.
+    """
+    if regime not in parts:
+        return dict(parts)
+    nouvelle = parts[regime] * (1 + ecart)
+    reste = 1 - parts[regime]
+    return {
+        r: nouvelle if r == regime else (p * (1 - nouvelle) / reste if reste else 0.0)
+        for r, p in parts.items()
+    }
+
+
 def assiette_consommation_finale(
     consommations: Iterable[tuple[str, str, float]],
     regime_produit: Mapping[str, str],
@@ -278,27 +299,40 @@ def repartitions_produits_mixtes() -> dict[str, Repartition]:
     return repartitions
 
 
-def ecart_territorial() -> float:
-    """Écart de TVA dû aux taux d'outre-mer et de Corse, en Md€ (année des chiffrages).
+def ecart_territorial(ecart: float | None = None) -> float:
+    """Écart de TVA dû aux taux d'outre-mer et de Corse, en Md€.
 
-    Retranché de la recette de chaque année (hypothèse ``tva_ecart_territorial_stable``).
+    Montant des chiffrages (année 2023) multiplié par (1 + ecart), retranché de la recette de
+    chaque année. ``ecart`` vaut par défaut la valeur centrale de l'hypothèse
+    ``tva_ecart_territorial_stable``.
     """
-    return (
-        sum(
-            chiffrage(df.chiffrage)
-            for df in depenses_fiscales()
-            if df.usage == UsageDepenseFiscale.ECART_TERRITORIAL
-        )
-        / MILLIONS_PAR_MILLIARD
+    if ecart is None:
+        ecart = hypothese(HYPOTHESE_TERRITORIALE).valeur_centrale
+    montant = sum(
+        chiffrage(df.chiffrage)
+        for df in depenses_fiscales()
+        if df.usage == UsageDepenseFiscale.ECART_TERRITORIAL
     )
+    return montant * (1 + ecart) / MILLIONS_PAR_MILLIARD
 
 
-def estimer_assiette(annee_comptes: int) -> Assiette:
-    """Assiette hors taxe portant de la TVA, par régime et par payeur, pour une année de comptes."""
+@cache
+def estimer_assiette(annee_comptes: int, ecart_repartition: float | None = None) -> Assiette:
+    """Assiette hors taxe portant de la TVA, par régime et par payeur, pour une année de comptes.
+
+    ``ecart_repartition`` : écart relatif appliqué à la part au taux de 5,5 % des produits
+    répartis ; par défaut, valeur centrale de l'hypothèse
+    ``tva_repartition_produits_mixtes_stable``.
+    """
+    if ecart_repartition is None:
+        ecart_repartition = hypothese(HYPOTHESE_REPARTITION).valeur_centrale
     taux = taux_tva(annee_comptes)
     regime_produit = regimes_produits()
     regime_a38 = regimes_a38()
-    repartitions = {p: r.parts for p, r in repartitions_produits_mixtes().items()}
+    repartitions = {
+        p: ajuster_part(r.parts, REGIME_AJUSTE, ecart_repartition)
+        for p, r in repartitions_produits_mixtes().items()
+    }
     fines = {s: consommation_fine(s, annee_comptes) for s in SECTEURS_FINALS}
     tef = tes(annee_comptes, "tef")
     tei = tes(annee_comptes, "tei")
@@ -408,16 +442,59 @@ RECETTES_VIEILLISSEMENT = {
 
 
 @cache
-def estimer_point_tva(annee_comptes: int, annee_cible: int) -> PointTva:
+def estimer_point_tva(
+    annee_comptes: int, annee_cible: int, ecart_repartition: float | None = None
+) -> PointTva:
     coefficient = 1.0
     if annee_cible != annee_comptes:
         coefficient = chiffrage(RECETTES_VIEILLISSEMENT[annee_cible]) / chiffrage(
             RECETTES_VIEILLISSEMENT[annee_comptes]
         )
-    return point_tva(estimer_assiette(annee_comptes), coefficient)
+    return point_tva(estimer_assiette(annee_comptes, ecart_repartition), coefficient)
 
 
 @cache
-def estimer_recette_totale(annee_comptes: int) -> float:
+def estimer_recette_totale(
+    annee_comptes: int,
+    ecart_repartition: float | None = None,
+    ecart_territoire: float | None = None,
+) -> float:
     """Recette de TVA reconstituée, diminuée de l'écart dû aux taux d'outre-mer et de Corse."""
-    return recette(estimer_assiette(annee_comptes), taux_tva(annee_comptes)) - ecart_territorial()
+    assiette = estimer_assiette(annee_comptes, ecart_repartition)
+    return recette(assiette, taux_tva(annee_comptes)) - ecart_territorial(ecart_territoire)
+
+
+def _bornes(identifiant: str) -> tuple[float, float]:
+    plage = hypothese(identifiant).plage
+    return plage.basse, plage.haute
+
+
+def fourchette_point_tva(annee_comptes: int, annee_cible: int) -> dict[str, dict[str, Fourchette]]:
+    """Point de TVA brut et net en fourchette, par taux (clés ``brut`` et ``net``).
+
+    Les bornes viennent de la plage de l'hypothèse ``tva_repartition_produits_mixtes_stable`` ;
+    elles ne couvrent pas l'erreur du modèle (voir docs/validation/levier_tva.md).
+    """
+    central = estimer_point_tva(annee_comptes, annee_cible)
+    variantes = [
+        estimer_point_tva(annee_comptes, annee_cible, e) for e in _bornes(HYPOTHESE_REPARTITION)
+    ]
+    return {
+        nature: {
+            cle: encadrer(
+                getattr(central, nature)[cle], [getattr(v, nature)[cle] for v in variantes]
+            )
+            for cle in central.brut
+        }
+        for nature in ("brut", "net")
+    }
+
+
+def fourchette_recette_totale(annee_comptes: int) -> Fourchette:
+    """Recette de TVA en fourchette : plages des deux hypothèses, combinées à leurs bornes."""
+    variantes = [
+        estimer_recette_totale(annee_comptes, r, t)
+        for r in _bornes(HYPOTHESE_REPARTITION)
+        for t in _bornes(HYPOTHESE_TERRITORIALE)
+    ]
+    return encadrer(estimer_recette_totale(annee_comptes), variantes)

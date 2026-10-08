@@ -8,7 +8,7 @@ leviers:
     parametres_reglables: [Taux normal, Taux réduits, Taux super-réduit]
     moteur: agrege
     references_visees: [Évaluations de rendement dans Voies et Moyens (PLF)]
-    statut: non_publie
+    statut: beta
 
   - id: impot_revenu
     libelle: Impôt sur le revenu

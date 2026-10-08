@@ -1,6 +1,6 @@
 ---
 levier: tva
-statut: non_publie
+statut: beta
 mise_a_jour: 2026-10-08
 ---
 
@@ -89,3 +89,4 @@ Leurs plages serviront au calcul des fourchettes. Restent à créer, une fois so
 | 2026-10-08 | Séparation des médicaments non remboursables (comptes de la santé de la DREES) essayée et non retenue ; diagnostic publié dans `docs/validation/levier_tva.md` | aucun (modèle inchangé) |
 | 2026-10-08 | Tolérance maintenue à ±10 % (décision du mainteneur) ; précision des références publiée dans `docs/validation/levier_tva.md` | aucun |
 | 2026-10-08 | Convention du point net maintenue (décision du mainteneur) ; limite publiée dans `docs/validation/levier_tva.md` | aucun |
+| 2026-10-08 | Prototype clos en bêta (décision du mainteneur) ; type `Fourchette` et fourchettes TVA à partir des deux hypothèses du registre | aucun (valeurs centrales inchangées) |

@@ -1,6 +1,6 @@
 # Levier TVA : rendement d'un point de TVA, premier modèle
 
-Tâches 0.4 et 0.5 du plan. Rapport du 7 octobre 2026, mis à jour le 8 octobre 2026 (répartition des produits mixtes et écart territorial). Statut du levier : **non publié** (bêta en développement).
+Tâches 0.4 et 0.5 du plan. Rapport du 7 octobre 2026, mis à jour le 8 octobre 2026 (répartition des produits mixtes et écart territorial). Statut du levier : **bêta, non validé** (décision du mainteneur du 8 octobre 2026 : prototype clos avec ses écarts publiés).
 
 ## Méthode
 
@@ -42,6 +42,21 @@ Taux de TVA : paramètres d'OpenFisca-France. Données : `pipelines/tva/` → `d
 Bilan : 10 comparaisons sur 17 dans la tolérance de ±10 % (8 au 7 octobre). Passent désormais : point brut 2015 au taux de 5,5 % et recette 2024. Les deux recettes comprennent l'écart territorial de 2,3 Md€ ; sans lui, elles seraient de 216,1 Md€ en 2022 (+6,6 %) et 231,9 Md€ en 2024 (+10,1 %).
 
 La répartition des travaux met toute la consommation de travaux des ménages aux taux réduits (77,0 % à 10 %, 23,0 % à 5,5 %) : l'assiette des deux dépenses fiscales dépasse de 5,5 % cette consommation en 2023. L'excès correspond probablement à des travaux comptés en investissement des ménages, que le modèle laisse au taux normal.
+
+## Fourchettes
+
+Calculées par `fourchette_point_tva` et `fourchette_recette_totale` (`moteur/src/fr_budget/agrege/tva.py`), à partir des plages des deux hypothèses du registre : `tva_repartition_produits_mixtes_stable` (part des travaux au taux de 5,5 %, ±0,4 %) et `tva_ecart_territorial_stable` (écart d'outre-mer et de Corse, ±6,2 %, recette seulement).
+
+| Résultat | Bas | Central | Haut |
+|---|---|---|---|
+| Point brut 2025, ensemble | 14,18 | 14,18 | 14,18 |
+| Point brut 2025, taux de 5,5 % | 2,011 | 2,011 | 2,011 |
+| Point brut 2025, taux de 10 % | 1,949 | 1,949 | 1,949 |
+| Point net 2025, ensemble | 11,59 | 11,59 | 11,59 |
+| Recette 2022 | 213,6 | 213,8 | 213,9 |
+| Recette 2024 | 229,5 | 229,6 | 229,8 |
+
+En Md€. **Limite : ces fourchettes sont très étroites parce qu'elles ne couvrent que ces deux hypothèses.** Elles ne couvrent ni l'erreur du modèle (écarts de -45 % à +55 % sur certains taux, ci-dessus), ni l'arrondi des références, ni les correspondances produit-taux « à vérifier ». Elles ne doivent pas être lues comme l'incertitude du résultat. Une hypothèse d'incertitude sur le reste de l'assiette, sourcée, reste à créer avant toute publication hors bêta.
 
 ## Méthode écartée : restauration
 
@@ -124,4 +139,4 @@ La méthode reprend celle de la DG Trésor. Le modèle utilise désormais cinq c
 - Données A38 pour les achats des producteurs et l'investissement, quand la DG Trésor travaille sur 138 produits et 138 branches non publiés.
 - Point net calculé selon la convention des comptes nationaux, peut-être différente de celle de la DG Trésor (voir « Convention du point net »).
 - Pas d'effet de comportement. Les taux d'outre-mer et de Corse ne sont pris en compte que par l'écart global du tome II, sur la recette, pas sur le point de TVA ; franchise en base non modélisée.
-- Résultat donné en valeur centrale seulement : la fourchette (règle 4 de `CLAUDE.md`) viendra avec les hypothèses de répartition des produits mixtes.
+- Fourchettes limitées aux deux hypothèses du registre (voir « Fourchettes ») : elles sous-estiment l'incertitude réelle.

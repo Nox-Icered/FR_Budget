@@ -2,6 +2,7 @@ import pytest
 
 from fr_budget.agrege.tva import (
     Assiette,
+    ajuster_part,
     assiette_consommation_finale,
     assiette_depense_fiscale,
     assiette_remanente,
@@ -104,3 +105,9 @@ def test_assiette_consommation_finale_d_un_produit_reparti() -> None:
         ("intermediaire", "menages"): pytest.approx(100.0),
         ("normal", "menages"): pytest.approx(183.33, abs=0.01),
     }
+
+
+def test_ajuster_part_d_un_regime_et_reste_au_prorata() -> None:
+    parts = ajuster_part({"intermediaire": 0.75, "reduit": 0.25}, "reduit", 0.2)
+    assert parts == {"intermediaire": pytest.approx(0.7), "reduit": pytest.approx(0.3)}
+    assert ajuster_part({"normal": 1.0}, "reduit", 0.2) == {"normal": 1.0}

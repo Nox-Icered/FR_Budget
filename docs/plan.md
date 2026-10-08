@@ -82,6 +82,8 @@ Choix structurants :
 
 Porte 0 : prototype TVA reproduisant le chiffrage officiel à ±10 % sur deux millésimes, présenté à un premier relecteur.
 
+Décision du 8 octobre 2026 : le prototype TVA est clos au statut bêta sans avoir franchi la porte au niveau de chaque taux (10 comparaisons sur 17 dans la tolérance, détail dans `docs/validation/levier_tva.md`). Le passage à la phase 1 est décidé par le mainteneur malgré ces écarts, qui restent publiés. La présentation à un premier relecteur reste à faire.
+
 | Tâche | Contenu | Terminé quand |
 |-------|---------|---------------|
 | 0.1 Socle du dépôt | Licence, README, structure ci-dessus, `pyproject.toml`, ruff, mypy strict, pytest, pre-commit, CI qui lance lint et tests. | La CI passe sur une branche vide de calcul. |

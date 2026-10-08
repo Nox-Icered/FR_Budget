@@ -138,6 +138,22 @@ datasets:
     methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-08
 
+  - id: plf2027_resf_pdf
+    source: plf2027_resf
+    description: RESF annexé au PLF 2027 (PDF, 218 pages)
+    fichier: data/raw/baseline/tresor/PLF_2027_RESF.pdf
+    empreinte_sha256: b7e6aab2e9f5f762b010c2f501f997f2d00c8e1377e0b83107ec73bc278be59f
+    methode_transformation: aucune pour l'instant ; document de référence de la baseline (lot 1.3)
+    telecharge_le: 2026-10-08
+
+  - id: plf2027_resf_tableaux_xlsx
+    source: plf2027_resf
+    description: Tableaux du RESF 2027 (classeur Excel, 10 onglets, prévisions 2025-2030)
+    fichier: data/raw/baseline/tresor/Tableaux_RESF_2027.xlsx
+    empreinte_sha256: fa48c76751410b40a65a27f77ecd34ab3a532a18e482f0beed21cd17824f2618
+    methode_transformation: aucune pour l'instant ; extraction scriptée prévue au lot 1.3
+    telecharge_le: 2026-10-08
+
   - id: eurostat_gov_10a_exp_fr_json
     source: eurostat_gov_10a_exp
     description: Dépenses totales des APU françaises par fonction COFOG (80 postes) et par sous-secteur, millions d'euros, JSON-stat

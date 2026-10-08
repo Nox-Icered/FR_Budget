@@ -2,10 +2,10 @@
 # compte en amont. Chaque correction cite ses sources et la version d'OpenFisca visée.
 # Une montée de version d'OpenFisca impose de vérifier si la correction est encore utile.
 #
-# Les sources primaires (Légifrance, BOFiP, site de l'AGS) n'étaient pas joignables depuis
-# l'environnement de développement le 7 octobre 2026 : les sources citées ont été trouvées
-# par recherche web et recoupées avec le modèle de calcul de l'Urssaf. Elles sont à
-# confirmer sur les textes primaires.
+# Les sources sont des identifiants de registres/sources.yaml. Les sources primaires
+# (Légifrance, BOFiP, site de l'AGS) n'étaient pas joignables le 7 octobre 2026 : elles
+# sont citées d'après des résultats de recherche (acces: recherche_web) et recoupées avec
+# le modèle de calcul de l'Urssaf. À confirmer sur les textes primaires.
 
 openfisca_france_version: "176.1.2"
 
@@ -21,15 +21,9 @@ corrections:
       OpenFisca 176.1.2 retient 0,20 % depuis le 1er janvier 2024 (dernière vérification
       notée dans le paramètre : 14 mars 2024).
     sources:
-      - titre: Communiqué de presse de l'AGS, « taux de cotisation AGS 0,25 % » (18 juin 2024)
-        url: https://ags-garantie-salaires.org/files/ags-theme/ags/2024/CP taux de cotisation AGS 025 .pdf
-        consulte: non joignable, cité d'après les résultats de recherche
-      - titre: Legisocial, « Taux de cotisation AGS relevé à 0,25 % au 1er juillet 2024 »
-        url: https://www.legisocial.fr/actualites-sociales/6778-taux-cotisation-ags-releve-025-1er-juillet-2024.html
-        consulte: résultat de recherche du 7 octobre 2026
-      - titre: Règle « salarié . cotisations . AGS » du modèle modele-social 11.1.0 (0,25 % depuis 07/2024)
-        url: https://www.npmjs.com/package/modele-social
-        consulte: paquet installé le 7 octobre 2026
+      - ags_communique_taux_2024_07
+      - legisocial_ags_2024_07
+      - modele_social_11_1_0
 
   - id: mutuelle_part_patronale_imposable
     type: variable
@@ -48,14 +42,6 @@ corrections:
       OpenFisca 176.1.2 déduit la part salariale (complementaire_sante_salarie) du salaire
       imposable mais n'y ajoute pas la part patronale (complementaire_sante_employeur).
     sources:
-      - titre: >
-          Loi de finances pour 2014, imposition de la part patronale des contributions aux
-          contrats collectifs de frais de santé à compter des revenus 2013 (article 83 du CGI)
-        url: https://bofip.impots.gouv.fr/node/17262
-        consulte: non joignable, cité d'après les résultats de recherche
-      - titre: AG2R La Mondiale, « Le sort fiscal et social des contributions »
-        url: https://www.ag2rlamondiale.fr/culture-branches/reperes-pour-negocier/obligations-a-respecter/conseil-le-sort-fiscal-et-social-des-contributions
-        consulte: résultat de recherche du 7 octobre 2026
-      - titre: Règle « salarié . rémunération . net . imposable » du modèle modele-social 11.1.0
-        url: https://www.npmjs.com/package/modele-social
-        consulte: paquet installé le 7 octobre 2026
+      - bofip_prevoyance_complementaire
+      - ag2r_sort_fiscal_contributions
+      - modele_social_11_1_0

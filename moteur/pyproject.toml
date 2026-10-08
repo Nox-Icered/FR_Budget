@@ -6,6 +6,7 @@ license = "AGPL-3.0-or-later"
 requires-python = ">=3.12,<3.13"
 dependencies = [
     "openfisca-france==176.1.2",
+    "pydantic>=2.13.5",
     "pyyaml>=6.0.3",
 ]
 

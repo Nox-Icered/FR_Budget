@@ -27,3 +27,9 @@ repos:
         language: system
         pass_filenames: false
         files: ^moteur/
+      - id: registres
+        name: registres (schémas, renvois, empreintes, libellés)
+        entry: uv run --directory moteur python -m fr_budget.registres.verification
+        language: system
+        pass_filenames: false
+        files: ^(registres/|data/raw/|moteur/src/fr_budget/registres/)

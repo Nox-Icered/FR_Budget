@@ -26,7 +26,7 @@ from typing import Any
 import pytest
 from python_calamine import CalamineWorkbook
 
-from fr_budget.apu import comptes_apu, ratio_pib
+from fr_budget.apu import comptes_apu, depenses_par_fonction, ratio_pib
 from fr_budget.registres.verification import RACINE_DEPOT
 
 SECTEURS = ["S13", "S1311", "S13111", "S13112", "S1313", "S1314"]
@@ -97,3 +97,20 @@ def test_dette_en_pourcentage_du_pib_egale_au_ratio_publie() -> None:
             assert calcule == pytest.approx(publies[(an, secteur)], abs=TOLERANCE_RATIO), (
                 f"{secteur} {an} : {calcule:.2f} % calculé, {publies[(an, secteur)]} % publié"
             )
+
+
+@pytest.mark.validation
+@pytest.mark.parametrize("secteur", ["S13", "S1311", "S1313", "S1314"])
+def test_total_cofog_eurostat_egal_aux_depenses_insee(secteur: str) -> None:
+    """Total COFOG (Eurostat) = total des dépenses (INSEE), 2010-2022, à 0,05 Md€ près.
+
+    2023 et 2024 ne sont pas testées : l'INSEE a actualisé ses tableaux le 28 août 2026 (compte
+    semi-définitif), après les données reprises par Eurostat ; écarts publiés dans
+    docs/fiches/comptes_apu.md.
+    """
+    c = comptes_apu()
+    cofog = depenses_par_fonction()
+    for an in range(2010, 2023):
+        assert cofog[(an, secteur, "TOTAL")] == pytest.approx(
+            c.valeur(an, secteur, "depenses"), abs=0.05
+        ), f"{secteur} {an}"

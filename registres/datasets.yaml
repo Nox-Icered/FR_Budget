@@ -130,6 +130,14 @@ datasets:
     methode_transformation: pipelines/apu/extraire_comptes_apu.py → data/processed/apu/comptes_apu.csv
     telecharge_le: 2026-10-08
 
+  - id: eurostat_gov_10a_exp_fr_json
+    source: eurostat_gov_10a_exp
+    description: Dépenses totales des APU françaises par fonction COFOG (80 postes) et par sous-secteur, millions d'euros, JSON-stat
+    fichier: data/raw/apu/eurostat/gov_10a_exp_FR.json
+    empreinte_sha256: 6b4163fd5e284e65ed1dbf81fc158c12e466d537ca24c58c33918f6ec299e73d
+    methode_transformation: pipelines/apu/extraire_cofog.py → data/processed/apu/cofog.csv
+    telecharge_le: 2026-10-08
+
   - id: dgtresor_cahier_2016_02_pdf
     source: dgtresor_cahier_2016_02
     description: Cahier de la DG Trésor 2016-02 (PDF)

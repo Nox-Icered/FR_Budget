@@ -151,7 +151,7 @@ datasets:
     description: Tableaux du RESF 2027 (classeur Excel, 10 onglets, prévisions 2025-2030)
     fichier: data/raw/baseline/tresor/Tableaux_RESF_2027.xlsx
     empreinte_sha256: fa48c76751410b40a65a27f77ecd34ab3a532a18e482f0beed21cd17824f2618
-    methode_transformation: aucune pour l'instant ; extraction scriptée prévue au lot 1.3
+    methode_transformation: pipelines/baseline/extraire_resf.py → data/processed/baseline/resf_2027.csv
     telecharge_le: 2026-10-08
 
   - id: ce_ageing_report_2024_fiche_france_pdf
@@ -167,7 +167,15 @@ datasets:
     description: Ageing Report 2024, annexe statistique de toutes les fiches pays (classeur Excel, onglets FRa, FRb, FRc pour la France)
     fichier: data/raw/baseline/commission_europeenne/2024_Ageing_Report-Statistical_annex_all_countryfiches.xlsx
     empreinte_sha256: 8453dfda8db0ad253d3965cd85490c30e4b5d0598eb6c2ffa4adbf23ab45bb7f
-    methode_transformation: aucune pour l'instant ; extraction scriptée prévue au lot 1.3
+    methode_transformation: pipelines/baseline/extraire_ageing_report.py → data/processed/baseline/ageing_report_2024_fr.csv
+    telecharge_le: 2026-10-08
+
+  - id: ce_ageing_report_2024_rapport_pdf
+    source: ce_ageing_report_2024
+    description: Ageing Report 2024, rapport principal (European Economy Institutional Paper 279, PDF), définition des variantes
+    fichier: data/raw/baseline/commission_europeenne/ip279_en.pdf
+    empreinte_sha256: 952ee30dededf74d3c260c9442202515542ca24b4f4e7f17ff549585af97f930
+    methode_transformation: aucune ; document de référence
     telecharge_le: 2026-10-08
 
   - id: eurostat_gov_10a_exp_fr_json

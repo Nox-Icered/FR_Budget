@@ -78,10 +78,16 @@ La première variante applique une part calculée sur 7,8 Md€ à une assiette 
 ## Écarts expliqués et suite
 
 - **Produits mixtes encore affectés au taux dominant** (`statut: mixte_simplifie` dans les correspondances) : abonnements d'électricité et de gaz (5,5 % en 2022 affectés à 20 %), eau (affectée à 10 % au niveau A38), boissons servies, médicaments remboursables ou non. Le tome II de Voies et Moyens ne les chiffre pas : ce ne sont pas des dépenses fiscales.
-- **Taux de 2,1 %** : le modèle met tous les médicaments au taux de 2,1 % et attribue aux APU les médicaments remboursés (31 Md€ de consommation individuelle des APU) et les achats de médicaments des hôpitaux ; la DG Trésor affiche un point net égal au point brut sur ce taux, donc une part APU quasi nulle. La séparation des médicaments non remboursables (10 %) a été essayée et n'est pas retenue (section suivante). La convention d'attribution aux APU reste à éclaircir. La référence « 0,4 Md€ » est arrondie au dixième, soit ±12,5 %, plus que la tolérance (voir « Précision des références »).
+- **Taux de 2,1 %** : le modèle met tous les médicaments au taux de 2,1 % et attribue aux APU les médicaments remboursés (31 Md€ de consommation individuelle des APU) et les achats de médicaments des hôpitaux ; la DG Trésor affiche un point net égal au point brut sur ce taux, donc une part APU quasi nulle. La séparation des médicaments non remboursables (10 %) a été essayée et n'est pas retenue (section suivante). Convention d'attribution aux APU maintenue (voir « Convention du point net »). La référence « 0,4 Md€ » est arrondie au dixième, soit ±12,5 %, plus que la tolérance (voir « Précision des références »).
 - **Recette totale** : le modèle calcule une TVA théorique ; la recette réelle est plus faible (écart de TVA : fraude, erreurs, défaillances), que la DG Trésor corrige par un recalage que nous ne faisons pas.
 - **Banque et immobilier** : la TVA facturée par ces branches sur option (locations professionnelles, certaines commissions) n'est pas comptée ; les comptes nationaux en enregistrent 8 Md€ en 2022.
 - **Correspondances à vérifier** : 747 Md€ de consommation des ménages ont un rattachement « à vérifier » (taux connu, texte non relu) ; seuls les taux de l'alimentation ont été vérifiés dans le BOFiP.
+
+## Convention du point net
+
+Décision du mainteneur (8 octobre 2026) : le modèle garde sa convention. Le point net retranche toute la TVA dont la dépense est payée par les administrations publiques au sens des comptes nationaux, y compris leur consommation individuelle (transferts sociaux en nature : médicaments remboursés, par exemple), en plus de leurs consommations intermédiaires, de leur consommation collective et de leur investissement.
+
+Limite : la DG Trésor semble suivre une autre convention, au moins pour les médicaments (point net égal au point brut au taux de 2,1 %), mais la publication ne la décrit pas. Les points nets par taux ne sont donc pas strictement comparables à la référence. Essai (non retenu) : en comptant la consommation individuelle des APU comme payée par les ménages, le point net 2025 passe de +1,7 % à +5,6 % pour l'ensemble, de -44,7 % à +33,9 % au taux de 2,1 % et de +13,0 % à +15,9 % au taux de 10 % ; le nombre de tests réussis ne change pas (10 sur 17). Les points bruts ne dépendent pas de cette convention.
 
 ## Précision des références
 
@@ -116,5 +122,6 @@ La méthode reprend celle de la DG Trésor. Le modèle utilise désormais cinq c
 ## Limites
 
 - Données A38 pour les achats des producteurs et l'investissement, quand la DG Trésor travaille sur 138 produits et 138 branches non publiés.
+- Point net calculé selon la convention des comptes nationaux, peut-être différente de celle de la DG Trésor (voir « Convention du point net »).
 - Pas d'effet de comportement. Les taux d'outre-mer et de Corse ne sont pris en compte que par l'écart global du tome II, sur la recette, pas sur le point de TVA ; franchise en base non modélisée.
 - Résultat donné en valeur centrale seulement : la fourchette (règle 4 de `CLAUDE.md`) viendra avec les hypothèses de répartition des produits mixtes.

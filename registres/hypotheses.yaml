@@ -53,3 +53,53 @@ hypotheses:
       rapprochent le calendrier d'un refinancement au 1er janvier (borne haute). Aucune source
       publiée ne donne le calendrier des émissions : la plage est large.
     instruments: [dynamique_dette]
+
+  - id: baseline_part_refinancee
+    libelle: Part de la dette publique refinancée chaque année au taux de marché, de 2031 à 2046
+    unite: fraction de la dette de début d'année
+    valeur_centrale: 0.194
+    plage:
+      basse: 0.193
+      haute: 0.194
+    sources: [plf2027_pap_engagements_financiers_etat]
+    justification: >-
+      Part de la dette négociable de l'État refinancée en 2027 (émissions à moyen et long terme
+      de 340,0 Md€, titres courts de 205,5 Md€ et leur variation de 2,2 Md€, rapportés à un
+      encours de 2 822,4 Md€) : 19,4 %. Le même calcul pour 2026 donne 19,3 %. La plage couvre
+      ces deux millésimes. Elle est étroite et ne couvre ni le profil de maturité des autres
+      sous-secteurs (sécurité sociale, collectivités), ni un allongement ou un raccourcissement
+      futur de la maturité.
+    instruments: [baseline]
+
+  - id: baseline_ajustement_stock_flux
+    libelle: Ajustement stock-flux annuel de 2031 à 2046
+    unite: points de PIB par an
+    valeur_centrale: 0.0
+    plage:
+      basse: 0.0
+      haute: 0.5
+    sources: [plf2027_resf]
+    justification: >-
+      Le RESF 2027 publie des flux de créances de 0,1 point de PIB en 2025 et de 0,5 point en
+      2026 et 2027 (annexe finances publiques, tableau 14). Pour 2028-2030, l'écart qui referme
+      la formule de la dette vaut 0,10, 0,03 et 0,04 point. La valeur centrale suppose
+      qu'aucun flux de créances ne s'ajoute au déficit après 2030 ; la borne haute reprend le
+      niveau de 2026-2027.
+    instruments: [baseline]
+
+  - id: baseline_cout_vieillissement_variantes
+    libelle: Variation du coût du vieillissement après 2030 selon les variantes de l'Ageing Report 2024
+    unite: écart en 2046 à la variation 2030-2046 du scénario de référence, points de PIB
+    valeur_centrale: 0.0
+    plage:
+      basse: -0.358
+      haute: 0.948
+    sources: [ce_ageing_report_2024]
+    justification: >-
+      Le scénario de référence de l'Ageing Report 2024 donne un coût total du vieillissement
+      (retraites, santé, dépendance, éducation) presque stable de 2030 à 2046 (+0,002 point).
+      Les huit variantes publiées pour la France (annexe statistique, onglet FRc) changent
+      cette variation de -0,358 point (fécondité plus basse de 20 %) à +0,948 point (scénario
+      de risque sur la santé et la dépendance) en 2046. Le modèle applique chaque variante
+      année par année ; la plage indique les extrêmes en 2046.
+    instruments: [baseline]

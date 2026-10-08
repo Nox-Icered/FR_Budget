@@ -36,7 +36,7 @@ Les dépenses et recettes de chaque sous-secteur sont consolidées à l'intérie
 
 Source `insee_comptes_nationaux_2025` et jeux `insee_cna2025_*` dans les registres (édition 2025 des comptes nationaux, compte semi-définitif des APU actualisé le 28 août 2026). Années : de 1949 à 2025 selon les tableaux.
 
-## 5. Hypothèses et choix à valider
+## 5. Hypothèses et choix
 
 **Solde primaire : deux conventions.** Le solde primaire retire les intérêts du solde. Deux définitions existent :
 
@@ -45,7 +45,7 @@ Source `insee_comptes_nationaux_2025` et jeux `insee_cna2025_*` dans les registr
 | A. Intérêts versés | capacité de financement + intérêts versés | -85,9 Md€ (-2,87 % du PIB) |
 | B. Intérêts nets | capacité de financement + intérêts versés - intérêts reçus | -89,3 Md€ (-2,99 % du PIB) |
 
-Calcul à partir des données 2025 du tableau 3.201 : capacité de financement -151,6 Md€, intérêts versés 65,7 Md€, intérêts reçus 3,5 Md€, PIB 2 991,1 Md€. Le code applique A, cohérente avec la formule de la dette de `CLAUDE.md`, où le terme d'intérêts porte sur la dette brute. Choix à valider par le mainteneur.
+Calcul à partir des données 2025 du tableau 3.201 : capacité de financement -151,6 Md€, intérêts versés 65,7 Md€, intérêts reçus 3,5 Md€, PIB 2 991,1 Md€. Convention A retenue par le mainteneur le 8 octobre 2026, cohérente avec la formule de la dette de `CLAUDE.md`, où le terme d'intérêts porte sur la dette brute.
 
 ## 6. Validation
 
@@ -68,3 +68,4 @@ Constat : avant 2020, la ligne « Série du PIB utilisée » du tableau 3.101 ne
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
 | 2026-10-08 | Extraction des comptes des APU 2025 et premiers contrôles | 14 tests de contrôle créés, tous réussis |
+| 2026-10-08 | Convention du solde primaire : intérêts versés (décision du mainteneur) | aucun |

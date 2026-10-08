@@ -50,9 +50,9 @@ def comptes_apu() -> ComptesApu:
 def solde_primaire(capacite_financement: float, interets_verses: float) -> float:
     """Solde primaire : capacité (+) ou besoin (-) de financement hors intérêts versés (D41).
 
-    Convention proposée (à valider) : intérêts versés, comme le terme ``r * d`` de la dynamique
-    de la dette, qui porte sur la dette brute. L'autre convention, intérêts nets des intérêts
-    reçus, est présentée dans docs/fiches/comptes_apu.md.
+    Convention retenue par le mainteneur le 8 octobre 2026 : intérêts versés, comme le terme
+    ``r * d`` de la dynamique de la dette, qui porte sur la dette brute. L'autre convention,
+    intérêts nets des intérêts reçus, est présentée dans docs/fiches/comptes_apu.md.
     """
     return capacite_financement + interets_verses
 

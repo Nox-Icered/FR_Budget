@@ -31,6 +31,31 @@ jobs:
       - run: uv run mypy
       - name: Tests unitaires
         run: uv run pytest -m "not validation"
-      - name: Tests de validation
-        # Aucun test de validation pour l'instant : pytest renvoie 5 quand rien n'est collecté.
-        run: uv run pytest -m validation || [ $? -eq 5 ]
+
+  validation:
+    name: Tests de validation (écarts aux références)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: moteur
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+      - run: uv run pytest -m validation -rA
+
+  references-urssaf:
+    name: Références Urssaf reproductibles
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: outils/references_urssaf
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run generer
+      - name: Le fichier de référence committé est celui que produit le script
+        run: git diff --exit-code -- ../../registres/references/menages/

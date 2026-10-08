@@ -4,13 +4,17 @@ version = "0.0.0"
 description = "Moteur de calcul du simulateur public du budget des administrations publiques françaises"
 license = "AGPL-3.0-or-later"
 requires-python = ">=3.12,<3.13"
-dependencies = []
+dependencies = [
+    "openfisca-france==176.1.2",
+    "pyyaml>=6.0.3",
+]
 
 [dependency-groups]
 dev = [
     "mypy",
     "pytest",
     "ruff",
+    "types-pyyaml>=6.0.12.20260906",
 ]
 
 [build-system]
@@ -19,6 +23,10 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/fr_budget"]
+
+[tool.hatch.build.targets.wheel.force-include]
+# Registre lu par le moteur : copié dans le paquet pour une installation hors du dépôt.
+"../registres/corrections_openfisca.yaml" = "fr_budget/registres/corrections_openfisca.yaml"
 
 [tool.ruff]
 line-length = 100
@@ -44,3 +52,8 @@ markers = [
     "validation: test qui compare le modèle à un chiffrage de référence officiel ou académique",
 ]
 addopts = "--strict-markers"
+
+[[tool.mypy.overrides]]
+# OpenFisca ne publie pas d'annotations de types.
+module = ["openfisca_core.*", "openfisca_france.*"]
+ignore_missing_imports = true

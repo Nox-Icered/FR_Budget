@@ -136,6 +136,8 @@ datasets:
     fichier: data/raw/dette/plf2027_pap_engagements_financiers_etat.pdf
     empreinte_sha256: 73d37d79f7d72ae0e5b614c1f6fa72a277e6766754246bf02d944d62949d57cf
     methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-08
+
   - id: eurostat_gov_10a_exp_fr_json
     source: eurostat_gov_10a_exp
     description: Dépenses totales des APU françaises par fonction COFOG (80 postes) et par sous-secteur, millions d'euros, JSON-stat

@@ -50,6 +50,86 @@ datasets:
     methode_transformation: aucune ; valeurs lues dans le classeur « Fiches 13 à 17 », feuille « F13 Tab2 », citées dans docs/validation/levier_tva.md (non utilisées par le modèle)
     telecharge_le: 2026-10-08
 
+  - id: insee_cna2025_t_3101
+    source: insee_comptes_nationaux_2025
+    description: Tableau 3.101, dette des APU au sens de Maastricht par sous-secteur, 1978-2025
+    fichier: data/raw/apu/insee/t_3101_fr.xlsx
+    empreinte_sha256: f653ed4133585e36d9b620c075a1e62290d0cd65e708f26f3b2e4faad1c6740a
+    methode_transformation: pipelines/apu/extraire_comptes_apu.py → data/processed/apu/comptes_apu.csv
+    telecharge_le: 2026-10-08
+
+  - id: insee_cna2025_t_3106
+    source: insee_comptes_nationaux_2025
+    description: Tableau 3.106, déficit des APU au sens de Maastricht par sous-secteur, 1949-2025
+    fichier: data/raw/apu/insee/t_3106_fr.xlsx
+    empreinte_sha256: f0d67298ec45dbbf4231605b02147a21932fecfe3b1847faec7b65e6e513032e
+    methode_transformation: pipelines/apu/extraire_comptes_apu.py → data/processed/apu/comptes_apu.csv
+    telecharge_le: 2026-10-08
+
+  - id: insee_cna2025_t_3201
+    source: insee_comptes_nationaux_2025
+    description: Tableau 3.201, dépenses et recettes des APU (S13), 1959-2025
+    fichier: data/raw/apu/insee/t_3201_fr.xlsx
+    empreinte_sha256: 487d4299a5bac8d616000952fd012a0eb6d251a3586508165fc37d64a73a397a
+    methode_transformation: pipelines/apu/extraire_comptes_apu.py → data/processed/apu/comptes_apu.csv
+    telecharge_le: 2026-10-08
+
+  - id: insee_cna2025_t_3202
+    source: insee_comptes_nationaux_2025
+    description: Tableau 3.202, dépenses et recettes de l'administration publique centrale (S1311)
+    fichier: data/raw/apu/insee/t_3202_fr.xlsx
+    empreinte_sha256: b72a14c0143def4d251b09bf4f439d05d8111385666f3e0c6231e6236141e71a
+    methode_transformation: pipelines/apu/extraire_comptes_apu.py → data/processed/apu/comptes_apu.csv
+    telecharge_le: 2026-10-08
+
+  - id: insee_cna2025_t_3203
+    source: insee_comptes_nationaux_2025
+    description: Tableau 3.203, dépenses et recettes de l'État (S13111)
+    fichier: data/raw/apu/insee/t_3203_fr.xlsx
+    empreinte_sha256: 3ecbd58498ac7ae6db91af4d357fc46579c5dec2ace46b26270442df0e951708
+    methode_transformation: pipelines/apu/extraire_comptes_apu.py → data/processed/apu/comptes_apu.csv
+    telecharge_le: 2026-10-08
+
+  - id: insee_cna2025_t_3204
+    source: insee_comptes_nationaux_2025
+    description: Tableau 3.204, dépenses et recettes des organismes divers d'administration centrale (S13112)
+    fichier: data/raw/apu/insee/t_3204_fr.xlsx
+    empreinte_sha256: 38695f8ead6cc70f3b1971f0f061df5ada803f5cd6b2e02a5f1d14e12bceb9bd
+    methode_transformation: pipelines/apu/extraire_comptes_apu.py → data/processed/apu/comptes_apu.csv
+    telecharge_le: 2026-10-08
+
+  - id: insee_cna2025_t_3205
+    source: insee_comptes_nationaux_2025
+    description: Tableau 3.205, dépenses et recettes des administrations publiques locales (S1313)
+    fichier: data/raw/apu/insee/t_3205_fr.xlsx
+    empreinte_sha256: 8a9f601ebfe07b23300b5b0eb4fa6d1a35e7a8690ca69dcb1b935384fd15e1df
+    methode_transformation: pipelines/apu/extraire_comptes_apu.py → data/processed/apu/comptes_apu.csv
+    telecharge_le: 2026-10-08
+
+  - id: insee_cna2025_t_3212
+    source: insee_comptes_nationaux_2025
+    description: Tableau 3.212, dépenses et recettes des administrations de sécurité sociale (S1314)
+    fichier: data/raw/apu/insee/t_3212_fr.xlsx
+    empreinte_sha256: 6d384593ca748741641802a9a0c4c39be8db49432d8726cc16a5f58f14fea9db
+    methode_transformation: pipelines/apu/extraire_comptes_apu.py → data/processed/apu/comptes_apu.csv
+    telecharge_le: 2026-10-08
+
+  - id: insee_cna2025_t_3215
+    source: insee_comptes_nationaux_2025
+    description: Tableau 3.215, dépenses et recettes des APU par sous-secteur (non consolidées par sous-secteur)
+    fichier: data/raw/apu/insee/t_3215_fr.xlsx
+    empreinte_sha256: e797d519dd7a7e1a226f56bb79d8102d02f9aa3171eb7ceb53f573946396154a
+    methode_transformation: aucune ; conservé pour contrôle (sous-secteurs non consolidés)
+    telecharge_le: 2026-10-08
+
+  - id: insee_cna2025_t_1101_1103
+    source: insee_comptes_nationaux_2025
+    description: Tableaux 1.101 à 1.103, produit intérieur brut et ses composantes, 1949-2025
+    fichier: data/raw/apu/insee/T_1101_1103_fr.xlsx
+    empreinte_sha256: 79dae87233daf59345a8fee530ae427877c9f68bd67f21d129bffaf12bad3c14
+    methode_transformation: pipelines/apu/extraire_comptes_apu.py → data/processed/apu/comptes_apu.csv
+    telecharge_le: 2026-10-08
+
   - id: dgtresor_cahier_2016_02_pdf
     source: dgtresor_cahier_2016_02
     description: Cahier de la DG Trésor 2016-02 (PDF)

@@ -133,6 +133,15 @@ sources:
     acces: direct
     consulte_le: 2026-10-08
 
+  - id: insee_comptes_nationaux_2025
+    nom: Comptes nationaux annuels en 2025 (base 2020) - administrations publiques, dette et déficit au sens de Maastricht, dépenses et recettes, PIB
+    editeur: INSEE
+    url: https://www.insee.fr/fr/statistiques/8988793?sommaire=8988934
+    licence: Licence Ouverte 2.0
+    millesime: édition 2025 (compte semi-définitif des APU actualisé le 28 août 2026)
+    acces: direct
+    consulte_le: 2026-10-08
+
   - id: dgtresor_cahier_2016_02
     nom: Les Cahiers de la DG Trésor n° 2016-02, « Le modèle d'estimation de la TVA théorique » (J.-A. Andrivon, C. Geay, É. Janbon)
     editeur: Direction générale du Trésor

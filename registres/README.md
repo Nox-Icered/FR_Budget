@@ -25,6 +25,7 @@ cd moteur && uv run python -m fr_budget.registres.verification
 - L'empreinte de chaque fichier de `data/raw/` correspond au registre (un fichier absent donne un avertissement : il peut être trop lourd pour le dépôt et téléchargé par script).
 - La plage d'une hypothèse encadre sa valeur centrale.
 - Aucun libellé de levier ne contient un terme de `libelles_interdits.yaml`.
+- Chaque fiche de `docs/fiches/` désigne dans son en-tête un levier du registre ou un module.
 
 ## Mode d'accès d'une source
 

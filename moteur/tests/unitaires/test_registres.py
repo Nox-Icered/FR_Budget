@@ -5,7 +5,7 @@ from typing import Any
 import pytest
 import yaml
 
-from fr_budget.registres.verification import Rapport, charger, main, verifier
+from fr_budget.registres.verification import Rapport, charger, main, verifier, verifier_fiches
 
 SOURCE: dict[str, Any] = {
     "id": "source_a",
@@ -171,3 +171,24 @@ def test_fichier_hors_de_data_raw_refuse(tmp_path: Path, chemin: str) -> None:
     }
     resultat = erreurs(ecrire_registres(tmp_path, datasets=[dataset]))
     assert any("data/raw/" in e for e in resultat)
+
+
+@pytest.mark.parametrize(
+    ("contenu", "valide"),
+    [
+        ("---\nlevier: levier_a\n---\n# Fiche\n", True),
+        ("---\nmodule: cascade\n---\n# Fiche\n", True),
+        ("---\nlevier: levier_absent\n---\n# Fiche\n", False),
+        ("---\nlevier: levier_a\nmodule: cascade\n---\n# Fiche\n", False),
+        ("---\nmodule:\n---\n# Fiche\n", False),
+        ("---\nmodule: [a, b]\n---\n# Fiche\n", False),
+        ("---\nmodule: Module Invalide\n---\n# Fiche\n", False),
+        ("# Fiche sans en-tête\n", False),
+    ],
+)
+def test_en_tete_des_fiches(tmp_path: Path, contenu: str, valide: bool) -> None:
+    (tmp_path / "fiche.md").write_text(contenu, encoding="utf-8")
+    (tmp_path / "_modele.md").write_text("# Modèle sans en-tête\n", encoding="utf-8")
+    rapport = Rapport()
+    verifier_fiches(tmp_path, {"levier_a"}, rapport)
+    assert (rapport.erreurs == []) is valide

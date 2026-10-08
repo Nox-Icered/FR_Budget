@@ -19,4 +19,4 @@ Les pages sont générées à partir des fichiers de `donnees/`, produits par l'
 | `/` | Comptes des APU de la dernière année par sous-secteur (Md€ et % du PIB), dépenses par fonction |
 | `/sources/` | Registre des sources |
 | `/hypotheses/` | Registre des hypothèses, avec plages et justification |
-| `/validation/` | Statut des leviers et références saisies pour la validation |
+| `/validation/` | Statut des leviers, comparaison du modèle à chaque référence (écart publié, y compris hors tolérance), références saisies |

@@ -2,17 +2,18 @@
 
 Règles (CLAUDE.md) : l'API ne stocke rien et ne journalise aucune donnée saisie par
 l'utilisateur ; chaque réponse chiffrée indique sa source (identifiant du registre) et son
-unité. Lancer sans journal d'accès :
-
-    uv run uvicorn fr_budget_api.app:application --no-access-log
+unité. Le journal d'accès d'uvicorn (qui contiendrait les paramètres des requêtes) est
+désactivé par ``creer_application`` elle-même ; lancer avec ``python -m fr_budget_api.serveur``.
 
 Points d'entrée : ``/sante``, ``/version``, ``/registres/{nom}``, ``/comptes-apu``,
-``/depenses-par-fonction``. La baseline et les scénarios viendront avec les lots 1.3 et suivants.
+``/depenses-par-fonction``, ``/validation``. La baseline et les scénarios viendront avec les
+lots 1.3 et suivants.
 """
 
 from __future__ import annotations
 
 import hashlib
+import logging
 from functools import cache
 from importlib.metadata import version
 from pathlib import Path
@@ -21,6 +22,7 @@ from typing import Any
 from fastapi import FastAPI, HTTPException
 from fr_budget.apu import comptes_apu, depenses_par_fonction, libelles_cofog, ratio_pib
 from fr_budget.registres.verification import RACINE_DEPOT, Rapport, charger
+from fr_budget.validation import comparaisons
 
 SOURCE_COMPTES_APU = "insee_comptes_nationaux_2025"
 SOURCE_COFOG = "eurostat_gov_10a_exp"
@@ -46,7 +48,8 @@ def empreinte_dossier(dossier: Path) -> str:
 @cache
 def _version() -> dict[str, str]:
     return {
-        "moteur": version("fr-budget"),
+        # Empreinte du code du moteur : change à chaque modification d'un calcul.
+        "moteur": empreinte_dossier(RACINE_DEPOT / "moteur" / "src" / "fr_budget"),
         "registres": empreinte_dossier(RACINE_DEPOT / "registres"),
         "donnees": empreinte_dossier(RACINE_DEPOT / "data" / "processed"),
     }
@@ -120,7 +123,26 @@ def version_donnees() -> dict[str, str]:
     return _version()
 
 
+def resume_validation() -> list[dict[str, Any]]:
+    """Valeur du modèle, référence et écart pour chaque référence de validation."""
+    unites = {c["id"]: c["unite"] for c in _registres()["chiffrages"]}
+    return [
+        {
+            "reference": c.reference,
+            "modele": c.modele,
+            "valeur_reference": c.valeur_reference,
+            "ecart": c.ecart,
+            "tolerance": c.tolerance,
+            "dans_la_tolerance": c.dans_la_tolerance,
+            "unite": unites[c.reference],
+        }
+        for c in comparaisons()
+    ]
+
+
 def creer_application() -> FastAPI:
+    # Règle 5 : aucune requête (et donc aucun paramètre saisi) dans les journaux.
+    logging.getLogger("uvicorn.access").disabled = True
     app = FastAPI(
         title="Simulateur du budget des administrations publiques",
         description="API sans état : aucune donnée saisie n'est stockée ni journalisée.",
@@ -158,6 +180,11 @@ def creer_application() -> FastAPI:
         if depenses is None:
             raise HTTPException(status_code=404, detail="année ou sous-secteur absent")
         return depenses
+
+    @app.get("/validation")
+    def route_validation() -> list[dict[str, Any]]:
+        """Comparaisons du modèle aux chiffrages de référence, écarts compris."""
+        return resume_validation()
 
     return app
 

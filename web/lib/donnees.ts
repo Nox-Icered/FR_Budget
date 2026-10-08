@@ -16,7 +16,11 @@ export type Serie = {
   indicateur: string;
   valeurs: Point[];
 };
-export type ComptesApu = Record<string, Record<string, Serie>>;
+export type ComptesApu = {
+  sous_secteurs: string[];
+  indicateurs: string[];
+  series: Record<string, Record<string, Serie>>;
+};
 export type Cofog = {
   source: string;
   unite: string;
@@ -54,5 +58,14 @@ export type Chiffrage = {
   unite: string;
   localisation: string;
   relecture: "a_relire" | "relu";
+};
+export type Comparaison = {
+  reference: string;
+  modele: number;
+  valeur_reference: number;
+  ecart: number;
+  tolerance: number;
+  dans_la_tolerance: boolean;
+  unite: string;
 };
 export type Version = { moteur: string; registres: string; donnees: string };

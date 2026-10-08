@@ -1,13 +1,11 @@
 import { texte, nombre } from "../lib/textes";
 import { lire, type ComptesApu, type Cofog } from "../lib/donnees";
 
-const SOUS_SECTEURS = ["S13", "S1311", "S1313", "S1314"];
-const INDICATEURS = ["depenses", "recettes", "capacite_financement", "interets_verses", "dette_maastricht"];
-
 export default function Accueil() {
   const comptes = lire<ComptesApu>("comptes-apu.json");
   const cofog = lire<Cofog>("cofog.json");
-  const derniere = Math.max(...comptes.S13.dette_maastricht.valeurs.map((p) => p.annee));
+  const { sous_secteurs, indicateurs, series } = comptes;
+  const derniere = Math.max(...series.S13.dette_maastricht.valeurs.map((p) => p.annee));
   const divisions = cofog.valeurs.filter((v) => /^GF\d{2}$/.test(v.cofog));
 
   return (
@@ -15,12 +13,12 @@ export default function Accueil() {
       <h1>{texte("accueil.titre")}</h1>
       <p>{texte("accueil.intro")}</p>
       <h2>{texte("accueil.annee", { annee: derniere })}</h2>
-      {SOUS_SECTEURS.map((secteur) => (
+      {sous_secteurs.map((secteur) => (
         <section key={secteur}>
           <h3>{texte(`accueil.sous_secteurs.${secteur}`)}</h3>
           <dl className="chiffres">
-            {INDICATEURS.map((indicateur) => {
-              const point = comptes[secteur][indicateur].valeurs.find((p) => p.annee === derniere);
+            {indicateurs.map((indicateur) => {
+              const point = series[secteur][indicateur].valeurs.find((p) => p.annee === derniere);
               if (!point) return null;
               return (
                 <div key={indicateur}>
@@ -38,8 +36,8 @@ export default function Accueil() {
             })}
           </dl>
           <p className="source">
-            <a href={`/sources/#${comptes[secteur].dette_maastricht.source}`}>
-              {texte("accueil.source", { source: comptes[secteur].dette_maastricht.source })}
+            <a href={`/sources/#${series[secteur].dette_maastricht.source}`}>
+              {texte("accueil.source", { source: series[secteur].dette_maastricht.source })}
             </a>
           </p>
         </section>
@@ -67,6 +65,7 @@ export default function Accueil() {
         <p className="source">
           <a href={`/sources/#${cofog.source}`}>{texte("accueil.source", { source: cofog.source })}</a>
         </p>
+        <p className="source">{texte("accueil.mention_eurostat")}</p>
       </section>
     </>
   );

@@ -31,7 +31,7 @@ export default function Gabarit({ children }: { children: ReactNode }) {
           <p>{texte("site.pied")}</p>
           <p className="version">
             {texte("version.texte", {
-              moteur: version.moteur,
+              moteur: version.moteur.slice(0, 12),
               registres: version.registres.slice(0, 12),
               donnees: version.donnees.slice(0, 12),
             })}

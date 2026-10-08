@@ -20,10 +20,11 @@ export default function Hypotheses() {
             </p>
             <p>
               {texte("hypotheses.sources")} :{" "}
-              {h.sources.map((s) => (
-                <a key={s} href={`/sources/#${s}`}>
-                  {s}
-                </a>
+              {h.sources.map((s, i) => (
+                <span key={s}>
+                  {i > 0 && ", "}
+                  <a href={`/sources/#${s}`}>{s}</a>
+                </span>
               ))}
             </p>
           </li>

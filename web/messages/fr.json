@@ -33,7 +33,8 @@
     },
     "fonctions_titre": "Dépenses par fonction en {annee}",
     "fonction": "Fonction",
-    "montant": "Montant"
+    "montant": "Montant",
+    "mention_eurostat": "Données Eurostat converties en milliards d'euros par ce site. L'usage qui en est fait n'engage pas Eurostat."
   },
   "sources": {
     "titre": "Sources",
@@ -69,7 +70,15 @@
     "relectures": {
       "a_relire": "À relire",
       "relu": "Relu"
-    }
+    },
+    "comparaisons_titre": "Comparaison du modèle aux références",
+    "comparaisons_intro": "Écart relatif entre la valeur du modèle et la référence officielle, tolérance de ±{tolerance} %. Les écarts hors tolérance sont publiés tels quels.",
+    "modele": "Modèle",
+    "ecart": "Écart",
+    "resultat": "Résultat",
+    "dans_tolerance": "Dans la tolérance",
+    "hors_tolerance": "Hors tolérance",
+    "pourcent": "{valeur} %"
   },
   "version": {
     "texte": "Version du moteur {moteur} ; registres {registres} ; données {donnees}"

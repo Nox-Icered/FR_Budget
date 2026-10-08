@@ -13,10 +13,13 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from fr_budget.apu import depenses_par_fonction
+
 from fr_budget_api.app import (
     REGISTRES,
     depenses_fonctions,
     registre,
+    resume_validation,
     serie_comptes,
     version_donnees,
 )
@@ -29,8 +32,6 @@ INDICATEURS = (
     "interets_verses",
     "dette_maastricht",
 )
-DERNIERE_ANNEE_COFOG = 2024
-"""Dernière année publiée par Eurostat dans le jeu téléchargé (voir docs/fiches/comptes_apu.md)."""
 
 
 def _ecrire(dossier: Path, nom: str, contenu: Any) -> None:
@@ -47,10 +48,19 @@ def exporter(dossier: Path) -> None:
     _ecrire(
         dossier,
         "comptes-apu.json",
-        {secteur: {i: serie_comptes(secteur, i) for i in INDICATEURS} for secteur in SOUS_SECTEURS}
-        | {"S1": {"pib": serie_comptes("S1", "pib")}},
+        {
+            # Listes ordonnées : le site affiche exactement ce qui est exporté, dans cet ordre.
+            "sous_secteurs": list(SOUS_SECTEURS),
+            "indicateurs": list(INDICATEURS),
+            "series": {
+                secteur: {i: serie_comptes(secteur, i) for i in INDICATEURS}
+                for secteur in SOUS_SECTEURS
+            },
+        },
     )
-    _ecrire(dossier, "cofog.json", depenses_fonctions(DERNIERE_ANNEE_COFOG, "S13"))
+    derniere_annee = max(a for a, s, _ in depenses_par_fonction() if s == "S13")
+    _ecrire(dossier, "cofog.json", depenses_fonctions(derniere_annee, "S13"))
+    _ecrire(dossier, "validation.json", resume_validation())
 
 
 if __name__ == "__main__":

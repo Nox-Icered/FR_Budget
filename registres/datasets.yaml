@@ -34,6 +34,22 @@ datasets:
     methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-08
 
+  - id: drees_comptes_sante_financement_2026_csv
+    source: drees_comptes_sante_financement_2026
+    description: Dépense de santé par poste et par financeur, 2010 à 2025, en euros (export CSV de l'API, séparateur point-virgule)
+    fichier: data/raw/tva/drees/cns_financement_edition_2026.csv
+    empreinte_sha256: fa605c4f615f993671babfa151b0c83effa476fdb4109d5c5527b9ab8b8786f2
+    methode_transformation: aucune ; sert au diagnostic des médicaments décrit dans docs/validation/levier_tva.md (non utilisé par le modèle)
+    telecharge_le: 2026-10-08
+
+  - id: drees_comptes_sante_2023_zip
+    source: drees_comptes_sante_2023
+    description: Archive des tableaux de l'édition 2023 des comptes de la santé (classeurs Excel) ; fiche 13, tableau 2 pour les médicaments
+    fichier: data/raw/tva/drees/cns_edition_2023_maj_fev_24.zip
+    empreinte_sha256: ddf720d81a355f918dcdbdf65c3073b120c6c5fec8f554756ad35eb552724c80
+    methode_transformation: aucune ; valeurs lues dans le classeur « Fiches 13 à 17 », feuille « F13 Tab2 », citées dans docs/validation/levier_tva.md (non utilisées par le modèle)
+    telecharge_le: 2026-10-08
+
   - id: dgtresor_cahier_2016_02_pdf
     source: dgtresor_cahier_2016_02
     description: Cahier de la DG Trésor 2016-02 (PDF)

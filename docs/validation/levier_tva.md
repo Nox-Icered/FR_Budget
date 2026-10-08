@@ -49,10 +49,36 @@ Le même calcul appliqué à la restauration (dépenses fiscales 730221 et 73020
 
 La répartition des spectacles (730231, 730301) a aussi été essayée : effet inférieur à 0,01 Md€ sur chaque point, et le taux du reste n'est pas connu. Non retenue.
 
+## Médicaments : essai non retenu (8 octobre 2026)
+
+Sources : DREES, comptes de la santé, édition 2026 (répartition par financeur, 2010 à 2025) et édition 2023 (fiche 13, tableaux 1 et 2, année 2022). Ces données servent au diagnostic, pas au modèle.
+
+**Ce que disent les deux sources pour 2022**
+
+| | Comptes nationaux (INSEE) | Comptes de la santé (DREES) |
+|---|---|---|
+| Produits pharmaceutiques (C21) achetés par les ménages | 14,3 Md€ | |
+| Produits pharmaceutiques (C21) payés par les APU | 31,0 Md€ | |
+| Total | 45,3 Md€ | 43,6 Md€ d'achats de médicaments hors remises : 36,5 en ville et 7,0 « en sus » à l'hôpital |
+| Médicaments payés par les ménages et les complémentaires | | 7,8 Md€ |
+| dont non remboursables (taux de 10 %) | | 2,6 Md€ |
+
+L'écart apparent de 6,5 Md€ entre les 14,3 Md€ des ménages (INSEE) et les 7,8 Md€ de la DREES n'est pas un écart de champ : les deux totaux sont proches (45,3 et 43,6 Md€). Il vient donc surtout de la façon de répartir la dépense entre ménages et APU (hypothèse à confirmer auprès de l'INSEE ou de la DREES). La DREES compte la dépense nette des remises versées par les laboratoires à l'Assurance maladie (3,8 Md€ en ville, 2,3 Md€ « en sus ») ; ces remises ne changent pas le prix payé en pharmacie, donc pas la TVA. Les honoraires de dispensation des pharmaciens (4,1 Md€) sont inclus dans les deux sources ; leur traitement en TVA reste à vérifier.
+
+**Essais (comptes 2022 vieillis en 2025, et comptes 2015)**
+
+| Variante | Part des achats des ménages mise à 10 % | Point brut 2025, taux de 2,1 % | Point net 2025, taux de 2,1 % | Point brut 2015, taux de 2,1 % | Tests réussis |
+|---|---|---|---|---|---|
+| Modèle actuel | 0 | +55,3 % | -44,7 % | -3,3 % | 10 sur 17 |
+| Part des non remboursables dans la dépense des ménages et des complémentaires (DREES) | 33,5 % | +43,1 % | -56,8 % | -11,9 % | 9 sur 17 |
+| Non remboursables (DREES) rapportés aux achats des ménages (INSEE) | 18,1 % | +48,7 % | -51,2 % | -8,8 % | 10 sur 17 |
+
+La première variante applique une part calculée sur 7,8 Md€ à une assiette de 14,3 Md€ : elle surestime le montant mis à 10 %. La seconde est cohérente en montant (2,6 Md€ mis à 10 %), mais dégrade le point net au taux de 2,1 % et les points au taux de 10 %. Décision du mainteneur : modèle inchangé, essai publié ici. L'essentiel de l'écart au taux de 2,1 % vient de la convention d'attribution aux APU (point précédent) : en comptant les médicaments remboursés comme payés par les ménages, le point net 2025 au taux de 2,1 % passe de -44,7 % à +33,9 % (essai, non retenu).
+
 ## Écarts expliqués et suite
 
 - **Produits mixtes encore affectés au taux dominant** (`statut: mixte_simplifie` dans les correspondances) : abonnements d'électricité et de gaz (5,5 % en 2022 affectés à 20 %), eau (affectée à 10 % au niveau A38), boissons servies, médicaments remboursables ou non. Le tome II de Voies et Moyens ne les chiffre pas : ce ne sont pas des dépenses fiscales.
-- **Taux de 2,1 %** : le modèle met tous les médicaments au taux de 2,1 % et attribue aux APU les médicaments remboursés (31 Md€ de consommation individuelle des APU) et les achats de médicaments des hôpitaux ; la DG Trésor affiche un point net égal au point brut sur ce taux, donc une part APU quasi nulle. Prochaine étape : séparer les médicaments remboursables (2,1 %) des non remboursables (10 %) avec les comptes de la santé de la DREES, fichier à déposer (site bloqué depuis l'environnement de calcul). La convention d'attribution aux APU reste à éclaircir.
+- **Taux de 2,1 %** : le modèle met tous les médicaments au taux de 2,1 % et attribue aux APU les médicaments remboursés (31 Md€ de consommation individuelle des APU) et les achats de médicaments des hôpitaux ; la DG Trésor affiche un point net égal au point brut sur ce taux, donc une part APU quasi nulle. La séparation des médicaments non remboursables (10 %) a été essayée et n'est pas retenue (section suivante). La convention d'attribution aux APU reste à éclaircir. La référence « 0,4 Md€ » est arrondie au dixième : la valeur publiée couvre de 0,35 à 0,45 Md€, soit ±12,5 %, plus que la tolérance.
 - **Recette totale** : le modèle calcule une TVA théorique ; la recette réelle est plus faible (écart de TVA : fraude, erreurs, défaillances), que la DG Trésor corrige par un recalage que nous ne faisons pas.
 - **Banque et immobilier** : la TVA facturée par ces branches sur option (locations professionnelles, certaines commissions) n'est pas comptée ; les comptes nationaux en enregistrent 8 Md€ en 2022.
 - **Correspondances à vérifier** : 747 Md€ de consommation des ménages ont un rattachement « à vérifier » (taux connu, texte non relu) ; seuls les taux de l'alimentation ont été vérifiés dans le BOFiP.

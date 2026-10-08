@@ -130,6 +130,14 @@ datasets:
     methode_transformation: pipelines/apu/extraire_comptes_apu.py → data/processed/apu/comptes_apu.csv
     telecharge_le: 2026-10-08
 
+  - id: plf2027_pap_engagements_financiers_etat_pdf
+    source: plf2027_pap_engagements_financiers_etat
+    description: PAP 2027 « Engagements financiers de l'État » (PDF, 142 pages)
+    fichier: data/raw/dette/plf2027_pap_engagements_financiers_etat.pdf
+    empreinte_sha256: 73d37d79f7d72ae0e5b614c1f6fa72a277e6766754246bf02d944d62949d57cf
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-08
+
   - id: dgtresor_cahier_2016_02_pdf
     source: dgtresor_cahier_2016_02
     description: Cahier de la DG Trésor 2016-02 (PDF)

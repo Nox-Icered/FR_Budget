@@ -137,10 +137,23 @@ def _renvoi(lieu: str, cible: str, connus: set[str], nature: str, rapport: Rappo
         rapport.erreurs.append(f"{lieu} : {nature} inconnu(e) « {cible} »")
 
 
+def modules_documentes(dossier_fiches: Path) -> set[str]:
+    """Identifiants de module déclarés dans l'en-tête des fiches (``module: …``)."""
+    modules: set[str] = set()
+    if dossier_fiches.is_dir():
+        for fiche in dossier_fiches.glob("*.md"):
+            bloc = re.match(r"---\n(.*?)\n---\n", fiche.read_text(encoding="utf-8"), re.DOTALL)
+            en_tete = yaml.safe_load(bloc.group(1)) if bloc else None
+            if isinstance(en_tete, dict) and isinstance(en_tete.get("module"), str):
+                modules.add(en_tete["module"])
+    return modules
+
+
 def verifier(registres: Registres, racine: Path, rapport: Rapport) -> None:
     """Contrôles qui portent sur plusieurs entrées ou plusieurs registres."""
     sources = {s.id for s in registres.sources}
     leviers = {lv.id for lv in registres.leviers}
+    modules = modules_documentes(racine / "docs" / "fiches")
     _doublons("sources.yaml", [s.id for s in registres.sources], rapport)
     _doublons("datasets.yaml", [d.id for d in registres.datasets], rapport)
     _doublons("hypotheses.yaml", [h.id for h in registres.hypotheses], rapport)
@@ -161,9 +174,18 @@ def verifier(registres: Registres, racine: Path, rapport: Rapport) -> None:
         for s in h.sources:
             _renvoi(f"hypotheses.yaml / {h.id}", s, sources, "source", rapport)
         for instrument in h.instruments:
-            _renvoi(f"hypotheses.yaml / {h.id}", instrument, leviers, "levier", rapport)
+            _renvoi(
+                f"hypotheses.yaml / {h.id}",
+                instrument,
+                leviers | modules,
+                "levier ou module",
+                rapport,
+            )
     for c in registres.chiffrages:
-        _renvoi(f"chiffrages.yaml / {c.id}", c.levier, leviers, "levier", rapport)
+        if c.levier is not None:
+            _renvoi(f"chiffrages.yaml / {c.id}", c.levier, leviers, "levier", rapport)
+        if c.module is not None:
+            _renvoi(f"chiffrages.yaml / {c.id}", c.module, modules, "module", rapport)
         _renvoi(f"chiffrages.yaml / {c.id}", c.source, sources, "source", rapport)
     chiffrages = {c.id for c in registres.chiffrages}
     for df in registres.depenses_fiscales_tva:

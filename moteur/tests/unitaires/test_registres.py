@@ -234,3 +234,16 @@ def test_depenses_fiscales_tva_controlees(
         yaml.safe_dump({"depenses_fiscales": [entree]}), encoding="utf-8"
     )
     assert any(message in e for e in erreurs(registres))
+
+
+def test_chiffrage_d_un_module_inconnu_refuse(tmp_path: Path) -> None:
+    chiffrage = {**CHIFFRAGE, "levier": None, "module": "module_inconnu"}
+    del chiffrage["levier"]
+    assert any("module" in e for e in erreurs(ecrire_registres(tmp_path, chiffrages=[chiffrage])))
+
+
+def test_chiffrage_avec_levier_et_module_refuse(tmp_path: Path) -> None:
+    chiffrage = {**CHIFFRAGE, "module": "dynamique_dette"}
+    assert any(
+        "exactement" in e for e in erreurs(ecrire_registres(tmp_path, chiffrages=[chiffrage]))
+    )

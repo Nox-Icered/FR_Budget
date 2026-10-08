@@ -29,16 +29,23 @@ Code : `moteur/src/fr_budget/dette.py` (fonctions pures).
 
 ## 4. Données
 
-Comptes des APU (fiche `comptes_apu.md`). Pour la part refinancée chaque année, il faudra le profil de remboursement de la dette de l'État, publié par l'Agence France Trésor (bulletin mensuel). Son site est protégé par une page anti-robots qui bloque l'environnement de calcul : fichier à déposer par le mainteneur.
+- Comptes des APU (fiche `comptes_apu.md`).
+- Dette négociable de l'État : PLF 2027, projet annuel de performances « Engagements financiers de l'État » (source `plf2027_pap_engagements_financiers_etat`, chiffrages `dette_etat_*`, pages 32 à 34 et 40) : encours fin 2025, tableau de financement 2026-2027, scénario de taux, choc de taux.
+- Le site de l'Agence France Trésor (profil de remboursement détaillé) est protégé par une page anti-robots qui bloque l'environnement de calcul.
 
 ## 5. Hypothèses
 
-À créer : part refinancée chaque année, taux de marché à l'émission, croissance en valeur, ajustement stock-flux (zéro ou moyenne historique, avec plage).
+- `dette_fraction_premiere_annee_exposee` : part de la première année pendant laquelle la dette refinancée porte le nouveau taux ; 0,5 (émissions étalées), plage 0,5 à 1.
+- À créer : taux de marché au-delà de 2027, croissance en valeur, ajustement stock-flux (zéro ou moyenne historique, avec plage).
+
+Part refinancée de la dette de l'État en 2027, calculée par `surcout_choc_taux_etat` : (émissions à moyen et long terme 2027 + titres à court terme fin 2026 + leur variation 2027) / encours fin 2026 = (340,0 + 205,5 + 2,2) / 2 822,4 = 19,4 %. L'encours fin 2026 est reconstitué en valeur nominale (encours fin 2025 + émissions 2026 - amortissements nominaux 2026 + variation des titres courts 2026) ; les émissions sont comptées à leur montant publié, sans correction des primes et décotes.
 
 ## 6. Validation
 
 - Cas analytiques (`moteur/tests/unitaires/test_dette.py`) : dette stable si r = g et pb = 0 ; effet boule de neige si r > g ; solde primaire stabilisant ; trajectoire sur plusieurs années ; convergence géométrique du taux apparent vers le taux de marché.
-- Reste à faire : reproduire une trajectoire officielle de dette (programme de stabilité ou plan budgétaire et structurel de moyen terme ; Commission européenne) avec les hypothèses de cette trajectoire.
+- Choc de taux (`moteur/tests/validation/test_dette_choc_taux.py`) : un choc de +1 point au 1er janvier 2027 coûte 3,4 Md€ la première année selon le PLF 2027 (page 40). Modèle : **2,89 Md€, écart -15,1 % : échec** (tolérance ±10 %). Fourchette selon l'hypothèse d'exposition de la première année : 2,89 à 5,48 Md€, qui contient la référence. L'écart vient du calendrier des émissions et du renouvellement des titres courts dans l'année, que le modèle à une seule part refinancée ne distingue pas.
+- Cinquième année, à titre indicatif (non testée, encours tenu constant) : 17,5 Md€ (fourchette 17,5 à 18,6) pour « environ 19 Md€ » dans la source ; avec un encours croissant, le modèle donnerait davantage. Le test attend la trajectoire de dette 2027-2031 du rapport économique, social et financier du PLF 2027, pas encore en ligne.
+- Reste à faire : reproduire une trajectoire officielle de dette avec ses hypothèses.
 
 **Décomposition observée de la dette des APU, 2015-2025** (données INSEE, solde primaire selon la convention A de `comptes_apu.md`) :
 
@@ -68,3 +75,4 @@ L'ajustement stock-flux n'est pas négligeable certaines années (+3,0 points en
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
 | 2026-10-08 | Formules de la dynamique de la dette et du taux apparent ; décomposition observée 2015-2025 | 10 tests unitaires créés, tous réussis |
+| 2026-10-08 | Part refinancée et choc de taux sur la dette de l'État (PLF 2027) | 2 tests unitaires créés, réussis ; 1 test de validation créé, en échec (-15,1 %) |

@@ -8,7 +8,9 @@ import pytest
 from fr_budget.dette import (
     ajustement_stock_flux_implicite,
     dette_suivante,
+    part_refinancee,
     solde_primaire_stabilisant,
+    surcout_choc_taux,
     taux_apparent_suivant,
     trajectoire_dette,
 )
@@ -68,3 +70,16 @@ def test_ajustement_stock_flux_implicite_referme_la_formule() -> None:
     d0, r, g, pb = 1.1, 0.025, 0.03, -0.02
     sfa = ajustement_stock_flux_implicite(d0, 1.14, r, g, pb)
     assert dette_suivante(d0, r, g, pb, sfa) == pytest.approx(1.14)
+
+
+def test_part_refinancee() -> None:
+    # 300 émis à moyen et long terme, 200 de titres courts renouvelés, +10 de titres courts,
+    # sur un encours de 2 550.
+    assert part_refinancee(300.0, 200.0, 10.0, 2550.0) == pytest.approx(0.2)
+
+
+def test_surcout_d_un_choc_de_taux() -> None:
+    # Choc de 1 point, 20 % refinancés par an, encours 1 000.
+    assert surcout_choc_taux(1000.0, 0.2, 0.01, 1, 1.0) == pytest.approx(2.0)
+    assert surcout_choc_taux(1000.0, 0.2, 0.01, 1, 0.5) == pytest.approx(10 * (1 - 0.8**0.5))
+    assert surcout_choc_taux(1000.0, 0.2, 0.01, 5, 1.0) == pytest.approx(10 * (1 - 0.8**5))

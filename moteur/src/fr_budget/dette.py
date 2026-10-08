@@ -21,6 +21,12 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 
+from fr_budget.fourchette import Fourchette, encadrer
+from fr_budget.registres.acces import chiffrage, hypothese
+
+HYPOTHESE_EXPOSITION = "dette_fraction_premiere_annee_exposee"
+UN_POINT = 0.01
+
 
 def dette_suivante(d: float, r: float, g: float, pb: float, sfa: float = 0.0) -> float:
     """Dette de l'année suivante, en ratio de PIB."""
@@ -67,3 +73,63 @@ def ajustement_stock_flux_implicite(
 ) -> float:
     """Ajustement stock-flux qui fait coïncider la formule avec une dette observée."""
     return d - d_precedent * (1 + r) / (1 + g) + pb
+
+
+def part_refinancee(
+    emissions_long_terme: float,
+    encours_court_terme: float,
+    variation_court_terme: float,
+    encours: float,
+) -> float:
+    """Part de la dette refinancée dans l'année, au taux de marché de l'année.
+
+    Émissions à moyen et long terme, plus renouvellement de tout l'encours à court terme (titres
+    de moins d'un an) et sa variation, rapportés à l'encours de début d'année.
+    """
+    return (emissions_long_terme + encours_court_terme + variation_court_terme) / encours
+
+
+def surcout_choc_taux(
+    encours: float, part: float, choc: float, annee: int, fraction_premiere_annee: float
+) -> float:
+    """Surcoût d'intérêts, l'année ``annee`` (1 = première), d'un choc de taux sur toute la courbe.
+
+    Application de ``taux_apparent_suivant`` à un écart de taux : après k années de
+    refinancement à la part constante s, l'écart de taux apparent vaut
+    choc * (1 - (1 - s) ** k). La première année ne compte que ``fraction_premiere_annee``
+    d'exposition (émissions étalées dans l'année). L'encours est tenu constant.
+    """
+    exposition = annee - 1 + fraction_premiere_annee
+    return float(encours * choc * (1 - (1 - part) ** exposition))
+
+
+def surcout_choc_taux_etat(annee: int) -> Fourchette:
+    """Surcoût, en Md€, d'un choc de +1 point au 1er janvier 2027 sur la dette négociable de l'État.
+
+    Données : PLF 2027, PAP « Engagements financiers de l'État » (chiffrages
+    ``dette_etat_*``). Encours fin 2026 = encours nominal fin 2025 + émissions à moyen et long
+    terme 2026 - amortissements nominaux 2026 + variation des titres courts 2026. Part
+    refinancée 2027 = (émissions 2027 + titres courts fin 2026 + leur variation 2027) / encours
+    fin 2026. Fourchette : plage de l'hypothèse ``dette_fraction_premiere_annee_exposee``.
+    """
+    court_terme_fin_2026 = chiffrage("dette_etat_btf_fin_2025") + chiffrage(
+        "dette_etat_variation_btf_2026"
+    )
+    encours_fin_2026 = (
+        chiffrage("dette_etat_negociable_nominal_fin_2025")
+        + chiffrage("dette_etat_emissions_mlt_2026")
+        - chiffrage("dette_etat_amortissements_mlt_nominal_2026")
+        + chiffrage("dette_etat_variation_btf_2026")
+    )
+    part = part_refinancee(
+        chiffrage("dette_etat_emissions_mlt_2027"),
+        court_terme_fin_2026,
+        chiffrage("dette_etat_variation_btf_2027"),
+        encours_fin_2026,
+    )
+    h = hypothese(HYPOTHESE_EXPOSITION)
+    calcul = {
+        f: surcout_choc_taux(encours_fin_2026, part, UN_POINT, annee, f)
+        for f in (h.valeur_centrale, h.plage.basse, h.plage.haute)
+    }
+    return encadrer(calcul[h.valeur_centrale], [calcul[h.plage.basse], calcul[h.plage.haute]])

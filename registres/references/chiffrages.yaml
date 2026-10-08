@@ -287,3 +287,135 @@ chiffrages:
     localisation: Tome II, page 164, dépense fiscale n° 730207, colonne « Réalisation 2023 »
     saisi_le: 2026-10-08
     relecture: a_relire
+
+  - id: dette_etat_negociable_nominal_fin_2025
+    module: dynamique_dette
+    source: plf2027_pap_engagements_financiers_etat
+    millesime: "2025 (exécution)"
+    mesure: Encours de la dette négociable de l'État, valeur nominale, fin 2025
+    valeur: 2670.3
+    unite: Md€
+    localisation: Page 40, tableau « Évolution de l'encours de la dette négociable », ligne « Ensemble de la dette – valeur nominale »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: dette_etat_btf_fin_2025
+    module: dynamique_dette
+    source: plf2027_pap_engagements_financiers_etat
+    millesime: "2025 (exécution)"
+    mesure: Encours des titres à court terme (BTF), fin 2025
+    valeur: 195.9
+    unite: Md€
+    localisation: Page 40, même tableau, ligne « BTF »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: dette_etat_emissions_mlt_2026
+    module: dynamique_dette
+    source: plf2027_pap_engagements_financiers_etat
+    millesime: "2026 (révisé au PLF 2027)"
+    mesure: Émissions de titres à moyen et long terme, nettes des rachats, 2026 révisé
+    valeur: 310.0
+    unite: Md€
+    localisation: Page 32, tableau de financement, colonne « 2026 révisé »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: dette_etat_amortissements_mlt_nominal_2026
+    module: dynamique_dette
+    source: plf2027_pap_engagements_financiers_etat
+    millesime: "2026 (révisé au PLF 2027)"
+    mesure: Amortissement de titres d'État à moyen et long terme, valeur nominale, 2026 révisé
+    valeur: 167.5
+    unite: Md€
+    localisation: Page 32, tableau de financement, ligne « valeur nominale », colonne « 2026 révisé »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: dette_etat_variation_btf_2026
+    module: dynamique_dette
+    source: plf2027_pap_engagements_financiers_etat
+    millesime: "2026 (révisé au PLF 2027)"
+    mesure: Variation de l'encours de titres à court terme, 2026 révisé
+    valeur: 9.6
+    unite: Md€
+    localisation: Page 32, tableau de financement, colonne « 2026 révisé »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: dette_etat_emissions_mlt_2027
+    module: dynamique_dette
+    source: plf2027_pap_engagements_financiers_etat
+    millesime: "PLF 2027"
+    mesure: Émissions de titres à moyen et long terme, nettes des rachats, 2027
+    valeur: 340.0
+    unite: Md€
+    localisation: Page 32, tableau de financement, colonne « 2027 PLF »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: dette_etat_variation_btf_2027
+    module: dynamique_dette
+    source: plf2027_pap_engagements_financiers_etat
+    millesime: "PLF 2027"
+    mesure: Variation de l'encours de titres à court terme, 2027
+    valeur: 2.2
+    unite: Md€
+    localisation: Page 32, tableau de financement, colonne « 2027 PLF »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: dette_etat_taux_10_ans_fin_2026
+    module: dynamique_dette
+    source: plf2027_pap_engagements_financiers_etat
+    millesime: "PLF 2027"
+    mesure: Hypothèse de taux à 10 ans, fin 2026
+    valeur: 4.2
+    unite: "%"
+    localisation: Page 33, « Scénario de taux à moyen et long terme »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: dette_etat_taux_10_ans_fin_2027
+    module: dynamique_dette
+    source: plf2027_pap_engagements_financiers_etat
+    millesime: "PLF 2027"
+    mesure: Hypothèse de taux à 10 ans, fin 2027, puis stabilisation à ce niveau
+    valeur: 4.3
+    unite: "%"
+    localisation: Page 33, « Scénario de taux à moyen et long terme »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: dette_etat_taux_3_mois_fin_2026
+    module: dynamique_dette
+    source: plf2027_pap_engagements_financiers_etat
+    millesime: "PLF 2027"
+    mesure: Hypothèse de taux à 3 mois, fin 2026, puis stabilisation à ce niveau
+    valeur: 3.0
+    unite: "%"
+    localisation: Page 34, « Scénario de taux à court terme »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: dette_etat_choc_taux_100pb_an_1
+    module: dynamique_dette
+    source: plf2027_pap_engagements_financiers_etat
+    millesime: "PLF 2027"
+    mesure: Surcoût de charge de la dette d'un choc de +1 point sur toute la courbe au 1er janvier 2027, première année (comptabilité maastrichtienne)
+    valeur: 3.4
+    unite: Md€
+    localisation: Page 40, « Simulation d'un choc de taux et sensibilité à l'inflation »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: dette_etat_choc_taux_100pb_an_5
+    module: dynamique_dette
+    source: plf2027_pap_engagements_financiers_etat
+    millesime: "PLF 2027"
+    mesure: Même choc, cinquième année (« environ » dans la source)
+    valeur: 19.0
+    unite: Md€
+    localisation: Page 40, « Simulation d'un choc de taux et sensibilité à l'inflation »
+    saisi_le: 2026-10-08
+    relecture: a_relire

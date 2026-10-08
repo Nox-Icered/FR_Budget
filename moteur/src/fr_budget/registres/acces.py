@@ -21,3 +21,16 @@ def _hypotheses() -> dict[str, Hypothese]:
 def hypothese(identifiant: str) -> Hypothese:
     """Hypothèse du registre ; ``KeyError`` si elle n'existe pas."""
     return _hypotheses()[identifiant]
+
+
+@cache
+def _chiffrages() -> dict[str, float]:
+    contenu = yaml.safe_load(
+        (RACINE_DEPOT / "registres" / "references" / "chiffrages.yaml").read_text(encoding="utf-8")
+    )
+    return {c["id"]: float(c["valeur"]) for c in contenu["chiffrages"]}
+
+
+def chiffrage(identifiant: str) -> float:
+    """Valeur d'un chiffrage de référence ; ``KeyError`` s'il n'existe pas."""
+    return _chiffrages()[identifiant]

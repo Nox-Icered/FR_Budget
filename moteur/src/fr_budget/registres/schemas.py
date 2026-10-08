@@ -118,10 +118,15 @@ class StatutRelecture(StrEnum):
 
 
 class Chiffrage(Strict):
-    """Chiffrage officiel ou académique d'un levier, saisi pour la validation."""
+    """Chiffrage officiel ou académique d'un levier ou d'un module, saisi pour la validation.
+
+    Exactement l'un de ``levier`` (registre des leviers) ou ``module`` (module documenté par
+    une fiche, par exemple ``dynamique_dette``).
+    """
 
     id: Identifiant
-    levier: Identifiant
+    levier: Identifiant | None = None
+    module: Identifiant | None = None
     source: Identifiant
     millesime: Texte
     mesure: Texte
@@ -132,6 +137,13 @@ class Chiffrage(Strict):
     """Page, tableau ou ligne du document où se trouve la valeur."""
     saisi_le: date
     relecture: StatutRelecture
+
+    @model_validator(mode="after")
+    def un_levier_ou_un_module(self) -> Self:
+        if (self.levier is None) == (self.module is None):
+            msg = f"{self.id} : renseigner exactement l'un de levier ou module"
+            raise ValueError(msg)
+        return self
 
 
 class UsageDepenseFiscale(StrEnum):

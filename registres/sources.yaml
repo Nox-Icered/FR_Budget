@@ -142,6 +142,15 @@ sources:
     acces: direct
     consulte_le: 2026-10-08
 
+  - id: plf2027_pap_engagements_financiers_etat
+    nom: Projet de loi de finances pour 2027, projet annuel de performances de la mission « Engagements financiers de l'État » (programme 117, charge de la dette et trésorerie de l'État)
+    editeur: Ministère de l'Économie et des Finances (document publié par l'Assemblée nationale)
+    url: https://www.assemblee-nationale.fr/dyn/contenu/visualisation/1128231/file/PAP%202027%20-%20Engagements%20financiers%20de%20l%27Etat.pdf
+    licence: Licence Ouverte 2.0
+    millesime: PLF 2027
+    acces: direct
+    consulte_le: 2026-10-08
+
   - id: eurostat_gov_10a_exp
     nom: Eurostat, dépenses des administrations publiques par fonction (CFAP/COFOG), tableau gov_10a_exp
     editeur: Eurostat (données transmises par l'INSEE)

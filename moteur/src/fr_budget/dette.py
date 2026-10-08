@@ -19,12 +19,13 @@ ne contient que les formules.
 
 from __future__ import annotations
 
+import math
 from collections.abc import Sequence
 
 from fr_budget.fourchette import Fourchette, encadrer
 from fr_budget.registres.acces import chiffrage, hypothese
 
-HYPOTHESE_EXPOSITION = "dette_fraction_premiere_annee_exposee"
+HYPOTHESE_DEBUT_ANNEE = "dette_part_refinancement_debut_annee"
 UN_POINT = 0.01
 
 
@@ -90,21 +91,29 @@ def part_refinancee(
 
 
 def surcout_choc_taux(
-    encours: float, part: float, choc: float, annee: int, fraction_premiere_annee: float
+    encours: float, part: float, choc: float, annee: int, part_debut_annee: float
 ) -> float:
-    """Surcoût d'intérêts, l'année ``annee`` (1 = première), d'un choc de taux sur toute la courbe.
+    """Surcoût d'intérêts, l'année ``annee`` (k = 1 pour la première), d'un choc de taux.
 
-    Application de ``taux_apparent_suivant`` à un écart de taux : après t années de
-    refinancement à la part annuelle constante s, la part de la dette au nouveau taux vaut
-    1 - (1 - s) ** t. Le surcoût de l'année k est évalué en un seul point de l'année,
-    t = k - 1 + ``fraction_premiere_annee`` : 0,5 (milieu d'année) pour des émissions étalées,
-    1 (fin d'année) si tout est refinancé en début d'année. Avec 0,5, c'est une approximation
-    de la moyenne sur l'année d'un refinancement continu, 1 - ((1 - s) ** k - (1 - s) **
-    (k - 1)) / ln(1 - s) : pour s = 19,4 %, elle la dépasse de 1,7 % la première année et de
-    0,1 % la cinquième (docs/fiches/dynamique_dette.md). L'encours est tenu constant.
+    Après t années de refinancement à la part annuelle constante s, la part de la dette au
+    nouveau taux vaut 1 - (1 - s) ** t (application de ``taux_apparent_suivant``). L'exposition
+    de l'année k combine deux calendriers de refinancement, pondérés par ``part_debut_annee`` :
+
+    - refinancement continu au fil de l'année : moyenne exacte sur l'année,
+      1 - ((1 - s) ** k - (1 - s) ** (k - 1)) / ln(1 - s) ;
+    - refinancement le 1er janvier : 1 - (1 - s) ** k.
+
+    Décision du mainteneur (8 octobre 2026) : moyenne exacte, au lieu de l'évaluation en milieu
+    d'année. L'encours est tenu constant.
     """
-    exposition = annee - 1 + fraction_premiere_annee
-    return float(encours * choc * (1 - (1 - part) ** exposition))
+    if part <= 0:
+        return 0.0
+    reste = 1 - part
+    debut = 1 - reste**annee
+    # Tout refinancé (s = 1) : la dette porte le nouveau taux dès le début.
+    continu = 1.0 if reste <= 0 else 1 - (reste**annee - reste ** (annee - 1)) / math.log(reste)
+    exposition = (1 - part_debut_annee) * continu + part_debut_annee * debut
+    return float(encours * choc * exposition)
 
 
 def surcout_choc_taux_etat(annee: int) -> Fourchette:
@@ -114,7 +123,7 @@ def surcout_choc_taux_etat(annee: int) -> Fourchette:
     ``dette_etat_*``). Encours fin 2026 = encours nominal fin 2025 + émissions à moyen et long
     terme 2026 - amortissements nominaux 2026 + variation des titres courts 2026. Part
     refinancée 2027 = (émissions 2027 + titres courts fin 2026 + leur variation 2027) / encours
-    fin 2026. Fourchette : plage de l'hypothèse ``dette_fraction_premiere_annee_exposee``.
+    fin 2026. Fourchette : plage de l'hypothèse ``dette_part_refinancement_debut_annee``.
     """
     court_terme_fin_2026 = chiffrage("dette_etat_btf_fin_2025") + chiffrage(
         "dette_etat_variation_btf_2026"
@@ -131,7 +140,7 @@ def surcout_choc_taux_etat(annee: int) -> Fourchette:
         chiffrage("dette_etat_variation_btf_2027"),
         encours_fin_2026,
     )
-    h = hypothese(HYPOTHESE_EXPOSITION)
+    h = hypothese(HYPOTHESE_DEBUT_ANNEE)
     calcul = {
         f: surcout_choc_taux(encours_fin_2026, part, UN_POINT, annee, f)
         for f in (h.valeur_centrale, h.plage.basse, h.plage.haute)

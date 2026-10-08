@@ -25,7 +25,7 @@ Code : `moteur/src/fr_budget/dette.py` (fonctions pures).
 - d : dette au sens de Maastricht en ratio de PIB ; r : taux apparent (intérêts versés rapportés à la dette de l'année précédente) ; g : croissance du PIB en valeur ; pb : solde primaire en ratio de PIB ; sfa : ajustement stock-flux.
 - Taux apparent : chaque année, la part refinancée de la dette (titres arrivant à échéance et emprunts nouveaux) prend le taux de marché, le reste garde son taux : r(t+1) = (1 - s) * r(t) + s * i(t).
 - Solde primaire stabilisant : pb* = d * (r - g) / (1 + g).
-- Choc de taux : la part de la dette au nouveau taux après t années est 1 - (1 - s)^t ; le surcoût de l'année k est évalué en t = k - 1 + f, f étant la part de la première année exposée (0,5 pour des émissions étalées). Avec f = 0,5, c'est une approximation de la moyenne sur l'année d'un refinancement continu, 1 - ((1 - s)^k - (1 - s)^(k-1)) / ln(1 - s) : pour s = 19,4 %, elle la dépasse de 1,7 % la première année (2,89 Md€ au lieu de 2,84 Md€), 0,5 % la deuxième et 0,1 % la cinquième. Changer de formule reste à décider par le mainteneur.
+- Choc de taux : la part de la dette au nouveau taux après t années est 1 - (1 - s)^t. L'exposition de l'année k pondère deux calendriers par p, la part du refinancement faite le 1er janvier : refinancement continu, dont le surcoût est la moyenne exacte sur l'année, 1 - ((1 - s)^k - (1 - s)^(k-1)) / ln(1 - s) ; refinancement au 1er janvier, 1 - (1 - s)^k. Décision du mainteneur du 8 octobre 2026 : moyenne exacte, qui remplace l'évaluation en milieu d'année (celle-ci la dépassait de 1,7 % la première année).
 - Ajustement stock-flux implicite : ce qui referme la formule sur une dette observée.
 
 ## 4. Données
@@ -36,7 +36,7 @@ Code : `moteur/src/fr_budget/dette.py` (fonctions pures).
 
 ## 5. Hypothèses
 
-- `dette_fraction_premiere_annee_exposee` : part de la première année pendant laquelle la dette refinancée porte le nouveau taux ; 0,5 (émissions étalées), plage 0,5 à 1.
+- `dette_part_refinancement_debut_annee` : part du refinancement de l'année réalisée dès le 1er janvier ; 0 (refinancement continu), plage 0 à 1. Remplace `dette_fraction_premiere_annee_exposee` (0,5, plage 0,5 à 1) avec la moyenne exacte.
 - À créer : taux de marché au-delà de 2027, croissance en valeur, ajustement stock-flux (zéro ou moyenne historique, avec plage).
 
 Part refinancée de la dette de l'État en 2027, calculée par `surcout_choc_taux_etat` : (émissions à moyen et long terme 2027 + titres à court terme fin 2026 + leur variation 2027) / encours fin 2026 = (340,0 + 205,5 + 2,2) / 2 822,4 = 19,4 %. L'encours fin 2026 est reconstitué en valeur nominale (encours fin 2025 + émissions 2026 - amortissements nominaux 2026 + variation des titres courts 2026) ; les émissions sont comptées à leur montant publié, sans correction des primes et décotes.
@@ -44,7 +44,7 @@ Part refinancée de la dette de l'État en 2027, calculée par `surcout_choc_tau
 ## 6. Validation
 
 - Cas analytiques (`moteur/tests/unitaires/test_dette.py`) : dette stable si r = g et pb = 0 ; effet boule de neige si r > g ; solde primaire stabilisant ; trajectoire sur plusieurs années ; convergence géométrique du taux apparent vers le taux de marché.
-- Choc de taux (`moteur/tests/validation/test_dette_choc_taux.py`) : un choc de +1 point au 1er janvier 2027 coûte 3,4 Md€ la première année selon le PLF 2027 (page 40). Modèle : **2,89 Md€, écart -15,1 % : échec** (tolérance ±10 %). Fourchette selon l'hypothèse d'exposition de la première année : 2,89 à 5,48 Md€, qui contient la référence. L'écart vient du calendrier des émissions et du renouvellement des titres courts dans l'année, que le modèle à une seule part refinancée ne distingue pas.
+- Choc de taux (`moteur/tests/validation/test_dette_choc_taux.py`) : un choc de +1 point au 1er janvier 2027 coûte 3,4 Md€ la première année selon le PLF 2027 (page 40). Modèle : **2,84 Md€, écart -16,6 % : échec** (tolérance ±10 % ; -15,1 % avec l'ancienne évaluation en milieu d'année). Fourchette selon la part du refinancement faite le 1er janvier : 2,84 à 5,48 Md€, qui contient la référence. L'écart vient du calendrier des émissions et du renouvellement des titres courts dans l'année, que le modèle à une seule part refinancée ne distingue pas.
 - Cinquième année, à titre indicatif (non testée, encours tenu constant) : 17,5 Md€ (fourchette 17,5 à 18,6) pour « environ 19 Md€ » dans la source ; avec un encours croissant, le modèle donnerait davantage. Le test attend la trajectoire de dette 2027-2031 du rapport économique, social et financier du PLF 2027, pas encore en ligne.
 - Reste à faire : reproduire une trajectoire officielle de dette avec ses hypothèses.
 
@@ -78,3 +78,4 @@ L'ajustement stock-flux n'est pas négligeable certaines années (+3,0 points en
 | 2026-10-08 | Formules de la dynamique de la dette et du taux apparent ; décomposition observée 2015-2025 | 10 tests unitaires créés, tous réussis |
 | 2026-10-08 | Part refinancée et choc de taux sur la dette de l'État (PLF 2027) | 2 tests unitaires créés, réussis ; 1 test de validation créé, en échec (-15,1 %) |
 | 2026-10-08 | Relecture finale : description de la formule du choc de taux précisée (approximation en milieu d'année, écart à la moyenne exacte publié) | aucun |
+| 2026-10-08 | Choc de taux : moyenne exacte sur l'année (décision du mainteneur) ; hypothèse `dette_part_refinancement_debut_annee` | test_dette_choc_taux : -15,1 % → -16,6 % (échec inchangé) ; tests unitaires du choc réécrits pour la nouvelle formule (3 tests) |

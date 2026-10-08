@@ -1,5 +1,289 @@
 # Chiffrages officiels et académiques des leviers, saisis pour la validation.
 # Chaque valeur est relue par le responsable du projet (relecture: a_relire puis relu).
-# Premier contenu : tâche 0.4 du plan (Voies et Moyens, trois derniers PLF).
 
-chiffrages: []
+chiffrages:
+  - id: tva_point_net_2025_ensemble
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement net (après TVA payée par les APU) d'une hausse d'un point de tous les taux, statique
+    valeur: 11.4
+    unite: Md€
+    localisation: Tableau 2, page 5
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2025_ensemble
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement brut d'une hausse d'un point de tous les taux, statique
+    valeur: 13.7
+    unite: Md€
+    localisation: Tableau 1, page 4
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_net_2025_taux_2_1
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement net (après TVA payée par les APU) d'une hausse d'un point de le taux super-réduit (2,1 %), statique
+    valeur: 0.4
+    unite: Md€
+    localisation: Tableau 2, page 5
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2025_taux_2_1
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement brut d'une hausse d'un point de le taux super-réduit (2,1 %), statique
+    valeur: 0.4
+    unite: Md€
+    localisation: Tableau 1, page 4
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_net_2025_taux_5_5
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement net (après TVA payée par les APU) d'une hausse d'un point de le taux réduit (5,5 %), statique
+    valeur: 2.0
+    unite: Md€
+    localisation: Tableau 2, page 5
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2025_taux_5_5
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement brut d'une hausse d'un point de le taux réduit (5,5 %), statique
+    valeur: 2.4
+    unite: Md€
+    localisation: Tableau 1, page 4
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_net_2025_taux_10
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement net (après TVA payée par les APU) d'une hausse d'un point de le taux intermédiaire (10 %), statique
+    valeur: 1.6
+    unite: Md€
+    localisation: Tableau 2, page 5
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2025_taux_10
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement brut d'une hausse d'un point de le taux intermédiaire (10 %), statique
+    valeur: 1.9
+    unite: Md€
+    localisation: Tableau 1, page 4
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_net_2025_taux_20
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement net (après TVA payée par les APU) d'une hausse d'un point de le taux normal (20 %), statique
+    valeur: 7.5
+    unite: Md€
+    localisation: Tableau 2, page 5
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2025_taux_20
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: 2025 (modèle 2022 vieilli)
+    mesure: Rendement brut d'une hausse d'un point de le taux normal (20 %), statique
+    valeur: 8.9
+    unite: Md€
+    localisation: Tableau 1, page 4
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_nette_totale_execution_2024
+    levier: tva
+    source: plf2026_voies_et_moyens_tome1
+    millesime: PLF 2026
+    mesure: TVA nette totale en comptabilité budgétaire, exécution 2024
+    valeur: 210.7
+    unite: Md€
+    localisation: Tableau « TVA brute totale… », page 33 (section « Taxe sur la valeur ajoutée nette »)
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_nette_totale_execution_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome1
+    millesime: PLF 2025
+    mesure: TVA nette totale en comptabilité budgétaire, exécution 2023
+    valeur: 208.4
+    unite: Md€
+    localisation: Tableau « TVA brute totale… », page 30 (section « Taxe sur la valeur ajoutée nette »)
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2015_ensemble
+    levier: tva
+    source: dgtresor_cahier_2016_02
+    millesime: 2015 (estimation du PLF pour 2016)
+    mesure: Rendement d'une hausse d'un point de tous les taux, statique, hors hausse des dépenses publiques induite (arrondi au quart de milliard dans la source)
+    valeur: 9.75
+    unite: Md€
+    localisation: Tableau 8, page 24 (page 26 du PDF)
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2015_taux_2_1
+    levier: tva
+    source: dgtresor_cahier_2016_02
+    millesime: 2015 (estimation du PLF pour 2016)
+    mesure: Rendement d'une hausse d'un point de le taux super-réduit (2,1 %), statique, hors hausse des dépenses publiques induite (arrondi au quart de milliard dans la source)
+    valeur: 0.5
+    unite: Md€
+    localisation: Tableau 8, page 24 (page 26 du PDF)
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2015_taux_5_5
+    levier: tva
+    source: dgtresor_cahier_2016_02
+    millesime: 2015 (estimation du PLF pour 2016)
+    mesure: Rendement d'une hausse d'un point de le taux réduit (5,5 %), statique, hors hausse des dépenses publiques induite (arrondi au quart de milliard dans la source)
+    valeur: 1.75
+    unite: Md€
+    localisation: Tableau 8, page 24 (page 26 du PDF)
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2015_taux_10
+    levier: tva
+    source: dgtresor_cahier_2016_02
+    millesime: 2015 (estimation du PLF pour 2016)
+    mesure: Rendement d'une hausse d'un point de le taux intermédiaire (10 %), statique, hors hausse des dépenses publiques induite (arrondi au quart de milliard dans la source)
+    valeur: 1.25
+    unite: Md€
+    localisation: Tableau 8, page 24 (page 26 du PDF)
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_point_brut_2015_taux_20
+    levier: tva
+    source: dgtresor_cahier_2016_02
+    millesime: 2015 (estimation du PLF pour 2016)
+    mesure: Rendement d'une hausse d'un point de le taux normal (20 %), statique, hors hausse des dépenses publiques induite (arrondi au quart de milliard dans la source)
+    valeur: 6.5
+    unite: Md€
+    localisation: Tableau 8, page 24 (page 26 du PDF)
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_nette_totale_2022_dgtresor
+    levier: tva
+    source: dgtresor_tresor_eco_371
+    millesime: "2022"
+    mesure: TVA nette en comptabilité budgétaire, toutes administrations publiques, 2022 (sert au vieillissement 2022 → 2025)
+    valeur: 202.7
+    unite: Md€
+    localisation: Page 2, section 1
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_nette_totale_prevision_2025
+    levier: tva
+    source: plf2026_voies_et_moyens_tome1
+    millesime: PLF 2026
+    mesure: TVA nette totale en comptabilité budgétaire, prévision 2025 (sert au vieillissement 2022 → 2025)
+    valeur: 210.0
+    unite: Md€
+    localisation: Tableau « TVA brute totale… », page 33 (section « Taxe sur la valeur ajoutée nette »)
+    saisi_le: 2026-10-07
+    relecture: a_relire
+
+  - id: tva_depense_fiscale_730213_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome2
+    millesime: 2023 (réalisation, PLF 2025)
+    mesure: Taux de 10 % pour les travaux d'amélioration, de transformation, d'aménagement et d'entretien des logements achevés depuis plus de deux ans (hors rénovation énergétique) ; coût par rapport au taux normal de 20 %
+    valeur: 2150
+    unite: M€
+    localisation: Tome II, page 165, dépense fiscale n° 730213, colonne « Réalisation 2023 »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: tva_depense_fiscale_730223_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome2
+    millesime: 2023 (réalisation, PLF 2025)
+    mesure: Taux de 5,5 % pour les travaux d'amélioration de la qualité énergétique des logements achevés depuis plus de deux ans ; coût par rapport au taux normal de 20 %
+    valeur: 970
+    unite: M€
+    localisation: Tome II, page 167, dépense fiscale n° 730223, colonne « Réalisation 2023 »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: tva_depense_fiscale_710103_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome2
+    millesime: 2023 (réalisation, PLF 2025)
+    mesure: Niveau des taux en Guadeloupe, en Martinique et à La Réunion (8,5 % et 2,1 %) ; coût par rapport aux taux de la France métropolitaine
+    valeur: 1940
+    unite: M€
+    localisation: Tome II, page 159, dépense fiscale n° 710103, colonne « Réalisation 2023 »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: tva_depense_fiscale_710105_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome2
+    millesime: 2023 (réalisation, PLF 2025)
+    mesure: Non-application provisoire de la TVA en Guyane et à Mayotte ; coût par rapport à l'application de la TVA
+    valeur: 160
+    unite: M€
+    localisation: Tome II, page 159, dépense fiscale n° 710105, colonne « Réalisation 2023 »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: tva_depense_fiscale_730306_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome2
+    millesime: 2023 (réalisation, PLF 2025)
+    mesure: Taux particuliers applicables en Corse ; coût par rapport aux taux de la France continentale
+    valeur: 197
+    unite: M€
+    localisation: Tome II, page 172, dépense fiscale n° 730306, colonne « Réalisation 2023 »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: tva_depense_fiscale_730221_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome2
+    millesime: 2023 (réalisation, PLF 2025)
+    mesure: Taux de 10 % pour la restauration commerciale ; coût par rapport au taux normal de 20 % (contrôle, non utilisé par le modèle)
+    valeur: 2000
+    unite: M€
+    localisation: Tome II, page 166, dépense fiscale n° 730221, colonne « Réalisation 2023 »
+    saisi_le: 2026-10-08
+    relecture: a_relire
+
+  - id: tva_depense_fiscale_730207_2023
+    levier: tva
+    source: plf2025_voies_et_moyens_tome2
+    millesime: 2023 (réalisation, PLF 2025)
+    mesure: Taux de 10 % pour les repas des cantines d'entreprises ou d'administrations ; coût par rapport au taux normal de 20 % (contrôle, non utilisé par le modèle)
+    valeur: 171
+    unite: M€
+    localisation: Tome II, page 164, dépense fiscale n° 730207, colonne « Réalisation 2023 »
+    saisi_le: 2026-10-08
+    relecture: a_relire

@@ -1,0 +1,38 @@
+a38,regime,statut,reference,note
+AZ,reduit,mixte_simplifie,CGI art. 278-0 bis A 1° (denrées alimentaires) ; BOI-TVA-LIQ-30-10-10 § 1,Les produits agricoles non alimentaires (horticulture, bois) relèvent d'autres taux ; affecté au taux réduit
+BZ,normal,a_verifier,CGI art. 278 (taux normal),
+CA,reduit,mixte_simplifie,CGI art. 278-0 bis A 1° ; BOI-TVA-LIQ-30-10-10 § 1,Les boissons alcooliques et confiseries sont à 20 % ; affecté au taux réduit
+CB,normal,a_verifier,CGI art. 278,
+CC,normal,mixte_simplifie,CGI art. 278,Les livres imprimés relèvent du taux réduit ; affecté au taux normal
+CD,normal,a_verifier,CGI art. 278,
+CE,normal,mixte_simplifie,CGI art. 278 ; CGI art. 279 (engrais),Les engrais relèvent du taux de 10 % ; affecté au taux normal
+CF,super_reduit,mixte_simplifie,CGI art. 281 octies (médicaments remboursables et agréés aux collectivités),Les autres produits pharmaceutiques sont à 10 % ou 20 % ; affecté au taux super-réduit
+CG,normal,a_verifier,CGI art. 278,
+CH,normal,a_verifier,CGI art. 278,
+CI,normal,a_verifier,CGI art. 278,
+CJ,normal,a_verifier,CGI art. 278,
+CK,normal,a_verifier,CGI art. 278,
+CL,normal,a_verifier,CGI art. 278,
+CM,normal,mixte_simplifie,CGI art. 278,Certains appareillages pour handicapés relèvent du taux réduit ; affecté au taux normal
+DZ,normal,a_verifier,CGI art. 278,
+EZ,intermediaire,mixte_simplifie,CGI art. 278-0 bis A 2° (eau) ; CGI art. 279 c (assainissement et déchets),L'eau est au taux réduit ; affecté au taux intermédiaire
+FZ,normal,mixte_simplifie,CGI art. 278,Les travaux dans les logements et le logement social relèvent de taux réduits ; affecté au taux normal pour les achats des producteurs et l'investissement
+GZ,normal,a_verifier,CGI art. 278,
+HZ,normal,mixte_simplifie,CGI art. 278 ; CGI art. 279 b quater (transport de voyageurs),Le transport de voyageurs est à 10 % ; affecté au taux normal (fret majoritaire dans les achats des producteurs)
+IZ,intermediaire,a_verifier,CGI art. 279 a et n (hébergement et restauration),
+JA,normal,mixte_simplifie,CGI art. 278 ; CGI art. 278-0 bis A (livres) ; CGI art. 298 septies (presse),Les livres et la presse relèvent de taux réduits ; affecté au taux normal
+JB,normal,a_verifier,CGI art. 278,
+JC,normal,a_verifier,CGI art. 278,
+KZ,exonere,a_verifier,CGI art. 261 C (opérations bancaires financières et d'assurance),
+LZ,exonere,mixte_simplifie,CGI art. 261 D 2° (locations de locaux d'habitation),Les locations de locaux professionnels peuvent être taxées sur option ; affecté à l'exonération
+MA,normal,a_verifier,CGI art. 278,
+MB,normal,a_verifier,CGI art. 278,
+MC,normal,a_verifier,CGI art. 278,
+NZ,normal,a_verifier,CGI art. 278,
+OZ,hors_champ,a_verifier,CGI art. 256 B (activités des personnes morales de droit public),
+PZ,exonere,a_verifier,CGI art. 261 4 4° (enseignement),
+QA,exonere,a_verifier,CGI art. 261 4 1° (soins médicaux),
+QB,exonere,a_verifier,CGI art. 261 7 1° (organismes sans but lucratif à caractère social),
+RZ,normal,mixte_simplifie,CGI art. 278 ; CGI art. 261 E (jeux de hasard),Les jeux de hasard sont exonérés ; affecté au taux normal
+SZ,exonere,mixte_simplifie,CGI art. 261 7 1° (organismes sans but lucratif),Les services personnels marchands sont au taux normal ; affecté à l'exonération
+TZ,hors_champ,a_verifier,Salaires du personnel domestique,

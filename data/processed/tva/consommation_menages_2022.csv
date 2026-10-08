@@ -1,0 +1,305 @@
+code,libelle,a38,millions_euros
+H_A01S1,Pommes de terre,AZ,1692.8
+H_A01S6,Autres plantes industrielles,AZ,149.1
+H_A01S7,Légumes frais,AZ,10007.7
+HI_A01S8A,Végétaux d'intérieur et d'extérieur,AZ,4513.4
+HI_A01S8B,Arbres de Noël,AZ,209.1
+HI_A01T1A_B,Fruits tropicaux et oléagineux,AZ,2229.3
+HI_A01T1C_D,Autres fruits frais,AZ,7765.7
+H_A01U8,Oeufs,AZ,2130.9
+HI_A01U9A_C,Miel,AZ,304.8
+HI_A01U9B,Animaux de compagnie ccm,AZ,345.1
+138G_A02Z,Produits sylvicoles et services annexes,AZ,2916.8
+138G_A03Z,Produits de la pêche et de l'aquaculture ; services de soutien à la pêche,AZ,2091.1
+138G_B08Z,Autres produits des industries extractives,BZ,17.2
+138G_D35A,"Électricité, transport et distribution d'électricité",DZ,31332.0
+H_D35B2,Distribution de combustibles gazeux par conduites,DZ,11730.5
+H_D35B4,Production et distribution de vapeur et d air conditionné,DZ,3078.4
+138G_E36Z,Eau naturelle ; traitement et distribution d'eau,EZ,4693.9
+138G_E37Z,Collecte et traitement des eaux usées ; boues d'épuration,EZ,6285.5
+138G_E38Z,"Collecte, traitement et élimination des déchets ; récupération de matériaux",EZ,5123.5
+HI_C10A1A,Boeuf,CA,6167.4
+HI_C10A1B,Veau,CA,1113.1
+HI_C10A1C,Mouton,CA,778.0
+HI_C10A1D,Cheval,CA,68.6
+HI_C10A1E,Porc,CA,1980.6
+HI_C10A1F,Triperie et graisse animale,CA,387.0
+HI_C10A1G_H,Lapins et gibiers,CA,616.4
+H_C10A2,Viandes de volailles sauf lapins et gibiers ccm et atc,CA,4809.3
+H_C10A3,Charcuterie et préparations à base de viande,CA,15329.4
+HI_C10B0A,Poissons frais en morceaux,CA,1564.7
+HI_C10B0B,Poissons congelés ou surgelés,CA,1501.8
+HI_C10B0C,"Poissons séchés, fumés et en conserve",CA,2439.0
+H_C10C1,Transformation et conservation de pommes de terre,CA,1801.9
+H_C10C2,Jus de fruits et de légumes,CA,2235.9
+HI_C10C3A,Légumes coupés ou emballés,CA,855.9
+HI_C10C3B,Fruits coupés ou emballés,CA,53.1
+HI_C10C3C,Préparations et conserves de légumes,CA,4601.5
+HI_C10C3D,"Confitures, gelées, compotes et purées de fruits",CA,1613.6
+HI_C10C3E,Autres préparations et conserves de fruits,CA,1035.1
+H_C10D1,Huiles raffinées,CA,1491.5
+H_C10D2,Margarine et graisses comestibles similaires,CA,588.2
+HI_C10E1A_B,Laits liquides,CA,2373.5
+HI_C10E1C,Crème de lait,CA,1159.0
+HI_C10E1D,Yaourts et desserts lactés frais,CA,4623.3
+HI_C10E1E_F,Beurre,CA,1696.6
+HI_C10E1G_H,Fromages,CA,10614.2
+HI_C10E1I,Autres produits laitiers,CA,105.5
+H_C10E2,Glaces et sorbets,CA,2798.1
+HI_C10F1A,Farines,CA,231.9
+HI_C10F1B,Riz,CA,666.3
+HI_C10F1C,Autres produits issus du travail des grains,CA,1296.7
+H_C10F2,Produits amylacés,CA,26.1
+HI_C10G1A,Pain,CA,11730.0
+HI_C10G1B,Pâtisserie fraîche,CA,7067.3
+H_C10G2,"Biscuits, biscottes, pâtisseries de conservation",CA,7819.1
+H_C10G3,Pâtes alimentaires,CA,1764.7
+H_C10H1,Sucre,CA,411.1
+H_C10H2,"Cacao, chocolat et produits de confiserie",CA,6925.5
+H_C10H3,Transformation du thé et du café,CA,4996.2
+HI_C10H4A,Sel alimentaire,CA,142.5
+HI_C10H4B,Autres condiments et assaisonnements,CA,3077.9
+HI_C10H5A,Plats préparés à base de viande,CA,1992.3
+HI_C10H5B,Plats préparés à base de poissons et produits de la mer,CA,724.2
+HI_C10H5C,Plats préparés à base de pâtes,CA,480.0
+HI_C10H5D,Autres plats préparés,CA,5132.0
+H_C10H6,Aliments homogénéisés et diététiques,CA,1317.4
+HI_C10H7A,Soupes et potages,CA,607.0
+HI_C10H7B,Sandwiches,CA,1255.5
+HI_C10H7C,Pizzas fraîches,CA,319.2
+HI_C10H7D,Édulcorants,CA,71.5
+HI_C10H7E,Compléments alimentaires,CA,2619.4
+HI_C10H7F,Autres produits alimentaires divers,CA,1030.1
+H_C10K2,Aliments pour animaux de compagnie,CA,5304.5
+HI_C11Z1A,Eaux de vie,CA,3988.3
+HI_C11Z1B,Liqueurs et apéritifs,CA,1631.1
+HI_C11Z2A,Champagne et mousseux ccm,CA,2414.5
+HI_C11Z2B_E,"Vins de consommation courante, y compris autoconsommation",CA,2589.5
+HI_C11Z2C,Vins d'appellation d'origine contrôlée et de qualité supérieure,CA,4673.9
+HI_C11Z2D,Vins doux naturels,CA,251.4
+H_C11Z3,Cidre et de vins de fruits,CA,146.6
+H_C11Z4,Autres boissons fermentées non distillées,CA,419.1
+H_C11Z5,Bière,CA,5298.5
+HI_C11Z7A,Eaux de table,CA,2609.6
+HI_C11Z7B,Boissons non alcoolisées diverses,CA,5020.6
+H_C12Z0,Produits à base de tabac,CA,23202.4
+H_C13Z1,"Préparation de fibres textiles, filature et tissage",CB,198.4
+H_C13Z3,Autres industries textiles,CB,2666.2
+HI_C14Z1A,Vêtements en cuir,CB,921.7
+HI_C14Z1C_B2020,Vêtements de dessus pour hommes et garçonnets,CB,4464.9
+HI_C14Z1D_B2020,Vêtements de dessus pour femmes et fillettes,CB,7910.4
+HI_C14Z1E_B2020,Chemiserie,CB,5190.3
+HI_C14Z1F,Sous-vêtements et vêtements de nuit,CB,2822.9
+HI_C14Z1G_B2020,"Soutiens-gorge, corsets",CB,1217.7
+HI_C14Z1H_B2020,Layette,CB,1016.8
+HI_C14Z1I_B2020,Vêtements de sport,CB,2389.9
+HI_C14Z1J_B2020,Accessoires de l’habillement,CB,2796.4
+HI_C14Z1DIV,Autres vêtements,CB,368.1
+HI_C14Z2A,"Chaussettes, bas et collants",CB,1425.2
+HI_C14Z2B,Pull-overs et articles similaires,CB,4679.9
+HI_C15Z0A,"Articles de voyage, de maroquinerie et de sellerie",CB,3905.5
+HI_C15Z0B,Chaussures en cuir ou textile,CB,9295.8
+138G_C16Z,"Bois, articles en bois et en liège, à l'exclusion des meubles ; articles de vannerie et de sparterie",CC,1399.4
+HI_C17B2A_B2020,Articles en papier à usage domestique,CC,1186.0
+HI_C17B2B_B2020,Articles en papier à usage sanitaire,CC,4631.0
+HI_C17B2C_B2020,Articles de papeterie,CC,610.2
+HI_C17B2D_B2020,Papiers peints,CC,355.8
+HI_C17B2E_B2020,Autres articles en papier ou en carton,CC,404.7
+H_C20A1,"Gaz industriels, colorants, autres produits chimiques de base",CE,221.5
+H_C20A3,Produits azotés et d engrais,CE,574.6
+H_C20B1,"Savons, détergents et produits d’entretien",CE,5610.4
+H_C20B2,Parfums et produits pour la toilette,CE,12856.1
+H_C20C1,Pesticides et autres produits agrochimiques,CE,1251.7
+H_C20C2,"Peintures, vernis, encres et mastics",CE,325.8
+HI_C20C3B_B2020,Allumettes,CE,130.6
+HI_C20C3C,Colles,CE,199.9
+HI_C20C3D,Huiles essentielles,CE,530.0
+HI_C20C3E_B2020,Recharges de cigarettes électroniques,CE,826.9
+HI_C20C3DIV,Autres produits chimiques,CE,421.0
+H_C21Z1,Produits pharmaceutiques de base,CF,4772.9
+H_C21Z2,Préparations pharmaceutiques,CF,9545.5
+H_C22A1,Pneumatiques,CG,3355.1
+HI_C22A2A,Préservatifs,CG,111.9
+HI_C22A2B,Autres articles en caoutchouc,CG,151.4
+138G_C22B,Produits en plastique,CG,1568.8
+138G_C23A,Verre et articles en verre,CG,989.2
+138G_C23B,Autres produits minéraux non métalliques hors verre,CG,2552.8
+H_C24B2,Métallurgie de l’aluminium,CH,117.1
+138G_C25C,Armes et munitions,CH,315.8
+H_C25E1,"Coutellerie, outillage et quincaillerie",CH,2045.5
+H_C25E2,Autres ouvrages en métaux,CH,2693.2
+HI_C31Z1A,Sièges de bureau et de magasin,CM,1726.7
+HI_C31Z1B,Meubles de bureau,CM,330.9
+HI_C31Z2A,Meubles et sièges de cuisine,CM,4283.7
+HI_C31Z2B,Matelas et sommiers,CM,2093.8
+HI_C31Z2C,Sièges d'ameublement d'intérieur,CM,2673.2
+HI_C31Z2D,Meubles meublants et meubles divers,CM,4170.2
+HI_C31Z2E,Meubles et sièges de jardin et d'extérieur,CM,703.6
+HI_C32A0A,"Bijouterie, joaillerie, orfèvrerie",CM,4392.5
+HI_C32A0B,Bijouterie fantaisie,CM,1130.3
+HI_C32A0C,Instruments de musique,CM,274.1
+H_C32B1,Matériel médico-chirurgical et dentaire,CM,1285.6
+HI_C32B2A,Lunettes correctrices,CM,7121.4
+HI_C32B2B,Lunettes solaires,CM,562.4
+HI_C32C0A,Articles de sport,CM,7249.9
+HI_C32C0B,Jeux et jouets,CM,4386.4
+HI_C32C0E,Cercueils,CM,143.6
+HI_C32C0DIV,Autres produits manufacturés,CM,4742.6
+138G_C33Z,Réparation et installation de machines et d'équipements,CM,656.4
+H_C19Z1,Cokéfaction,CD,0.0
+HI_C19Z2A,Agglomérés et briquettes de houille,CD,155.3
+HI_C19Z2B_B2020,"Essence, super plombé",CD,0.0
+HI_C19Z2C_B2020,Super sans plomb,CD,20157.4
+HI_C19Z2D_B2020,Gasoil,CD,34006.9
+HI_C19Z2E_B2020,Fioul non domestique,CD,40.6
+HI_C19Z2F_B2020,Fioul domestique,CD,4439.0
+HI_C19Z2G_B2020,Lubrifiants,CD,1724.5
+HI_C19Z2H_B2020,Gaz pétrolier liquéfié,CD,1675.0
+H_C26A0,Composants et cartes électroniques,CI,41.3
+HI_C26B0A_B2020,Ordinateurs et tablettes,CI,3164.8
+HI_C26B0B_B2020,Équipements informatiques périphériques et consommables,CI,2154.5
+HI_C26C0A,Téléphones mobiles,CI,5038.4
+HI_C26C0B_B2020,Autres équipements de téléphonie,CI,386.6
+HI_C26C0C_B2020,Antennes de réception et alarmes domestiques,CI,72.7
+HI_C26D0A_B2020,Téléviseurs,CI,2169.3
+HI_C26D0B_B2020,Consoles de jeux et jeux vidéo,CI,670.4
+HI_C26D0C_B2020,Autres produits électroniques grand public,CI,2456.4
+HI_C26E0A_B2020,"Instruments et appareils de mesure, d'essais et de navigation",CI,125.0
+HI_C26E0B_B2020,Horlogerie,CI,2419.8
+138G_C26F,"Équipements d'irradiation médicale, électromédicaux et électrothérapeutiques",CI,1644.6
+138G_C26G,"Matériel optique et photographique, supports magnétiques et optiques",CI,549.0
+HI_C27A0A_B2020,Gros appareils électro-ménagers pour la cuisine,CJ,5240.7
+HI_C27A0B_B2020,Gros appareils électro-ménagers pour la buanderie,CJ,1567.5
+HI_C27A0C_B2020,Radiateurs et appareils de traitement de l’air,CJ,997.4
+HI_C27A0D_B2020,Appareils électro-ménagers pour le nettoyage,CJ,1205.5
+HI_C27A0E_B2020,Petits appareils électro-ménagers pour la préparation de nourriture,CJ,924.8
+HI_C27A0F_B2020,Petits appareils électro-ménagers pour la préparation de boissons,CJ,719.7
+HI_C27A0G_B2020,Autres petits appareils électro-ménagers,CJ,336.1
+HI_C27A0H_B2020,Appareils de toilette électriques,CJ,812.1
+HI_C27A0I_B2020,Appareils ménagers non électriques,CJ,1111.0
+HI_C27B3A_B2020,Piles électriques,CJ,596.9
+HI_C27B3B_B2020,Batteries de voitures,CJ,488.1
+HI_C27B3C_E,Appareils d'éclairage,CJ,1020.3
+HI_C27B3D,Lampes,CJ,509.6
+HI_C27B3F_B2020,Cigarettes électroniques (hors recharges),CJ,551.5
+HI_C27B3G_B2020,Autres matériels électriques,CJ,80.4
+H_C27B4,"Fils, câbles et matériel d installation électrique",CJ,390.7
+138G_C28B,Machines agricoles et forestières,CK,428.7
+H_C28A9,Outillage portatif à moteur incorporé,CK,848.1
+H_C28DIV,Autres machines,CK,826.1
+HI_C29A1A_B2020,Echange standard moteur,CL,559.9
+HI_C29A1B_B2020,Voitures neuves,CL,18923.4
+HI_C29A1C_B2020,Voitures d’occasion,CL,10909.9
+HI_C29A1D,Camping-cars,CL,2216.2
+H_C29A2,Carrosseries et remorques,CL,218.7
+138G_C29B,Équipements automobiles,CL,24680.1
+138G_C30A_C,Navires et bateaux ; Aéronefs et engins spatiaux,CL,2011.8
+HI_C30E0A_B2020,Motocycles (hors bicyclettes électriques),CL,3010.4
+HI_C30E0B_B2020,Bicyclettes électriques,CL,1505.2
+HI_C30E0C_B2020,Autres engins électriques (hors véhicules pour invalides),CL,372.3
+HI_C30E0D_B2020,Bicyclettes non électriques,CL,2057.1
+HI_C30E0E_B2020,Véhicules pour invalides,CL,69.6
+HI_C30E0F_B2020,Landaus et poussettes,CL,175.7
+H_F43Z0,Travaux de construction spécialisés,FZ,27576.5
+H_G45Z2,Services d’entretien de véhicules automobiles,GZ,4483.7
+H_G45Z3,Services d’entretien de motocycles,GZ,1432.9
+138G_H49A,Transport ferroviaire,HZ,5778.4
+H_H49B1,Transports urbains et suburbains de voyageurs,HZ,5484.7
+H_H49B2,Transports de voyageurs par taxis,HZ,2532.2
+H_H49B3,Transports routiers réguliers de voyageurs,HZ,781.6
+H_H49B4,Autres transports routiers de voyageurs,HZ,2080.9
+H_H49B5,Téléphériques et remontées mécaniques,HZ,1725.2
+138G_H49C,Transport routier de fret et par conduites,HZ,1690.9
+H_H50Z1,Transports maritimes et côtiers de passagers,HZ,311.0
+H_H50Z3,Transports fluviaux de passagers,HZ,105.8
+138G_H51Z,Transports aériens,HZ,11552.8
+H_H52M3_B2020,Services annexes des transports terrestres (marchand),HZ,9193.8
+H_H52M7_B2020,"Messagerie, fret express (marchand)",HZ,87.2
+HI_H53Z1A_B2020,Livraison de courrier dans le cadre d’une obligation de service universel,HZ,1102.0
+HI_H53Z1B_B2020,Livraison de colis dans le cadre d’une obligation de service universel,HZ,734.5
+HI_I55Z1A,"Hôtels, centres ou villages de vacances avec service de chambre",IZ,12004.7
+HI_I55Z1B,Hébergement touristique et autre hébergement de courte durée,IZ,8473.1
+H_I55Z2,Terrains de camping et parcs pour caravanes ou véhicules de loisirs,IZ,3647.1
+H_I55Z3,Hébergements divers,IZ,1541.3
+H_I56Z1,Restaurants et services de restauration mobile,IZ,69186.8
+H_I56Z2,Traiteurs et autres services de restauration,IZ,10589.7
+H_I56Z3,Services des débits de boissons,IZ,8924.3
+HI_J58Z1A,Édition de livres,JA,4440.0
+HI_J58Z1C,Édition de journaux,JA,1887.3
+HI_J58Z1D,Édition de revues et périodiques,JA,2524.2
+HI_J58Z1E,Autres activités d'édition,JA,671.2
+HI_J58Z1F,Édition de jeux électroniques (hors édition en ligne),JA,3679.0
+HI_J58ZDIV,"Services télématiques, jeux électroniques et logiciels",JA,264.7
+HI_J59Z2A,Distribution de films,JA,252.2
+HI_J59Z2B,Projection de films cinématographiques,JA,1190.4
+HI_J59Z3A,Édition d'enregistrements sonores,JA,249.9
+HI_J59Z3B,Édition d'enregistrements sonores en ligne,JA,705.8
+HI_J61Z0A,"Télécommunication hors distribution, bouquets de programmes radio et télévisuels",JB,24793.5
+HI_J61Z0B,Distribution de bouquets de programmes de radio et de télévision,JB,5860.9
+H_J62Z0,"Programmation, conseil et autres activités informatiques",JC,4143.3
+H_J63Z1,"Traitement de données, hébergement et activités connexes- portails Internet",JC,741.0
+138G_K64H,Autres services bancaires (explicitement facturés),KZ,9481.0
+138G_K64S,Services financiers de prêts et dépôts (implicitement mesurés),KZ,6678.6
+H_K65Z1,Services d assurance-vie et de capitalisation,KZ,28132.1
+HI_K65Z2A,Assurances maladie,KZ,20239.2
+HI_K65Z2B,Assurances logement,KZ,7641.5
+HI_K65Z2C,Assurances transports,KZ,9641.9
+HI_K65Z2D,Assurances responsabilité civile,KZ,2737.6
+H_K65Z4,Services de retraites supplémentaires,KZ,623.0
+138G_L68A,Transactions sur biens immobiliers propres et  pour compte tiers,LZ,723.9
+HI_L68R1A_B2020,Location de logements (loyers réels),LZ,69261.8
+HI_L68R1B_B2020,Location de logements (gardiens d immeubles),LZ,743.5
+HI_L68R1C_B2020,Droit de bail,LZ,0.0
+H_L68R2,Location de terrain et autres biens immobiliers (loyers réels),LZ,738.4
+HI_L68I0A_B2020,Location et exploitation de biens immobiliers (loyers imputés),LZ,208071.8
+HI_L68I0B_B2020,Location et exploitation de biens immobiliers (gardiens d'immeubles),LZ,597.0
+H_M69Z1,Activités juridiques,MA,8380.2
+H_M69Z2,Activités comptables,MA,1028.2
+H_M71Z2,Activités de contrôle et analyses techniques,MA,1464.3
+H_M74Z2,Activités photographiques,MC,1451.5
+H_M75Z0,Activités vétérinaires,MC,4019.7
+H_N77Z1,Location et location-bail de véhicules automobiles,NZ,3159.8
+H_N77Z2,Location et location-bail de biens personnels et domestiques,NZ,4328.4
+H_N77Z3,"Location et location-bail d autres machines, équipements et biens",NZ,1020.0
+138G_N78Z,Services liés à l'emploi,NZ,587.2
+H_N79Z1,Services des agences de voyage et des voyagistes,NZ,4393.8
+H_N79Z2,Autres services de réservation et activités liées,NZ,828.2
+H_N80Z0,Enquêtes et sécurité,NZ,1619.2
+H_N81Z0,Services relatifs aux bâtiments et aménagement paysager,NZ,4009.5
+138G_N82Z,Services administratifs et autres services de soutien aux entreprises,NZ,1723.7
+138G_O84Z,Services d'administration publique et de défense ; services de sécurité sociale obligatoire,OZ,712.0
+H_P85M1,Enseignement scolaire (marchand),PZ,2742.2
+HI_P85M2A,"Enseignement culturel, de disciplines sportives et d activités de loisirs",PZ,603.0
+HI_P85M2B,Écoles de conduite,PZ,3187.2
+HI_P85M2C,Formation des adultes et formation continue,PZ,1925.5
+HI_P85M2D,Autres enseignements,PZ,2006.8
+138G_P85N,Services de l'enseignement (non marchand),PZ,3323.8
+138G_Q86M,Services de santé humaine (marchand),QA,27435.7
+138G_Q86N,Services de santé humaine (non marchand),QA,4172.0
+138G_Q87M,Services d'hébergement médico-social et social (marchand),QB,15658.6
+138G_Q87N,Services d'hébergement médico-social et social (non marchand),QB,1640.4
+138G_Q88M,Services d'action sociale sans hébergement (marchand),QB,1693.7
+138G_Q88N,Services d'action sociale sans hébergement (non marchand),QB,3120.7
+H_R90M0,"Activités créatives, artistiques et de spectacle (marchandes)",RZ,3813.0
+138G_R90N,"Services créatifs, artistiques et du spectacle (non marchand)",RZ,391.0
+H_R91M0,"Bibliothèques, archives, musées et autres activités culturelles (marchandes)",RZ,796.6
+138G_R91N,"Services des bibliothèques, archives, musées et autres services culturels (non marchand)",RZ,165.0
+138G_R92Z,Jeux de hasard et d'argent,RZ,12810.0
+H_R93M1,Services liés au sport (marchands),RZ,4030.1
+H_R93M2,Autres services récréatifs et de loisirs (marchands),RZ,5737.2
+138G_R93N,"Services sportifs, récréatifs et de loisirs (non marchand)",RZ,912.0
+HI_S95Z0A,Entretien et réparation de machines de bureau et de matériel informatique,SZ,223.3
+HI_S95Z0B,Réparation d'équipements de communication,SZ,52.3
+HI_S95Z0C,Réparation de produits électroniques grand public,SZ,476.6
+HI_S95Z0D,Réparation d'appareils électroménagers et d'équipements pour la maison et le jardin,SZ,395.5
+HI_S95Z0E,Réparation de chaussures et d'articles en cuir,SZ,157.3
+HI_S95Z0F,Réparation de meubles et d'équipements du foyer,SZ,714.4
+HI_S95Z0G,Réparation d'articles d'horlogerie et de bijouterie,SZ,161.9
+HI_S95Z0H,Réparation d'autres biens personnels et domestiques,SZ,633.4
+H_S96Z1,Blanchisserie-teinturerie,SZ,802.5
+H_S96Z2,Coiffure,SZ,8613.4
+H_S96Z3,Soins de beauté,SZ,3887.0
+H_S96Z4,Services funéraires,SZ,3143.2
+HI_S96Z5A,Cures thermales,SZ,80.3
+HI_S96Z5B_C,Autres soins et services corporels,SZ,4274.1
+138G_T97Z,Services des ménages en tant qu'employeurs de personnel domestique,TZ,2638.0

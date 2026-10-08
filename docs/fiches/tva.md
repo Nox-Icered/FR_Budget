@@ -1,12 +1,12 @@
 ---
 levier: tva
-statut: non_publie
-mise_a_jour: 2026-10-07
+statut: beta
+mise_a_jour: 2026-10-08
 ---
 
 # Fiche : TVA
 
-Fiche en préparation (tâche 0.5 du plan). Elle décrit la méthode proposée et les données à réunir. Elle ne contient aucun chiffre : les données et les chiffrages officiels ne sont pas encore accessibles depuis l'environnement de développement.
+Fiche en préparation. Méthode retenue le 7 octobre 2026 : modèle de TVA théorique de la DG Trésor appliqué aux données publiques de l'INSEE, validé contre le point de TVA publié par la DG Trésor et contre la recette totale de Voies et Moyens. Premiers résultats et écarts : [`docs/validation/levier_tva.md`](../validation/levier_tva.md).
 
 ## 1. Question posée
 
@@ -21,7 +21,7 @@ Combien rapporte ou coûte aux administrations publiques une variation d'un taux
 | Taux réduit | à relever | idem |
 | Taux super-réduit | à relever | idem |
 
-Les taux particuliers (Corse, outre-mer) sont hors du périmètre de la V1. Cette limite est indiquée au § 7.
+Les taux particuliers (Corse, outre-mer) ne sont pas réglables en V1. Leur effet sur la recette est retranché à partir du tome II de Voies et Moyens (§ 5 et 7).
 
 ## 3. Méthode de calcul (proposée, à valider)
 
@@ -57,11 +57,17 @@ La TVA est encaissée avec un décalage. Une hausse au 1er janvier rapporte donc
 
 ## 5. Hypothèses
 
-À créer dans `registres/hypotheses.yaml` une fois sourcées : coefficient de première année ; fourchette d'incertitude sur l'assiette.
+Dans `registres/hypotheses.yaml` :
+
+- `tva_repartition_produits_mixtes_stable` : la répartition des travaux entre 10 % et 5,5 %, calculée sur 2023 à partir du tome II de Voies et Moyens (PLF 2025), vaut pour les autres années ;
+- `tva_ecart_territorial_stable` : l'écart dû aux taux d'outre-mer et de Corse (2 297 M€ en 2023) est retranché de la recette de chaque année.
+
+Leurs plages serviront au calcul des fourchettes. Restent à créer, une fois sourcées : coefficient de première année ; fourchette d'incertitude sur le reste de l'assiette.
 
 ## 6. Validation
 
-- Références : évaluations de rendement de l'annexe Voies et Moyens des trois derniers PLF (tâche 0.4), à saisir dans `registres/references/chiffrages.yaml`.
+- Constat : l'annexe Voies et Moyens ne chiffre pas le rendement d'une variation de taux ; elle donne la recette totale.
+- Références retenues (`registres/references/chiffrages.yaml`) : point de TVA brut et net 2025 (DG Trésor, Trésor-Éco n° 371), point de TVA 2015 (DG Trésor, Cahier 2016-02), recette totale 2022 (DG Trésor) et 2024 (PLF 2026, Voies et Moyens tome I).
 - Tolérance : ±10 % sur le rendement à 1 an, sur au moins deux millésimes.
 - Source indépendante visée : IPP (TAXIPP), Cour des comptes ou Commission européenne.
 - Test : à écrire avant le code, dans `moteur/tests/validation/`.
@@ -69,7 +75,8 @@ La TVA est encaissée avec un décalage. Une hausse au 1er janvier rapporte donc
 ## 7. Limites connues
 
 - Rendement statique : aucune réaction des prix ni des quantités consommées.
-- Taux particuliers (Corse, outre-mer) non modélisés en V1.
+- Taux particuliers (Corse, outre-mer) non modélisés en V1 : leur effet global sur la recette est retranché (tome II de Voies et Moyens), mais pas leur effet sur le point de TVA.
+- Médicaments tous au taux de 2,1 %, restauration toute au taux de 10 % : voir `docs/validation/levier_tva.md`.
 - L'effet sur le pouvoir d'achat (indicateur séparé de la spécification) demande les budgets de famille de l'INSEE.
 
 ## 8. Journal
@@ -77,3 +84,9 @@ La TVA est encaissée avec un décalage. Une hausse au 1er janvier rapporte donc
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
 | 2026-10-07 | Fiche créée : méthode proposée, données à réunir | aucun |
+| 2026-10-07 | Premier modèle (`agrege/tva.py`) | 17 tests de validation créés : 8 réussis, 9 échoués |
+| 2026-10-08 | Travaux répartis entre 10 % et 5,5 % et écart d'outre-mer et de Corse retranché de la recette (tome II de Voies et Moyens, PLF 2025) ; répartition de la restauration essayée et écartée | 2 tests passent (point brut 2015 au taux de 5,5 % : -11,5 % → -9,0 % ; recette 2024 : +10,2 % → +9,0 %) ; 10 réussis, 7 échoués ; détail dans `docs/validation/levier_tva.md` |
+| 2026-10-08 | Séparation des médicaments non remboursables (comptes de la santé de la DREES) essayée et non retenue ; diagnostic publié dans `docs/validation/levier_tva.md` | aucun (modèle inchangé) |
+| 2026-10-08 | Tolérance maintenue à ±10 % (décision du mainteneur) ; précision des références publiée dans `docs/validation/levier_tva.md` | aucun |
+| 2026-10-08 | Convention du point net maintenue (décision du mainteneur) ; limite publiée dans `docs/validation/levier_tva.md` | aucun |
+| 2026-10-08 | Prototype clos en bêta (décision du mainteneur) ; type `Fourchette` et fourchettes TVA à partir des deux hypothèses du registre | aucun (valeurs centrales inchangées) |

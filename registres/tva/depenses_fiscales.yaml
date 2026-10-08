@@ -1,0 +1,36 @@
+# Dépenses fiscales de TVA utilisées par le modèle (tome II de Voies et Moyens).
+# Les montants sont dans registres/references/chiffrages.yaml.
+#
+# - repartition : l'assiette d'un taux réduit, déduite de son coût (coût / (taux normal −
+#   taux réduit)), fixe la part de la consommation du produit à ce taux pour l'année du
+#   chiffrage ; le reste est au taux normal (hypothèse tva_repartition_produits_mixtes_stable).
+# - ecart_territorial : retranché de la recette théorique (hypothèse tva_ecart_territorial_stable).
+#
+# Non retenues : restauration (730221, 730207). L'assiette déduite de leur coût (21,7 Md€ hors
+# taxe en 2023) est plus de trois fois plus petite que la consommation de restauration des
+# comptes nationaux (86,7 Md€ TTC) ; voir docs/validation/levier_tva.md.
+
+depenses_fiscales:
+  - chiffrage: tva_depense_fiscale_730213_2023
+    usage: repartition
+    annee: 2023
+    produit: H_F43Z0
+    regime: intermediaire
+
+  - chiffrage: tva_depense_fiscale_730223_2023
+    usage: repartition
+    annee: 2023
+    produit: H_F43Z0
+    regime: reduit
+
+  - chiffrage: tva_depense_fiscale_710103_2023
+    usage: ecart_territorial
+    annee: 2023
+
+  - chiffrage: tva_depense_fiscale_710105_2023
+    usage: ecart_territorial
+    annee: 2023
+
+  - chiffrage: tva_depense_fiscale_730306_2023
+    usage: ecart_territorial
+    annee: 2023

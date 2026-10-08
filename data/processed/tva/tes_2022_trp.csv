@@ -1,0 +1,445 @@
+produit,colonne,millions_euros
+AZ,Production des produits (1),97580.0
+AZ,Importations de biens,18600.0
+AZ,Importations de services,0.0
+AZ,Importations de biens et de services,18600.0
+AZ,Correction CAF/FAB,0.0
+AZ,TOTAL DES RESSOURCES (2),116180.0
+AZ,Marges commerciales,26245.9
+AZ,Marges de transport,2149.8
+AZ,Impôts sur les produits - total -,2033.8
+AZ,dont taxes du type TVA,1967.8
+AZ,Subventions sur les produits,-1363.4
+AZ,TOTAL DES RESSOURCES (3),145246.1
+BZ,Production des produits (1),6267.9
+BZ,Importations de biens,97963.0
+BZ,Importations de services,0.0
+BZ,Importations de biens et de services,97963.0
+BZ,Correction CAF/FAB,0.0
+BZ,TOTAL DES RESSOURCES (2),104230.9
+BZ,Marges commerciales,16113.9
+BZ,Marges de transport,1324.9
+BZ,Impôts sur les produits - total -,200.1
+BZ,dont taxes du type TVA,113.1
+BZ,Subventions sur les produits,0.0
+BZ,TOTAL DES RESSOURCES (3),121869.8
+CA,Production des produits (1),206898.0
+CA,Importations de biens,55896.0
+CA,Importations de services,0.0
+CA,Importations de biens et de services,55896.0
+CA,Correction CAF/FAB,0.0
+CA,TOTAL DES RESSOURCES (2),262794.0
+CA,Marges commerciales,85425.9
+CA,Marges de transport,6478.5
+CA,Impôts sur les produits - total -,36404.2
+CA,dont taxes du type TVA,16310.2
+CA,Subventions sur les produits,-95.8
+CA,TOTAL DES RESSOURCES (3),391006.8
+CB,Production des produits (1),20208.6
+CB,Importations de biens,49828.0
+CB,Importations de services,0.0
+CB,Importations de biens et de services,49828.0
+CB,Correction CAF/FAB,0.0
+CB,TOTAL DES RESSOURCES (2),70036.6
+CB,Marges commerciales,44038.4
+CB,Marges de transport,1152.6
+CB,Impôts sur les produits - total -,10086.1
+CB,dont taxes du type TVA,9069.1
+CB,Subventions sur les produits,0.0
+CB,TOTAL DES RESSOURCES (3),125313.7
+CC,Production des produits (1),42838.5
+CC,Importations de biens,19236.0
+CC,Importations de services,0.0
+CC,Importations de biens et de services,19236.0
+CC,Correction CAF/FAB,0.0
+CC,TOTAL DES RESSOURCES (2),62074.5
+CC,Marges commerciales,10923.7
+CC,Marges de transport,2211.7
+CC,Impôts sur les produits - total -,2593.8
+CC,dont taxes du type TVA,2518.8
+CC,Subventions sur les produits,0.0
+CC,TOTAL DES RESSOURCES (3),77803.7
+CD,Production des produits (1),53564.3
+CD,Importations de biens,53465.0
+CD,Importations de services,0.0
+CD,Importations de biens et de services,53465.0
+CD,Correction CAF/FAB,0.0
+CD,TOTAL DES RESSOURCES (2),107029.3
+CD,Marges commerciales,11904.4
+CD,Marges de transport,2121.1
+CD,Impôts sur les produits - total -,43576.2
+CD,dont taxes du type TVA,12143.2
+CD,Subventions sur les produits,-7596.0
+CD,TOTAL DES RESSOURCES (3),157035.0
+CE,Production des produits (1),74590.4
+CE,Importations de biens,67680.0
+CE,Importations de services,0.0
+CE,Importations de biens et de services,67680.0
+CE,Correction CAF/FAB,0.0
+CE,TOTAL DES RESSOURCES (2),142270.4
+CE,Marges commerciales,32926.0
+CE,Marges de transport,4379.5
+CE,Impôts sur les produits - total -,4870.4
+CE,dont taxes du type TVA,4374.4
+CE,Subventions sur les produits,0.0
+CE,TOTAL DES RESSOURCES (3),184446.3
+CF,Production des produits (1),29262.4
+CF,Importations de biens,35780.0
+CF,Importations de services,0.0
+CF,Importations de biens et de services,35780.0
+CF,Correction CAF/FAB,0.0
+CF,TOTAL DES RESSOURCES (2),65042.4
+CF,Marges commerciales,39321.0
+CF,Marges de transport,1257.5
+CF,Impôts sur les produits - total -,3313.3
+CF,dont taxes du type TVA,2388.3
+CF,Subventions sur les produits,0.0
+CF,TOTAL DES RESSOURCES (3),108934.2
+CG,Production des produits (1),59315.6
+CG,Importations de biens,34461.0
+CG,Importations de services,0.0
+CG,Importations de biens et de services,34461.0
+CG,Correction CAF/FAB,0.0
+CG,TOTAL DES RESSOURCES (2),93776.6
+CG,Marges commerciales,17971.9
+CG,Marges de transport,4363.8
+CG,Impôts sur les produits - total -,2250.2
+CG,dont taxes du type TVA,1934.2
+CG,Subventions sur les produits,0.0
+CG,TOTAL DES RESSOURCES (3),118362.5
+CH,Production des produits (1),98679.1
+CH,Importations de biens,56865.0
+CH,Importations de services,0.0
+CH,Importations de biens et de services,56865.0
+CH,Correction CAF/FAB,0.0
+CH,TOTAL DES RESSOURCES (2),155544.1
+CH,Marges commerciales,16499.4
+CH,Marges de transport,3182.4
+CH,Impôts sur les produits - total -,1637.1
+CH,dont taxes du type TVA,1382.1
+CH,Subventions sur les produits,0.0
+CH,TOTAL DES RESSOURCES (3),176863.0
+CI,Production des produits (1),29194.9
+CI,Importations de biens,57938.0
+CI,Importations de services,0.0
+CI,Importations de biens et de services,57938.0
+CI,Correction CAF/FAB,0.0
+CI,TOTAL DES RESSOURCES (2),87132.9
+CI,Marges commerciales,24893.8
+CI,Marges de transport,1804.7
+CI,Impôts sur les produits - total -,4816.7
+CI,dont taxes du type TVA,4635.7
+CI,Subventions sur les produits,0.0
+CI,TOTAL DES RESSOURCES (3),118648.1
+CJ,Production des produits (1),26364.7
+CJ,Importations de biens,36442.0
+CJ,Importations de services,0.0
+CJ,Importations de biens et de services,36442.0
+CJ,Correction CAF/FAB,0.0
+CJ,TOTAL DES RESSOURCES (2),62806.7
+CJ,Marges commerciales,15530.2
+CJ,Marges de transport,756.8
+CJ,Impôts sur les produits - total -,3188.4
+CJ,dont taxes du type TVA,2915.4
+CJ,Subventions sur les produits,0.0
+CJ,TOTAL DES RESSOURCES (3),82282.1
+CK,Production des produits (1),42257.4
+CK,Importations de biens,55930.0
+CK,Importations de services,0.0
+CK,Importations de biens et de services,55930.0
+CK,Correction CAF/FAB,0.0
+CK,TOTAL DES RESSOURCES (2),98187.4
+CK,Marges commerciales,28944.3
+CK,Marges de transport,1871.6
+CK,Impôts sur les produits - total -,1275.3
+CK,dont taxes du type TVA,999.3
+CK,Subventions sur les produits,0.0
+CK,TOTAL DES RESSOURCES (3),130278.6
+CL,Production des produits (1),175812.3
+CL,Importations de biens,111874.0
+CL,Importations de services,0.0
+CL,Importations de biens et de services,111874.0
+CL,Correction CAF/FAB,0.0
+CL,TOTAL DES RESSOURCES (2),287686.3
+CL,Marges commerciales,42034.7
+CL,Marges de transport,1258.3
+CL,Impôts sur les produits - total -,17244.1
+CL,dont taxes du type TVA,14365.1
+CL,Subventions sur les produits,-1438.0
+CL,TOTAL DES RESSOURCES (3),346785.4
+CM,Production des produits (1),95482.8
+CM,Importations de biens,40997.0
+CM,Importations de services,0.0
+CM,Importations de biens et de services,40997.0
+CM,Correction CAF/FAB,0.0
+CM,TOTAL DES RESSOURCES (2),136479.8
+CM,Marges commerciales,38346.9
+CM,Marges de transport,805.8
+CM,Impôts sur les produits - total -,10458.2
+CM,dont taxes du type TVA,10194.2
+CM,Subventions sur les produits,0.0
+CM,TOTAL DES RESSOURCES (3),186090.7
+DZ,Production des produits (1),240164.3
+DZ,Importations de biens,17980.0
+DZ,Importations de services,0.0
+DZ,Importations de biens et de services,17980.0
+DZ,Correction CAF/FAB,0.0
+DZ,TOTAL DES RESSOURCES (2),258144.3
+DZ,Marges commerciales,0.0
+DZ,Marges de transport,2057.1
+DZ,Impôts sur les produits - total -,14173.3
+DZ,dont taxes du type TVA,8359.3
+DZ,Subventions sur les produits,-14815.0
+DZ,TOTAL DES RESSOURCES (3),259559.7
+EZ,Production des produits (1),62069.0
+EZ,Importations de biens,2560.0
+EZ,Importations de services,0.0
+EZ,Importations de biens et de services,2560.0
+EZ,Correction CAF/FAB,0.0
+EZ,TOTAL DES RESSOURCES (2),64629.0
+EZ,Marges commerciales,560.2
+EZ,Marges de transport,201.5
+EZ,Impôts sur les produits - total -,4358.6
+EZ,dont taxes du type TVA,1856.6
+EZ,Subventions sur les produits,0.0
+EZ,TOTAL DES RESSOURCES (3),69749.3
+FZ,Production des produits (1),387856.7
+FZ,Importations de biens,0.0
+FZ,Importations de services,2489.0
+FZ,Importations de biens et de services,2489.0
+FZ,Correction CAF/FAB,0.0
+FZ,TOTAL DES RESSOURCES (2),390345.7
+FZ,Marges commerciales,0.0
+FZ,Marges de transport,0.0
+FZ,Impôts sur les produits - total -,36393.2
+FZ,dont taxes du type TVA,34700.2
+FZ,Subventions sur les produits,0.0
+FZ,TOTAL DES RESSOURCES (3),426738.9
+GZ,Production des produits (1),498876.9
+GZ,Importations de biens,0.0
+GZ,Importations de services,7870.0
+GZ,Importations de biens et de services,7870.0
+GZ,Correction CAF/FAB,0.0
+GZ,TOTAL DES RESSOURCES (2),506746.9
+GZ,Marges commerciales,-454389.0
+GZ,Marges de transport,0.0
+GZ,Impôts sur les produits - total -,1248.6
+GZ,dont taxes du type TVA,1248.6
+GZ,Subventions sur les produits,0.0
+GZ,TOTAL DES RESSOURCES (3),53606.5
+HZ,Production des produits (1),291337.6
+HZ,Importations de biens,0.0
+HZ,Importations de services,54588.0
+HZ,Importations de biens et de services,54588.0
+HZ,Correction CAF/FAB,-25025.0
+HZ,TOTAL DES RESSOURCES (2),320900.6
+HZ,Marges commerciales,0.0
+HZ,Marges de transport,-38137.8
+HZ,Impôts sur les produits - total -,7210.0
+HZ,dont taxes du type TVA,5656.0
+HZ,Subventions sur les produits,-9692.0
+HZ,TOTAL DES RESSOURCES (3),280280.8
+IZ,Production des produits (1),131197.1
+IZ,Importations de biens,0.0
+IZ,Importations de services,0.0
+IZ,Importations de biens et de services,0.0
+IZ,Correction CAF/FAB,0.0
+IZ,TOTAL DES RESSOURCES (2),131197.1
+IZ,Marges commerciales,0.0
+IZ,Marges de transport,0.0
+IZ,Impôts sur les produits - total -,12019.9
+IZ,dont taxes du type TVA,11333.9
+IZ,Subventions sur les produits,-379.0
+IZ,TOTAL DES RESSOURCES (3),142838.0
+JA,Production des produits (1),66298.3
+JA,Importations de biens,0.0
+JA,Importations de services,4379.0
+JA,Importations de biens et de services,4379.0
+JA,Correction CAF/FAB,0.0
+JA,TOTAL DES RESSOURCES (2),70677.3
+JA,Marges commerciales,2708.4
+JA,Marges de transport,760.2
+JA,Impôts sur les produits - total -,3744.3
+JA,dont taxes du type TVA,3117.3
+JA,Subventions sur les produits,0.0
+JA,TOTAL DES RESSOURCES (3),77890.2
+JB,Production des produits (1),60981.3
+JB,Importations de biens,0.0
+JB,Importations de services,3595.0
+JB,Importations de biens et de services,3595.0
+JB,Correction CAF/FAB,0.0
+JB,TOTAL DES RESSOURCES (2),64576.3
+JB,Marges commerciales,0.0
+JB,Marges de transport,0.0
+JB,Impôts sur les produits - total -,6428.1
+JB,dont taxes du type TVA,6181.1
+JB,Subventions sur les produits,0.0
+JB,TOTAL DES RESSOURCES (3),71004.4
+JC,Production des produits (1),149311.7
+JC,Importations de biens,0.0
+JC,Importations de services,25543.0
+JC,Importations de biens et de services,25543.0
+JC,Correction CAF/FAB,0.0
+JC,TOTAL DES RESSOURCES (2),174854.7
+JC,Marges commerciales,0.0
+JC,Marges de transport,0.0
+JC,Impôts sur les produits - total -,3915.9
+JC,dont taxes du type TVA,3292.9
+JC,Subventions sur les produits,0.0
+JC,TOTAL DES RESSOURCES (3),178770.6
+KZ,Production des produits (1),267297.2
+KZ,Importations de biens,0.0
+KZ,Importations de services,21497.2
+KZ,Importations de biens et de services,21497.2
+KZ,Correction CAF/FAB,-253.0
+KZ,TOTAL DES RESSOURCES (2),288541.4
+KZ,Marges commerciales,0.0
+KZ,Marges de transport,0.0
+KZ,Impôts sur les produits - total -,23505.3
+KZ,dont taxes du type TVA,4858.3
+KZ,Subventions sur les produits,0.0
+KZ,TOTAL DES RESSOURCES (3),312046.7
+LZ,Production des produits (1),398446.1
+LZ,Importations de biens,0.0
+LZ,Importations de services,0.0
+LZ,Importations de biens et de services,0.0
+LZ,Correction CAF/FAB,0.0
+LZ,TOTAL DES RESSOURCES (2),398446.1
+LZ,Marges commerciales,0.0
+LZ,Marges de transport,0.0
+LZ,Impôts sur les produits - total -,3784.3
+LZ,dont taxes du type TVA,3245.3
+LZ,Subventions sur les produits,0.0
+LZ,TOTAL DES RESSOURCES (3),402230.4
+MA,Production des produits (1),305588.5
+MA,Importations de biens,0.0
+MA,Importations de services,30211.0
+MA,Importations de biens et de services,30211.0
+MA,Correction CAF/FAB,0.0
+MA,TOTAL DES RESSOURCES (2),335799.5
+MA,Marges commerciales,0.0
+MA,Marges de transport,0.0
+MA,Impôts sur les produits - total -,32910.0
+MA,dont taxes du type TVA,8549.0
+MA,Subventions sur les produits,0.0
+MA,TOTAL DES RESSOURCES (3),368709.5
+MB,Production des produits (1),69271.9
+MB,Importations de biens,0.0
+MB,Importations de services,11984.0
+MB,Importations de biens et de services,11984.0
+MB,Correction CAF/FAB,0.0
+MB,TOTAL DES RESSOURCES (2),81255.9
+MB,Marges commerciales,0.0
+MB,Marges de transport,0.0
+MB,Impôts sur les produits - total -,1084.5
+MB,dont taxes du type TVA,1084.5
+MB,Subventions sur les produits,0.0
+MB,TOTAL DES RESSOURCES (3),82340.4
+MC,Production des produits (1),43913.2
+MC,Importations de biens,0.0
+MC,Importations de services,9727.0
+MC,Importations de biens et de services,9727.0
+MC,Correction CAF/FAB,0.0
+MC,TOTAL DES RESSOURCES (2),53640.2
+MC,Marges commerciales,0.0
+MC,Marges de transport,0.0
+MC,Impôts sur les produits - total -,2091.6
+MC,dont taxes du type TVA,1882.6
+MC,Subventions sur les produits,0.0
+MC,TOTAL DES RESSOURCES (3),55731.8
+NZ,Production des produits (1),276221.9
+NZ,Importations de biens,0.0
+NZ,Importations de services,36342.0
+NZ,Importations de biens et de services,36342.0
+NZ,Correction CAF/FAB,0.0
+NZ,TOTAL DES RESSOURCES (2),312563.9
+NZ,Marges commerciales,0.0
+NZ,Marges de transport,0.0
+NZ,Impôts sur les produits - total -,11752.0
+NZ,dont taxes du type TVA,11752.0
+NZ,Subventions sur les produits,-1285.0
+NZ,TOTAL DES RESSOURCES (3),323030.9
+OZ,Production des produits (1),224881.2
+OZ,Importations de biens,0.0
+OZ,Importations de services,0.0
+OZ,Importations de biens et de services,0.0
+OZ,Correction CAF/FAB,0.0
+OZ,TOTAL DES RESSOURCES (2),224881.2
+OZ,Marges commerciales,0.0
+OZ,Marges de transport,0.0
+OZ,Impôts sur les produits - total -,0.0
+OZ,dont taxes du type TVA,0.0
+OZ,Subventions sur les produits,0.0
+OZ,TOTAL DES RESSOURCES (3),224881.2
+PZ,Production des produits (1),154555.0
+PZ,Importations de biens,0.0
+PZ,Importations de services,0.0
+PZ,Importations de biens et de services,0.0
+PZ,Correction CAF/FAB,0.0
+PZ,TOTAL DES RESSOURCES (2),154555.0
+PZ,Marges commerciales,0.0
+PZ,Marges de transport,0.0
+PZ,Impôts sur les produits - total -,1224.3
+PZ,dont taxes du type TVA,1224.3
+PZ,Subventions sur les produits,0.0
+PZ,TOTAL DES RESSOURCES (3),155779.3
+QA,Production des produits (1),203472.5
+QA,Importations de biens,0.0
+QA,Importations de services,792.0
+QA,Importations de biens et de services,792.0
+QA,Correction CAF/FAB,0.0
+QA,TOTAL DES RESSOURCES (2),204264.5
+QA,Marges commerciales,0.0
+QA,Marges de transport,0.0
+QA,Impôts sur les produits - total -,0.0
+QA,dont taxes du type TVA,0.0
+QA,Subventions sur les produits,0.0
+QA,TOTAL DES RESSOURCES (3),204264.5
+QB,Production des produits (1),97131.4
+QB,Importations de biens,0.0
+QB,Importations de services,0.0
+QB,Importations de biens et de services,0.0
+QB,Correction CAF/FAB,0.0
+QB,TOTAL DES RESSOURCES (2),97131.4
+QB,Marges commerciales,0.0
+QB,Marges de transport,0.0
+QB,Impôts sur les produits - total -,385.5
+QB,dont taxes du type TVA,385.5
+QB,Subventions sur les produits,0.0
+QB,TOTAL DES RESSOURCES (3),97516.9
+RZ,Production des produits (1),61451.1
+RZ,Importations de biens,0.0
+RZ,Importations de services,1176.0
+RZ,Importations de biens et de services,1176.0
+RZ,Correction CAF/FAB,0.0
+RZ,TOTAL DES RESSOURCES (2),62627.1
+RZ,Marges commerciales,0.0
+RZ,Marges de transport,0.0
+RZ,Impôts sur les produits - total -,8202.0
+RZ,dont taxes du type TVA,1568.0
+RZ,Subventions sur les produits,0.0
+RZ,TOTAL DES RESSOURCES (3),70829.1
+SZ,Production des produits (1),59765.9
+SZ,Importations de biens,0.0
+SZ,Importations de services,1645.0
+SZ,Importations de biens et de services,1645.0
+SZ,Correction CAF/FAB,0.0
+SZ,TOTAL DES RESSOURCES (2),61410.9
+SZ,Marges commerciales,0.0
+SZ,Marges de transport,0.0
+SZ,Impôts sur les produits - total -,3672.7
+SZ,dont taxes du type TVA,3665.7
+SZ,Subventions sur les produits,0.0
+SZ,TOTAL DES RESSOURCES (3),65083.6
+TZ,Production des produits (1),3121.1
+TZ,Importations de biens,0.0
+TZ,Importations de services,0.0
+TZ,Importations de biens et de services,0.0
+TZ,Correction CAF/FAB,0.0
+TZ,TOTAL DES RESSOURCES (2),3121.1
+TZ,Marges commerciales,0.0
+TZ,Marges de transport,0.0
+TZ,Impôts sur les produits - total -,0.0
+TZ,dont taxes du type TVA,0.0
+TZ,Subventions sur les produits,0.0
+TZ,TOTAL DES RESSOURCES (3),3121.1

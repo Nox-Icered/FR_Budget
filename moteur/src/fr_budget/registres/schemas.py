@@ -134,6 +134,47 @@ class Chiffrage(Strict):
     relecture: StatutRelecture
 
 
+class UsageDepenseFiscale(StrEnum):
+    REPARTITION = "repartition"
+    """Répartit un produit des comptes nationaux entre taux réduits et taux normal."""
+    ECART_TERRITORIAL = "ecart_territorial"
+    """Écart dû aux taux particuliers d'outre-mer et de Corse, retranché de la recette."""
+
+
+class RegimeReduit(StrEnum):
+    SUPER_REDUIT = "super_reduit"
+    REDUIT = "reduit"
+    INTERMEDIAIRE = "intermediaire"
+
+
+class DepenseFiscaleTva(Strict):
+    """Dépense fiscale de TVA utilisée par le modèle (``registres/tva/depenses_fiscales.yaml``).
+
+    La valeur est celle du chiffrage désigné (``registres/references/chiffrages.yaml``).
+    """
+
+    chiffrage: Identifiant
+    usage: UsageDepenseFiscale
+    annee: int
+    """Année du chiffrage, qui fixe l'année des comptes utilisée pour la répartition."""
+    produit: Texte | None = None
+    """Code produit de la consommation finale (usage « repartition »)."""
+    regime: RegimeReduit | None = None
+    """Taux réduit concerné (usage « repartition »)."""
+
+    @model_validator(mode="after")
+    def produit_et_regime_selon_l_usage(self) -> Self:
+        renseignes = self.produit is not None and self.regime is not None
+        vides = self.produit is None and self.regime is None
+        if self.usage == UsageDepenseFiscale.REPARTITION and not renseignes:
+            msg = f"{self.chiffrage} : produit et regime obligatoires pour une répartition"
+            raise ValueError(msg)
+        if self.usage == UsageDepenseFiscale.ECART_TERRITORIAL and not vides:
+            msg = f"{self.chiffrage} : produit et regime sans objet pour un écart territorial"
+            raise ValueError(msg)
+        return self
+
+
 class Correction(Strict):
     """Correction appliquée à OpenFisca-France (``registres/corrections_openfisca.yaml``)."""
 

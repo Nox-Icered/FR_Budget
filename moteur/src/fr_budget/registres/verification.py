@@ -20,6 +20,7 @@ from pydantic import BaseModel, ValidationError
 from fr_budget.registres.schemas import (
     Chiffrage,
     Dataset,
+    DepenseFiscaleTva,
     Hypothese,
     Levier,
     RegistreCorrections,
@@ -45,6 +46,7 @@ class Registres:
     chiffrages: list[Chiffrage]
     corrections: RegistreCorrections | None
     libelles_interdits: list[str]
+    depenses_fiscales_tva: list[DepenseFiscaleTva] = field(default_factory=list)
 
 
 def _lire(fichier: Path) -> Any:
@@ -110,6 +112,17 @@ def charger(dossier: Path, rapport: Rapport) -> Registres:
         ),
         corrections=corrections,
         libelles_interdits=[str(terme) for terme in interdits],
+        # Registre propre au levier TVA : facultatif.
+        depenses_fiscales_tva=(
+            _liste(
+                dossier / "tva" / "depenses_fiscales.yaml",
+                "depenses_fiscales",
+                DepenseFiscaleTva,
+                rapport,
+            )
+            if (dossier / "tva" / "depenses_fiscales.yaml").is_file()
+            else []
+        ),
     )
 
 
@@ -152,6 +165,9 @@ def verifier(registres: Registres, racine: Path, rapport: Rapport) -> None:
     for c in registres.chiffrages:
         _renvoi(f"chiffrages.yaml / {c.id}", c.levier, leviers, "levier", rapport)
         _renvoi(f"chiffrages.yaml / {c.id}", c.source, sources, "source", rapport)
+    chiffrages = {c.id for c in registres.chiffrages}
+    for df in registres.depenses_fiscales_tva:
+        _renvoi("tva/depenses_fiscales.yaml", df.chiffrage, chiffrages, "chiffrage", rapport)
     if registres.corrections is not None:
         _doublons(
             "corrections_openfisca.yaml", [c.id for c in registres.corrections.corrections], rapport

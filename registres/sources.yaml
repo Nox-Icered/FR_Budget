@@ -77,3 +77,87 @@ sources:
     date_publication: 2026-06-14
     acces: recherche_web
     consulte_le: 2026-10-07
+
+  - id: dgtresor_tresor_eco_371
+    nom: Trésor-Éco n° 371, « Analyse de la composition des recettes de TVA » (M. Gesta)
+    editeur: Direction générale du Trésor
+    url: https://www.tresor.economie.gouv.fr/Articles/2025/09/25/analyse-de-la-composition-des-recettes-de-tva
+    licence: non précisée
+    date_publication: 2025-09-25
+    millesime: modèle TVA théorique sur le compte semi-définitif 2022, point TVA vieilli à 2025
+    acces: direct
+    consulte_le: 2026-10-07
+
+  - id: plf2026_voies_et_moyens_tome1
+    nom: Projet de loi de finances pour 2026, annexe « Évaluation des voies et moyens », tome I (recettes)
+    editeur: Ministère de l'Économie et des Finances (document publié par l'Assemblée nationale)
+    url: https://www.assemblee-nationale.fr/dyn/contenu/visualisation/1087930/file/PLF%202026%20-%20V%26M%20TI%20-%20Evaluations%20des%20recettes.pdf
+    licence: Licence Ouverte 2.0
+    millesime: PLF 2026
+    acces: direct
+    consulte_le: 2026-10-07
+
+  - id: plf2025_voies_et_moyens_tome1
+    nom: Projet de loi de finances pour 2025, annexe « Évaluation des voies et moyens », tome I (recettes)
+    editeur: Ministère de l'Économie et des Finances (document publié par l'Assemblée nationale)
+    url: https://www2.assemblee-nationale.fr/static/17/Annexes-DL/PLF-2025/Voies_et_moyens_Tome_1_2025.pdf
+    licence: Licence Ouverte 2.0
+    millesime: PLF 2025
+    acces: direct
+    consulte_le: 2026-10-07
+
+  - id: plf2025_voies_et_moyens_tome2
+    nom: Projet de loi de finances pour 2025, annexe « Évaluation des voies et moyens », tome II (dépenses fiscales)
+    editeur: Ministère de l'Économie et des Finances (document publié par l'Assemblée nationale)
+    url: https://www2.assemblee-nationale.fr/static/17/Annexes-DL/PLF-2025/Voies_et_moyens_Tome_2_2025.pdf
+    licence: Licence Ouverte 2.0
+    millesime: PLF 2025
+    acces: direct
+    consulte_le: 2026-10-08
+
+  - id: drees_comptes_sante_financement_2026
+    nom: Les comptes de la santé - Répartition par financeur (édition 2026 du panorama des dépenses de santé)
+    editeur: DREES (ministère chargé de la santé)
+    url: https://data.drees.solidarites-sante.gouv.fr/explore/dataset/cns_financement/
+    licence: Licence Ouverte 2.0
+    millesime: édition 2026 (années 2010 à 2025)
+    acces: direct
+    consulte_le: 2026-10-08
+
+  - id: drees_comptes_sante_2023
+    nom: Les comptes de la santé, édition 2023 (mise à jour de février 2024), tableaux des fiches
+    editeur: DREES (ministère chargé de la santé)
+    url: https://data.drees.solidarites-sante.gouv.fr/explore/dataset/306_les-comptes-de-la-sante/
+    licence: Licence Ouverte 2.0
+    millesime: édition 2023 (données 2022)
+    acces: direct
+    consulte_le: 2026-10-08
+
+  - id: dgtresor_cahier_2016_02
+    nom: Les Cahiers de la DG Trésor n° 2016-02, « Le modèle d'estimation de la TVA théorique » (J.-A. Andrivon, C. Geay, É. Janbon)
+    editeur: Direction générale du Trésor
+    url: https://www.tresor.economie.gouv.fr/Articles/8a0808ef-32d9-487c-87f3-8b86a5e65785/files/8c114556-bf7a-4ee1-a827-3cdda0107371
+    licence: non précisée
+    date_publication: 2016-04-01
+    millesime: point TVA 2015 (estimation du PLF pour 2016)
+    acces: direct
+    consulte_le: 2026-10-07
+
+  - id: insee_consommation_produits_2024
+    nom: Comptes nationaux annuels base 2020, « Consommation des ménages en 2024 », consommation effective par produit (ménages, APU, ISBLSM)
+    editeur: INSEE
+    url: https://www.insee.fr/fr/statistiques/8574673
+    licence: Licence Ouverte 2.0
+    date_publication: 2025-05-28
+    millesime: comptes 2024 (série 1959-2024, 2022 semi-définitif)
+    acces: direct
+    consulte_le: 2026-10-07
+
+  - id: insee_tes_2025
+    nom: Comptes nationaux annuels base 2020, « Tableaux de synthèse - TES et TEE », TES A38
+    editeur: INSEE
+    url: https://www.insee.fr/fr/statistiques/8988861
+    licence: Licence Ouverte 2.0
+    millesime: TES A38 1978-2024
+    acces: direct
+    consulte_le: 2026-10-07

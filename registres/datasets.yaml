@@ -1,4 +1,107 @@
 # Registre des jeux de données extraits des sources (fichier dans data/raw/, empreinte
-# SHA-256, script de transformation). Premier contenu : tâche 0.5 du plan (prototype TVA).
+# SHA-256, script de transformation).
 
-datasets: []
+datasets:
+  - id: dgtresor_tresor_eco_371_pdf
+    source: dgtresor_tresor_eco_371
+    description: Note Trésor-Éco n° 371 (PDF, 8 pages)
+    fichier: data/raw/tva/dgtresor_tresor_eco_371_2025-09.pdf
+    empreinte_sha256: d3daa52ccfdc05978c7939d97ece4018803c0d0a868191c5c538699dc6bcadfb
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-07
+
+  - id: plf2026_voies_et_moyens_tome1_pdf
+    source: plf2026_voies_et_moyens_tome1
+    description: Voies et Moyens tome I du PLF 2026 (PDF, 102 pages)
+    fichier: data/raw/tva/plf2026_voies_et_moyens_tome1.pdf
+    empreinte_sha256: 4703605df8bfd1b4a20b1889839ebc1ea5a9b434eb4460eb2b40749e107371a0
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-07
+
+  - id: plf2025_voies_et_moyens_tome1_pdf
+    source: plf2025_voies_et_moyens_tome1
+    description: Voies et Moyens tome I du PLF 2025 (PDF, 125 pages)
+    fichier: data/raw/tva/plf2025_voies_et_moyens_tome1.pdf
+    empreinte_sha256: c01eccd5eb0a96912b0ad84b5db354fc3c9eaf80bd7db20c023e10057ab5648b
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-07
+
+  - id: plf2025_voies_et_moyens_tome2_pdf
+    source: plf2025_voies_et_moyens_tome2
+    description: Voies et Moyens tome II du PLF 2025 (PDF, 247 pages)
+    fichier: data/raw/tva/plf2025_voies_et_moyens_tome2.pdf
+    empreinte_sha256: 037fa53f1d04a07a6fd2f79e2d2bf25f063bc94f3e21ea8750bf1b81d66e4d45
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-08
+
+  - id: drees_comptes_sante_financement_2026_csv
+    source: drees_comptes_sante_financement_2026
+    description: Dépense de santé par poste et par financeur, 2010 à 2025, en euros (export CSV de l'API, séparateur point-virgule)
+    fichier: data/raw/tva/drees/cns_financement_edition_2026.csv
+    empreinte_sha256: fa605c4f615f993671babfa151b0c83effa476fdb4109d5c5527b9ab8b8786f2
+    methode_transformation: aucune ; sert au diagnostic des médicaments décrit dans docs/validation/levier_tva.md (non utilisé par le modèle)
+    telecharge_le: 2026-10-08
+
+  - id: drees_comptes_sante_2023_zip
+    source: drees_comptes_sante_2023
+    description: Archive des tableaux de l'édition 2023 des comptes de la santé (classeurs Excel) ; fiche 13, tableau 2 pour les médicaments
+    fichier: data/raw/tva/drees/cns_edition_2023_maj_fev_24.zip
+    empreinte_sha256: ddf720d81a355f918dcdbdf65c3073b120c6c5fec8f554756ad35eb552724c80
+    methode_transformation: aucune ; valeurs lues dans le classeur « Fiches 13 à 17 », feuille « F13 Tab2 », citées dans docs/validation/levier_tva.md (non utilisées par le modèle)
+    telecharge_le: 2026-10-08
+
+  - id: dgtresor_cahier_2016_02_pdf
+    source: dgtresor_cahier_2016_02
+    description: Cahier de la DG Trésor 2016-02 (PDF)
+    fichier: data/raw/tva/dgtresor_cahier_2016-02_tva_theorique.pdf
+    empreinte_sha256: 6a60d41d1b61f613eff8deac02619405c1ecd8553ffb1a5eef7e2acd68614fda
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-07
+
+  - id: insee_conso_produits_menages
+    source: insee_consommation_produits_2024
+    description: Consommation effective par produit, dépenses des ménages, millions d'euros courants (feuille MEURcour)
+    fichier: data/raw/tva/insee/T_CONSO_EFF_PRODUITS_MENAGES.xlsx
+    empreinte_sha256: 652884d95f675aa919cf9a65167a9e8fed49bf184b3cd59e50291fe612f55f47
+    methode_transformation: pipelines/tva/extraire_consommation.py
+    telecharge_le: 2026-10-07
+
+  - id: insee_conso_produits_apu
+    source: insee_consommation_produits_2024
+    description: Consommation effective par produit, dépenses des APU, millions d'euros courants (feuille MEURcour)
+    fichier: data/raw/tva/insee/T_CONSO_EFF_PRODUITS_APU.xlsx
+    empreinte_sha256: f386a9b9af059e0c6636bade4e0e17b551728382a9d02046acd8c55441e2985b
+    methode_transformation: pipelines/tva/extraire_consommation.py
+    telecharge_le: 2026-10-07
+
+  - id: insee_conso_produits_isblsm
+    source: insee_consommation_produits_2024
+    description: Consommation effective par produit, dépenses des ISBLSM, millions d'euros courants (feuille MEURcour)
+    fichier: data/raw/tva/insee/T_CONSO_EFF_PRODUITS_ISBLSM.xlsx
+    empreinte_sha256: a5f9864d3609147873776a94f399d2063c4596ba376ff6c04b42cd85498d2f43
+    methode_transformation: pipelines/tva/extraire_consommation.py
+    telecharge_le: 2026-10-07
+
+  - id: insee_tes_38_2022
+    source: insee_tes_2025
+    description: TES A38 2022 (TRP, TEF, TEI, CPR_CEB), prix d'acquisition
+    fichier: data/raw/tva/insee/TES_38_2022_fr.xlsx
+    empreinte_sha256: 1a9d587e3a70590a42210f10bca15a63dd85d18dc9946ca654d77e50970a29ed
+    methode_transformation: pipelines/tva/extraire_tes.py
+    telecharge_le: 2026-10-07
+
+  - id: insee_tes_38_2024
+    source: insee_tes_2025
+    description: TES A38 2024 (TRP, TEF, TEI, CPR_CEB), prix d'acquisition
+    fichier: data/raw/tva/insee/TES_38_2024_fr.xlsx
+    empreinte_sha256: 474b9875bfdaea9f377be3a7132d67f7ad487669bd36627001939813d2bc3d19
+    methode_transformation: pipelines/tva/extraire_tes.py
+    telecharge_le: 2026-10-07
+
+  - id: insee_tes_38_1978_2019
+    source: insee_tes_2025
+    description: Archive des TES A38 1978-2019 (dont TES_38_2015.xlsx)
+    fichier: data/raw/tva/insee/TES_38_1978_2019_fr.zip
+    empreinte_sha256: e87d2a1e6513dfde921e0ec70f201fb37e3b95bc157fe5f6863ecdefe0397027
+    methode_transformation: pipelines/tva/extraire_tes.py
+    telecharge_le: 2026-10-07

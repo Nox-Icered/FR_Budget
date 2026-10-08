@@ -62,6 +62,13 @@ def depenses_par_fonction() -> dict[tuple[int, str, str], float]:
         }
 
 
+@cache
+def libelles_cofog() -> dict[str, str]:
+    """Libellé de chaque code COFOG, tel que publié par Eurostat (en français)."""
+    with FICHIER_COFOG.open(encoding="utf-8") as f:
+        return {r["cofog"]: r["libelle"] for r in csv.DictReader(f)}
+
+
 def solde_primaire(capacite_financement: float, interets_verses: float) -> float:
     """Solde primaire : capacité (+) ou besoin (-) de financement hors intérêts versés (D41).
 

@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import json
 import logging
+from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
 
 from fr_budget_api.app import creer_application
+from fr_budget_api.export import exporter
 
 
 @pytest.fixture(scope="module")
@@ -77,3 +80,25 @@ def test_aucune_requete_journalisee(client: TestClient, caplog: pytest.LogCaptur
         client.get("/comptes-apu", params={"sous_secteur": "S13", "indicateur": "TRACE_42"})
     serveur = [r.getMessage() for r in caplog.records if not r.name.startswith("httpx")]
     assert not any("TRACE_42" in message for message in serveur)
+
+
+def test_export_identique_a_l_api(client: TestClient, tmp_path: Path) -> None:
+    exporter(tmp_path)
+    comptes = json.loads((tmp_path / "comptes-apu.json").read_text(encoding="utf-8"))
+    attendu = client.get(
+        "/comptes-apu", params={"sous_secteur": "S13", "indicateur": "dette_maastricht"}
+    ).json()
+    assert comptes["S13"]["dette_maastricht"] == attendu
+    sources = json.loads((tmp_path / "registre-sources.json").read_text(encoding="utf-8"))
+    assert sources == client.get("/registres/sources").json()
+
+
+def test_ratio_au_pib_fourni_par_le_moteur(client: TestClient) -> None:
+    serie = client.get(
+        "/comptes-apu", params={"sous_secteur": "S13", "indicateur": "dette_maastricht"}
+    ).json()
+    derniere = serie["valeurs"][-1]
+    pib = client.get("/comptes-apu", params={"sous_secteur": "S1", "indicateur": "pib"}).json()
+    pib_meme_annee = next(v["valeur"] for v in pib["valeurs"] if v["annee"] == derniere["annee"])
+    assert derniere["pourcent_pib"] == pytest.approx(derniere["valeur"] / pib_meme_annee * 100)
+    assert "pourcent_pib" not in pib["valeurs"][-1]

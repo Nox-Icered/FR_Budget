@@ -138,6 +138,46 @@ datasets:
     methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-08
 
+  - id: plf2027_resf_pdf
+    source: plf2027_resf
+    description: RESF annexé au PLF 2027 (PDF, 218 pages)
+    fichier: data/raw/baseline/tresor/PLF_2027_RESF.pdf
+    empreinte_sha256: b7e6aab2e9f5f762b010c2f501f997f2d00c8e1377e0b83107ec73bc278be59f
+    methode_transformation: aucune pour l'instant ; document de référence de la baseline (lot 1.3)
+    telecharge_le: 2026-10-08
+
+  - id: plf2027_resf_tableaux_xlsx
+    source: plf2027_resf
+    description: Tableaux du RESF 2027 (classeur Excel, 10 onglets, prévisions 2025-2030)
+    fichier: data/raw/baseline/tresor/Tableaux_RESF_2027.xlsx
+    empreinte_sha256: fa48c76751410b40a65a27f77ecd34ab3a532a18e482f0beed21cd17824f2618
+    methode_transformation: pipelines/baseline/extraire_resf.py → data/processed/baseline/resf_2027.csv
+    telecharge_le: 2026-10-08
+
+  - id: ce_ageing_report_2024_fiche_france_pdf
+    source: ce_ageing_report_2024
+    description: Ageing Report 2024, fiche pays France (PDF, 53 pages)
+    fichier: data/raw/baseline/commission_europeenne/2024-ageing-report-country-fiche-France.pdf
+    empreinte_sha256: 8b28513a2466b312cec11ea5ed2c9cf4340164f2d077ce95c17cf8f506517397
+    methode_transformation: aucune pour l'instant ; document de référence de la baseline après 2030 (lot 1.3)
+    telecharge_le: 2026-10-08
+
+  - id: ce_ageing_report_2024_annexe_pays_xlsx
+    source: ce_ageing_report_2024
+    description: Ageing Report 2024, annexe statistique de toutes les fiches pays (classeur Excel, onglets FRa, FRb, FRc pour la France)
+    fichier: data/raw/baseline/commission_europeenne/2024_Ageing_Report-Statistical_annex_all_countryfiches.xlsx
+    empreinte_sha256: 8453dfda8db0ad253d3965cd85490c30e4b5d0598eb6c2ffa4adbf23ab45bb7f
+    methode_transformation: pipelines/baseline/extraire_ageing_report.py → data/processed/baseline/ageing_report_2024_fr.csv
+    telecharge_le: 2026-10-08
+
+  - id: ce_ageing_report_2024_rapport_pdf
+    source: ce_ageing_report_2024
+    description: Ageing Report 2024, rapport principal (European Economy Institutional Paper 279, PDF), définition des variantes
+    fichier: data/raw/baseline/commission_europeenne/ip279_en.pdf
+    empreinte_sha256: 952ee30dededf74d3c260c9442202515542ca24b4f4e7f17ff549585af97f930
+    methode_transformation: aucune ; document de référence
+    telecharge_le: 2026-10-08
+
   - id: eurostat_gov_10a_exp_fr_json
     source: eurostat_gov_10a_exp
     description: Dépenses totales des APU françaises par fonction COFOG (80 postes) et par sous-secteur, millions d'euros, JSON-stat

@@ -1,0 +1,88 @@
+annee,indicateur,valeur,unite,tableau
+2025,ajustement_structurel,0.6,points de PIB potentiel,Finances publiques / Tableau 21
+2025,ajustement_structurel_primaire,0.8,points de PIB potentiel,Finances publiques / Tableau 21
+2025,charge_interets,2.2,% du PIB,Annexe finances publiques / Tableau 13
+2025,composante_conjoncturelle,0.1,% du PIB,Annexe finances publiques / Tableau 13
+2025,croissance_nominale,1.9,%,Finances publiques / Tableau 4
+2025,croissance_potentielle,1.2,%,Finances publiques / Tableau 21
+2025,croissance_volume,0.9,%,Finances publiques / Tableau 21
+2025,deflateur,1.1,%,Perspectives éco_Fiche 7 / Tableau 1
+2025,dette,115.7,% du PIB,Finances publiques / Tableau 21
+2025,ecart_production,0.2,% du PIB potentiel,Finances publiques / Tableau 21
+2025,flux_creances,0.1,% du PIB,Annexe finances publiques / Tableau 14
+2025,ipc,0.9,%,Perspectives éco_Fiche 7 / Tableau 1
+2025,solde_conjoncturel,0.1,% du PIB,Finances publiques / Tableau 21
+2025,solde_primaire,-2.9,% du PIB,Annexe finances publiques / Tableau 13
+2025,solde_public,-5.1,% du PIB,Finances publiques / Tableau 21
+2025,solde_structurel,-5.2,% du PIB potentiel,Finances publiques / Tableau 21
+2025,taux_10_ans,3.4,%,Annexe macro / Tableau 8
+2025,taux_apparent,2.0,%,Annexe finances publiques / Tableau 14
+2026,ajustement_structurel,0.1,points de PIB potentiel,Finances publiques / Tableau 21
+2026,ajustement_structurel_primaire,0.4,points de PIB potentiel,Finances publiques / Tableau 21
+2026,charge_interets,2.6,% du PIB,Annexe finances publiques / Tableau 13
+2026,composante_conjoncturelle,-0.3,% du PIB,Annexe finances publiques / Tableau 13
+2026,croissance_nominale,2.0,%,Finances publiques / Tableau 4
+2026,croissance_potentielle,1.2,%,Finances publiques / Tableau 21
+2026,croissance_volume,0.5,%,Finances publiques / Tableau 21
+2026,deflateur,1.5,%,Perspectives éco_Fiche 7 / Tableau 1
+2026,dette,119.3,% du PIB,Finances publiques / Tableau 21
+2026,ecart_production,-0.5,% du PIB potentiel,Finances publiques / Tableau 21
+2026,flux_creances,0.5,% du PIB,Annexe finances publiques / Tableau 14
+2026,ipc,2.1,%,Perspectives éco_Fiche 7 / Tableau 1
+2026,solde_conjoncturel,-0.3,% du PIB,Finances publiques / Tableau 21
+2026,solde_primaire,-2.8,% du PIB,Annexe finances publiques / Tableau 13
+2026,solde_public,-5.4,% du PIB,Finances publiques / Tableau 21
+2026,solde_structurel,-5.1,% du PIB potentiel,Finances publiques / Tableau 21
+2026,taux_10_ans,3.9,%,Annexe macro / Tableau 8
+2026,taux_apparent,2.3,%,Annexe finances publiques / Tableau 14
+2027,ajustement_structurel,0.5,points de PIB potentiel,Finances publiques / Tableau 21
+2027,ajustement_structurel_primaire,0.8,points de PIB potentiel,Finances publiques / Tableau 21
+2027,charge_interets,2.9,% du PIB,Annexe finances publiques / Tableau 13
+2027,composante_conjoncturelle,-0.4,% du PIB,Annexe finances publiques / Tableau 13
+2027,croissance_nominale,2.8,%,Finances publiques / Tableau 4
+2027,croissance_potentielle,1.2,%,Finances publiques / Tableau 21
+2027,croissance_volume,1.0,%,Finances publiques / Tableau 21
+2027,deflateur,1.7,%,Perspectives éco_Fiche 7 / Tableau 1
+2027,dette,121.7,% du PIB,Finances publiques / Tableau 21
+2027,ecart_production,-0.7,% du PIB potentiel,Finances publiques / Tableau 21
+2027,flux_creances,0.5,% du PIB,Annexe finances publiques / Tableau 14
+2027,ipc,1.7,%,Perspectives éco_Fiche 7 / Tableau 1
+2027,solde_conjoncturel,-0.4,% du PIB,Finances publiques / Tableau 21
+2027,solde_primaire,-2.1,% du PIB,Annexe finances publiques / Tableau 13
+2027,solde_public,-5.0,% du PIB,Finances publiques / Tableau 21
+2027,solde_structurel,-4.6,% du PIB potentiel,Finances publiques / Tableau 21
+2027,taux_10_ans,4.3,%,Annexe macro / Tableau 8
+2027,taux_apparent,2.5,%,Annexe finances publiques / Tableau 14
+2028,ajustement_structurel,1.2,points de PIB potentiel,Finances publiques / Tableau 21
+2028,ajustement_structurel_primaire,1.5,points de PIB potentiel,Finances publiques / Tableau 21
+2028,croissance_potentielle,1.2,%,Finances publiques / Tableau 21
+2028,croissance_volume,1.1,%,Finances publiques / Tableau 21
+2028,deflateur,1.6,%,Perspectives éco_Fiche 7 / Tableau 1
+2028,dette,122.4,% du PIB,Finances publiques / Tableau 21
+2028,ecart_production,-0.8,% du PIB potentiel,Finances publiques / Tableau 21
+2028,ipc,1.75,%,Perspectives éco_Fiche 7 / Tableau 1
+2028,solde_conjoncturel,-0.5,% du PIB,Finances publiques / Tableau 21
+2028,solde_public,-3.9,% du PIB,Finances publiques / Tableau 21
+2028,solde_structurel,-3.4,% du PIB potentiel,Finances publiques / Tableau 21
+2029,ajustement_structurel,1.0,points de PIB potentiel,Finances publiques / Tableau 21
+2029,ajustement_structurel_primaire,1.3,points de PIB potentiel,Finances publiques / Tableau 21
+2029,croissance_potentielle,1.0,%,Finances publiques / Tableau 21
+2029,croissance_volume,1.1,%,Finances publiques / Tableau 21
+2029,deflateur,1.6,%,Perspectives éco_Fiche 7 / Tableau 1
+2029,dette,121.9,% du PIB,Finances publiques / Tableau 21
+2029,ecart_production,-0.7,% du PIB potentiel,Finances publiques / Tableau 21
+2029,ipc,1.75,%,Perspectives éco_Fiche 7 / Tableau 1
+2029,solde_conjoncturel,-0.4,% du PIB,Finances publiques / Tableau 21
+2029,solde_public,-2.8,% du PIB,Finances publiques / Tableau 21
+2029,solde_structurel,-2.4,% du PIB potentiel,Finances publiques / Tableau 21
+2030,ajustement_structurel,0.3,points de PIB potentiel,Finances publiques / Tableau 21
+2030,ajustement_structurel_primaire,0.5,points de PIB potentiel,Finances publiques / Tableau 21
+2030,croissance_potentielle,1.0,%,Finances publiques / Tableau 21
+2030,croissance_volume,1.2,%,Finances publiques / Tableau 21
+2030,deflateur,1.6,%,Perspectives éco_Fiche 7 / Tableau 1
+2030,dette,120.9,% du PIB,Finances publiques / Tableau 21
+2030,ecart_production,-0.5,% du PIB potentiel,Finances publiques / Tableau 21
+2030,ipc,1.75,%,Perspectives éco_Fiche 7 / Tableau 1
+2030,solde_conjoncturel,-0.3,% du PIB,Finances publiques / Tableau 21
+2030,solde_public,-2.4,% du PIB,Finances publiques / Tableau 21
+2030,solde_structurel,-2.2,% du PIB potentiel,Finances publiques / Tableau 21

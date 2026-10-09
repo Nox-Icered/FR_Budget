@@ -151,6 +151,24 @@ sources:
     acces: direct
     consulte_le: 2026-10-08
 
+  - id: plf2027_resf
+    nom: Projet de loi de finances pour 2027, rapport économique, social et financier (RESF) et ses tableaux
+    editeur: Direction générale du Trésor
+    url: https://www.tresor.economie.gouv.fr/Articles/2026/10/06/le-rapport-economique-social-et-financier-resf-2027-est-publie
+    licence: "Mentions légales du site de la DG Trésor, réutilisation non commerciale autorisée en respectant l'intégrité des informations et en précisant l'origine et la date de publication (https://www.tresor.economie.gouv.fr/Institutionnel/mentions-legales)"
+    millesime: PLF 2027 (publié le 6 octobre 2026)
+    acces: direct
+    consulte_le: 2026-10-08
+
+  - id: ce_ageing_report_2024
+    nom: Commission européenne, 2024 Ageing Report, Economic and Budgetary Projections for the EU Member States (2022-2070), fiche France et annexe statistique par pays
+    editeur: Commission européenne, direction générale des affaires économiques et financières, et comité de politique économique (groupe de travail sur le vieillissement)
+    url: https://economy-finance.ec.europa.eu/publications/2024-ageing-report-economic-and-budgetary-projections-eu-member-states-2022-2070_en
+    licence: "CC BY 4.0, décision de la Commission du 12 décembre 2011 sur la réutilisation (https://commission.europa.eu/legal-notice_en) ; mention de la source et signalement des modifications"
+    millesime: Ageing Report 2024 (projections 2022-2070)
+    acces: direct
+    consulte_le: 2026-10-08
+
   - id: eurostat_gov_10a_exp
     nom: Eurostat, dépenses des administrations publiques par fonction (CFAP/COFOG), tableau gov_10a_exp
     editeur: Eurostat (données transmises par l'INSEE)

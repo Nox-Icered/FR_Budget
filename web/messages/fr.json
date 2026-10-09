@@ -9,7 +9,8 @@
     "accueil": "Accueil",
     "sources": "Sources",
     "hypotheses": "Hypothèses",
-    "validation": "Validation"
+    "validation": "Validation",
+    "baseline": "Trajectoire sans réforme"
   },
   "accueil": {
     "titre": "Les comptes des administrations publiques",
@@ -82,5 +83,27 @@
   },
   "version": {
     "texte": "Version du moteur {moteur} ; registres {registres} ; données {donnees}"
+  },
+  "baseline": {
+    "titre": "Dette et solde primaire sans réforme, 2025-2046",
+    "bandeau": "Bêta, non validé : cette trajectoire n'a pas encore été relue par des relecteurs indépendants.",
+    "intro": "Jusqu'en {raccord}, les chiffres sont ceux de la prévision du Gouvernement (rapport économique, social et financier du projet de loi de finances pour 2027). Ensuite, ils sont projetés avec les hypothèses de long terme de la Commission européenne (Ageing Report 2024).",
+    "annee": "Année",
+    "dette": "Dette publique",
+    "solde_primaire": "Solde primaire",
+    "bas": "Bas",
+    "central": "Central",
+    "haut": "Haut",
+    "segments": {
+      "resf": "2025-2030 : prévision du Gouvernement",
+      "projection": "2031-2046 : projection"
+    },
+    "unite": "Unité : {unite}. Un solde primaire positif est un excédent avant paiement des intérêts.",
+    "methode_titre": "Méthode",
+    "methode": "Après 2030, la dette suit la formule dette de l'année suivante = dette × (1 + taux d'intérêt) / (1 + croissance) - solde primaire + ajustement stock-flux. Le solde primaire de 2030 est maintenu, puis corrigé de l'évolution des dépenses de retraite, de santé, de dépendance et d'éducation projetée par la Commission européenne. La fourchette fait varier une hypothèse à la fois dans sa plage.",
+    "hypotheses_titre": "Hypothèses utilisées",
+    "graphique_titre": "Dette publique, en % du PIB : valeur centrale et fourchette",
+    "graphique_raccord": "Début de la projection",
+    "graphique_lecture": "La ligne donne la valeur centrale, la zone colorée la fourchette basse-haute. Toutes les valeurs figurent dans le tableau ci-dessous."
   }
 }

@@ -79,3 +79,4 @@ L'ajustement stock-flux n'est pas négligeable certaines années (+3,0 points en
 | 2026-10-08 | Part refinancée et choc de taux sur la dette de l'État (PLF 2027) | 2 tests unitaires créés, réussis ; 1 test de validation créé, en échec (-15,1 %) |
 | 2026-10-08 | Relecture finale : description de la formule du choc de taux précisée (approximation en milieu d'année, écart à la moyenne exacte publié) | aucun |
 | 2026-10-08 | Choc de taux : moyenne exacte sur l'année (décision du mainteneur) ; hypothèse `dette_part_refinancement_debut_annee` | test_dette_choc_taux : -15,1 % → -16,6 % (échec inchangé) ; tests unitaires du choc réécrits pour la nouvelle formule (3 tests) |
+| 2026-10-09 | Validation de la cinquième année du choc (« environ 19 Md€ », PAP 2027 page 40), encours de fin 2026 tenu constant | 1 test de validation créé, réussi : 17,51 Md€, écart -7,8 % |

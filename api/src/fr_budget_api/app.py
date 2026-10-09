@@ -6,8 +6,8 @@ unité. Le journal d'accès d'uvicorn (qui contiendrait les paramètres des requ
 désactivé par ``creer_application`` elle-même ; lancer avec ``python -m fr_budget_api.serveur``.
 
 Points d'entrée : ``/sante``, ``/version``, ``/registres/{nom}``, ``/comptes-apu``,
-``/depenses-par-fonction``, ``/validation``. La baseline et les scénarios viendront avec les
-lots 1.3 et suivants.
+``/depenses-par-fonction``, ``/validation``, ``/baseline``. Les scénarios viendront avec les
+lots suivants.
 """
 
 from __future__ import annotations
@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI, HTTPException
+from fr_budget import baseline as module_baseline
 from fr_budget.apu import comptes_apu, depenses_par_fonction, libelles_cofog, ratio_pib
 from fr_budget.registres.verification import RACINE_DEPOT, Rapport, charger
 from fr_budget.validation import comparaisons
@@ -140,6 +141,42 @@ def resume_validation() -> list[dict[str, Any]]:
     ]
 
 
+def _fourchette(f: Any) -> dict[str, float]:
+    return {"bas": f.bas, "central": f.central, "haut": f.haut}
+
+
+@cache
+def serie_baseline() -> dict[str, Any]:
+    """Baseline 2025-2046 en fourchette (``fr_budget.baseline``), avec sources et hypothèses.
+
+    Le statut reprend celui de la fiche ``docs/fiches/baseline.md`` : non publié tant que la
+    porte de la phase 1 (relecture par deux relecteurs) n'est pas franchie.
+    """
+    raccord = module_baseline.ANNEE_RACCORD
+    return {
+        "sources": ["plf2027_resf", "ce_ageing_report_2024"],
+        "unite": "% du PIB",
+        "statut": "non_publie",
+        "annee_raccord": raccord,
+        "hypotheses": [
+            module_baseline.HYPOTHESE_PART,
+            module_baseline.HYPOTHESE_STOCK_FLUX,
+            module_baseline.HYPOTHESE_VIEILLISSEMENT,
+            module_baseline.HYPOTHESE_CROISSANCE,
+            module_baseline.HYPOTHESE_TAUX,
+        ],
+        "valeurs": [
+            {
+                "annee": ligne.annee,
+                "segment": "resf" if ligne.annee <= raccord else "projection",
+                "dette": _fourchette(ligne.dette),
+                "solde_primaire": _fourchette(ligne.solde_primaire),
+            }
+            for ligne in module_baseline.baseline()
+        ],
+    }
+
+
 def creer_application() -> FastAPI:
     # Règle 5 : aucune requête (et donc aucun paramètre saisi) dans les journaux.
     logging.getLogger("uvicorn.access").disabled = True
@@ -185,6 +222,11 @@ def creer_application() -> FastAPI:
     def route_validation() -> list[dict[str, Any]]:
         """Comparaisons du modèle aux chiffrages de référence, écarts compris."""
         return resume_validation()
+
+    @app.get("/baseline")
+    def route_baseline() -> dict[str, Any]:
+        """Dette et solde primaire de 2025 à 2046, sans réforme, en fourchette."""
+        return serie_baseline()
 
     return app
 

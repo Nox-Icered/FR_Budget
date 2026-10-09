@@ -1,0 +1,777 @@
+annee,indicateur,valeur,unite,onglet
+2022,cout_vieillissement,29.8823,% du PIB,FRc
+2022,croissance_potentielle,1.1402,%,FRa
+2022,dependance,1.8962,% du PIB,FRc
+2022,education,4.7875,% du PIB,FRc
+2022,ipc,5.9058,%,FRa
+2022,retraites,14.4456,% du PIB,FRb
+2022,sante,8.753,% du PIB,FRc
+2022,taux_nominal,1.7008,%,FRa
+2023,cout_vieillissement,29.1227,% du PIB,FRc
+2023,cout_vieillissement_ecart_emploi_seniors_haut,-0.0027,points de PIB,FRc
+2023,cout_vieillissement_ecart_esperance_vie_haute,0.0141,points de PIB,FRc
+2023,cout_vieillissement_ecart_fecondite_basse,-0.0135,points de PIB,FRc
+2023,cout_vieillissement_ecart_migration_basse,0.0017,points de PIB,FRc
+2023,cout_vieillissement_ecart_migration_haute,-0.0332,points de PIB,FRc
+2023,cout_vieillissement_ecart_pgf_basse,-0.0056,points de PIB,FRc
+2023,cout_vieillissement_ecart_pgf_haute,-0.0173,points de PIB,FRc
+2023,cout_vieillissement_ecart_risque_sante_dependance,0.028,points de PIB,FRc
+2023,croissance_potentielle,1.1629,%,FRa
+2023,dependance,1.8959,% du PIB,FRc
+2023,education,4.7234,% du PIB,FRc
+2023,ipc,5.4979,%,FRa
+2023,retraites,14.1475,% du PIB,FRb
+2023,sante,8.3559,% du PIB,FRc
+2023,taux_nominal,2.8267,%,FRa
+2024,cout_vieillissement,29.2255,% du PIB,FRc
+2024,cout_vieillissement_ecart_emploi_seniors_haut,-0.0046,points de PIB,FRc
+2024,cout_vieillissement_ecart_esperance_vie_haute,0.0151,points de PIB,FRc
+2024,cout_vieillissement_ecart_fecondite_basse,-0.0264,points de PIB,FRc
+2024,cout_vieillissement_ecart_migration_basse,0.022,points de PIB,FRc
+2024,cout_vieillissement_ecart_migration_haute,-0.0329,points de PIB,FRc
+2024,cout_vieillissement_ecart_pgf_basse,-0.0041,points de PIB,FRc
+2024,cout_vieillissement_ecart_pgf_haute,-0.0308,points de PIB,FRc
+2024,cout_vieillissement_ecart_risque_sante_dependance,0.0825,points de PIB,FRc
+2024,croissance_potentielle,1.1514,%,FRa
+2024,dependance,1.8976,% du PIB,FRc
+2024,education,4.6575,% du PIB,FRc
+2024,ipc,2.4522,%,FRa
+2024,retraites,14.2862,% du PIB,FRb
+2024,sante,8.3842,% du PIB,FRc
+2024,taux_nominal,2.9245,%,FRa
+2025,cout_vieillissement,29.1626,% du PIB,FRc
+2025,cout_vieillissement_ecart_emploi_seniors_haut,-0.0838,points de PIB,FRc
+2025,cout_vieillissement_ecart_esperance_vie_haute,0.0138,points de PIB,FRc
+2025,cout_vieillissement_ecart_fecondite_basse,0.0139,points de PIB,FRc
+2025,cout_vieillissement_ecart_migration_basse,0.0682,points de PIB,FRc
+2025,cout_vieillissement_ecart_migration_haute,-0.0377,points de PIB,FRc
+2025,cout_vieillissement_ecart_pgf_basse,0.0217,points de PIB,FRc
+2025,cout_vieillissement_ecart_pgf_haute,-0.03,points de PIB,FRc
+2025,cout_vieillissement_ecart_risque_sante_dependance,0.1213,points de PIB,FRc
+2025,croissance_potentielle,0.8457,%,FRa
+2025,dependance,1.9027,% du PIB,FRc
+2025,education,4.6055,% du PIB,FRc
+2025,ipc,2.3015,%,FRa
+2025,retraites,14.2419,% du PIB,FRb
+2025,sante,8.4125,% du PIB,FRc
+2025,taux_nominal,3.0223,%,FRa
+2026,cout_vieillissement,29.1772,% du PIB,FRc
+2026,cout_vieillissement_ecart_emploi_seniors_haut,-0.1218,points de PIB,FRc
+2026,cout_vieillissement_ecart_esperance_vie_haute,0.0141,points de PIB,FRc
+2026,cout_vieillissement_ecart_fecondite_basse,0.0398,points de PIB,FRc
+2026,cout_vieillissement_ecart_migration_basse,0.0939,points de PIB,FRc
+2026,cout_vieillissement_ecart_migration_haute,-0.0403,points de PIB,FRc
+2026,cout_vieillissement_ecart_pgf_basse,0.0093,points de PIB,FRc
+2026,cout_vieillissement_ecart_pgf_haute,-0.031,points de PIB,FRc
+2026,cout_vieillissement_ecart_risque_sante_dependance,0.1561,points de PIB,FRc
+2026,croissance_potentielle,0.6633,%,FRa
+2026,dependance,1.9107,% du PIB,FRc
+2026,education,4.5553,% du PIB,FRc
+2026,ipc,2.1507,%,FRa
+2026,retraites,14.272,% du PIB,FRb
+2026,sante,8.4392,% du PIB,FRc
+2026,taux_nominal,3.1201,%,FRa
+2027,cout_vieillissement,29.2426,% du PIB,FRc
+2027,cout_vieillissement_ecart_emploi_seniors_haut,-0.1433,points de PIB,FRc
+2027,cout_vieillissement_ecart_esperance_vie_haute,0.0312,points de PIB,FRc
+2027,cout_vieillissement_ecart_fecondite_basse,0.0572,points de PIB,FRc
+2027,cout_vieillissement_ecart_migration_basse,0.0828,points de PIB,FRc
+2027,cout_vieillissement_ecart_migration_haute,-0.0629,points de PIB,FRc
+2027,cout_vieillissement_ecart_pgf_basse,0.0041,points de PIB,FRc
+2027,cout_vieillissement_ecart_pgf_haute,-0.0319,points de PIB,FRc
+2027,cout_vieillissement_ecart_risque_sante_dependance,0.1903,points de PIB,FRc
+2027,croissance_potentielle,0.5575,%,FRa
+2027,dependance,1.9452,% du PIB,FRc
+2027,education,4.5042,% du PIB,FRc
+2027,ipc,2.0,%,FRa
+2027,retraites,14.3282,% du PIB,FRb
+2027,sante,8.4651,% du PIB,FRc
+2027,taux_nominal,3.2179,%,FRa
+2028,cout_vieillissement,29.2571,% du PIB,FRc
+2028,cout_vieillissement_ecart_emploi_seniors_haut,-0.1983,points de PIB,FRc
+2028,cout_vieillissement_ecart_esperance_vie_haute,0.0236,points de PIB,FRc
+2028,cout_vieillissement_ecart_fecondite_basse,0.0511,points de PIB,FRc
+2028,cout_vieillissement_ecart_migration_basse,0.1183,points de PIB,FRc
+2028,cout_vieillissement_ecart_migration_haute,-0.1065,points de PIB,FRc
+2028,cout_vieillissement_ecart_pgf_basse,-0.0188,points de PIB,FRc
+2028,cout_vieillissement_ecart_pgf_haute,-0.0218,points de PIB,FRc
+2028,cout_vieillissement_ecart_risque_sante_dependance,0.2243,points de PIB,FRc
+2028,croissance_potentielle,0.5459,%,FRa
+2028,dependance,1.9574,% du PIB,FRc
+2028,education,4.4581,% du PIB,FRc
+2028,ipc,2.0,%,FRa
+2028,retraites,14.3507,% du PIB,FRb
+2028,sante,8.4909,% du PIB,FRc
+2028,taux_nominal,3.3157,%,FRa
+2029,cout_vieillissement,29.2271,% du PIB,FRc
+2029,cout_vieillissement_ecart_emploi_seniors_haut,-0.2777,points de PIB,FRc
+2029,cout_vieillissement_ecart_esperance_vie_haute,0.0446,points de PIB,FRc
+2029,cout_vieillissement_ecart_fecondite_basse,0.0312,points de PIB,FRc
+2029,cout_vieillissement_ecart_migration_basse,0.1577,points de PIB,FRc
+2029,cout_vieillissement_ecart_migration_haute,-0.1084,points de PIB,FRc
+2029,cout_vieillissement_ecart_pgf_basse,0.0048,points de PIB,FRc
+2029,cout_vieillissement_ecart_pgf_haute,-0.0241,points de PIB,FRc
+2029,cout_vieillissement_ecart_risque_sante_dependance,0.2591,points de PIB,FRc
+2029,croissance_potentielle,0.563,%,FRa
+2029,dependance,1.9674,% du PIB,FRc
+2029,education,4.4148,% du PIB,FRc
+2029,ipc,2.0,%,FRa
+2029,retraites,14.329,% du PIB,FRb
+2029,sante,8.516,% du PIB,FRc
+2029,taux_nominal,3.4135,%,FRa
+2030,cout_vieillissement,29.2113,% du PIB,FRc
+2030,cout_vieillissement_ecart_emploi_seniors_haut,-0.3445,points de PIB,FRc
+2030,cout_vieillissement_ecart_esperance_vie_haute,0.0303,points de PIB,FRc
+2030,cout_vieillissement_ecart_fecondite_basse,-0.0106,points de PIB,FRc
+2030,cout_vieillissement_ecart_migration_basse,0.1442,points de PIB,FRc
+2030,cout_vieillissement_ecart_migration_haute,-0.1571,points de PIB,FRc
+2030,cout_vieillissement_ecart_pgf_basse,0.0031,points de PIB,FRc
+2030,cout_vieillissement_ecart_pgf_haute,-0.0444,points de PIB,FRc
+2030,cout_vieillissement_ecart_risque_sante_dependance,0.295,points de PIB,FRc
+2030,croissance_potentielle,0.5829,%,FRa
+2030,dependance,1.9768,% du PIB,FRc
+2030,education,4.3677,% du PIB,FRc
+2030,ipc,2.0,%,FRa
+2030,retraites,14.3213,% du PIB,FRb
+2030,sante,8.5455,% du PIB,FRc
+2030,taux_nominal,3.5113,%,FRa
+2031,cout_vieillissement,29.1957,% du PIB,FRc
+2031,cout_vieillissement_ecart_emploi_seniors_haut,-0.4039,points de PIB,FRc
+2031,cout_vieillissement_ecart_esperance_vie_haute,0.0258,points de PIB,FRc
+2031,cout_vieillissement_ecart_fecondite_basse,-0.083,points de PIB,FRc
+2031,cout_vieillissement_ecart_migration_basse,0.1689,points de PIB,FRc
+2031,cout_vieillissement_ecart_migration_haute,-0.198,points de PIB,FRc
+2031,cout_vieillissement_ecart_pgf_basse,0.0382,points de PIB,FRc
+2031,cout_vieillissement_ecart_pgf_haute,-0.0026,points de PIB,FRc
+2031,cout_vieillissement_ecart_risque_sante_dependance,0.332,points de PIB,FRc
+2031,croissance_potentielle,0.6092,%,FRa
+2031,dependance,1.9944,% du PIB,FRc
+2031,education,4.3191,% du PIB,FRc
+2031,ipc,2.0,%,FRa
+2031,retraites,14.3103,% du PIB,FRb
+2031,sante,8.5719,% du PIB,FRc
+2031,taux_nominal,3.6091,%,FRa
+2032,cout_vieillissement,29.1965,% du PIB,FRc
+2032,cout_vieillissement_ecart_emploi_seniors_haut,-0.4222,points de PIB,FRc
+2032,cout_vieillissement_ecart_esperance_vie_haute,0.0295,points de PIB,FRc
+2032,cout_vieillissement_ecart_fecondite_basse,-0.108,points de PIB,FRc
+2032,cout_vieillissement_ecart_migration_basse,0.1874,points de PIB,FRc
+2032,cout_vieillissement_ecart_migration_haute,-0.2399,points de PIB,FRc
+2032,cout_vieillissement_ecart_pgf_basse,0.0478,points de PIB,FRc
+2032,cout_vieillissement_ecart_pgf_haute,-0.002,points de PIB,FRc
+2032,cout_vieillissement_ecart_risque_sante_dependance,0.3702,points de PIB,FRc
+2032,croissance_potentielle,0.6189,%,FRa
+2032,dependance,2.0221,% du PIB,FRc
+2032,education,4.2721,% du PIB,FRc
+2032,ipc,2.0,%,FRa
+2032,retraites,14.3017,% du PIB,FRb
+2032,sante,8.6006,% du PIB,FRc
+2032,taux_nominal,3.7069,%,FRa
+2033,cout_vieillissement,29.2354,% du PIB,FRc
+2033,cout_vieillissement_ecart_emploi_seniors_haut,-0.4543,points de PIB,FRc
+2033,cout_vieillissement_ecart_esperance_vie_haute,0.0442,points de PIB,FRc
+2033,cout_vieillissement_ecart_fecondite_basse,-0.1388,points de PIB,FRc
+2033,cout_vieillissement_ecart_migration_basse,0.1937,points de PIB,FRc
+2033,cout_vieillissement_ecart_migration_haute,-0.2327,points de PIB,FRc
+2033,cout_vieillissement_ecart_pgf_basse,0.0604,points de PIB,FRc
+2033,cout_vieillissement_ecart_pgf_haute,-0.0376,points de PIB,FRc
+2033,cout_vieillissement_ecart_risque_sante_dependance,0.4111,points de PIB,FRc
+2033,croissance_potentielle,0.6741,%,FRa
+2033,dependance,2.0512,% du PIB,FRc
+2033,education,4.2294,% du PIB,FRc
+2033,ipc,2.0,%,FRa
+2033,retraites,14.3304,% du PIB,FRb
+2033,sante,8.6244,% du PIB,FRc
+2033,taux_nominal,3.7216,%,FRa
+2034,cout_vieillissement,29.2849,% du PIB,FRc
+2034,cout_vieillissement_ecart_emploi_seniors_haut,-0.4325,points de PIB,FRc
+2034,cout_vieillissement_ecart_esperance_vie_haute,0.0434,points de PIB,FRc
+2034,cout_vieillissement_ecart_fecondite_basse,-0.1883,points de PIB,FRc
+2034,cout_vieillissement_ecart_migration_basse,0.2236,points de PIB,FRc
+2034,cout_vieillissement_ecart_migration_haute,-0.2088,points de PIB,FRc
+2034,cout_vieillissement_ecart_pgf_basse,0.068,points de PIB,FRc
+2034,cout_vieillissement_ecart_pgf_haute,-0.0423,points de PIB,FRc
+2034,cout_vieillissement_ecart_risque_sante_dependance,0.4559,points de PIB,FRc
+2034,croissance_potentielle,0.7544,%,FRa
+2034,dependance,2.0851,% du PIB,FRc
+2034,education,4.1926,% du PIB,FRc
+2034,ipc,2.0,%,FRa
+2034,retraites,14.3573,% du PIB,FRb
+2034,sante,8.6499,% du PIB,FRc
+2034,taux_nominal,3.7362,%,FRa
+2035,cout_vieillissement,29.2764,% du PIB,FRc
+2035,cout_vieillissement_ecart_emploi_seniors_haut,-0.4273,points de PIB,FRc
+2035,cout_vieillissement_ecart_esperance_vie_haute,0.0567,points de PIB,FRc
+2035,cout_vieillissement_ecart_fecondite_basse,-0.2228,points de PIB,FRc
+2035,cout_vieillissement_ecart_migration_basse,0.2541,points de PIB,FRc
+2035,cout_vieillissement_ecart_migration_haute,-0.249,points de PIB,FRc
+2035,cout_vieillissement_ecart_pgf_basse,0.0373,points de PIB,FRc
+2035,cout_vieillissement_ecart_pgf_haute,-0.0184,points de PIB,FRc
+2035,cout_vieillissement_ecart_risque_sante_dependance,0.5039,points de PIB,FRc
+2035,croissance_potentielle,0.8429,%,FRa
+2035,dependance,2.1198,% du PIB,FRc
+2035,education,4.161,% du PIB,FRc
+2035,ipc,2.0,%,FRa
+2035,retraites,14.322,% du PIB,FRb
+2035,sante,8.6735,% du PIB,FRc
+2035,taux_nominal,3.7509,%,FRa
+2036,cout_vieillissement,29.2721,% du PIB,FRc
+2036,cout_vieillissement_ecart_emploi_seniors_haut,-0.4598,points de PIB,FRc
+2036,cout_vieillissement_ecart_esperance_vie_haute,0.0769,points de PIB,FRc
+2036,cout_vieillissement_ecart_fecondite_basse,-0.2661,points de PIB,FRc
+2036,cout_vieillissement_ecart_migration_basse,0.2663,points de PIB,FRc
+2036,cout_vieillissement_ecart_migration_haute,-0.287,points de PIB,FRc
+2036,cout_vieillissement_ecart_pgf_basse,0.0365,points de PIB,FRc
+2036,cout_vieillissement_ecart_pgf_haute,-0.0136,points de PIB,FRc
+2036,cout_vieillissement_ecart_risque_sante_dependance,0.5566,points de PIB,FRc
+2036,croissance_potentielle,0.9389,%,FRa
+2036,dependance,2.1515,% du PIB,FRc
+2036,education,4.1359,% du PIB,FRc
+2036,ipc,2.0,%,FRa
+2036,retraites,14.2883,% du PIB,FRb
+2036,sante,8.6963,% du PIB,FRc
+2036,taux_nominal,3.7655,%,FRa
+2037,cout_vieillissement,29.2708,% du PIB,FRc
+2037,cout_vieillissement_ecart_emploi_seniors_haut,-0.4557,points de PIB,FRc
+2037,cout_vieillissement_ecart_esperance_vie_haute,0.1046,points de PIB,FRc
+2037,cout_vieillissement_ecart_fecondite_basse,-0.2897,points de PIB,FRc
+2037,cout_vieillissement_ecart_migration_basse,0.2935,points de PIB,FRc
+2037,cout_vieillissement_ecart_migration_haute,-0.2843,points de PIB,FRc
+2037,cout_vieillissement_ecart_pgf_basse,0.066,points de PIB,FRc
+2037,cout_vieillissement_ecart_pgf_haute,0.0285,points de PIB,FRc
+2037,cout_vieillissement_ecart_risque_sante_dependance,0.6144,points de PIB,FRc
+2037,croissance_potentielle,1.0421,%,FRa
+2037,dependance,2.1794,% du PIB,FRc
+2037,education,4.1192,% du PIB,FRc
+2037,ipc,2.0,%,FRa
+2037,retraites,14.2518,% du PIB,FRb
+2037,sante,8.7205,% du PIB,FRc
+2037,taux_nominal,3.7802,%,FRa
+2038,cout_vieillissement,29.2683,% du PIB,FRc
+2038,cout_vieillissement_ecart_emploi_seniors_haut,-0.4722,points de PIB,FRc
+2038,cout_vieillissement_ecart_esperance_vie_haute,0.1444,points de PIB,FRc
+2038,cout_vieillissement_ecart_fecondite_basse,-0.3197,points de PIB,FRc
+2038,cout_vieillissement_ecart_migration_basse,0.3277,points de PIB,FRc
+2038,cout_vieillissement_ecart_migration_haute,-0.2975,points de PIB,FRc
+2038,cout_vieillissement_ecart_pgf_basse,0.0705,points de PIB,FRc
+2038,cout_vieillissement_ecart_pgf_haute,-0.009,points de PIB,FRc
+2038,cout_vieillissement_ecart_risque_sante_dependance,0.6769,points de PIB,FRc
+2038,croissance_potentielle,1.1754,%,FRa
+2038,dependance,2.2062,% du PIB,FRc
+2038,education,4.1088,% du PIB,FRc
+2038,ipc,2.0,%,FRa
+2038,retraites,14.2094,% du PIB,FRb
+2038,sante,8.7439,% du PIB,FRc
+2038,taux_nominal,3.7949,%,FRa
+2039,cout_vieillissement,29.2604,% du PIB,FRc
+2039,cout_vieillissement_ecart_emploi_seniors_haut,-0.4613,points de PIB,FRc
+2039,cout_vieillissement_ecart_esperance_vie_haute,0.2119,points de PIB,FRc
+2039,cout_vieillissement_ecart_fecondite_basse,-0.3262,points de PIB,FRc
+2039,cout_vieillissement_ecart_migration_basse,0.3634,points de PIB,FRc
+2039,cout_vieillissement_ecart_migration_haute,-0.2747,points de PIB,FRc
+2039,cout_vieillissement_ecart_pgf_basse,0.1214,points de PIB,FRc
+2039,cout_vieillissement_ecart_pgf_haute,-0.0053,points de PIB,FRc
+2039,cout_vieillissement_ecart_risque_sante_dependance,0.7437,points de PIB,FRc
+2039,croissance_potentielle,1.329,%,FRa
+2039,dependance,2.23,% du PIB,FRc
+2039,education,4.1026,% du PIB,FRc
+2039,ipc,2.0,%,FRa
+2039,retraites,14.1597,% du PIB,FRb
+2039,sante,8.7681,% du PIB,FRc
+2039,taux_nominal,3.8095,%,FRa
+2040,cout_vieillissement,29.239,% du PIB,FRc
+2040,cout_vieillissement_ecart_emploi_seniors_haut,-0.4641,points de PIB,FRc
+2040,cout_vieillissement_ecart_esperance_vie_haute,0.2241,points de PIB,FRc
+2040,cout_vieillissement_ecart_fecondite_basse,-0.3989,points de PIB,FRc
+2040,cout_vieillissement_ecart_migration_basse,0.358,points de PIB,FRc
+2040,cout_vieillissement_ecart_migration_haute,-0.297,points de PIB,FRc
+2040,cout_vieillissement_ecart_pgf_basse,0.1385,points de PIB,FRc
+2040,cout_vieillissement_ecart_pgf_haute,-0.0147,points de PIB,FRc
+2040,cout_vieillissement_ecart_risque_sante_dependance,0.8153,points de PIB,FRc
+2040,croissance_potentielle,1.5112,%,FRa
+2040,dependance,2.2526,% du PIB,FRc
+2040,education,4.0992,% du PIB,FRc
+2040,ipc,2.0,%,FRa
+2040,retraites,14.0974,% du PIB,FRb
+2040,sante,8.7899,% du PIB,FRc
+2040,taux_nominal,3.8242,%,FRa
+2041,cout_vieillissement,29.2766,% du PIB,FRc
+2041,cout_vieillissement_ecart_emploi_seniors_haut,-0.4864,points de PIB,FRc
+2041,cout_vieillissement_ecart_esperance_vie_haute,0.2141,points de PIB,FRc
+2041,cout_vieillissement_ecart_fecondite_basse,-0.4312,points de PIB,FRc
+2041,cout_vieillissement_ecart_migration_basse,0.3922,points de PIB,FRc
+2041,cout_vieillissement_ecart_migration_haute,-0.3489,points de PIB,FRc
+2041,cout_vieillissement_ecart_pgf_basse,0.1245,points de PIB,FRc
+2041,cout_vieillissement_ecart_pgf_haute,-0.0126,points de PIB,FRc
+2041,cout_vieillissement_ecart_risque_sante_dependance,0.8877,points de PIB,FRc
+2041,croissance_potentielle,1.5411,%,FRa
+2041,dependance,2.2734,% du PIB,FRc
+2041,education,4.0967,% du PIB,FRc
+2041,ipc,2.0,%,FRa
+2041,retraites,14.094,% du PIB,FRb
+2041,sante,8.8126,% du PIB,FRc
+2041,taux_nominal,3.8388,%,FRa
+2042,cout_vieillissement,29.2898,% du PIB,FRc
+2042,cout_vieillissement_ecart_emploi_seniors_haut,-0.4772,points de PIB,FRc
+2042,cout_vieillissement_ecart_esperance_vie_haute,0.2408,points de PIB,FRc
+2042,cout_vieillissement_ecart_fecondite_basse,-0.4275,points de PIB,FRc
+2042,cout_vieillissement_ecart_migration_basse,0.4634,points de PIB,FRc
+2042,cout_vieillissement_ecart_migration_haute,-0.3697,points de PIB,FRc
+2042,cout_vieillissement_ecart_pgf_basse,0.1664,points de PIB,FRc
+2042,cout_vieillissement_ecart_pgf_haute,-0.0033,points de PIB,FRc
+2042,cout_vieillissement_ecart_risque_sante_dependance,0.96,points de PIB,FRc
+2042,croissance_potentielle,1.563,%,FRa
+2042,dependance,2.2908,% du PIB,FRc
+2042,education,4.095,% du PIB,FRc
+2042,ipc,2.0,%,FRa
+2042,retraites,14.0745,% du PIB,FRb
+2042,sante,8.8294,% du PIB,FRc
+2042,taux_nominal,3.8535,%,FRa
+2043,cout_vieillissement,29.2575,% du PIB,FRc
+2043,cout_vieillissement_ecart_emploi_seniors_haut,-0.4635,points de PIB,FRc
+2043,cout_vieillissement_ecart_esperance_vie_haute,0.2278,points de PIB,FRc
+2043,cout_vieillissement_ecart_fecondite_basse,-0.3858,points de PIB,FRc
+2043,cout_vieillissement_ecart_migration_basse,0.4989,points de PIB,FRc
+2043,cout_vieillissement_ecart_migration_haute,-0.368,points de PIB,FRc
+2043,cout_vieillissement_ecart_pgf_basse,0.1904,points de PIB,FRc
+2043,cout_vieillissement_ecart_pgf_haute,-0.0074,points de PIB,FRc
+2043,cout_vieillissement_ecart_risque_sante_dependance,1.0317,points de PIB,FRc
+2043,croissance_potentielle,1.5266,%,FRa
+2043,dependance,2.3083,% du PIB,FRc
+2043,education,4.0953,% du PIB,FRc
+2043,ipc,2.0,%,FRa
+2043,retraites,14.0103,% du PIB,FRb
+2043,sante,8.8436,% du PIB,FRc
+2043,taux_nominal,3.8681,%,FRa
+2044,cout_vieillissement,29.241,% du PIB,FRc
+2044,cout_vieillissement_ecart_emploi_seniors_haut,-0.4739,points de PIB,FRc
+2044,cout_vieillissement_ecart_esperance_vie_haute,0.2334,points de PIB,FRc
+2044,cout_vieillissement_ecart_fecondite_basse,-0.3946,points de PIB,FRc
+2044,cout_vieillissement_ecart_migration_basse,0.5452,points de PIB,FRc
+2044,cout_vieillissement_ecart_migration_haute,-0.3932,points de PIB,FRc
+2044,cout_vieillissement_ecart_pgf_basse,0.2119,points de PIB,FRc
+2044,cout_vieillissement_ecart_pgf_haute,-0.007,points de PIB,FRc
+2044,cout_vieillissement_ecart_risque_sante_dependance,1.1027,points de PIB,FRc
+2044,croissance_potentielle,1.4739,%,FRa
+2044,dependance,2.3272,% du PIB,FRc
+2044,education,4.098,% du PIB,FRc
+2044,ipc,2.0,%,FRa
+2044,retraites,13.9593,% du PIB,FRb
+2044,sante,8.8565,% du PIB,FRc
+2044,taux_nominal,3.8828,%,FRa
+2045,cout_vieillissement,29.2237,% du PIB,FRc
+2045,cout_vieillissement_ecart_emploi_seniors_haut,-0.4981,points de PIB,FRc
+2045,cout_vieillissement_ecart_esperance_vie_haute,0.2351,points de PIB,FRc
+2045,cout_vieillissement_ecart_fecondite_basse,-0.3891,points de PIB,FRc
+2045,cout_vieillissement_ecart_migration_basse,0.5221,points de PIB,FRc
+2045,cout_vieillissement_ecart_migration_haute,-0.4305,points de PIB,FRc
+2045,cout_vieillissement_ecart_pgf_basse,0.2198,points de PIB,FRc
+2045,cout_vieillissement_ecart_pgf_haute,-0.0155,points de PIB,FRc
+2045,cout_vieillissement_ecart_risque_sante_dependance,1.173,points de PIB,FRc
+2045,croissance_potentielle,1.4323,%,FRa
+2045,dependance,2.345,% du PIB,FRc
+2045,education,4.1021,% du PIB,FRc
+2045,ipc,2.0,%,FRa
+2045,retraites,13.9079,% du PIB,FRb
+2045,sante,8.8687,% du PIB,FRc
+2045,taux_nominal,3.8974,%,FRa
+2046,cout_vieillissement,29.2135,% du PIB,FRc
+2046,cout_vieillissement_ecart_emploi_seniors_haut,-0.5025,points de PIB,FRc
+2046,cout_vieillissement_ecart_esperance_vie_haute,0.2597,points de PIB,FRc
+2046,cout_vieillissement_ecart_fecondite_basse,-0.3684,points de PIB,FRc
+2046,cout_vieillissement_ecart_migration_basse,0.4931,points de PIB,FRc
+2046,cout_vieillissement_ecart_migration_haute,-0.4747,points de PIB,FRc
+2046,cout_vieillissement_ecart_pgf_basse,0.2006,points de PIB,FRc
+2046,cout_vieillissement_ecart_pgf_haute,-0.0427,points de PIB,FRc
+2046,cout_vieillissement_ecart_risque_sante_dependance,1.243,points de PIB,FRc
+2046,croissance_potentielle,1.3988,%,FRa
+2046,dependance,2.3621,% du PIB,FRc
+2046,education,4.1064,% du PIB,FRc
+2046,ipc,2.0,%,FRa
+2046,retraites,13.8661,% du PIB,FRb
+2046,sante,8.8789,% du PIB,FRc
+2046,taux_nominal,3.9121,%,FRa
+2047,cout_vieillissement,29.2064,% du PIB,FRc
+2047,cout_vieillissement_ecart_emploi_seniors_haut,-0.471,points de PIB,FRc
+2047,cout_vieillissement_ecart_esperance_vie_haute,0.315,points de PIB,FRc
+2047,cout_vieillissement_ecart_fecondite_basse,-0.2765,points de PIB,FRc
+2047,cout_vieillissement_ecart_migration_basse,0.5504,points de PIB,FRc
+2047,cout_vieillissement_ecart_migration_haute,-0.4965,points de PIB,FRc
+2047,cout_vieillissement_ecart_pgf_basse,0.2604,points de PIB,FRc
+2047,cout_vieillissement_ecart_pgf_haute,-0.0077,points de PIB,FRc
+2047,cout_vieillissement_ecart_risque_sante_dependance,1.313,points de PIB,FRc
+2047,croissance_potentielle,1.3667,%,FRa
+2047,dependance,2.3779,% du PIB,FRc
+2047,education,4.1103,% du PIB,FRc
+2047,ipc,2.0,%,FRa
+2047,retraites,13.8269,% du PIB,FRb
+2047,sante,8.8913,% du PIB,FRc
+2047,taux_nominal,3.9267,%,FRa
+2048,cout_vieillissement,29.2185,% du PIB,FRc
+2048,cout_vieillissement_ecart_emploi_seniors_haut,-0.4522,points de PIB,FRc
+2048,cout_vieillissement_ecart_esperance_vie_haute,0.3497,points de PIB,FRc
+2048,cout_vieillissement_ecart_fecondite_basse,-0.1995,points de PIB,FRc
+2048,cout_vieillissement_ecart_migration_basse,0.6125,points de PIB,FRc
+2048,cout_vieillissement_ecart_migration_haute,-0.5096,points de PIB,FRc
+2048,cout_vieillissement_ecart_pgf_basse,0.2956,points de PIB,FRc
+2048,cout_vieillissement_ecart_pgf_haute,0.0058,points de PIB,FRc
+2048,cout_vieillissement_ecart_risque_sante_dependance,1.3822,points de PIB,FRc
+2048,croissance_potentielle,1.3431,%,FRa
+2048,dependance,2.3928,% du PIB,FRc
+2048,education,4.1129,% du PIB,FRc
+2048,ipc,2.0,%,FRa
+2048,retraites,13.8123,% du PIB,FRb
+2048,sante,8.9005,% du PIB,FRc
+2048,taux_nominal,3.9414,%,FRa
+2049,cout_vieillissement,29.231,% du PIB,FRc
+2049,cout_vieillissement_ecart_emploi_seniors_haut,-0.4381,points de PIB,FRc
+2049,cout_vieillissement_ecart_esperance_vie_haute,0.3489,points de PIB,FRc
+2049,cout_vieillissement_ecart_fecondite_basse,-0.0982,points de PIB,FRc
+2049,cout_vieillissement_ecart_migration_basse,0.6565,points de PIB,FRc
+2049,cout_vieillissement_ecart_migration_haute,-0.4949,points de PIB,FRc
+2049,cout_vieillissement_ecart_pgf_basse,0.3265,points de PIB,FRc
+2049,cout_vieillissement_ecart_pgf_haute,-0.0036,points de PIB,FRc
+2049,cout_vieillissement_ecart_risque_sante_dependance,1.4523,points de PIB,FRc
+2049,croissance_potentielle,1.3198,%,FRa
+2049,dependance,2.4112,% du PIB,FRc
+2049,education,4.1148,% du PIB,FRc
+2049,ipc,2.0,%,FRa
+2049,retraites,13.7937,% du PIB,FRb
+2049,sante,8.9114,% du PIB,FRc
+2049,taux_nominal,3.956,%,FRa
+2050,cout_vieillissement,29.1892,% du PIB,FRc
+2050,cout_vieillissement_ecart_emploi_seniors_haut,-0.4644,points de PIB,FRc
+2050,cout_vieillissement_ecart_esperance_vie_haute,0.3879,points de PIB,FRc
+2050,cout_vieillissement_ecart_fecondite_basse,-0.0355,points de PIB,FRc
+2050,cout_vieillissement_ecart_migration_basse,0.6662,points de PIB,FRc
+2050,cout_vieillissement_ecart_migration_haute,-0.5309,points de PIB,FRc
+2050,cout_vieillissement_ecart_pgf_basse,0.3713,points de PIB,FRc
+2050,cout_vieillissement_ecart_pgf_haute,-0.0319,points de PIB,FRc
+2050,cout_vieillissement_ecart_risque_sante_dependance,1.522,points de PIB,FRc
+2050,croissance_potentielle,1.3066,%,FRa
+2050,dependance,2.4276,% du PIB,FRc
+2050,education,4.1155,% du PIB,FRc
+2050,ipc,2.0,%,FRa
+2050,retraites,13.7264,% du PIB,FRb
+2050,sante,8.9197,% du PIB,FRc
+2050,taux_nominal,3.9707,%,FRa
+2051,cout_vieillissement,29.162,% du PIB,FRc
+2051,cout_vieillissement_ecart_emploi_seniors_haut,-0.4811,points de PIB,FRc
+2051,cout_vieillissement_ecart_esperance_vie_haute,0.4028,points de PIB,FRc
+2051,cout_vieillissement_ecart_fecondite_basse,0.0265,points de PIB,FRc
+2051,cout_vieillissement_ecart_migration_basse,0.6664,points de PIB,FRc
+2051,cout_vieillissement_ecart_migration_haute,-0.5655,points de PIB,FRc
+2051,cout_vieillissement_ecart_pgf_basse,0.3608,points de PIB,FRc
+2051,cout_vieillissement_ecart_pgf_haute,-0.0843,points de PIB,FRc
+2051,cout_vieillissement_ecart_risque_sante_dependance,1.5919,points de PIB,FRc
+2051,croissance_potentielle,1.2938,%,FRa
+2051,dependance,2.443,% du PIB,FRc
+2051,education,4.1147,% du PIB,FRc
+2051,ipc,2.0,%,FRa
+2051,retraites,13.6742,% du PIB,FRb
+2051,sante,8.9301,% du PIB,FRc
+2051,taux_nominal,3.9853,%,FRa
+2052,cout_vieillissement,29.1165,% du PIB,FRc
+2052,cout_vieillissement_ecart_emploi_seniors_haut,-0.4763,points de PIB,FRc
+2052,cout_vieillissement_ecart_esperance_vie_haute,0.4531,points de PIB,FRc
+2052,cout_vieillissement_ecart_fecondite_basse,0.1036,points de PIB,FRc
+2052,cout_vieillissement_ecart_migration_basse,0.707,points de PIB,FRc
+2052,cout_vieillissement_ecart_migration_haute,-0.58,points de PIB,FRc
+2052,cout_vieillissement_ecart_pgf_basse,0.4295,points de PIB,FRc
+2052,cout_vieillissement_ecart_pgf_haute,-0.068,points de PIB,FRc
+2052,cout_vieillissement_ecart_risque_sante_dependance,1.6615,points de PIB,FRc
+2052,croissance_potentielle,1.279,%,FRa
+2052,dependance,2.4579,% du PIB,FRc
+2052,education,4.1118,% du PIB,FRc
+2052,ipc,2.0,%,FRa
+2052,retraites,13.6114,% du PIB,FRb
+2052,sante,8.9355,% du PIB,FRc
+2052,taux_nominal,4.0,%,FRa
+2053,cout_vieillissement,29.0886,% du PIB,FRc
+2053,cout_vieillissement_ecart_emploi_seniors_haut,-0.4576,points de PIB,FRc
+2053,cout_vieillissement_ecart_esperance_vie_haute,0.4895,points de PIB,FRc
+2053,cout_vieillissement_ecart_fecondite_basse,0.1979,points de PIB,FRc
+2053,cout_vieillissement_ecart_migration_basse,0.7303,points de PIB,FRc
+2053,cout_vieillissement_ecart_migration_haute,-0.5954,points de PIB,FRc
+2053,cout_vieillissement_ecart_pgf_basse,0.4623,points de PIB,FRc
+2053,cout_vieillissement_ecart_pgf_haute,-0.0581,points de PIB,FRc
+2053,cout_vieillissement_ecart_risque_sante_dependance,1.7317,points de PIB,FRc
+2053,croissance_potentielle,1.2655,%,FRa
+2053,dependance,2.4702,% du PIB,FRc
+2053,education,4.1067,% du PIB,FRc
+2053,ipc,2.0,%,FRa
+2053,retraites,13.5676,% du PIB,FRb
+2053,sante,8.944,% du PIB,FRc
+2053,taux_nominal,4.0,%,FRa
+2054,cout_vieillissement,29.1037,% du PIB,FRc
+2054,cout_vieillissement_ecart_emploi_seniors_haut,-0.4801,points de PIB,FRc
+2054,cout_vieillissement_ecart_esperance_vie_haute,0.4986,points de PIB,FRc
+2054,cout_vieillissement_ecart_fecondite_basse,0.2534,points de PIB,FRc
+2054,cout_vieillissement_ecart_migration_basse,0.7136,points de PIB,FRc
+2054,cout_vieillissement_ecart_migration_haute,-0.6288,points de PIB,FRc
+2054,cout_vieillissement_ecart_pgf_basse,0.4161,points de PIB,FRc
+2054,cout_vieillissement_ecart_pgf_haute,-0.0909,points de PIB,FRc
+2054,cout_vieillissement_ecart_risque_sante_dependance,1.8024,points de PIB,FRc
+2054,croissance_potentielle,1.2686,%,FRa
+2054,dependance,2.4812,% du PIB,FRc
+2054,education,4.0988,% du PIB,FRc
+2054,ipc,2.0,%,FRa
+2054,retraites,13.5704,% du PIB,FRb
+2054,sante,8.9533,% du PIB,FRc
+2054,taux_nominal,4.0,%,FRa
+2055,cout_vieillissement,29.0967,% du PIB,FRc
+2055,cout_vieillissement_ecart_emploi_seniors_haut,-0.5069,points de PIB,FRc
+2055,cout_vieillissement_ecart_esperance_vie_haute,0.4902,points de PIB,FRc
+2055,cout_vieillissement_ecart_fecondite_basse,0.3019,points de PIB,FRc
+2055,cout_vieillissement_ecart_migration_basse,0.7028,points de PIB,FRc
+2055,cout_vieillissement_ecart_migration_haute,-0.6627,points de PIB,FRc
+2055,cout_vieillissement_ecart_pgf_basse,0.4059,points de PIB,FRc
+2055,cout_vieillissement_ecart_pgf_haute,-0.1444,points de PIB,FRc
+2055,cout_vieillissement_ecart_risque_sante_dependance,1.8731,points de PIB,FRc
+2055,croissance_potentielle,1.2736,%,FRa
+2055,dependance,2.4909,% du PIB,FRc
+2055,education,4.0881,% du PIB,FRc
+2055,ipc,2.0,%,FRa
+2055,retraites,13.5543,% du PIB,FRb
+2055,sante,8.9634,% du PIB,FRc
+2055,taux_nominal,4.0,%,FRa
+2056,cout_vieillissement,29.0875,% du PIB,FRc
+2056,cout_vieillissement_ecart_emploi_seniors_haut,-0.4987,points de PIB,FRc
+2056,cout_vieillissement_ecart_esperance_vie_haute,0.5132,points de PIB,FRc
+2056,cout_vieillissement_ecart_fecondite_basse,0.3759,points de PIB,FRc
+2056,cout_vieillissement_ecart_migration_basse,0.7036,points de PIB,FRc
+2056,cout_vieillissement_ecart_migration_haute,-0.6919,points de PIB,FRc
+2056,cout_vieillissement_ecart_pgf_basse,0.439,points de PIB,FRc
+2056,cout_vieillissement_ecart_pgf_haute,-0.156,points de PIB,FRc
+2056,cout_vieillissement_ecart_risque_sante_dependance,1.9436,points de PIB,FRc
+2056,croissance_potentielle,1.2728,%,FRa
+2056,dependance,2.5005,% du PIB,FRc
+2056,education,4.0748,% du PIB,FRc
+2056,ipc,2.0,%,FRa
+2056,retraites,13.5379,% du PIB,FRb
+2056,sante,8.9742,% du PIB,FRc
+2056,taux_nominal,4.0,%,FRa
+2057,cout_vieillissement,29.0463,% du PIB,FRc
+2057,cout_vieillissement_ecart_emploi_seniors_haut,-0.4799,points de PIB,FRc
+2057,cout_vieillissement_ecart_esperance_vie_haute,0.5438,points de PIB,FRc
+2057,cout_vieillissement_ecart_fecondite_basse,0.4906,points de PIB,FRc
+2057,cout_vieillissement_ecart_migration_basse,0.7548,points de PIB,FRc
+2057,cout_vieillissement_ecart_migration_haute,-0.6859,points de PIB,FRc
+2057,cout_vieillissement_ecart_pgf_basse,0.4718,points de PIB,FRc
+2057,cout_vieillissement_ecart_pgf_haute,-0.1465,points de PIB,FRc
+2057,cout_vieillissement_ecart_risque_sante_dependance,2.0131,points de PIB,FRc
+2057,croissance_potentielle,1.2788,%,FRa
+2057,dependance,2.51,% du PIB,FRc
+2057,education,4.0589,% du PIB,FRc
+2057,ipc,2.0,%,FRa
+2057,retraites,13.4902,% du PIB,FRb
+2057,sante,8.9872,% du PIB,FRc
+2057,taux_nominal,4.0,%,FRa
+2058,cout_vieillissement,29.0514,% du PIB,FRc
+2058,cout_vieillissement_ecart_emploi_seniors_haut,-0.4736,points de PIB,FRc
+2058,cout_vieillissement_ecart_esperance_vie_haute,0.5742,points de PIB,FRc
+2058,cout_vieillissement_ecart_fecondite_basse,0.6091,points de PIB,FRc
+2058,cout_vieillissement_ecart_migration_basse,0.8052,points de PIB,FRc
+2058,cout_vieillissement_ecart_migration_haute,-0.6818,points de PIB,FRc
+2058,cout_vieillissement_ecart_pgf_basse,0.5264,points de PIB,FRc
+2058,cout_vieillissement_ecart_pgf_haute,-0.1744,points de PIB,FRc
+2058,cout_vieillissement_ecart_risque_sante_dependance,2.0818,points de PIB,FRc
+2058,croissance_potentielle,1.2797,%,FRa
+2058,dependance,2.5187,% du PIB,FRc
+2058,education,4.0409,% du PIB,FRc
+2058,ipc,2.0,%,FRa
+2058,retraites,13.4938,% du PIB,FRb
+2058,sante,8.9979,% du PIB,FRc
+2058,taux_nominal,4.0,%,FRa
+2059,cout_vieillissement,29.0267,% du PIB,FRc
+2059,cout_vieillissement_ecart_emploi_seniors_haut,-0.5024,points de PIB,FRc
+2059,cout_vieillissement_ecart_esperance_vie_haute,0.6152,points de PIB,FRc
+2059,cout_vieillissement_ecart_fecondite_basse,0.71,points de PIB,FRc
+2059,cout_vieillissement_ecart_migration_basse,0.8613,points de PIB,FRc
+2059,cout_vieillissement_ecart_migration_haute,-0.6805,points de PIB,FRc
+2059,cout_vieillissement_ecart_pgf_basse,0.5757,points de PIB,FRc
+2059,cout_vieillissement_ecart_pgf_haute,-0.146,points de PIB,FRc
+2059,cout_vieillissement_ecart_risque_sante_dependance,2.151,points de PIB,FRc
+2059,croissance_potentielle,1.2691,%,FRa
+2059,dependance,2.525,% du PIB,FRc
+2059,education,4.0217,% du PIB,FRc
+2059,ipc,2.0,%,FRa
+2059,retraites,13.4719,% du PIB,FRb
+2059,sante,9.0081,% du PIB,FRc
+2059,taux_nominal,4.0,%,FRa
+2060,cout_vieillissement,29.036,% du PIB,FRc
+2060,cout_vieillissement_ecart_emploi_seniors_haut,-0.5018,points de PIB,FRc
+2060,cout_vieillissement_ecart_esperance_vie_haute,0.6288,points de PIB,FRc
+2060,cout_vieillissement_ecart_fecondite_basse,0.7466,points de PIB,FRc
+2060,cout_vieillissement_ecart_migration_basse,0.8577,points de PIB,FRc
+2060,cout_vieillissement_ecart_migration_haute,-0.7021,points de PIB,FRc
+2060,cout_vieillissement_ecart_pgf_basse,0.5938,points de PIB,FRc
+2060,cout_vieillissement_ecart_pgf_haute,-0.1779,points de PIB,FRc
+2060,cout_vieillissement_ecart_risque_sante_dependance,2.2216,points de PIB,FRc
+2060,croissance_potentielle,1.2572,%,FRa
+2060,dependance,2.5278,% du PIB,FRc
+2060,education,4.0021,% du PIB,FRc
+2060,ipc,2.0,%,FRa
+2060,retraites,13.4895,% du PIB,FRb
+2060,sante,9.0166,% du PIB,FRc
+2060,taux_nominal,4.0,%,FRa
+2061,cout_vieillissement,29.0338,% du PIB,FRc
+2061,cout_vieillissement_ecart_emploi_seniors_haut,-0.5295,points de PIB,FRc
+2061,cout_vieillissement_ecart_esperance_vie_haute,0.6182,points de PIB,FRc
+2061,cout_vieillissement_ecart_fecondite_basse,0.7255,points de PIB,FRc
+2061,cout_vieillissement_ecart_migration_basse,0.8421,points de PIB,FRc
+2061,cout_vieillissement_ecart_migration_haute,-0.7284,points de PIB,FRc
+2061,cout_vieillissement_ecart_pgf_basse,0.5943,points de PIB,FRc
+2061,cout_vieillissement_ecart_pgf_haute,-0.2128,points de PIB,FRc
+2061,cout_vieillissement_ecart_risque_sante_dependance,2.2944,points de PIB,FRc
+2061,croissance_potentielle,1.2387,%,FRa
+2061,dependance,2.5289,% du PIB,FRc
+2061,education,3.9826,% du PIB,FRc
+2061,ipc,2.0,%,FRa
+2061,retraites,13.4964,% du PIB,FRb
+2061,sante,9.0259,% du PIB,FRc
+2061,taux_nominal,4.0,%,FRa
+2062,cout_vieillissement,29.0115,% du PIB,FRc
+2062,cout_vieillissement_ecart_emploi_seniors_haut,-0.5576,points de PIB,FRc
+2062,cout_vieillissement_ecart_esperance_vie_haute,0.6382,points de PIB,FRc
+2062,cout_vieillissement_ecart_fecondite_basse,0.7553,points de PIB,FRc
+2062,cout_vieillissement_ecart_migration_basse,0.856,points de PIB,FRc
+2062,cout_vieillissement_ecart_migration_haute,-0.7472,points de PIB,FRc
+2062,cout_vieillissement_ecart_pgf_basse,0.5927,points de PIB,FRc
+2062,cout_vieillissement_ecart_pgf_haute,-0.2362,points de PIB,FRc
+2062,cout_vieillissement_ecart_risque_sante_dependance,2.3682,points de PIB,FRc
+2062,croissance_potentielle,1.2097,%,FRa
+2062,dependance,2.5303,% du PIB,FRc
+2062,education,3.964,% du PIB,FRc
+2062,ipc,2.0,%,FRa
+2062,retraites,13.4849,% du PIB,FRb
+2062,sante,9.0324,% du PIB,FRc
+2062,taux_nominal,4.0,%,FRa
+2063,cout_vieillissement,28.9826,% du PIB,FRc
+2063,cout_vieillissement_ecart_emploi_seniors_haut,-0.5924,points de PIB,FRc
+2063,cout_vieillissement_ecart_esperance_vie_haute,0.644,points de PIB,FRc
+2063,cout_vieillissement_ecart_fecondite_basse,0.7994,points de PIB,FRc
+2063,cout_vieillissement_ecart_migration_basse,0.8267,points de PIB,FRc
+2063,cout_vieillissement_ecart_migration_haute,-0.7768,points de PIB,FRc
+2063,cout_vieillissement_ecart_pgf_basse,0.6095,points de PIB,FRc
+2063,cout_vieillissement_ecart_pgf_haute,-0.2976,points de PIB,FRc
+2063,cout_vieillissement_ecart_risque_sante_dependance,2.4414,points de PIB,FRc
+2063,croissance_potentielle,1.1752,%,FRa
+2063,dependance,2.5313,% du PIB,FRc
+2063,education,3.9469,% du PIB,FRc
+2063,ipc,2.0,%,FRa
+2063,retraites,13.4664,% du PIB,FRb
+2063,sante,9.038,% du PIB,FRc
+2063,taux_nominal,4.0,%,FRa
+2064,cout_vieillissement,28.961,% du PIB,FRc
+2064,cout_vieillissement_ecart_emploi_seniors_haut,-0.6017,points de PIB,FRc
+2064,cout_vieillissement_ecart_esperance_vie_haute,0.642,points de PIB,FRc
+2064,cout_vieillissement_ecart_fecondite_basse,0.8574,points de PIB,FRc
+2064,cout_vieillissement_ecart_migration_basse,0.8083,points de PIB,FRc
+2064,cout_vieillissement_ecart_migration_haute,-0.7851,points de PIB,FRc
+2064,cout_vieillissement_ecart_pgf_basse,0.6012,points de PIB,FRc
+2064,cout_vieillissement_ecart_pgf_haute,-0.3246,points de PIB,FRc
+2064,cout_vieillissement_ecart_risque_sante_dependance,2.5138,points de PIB,FRc
+2064,croissance_potentielle,1.1352,%,FRa
+2064,dependance,2.536,% du PIB,FRc
+2064,education,3.9322,% du PIB,FRc
+2064,ipc,2.0,%,FRa
+2064,retraites,13.4475,% du PIB,FRb
+2064,sante,9.0453,% du PIB,FRc
+2064,taux_nominal,4.0,%,FRa
+2065,cout_vieillissement,28.9463,% du PIB,FRc
+2065,cout_vieillissement_ecart_emploi_seniors_haut,-0.6051,points de PIB,FRc
+2065,cout_vieillissement_ecart_esperance_vie_haute,0.6721,points de PIB,FRc
+2065,cout_vieillissement_ecart_fecondite_basse,0.9221,points de PIB,FRc
+2065,cout_vieillissement_ecart_migration_basse,0.843,points de PIB,FRc
+2065,cout_vieillissement_ecart_migration_haute,-0.7836,points de PIB,FRc
+2065,cout_vieillissement_ecart_pgf_basse,0.6298,points de PIB,FRc
+2065,cout_vieillissement_ecart_pgf_haute,-0.3357,points de PIB,FRc
+2065,cout_vieillissement_ecart_risque_sante_dependance,2.5838,points de PIB,FRc
+2065,croissance_potentielle,1.0986,%,FRa
+2065,dependance,2.5462,% du PIB,FRc
+2065,education,3.9201,% du PIB,FRc
+2065,ipc,2.0,%,FRa
+2065,retraites,13.4319,% du PIB,FRb
+2065,sante,9.0481,% du PIB,FRc
+2065,taux_nominal,4.0,%,FRa
+2066,cout_vieillissement,28.9518,% du PIB,FRc
+2066,cout_vieillissement_ecart_emploi_seniors_haut,-0.5956,points de PIB,FRc
+2066,cout_vieillissement_ecart_esperance_vie_haute,0.7026,points de PIB,FRc
+2066,cout_vieillissement_ecart_fecondite_basse,0.9714,points de PIB,FRc
+2066,cout_vieillissement_ecart_migration_basse,0.8608,points de PIB,FRc
+2066,cout_vieillissement_ecart_migration_haute,-0.7797,points de PIB,FRc
+2066,cout_vieillissement_ecart_pgf_basse,0.6326,points de PIB,FRc
+2066,cout_vieillissement_ecart_pgf_haute,-0.3468,points de PIB,FRc
+2066,cout_vieillissement_ecart_risque_sante_dependance,2.6537,points de PIB,FRc
+2066,croissance_potentielle,1.0665,%,FRa
+2066,dependance,2.5597,% du PIB,FRc
+2066,education,3.9107,% du PIB,FRc
+2066,ipc,2.0,%,FRa
+2066,retraites,13.4257,% du PIB,FRb
+2066,sante,9.0557,% du PIB,FRc
+2066,taux_nominal,4.0,%,FRa
+2067,cout_vieillissement,28.9849,% du PIB,FRc
+2067,cout_vieillissement_ecart_emploi_seniors_haut,-0.5793,points de PIB,FRc
+2067,cout_vieillissement_ecart_esperance_vie_haute,0.729,points de PIB,FRc
+2067,cout_vieillissement_ecart_fecondite_basse,1.0416,points de PIB,FRc
+2067,cout_vieillissement_ecart_migration_basse,0.88,points de PIB,FRc
+2067,cout_vieillissement_ecart_migration_haute,-0.7682,points de PIB,FRc
+2067,cout_vieillissement_ecart_pgf_basse,0.639,points de PIB,FRc
+2067,cout_vieillissement_ecart_pgf_haute,-0.3386,points de PIB,FRc
+2067,cout_vieillissement_ecart_risque_sante_dependance,2.7246,points de PIB,FRc
+2067,croissance_potentielle,1.0294,%,FRa
+2067,dependance,2.5742,% du PIB,FRc
+2067,education,3.9041,% du PIB,FRc
+2067,ipc,2.0,%,FRa
+2067,retraites,13.4474,% du PIB,FRb
+2067,sante,9.0592,% du PIB,FRc
+2067,taux_nominal,4.0,%,FRa
+2068,cout_vieillissement,29.0263,% du PIB,FRc
+2068,cout_vieillissement_ecart_emploi_seniors_haut,-0.59,points de PIB,FRc
+2068,cout_vieillissement_ecart_esperance_vie_haute,0.7595,points de PIB,FRc
+2068,cout_vieillissement_ecart_fecondite_basse,1.1188,points de PIB,FRc
+2068,cout_vieillissement_ecart_migration_basse,0.8863,points de PIB,FRc
+2068,cout_vieillissement_ecart_migration_haute,-0.7834,points de PIB,FRc
+2068,cout_vieillissement_ecart_pgf_basse,0.6754,points de PIB,FRc
+2068,cout_vieillissement_ecart_pgf_haute,-0.3507,points de PIB,FRc
+2068,cout_vieillissement_ecart_risque_sante_dependance,2.7986,points de PIB,FRc
+2068,croissance_potentielle,0.9976,%,FRa
+2068,dependance,2.5871,% du PIB,FRc
+2068,education,3.9003,% du PIB,FRc
+2068,ipc,2.0,%,FRa
+2068,retraites,13.4754,% du PIB,FRb
+2068,sante,9.0635,% du PIB,FRc
+2068,taux_nominal,4.0,%,FRa
+2069,cout_vieillissement,29.059,% du PIB,FRc
+2069,cout_vieillissement_ecart_emploi_seniors_haut,-0.5815,points de PIB,FRc
+2069,cout_vieillissement_ecart_esperance_vie_haute,0.8106,points de PIB,FRc
+2069,cout_vieillissement_ecart_fecondite_basse,1.1717,points de PIB,FRc
+2069,cout_vieillissement_ecart_migration_basse,0.9381,points de PIB,FRc
+2069,cout_vieillissement_ecart_migration_haute,-0.7391,points de PIB,FRc
+2069,cout_vieillissement_ecart_pgf_basse,0.6986,points de PIB,FRc
+2069,cout_vieillissement_ecart_pgf_haute,-0.332,points de PIB,FRc
+2069,cout_vieillissement_ecart_risque_sante_dependance,2.8758,points de PIB,FRc
+2069,croissance_potentielle,0.973,%,FRa
+2069,dependance,2.6004,% du PIB,FRc
+2069,education,3.8992,% du PIB,FRc
+2069,ipc,2.0,%,FRa
+2069,retraites,13.4911,% du PIB,FRb
+2069,sante,9.0684,% du PIB,FRc
+2069,taux_nominal,4.0,%,FRa
+2070,cout_vieillissement,29.1529,% du PIB,FRc
+2070,cout_vieillissement_ecart_emploi_seniors_haut,-0.6016,points de PIB,FRc
+2070,cout_vieillissement_ecart_esperance_vie_haute,0.8235,points de PIB,FRc
+2070,cout_vieillissement_ecart_fecondite_basse,1.2046,points de PIB,FRc
+2070,cout_vieillissement_ecart_migration_basse,0.906,points de PIB,FRc
+2070,cout_vieillissement_ecart_migration_haute,-0.7783,points de PIB,FRc
+2070,cout_vieillissement_ecart_pgf_basse,0.6906,points de PIB,FRc
+2070,cout_vieillissement_ecart_pgf_haute,-0.366,points de PIB,FRc
+2070,cout_vieillissement_ecart_risque_sante_dependance,2.958,points de PIB,FRc
+2070,croissance_potentielle,0.9483,%,FRa
+2070,dependance,2.6144,% du PIB,FRc
+2070,education,3.9007,% du PIB,FRc
+2070,ipc,2.0,%,FRa
+2070,retraites,13.5675,% du PIB,FRb
+2070,sante,9.0703,% du PIB,FRc
+2070,taux_nominal,4.0,%,FRa

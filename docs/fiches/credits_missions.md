@@ -7,7 +7,7 @@ mise_a_jour: 2026-10-09
 # Fiche : crédits par mission du budget de l'État
 
 Lot 2.5 du plan (phase 2). Décisions du mainteneur du 9 octobre 2026, options (a) :
-- périmètre hors pensions, dotations aux collectivités et contribution à l'Union européenne ;
+- périmètre hors pensions, dotations aux collectivités et contribution à l'Union européenne ; borne de ±20 % et exclusion des régimes sociaux et de retraite confirmées ;
 - crédits de personnel gardés dans les missions ;
 - 1 € de crédit compte pour 1 € de solde ;
 - base : le PLF 2026.
@@ -20,9 +20,9 @@ Que change pour le solde et la dette une variation de x % des crédits de paieme
 
 | Paramètre | Valeur actuelle | Plage proposée sur le site | Source de la valeur actuelle |
 |-----------|-----------------|----------------------------|------------------------------|
-| Variation des crédits d'une mission (29 missions, 327,3 Md€ au total) | 0 % | de -20 à +20 %, par pas de 1 | `db_budget_vert_plf2026` |
+| Variation des crédits d'une mission (28 missions, 321,3 Md€ au total) | 0 % | de -20 à +20 %, par pas de 1 | `db_budget_vert_plf2026` |
 
-La borne de ±20 % est un choix du lot, sans source : **à confirmer par le mainteneur**. Une même mission ne peut être réglée deux fois (`verifier_double_compte`).
+La borne de ±20 % est un choix du lot, sans source, confirmé par le mainteneur. Une même mission ne peut être réglée deux fois (`verifier_double_compte`).
 
 ## 3. Méthode de calcul
 
@@ -32,7 +32,8 @@ La borne de ±20 % est un choix du lot, sans source : **à confirmer par le main
   - les crédits votés et les dépenses constatées de l'annexe 1 des PLRG 2023 à 2025.
 - **Périmètre** : programmes du budget général, c'est-à-dire ceux de l'annexe 1 des PLRG. En sont exclues :
   - la mission « Relations avec les collectivités territoriales », qui relève du futur levier des dotations ;
-  - les « Crédits non répartis » : c'est une provision répartie en cours d'année entre les autres missions, et leur exécution vaut zéro par construction.
+  - les « Crédits non répartis » : c'est une provision répartie en cours d'année entre les autres missions, et leur exécution vaut zéro par construction ;
+  - la mission « Régimes sociaux et de retraite » (subventions aux régimes spéciaux), qui relève du futur levier de l'indexation des pensions.
 
   Le budget vert ne contient ni la charge de la dette, ni les remboursements et dégrèvements. Les pensions de l'État, les prélèvements sur recettes, les budgets annexes et les comptes spéciaux ne font pas partie du budget général.
 - **Convention** : les crédits de personnel du budget vert excluent les cotisations versées au compte d'affectation spéciale « Pensions », qui sont un flux interne à l'État.
@@ -52,9 +53,9 @@ Le budget vert du PLF 2027 n'est pas encore publié : il faudra l'intégrer dès
 
 | Hypothèse (`registres/hypotheses.yaml`) | Valeur centrale | Plage | Effet sur le résultat |
 |-----------------------------------------|-----------------|-------|-----------------------|
-| `credits_missions_ecart_execution` | 0 | -0,145 à +0,076 | effet d'une variation des crédits |
+| `credits_missions_ecart_execution` | 0 | -0,147 à +0,090 | effet d'une variation des crédits |
 
-La plage reprend les 10e et 90e centiles de l'écart entre dépenses constatées et crédits votés, par mission, sur 2023-2025 (89 observations). Les tests unitaires la recalculent à partir des données.
+La plage reprend les 10e et 90e centiles de l'écart entre dépenses constatées et crédits votés, par mission, sur 2023-2025 (86 observations). Les tests unitaires la recalculent à partir des données.
 
 ## 6. Validation
 
@@ -66,9 +67,9 @@ La validation compare l'assiette que le modèle aurait retenue avec la loi de fi
 
 | Exercice | Dépenses constatées (PLRG) | Crédits votés en LFI (modèle) | Écart | Dans la tolérance |
 |----------|----------------------------|-------------------------------|-------|-------------------|
-| 2023 | 383,6 Md€ | 381,4 Md€ | -0,6 % | oui |
-| 2024 | 378,0 Md€ | 378,4 Md€ | +0,1 % | oui |
-| 2025 | 381,2 Md€ | 375,0 Md€ | -1,6 % | oui |
+| 2023 | 377,7 Md€ | 375,3 Md€ | -0,6 % | oui |
+| 2024 | 371,9 Md€ | 372,2 Md€ | +0,1 % | oui |
+| 2025 | 375,1 Md€ | 369,0 Md€ | -1,6 % | oui |
 
 Ces montants suivent la convention des PLRG, cotisations au compte « Pensions » comprises : ils sont plus élevés que l'assiette du budget vert. Les écarts par mission sont plus grands (par exemple « Investir pour la France de 2030 » : -37 % en 2025) ; ils fondent la plage.
 
@@ -78,7 +79,6 @@ Ces montants suivent la convention des PLRG, cotisations au compte « Pensions �
 
 - Un euro de crédit compte pour un euro de solde des administrations publiques. C'est faux quand le crédit finance un autre organisme public (opérateur, université, Sécurité sociale, collectivité) qui garde sa dépense.
 - Les crédits de personnel restent dans chaque mission : ce levier recoupera le futur levier « rémunérations publiques ». La combinaison des deux sera refusée.
-- La mission « Régimes sociaux et de retraite » (subventions aux régimes spéciaux) reste dans le levier. Elle recoupera le futur levier « indexation des pensions » : **à trancher par le mainteneur**.
 - Aucun effet sur la croissance ni sur les recettes (multiplicateur désactivé).
 - La comptabilité budgétaire (crédits de paiement) n'est pas la comptabilité nationale : décalages de calendrier, opérations financières.
 
@@ -87,3 +87,4 @@ Ces montants suivent la convention des PLRG, cotisations au compte « Pensions �
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
 | 2026-10-09 | Création du levier : extraction du budget vert 2026 et des PLRG 2023 à 2025 | 3 nouvelles références de validation, toutes dans la tolérance |
+| 2026-10-09 | Exclusion de « Régimes sociaux et de retraite » (décision du mainteneur) | références : 383,6 → 377,7, 378,0 → 371,9, 381,2 → 375,1 Md€ ; écarts inchangés au dixième (-0,6 %, +0,1 %, -1,6 %) ; plage -0,145/+0,076 → -0,147/+0,090 |

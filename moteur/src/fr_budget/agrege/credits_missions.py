@@ -10,8 +10,10 @@ Données (``data/processed/credits_missions/``, script ``pipelines/credits_missi
 
 Périmètre du levier (décisions du mainteneur du 9 octobre 2026, options (a)) : programmes du
 budget général (ceux de l'annexe 1 des PLRG), hors mission « Relations avec les collectivités
-territoriales » (levier des dotations aux collectivités) et hors « Crédits non répartis »
-(provision répartie en cours d'année entre les autres missions). Les pensions de l'État
+territoriales » (levier des dotations aux collectivités), hors « Crédits non répartis »
+(provision répartie en cours d'année entre les autres missions) et hors « Régimes sociaux et
+de retraite » (subventions aux régimes spéciaux, levier de l'indexation des pensions ;
+décision du mainteneur du 9 octobre 2026). Les pensions de l'État
 (compte d'affectation spéciale), les prélèvements sur recettes au profit des collectivités et
 de l'Union européenne, les budgets annexes et les autres comptes spéciaux ne sont pas dans le
 budget général. Les crédits de personnel restent dans chaque mission (option 2 (a)).
@@ -32,7 +34,11 @@ DOSSIER = RACINE_DEPOT / "data" / "processed" / "credits_missions"
 FICHIER_PLF = DOSSIER / "plf2026_programmes.csv"
 FICHIER_PLRG = DOSSIER / "plrg_programmes.csv"
 EXERCICES_PLRG = (2023, 2024, 2025)
-MISSIONS_EXCLUES = ("Relations avec les collectivités territoriales", "Crédits non répartis")
+MISSIONS_EXCLUES = (
+    "Relations avec les collectivités territoriales",
+    "Crédits non répartis",
+    "Régimes sociaux et de retraite",
+)
 # Dans les PLRG : missions hors du budget vert (remboursements et dégrèvements) ou exclues.
 MISSIONS_EXCLUES_PLRG = (*MISSIONS_EXCLUES, "Remboursements et dégrèvements")
 ANNEE_CREDITS = 2026

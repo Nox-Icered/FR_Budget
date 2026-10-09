@@ -25,10 +25,11 @@ Leviers disponibles :
   rapport du coût 2026 au PIB 2026). ``depense_fiscale`` : unité générique (1 Md€ de 2025, plage
   d'une dépense), dont le site se sert pour une dépense choisie dans le catalogue.
 - ``credits_mission_<mission>`` : variation de x % des crédits de paiement d'une mission du
-  budget général (``fr_budget.agrege.credits_missions``), de -20 à +20 %. Effet d'un pour
-  cent : moins 1 % des crédits demandés au PLF 2026 (une hausse dégrade le solde), ramené en
-  euros de 2025 comme les dépenses fiscales ; 1 € de crédit compte pour 1 € de solde des
-  administrations publiques (option 3 (a) du 9 octobre 2026). ``credits_missions`` : unité
+  budget général (``fr_budget.agrege.credits_missions``), de -20 à +20 % (borne confirmée
+  par le mainteneur). Effet d'un pour cent : moins 1 % des crédits demandés au PLF 2026
+  (une hausse dégrade le solde), ramené en euros de 2025 comme les dépenses fiscales ;
+  1 € de crédit compte pour 1 € de solde des administrations publiques (option 3 (a) du
+  9 octobre 2026). ``credits_missions`` : unité
   générique (hausse de 1 Md€ de 2025), dont le site se sert pour les missions réglées.
 
 Fourchettes : écart au scénario de référence, avec la plage du rendement du levier ; niveau
@@ -62,8 +63,8 @@ HYPOTHESE_ECART_DEPENSE = "depenses_fiscales_ecart_depense"
 LEVIER_CREDITS_UNITE = "credits_missions"
 PREFIXE_CREDITS_MISSION = "credits_mission_"
 HYPOTHESE_ECART_CREDITS = "credits_missions_ecart_execution"
-# Variation admise des crédits d'une mission, en % : choix du lot 2.5, à confirmer par le
-# mainteneur (aucune source ne borne une variation de crédits).
+# Variation admise des crédits d'une mission, en % : choix du lot 2.5, confirmé par le
+# mainteneur le 9 octobre 2026 (aucune source ne borne une variation de crédits).
 BORNE_CREDITS = 20.0
 MILLIONS_PAR_MILLIARD = 1000.0
 EUROS_PAR_MILLIARD = 1e9

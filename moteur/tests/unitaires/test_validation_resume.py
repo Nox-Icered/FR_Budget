@@ -44,6 +44,10 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
         for impot in ("impot_revenu", "impot_revenu_et_societes", "impot_societes")
         for annee in (2023, 2024)
     }
+    attendues |= {
+        "depenses_fiscales_ccomptes_total_2024_revise",
+        "depenses_fiscales_ccomptes_total_2023_definitif",
+    }
     attendues = {a for a in attendues if not a.endswith("_") and "{" not in a}
     assert {r for r, _ in _definitions()} == attendues
 

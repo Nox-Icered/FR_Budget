@@ -10,8 +10,8 @@ réalisé publié deux ans plus tard (registres/references/chiffrages.yaml) :
 
 Impôts : impôt sur le revenu, impôt sur le revenu et impôt sur les sociétés, impôt sur les
 sociétés (environ 85 % du coût du levier en 2026). Tolérance : ±10 % (règle de publication,
-CLAUDE.md). Ce n'est pas une source indépendante : la comparaison à la Cour des comptes reste
-à faire.
+CLAUDE.md). Ce n'est pas une source indépendante ; la confrontation à la Cour des comptes
+suit (``test_cout_total_prevu_face_a_la_cour_des_comptes``).
 """
 
 from __future__ import annotations
@@ -35,4 +35,32 @@ def test_cout_prevu_face_au_cout_realise(impot: str, plf: int, annee: int) -> No
     assert abs(ecart) <= TOLERANCE, (
         f"{identifiant} : prévision du PLF {plf} {modele:.0f} M€, réalisation {reference:.0f} M€, "
         f"écart {ecart:+.1%} (tolérance ±{TOLERANCE:.0%})"
+    )
+
+
+MILLIONS_PAR_MILLIARD = 1000.0
+
+
+@pytest.mark.validation
+@pytest.mark.parametrize(
+    ("identifiant", "plf", "annee"),
+    [
+        ("depenses_fiscales_ccomptes_total_2024_revise", 2024, 2024),
+        ("depenses_fiscales_ccomptes_total_2023_definitif", 2024, 2023),
+    ],
+)
+def test_cout_total_prevu_face_a_la_cour_des_comptes(
+    identifiant: str, plf: int, annee: int
+) -> None:
+    """Source indépendante : Cour des comptes, note d'exécution budgétaire 2024 sur les dépenses
+    fiscales (avril 2025), tableau page 18. Coût total de toutes les dépenses fiscales, nouvelle
+    convention TVA : prévision du PLF 2024 (modèle) face au montant révisé (2024) ou définitif
+    (2023) retenu par la Cour. La Cour retraite les données de l'administration fiscale : elle
+    contrôle le chiffrage, elle ne le refait pas."""
+    reference = chiffrage(identifiant)
+    modele = sum(cout_par_impot(plf, annee).values()) / MILLIONS_PAR_MILLIARD
+    ecart = (modele - reference) / reference
+    assert abs(ecart) <= TOLERANCE, (
+        f"{identifiant} : prévision du PLF {plf} {modele:.2f} Md€, Cour des comptes "
+        f"{reference:.2f} Md€, écart {ecart:+.1%} (tolérance ±{TOLERANCE:.0%})"
     )

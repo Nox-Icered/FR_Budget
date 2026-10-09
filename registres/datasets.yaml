@@ -50,6 +50,14 @@ datasets:
     methode_transformation: pipelines/niches_fiscales/extraire_tome2.py → data/processed/niches_fiscales/depenses_fiscales.csv ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-09
 
+  - id: ccomptes_neb_2024_depenses_fiscales_pdf
+    source: ccomptes_neb_2024_depenses_fiscales
+    description: Note d'analyse de l'exécution budgétaire 2024 sur les dépenses fiscales (PDF, 81 pages), déposée par le mainteneur (site de la Cour inaccessible depuis l'environnement de travail)
+    fichier: data/raw/niches_fiscales/ccomptes_neb_2024_depenses_fiscales.pdf
+    empreinte_sha256: 56eb509582193b0efa0b691fde4cce97959c57e322de83da11498b79fe52d0f3
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-09
+
   - id: drees_comptes_sante_financement_2026_csv
     source: drees_comptes_sante_financement_2026
     description: Dépense de santé par poste et par financeur, 2010 à 2025, en euros (export CSV de l'API, séparateur point-virgule)

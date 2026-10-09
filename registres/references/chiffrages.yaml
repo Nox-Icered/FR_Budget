@@ -771,3 +771,47 @@ chiffrages:
     localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Impôt sur les sociétés », colonne « Coût 2024 », pages 14 et 15 du fichier PDF
     saisi_le: 2026-10-09
     relecture: a_relire
+
+  - id: depenses_fiscales_ccomptes_total_2023_initial
+    levier: depenses_fiscales
+    source: ccomptes_neb_2024_depenses_fiscales
+    millesime: "2023 (prévision initiale du PLF 2023, recalculée en nouvelle convention TVA)"
+    mesure: Coût total des dépenses fiscales prévu pour 2023 (source indépendante, non utilisée par le modèle)
+    valeur: 77.676
+    unite: Md€
+    localisation: tableau « écarts de chiffrage des dépenses fiscales par année de référence sur le fondement de la nouvelle convention TVA (2022 - 2025) », page 18, ligne « Montant prévisionnel du PLF N », colonne 2023
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_ccomptes_total_2023_definitif
+    levier: depenses_fiscales
+    source: ccomptes_neb_2024_depenses_fiscales
+    millesime: "2023 (montant définitif du PLF 2025)"
+    mesure: Coût total définitif des dépenses fiscales de 2023, nouvelle convention TVA
+    valeur: 82.923
+    unite: Md€
+    localisation: tableau « écarts de chiffrage des dépenses fiscales par année de référence sur le fondement de la nouvelle convention TVA (2022 - 2025) », page 18, ligne « Montant définitif en PLF N+2 », colonne 2023
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_ccomptes_total_2024_revise
+    levier: depenses_fiscales
+    source: ccomptes_neb_2024_depenses_fiscales
+    millesime: "2024 (montant révisé du PLF 2025)"
+    mesure: Coût total révisé des dépenses fiscales de 2024, nouvelle convention TVA
+    valeur: 83.292
+    unite: Md€
+    localisation: tableau « écarts de chiffrage des dépenses fiscales par année de référence sur le fondement de la nouvelle convention TVA (2022 - 2025) », page 18, ligne « Montant révisé en PLF N+1 », colonne 2024
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_ccomptes_ecart_moyen_n_n2
+    levier: depenses_fiscales
+    source: ccomptes_neb_2024_depenses_fiscales
+    millesime: "2018 à 2023 (ancienne convention TVA)"
+    mesure: Écart moyen entre le coût total prévu en N et le coût définitif publié en N+2 (source indépendante, non utilisée par le modèle)
+    valeur: 3.4
+    unite: "%"
+    localisation: Page 17, encadré sur les écarts de prévision 2018-2025, « Le différentiel est en moyenne de 3,4 % sur la période considérée entre les prévisions en N et N+2 »
+    saisi_le: 2026-10-09
+    relecture: a_relire

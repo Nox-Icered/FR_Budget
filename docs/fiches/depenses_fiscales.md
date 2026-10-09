@@ -73,7 +73,20 @@ Par construction, le rendement est le coût officiel prévu : le comparer au mê
 
 À la prévision à un an (celle que le levier utilise), les écarts sont plus grands : impôt sur les sociétés -17 %, droits d'enregistrement +495 % (voir les plages).
 
-**Source indépendante : manquante.** La note d'analyse de l'exécution budgétaire de la Cour des comptes sur les dépenses fiscales (https://www.ccomptes.fr/sites/default/files/2025-04/NEB-2024-Depenses-fiscales.pdf) n'a pas pu être téléchargée depuis l'environnement de travail (connexion coupée). Statut « bêta, non validé » tant que cette confrontation n'est pas faite.
+**Source indépendante : Cour des comptes**, note d'analyse de l'exécution budgétaire 2024 sur les dépenses fiscales (avril 2025, `ccomptes_neb_2024_depenses_fiscales`, déposée par le mainteneur). La Cour retraite les données de l'administration fiscale : elle contrôle le chiffrage, elle ne le refait pas. Coût total de toutes les dépenses fiscales (nouvelle convention TVA), tableau page 18 :
+
+| Référence (Cour des comptes) | Valeur de référence | Valeur du modèle (prévision du PLF 2024) | Écart | Dans la tolérance |
+|------------------------------|---------------------|------------------------------------------|-------|-------------------|
+| Coût révisé 2024 (PLF 2025) | 83,29 Md€ | 78,74 Md€ | -5,5 % | oui |
+| Coût définitif 2023 (PLF 2025) | 82,92 Md€ | 81,34 Md€ | -1,9 % | oui |
+
+Ce que la Cour ajoute :
+- les montants des tomes II qu'elle cite (78,741, 81,344, 82,923, 83,292 et 85,616 Md€) sont ceux que l'extraction redonne ;
+- le coût prévu est **systématiquement sous-estimé** : le coût définitif dépasse la prévision initiale chaque année depuis 2019, de 3,4 % en moyenne sur 2018-2023 (`depenses_fiscales_ccomptes_ecart_moyen_n_n2`, page 17) et de 6,75 % pour 2023 (prévision initiale du PLF 2023 : 77,676 Md€, page 18) ;
+- la révision de 2024 (+4,55 Md€) vient de mesures nouvelles (0,85 Md€), de changements de méthode (1,95 Md€) et de l'évolution spontanée (1,76 Md€) (page 19) ;
+- la méthode de chiffrage « suppose le comportement des agents économiques stable » (page 42), comme le modèle.
+
+La valeur centrale du levier ne corrige pas ce biais : décision en attente du mainteneur.
 
 ## 7. Limites connues
 
@@ -88,4 +101,5 @@ Par construction, le rendement est le coût officiel prévu : le comparer au mê
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
 | 2026-10-09 | Création du levier (catalogue et impôts), extraction des trois tomes II | 6 nouvelles références de validation, toutes dans la tolérance ; tableau : 21 sur 29 |
+| 2026-10-09 | Confrontation à la Cour des comptes (NEB 2024) : 2 références ajoutées, dans la tolérance ; tableau : 23 sur 31 | aucun calcul modifié |
 | 2026-10-09 | Accises : remboursements des transporteurs, du transport collectif et des taxis repris du PLF 2026 (1 178, 183 et 59 M€ au lieu de 1 272, 183 et 50 M€) | aucun test de validation ; rendement d'un centime de gazole 0,225 → 0,232 Md€ |

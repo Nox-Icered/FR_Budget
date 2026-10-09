@@ -259,18 +259,19 @@ class AnneeFourchette:
     solde_primaire: Fourchette
 
 
-def baseline() -> list[AnneeFourchette]:
-    """Baseline 2025-2046 en fourchette (dette et solde primaire, en % du PIB).
+@cache
+def trajectoires() -> tuple[tuple[AnneeBaseline, ...], tuple[tuple[AnneeBaseline, ...], ...]]:
+    """Trajectoires complètes 2025-2046 : la centrale, puis chaque variante de la fourchette.
 
-    2025-2030 : RESF, sans fourchette (prévision officielle reprise telle quelle). 2031-2046 :
-    projection centrale et variantes, chaque hypothèse variant seule dans sa plage :
-    part refinancée et ajustement stock-flux (bornes de leur plage), coût du vieillissement
-    (chaque variante de l'Ageing Report), croissance en volume et taux de marché (borne haute
-    de leur plage, maintenue de 2031 à 2046).
+    2025-2030 : RESF, identique dans toutes les trajectoires. 2031-2046 : projection centrale
+    et variantes, chaque hypothèse variant seule dans sa plage : part refinancée et
+    ajustement stock-flux (bornes de leur plage), coût du vieillissement (chaque variante de
+    l'Ageing Report), croissance en volume et taux de marché (borne haute de leur plage,
+    maintenue de 2031 à 2046).
     """
     part = hypothese(HYPOTHESE_PART)
     sfa = hypothese(HYPOTHESE_STOCK_FLUX)
-    centrale = projection()
+    resf_lignes = tuple(trajectoire_resf())
     variantes = [
         projection(part_refinancee=part.plage.basse),
         projection(part_refinancee=part.plage.haute),
@@ -280,20 +281,24 @@ def baseline() -> list[AnneeFourchette]:
         projection(croissance_volume=hypothese(HYPOTHESE_CROISSANCE).plage.haute),
         projection(taux_marche=hypothese(HYPOTHESE_TAUX).plage.haute),
     ]
-    lignes = [
+    return (
+        resf_lignes + tuple(projection()),
+        tuple(resf_lignes + tuple(v) for v in variantes),
+    )
+
+
+def baseline() -> list[AnneeFourchette]:
+    """Baseline 2025-2046 en fourchette (dette et solde primaire, en % du PIB).
+
+    Les bornes sont les extrêmes de la trajectoire centrale et des variantes
+    (``trajectoires``). En 2025-2030, toutes coïncident : la fourchette est réduite au RESF.
+    """
+    centrale, variantes = trajectoires()
+    return [
         AnneeFourchette(
-            a.annee,
-            Fourchette(a.dette, a.dette, a.dette),
-            Fourchette(a.solde_primaire, a.solde_primaire, a.solde_primaire),
+            c.annee,
+            encadrer(c.dette, [v[i].dette for v in variantes]),
+            encadrer(c.solde_primaire, [v[i].solde_primaire for v in variantes]),
         )
-        for a in trajectoire_resf()
+        for i, c in enumerate(centrale)
     ]
-    for i, c in enumerate(centrale):
-        lignes.append(
-            AnneeFourchette(
-                c.annee,
-                encadrer(c.dette, [v[i].dette for v in variantes]),
-                encadrer(c.solde_primaire, [v[i].solde_primaire for v in variantes]),
-            )
-        )
-    return lignes

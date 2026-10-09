@@ -54,6 +54,10 @@ def _choc_taux_premiere_annee() -> float:
     return surcout_choc_taux_etat(annee=1).central
 
 
+def _choc_taux_cinquieme_annee() -> float:
+    return surcout_choc_taux_etat(annee=5).central
+
+
 def _definitions() -> list[tuple[str, Callable[[], float]]]:
     definitions: list[tuple[str, Callable[[], float]]] = []
     for taux in TAUX_TVA:
@@ -66,6 +70,7 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         ("tva_nette_totale_2022_dgtresor", partial(estimer_recette_totale, 2022)),
         ("tva_nette_totale_execution_2024", partial(estimer_recette_totale, 2024)),
         ("dette_etat_choc_taux_100pb_an_1", _choc_taux_premiere_annee),
+        ("dette_etat_choc_taux_100pb_an_5", _choc_taux_cinquieme_annee),
     ]
     return definitions
 

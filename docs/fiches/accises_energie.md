@@ -19,7 +19,7 @@ Que rapporte, par an, une hausse (ou une baisse) de x centimes par litre du tari
 | Tarif du gazole | 59,40 centimes par litre au 1er janvier 2025 | de -14 à +14 centimes | `openfisca_france_176_1_2` |
 | Tarif des essences | 66,29 centimes par litre pour le SP95-E10 au 1er janvier 2025 | de -14 à +14 centimes | `openfisca_france_176_1_2` |
 
-Bornes : la baisse du gazole s'arrête au tarif réduit du transport routier de marchandises (45,19 centimes, `accises_tarif_trm_2025`) ; au-delà, le remboursement des transporteurs changerait de sens. La hausse et le levier des essences reprennent la même amplitude (choix à valider par le mainteneur).
+Bornes : la baisse du gazole s'arrête au tarif réduit du transport routier de marchandises (45,19 centimes, `accises_tarif_trm_2025`) ; au-delà, le remboursement des transporteurs changerait de sens. La hausse et le levier des essences reprennent la même amplitude. Bornes et statut « bêta » confirmés par le mainteneur le 9 octobre 2026.
 
 ## 3. Méthode de calcul
 

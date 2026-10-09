@@ -29,7 +29,7 @@ from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, replace
 
 from fr_budget import baseline as module_baseline
-from fr_budget.agrege import accises
+from fr_budget.agrege import accises, impot_societes
 from fr_budget.agrege.tva import HYPOTHESE_REPARTITION, fourchette_point_tva, taux_tva
 from fr_budget.apu import comptes_apu, ratio_pib
 from fr_budget.baseline import ANNEE_FIN, AnneeBaseline, trajectoires
@@ -41,6 +41,8 @@ LEVIER_TVA_NORMAL = "tva_taux_normal"
 LEVIER_ACCISE_GAZOLE = "accise_gazole"
 LEVIER_ACCISE_ESSENCES = "accise_essences"
 LEVIERS_ACCISES = {LEVIER_ACCISE_GAZOLE: "gazole", LEVIER_ACCISE_ESSENCES: "essences"}
+LEVIER_IS_TAUX_NORMAL = "is_taux_normal"
+LEVIER_IS_SURTAXE = "is_surtaxe_grandes_entreprises"
 ANNEE_REFERENCE = 2025
 # Premier exercice dont le budget n'est pas encore voté : celui du PLF 2027.
 ANNEE_PREMIERE_MESURE = 2027
@@ -63,6 +65,12 @@ def rendement_unitaire(levier: str) -> Fourchette:
     levier (``fr_budget.agrege.accises.assiette_levier``), bornes de l'hypothèse des masses
     volumiques.
     """
+    if levier == LEVIER_IS_TAUX_NORMAL:
+        valeur = impot_societes.rendement_point_taux_normal(ANNEE_REFERENCE)
+        return Fourchette(valeur, valeur, valeur)
+    if levier == LEVIER_IS_SURTAXE:
+        valeur = impot_societes.assiette_surtaxe(ANNEE_REFERENCE) / POURCENT
+        return Fourchette(valeur, valeur, valeur)
     if levier in LEVIERS_ACCISES:
         cle = LEVIERS_ACCISES[levier]
         plage = hypothese(accises.HYPOTHESE_MASSES).plage
@@ -85,6 +93,10 @@ def taux_reference(levier: str) -> float:
     TVA : taux normal en %. Accises : tarif en centimes par litre du gazole, et du SP95-E10
     (essence la plus vendue en 2025 selon le SDES) pour les essences.
     """
+    if levier == LEVIER_IS_TAUX_NORMAL:
+        return impot_societes.taux_is(ANNEE_REFERENCE)["normal"] * POURCENT
+    if levier == LEVIER_IS_SURTAXE:
+        return 0.0
     if levier == LEVIER_ACCISE_GAZOLE:
         return accises.tarifs(ANNEE_REFERENCE)["gazole"]
     if levier == LEVIER_ACCISE_ESSENCES:
@@ -106,6 +118,15 @@ def bornes_levier(levier: str) -> tuple[float, float]:
         taux = taux_tva(ANNEE_REFERENCE)
         ecart = (taux["normal"] - taux["intermediaire"]) * POURCENT
         return -ecart, ecart
+    if levier == LEVIER_IS_TAUX_NORMAL:
+        # La baisse s'arrête au taux réduit des PME ; la hausse admise est de même ampleur.
+        taux = impot_societes.taux_is(ANNEE_REFERENCE)
+        ecart = (taux["normal"] - taux["reduit"]) * POURCENT
+        return -ecart, ecart
+    if levier == LEVIER_IS_SURTAXE:
+        # Surtaxe en pourcentage de l'IS dû, de 0 au taux le plus élevé de la contribution
+        # exceptionnelle de 2025 (41,2 %, évaluation préalable de l'article 11 du PLF 2025).
+        return 0.0, chiffrage("is_taux_contribution_exceptionnelle_haute")
     if levier in LEVIERS_ACCISES:
         # La baisse du gazole s'arrête au tarif réduit du transport routier de marchandises
         # (au-delà, le mécanisme de remboursement s'inverse) ; même amplitude pour la hausse
@@ -215,6 +236,8 @@ def reponse_unitaire(levier: str, annee: int) -> list[AnneeScenario]:
 
 
 LEVIERS_REGISTRE = {
+    LEVIER_IS_TAUX_NORMAL: "impot_societes",
+    LEVIER_IS_SURTAXE: "impot_societes",
     LEVIER_TVA_NORMAL: "tva",
     LEVIER_ACCISE_GAZOLE: "accises_energie",
     LEVIER_ACCISE_ESSENCES: "accises_energie",
@@ -236,7 +259,13 @@ PROVENANCE_ACCISES = (
     ),
     (accises.HYPOTHESE_MASSES,),
 )
+PROVENANCE_IS = (
+    ("dgfip_statistiques_51_is_2025", "openfisca_france_176_1_2", "plf2025_evaluations_prealables"),
+    (),
+)
 PROVENANCE_LEVIERS = {
+    LEVIER_IS_TAUX_NORMAL: PROVENANCE_IS,
+    LEVIER_IS_SURTAXE: PROVENANCE_IS,
     LEVIER_TVA_NORMAL: (
         (
             "insee_tes_2025",

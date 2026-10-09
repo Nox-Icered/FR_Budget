@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from functools import partial
 
 from fr_budget.agrege.accises import recette_brute
+from fr_budget.agrege.impot_societes import is_brut
 from fr_budget.agrege.tva import estimer_point_tva, estimer_recette_totale
 from fr_budget.dette import surcout_choc_taux_etat
 from fr_budget.registres.acces import chiffrage
@@ -74,6 +75,8 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         ("dette_etat_choc_taux_100pb_an_5", _choc_taux_cinquieme_annee),
         ("accises_ticpe_brute_totale_2023", partial(recette_brute, 2023)),
         ("accises_ticpe_brute_totale_2024", partial(recette_brute, 2024)),
+        ("is_brut_2024_dgfip", partial(is_brut, 2024)),
+        ("is_brut_2025_dgfip", partial(is_brut, 2025)),
     ]
     return definitions
 

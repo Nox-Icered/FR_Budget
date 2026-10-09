@@ -218,6 +218,46 @@ datasets:
     methode_transformation: aucune ; masses volumiques saisies dans registres/hypotheses.yaml
     telecharge_le: 2026-10-09
 
+  - id: dgfip_stat_51_is_2025_xlsx
+    source: dgfip_statistiques_51_is_2025
+    description: Tableaux de la note DGFiP Statistiques n° 51 (bénéfice imposable par taux, IS brut par taille d'entreprise)
+    fichier: data/raw/impot_societes/dgfip/dgfip_stat_51_is-2025.xlsx
+    empreinte_sha256: 18fb9a89af1977e0eb4a212dcfdfafe1e0507407b65a4bb78a3038279093c91b
+    methode_transformation: pipelines/impot_societes/extraire_dgfip.py → data/processed/impot_societes/benefice_imposable.csv
+    telecharge_le: 2026-10-09
+
+  - id: dgfip_stat_51_is_2025_pdf
+    source: dgfip_statistiques_51_is_2025
+    description: Note DGFiP Statistiques n° 51 (PDF, 9 pages)
+    fichier: data/raw/impot_societes/dgfip/dgfip_stat_51_is-2025.pdf
+    empreinte_sha256: 4c40eed2020415538edf5c72ad6cc3b6575e6da2259ea170e1bb232020464ff7
+    methode_transformation: aucune ; document de référence
+    telecharge_le: 2026-10-09
+
+  - id: dgfip_stat_39_is_2024_xlsx
+    source: dgfip_statistiques_39_is_2024
+    description: Tableaux de la note DGFiP Statistiques n° 39 (bénéfice imposable par taux 2018-2024, IS brut par taille d'entreprise)
+    fichier: data/raw/impot_societes/dgfip/dgfip_stat_39_is-2024.xlsx
+    empreinte_sha256: 9637d62fc2f33c36bad5999025e8b077799ab23d5e6630039d1e0f3c4ab82308
+    methode_transformation: valeur d'IS brut 2024 saisie dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-09
+
+  - id: dgfip_stat_39_is_2024_pdf
+    source: dgfip_statistiques_39_is_2024
+    description: Note DGFiP Statistiques n° 39 (PDF, 8 pages)
+    fichier: data/raw/impot_societes/dgfip/dgfip_stat_39_is-2024.pdf
+    empreinte_sha256: 8b474509c70e1fc36035380d5adc25bcec54cf9fc535697c79494a6348252859
+    methode_transformation: aucune ; document de référence
+    telecharge_le: 2026-10-09
+
+  - id: plf2025_evaluations_prealables_pdf
+    source: plf2025_evaluations_prealables
+    description: Évaluations préalables des articles du PLF 2025 (PDF)
+    fichier: data/raw/impot_societes/plf/plf2025_evaluations_prealables.pdf
+    empreinte_sha256: 7531aecda4536173e274a5fe151f582cf52cd967dfd389d9c8c31e6a12bd2857
+    methode_transformation: aucune ; valeurs saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-09
+
   - id: eurostat_gov_10a_exp_fr_json
     source: eurostat_gov_10a_exp
     description: Dépenses totales des APU françaises par fonction COFOG (80 postes) et par sous-secteur, millions d'euros, JSON-stat

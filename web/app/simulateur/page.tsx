@@ -22,6 +22,10 @@ export default function PageSimulateur() {
           rendement_tva: nombre(donnees.leviers.tva_taux_normal.rendement_unitaire),
           rendement_gazole: deuxDecimales(donnees.leviers.accise_gazole.rendement_unitaire),
           rendement_essences: deuxDecimales(donnees.leviers.accise_essences.rendement_unitaire),
+          rendement_is: nombre(donnees.leviers.is_taux_normal.rendement_unitaire),
+          rendement_surtaxe: deuxDecimales(
+            donnees.leviers.is_surtaxe_grandes_entreprises.rendement_unitaire,
+          ),
         })}
       </p>
       <ul>
@@ -29,6 +33,7 @@ export default function PageSimulateur() {
         <li>{texte("simulateur.limite_croissance")}</li>
         <li>{texte("simulateur.limite_fourchette")}</li>
         <li>{texte("simulateur.limite_tva_accise")}</li>
+        <li>{texte("simulateur.limite_is_calendrier")}</li>
       </ul>
       <p>
         <a href="/validation/">{texte("simulateur.lien_validation")}</a>

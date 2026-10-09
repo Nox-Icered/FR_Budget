@@ -22,7 +22,7 @@ leviers:
     parametres_reglables: [Taux normal, Taux PME, Seuils]
     moteur: agrege
     references_visees: [Voies et Moyens, Rapports du Conseil des prélèvements obligatoires]
-    statut: non_publie
+    statut: beta
 
   - id: csg
     libelle: CSG

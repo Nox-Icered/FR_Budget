@@ -101,6 +101,9 @@
     "unite": "Unité : {unite}. Un solde primaire positif est un excédent avant paiement des intérêts.",
     "methode_titre": "Méthode",
     "methode": "Après 2030, la dette suit la formule dette de l'année suivante = dette × (1 + taux d'intérêt) / (1 + croissance) - solde primaire + ajustement stock-flux. Le solde primaire de 2030 est maintenu, puis corrigé de l'évolution des dépenses de retraite, de santé, de dépendance et d'éducation projetée par la Commission européenne. La fourchette fait varier une hypothèse à la fois dans sa plage.",
-    "hypotheses_titre": "Hypothèses utilisées"
+    "hypotheses_titre": "Hypothèses utilisées",
+    "graphique_titre": "Dette publique, en % du PIB : valeur centrale et fourchette",
+    "graphique_raccord": "Début de la projection",
+    "graphique_lecture": "La ligne donne la valeur centrale, la zone colorée la fourchette basse-haute. Toutes les valeurs figurent dans le tableau ci-dessous."
   }
 }

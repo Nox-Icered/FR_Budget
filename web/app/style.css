@@ -53,3 +53,34 @@ th.groupe {
   text-align: left;
   padding-top: 1rem;
 }
+
+/* Graphique : une seule série (palette de référence, emplacement 1, validée clair et sombre). */
+:root { --serie-1: #2a78d6; }
+@media (prefers-color-scheme: dark) { :root { --serie-1: #3987e5; } }
+.graphique { margin: 16px 0; }
+.graphique figcaption { font-weight: 600; margin-bottom: 4px; }
+.graphique-cadre { position: relative; }
+.graphique svg { width: 100%; height: auto; display: block; touch-action: pan-y; }
+.graphique .grille { stroke: var(--trait); stroke-width: 1; }
+.graphique .axe { fill: var(--discret); font-size: 12px; }
+.graphique .bande { fill: var(--serie-1); fill-opacity: 0.18; }
+.graphique .centrale { fill: none; stroke: var(--serie-1); stroke-width: 2; }
+.graphique .raccord { stroke: var(--discret); stroke-width: 1; stroke-dasharray: 4 3; }
+.graphique .viseur { stroke: var(--discret); stroke-width: 1; }
+.graphique .point { fill: var(--serie-1); stroke: var(--fond); stroke-width: 2; }
+.infobulle {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  background: var(--fond);
+  border: 1px solid var(--trait);
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+@media (prefers-color-scheme: dark) { .graphique .bande { fill-opacity: 0.3; } }
+@media (max-width: 40rem) { .graphique .axe { font-size: 22px; } }

@@ -1,5 +1,6 @@
 import { texte, nombre } from "../../lib/textes";
 import { lire, type Baseline } from "../../lib/donnees";
+import { GraphiqueDette } from "./graphique";
 
 export default function PageBaseline() {
   const b = lire<Baseline>("baseline.json");
@@ -12,6 +13,18 @@ export default function PageBaseline() {
         </p>
       )}
       <p>{texte("baseline.intro", { raccord: b.annee_raccord })}</p>
+      <GraphiqueDette
+        points={b.valeurs.map((v) => ({ annee: v.annee, ...v.dette }))}
+        raccord={b.annee_raccord}
+        libelles={{
+          titre: texte("baseline.graphique_titre"),
+          bas: texte("baseline.bas"),
+          central: texte("baseline.central"),
+          haut: texte("baseline.haut"),
+          raccord: texte("baseline.graphique_raccord"),
+          unite: texte("baseline.graphique_lecture"),
+        }}
+      />
       <div className="defilement">
         <table>
           <thead>

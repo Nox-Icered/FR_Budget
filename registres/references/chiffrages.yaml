@@ -540,3 +540,69 @@ chiffrages:
     localisation: Section « B) Le rendement budgétaire », première phrase
     saisi_le: 2026-10-09
     relecture: a_relire
+
+  - id: is_brut_2024_dgfip
+    levier: impot_societes
+    source: dgfip_statistiques_39_is_2024
+    millesime: "2024 (bénéfices 2024)"
+    mesure: IS brut des entreprises imposées à l'IS, avant réductions et crédits d'impôt
+    valeur: 69.05
+    unite: Md€
+    localisation: Fichier de tableaux, onglet « Tableau 2 », ligne « IS brut », colonne « Ensemble » (69 047 590 312 €)
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: is_brut_2025_dgfip
+    levier: impot_societes
+    source: dgfip_statistiques_51_is_2025
+    millesime: "2025 (bénéfices 2025)"
+    mesure: IS brut des entreprises imposées à l'IS, avant réductions et crédits d'impôt
+    valeur: 70.47
+    unite: Md€
+    localisation: Fichier de tableaux, onglet « Tableau 2 », ligne « TOTAL », colonne « IS brut » (70,47417 Md€)
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: is_contribution_exceptionnelle_2025_plf
+    levier: impot_societes
+    source: plf2025_evaluations_prealables
+    millesime: "PLF 2025 (résultats 2023)"
+    mesure: Rendement de la contribution exceptionnelle sur les bénéfices des grandes entreprises (20,6 % ou 41,2 % de l'IS des sociétés au chiffre d'affaires d'au moins 1 Md€), première année
+    valeur: 8.0
+    unite: Md€
+    localisation: Article 11, section 4.2.1 « Incidences budgétaires », page 123
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: is_contribution_exceptionnelle_2025_fipeco
+    levier: impot_societes
+    source: fipeco_impot_societes
+    millesime: "2025 (réalisé)"
+    mesure: Rendement de la contribution exceptionnelle sur les bénéfices des grandes entreprises (source indépendante)
+    valeur: 7.5
+    unite: Md€
+    localisation: Section sur les taux, paragraphe sur la loi de finances pour 2025
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: is_taux_contribution_exceptionnelle_haute
+    levier: impot_societes
+    source: plf2025_evaluations_prealables
+    millesime: "PLF 2025"
+    mesure: Taux de la contribution exceptionnelle pour les sociétés au chiffre d'affaires d'au moins 3 Md€, premier exercice (en % de l'IS dû)
+    valeur: 41.2
+    unite: "%"
+    localisation: Article 11, texte proposé, IV. B., page 120
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: is_taux_contribution_exceptionnelle_basse
+    levier: impot_societes
+    source: plf2025_evaluations_prealables
+    millesime: "PLF 2025"
+    mesure: Taux de la contribution exceptionnelle pour les sociétés au chiffre d'affaires de 1 à 3 Md€, premier exercice (en % de l'IS dû)
+    valeur: 20.6
+    unite: "%"
+    localisation: Article 11, texte proposé, IV. A., page 120
+    saisi_le: 2026-10-09
+    relecture: a_relire

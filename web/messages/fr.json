@@ -121,7 +121,7 @@
     "fourchette": "{central} ({bas} à {haut})",
     "unite": "En points de PIB. Valeur centrale, puis fourchette basse et haute entre parenthèses. Un écart de solde positif est une amélioration du solde.",
     "methode_titre": "Méthode",
-    "methode": "Un point de taux normal de TVA rapporte {rendement_tva} milliards d'euros en 2025, une fois retirée la TVA payée par les administrations elles-mêmes. Un centime par litre rapporte {rendement_gazole} milliard d'euros sur le gazole, une fois retirés les volumes remboursés aux transporteurs routiers, au transport collectif et aux taxis, et {rendement_essences} milliard d'euros sur les essences. Ces montants sont tenus constants en part du PIB. La dette est recalculée chaque année avec les mêmes hypothèses que la trajectoire sans réforme ; une dette plus faible porte moins d'intérêts.",
+    "methode": "Un point de taux normal de TVA rapporte {rendement_tva} milliards d'euros en 2025, une fois retirée la TVA payée par les administrations elles-mêmes. Un centime par litre rapporte {rendement_gazole} milliard d'euros sur le gazole, une fois retirés les volumes remboursés aux transporteurs routiers, au transport collectif et aux taxis, et {rendement_essences} milliard d'euros sur les essences. Un point de taux normal de l'impôt sur les sociétés rapporte {rendement_is} milliards d'euros, et un point de surtaxe sur l'impôt des grandes entreprises {rendement_surtaxe} milliard d'euros (bénéfices 2025). Ces montants sont tenus constants en part du PIB. La dette est recalculée chaque année avec les mêmes hypothèses que la trajectoire sans réforme ; une dette plus faible porte moins d'intérêts.",
     "limite_comportement": "Les achats ne changent pas avec les prix : aucun effet de comportement n'est pris en compte.",
     "limite_croissance": "La mesure n'a pas d'effet sur la croissance ni sur les prix.",
     "limite_fourchette": "Les fourchettes des chiffrages sont étroites : elles ne couvrent pas toute l'erreur des modèles, publiée sur la page Validation.",
@@ -139,8 +139,17 @@
       "accise_essences": {
         "libelle": "Accise sur les essences SP95, SP95-E10 et SP98 (SP95-E10 : {reference} centimes par litre au 1er janvier {annee})",
         "valeur": "{valeur} centime(s) par litre"
+      },
+      "is_taux_normal": {
+        "libelle": "Taux normal de l'impôt sur les sociétés ({reference} % en {annee})",
+        "valeur": "{valeur} point(s)"
+      },
+      "is_surtaxe_grandes_entreprises": {
+        "libelle": "Surtaxe sur l'impôt sur les sociétés des entreprises dont le chiffre d'affaires dépasse 1 milliard d'euros, en % de l'impôt dû, en plus des contributions déjà votées",
+        "valeur": "{valeur} %"
       }
     },
-    "limite_tva_accise": "La hausse de l'accise augmente aussi la TVA payée sur le carburant : cet effet n'est pas compté."
+    "limite_tva_accise": "La hausse de l'accise augmente aussi la TVA payée sur le carburant : cet effet n'est pas compté.",
+    "limite_is_calendrier": "L'impôt sur les sociétés d'une année est en partie versé l'année suivante : l'effet de la première année est surestimé."
   }
 }

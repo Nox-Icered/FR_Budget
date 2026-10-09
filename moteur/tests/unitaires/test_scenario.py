@@ -149,3 +149,19 @@ def test_leviers_accises_bornes_et_additivite() -> None:
     )
     for a, b, c in zip(gazole, essences, deux, strict=True):
         assert c.ecart_dette.central == pytest.approx(a.ecart_dette.central + b.ecart_dette.central)
+
+
+def test_leviers_impot_societes() -> None:
+    from fr_budget.agrege.impot_societes import assiette_surtaxe, rendement_point_taux_normal
+    from fr_budget.scenario import LEVIER_IS_SURTAXE, LEVIER_IS_TAUX_NORMAL, rendement_unitaire
+
+    assert rendement_unitaire(LEVIER_IS_TAUX_NORMAL).central == pytest.approx(
+        rendement_point_taux_normal(2025)
+    )
+    assert rendement_unitaire(LEVIER_IS_SURTAXE).central == pytest.approx(
+        assiette_surtaxe(2025) / 100
+    )
+    assert bornes_levier(LEVIER_IS_TAUX_NORMAL) == pytest.approx((-10.0, 10.0))
+    assert bornes_levier(LEVIER_IS_SURTAXE) == pytest.approx((0.0, 41.2))
+    with pytest.raises(ValueError, match="bornes"):
+        scenario([Mesure(LEVIER_IS_SURTAXE, -1.0, 2027)])

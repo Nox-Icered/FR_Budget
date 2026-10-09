@@ -12,6 +12,8 @@ const LEVIERS: { id: string; pas: number }[] = [
   { id: "tva_taux_normal", pas: 0.5 },
   { id: "accise_gazole", pas: 1 },
   { id: "accise_essences", pas: 1 },
+  { id: "is_taux_normal", pas: 0.5 },
+  { id: "is_surtaxe_grandes_entreprises", pas: 1 },
 ];
 const ANNEES_AFFICHEES = [2027, 2030, 2035, 2040, 2046];
 

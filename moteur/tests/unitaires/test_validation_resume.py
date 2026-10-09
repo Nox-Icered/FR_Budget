@@ -23,7 +23,12 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
     dette."""
     textes = "".join(
         (RACINE_DEPOT / "moteur" / "tests" / "validation" / f).read_text(encoding="utf-8")
-        for f in ("test_levier_tva.py", "test_dette_choc_taux.py", "test_levier_accises.py")
+        for f in (
+            "test_levier_tva.py",
+            "test_dette_choc_taux.py",
+            "test_levier_accises.py",
+            "test_levier_impot_societes.py",
+        )
     )
     attendues = set(re.findall(r'"((?:tva|dette)_[a-z0-9_]+)"', textes))
     attendues |= {
@@ -32,6 +37,7 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
         for taux in ("ensemble", "taux_2_1", "taux_5_5", "taux_10", "taux_20")
     }
     attendues |= {f"accises_ticpe_brute_totale_{annee}" for annee in (2023, 2024)}
+    attendues |= {f"is_brut_{annee}_dgfip" for annee in (2024, 2025)}
     attendues = {a for a in attendues if not a.endswith("_") and "{" not in a}
     assert {r for r, _ in _definitions()} == attendues
 

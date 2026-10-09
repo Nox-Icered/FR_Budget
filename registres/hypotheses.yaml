@@ -151,7 +151,7 @@ hypotheses:
       points de PIB. Aucune source ne fournit encore l'élasticité de chaque recette au PIB : la
       plage est nulle et cette limite est affichée. Une plage sourcée remplacera cette
       convention quand l'élasticité sera saisie.
-    instruments: [tva, accises_energie]
+    instruments: [tva, accises_energie, impot_societes]
 
   - id: accises_masses_volumiques
     libelle: Masses volumiques servant à convertir en litres les ventes de carburants publiées en tonnes

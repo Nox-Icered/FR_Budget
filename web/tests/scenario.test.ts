@@ -68,3 +68,14 @@ test("deux leviers s'additionnent", () => {
   const [, b] = calculer(deux, [{ levier: "l", valeur: 1 }, { levier: "m", valeur: 2 }], 2027);
   assert.ok(Math.abs(b.ecart_dette.central - 3 * a.ecart_dette.central) < 1e-12);
 });
+
+test("mesures de signes opposés : bornes combinées comme dans le moteur", () => {
+  // Moteur (fr_budget.scenario) : borne basse = somme des bornes basses de chaque mesure,
+  // une mesure négative prenant sa réponse haute. +1 et -1 sur des réponses 0,9 à 1,1 :
+  // écart central 0, bornes -0,2 et +0,2.
+  const deux = { ...donnees, leviers: { ...donnees.leviers, m: donnees.leviers.l } };
+  const [, l] = calculer(deux, [{ levier: "l", valeur: 1 }, { levier: "m", valeur: -1 }], 2027);
+  assert.ok(Math.abs(l.ecart_solde_primaire.central) < 1e-12);
+  assert.ok(Math.abs(l.ecart_solde_primaire.bas + 0.2) < 1e-12);
+  assert.ok(Math.abs(l.ecart_solde_primaire.haut - 0.2) < 1e-12);
+});

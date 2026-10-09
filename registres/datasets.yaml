@@ -178,6 +178,46 @@ datasets:
     methode_transformation: aucune ; document de référence
     telecharge_le: 2026-10-08
 
+  - id: sdes_conso_produits_petroliers_csv
+    source: sdes_conso_produits_petroliers
+    description: Ventes mensuelles de produits pétroliers en France métropolitaine, en tonnes (CSV)
+    fichier: data/raw/accises/sdes/consommation_produits_petroliers_mensuelle.csv
+    empreinte_sha256: f2a12905cfd1b549f2b1670635b33be2669eeb44c9c97c9a5d698eacd5853e42
+    methode_transformation: pipelines/accises/extraire_ventes_sdes.py → data/processed/accises/ventes_produits_petroliers.csv
+    telecharge_le: 2026-10-09
+
+  - id: sdes_conso_produits_petroliers_variables_pdf
+    source: sdes_conso_produits_petroliers
+    description: Liste des variables du fichier des ventes mensuelles (unités, tonnes)
+    fichier: data/raw/accises/sdes/liste_variables.pdf
+    empreinte_sha256: 57563bd9e3226718a7d3f46a27626f991b32aea78385c9cb3d7d679274e00fba
+    methode_transformation: aucune ; documentation des unités
+    telecharge_le: 2026-10-09
+
+  - id: ministere_guide_fiscalite_energies_2025_pdf
+    source: ministere_guide_fiscalite_energies_2025
+    description: Guide 2025 sur la fiscalité des énergies (PDF, 36 pages)
+    fichier: data/raw/accises/ministere/guide_2025_fiscalite_energies.pdf
+    empreinte_sha256: 1a4f543c7826deb4542134c5756265961ee87d4d60dee847180445be71f3a202
+    methode_transformation: aucune ; valeurs lues et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-09
+
+  - id: ministere_guide_fiscalite_energies_2026_pdf
+    source: ministere_guide_fiscalite_energies_2026
+    description: Guide 2026 sur la fiscalité des énergies (PDF, 38 pages)
+    fichier: data/raw/accises/ministere/guide_2026_fiscalite_energies.pdf
+    empreinte_sha256: c89da0259490e26057140e291d974b7e0a267805cfe96e5d6f4a8ca5d81420f2
+    methode_transformation: aucune ; valeurs lues et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-09
+
+  - id: ademe_base_carbone_pci_masse_volumique_htm
+    source: ademe_base_carbone_pci_masse_volumique
+    description: Page de documentation « PCI et masse volumique » de la Base Carbone, HTML
+    fichier: data/raw/accises/ademe/base_carbone_pci_et_masse_volumique.htm
+    empreinte_sha256: b7d689c9d770ffec1e0f70e59d7b4ac8116d37344f65281a8ff5a92130cf5826
+    methode_transformation: aucune ; masses volumiques saisies dans registres/hypotheses.yaml
+    telecharge_le: 2026-10-09
+
   - id: eurostat_gov_10a_exp_fr_json
     source: eurostat_gov_10a_exp
     description: Dépenses totales des APU françaises par fonction COFOG (80 postes) et par sous-secteur, millions d'euros, JSON-stat

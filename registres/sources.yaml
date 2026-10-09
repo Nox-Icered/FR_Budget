@@ -169,6 +169,41 @@ sources:
     acces: direct
     consulte_le: 2026-10-08
 
+  - id: sdes_conso_produits_petroliers
+    nom: Données mensuelles de consommation de produits pétroliers en France métropolitaine (à partir de 2017)
+    editeur: Ministère de la Transition écologique, Service des données et études statistiques (SDES)
+    url: https://www.data.gouv.fr/datasets/donnees-mensuelles-de-consommation-de-produits-petroliers-a-partir-de-2017
+    licence: Licence Ouverte (fr-lo)
+    millesime: mise à jour du 7 octobre 2026 (janvier 2017 à décembre 2025)
+    acces: direct
+    consulte_le: 2026-10-09
+
+  - id: ministere_guide_fiscalite_energies_2025
+    nom: Guide 2025 sur la fiscalité des énergies
+    editeur: Ministère de la Transition écologique
+    url: https://www.ecologie.gouv.fr/sites/default/files/documents/Guide%202025%20sur%20la%20fiscalit%C3%A9%20des%20%C3%A9nergies.pdf
+    licence: Licence Etalab 2.0 (mentions légales du site ecologie.gouv.fr, sauf mention contraire)
+    millesime: 2025 (document du 8 août 2025)
+    acces: direct
+    consulte_le: 2026-10-09
+
+  - id: ministere_guide_fiscalite_energies_2026
+    nom: Guide 2026 sur la fiscalité des énergies
+    editeur: Ministère de la Transition écologique
+    url: https://www.ecologie.gouv.fr/sites/default/files/documents/Guide%202026%20sur%20fiscalit%C3%A9%20des%20%C3%A9nergies.pdf
+    licence: Licence Etalab 2.0 (mentions légales du site ecologie.gouv.fr, sauf mention contraire)
+    millesime: 2026 (document du 22 juillet 2026)
+    acces: direct
+    consulte_le: 2026-10-09
+
+  - id: ademe_base_carbone_pci_masse_volumique
+    nom: Base Carbone, documentation « PCI et masse volumique »
+    editeur: ADEME
+    url: https://prod-basecarbonesolo.ademe-dri.fr/documentation/UPLOAD_DOC_FR/pci_et_masse_volumique.htm
+    licence: non précisée (à vérifier)
+    acces: direct
+    consulte_le: 2026-10-09
+
   - id: eurostat_gov_10a_exp
     nom: Eurostat, dépenses des administrations publiques par fonction (CFAP/COFOG), tableau gov_10a_exp
     editeur: Eurostat (données transmises par l'INSEE)

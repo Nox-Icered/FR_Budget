@@ -6,7 +6,8 @@ unité. Le journal d'accès d'uvicorn (qui contiendrait les paramètres des requ
 désactivé par ``creer_application`` elle-même ; lancer avec ``python -m fr_budget_api.serveur``.
 
 Points d'entrée : ``/sante``, ``/version``, ``/registres/{nom}``, ``/comptes-apu``,
-``/depenses-par-fonction``, ``/validation``, ``/baseline``, ``POST /scenario``.
+``/depenses-par-fonction``, ``/validation``, ``/baseline``, ``/depenses-fiscales``,
+``POST /scenario``.
 """
 
 from __future__ import annotations
@@ -21,6 +22,7 @@ from typing import Any
 from fastapi import FastAPI, HTTPException
 from fr_budget import baseline as module_baseline
 from fr_budget import scenario as module_scenario
+from fr_budget.agrege import depenses_fiscales as module_depenses_fiscales
 from fr_budget.apu import comptes_apu, depenses_par_fonction, libelles_cofog, ratio_pib
 from fr_budget.registres.verification import RACINE_DEPOT, Rapport, charger
 from fr_budget.validation import comparaisons
@@ -183,7 +185,7 @@ class ScenarioEntree(BaseModel):
 
 
 def _statut_levier(levier: str) -> str:
-    registre_id = module_scenario.LEVIERS_REGISTRE.get(levier)
+    registre_id = module_scenario.levier_registre(levier)
     statuts = {lv["id"]: lv["statut"] for lv in _registres()["leviers"]}
     return statuts[registre_id] if registre_id else "inconnu"
 
@@ -195,6 +197,10 @@ def calcul_scenario(entree: ScenarioEntree) -> dict[str, Any] | None:
     données (un scénario partagé doit reproduire le même résultat). Rien n'est enregistré.
     """
     mesures = [module_scenario.Mesure(m.levier, m.valeur, m.annee) for m in entree.mesures]
+    # Le levier générique ne sert qu'au calcul du site : par l'API, une dépense fiscale est
+    # désignée par son numéro, ce qui permet de contrôler le double compte.
+    if any(m.levier == module_scenario.LEVIER_DEPENSE_FISCALE_UNITE for m in mesures):
+        return None
     try:
         lignes = module_scenario.scenario(mesures)
         sources, hypotheses = module_scenario.provenance(m.levier for m in mesures)
@@ -268,6 +274,44 @@ def reponses_unitaires() -> dict[str, Any]:
     }
 
 
+def catalogue_depenses_fiscales() -> dict[str, Any]:
+    """Dépenses fiscales proposées au levier, avec leur coût et le rendement d'un pour cent.
+
+    ``rendement_pourcent`` : Md€ de l'année de référence, valeur du levier générique
+    ``depense_fiscale`` pour une réduction de 1 % de la dépense (le site multiplie par x %).
+    """
+    df = module_depenses_fiscales
+    return {
+        "source": "plf2026_voies_et_moyens_tome2",
+        "annee_cout": df.ANNEE_COUT_LEVIER,
+        "unite_cout": "Md€",
+        "impots": {
+            i: {
+                "levier": module_scenario.levier_depenses_fiscales_impot(i),
+                "cout": df.cout_impot_levier(i) / module_scenario.MILLIONS_PAR_MILLIARD,
+            }
+            for i in df.IMPOTS_LEVIER
+        },
+        # Ordre des parties du tome II (l'export trie les clés des objets).
+        "ordre_impots": list(df.IMPOTS_LEVIER),
+        "impots_exclus": list(df.IMPOTS_EXCLUS),
+        "depenses": [
+            {
+                "code": d.code,
+                "impot": d.impot,
+                "libelle": d.libelle,
+                "cout": d.cout / module_scenario.MILLIONS_PAR_MILLIARD,
+                "annee_chiffrage": d.annee_chiffrage,
+                "fiabilite": d.fiabilite,
+                "rendement_pourcent": module_scenario.rendement_unitaire(
+                    module_scenario.levier_depense_fiscale(d.code)
+                ).central,
+            }
+            for d in df.catalogue()
+        ],
+    }
+
+
 def creer_application() -> FastAPI:
     # Règle 5 : aucune requête (et donc aucun paramètre saisi) dans les journaux.
     logging.getLogger("uvicorn.access").disabled = True
@@ -318,6 +362,11 @@ def creer_application() -> FastAPI:
     def route_baseline() -> dict[str, Any]:
         """Dette et solde primaire de 2025 à 2046, sans réforme, en fourchette."""
         return serie_baseline()
+
+    @app.get("/depenses-fiscales")
+    def route_depenses_fiscales() -> dict[str, Any]:
+        """Dépenses fiscales proposées au levier : coût prévu pour 2026 et rendement d'1 %."""
+        return catalogue_depenses_fiscales()
 
     @app.post("/scenario")
     def route_scenario(entree: ScenarioEntree) -> dict[str, Any]:

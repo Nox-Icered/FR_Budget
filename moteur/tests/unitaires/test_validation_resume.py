@@ -28,6 +28,7 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
             "test_dette_choc_taux.py",
             "test_levier_accises.py",
             "test_levier_impot_societes.py",
+            "test_levier_depenses_fiscales.py",
         )
     )
     attendues = set(re.findall(r'"((?:tva|dette)_[a-z0-9_]+)"', textes))
@@ -38,6 +39,15 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
     }
     attendues |= {f"accises_ticpe_brute_totale_{annee}" for annee in (2023, 2024)}
     attendues |= {f"is_brut_{annee}_dgfip" for annee in (2024, 2025)}
+    attendues |= {
+        f"depenses_fiscales_{impot}_realisation_{annee}"
+        for impot in ("impot_revenu", "impot_revenu_et_societes", "impot_societes")
+        for annee in (2023, 2024)
+    }
+    attendues |= {
+        "depenses_fiscales_ccomptes_total_2024_revise",
+        "depenses_fiscales_ccomptes_total_2023_definitif",
+    }
     attendues = {a for a in attendues if not a.endswith("_") and "{" not in a}
     assert {r for r, _ in _definitions()} == attendues
 

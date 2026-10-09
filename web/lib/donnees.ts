@@ -102,3 +102,21 @@ export type ReponsesUnitaires = {
     }
   >;
 };
+export type DepenseFiscale = {
+  code: string;
+  impot: string;
+  libelle: string;
+  cout: number;
+  annee_chiffrage: number;
+  fiabilite: string;
+  rendement_pourcent: number;
+};
+export type CatalogueDepensesFiscales = {
+  source: string;
+  annee_cout: number;
+  unite_cout: string;
+  impots: Record<string, { levier: string; cout: number }>;
+  ordre_impots: string[];
+  impots_exclus: string[];
+  depenses: DepenseFiscale[];
+};

@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from functools import partial
 
 from fr_budget.agrege.accises import recette_brute
+from fr_budget.agrege.depenses_fiscales import cout_par_impot
 from fr_budget.agrege.impot_societes import is_brut
 from fr_budget.agrege.tva import estimer_point_tva, estimer_recette_totale
 from fr_budget.dette import surcout_choc_taux_etat
@@ -22,6 +23,8 @@ from fr_budget.registres.acces import chiffrage
 TOLERANCE_PUBLICATION = 0.10
 """Règle de publication d'un levier (CLAUDE.md) : ±10 % sur le rendement à 1 an."""
 
+MILLIONS_PAR_MILLIARD = 1000.0
+IMPOTS_DEPENSES_FISCALES = ("impot_revenu", "impot_revenu_et_societes", "impot_societes")
 TAUX_TVA = ("ensemble", "taux_2_1", "taux_5_5", "taux_10", "taux_20")
 
 
@@ -60,6 +63,15 @@ def _choc_taux_cinquieme_annee() -> float:
     return surcout_choc_taux_etat(annee=5).central
 
 
+def _cout_prevu(plf: int, annee: int, impot: str) -> float:
+    return cout_par_impot(plf, annee)[impot]
+
+
+def _cout_total_prevu(plf: int, annee: int) -> float:
+    """Coût total de toutes les dépenses fiscales prévu par un PLF, en Md€."""
+    return sum(cout_par_impot(plf, annee).values()) / MILLIONS_PAR_MILLIARD
+
+
 def _definitions() -> list[tuple[str, Callable[[], float]]]:
     definitions: list[tuple[str, Callable[[], float]]] = []
     for taux in TAUX_TVA:
@@ -77,6 +89,18 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         ("accises_ticpe_brute_totale_2024", partial(recette_brute, 2024)),
         ("is_brut_2024_dgfip", partial(is_brut, 2024)),
         ("is_brut_2025_dgfip", partial(is_brut, 2025)),
+    ]
+    for plf, annee in ((2024, 2023), (2025, 2024)):
+        definitions += [
+            (
+                f"depenses_fiscales_{impot}_realisation_{annee}",
+                partial(_cout_prevu, plf, annee, impot),
+            )
+            for impot in IMPOTS_DEPENSES_FISCALES
+        ]
+    definitions += [
+        ("depenses_fiscales_ccomptes_total_2024_revise", partial(_cout_total_prevu, 2024, 2024)),
+        ("depenses_fiscales_ccomptes_total_2023_definitif", partial(_cout_total_prevu, 2024, 2023)),
     ]
     return definitions
 

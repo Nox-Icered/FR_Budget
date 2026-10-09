@@ -2,8 +2,10 @@
 // Simulateur : le calcul se fait dans le navigateur ; rien n'est envoyé ni enregistré.
 import { useId, useState } from "react";
 import { texte, nombre } from "../../lib/textes";
-import type { ReponsesUnitaires } from "../../lib/donnees";
+import type { CatalogueDepensesFiscales, ReponsesUnitaires } from "../../lib/donnees";
 import { calculer } from "../../lib/scenario";
+import { mesuresDepensesFiscales } from "../../lib/depenses-fiscales";
+import { ReglagesDepensesFiscales } from "./depenses-fiscales";
 import { GraphiqueDette } from "../baseline/graphique";
 
 // Ordre d'affichage et pas de réglage de chaque levier (en points ou en centimes par litre).
@@ -19,9 +21,11 @@ const ANNEES_AFFICHEES = [2027, 2030, 2035, 2040, 2046];
 
 export function Simulateur({
   donnees,
+  catalogue,
   raccord,
 }: {
   donnees: ReponsesUnitaires;
+  catalogue: CatalogueDepensesFiscales;
   raccord: number;
 }) {
   const leviers = LEVIERS.filter((l) => l.id in donnees.leviers);
@@ -29,11 +33,16 @@ export function Simulateur({
   const [valeurs, setValeurs] = useState<Record<string, number>>(
     Object.fromEntries(leviers.map((l) => [l.id, 0])),
   );
+  const [parImpot, setParImpot] = useState<Record<string, number>>({});
+  const [parDepense, setParDepense] = useState<Record<string, number>>({});
   const [annee, setAnnee] = useState(annees[0]);
   const idBase = useId();
   const lignes = calculer(
     donnees,
-    leviers.map((l) => ({ levier: l.id, valeur: valeurs[l.id] })),
+    [
+      ...leviers.map((l) => ({ levier: l.id, valeur: valeurs[l.id] })),
+      ...mesuresDepensesFiscales(catalogue, parImpot, parDepense),
+    ],
     annee,
   );
   const signe = (v: number) => (v > 0 ? `+${nombre(v)}` : nombre(v));
@@ -93,6 +102,14 @@ export function Simulateur({
           ))}
         </select>
       </fieldset>
+      <ReglagesDepensesFiscales
+        catalogue={catalogue}
+        leviers={donnees.leviers}
+        parImpot={parImpot}
+        setParImpot={setParImpot}
+        parDepense={parDepense}
+        setParDepense={setParDepense}
+      />
       <GraphiqueDette
         points={lignes.map((l) => ({ annee: l.annee, ...l.dette }))}
         raccord={raccord}

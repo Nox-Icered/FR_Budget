@@ -20,6 +20,8 @@ essences (SP95, SP95-E10, SP98). Pour le gazole, les volumes des transporteurs r
 transport collectif et des taxis sont retirés : leur tarif réduit est fixe, une hausse du tarif
 normal leur est remboursée. Ces volumes sont déduits des dépenses fiscales 800221, 800222 et
 800220 (tome II de Voies et Moyens) divisées par l'écart entre le tarif normal et le tarif réduit.
+Ces dépenses fiscales sont les prévisions 2025 du PLF 2026 (décision du mainteneur du 9 octobre
+2026 ; le PLF 2025 prévoyait 1 272, 183 et 50 M€).
 """
 
 from __future__ import annotations
@@ -159,8 +161,8 @@ def recette_brute(
 def volumes_rembourses(annee: int = ANNEE_REMBOURSEMENTS) -> dict[str, float]:
     """Volumes de gazole (hl) dont la hausse du tarif normal serait remboursée.
 
-    Dépense fiscale (M€, prévision 2025) divisée par l'écart entre le tarif normal du gazole
-    au 1er janvier de ``annee`` et le tarif réduit de l'activité (€/hl).
+    Dépense fiscale (M€, prévision 2025 du PLF 2026) divisée par l'écart entre le tarif normal
+    du gazole au 1er janvier de ``annee`` et le tarif réduit de l'activité (€/hl).
     """
     gazole = tarifs(annee)["gazole"]
     return {

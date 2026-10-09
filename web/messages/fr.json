@@ -150,6 +150,34 @@
       }
     },
     "limite_tva_accise": "La hausse de l'accise augmente aussi la TVA payée sur le carburant : cet effet n'est pas compté.",
-    "limite_is_calendrier": "L'impôt sur les sociétés d'une année est en partie versé l'année suivante : l'effet de la première année est surestimé."
+    "limite_is_calendrier": "L'impôt sur les sociétés d'une année est en partie versé l'année suivante : l'effet de la première année est surestimé.",
+    "depenses_fiscales": {
+      "titre": "Dépenses fiscales (niches fiscales)",
+      "intro": "Réduire une dépense fiscale de x % rapporte ici x % de son coût prévu pour {annee} par l'administration. Les dépenses fiscales de TVA et d'accise sur les énergies ne sont pas proposées : elles recoupent les curseurs de la TVA et des accises.",
+      "par_impot": "Toutes les dépenses fiscales d'un impôt",
+      "impot": "{impot} ({cout} milliards d'euros prévus en {annee})",
+      "valeur": "réduction de {valeur} %",
+      "impots": {
+        "impot_revenu": "Impôt sur le revenu",
+        "impot_revenu_et_societes": "Impôt sur le revenu et impôt sur les sociétés",
+        "impot_societes": "Impôt sur les sociétés",
+        "autres_impots_directs": "Autres impôts directs",
+        "enregistrement_timbre": "Droits d'enregistrement et de timbre",
+        "autres_droits": "Autres droits",
+        "impots_locaux": "Impôts locaux"
+      },
+      "une_depense": "Une dépense fiscale du catalogue ({nombre} dépenses chiffrées)",
+      "recherche": "Chercher par numéro ou par mots du libellé",
+      "aucun_resultat": "Aucune dépense fiscale ne correspond.",
+      "ajouter": "Ajouter",
+      "retirer": "Retirer",
+      "cout": "{cout} millions d'euros prévus en {annee} ; fiabilité : {fiabilite}",
+      "cout_repris": "{cout} millions d'euros (non chiffrée pour {annee} : montant de {annee_chiffrage} repris, convention de l'administration) ; fiabilité : {fiabilite}",
+      "fiabilite_inconnue": "non indiquée",
+      "deja_par_impot": "déjà couverte par le curseur de son impôt",
+      "impot_bloque": "Retirez d'abord les dépenses de cet impôt choisies une à une."
+    },
+    "limite_depenses_fiscales": "Le coût d'une dépense fiscale n'est pas le gain de sa suppression : l'administration précise qu'il ne tient compte ni des changements de comportement ni des interactions entre dépenses, et que la somme de ces coûts n'a pas de réelle signification. Le rendement affiché est le coût officiel, sans correction : pour un impôt entier ou plusieurs dépenses, c'est un ordre de grandeur.",
+    "methode_depenses_fiscales": "Dépenses fiscales : le rendement d'une réduction de x % est x % du coût prévu pour {annee} dans le projet de loi de finances pour {annee}, rapporté au PIB de la même année. La fourchette reprend les écarts constatés par le passé entre le coût prévu et le coût réalisé."
   }
 }

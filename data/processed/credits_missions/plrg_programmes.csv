@@ -1,0 +1,391 @@
+exercice,mission,programme,libelle,lfi,depenses_constatees
+2023,Action extérieure de l'État,105,Action de la France en Europe et dans le monde,2082957594.0,1982478807.3
+2023,Action extérieure de l'État,151,Français à l'étranger et affaires consulaires,391405832.0,390897235.1
+2023,Action extérieure de l'État,185,Diplomatie culturelle et d'influence,743762450.0,740708265.1800001
+2023,Administration générale et territoriale de l'État,216,Conduite et pilotage des politiques de l'intérieur,1870244783.0,1845865377.0
+2023,Administration générale et territoriale de l'État,232,Vie politique,119610368.0,159336699.75
+2023,Administration générale et territoriale de l'État,354,Administration territoriale de l'État,2578911198.0,2607625845.0
+2023,"Agriculture, alimentation, forêt et affaires rurales",149,"Compétitivité et durabilité de l'agriculture, de l'agroalimentaire et de la forêt",2100708055.0,2907929364.0
+2023,"Agriculture, alimentation, forêt et affaires rurales",206,Sécurité et qualité sanitaires de l'alimentation,654616346.0,770290511.0
+2023,"Agriculture, alimentation, forêt et affaires rurales",215,Conduite et pilotage des politiques de l'agriculture,674999660.0,597395069.9
+2023,"Agriculture, alimentation, forêt et affaires rurales",381,Allègements du coût du travail en agriculture (TODE-AG),427000000.0,433000000.0
+2023,"Agriculture, alimentation, forêt et affaires rurales",382,Soutien aux associations de protection animale et aux refuges,1000000.0,325588.2
+2023,Aide publique au développement,110,Aide économique et financière au développement,2337910235.0,2252541385.0
+2023,Aide publique au développement,209,Solidarité à l'égard des pays en développement,3436015377.0,3174730077.4
+2023,Aide publique au développement,365,Renforcement des fonds propres de l'Agence française de développement,150000000.0,150000000.0
+2023,"Anciens combattants, mémoire et liens avec la Nation",158,Indemnisation des victimes des persécutions antisémites et des actes de barbarie pendant la seconde guerre mondiale,91551101.0,82134566.21
+2023,"Anciens combattants, mémoire et liens avec la Nation",169,"Reconnaissance et réparation en faveur du monde combattant, mémoire et liens avec la Nation",1839320397.0,1865955590.0
+2023,Cohésion des territoires,109,Aide à l'accès au logement,13371300000.0,13290817301.0
+2023,Cohésion des territoires,112,Impulsion et coordination de la politique d'aménagement du territoire,262448144.0,340133915.0
+2023,Cohésion des territoires,135,"Urbanisme, territoires et amélioration de l'habitat",780775870.0,1089160083.0
+2023,Cohésion des territoires,147,Politique de la ville,597541138.0,565534111.4599999
+2023,Cohésion des territoires,162,Interventions territoriales de l'État,61561867.0,148503326.2
+2023,Cohésion des territoires,177,"Hébergement, parcours vers le logement et insertion des personnes vulnérables",2850579982.0,3076455061.0
+2023,Conseil et contrôle de l'État,126,"Conseil économique, social et environnemental",45137172.0,45994143.900000006
+2023,Conseil et contrôle de l'État,164,Cour des comptes et autres juridictions financières,247416003.0,245973168.70000002
+2023,Conseil et contrôle de l'État,165,Conseil d'État et autres juridictions administratives,525021818.0,501292553.9
+2023,Crédits non répartis,551,Provision relative aux rémunérations publiques,80000000.0,0.0
+2023,Crédits non répartis,552,Dépenses accidentelles et imprévisibles,1074000000.0,0.0
+2023,Culture,131,Création,1006161609.0,1010354287.0
+2023,Culture,175,Patrimoines,1100016198.0,1212097228.0
+2023,Culture,224,Soutien aux politiques du ministère de la culture,812130708.0,809802292.8000001
+2023,Culture,361,Transmission des savoirs et démocratisation de la culture,799581718.0,833444197.0
+2023,Direction de l'action du Gouvernement,129,Coordination du travail gouvernemental,801437279.0,771569764.3
+2023,Direction de l'action du Gouvernement,308,Protection des droits et libertés,127710091.0,122948347.42
+2023,Défense,144,Environnement et prospective de la politique de défense,1906207690.0,1898910319.0
+2023,Défense,146,Équipement des forces,15380935746.0,16243954641.0
+2023,Défense,178,Préparation et emploi des forces,12052608253.0,12967730590.0
+2023,Défense,212,Soutien de la politique de la défense,23776711734.0,23702071901.0
+2023,Engagements financiers de l'État,114,Appels en garantie de l'État (crédits évaluatifs),2582736463.0,1664873530.0
+2023,Engagements financiers de l'État,117,Charge de la dette et trésorerie de l'État (crédits évaluatifs),50825000000.0,53874275880.0
+2023,Engagements financiers de l'État,145,Épargne,59210034.0,72809623.8
+2023,Engagements financiers de l'État,336,Dotation du Mécanisme européen de stabilité,50000000.0,0.0
+2023,Engagements financiers de l'État,344,Fonds de soutien relatif aux prêts et contrats financiers structurés à risque,185850311.0,178434744.6
+2023,Engagements financiers de l'État,369,Amortissement de la dette de l'État liée à la covid-19,6586486312.0,6586486312.0
+2023,Enseignement scolaire,139,Enseignement privé du premier et du second degrés,8468113687.0,8424823224.9
+2023,Enseignement scolaire,140,Enseignement scolaire public du premier degré,25667162133.0,25455708832.93
+2023,Enseignement scolaire,141,Enseignement scolaire public du second degré,36455921370.0,36343171328.5
+2023,Enseignement scolaire,143,Enseignement technique agricole,1595501171.0,1551739285.8
+2023,Enseignement scolaire,214,Soutien de la politique de l'éducation nationale,2757167569.0,2784277849.9
+2023,Enseignement scolaire,230,Vie de l'élève,7453210420.0,7468367212.0
+2023,Gestion des finances publiques,156,Gestion fiscale et financière de l'État et du secteur public local,7968886219.0,7870464019.0
+2023,Gestion des finances publiques,218,Conduite et pilotage des politiques économiques et financières,965557569.0,956499269.2
+2023,Gestion des finances publiques,302,Facilitation et sécurisation des échanges,1602525405.0,1622492297.0
+2023,"Immigration, asile et intégration",104,Intégration et accès à la nationalité française,543163926.0,536146669.1
+2023,"Immigration, asile et intégration",303,Immigration et asile,1465938178.0,1732083092.0
+2023,Investir pour la France de 2030,421,Soutien des progrès de l'enseignement et de la recherche,244000000.0,234900000.0
+2023,Investir pour la France de 2030,422,Valorisation de la recherche,33000000.0,42100000.0
+2023,Investir pour la France de 2030,423,Accélération de la modernisation des entreprises,92500000.0,92500000.0
+2023,Investir pour la France de 2030,424,Financement des investissements stratégiques,3485000000.0,3481810025.0
+2023,Investir pour la France de 2030,425,Financement structurel des écosystèmes d'innovation,2233128199.0,2143128199.0
+2023,Justice,101,Accès au droit et à la justice,713982275.0,704028574.4
+2023,Justice,107,Administration pénitentiaire,4927411859.0,4748300611.0
+2023,Justice,166,Justice judiciaire,4148805671.0,4124648345.0
+2023,Justice,182,Protection judiciaire de la jeunesse,1092665816.0,1071712275.7
+2023,Justice,310,Conduite et pilotage de la politique de la justice,682463430.0,658622190.4000001
+2023,Justice,335,Conseil supérieur de la magistrature,4974238.0,4616566.9799999995
+2023,"Médias, livre et industries culturelles",180,Presse et médias,371009279.0,390378530.1
+2023,"Médias, livre et industries culturelles",334,Livre et industries culturelles,333851042.0,335268701.5
+2023,Outre-Mer,123,Conditions de vie Outre-Mer,783988975.0,829378596.5
+2023,Outre-Mer,138,Emploi Outre-Mer,1758542199.0,2150222750.9
+2023,Plan de relance,362,Écologie,3556379516.0,2816297451.0
+2023,Plan de relance,363,Compétitivité,380409638.0,678120616.3
+2023,Plan de relance,364,Cohésion,460689628.0,631975070.7
+2023,Pouvoirs publics,501,Présidence de la République,110459700.0,110459700.0
+2023,Pouvoirs publics,511,Assemblée nationale,571005584.0,571005584.0
+2023,Pouvoirs publics,521,Sénat,346294600.0,346294600.0
+2023,Pouvoirs publics,531,Conseil constitutionnel,13295000.0,13295000.0
+2023,Pouvoirs publics,533,Cour de justice de la République,984000.0,984000.0
+2023,Pouvoirs publics,541,La Chaîne parlementaire,34495822.0,34495822.0
+2023,Recherche et enseignement supérieur,142,Enseignement supérieur et recherche agricoles,424396462.0,407182524.6
+2023,Recherche et enseignement supérieur,150,Formations supérieures et recherche universitaire,14907800643.0,15018548113.9
+2023,Recherche et enseignement supérieur,172,Recherches scientifiques et technologiques pluridisciplinaires,7833527751.0,7668502871.0
+2023,Recherche et enseignement supérieur,190,"Recherche dans les domaines de l'énergie, du développement et de la mobilité durables",1800829878.0,2078661610.0
+2023,Recherche et enseignement supérieur,191,Recherche duale (civile et militaire),150019167.0,150019167.0
+2023,Recherche et enseignement supérieur,192,Recherche et enseignement supérieur en matière économique et industrielle,693736238.0,830310766.5
+2023,Recherche et enseignement supérieur,193,Recherche spatiale,1865683825.0,1835196679.0
+2023,Recherche et enseignement supérieur,231,Vie étudiante,3130191945.0,3082255660.0
+2023,Relations avec les collectivités territoriales,119,Concours financiers aux collectivités territoriales et à leurs groupements,4192165907.0,4145548865.0
+2023,Relations avec les collectivités territoriales,122,Concours spécifiques et administration,295601191.0,286451052.7
+2023,Remboursements et dégrèvements,200,Remboursements et dégrèvements d'impôts d'État (crédits évaluatifs),127055000000.0,137322000279.28
+2023,Remboursements et dégrèvements,201,Remboursements et dégrèvements d'impôts locaux (crédits évaluatifs),4586985108.0,5123083371.0
+2023,Régimes sociaux et de retraite,195,"Régimes de retraite des mines, de la SEITA et divers",1056304524.0,1058436265.0
+2023,Régimes sociaux et de retraite,197,Régimes de retraite et de sécurité sociale des marins,802009370.0,802009370.0
+2023,Régimes sociaux et de retraite,198,Régimes sociaux et de retraite des transports terrestres,4278605877.0,4071857762.0
+2023,Santé,183,Protection maladie,1220300000.0,1153506104.0
+2023,Santé,204,"Prévention, sécurité sanitaire et offre de soins",216091268.0,335721943.9
+2023,Santé,379,Compensation à la Sécurité sociale du coût des dons de vaccins à des pays tiers et reversement des recettes de la Facilité pour la relance et la résilience (FRR) européenne au titre du volet «Ségur investissement» du plan national de relance et de résili,1930400000.0,2120400000.0
+2023,"Solidarité, insertion et égalité des chances",124,Conduite et soutien des politiques sanitaires et sociales,1338493140.0,1284346385.3000002
+2023,"Solidarité, insertion et égalité des chances",137,Égalité entre les femmes et les hommes,65378788.0,69328820.86
+2023,"Solidarité, insertion et égalité des chances",157,Handicap et dépendance,14086467878.0,14221603996.0
+2023,"Solidarité, insertion et égalité des chances",304,Inclusion sociale et protection des personnes,13987377235.0,14415608338.0
+2023,"Sport, jeunesse et vie associative",163,Jeunesse et vie associative,837070841.0,799374440.2099999
+2023,"Sport, jeunesse et vie associative",219,Sport,700262145.0,577585505.4
+2023,"Sport, jeunesse et vie associative",350,Jeux olympiques et paralympiques 2024,294860000.0,345547840.0
+2023,Sécurités,152,Gendarmerie nationale,9910086369.0,10136926405.0
+2023,Sécurités,161,Sécurité civile,714109225.0,674509617.7
+2023,Sécurités,176,Police nationale,12372926960.0,12376169570.0
+2023,Sécurités,207,Sécurité et éducation routières,74375325.0,55547183.54
+2023,Transformation et fonction publiques,148,Fonction publique,300973842.0,287023573.08
+2023,Transformation et fonction publiques,348,Performance et résilience des bâtiments de l'État et de ses opérateurs,552715210.0,429139152.8
+2023,Transformation et fonction publiques,349,Transformation publique,251450000.0,217532252.9
+2023,Transformation et fonction publiques,352,Innovation et transformation numériques,10600000.0,8584072.49
+2023,Transformation et fonction publiques,368,Conduite et pilotage de la transformation et de la fonction publiques,44396102.0,43105857.61
+2023,Travail et emploi,102,Accès et retour à l'emploi,7443076187.0,6723364969.0
+2023,Travail et emploi,103,Accompagnement des mutations économiques et développement de l'emploi,12642360273.0,13432244677.0
+2023,Travail et emploi,111,Amélioration de la qualité de l'emploi et des relations du travail,110456293.0,89258740.68
+2023,Travail et emploi,155,"Conception, gestion et évaluation des politiques de l'emploi et du travail",681074041.0,695248321.2
+2023,"Écologie, développement et mobilité durables",113,"Paysages, eau et biodiversité",274509468.0,339346636.5
+2023,"Écologie, développement et mobilité durables",159,"Expertise, information géographique et météorologie",499754720.0,497177408.9
+2023,"Écologie, développement et mobilité durables",174,"Énergie, climat et après-mines",5563760390.0,4986757055.0
+2023,"Écologie, développement et mobilité durables",181,Prévention des risques,1143150567.0,1109272765.9
+2023,"Écologie, développement et mobilité durables",203,Infrastructures et services de transports,4372626282.0,8624021063.0
+2023,"Écologie, développement et mobilité durables",205,"Affaires maritimes, pêche et aquaculture",240870203.0,356584781.4
+2023,"Écologie, développement et mobilité durables",217,"Conduite et pilotage des politiques de l'écologie, du développement et de la mobilité durables",2995412869.0,2994394393.3
+2023,"Écologie, développement et mobilité durables",345,Service public de l'énergie,21000000000.0,20170184198.0
+2023,"Écologie, développement et mobilité durables",355,Charge de la dette de SNCF Réseau reprise par l'État (crédits évaluatifs),900000000.0,905411106.0
+2023,"Écologie, développement et mobilité durables",380,Fonds d'accélération de la transition écologique dans les territoires,500000000.0,301669572.1
+2023,Économie,134,Développement des entreprises et régulations,6310006037.0,3469350293.7
+2023,Économie,220,Statistiques et études économiques,454831894.0,454895312.88
+2023,Économie,305,Stratégies économiques,715866859.0,704779566.0
+2023,Économie,343,Plan France Très haut débit,437733772.0,426666331.2
+2023,Économie,367,"Financement des opérations patrimoniales envisagées en 2023 sur le compte d'affectation spéciale ""Participations financières de l'État""",0.0,0.0
+2024,Action extérieure de l'État,105,Action de la France en Europe et dans le monde,2263775608.0,2105038839.71
+2024,Action extérieure de l'État,151,Français à l'étranger et affaires consulaires,436881702.0,413928722.99
+2024,Action extérieure de l'État,185,Diplomatie culturelle et d'influence,805972195.0,769581186.77
+2024,Administration générale et territoriale de l'État,216,Conduite et pilotage des politiques de l'intérieur,1816328223.0,1712902723.5
+2024,Administration générale et territoriale de l'État,232,Vie politique,257621749.0,355125881.67
+2024,Administration générale et territoriale de l'État,354,Administration territoriale de l'État,2583169626.0,2593977038.79
+2024,"Agriculture, alimentation, forêt et affaires rurales",149,"Compétitivité et durabilité de l'agriculture, de l'agroalimentaire et de la forêt",2735854589.0,2573376458.28
+2024,"Agriculture, alimentation, forêt et affaires rurales",206,Sécurité et qualité sanitaires de l'alimentation,905703711.0,869846894.9000001
+2024,"Agriculture, alimentation, forêt et affaires rurales",215,Conduite et pilotage des politiques de l'agriculture,682371204.0,616667415.1300001
+2024,"Agriculture, alimentation, forêt et affaires rurales",381,Allègements du coût du travail en agriculture (TODE-AG),423000000.0,438427824.0
+2024,Aide publique au développement,110,Aide économique et financière au développement,2337910235.0,1875414028.45
+2024,Aide publique au développement,209,Solidarité à l'égard des pays en développement,3434910974.0,2796912905.81
+2024,Aide publique au développement,365,Renforcement des fonds propres de l'Agence française de développement,150000000.0,150000000.0
+2024,Aide publique au développement,370,"Restitution des ""biens mal acquis""",6100806.0,0.0
+2024,"Anciens combattants, mémoire et liens avec la Nation",158,Indemnisation des victimes des persécutions antisémites et des actes de barbarie pendant la seconde guerre mondiale,88140835.0,76947372.99000001
+2024,"Anciens combattants, mémoire et liens avec la Nation",169,"Reconnaissance et réparation en faveur du monde combattant, mémoire et liens avec la Nation",1839316624.0,1882210033.11
+2024,Cohésion des territoires,109,Aide à l'accès au logement,13656400000.0,13102208733.0
+2024,Cohésion des territoires,112,Impulsion et coordination de la politique d'aménagement du territoire,348520529.0,379630501.2
+2024,Cohésion des territoires,135,"Urbanisme, territoires et amélioration de l'habitat",1583661469.0,1217976346.57
+2024,Cohésion des territoires,147,Politique de la ville,639529153.0,524099314.81
+2024,Cohésion des territoires,162,Interventions territoriales de l'État,33151556.0,141894257.52
+2024,Cohésion des territoires,177,"Hébergement, parcours vers le logement et insertion des personnes vulnérables",2925669370.0,3131301573.86
+2024,Conseil et contrôle de l'État,126,"Conseil économique, social et environnemental",44907172.0,46218301.0
+2024,Conseil et contrôle de l'État,164,Cour des comptes et autres juridictions financières,255247223.0,253567825.79
+2024,Conseil et contrôle de l'État,165,Conseil d'État et autres juridictions administratives,583402714.0,560954747.86
+2024,Crédits non répartis,551,Provision relative aux rémunérations publiques,285526298.0,0.0
+2024,Crédits non répartis,552,Dépenses accidentelles et imprévisibles,225000000.0,0.0
+2024,Culture,131,Création,1042653016.0,973937627.03
+2024,Culture,175,Patrimoines,1193810999.0,1250576676.49
+2024,Culture,224,Soutien aux politiques du ministère de la culture,844255365.0,833224883.95
+2024,Culture,361,Transmission des savoirs et démocratisation de la culture,824400514.0,806994985.91
+2024,Direction de l'action du Gouvernement,129,Coordination du travail gouvernemental,917433848.0,885722171.8800001
+2024,Direction de l'action du Gouvernement,308,Protection des droits et libertés,135402866.0,130976426.81
+2024,Défense,144,Environnement et prospective de la politique de défense,1967619198.0,2006955015.73
+2024,Défense,146,Équipement des forces,16591352498.0,16713224479.05
+2024,Défense,178,Préparation et emploi des forces,13562508731.0,15048832910.08
+2024,Défense,212,Soutien de la politique de la défense,24634250116.0,24659167687.72
+2024,Engagements financiers de l'État,114,Appels en garantie de l'État (crédits évaluatifs),1902436463.0,1921545085.85
+2024,Engagements financiers de l'État,117,Charge de la dette et trésorerie de l'État (crédits évaluatifs),51375000000.0,49267565888.52
+2024,Engagements financiers de l'État,145,Épargne,71066322.0,106003721.41
+2024,Engagements financiers de l'État,344,Fonds de soutien relatif aux prêts et contrats financiers structurés à risque,187669310.0,177410818.89
+2024,Engagements financiers de l'État,355,Charge de la dette de SNCF Réseau reprise par l'État (crédits évaluatifs),807000000.0,817130417.58
+2024,Engagements financiers de l'État,369,Amortissement de la dette de l'État liée à la covid-19,6474951599.0,6474951599.0
+2024,Enseignement scolaire,139,Enseignement privé du premier et du second degrés,9035305069.0,8939358666.73
+2024,Enseignement scolaire,140,Enseignement scolaire public du premier degré,26873758249.0,26685544935.3
+2024,Enseignement scolaire,141,Enseignement scolaire public du second degré,38424611769.0,38247288122.92
+2024,Enseignement scolaire,143,Enseignement technique agricole,1695668426.0,1681618830.6599998
+2024,Enseignement scolaire,214,Soutien de la politique de l'éducation nationale,2873784793.0,2909792897.6099997
+2024,Enseignement scolaire,230,Vie de l'élève,8099021922.0,7933873880.29
+2024,Gestion des finances publiques,156,Gestion fiscale et financière de l'État et du secteur public local,8138123940.0,7959196649.26
+2024,Gestion des finances publiques,218,Conduite et pilotage des politiques économiques et financières,1054761167.0,963157381.26
+2024,Gestion des finances publiques,302,Facilitation et sécurisation des échanges,1706954576.0,1672794202.97
+2024,"Immigration, asile et intégration",104,Intégration et accès à la nationalité française,431358922.0,355125698.99
+2024,"Immigration, asile et intégration",303,Immigration et asile,1725143750.0,1835599035.85
+2024,Investir pour la France de 2030,421,Soutien des progrès de l'enseignement et de la recherche,255000000.0,240975000.0
+2024,Investir pour la France de 2030,422,Valorisation de la recherche,88200000.0,83349000.0
+2024,Investir pour la France de 2030,423,Accélération de la modernisation des entreprises,14260000.0,-76524300.0
+2024,Investir pour la France de 2030,424,Financement des investissements stratégiques,5691750000.0,4642993396.09
+2024,Investir pour la France de 2030,425,Financement structurel des écosystèmes d'innovation,1652500000.0,1379785080.0
+2024,Justice,101,Accès au droit et à la justice,736234297.0,726970553.58
+2024,Justice,107,Administration pénitentiaire,5002950814.0,4944773629.16
+2024,Justice,166,Justice judiciaire,4544008245.0,4374875084.46
+2024,Justice,182,Protection judiciaire de la jeunesse,1125947340.0,1087395649.47
+2024,Justice,310,Conduite et pilotage de la politique de la justice,747085247.0,687482396.5999999
+2024,Justice,335,Conseil supérieur de la magistrature,5720822.0,5275274.84
+2024,"Médias, livre et industries culturelles",180,Presse et médias,376665279.0,363778735.71
+2024,"Médias, livre et industries culturelles",334,Livre et industries culturelles,359282643.0,347761184.41
+2024,Outre-Mer,123,Conditions de vie Outre-Mer,919773972.0,937609797.79
+2024,Outre-Mer,138,Emploi Outre-Mer,1884690019.0,1979384334.89
+2024,Plan de relance,362,Écologie,1169075442.0,1766238849.67
+2024,Plan de relance,363,Compétitivité,65985600.0,386787407.21
+2024,Plan de relance,364,Cohésion,178900000.0,82627909.04
+2024,Pouvoirs publics,501,Présidence de la République,122563852.0,122563852.0
+2024,Pouvoirs publics,511,Assemblée nationale,607647569.0,627181842.0
+2024,Pouvoirs publics,521,Sénat,353470900.0,353470900.0
+2024,Pouvoirs publics,531,Conseil constitutionnel,17930000.0,17930000.0
+2024,Pouvoirs publics,533,Cour de justice de la République,984000.0,984000.0
+2024,Pouvoirs publics,541,La Chaîne parlementaire,35245822.0,35245822.0
+2024,Recherche et enseignement supérieur,142,Enseignement supérieur et recherche agricoles,443008004.0,421073617.05
+2024,Recherche et enseignement supérieur,150,Formations supérieures et recherche universitaire,15180783720.0,15108225737.41
+2024,Recherche et enseignement supérieur,172,Recherches scientifiques et technologiques pluridisciplinaires,8201401634.0,7736700386.23
+2024,Recherche et enseignement supérieur,190,"Recherche dans les domaines de l'énergie, du développement et de la mobilité durables",1948483219.0,2039156602.01
+2024,Recherche et enseignement supérieur,191,Recherche duale (civile et militaire),150019167.0,150019167.0
+2024,Recherche et enseignement supérieur,192,Recherche et enseignement supérieur en matière économique et industrielle,688636541.0,669666276.98
+2024,Recherche et enseignement supérieur,193,Recherche spatiale,1900179541.0,1607279541.0
+2024,Recherche et enseignement supérieur,231,Vie étudiante,3326639077.0,3254246060.17
+2024,Relations avec les collectivités territoriales,119,Concours financiers aux collectivités territoriales et à leurs groupements,3711788506.0,3638023724.54
+2024,Relations avec les collectivités territoriales,122,Concours spécifiques et administration,249601155.0,256649087.13
+2024,Remboursements et dégrèvements,200,Remboursements et dégrèvements d'impôts d'État (crédits évaluatifs),136189146022.0,141568330580.19
+2024,Remboursements et dégrèvements,201,Remboursements et dégrèvements d'impôts locaux (crédits évaluatifs),4291000000.0,4955165409.84
+2024,Régimes sociaux et de retraite,195,"Régimes de retraite des mines, de la SEITA et divers",1075655467.0,1082998006.28
+2024,Régimes sociaux et de retraite,197,Régimes de retraite et de sécurité sociale des marins,787337160.0,774486123.0
+2024,Régimes sociaux et de retraite,198,Régimes sociaux et de retraite des transports terrestres,4365695818.0,4206133513.56
+2024,Santé,183,Protection maladie,1216300000.0,1166740000.0
+2024,Santé,204,"Prévention, sécurité sanitaire et offre de soins",270581268.0,387131096.01
+2024,Santé,379,Compensation à la Sécurité sociale du coût des dons de vaccins à des pays tiers et reversement des recettes de la Facilité pour la relance et la résilience (FRR) européenne au titre du volet «Ségur investissement» du plan national de relance et de résili,1248900000.0,1248900000.0
+2024,"Solidarité, insertion et égalité des chances",124,Conduite et soutien des politiques sanitaires et sociales,1354651934.0,1291167447.6
+2024,"Solidarité, insertion et égalité des chances",137,Égalité entre les femmes et les hommes,77408682.0,101061133.78
+2024,"Solidarité, insertion et égalité des chances",157,Handicap et dépendance,15381767027.0,15315374691.57
+2024,"Solidarité, insertion et égalité des chances",304,Inclusion sociale et protection des personnes,14285058848.0,14323264934.33
+2024,"Sport, jeunesse et vie associative",163,Jeunesse et vie associative,901070841.0,772517592.4100001
+2024,"Sport, jeunesse et vie associative",219,Sport,775073339.0,639026388.21
+2024,"Sport, jeunesse et vie associative",350,Jeux olympiques et paralympiques 2024,133650000.0,136095354.5
+2024,Sécurités,152,Gendarmerie nationale,10392977945.0,11009866787.789999
+2024,Sécurités,161,Sécurité civile,880495462.0,962616283.5999999
+2024,Sécurités,176,Police nationale,12932725125.0,13443240127.11
+2024,Sécurités,207,Sécurité et éducation routières,108879721.0,70078388.62
+2024,Transformation et fonction publiques,148,Fonction publique,282563995.0,265086340.63
+2024,Transformation et fonction publiques,348,Performance et résilience des bâtiments de l'État et de ses opérateurs,527867705.0,398901665.17
+2024,Transformation et fonction publiques,349,Transformation publique,162824233.0,170638299.21
+2024,Transformation et fonction publiques,352,Innovation et transformation numériques,74100000.0,32092600.9
+2024,Transformation et fonction publiques,368,Conduite et pilotage de la transformation et de la fonction publiques,48365748.0,46924714.74
+2024,Travail et emploi,102,Accès et retour à l'emploi,7543175317.0,7049360036.18
+2024,Travail et emploi,103,Accompagnement des mutations économiques et développement de l'emploi,14308732364.0,13569520569.1
+2024,Travail et emploi,111,Amélioration de la qualité de l'emploi et des relations du travail,110036293.0,98515391.48
+2024,Travail et emploi,155,"Conception, gestion et évaluation des politiques de l'emploi et du travail",699040576.0,714697175.0699999
+2024,"Écologie, développement et mobilité durables",113,"Paysages, eau et biodiversité",511972615.0,379159409.21
+2024,"Écologie, développement et mobilité durables",159,"Expertise, information géographique et météorologie",515548889.0,503626611.65
+2024,"Écologie, développement et mobilité durables",174,"Énergie, climat et après-mines",5435154925.0,3797447109.97
+2024,"Écologie, développement et mobilité durables",181,Prévention des risques,1358583701.0,1285917538.71
+2024,"Écologie, développement et mobilité durables",203,Infrastructures et services de transports,4381048913.0,8598907595.68
+2024,"Écologie, développement et mobilité durables",205,"Affaires maritimes, pêche et aquaculture",312085103.0,313191803.78
+2024,"Écologie, développement et mobilité durables",217,"Conduite et pilotage des politiques de l'écologie, du développement et de la mobilité durables",3095635341.0,3081897560.92
+2024,"Écologie, développement et mobilité durables",345,Service public de l'énergie,4884000000.0,5701907423.41
+2024,"Écologie, développement et mobilité durables",380,Fonds d'accélération de la transition écologique dans les territoires,1124000000.0,569946529.46
+2024,Économie,134,Développement des entreprises et régulations,2656729661.0,3691726547.69
+2024,Économie,220,Statistiques et études économiques,473471923.0,459329440.1
+2024,Économie,305,Stratégies économiques,698576373.0,691985052.01
+2024,Économie,343,Plan France Très haut débit,464470090.0,260873290.81
+2024,Économie,367,"Financement des opérations patrimoniales envisagées en 2024 sur le compte d'affectation spéciale ""Participations financières de l'État""",0.0,0.0
+2025,Action extérieure de l'État,105,Action de la France en Europe et dans le monde,2649938602.0,2613879162.74
+2025,Action extérieure de l'État,151,Français à l'étranger et affaires consulaires,155310800.0,139503312.43
+2025,Action extérieure de l'État,185,Diplomatie culturelle et d'influence,651744733.0,624585363.3
+2025,Administration générale et territoriale de l'État,216,Conduite et pilotage des politiques de l'intérieur,2189225539.0,2026329832.38
+2025,Administration générale et territoriale de l'État,232,Vie politique,100242420.0,109039079.66
+2025,Administration générale et territoriale de l'État,354,Administration territoriale de l'État,2658458305.0,2642744725.6
+2025,"Agriculture, alimentation, forêt et affaires rurales",149,"Compétitivité et durabilité de l'agriculture, de l'agroalimentaire et de la forêt",2261317665.0,2143552773.9
+2025,"Agriculture, alimentation, forêt et affaires rurales",206,Sécurité et qualité sanitaires de l'alimentation,854636527.0,848119113.31
+2025,"Agriculture, alimentation, forêt et affaires rurales",215,Conduite et pilotage des politiques de l'agriculture,651189597.0,636672060.6
+2025,"Agriculture, alimentation, forêt et affaires rurales",381,Allègements du coût du travail en agriculture (TODE-AG),448500000.0,422985964.0
+2025,Aide publique au développement,110,Aide économique et financière au développement,1512674817.0,1453714389.05
+2025,Aide publique au développement,209,Solidarité à l'égard des pays en développement,1976928976.0,1866268839.89
+2025,Aide publique au développement,365,Renforcement des fonds propres de l'Agence française de développement,145000000.0,145000000.0
+2025,Aide publique au développement,370,"Restitution des ""biens mal acquis""",0.0,0.0
+2025,Aide publique au développement,384,Fonds de solidarité pour le développement,738000000.0,738000000.0
+2025,"Anciens combattants, mémoire et liens avec la Nation",158,Indemnisation des victimes des persécutions antisémites et des actes de barbarie pendant la seconde guerre mondiale,85354059.0,69712640.32
+2025,"Anciens combattants, mémoire et liens avec la Nation",169,"Reconnaissance et réparation en faveur du monde combattant, mémoire et liens avec la Nation",1769140569.0,1780407502.96
+2025,Cohésion des territoires,109,Aide à l'accès au logement,16713254000.0,16655646935.65
+2025,Cohésion des territoires,112,Impulsion et coordination de la politique d'aménagement du territoire,246745887.0,387488286.74
+2025,Cohésion des territoires,135,"Urbanisme, territoires et amélioration de l'habitat",2513552438.0,2844755663.27
+2025,Cohésion des territoires,147,Politique de la ville,609579643.0,555203672.02
+2025,Cohésion des territoires,162,Interventions territoriales de l'État,77597672.0,130545567.28
+2025,Cohésion des territoires,177,"Hébergement, parcours vers le logement et insertion des personnes vulnérables",2961499369.0,3132317355.42
+2025,Conseil et contrôle de l'État,126,"Conseil économique, social et environnemental",34431190.0,34060028.0
+2025,Conseil et contrôle de l'État,164,Cour des comptes et autres juridictions financières,258991492.0,259579782.23999998
+2025,Conseil et contrôle de l'État,165,Conseil d'État et autres juridictions administratives,598979281.0,570610182.72
+2025,Crédits non répartis,551,Provision relative aux rémunérations publiques,100000000.0,0.0
+2025,Crédits non répartis,552,Dépenses accidentelles et imprévisibles,125000000.0,0.0
+2025,Culture,131,Création,1043774435.0,983471713.64
+2025,Culture,175,Patrimoines,1251197231.0,1276459058.34
+2025,Culture,224,Soutien aux politiques du ministère de la culture,863145802.0,851656926.28
+2025,Culture,361,Transmission des savoirs et démocratisation de la culture,759910851.0,755959592.03
+2025,Direction de l'action du Gouvernement,129,Coordination du travail gouvernemental,886959056.0,936327077.48
+2025,Direction de l'action du Gouvernement,308,Protection des droits et libertés,138828327.0,135151954.95
+2025,Défense,144,Environnement et prospective de la politique de défense,2075550688.0,2074170751.3
+2025,Défense,146,Équipement des forces,18689519719.0,19283149630.42
+2025,Défense,178,Préparation et emploi des forces,14317927113.0,15572400590.05
+2025,Défense,212,Soutien de la politique de la défense,24863341053.0,25194015778.14
+2025,Engagements financiers de l'État,114,Appels en garantie de l'État (crédits évaluatifs),985272597.0,1344266190.95
+2025,Engagements financiers de l'État,117,Charge de la dette et trésorerie de l'État (crédits évaluatifs),54207000000.0,50895612715.86
+2025,Engagements financiers de l'État,145,Épargne,113165287.0,74964734.05
+2025,Engagements financiers de l'État,344,Fonds de soutien relatif aux prêts et contrats financiers structurés à risque,171619269.0,177716750.45
+2025,Engagements financiers de l'État,355,Charge de la dette de SNCF Réseau reprise par l'État (crédits évaluatifs),692000000.0,687275916.23
+2025,Enseignement scolaire,139,Enseignement privé du premier et du second degrés,8918238639.0,8812182660.83
+2025,Enseignement scolaire,140,Enseignement scolaire public du premier degré,27469524090.0,27358507821.820004
+2025,Enseignement scolaire,141,Enseignement scolaire public du second degré,39453695772.0,38974173357.6
+2025,Enseignement scolaire,143,Enseignement technique agricole,1712186055.0,1688297441.25
+2025,Enseignement scolaire,214,Soutien de la politique de l'éducation nationale,2968037099.0,2963770647.1800003
+2025,Enseignement scolaire,230,Vie de l'élève,8120318358.0,7948971522.7
+2025,Gestion des finances publiques,156,Gestion fiscale et financière de l'État et du secteur public local,8137480441.0,8001324844.4
+2025,Gestion des finances publiques,218,Conduite et pilotage des politiques économiques et financières,964301826.0,964923273.76
+2025,Gestion des finances publiques,302,Facilitation et sécurisation des échanges,1757526191.0,1728841878.36
+2025,"Immigration, asile et intégration",104,Intégration et accès à la nationalité française,366096208.0,346063275.02
+2025,"Immigration, asile et intégration",303,Immigration et asile,1715095392.0,1712080310.55
+2025,Investir pour la France de 2030,421,Soutien des progrès de l'enseignement et de la recherche,172909030.0,156250253.0
+2025,Investir pour la France de 2030,422,Valorisation de la recherche,206869977.0,195492128.0
+2025,Investir pour la France de 2030,423,Accélération de la modernisation des entreprises,149400459.0,36183434.0
+2025,Investir pour la France de 2030,424,Financement des investissements stratégiques,3957472275.0,2094916906.42
+2025,Investir pour la France de 2030,425,Financement structurel des écosystèmes d'innovation,778634101.0,818809225.0
+2025,Justice,101,Accès au droit et à la justice,802430559.0,784709998.86
+2025,Justice,107,Administration pénitentiaire,5327386498.0,5183421789.69
+2025,Justice,166,Justice judiciaire,4642251709.0,4584079495.13
+2025,Justice,182,Protection judiciaire de la jeunesse,1150735240.0,1107004151.15
+2025,Justice,310,Conduite et pilotage de la politique de la justice,753770710.0,715280712.0899999
+2025,Justice,335,Conseil supérieur de la magistrature,6277480.0,5781942.57
+2025,"Médias, livre et industries culturelles",180,Presse et médias,369165408.0,350580507.52
+2025,"Médias, livre et industries culturelles",334,Livre et industries culturelles,350837551.0,342907461.51
+2025,Outre-Mer,123,Conditions de vie Outre-Mer,838759748.0,878181684.36
+2025,Outre-Mer,138,Emploi Outre-Mer,2141371138.0,2162980614.79
+2025,Plan de relance,362,Écologie,0.0,1215076252.41
+2025,Plan de relance,363,Compétitivité,0.0,271287840.91
+2025,Pouvoirs publics,501,Présidence de la République,122563852.0,122563852.0
+2025,Pouvoirs publics,511,Assemblée nationale,607647569.0,607647569.0
+2025,Pouvoirs publics,521,Sénat,353470900.0,353470900.0
+2025,Pouvoirs publics,531,Conseil constitutionnel,17930000.0,17930000.0
+2025,Pouvoirs publics,533,Cour de justice de la République,984000.0,984000.0
+2025,Pouvoirs publics,541,La Chaîne parlementaire,35245822.0,35245822.0
+2025,Recherche et enseignement supérieur,142,Enseignement supérieur et recherche agricoles,421859182.0,414153929.85
+2025,Recherche et enseignement supérieur,150,Formations supérieures et recherche universitaire,15428142722.0,15314401974.73
+2025,Recherche et enseignement supérieur,172,Recherches scientifiques et technologiques pluridisciplinaires,8168080700.0,7901924144.47
+2025,Recherche et enseignement supérieur,190,"Recherche dans les domaines de l'énergie, du développement et de la mobilité durables",1408871271.0,1613968824.87
+2025,Recherche et enseignement supérieur,191,Recherche duale (civile et militaire),72656092.0,132656092.0
+2025,Recherche et enseignement supérieur,192,Recherche et enseignement supérieur en matière économique et industrielle,350806987.0,368236623.3
+2025,Recherche et enseignement supérieur,193,Recherche spatiale,1809190845.0,1635706651.0
+2025,Recherche et enseignement supérieur,231,Vie étudiante,3249641878.0,3205790716.56
+2025,Relations avec les collectivités territoriales,119,Concours financiers aux collectivités territoriales et à leurs groupements,3608378234.0,3607089404.9
+2025,Relations avec les collectivités territoriales,122,Concours spécifiques et administration,354420098.0,323100913.05
+2025,Remboursements et dégrèvements,200,Remboursements et dégrèvements d'impôts d'État (crédits évaluatifs),143576796000.0,136844347947.57
+2025,Remboursements et dégrèvements,201,Remboursements et dégrèvements d'impôts locaux (crédits évaluatifs),4728824991.0,4519874583.48
+2025,Régimes sociaux et de retraite,195,"Régimes de retraite des mines, de la SEITA et divers",1086795256.0,1091354689.46
+2025,Régimes sociaux et de retraite,197,Régimes de retraite et de sécurité sociale des marins,772145015.0,799080386.0
+2025,Régimes sociaux et de retraite,198,Régimes sociaux et de retraite des transports terrestres,4132828913.0,4180328179.0
+2025,Santé,183,Protection maladie,1216300000.0,1216300000.0
+2025,Santé,204,"Prévention, sécurité sanitaire et offre de soins",211729644.0,267293108.19
+2025,Santé,379,Reversement à la Sécurité sociale des recettes de la Facilité pour la relance et la résilience (FRR) européenne au titre du volet «Ségur investissement» du plan national de relance et de résilience (PNRR),54000000.0,54000000.0
+2025,"Solidarité, insertion et égalité des chances",137,Égalité entre les femmes et les hommes,94016767.0,100360179.57
+2025,"Solidarité, insertion et égalité des chances",157,Handicap et dépendance,16057571412.0,16183798194.77
+2025,"Solidarité, insertion et égalité des chances",304,Inclusion sociale et protection des personnes,14157121335.0,14572710786.46
+2025,"Sport, jeunesse et vie associative",163,Jeunesse et vie associative,848101987.0,833714296.24
+2025,"Sport, jeunesse et vie associative",219,Sport,593149632.0,520463252.29
+2025,"Sport, jeunesse et vie associative",350,Jeux olympiques et paralympiques 2024,48205300.0,-12185727.97
+2025,"Sport, jeunesse et vie associative",385,Jeux olympiques et paralympiques d'hiver 2030,9200000.0,8899400.0
+2025,Sécurités,152,Gendarmerie nationale,10891801471.0,11271600148.57
+2025,Sécurités,161,Sécurité civile,830496080.0,967525499.72
+2025,Sécurités,176,Police nationale,13453533133.0,13489754140.85
+2025,Sécurités,207,Sécurité et éducation routières,82115152.0,60134752.07
+2025,Transformation et fonction publiques,148,Fonction publique,265196267.0,249187275.16000003
+2025,Transformation et fonction publiques,348,Performance et résilience des bâtiments de l'État et de ses opérateurs,300050026.0,239272544.39
+2025,Transformation et fonction publiques,349,Transformation publique,103107640.0,53268717.32
+2025,Transformation et fonction publiques,368,Conduite et pilotage de la transformation et de la fonction publiques,53763690.0,50972938.42
+2025,"Travail, emploi et administration des ministères sociaux",102,Accès et retour à l'emploi,7067132189.0,6652552266.56
+2025,"Travail, emploi et administration des ministères sociaux",103,Accompagnement des mutations économiques et développement de l'emploi,10855207839.0,11752208249.65
+2025,"Travail, emploi et administration des ministères sociaux",111,Amélioration de la qualité de l'emploi et des relations du travail,84721684.0,79379919.56
+2025,"Travail, emploi et administration des ministères sociaux",155,Soutien des ministères sociaux,2002583670.0,1967790825.03
+2025,"Écologie, développement et mobilité durables",113,"Paysages, eau et biodiversité",415780504.0,358102778.71
+2025,"Écologie, développement et mobilité durables",159,"Expertise, information géographique et météorologie",518888251.0,512684595.93
+2025,"Écologie, développement et mobilité durables",174,"Énergie, climat et après-mines",1483722825.0,1422923216.43
+2025,"Écologie, développement et mobilité durables",181,Prévention des risques,1349737712.0,1251293170.34
+2025,"Écologie, développement et mobilité durables",203,Infrastructures et services de transports,4426244402.0,8284706524.41
+2025,"Écologie, développement et mobilité durables",205,"Affaires maritimes, pêche et aquaculture",268602722.0,280981992.85
+2025,"Écologie, développement et mobilité durables",217,"Conduite et pilotage des politiques de l'écologie, du développement et de la mobilité durables",3186787970.0,3119804623.5899997
+2025,"Écologie, développement et mobilité durables",235,Sûreté nucléaire et radioprotection,359013204.0,355941247.78999996
+2025,"Écologie, développement et mobilité durables",345,Service public de l'énergie,8571358333.0,9715091584.34
+2025,"Écologie, développement et mobilité durables",380,Fonds d'accélération de la transition écologique dans les territoires,1124000000.0,809189847.0
+2025,Économie,134,Développement des entreprises et régulations,2336035539.0,2396242617.3199997
+2025,Économie,220,Statistiques et études économiques,472444382.0,466171469.92
+2025,Économie,305,Stratégies économiques,693438232.0,713553907.8199999
+2025,Économie,343,Plan France Très haut débit,227266960.0,207712726.26
+2025,Économie,367,"Financement des opérations patrimoniales envisagées en 2025 sur le compte d'affectation spéciale ""Participations financières de l'État""",0.0,0.0

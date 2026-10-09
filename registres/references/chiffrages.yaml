@@ -815,3 +815,36 @@ chiffrages:
     localisation: Page 17, encadré sur les écarts de prévision 2018-2025, « Le différentiel est en moyenne de 3,4 % sur la période considérée entre les prévisions en N et N+2 »
     saisi_le: 2026-10-09
     relecture: a_relire
+
+  - id: credits_missions_depenses_constatees_2023
+    levier: credits_missions
+    source: dgfip_plrg_2023
+    millesime: "exercice 2023"
+    mesure: Dépenses constatées (crédits de paiement) des programmes des missions du levier, somme calculée par le moteur sur l'annexe 1 (budget général, hors remboursements et dégrèvements, relations avec les collectivités territoriales, crédits non répartis, régimes sociaux et de retraite et programmes absents du PLF 2026)
+    valeur: 377.712
+    unite: Md€
+    localisation: Fichier annexe1_etat_cp_2023, colonne « Depenses_constatees », somme des lignes du périmètre (fr_budget.agrege.credits_missions.total_execution(2023))
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: credits_missions_depenses_constatees_2024
+    levier: credits_missions
+    source: dgfip_plrg_2024
+    millesime: "exercice 2024"
+    mesure: Dépenses constatées (crédits de paiement) des programmes des missions du levier, somme calculée par le moteur sur l'annexe 1 (budget général, hors remboursements et dégrèvements, relations avec les collectivités territoriales, crédits non répartis, régimes sociaux et de retraite et programmes absents du PLF 2026)
+    valeur: 371.94
+    unite: Md€
+    localisation: Fichier annexe1_etat_cp_2024, colonne « Depenses_constatees », somme des lignes du périmètre (fr_budget.agrege.credits_missions.total_execution(2024))
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: credits_missions_depenses_constatees_2025
+    levier: credits_missions
+    source: dgfip_plrg_2025
+    millesime: "exercice 2025"
+    mesure: Dépenses constatées (crédits de paiement) des programmes des missions du levier, somme calculée par le moteur sur l'annexe 1 (budget général, hors remboursements et dégrèvements, relations avec les collectivités territoriales, crédits non répartis, régimes sociaux et de retraite et programmes absents du PLF 2026)
+    valeur: 375.091
+    unite: Md€
+    localisation: Fichier annexe1_etat_cp_2025, colonne « Depenses_constatees », somme des lignes du périmètre (fr_budget.agrege.credits_missions.total_execution(2025))
+    saisi_le: 2026-10-09
+    relecture: a_relire

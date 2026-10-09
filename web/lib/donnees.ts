@@ -120,3 +120,10 @@ export type CatalogueDepensesFiscales = {
   impots_exclus: string[];
   depenses: DepenseFiscale[];
 };
+export type CatalogueCreditsMissions = {
+  source: string;
+  annee_credits: number;
+  unite_credits: string;
+  bornes: [number, number];
+  missions: { identifiant: string; libelle: string; credits: number; rendement_pourcent: number }[];
+};

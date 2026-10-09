@@ -47,10 +47,10 @@ leviers:
 
   - id: depenses_fiscales
     libelle: Dépenses fiscales (niches fiscales)
-    parametres_reglables: [Suppression, Plafonnement ou réduction d'une dépense fiscale du catalogue]
+    parametres_reglables: [Réduction de 0 à 100 % d'une dépense fiscale du catalogue, Réduction de 0 à 100 % des dépenses fiscales d'un impôt]
     moteur: agrege
     references_visees: [Voies et Moyens, tome 2 (coût des dépenses fiscales)]
-    statut: non_publie
+    statut: beta
 
   - id: credits_missions
     libelle: Crédits par mission du budget de l'État

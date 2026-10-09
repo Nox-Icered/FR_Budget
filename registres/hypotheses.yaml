@@ -200,3 +200,154 @@ hypotheses:
       Valeur centrale : tarif non agricole sur tout le volume, comme en 2023 où tout le gazole
       non routier était taxé à 18,82 €/hl avant remboursement ; borne basse : tarif de 2023.
     instruments: [accises_energie]
+
+  - id: depenses_fiscales_ecart_depense
+    libelle: Écart entre le coût réalisé et le coût prévu d'une dépense fiscale
+    unite: écart relatif au coût prévu
+    valeur_centrale: 0.0
+    plage:
+      basse: -0.362
+      haute: 0.575
+    sources: [plf2024_voies_et_moyens_tome2, plf2026_voies_et_moyens_tome2]
+    justification: >-
+      Le rendement de la réduction d'une dépense fiscale est la part correspondante de son coût
+      prévu pour 2026 par le PLF 2026 (valeur centrale : aucun écart). La plage reprend les 10e
+      et 90e centiles de l'écart relatif entre le coût prévu pour 2024 par le PLF 2024 (prévision
+      à un an, comme celle de 2026 dans le PLF 2026) et le coût réalisé publié par le PLF 2026,
+      sur les 274 dépenses chiffrées dans les deux tomes avec une prévision positive. Calcul :
+      fr_budget.agrege.depenses_fiscales.plage_ecart_par_depense(2024, 2026, 2024), arrondi au
+      millième. Les écarts mêlent erreurs de prévision et changements de méthode de chiffrage.
+    instruments: [depenses_fiscales]
+
+  - id: depenses_fiscales_ecart_impot_revenu
+    libelle: Écart entre le coût réalisé et le coût prévu des dépenses fiscales (impôt sur le revenu)
+    unite: écart relatif au coût prévu
+    valeur_centrale: 0.0
+    plage:
+      basse: 0
+      haute: 0.062
+    sources: [plf2024_voies_et_moyens_tome2, plf2025_voies_et_moyens_tome2, plf2026_voies_et_moyens_tome2]
+    justification: >-
+      Le rendement de la réduction des dépenses fiscales d'un impôt est la part correspondante
+      de leur coût prévu pour 2026 par le PLF 2026 (valeur centrale : aucun écart). La plage va
+      de zéro à l'écart extrême constaté entre le coût total prévu et le coût réalisé publié
+      deux ans plus tard, sur trois comparaisons : prévision 2023 du PLF 2024 et réalisation du
+      PLF 2025 ; prévision 2024 du PLF 2025 et réalisation du PLF 2026 ; prévision 2024 du PLF
+      2024 et réalisation du PLF 2026. Périmètre : dépenses présentes dans les deux tomes et
+      chiffrées lors de la prévision ; convention du tome II pour les dépenses non chiffrées.
+      Calcul : fr_budget.agrege.depenses_fiscales.ecart_par_impot, arrondi au millième.
+    instruments: [depenses_fiscales]
+
+  - id: depenses_fiscales_ecart_impot_revenu_et_societes
+    libelle: Écart entre le coût réalisé et le coût prévu des dépenses fiscales (impôt sur le revenu et impôt sur les sociétés)
+    unite: écart relatif au coût prévu
+    valeur_centrale: 0.0
+    plage:
+      basse: -0.02
+      haute: 0.012
+    sources: [plf2024_voies_et_moyens_tome2, plf2025_voies_et_moyens_tome2, plf2026_voies_et_moyens_tome2]
+    justification: >-
+      Le rendement de la réduction des dépenses fiscales d'un impôt est la part correspondante
+      de leur coût prévu pour 2026 par le PLF 2026 (valeur centrale : aucun écart). La plage va
+      de zéro à l'écart extrême constaté entre le coût total prévu et le coût réalisé publié
+      deux ans plus tard, sur trois comparaisons : prévision 2023 du PLF 2024 et réalisation du
+      PLF 2025 ; prévision 2024 du PLF 2025 et réalisation du PLF 2026 ; prévision 2024 du PLF
+      2024 et réalisation du PLF 2026. Périmètre : dépenses présentes dans les deux tomes et
+      chiffrées lors de la prévision ; convention du tome II pour les dépenses non chiffrées.
+      Calcul : fr_budget.agrege.depenses_fiscales.ecart_par_impot, arrondi au millième.
+    instruments: [depenses_fiscales]
+
+  - id: depenses_fiscales_ecart_impot_societes
+    libelle: Écart entre le coût réalisé et le coût prévu des dépenses fiscales (impôt sur les sociétés)
+    unite: écart relatif au coût prévu
+    valeur_centrale: 0.0
+    plage:
+      basse: -0.17
+      haute: 0.087
+    sources: [plf2024_voies_et_moyens_tome2, plf2025_voies_et_moyens_tome2, plf2026_voies_et_moyens_tome2]
+    justification: >-
+      Le rendement de la réduction des dépenses fiscales d'un impôt est la part correspondante
+      de leur coût prévu pour 2026 par le PLF 2026 (valeur centrale : aucun écart). La plage va
+      de zéro à l'écart extrême constaté entre le coût total prévu et le coût réalisé publié
+      deux ans plus tard, sur trois comparaisons : prévision 2023 du PLF 2024 et réalisation du
+      PLF 2025 ; prévision 2024 du PLF 2025 et réalisation du PLF 2026 ; prévision 2024 du PLF
+      2024 et réalisation du PLF 2026. Périmètre : dépenses présentes dans les deux tomes et
+      chiffrées lors de la prévision ; convention du tome II pour les dépenses non chiffrées.
+      Calcul : fr_budget.agrege.depenses_fiscales.ecart_par_impot, arrondi au millième.
+    instruments: [depenses_fiscales]
+
+  - id: depenses_fiscales_ecart_autres_impots_directs
+    libelle: Écart entre le coût réalisé et le coût prévu des dépenses fiscales (autres impôts directs)
+    unite: écart relatif au coût prévu
+    valeur_centrale: 0.0
+    plage:
+      basse: -0.035
+      haute: 0.024
+    sources: [plf2024_voies_et_moyens_tome2, plf2025_voies_et_moyens_tome2, plf2026_voies_et_moyens_tome2]
+    justification: >-
+      Le rendement de la réduction des dépenses fiscales d'un impôt est la part correspondante
+      de leur coût prévu pour 2026 par le PLF 2026 (valeur centrale : aucun écart). La plage va
+      de zéro à l'écart extrême constaté entre le coût total prévu et le coût réalisé publié
+      deux ans plus tard, sur trois comparaisons : prévision 2023 du PLF 2024 et réalisation du
+      PLF 2025 ; prévision 2024 du PLF 2025 et réalisation du PLF 2026 ; prévision 2024 du PLF
+      2024 et réalisation du PLF 2026. Périmètre : dépenses présentes dans les deux tomes et
+      chiffrées lors de la prévision ; convention du tome II pour les dépenses non chiffrées.
+      Calcul : fr_budget.agrege.depenses_fiscales.ecart_par_impot, arrondi au millième.
+    instruments: [depenses_fiscales]
+
+  - id: depenses_fiscales_ecart_enregistrement_timbre
+    libelle: Écart entre le coût réalisé et le coût prévu des dépenses fiscales (droits d'enregistrement et de timbre)
+    unite: écart relatif au coût prévu
+    valeur_centrale: 0.0
+    plage:
+      basse: 0
+      haute: 4.948
+    sources: [plf2024_voies_et_moyens_tome2, plf2025_voies_et_moyens_tome2, plf2026_voies_et_moyens_tome2]
+    justification: >-
+      Le rendement de la réduction des dépenses fiscales d'un impôt est la part correspondante
+      de leur coût prévu pour 2026 par le PLF 2026 (valeur centrale : aucun écart). La plage va
+      de zéro à l'écart extrême constaté entre le coût total prévu et le coût réalisé publié
+      deux ans plus tard, sur trois comparaisons : prévision 2023 du PLF 2024 et réalisation du
+      PLF 2025 ; prévision 2024 du PLF 2025 et réalisation du PLF 2026 ; prévision 2024 du PLF
+      2024 et réalisation du PLF 2026. Périmètre : dépenses présentes dans les deux tomes et
+      chiffrées lors de la prévision ; convention du tome II pour les dépenses non chiffrées.
+      Calcul : fr_budget.agrege.depenses_fiscales.ecart_par_impot, arrondi au millième.
+    instruments: [depenses_fiscales]
+
+  - id: depenses_fiscales_ecart_autres_droits
+    libelle: Écart entre le coût réalisé et le coût prévu des dépenses fiscales (autres droits)
+    unite: écart relatif au coût prévu
+    valeur_centrale: 0.0
+    plage:
+      basse: 0
+      haute: 2.8
+    sources: [plf2024_voies_et_moyens_tome2, plf2025_voies_et_moyens_tome2, plf2026_voies_et_moyens_tome2]
+    justification: >-
+      Le rendement de la réduction des dépenses fiscales d'un impôt est la part correspondante
+      de leur coût prévu pour 2026 par le PLF 2026 (valeur centrale : aucun écart). La plage va
+      de zéro à l'écart extrême constaté entre le coût total prévu et le coût réalisé publié
+      deux ans plus tard, sur trois comparaisons : prévision 2023 du PLF 2024 et réalisation du
+      PLF 2025 ; prévision 2024 du PLF 2025 et réalisation du PLF 2026 ; prévision 2024 du PLF
+      2024 et réalisation du PLF 2026. Périmètre : dépenses présentes dans les deux tomes et
+      chiffrées lors de la prévision ; convention du tome II pour les dépenses non chiffrées.
+      Calcul : fr_budget.agrege.depenses_fiscales.ecart_par_impot, arrondi au millième.
+    instruments: [depenses_fiscales]
+
+  - id: depenses_fiscales_ecart_impots_locaux
+    libelle: Écart entre le coût réalisé et le coût prévu des dépenses fiscales (impôts locaux)
+    unite: écart relatif au coût prévu
+    valeur_centrale: 0.0
+    plage:
+      basse: 0
+      haute: 0.2
+    sources: [plf2024_voies_et_moyens_tome2, plf2025_voies_et_moyens_tome2, plf2026_voies_et_moyens_tome2]
+    justification: >-
+      Le rendement de la réduction des dépenses fiscales d'un impôt est la part correspondante
+      de leur coût prévu pour 2026 par le PLF 2026 (valeur centrale : aucun écart). La plage va
+      de zéro à l'écart extrême constaté entre le coût total prévu et le coût réalisé publié
+      deux ans plus tard, sur trois comparaisons : prévision 2023 du PLF 2024 et réalisation du
+      PLF 2025 ; prévision 2024 du PLF 2025 et réalisation du PLF 2026 ; prévision 2024 du PLF
+      2024 et réalisation du PLF 2026. Périmètre : dépenses présentes dans les deux tomes et
+      chiffrées lors de la prévision ; convention du tome II pour les dépenses non chiffrées.
+      Calcul : fr_budget.agrege.depenses_fiscales.ecart_par_impot, arrondi au millième.
+    instruments: [depenses_fiscales]

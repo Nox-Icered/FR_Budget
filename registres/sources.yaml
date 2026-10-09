@@ -115,6 +115,24 @@ sources:
     acces: direct
     consulte_le: 2026-10-08
 
+  - id: plf2024_voies_et_moyens_tome2
+    nom: Projet de loi de finances pour 2024, annexe « Évaluation des voies et moyens », tome II (dépenses fiscales)
+    editeur: Ministère de l'Économie et des Finances (document publié par l'Assemblée nationale)
+    url: https://www.assemblee-nationale.fr/dyn/content/download/705208/file/Evaluation%20des%20voies%20et%20moyens%20-%20Tome%20II.pdf
+    licence: Licence Ouverte 2.0
+    millesime: PLF 2024
+    acces: direct
+    consulte_le: 2026-10-09
+
+  - id: plf2026_voies_et_moyens_tome2
+    nom: Projet de loi de finances pour 2026, annexe « Évaluation des voies et moyens », tome II (dépenses fiscales)
+    editeur: Ministère de l'Économie et des Finances (document publié par l'Assemblée nationale)
+    url: https://www.assemblee-nationale.fr/dyn/contenu/visualisation/1087933/file/Voies_et_moyens_Tome_2_2026.pdf
+    licence: Licence Ouverte 2.0
+    millesime: PLF 2026
+    acces: direct
+    consulte_le: 2026-10-09
+
   - id: drees_comptes_sante_financement_2026
     nom: Les comptes de la santé - Répartition par financeur (édition 2026 du panorama des dépenses de santé)
     editeur: DREES (ministère chargé de la santé)

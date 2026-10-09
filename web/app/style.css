@@ -90,3 +90,6 @@ th.groupe {
 .reglages select { max-width: 10rem; font: inherit; }
 .reglage { display: grid; gap: 2px; margin-bottom: 8px; }
 .etiquette { margin-left: 8px; font-size: 0.8rem; padding: 0 6px; border: 1px solid var(--trait); color: var(--discret); }
+.reglages h3 { font-size: 1rem; margin: 8px 0 0; }
+.reglages input[type="search"] { font: inherit; width: 100%; }
+.resultats { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }

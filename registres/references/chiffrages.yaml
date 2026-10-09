@@ -488,10 +488,10 @@ chiffrages:
 
   - id: accises_remboursement_trm_2025
     levier: accises_energie
-    source: plf2025_voies_et_moyens_tome2
-    millesime: "2025 (prévision)"
+    source: plf2026_voies_et_moyens_tome2
+    millesime: "2025 (prévision du PLF 2026)"
     mesure: Dépense fiscale 800221, remboursement partiel de l'accise sur les gazoles des véhicules de transport de marchandises d'au moins 7,5 tonnes
-    valeur: 1272
+    valeur: 1178
     unite: M€
     localisation: Fiche 800221, impact budgétaire, colonne « Prévision 2025 »
     saisi_le: 2026-10-09
@@ -499,8 +499,8 @@ chiffrages:
 
   - id: accises_remboursement_transport_collectif_2025
     levier: accises_energie
-    source: plf2025_voies_et_moyens_tome2
-    millesime: "2025 (prévision)"
+    source: plf2026_voies_et_moyens_tome2
+    millesime: "2025 (prévision du PLF 2026)"
     mesure: Dépense fiscale 800222, remboursement partiel de l'accise sur les gazoles des véhicules de transport public collectif de voyageurs
     valeur: 183
     unite: M€
@@ -510,10 +510,10 @@ chiffrages:
 
   - id: accises_remboursement_taxis_2025
     levier: accises_energie
-    source: plf2025_voies_et_moyens_tome2
-    millesime: "2025 (prévision)"
+    source: plf2026_voies_et_moyens_tome2
+    millesime: "2025 (prévision du PLF 2026)"
     mesure: Dépense fiscale 800220, remboursement partiel de l'accise sur les carburants des taxis
-    valeur: 50
+    valeur: 59
     unite: M€
     localisation: Fiche 800220, impact budgétaire, colonne « Prévision 2025 »
     saisi_le: 2026-10-09
@@ -604,5 +604,170 @@ chiffrages:
     valeur: 20.6
     unite: "%"
     localisation: Article 11, texte proposé, IV. A., page 120
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_total_plf2024_2022
+    levier: depenses_fiscales
+    source: plf2024_voies_et_moyens_tome2
+    millesime: "2022 (réalisation du PLF 2024)"
+    mesure: Coût total des dépenses fiscales, convention du tome II (une dépense non chiffrée reprend le dernier montant chiffré)
+    valeur: 85616
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Total », colonne « Coût 2022 », page 14 du fichier PDF
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_total_plf2024_2023
+    levier: depenses_fiscales
+    source: plf2024_voies_et_moyens_tome2
+    millesime: "2023 (prévision du PLF 2024)"
+    mesure: Coût total des dépenses fiscales, convention du tome II (une dépense non chiffrée reprend le dernier montant chiffré)
+    valeur: 81344
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Total », colonne « Coût 2023 », page 14 du fichier PDF
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_total_plf2024_2024
+    levier: depenses_fiscales
+    source: plf2024_voies_et_moyens_tome2
+    millesime: "2024 (prévision du PLF 2024)"
+    mesure: Coût total des dépenses fiscales, convention du tome II (une dépense non chiffrée reprend le dernier montant chiffré)
+    valeur: 78741
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Total », colonne « Coût 2024 », page 14 du fichier PDF
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_total_plf2025_2023
+    levier: depenses_fiscales
+    source: plf2025_voies_et_moyens_tome2
+    millesime: "2023 (réalisation du PLF 2025)"
+    mesure: Coût total des dépenses fiscales, convention du tome II (une dépense non chiffrée reprend le dernier montant chiffré)
+    valeur: 82923
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Total », colonne « Coût 2023 », pages 13 et 14 du fichier PDF
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_total_plf2025_2024
+    levier: depenses_fiscales
+    source: plf2025_voies_et_moyens_tome2
+    millesime: "2024 (prévision du PLF 2025)"
+    mesure: Coût total des dépenses fiscales, convention du tome II (une dépense non chiffrée reprend le dernier montant chiffré)
+    valeur: 83292
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Total », colonne « Coût 2024 », pages 13 et 14 du fichier PDF
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_total_plf2025_2025
+    levier: depenses_fiscales
+    source: plf2025_voies_et_moyens_tome2
+    millesime: "2025 (prévision du PLF 2025)"
+    mesure: Coût total des dépenses fiscales, convention du tome II (une dépense non chiffrée reprend le dernier montant chiffré)
+    valeur: 85098
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Total », colonne « Coût 2025 », pages 13 et 14 du fichier PDF
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_total_plf2026_2024
+    levier: depenses_fiscales
+    source: plf2026_voies_et_moyens_tome2
+    millesime: "2024 (réalisation du PLF 2026)"
+    mesure: Coût total des dépenses fiscales, convention du tome II (une dépense non chiffrée reprend le dernier montant chiffré)
+    valeur: 89406
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Total », colonne « Coût 2024 », pages 14 et 15 du fichier PDF
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_total_plf2026_2025
+    levier: depenses_fiscales
+    source: plf2026_voies_et_moyens_tome2
+    millesime: "2025 (prévision du PLF 2026)"
+    mesure: Coût total des dépenses fiscales, convention du tome II (une dépense non chiffrée reprend le dernier montant chiffré)
+    valeur: 91834
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Total », colonne « Coût 2025 », pages 14 et 15 du fichier PDF
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_total_plf2026_2026
+    levier: depenses_fiscales
+    source: plf2026_voies_et_moyens_tome2
+    millesime: "2026 (prévision du PLF 2026)"
+    mesure: Coût total des dépenses fiscales, convention du tome II (une dépense non chiffrée reprend le dernier montant chiffré)
+    valeur: 88269
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Total », colonne « Coût 2026 », pages 14 et 15 du fichier PDF
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_impot_revenu_realisation_2023
+    levier: depenses_fiscales
+    source: plf2025_voies_et_moyens_tome2
+    millesime: "2023 (réalisation du PLF 2025)"
+    mesure: Coût réalisé des dépenses fiscales de la partie « Impôt sur le revenu » du tome II
+    valeur: 38735
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Impôt sur le revenu », colonne « Coût 2023 », pages 13 et 14 du fichier PDF
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_impot_revenu_et_societes_realisation_2023
+    levier: depenses_fiscales
+    source: plf2025_voies_et_moyens_tome2
+    millesime: "2023 (réalisation du PLF 2025)"
+    mesure: Coût réalisé des dépenses fiscales de la partie « Impôt sur le revenu et impôt sur les sociétés » du tome II
+    valeur: 13977
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Impôt sur le revenu et impôt sur les sociétés », colonne « Coût 2023 », pages 13 et 14 du fichier PDF
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_impot_societes_realisation_2023
+    levier: depenses_fiscales
+    source: plf2025_voies_et_moyens_tome2
+    millesime: "2023 (réalisation du PLF 2025)"
+    mesure: Coût réalisé des dépenses fiscales de la partie « Impôt sur les sociétés » du tome II
+    valeur: 9179
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Impôt sur les sociétés », colonne « Coût 2023 », pages 13 et 14 du fichier PDF
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_impot_revenu_realisation_2024
+    levier: depenses_fiscales
+    source: plf2026_voies_et_moyens_tome2
+    millesime: "2024 (réalisation du PLF 2026)"
+    mesure: Coût réalisé des dépenses fiscales de la partie « Impôt sur le revenu » du tome II
+    valeur: 42079
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Impôt sur le revenu », colonne « Coût 2024 », pages 14 et 15 du fichier PDF
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_impot_revenu_et_societes_realisation_2024
+    levier: depenses_fiscales
+    source: plf2026_voies_et_moyens_tome2
+    millesime: "2024 (réalisation du PLF 2026)"
+    mesure: Coût réalisé des dépenses fiscales de la partie « Impôt sur le revenu et impôt sur les sociétés » du tome II
+    valeur: 14111
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Impôt sur le revenu et impôt sur les sociétés », colonne « Coût 2024 », pages 14 et 15 du fichier PDF
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: depenses_fiscales_impot_societes_realisation_2024
+    levier: depenses_fiscales
+    source: plf2026_voies_et_moyens_tome2
+    millesime: "2024 (réalisation du PLF 2026)"
+    mesure: Coût réalisé des dépenses fiscales de la partie « Impôt sur les sociétés » du tome II
+    valeur: 3913
+    unite: M€
+    localisation: Présentation générale, tableau « Dépenses fiscales par impôt », ligne « Impôt sur les sociétés », colonne « Coût 2024 », pages 14 et 15 du fichier PDF
     saisi_le: 2026-10-09
     relecture: a_relire

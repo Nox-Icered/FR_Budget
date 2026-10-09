@@ -26,7 +26,7 @@ Bornes : la baisse du gazole s'arrête au tarif réduit du transport routier de 
 - Moteur : agrégé (`moteur/src/fr_budget/agrege/accises.py`).
 - **Recette brute** = somme sur les produits des ventes (tonnes, converties en hectolitres par la masse volumique) × tarif (€/hl ; €/100 kg pour le GPL et le fioul lourd). Fonction `recette_brute`.
 - **Assiette du levier** (`assiette_levier`) : gazole routier, moins les volumes des transporteurs routiers, du transport collectif et des taxis, dont le tarif réduit est fixe (une hausse du tarif normal leur est remboursée) ; essences SP95, SP95-E10 et SP98 (le superéthanol E85 a son propre tarif). Volumes remboursés = dépense fiscale / (tarif normal - tarif réduit) (`volumes_rembourses`).
-- **Rendement d'un centime par litre**, ventes 2025 : 0,225 Md€ pour le gazole, 0,148 Md€ pour les essences. Dans le scénario, ce rendement est rapporté au PIB de 2025 et tenu constant en points de PIB (`scenario_rendement_constant_pib`), comme pour la TVA.
+- **Rendement d'un centime par litre**, ventes 2025 : 0,232 Md€ pour le gazole (0,225 Md€ avec les remboursements prévus par le PLF 2025), 0,148 Md€ pour les essences. Dans le scénario, ce rendement est rapporté au PIB de 2025 et tenu constant en points de PIB (`scenario_rendement_constant_pib`), comme pour la TVA.
 
 ## 4. Données
 
@@ -36,7 +36,7 @@ Bornes : la baisse du gazole s'arrête au tarif réduit du transport routier de 
 | `ministere_guide_fiscalite_energies_2026_pdf` | tarifs du gazole non routier et tarifs réduits | 2026 |
 | `ministere_guide_fiscalite_energies_2025_pdf` | coefficients de conversion légaux (annexe 3) | 2025 |
 | `ademe_base_carbone_pci_masse_volumique_htm` | masses volumiques | non daté |
-| `plf2025_voies_et_moyens_tome2_pdf` | dépenses fiscales 800220, 800221, 800222 | PLF 2025 |
+| `plf2026_voies_et_moyens_tome2_pdf` | dépenses fiscales 800220, 800221, 800222 (prévisions 2025 : 59, 1 178 et 183 M€) | PLF 2026 |
 
 ## 5. Hypothèses
 

@@ -98,3 +98,22 @@ def test_provenance() -> None:
     assert "depenses_fiscales_ecart_depense" in hypotheses
     _, hypotheses = provenance([levier_depenses_fiscales_impot("impots_locaux")])
     assert "depenses_fiscales_ecart_impots_locaux" in hypotheses
+
+
+def test_unite_generique_une_seule_fois_et_sans_depense_choisie() -> None:
+    """Le levier générique (une somme de dépenses choisies sur le site) ne peut figurer qu'une
+    fois, et pas avec une dépense désignée par son numéro."""
+    with pytest.raises(ValueError, match="double compte"):
+        scenario(
+            [
+                Mesure(LEVIER_DEPENSE_FISCALE_UNITE, 1.0, 2027),
+                Mesure(LEVIER_DEPENSE_FISCALE_UNITE, 1.0, 2028),
+            ]
+        )
+    with pytest.raises(ValueError, match="double compte"):
+        scenario(
+            [
+                Mesure(LEVIER_DEPENSE_FISCALE_UNITE, 1.0, 2027),
+                Mesure(levier_depense_fiscale(CODE), 10.0, 2027),
+            ]
+        )

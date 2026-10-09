@@ -275,7 +275,12 @@ class AnneeScenario:
 
 
 def verifier_double_compte(mesures: Sequence[Mesure]) -> None:
-    """Refuse deux mesures sur la même dépense fiscale, ou une dépense et tout son impôt."""
+    """Refuse deux mesures sur la même dépense fiscale, ou une dépense et tout son impôt.
+
+    Le levier générique (somme des dépenses choisies sur le site) est admis une seule fois et
+    jamais avec une dépense désignée par son numéro. Le site empêche lui-même de choisir une
+    dépense d'un impôt dont le curseur n'est pas à zéro.
+    """
     depenses = [d for d in (depense_du_levier(m.levier) for m in mesures) if d is not None]
     impots = {
         LEVIERS_DEPENSES_FISCALES_IMPOT[m.levier]
@@ -285,6 +290,10 @@ def verifier_double_compte(mesures: Sequence[Mesure]) -> None:
     codes = [d.code for d in depenses]
     if len(set(codes)) < len(codes) or any(d.impot in impots for d in depenses):
         msg = "double compte : une même dépense fiscale est visée par deux mesures"
+        raise ValueError(msg)
+    generiques = sum(m.levier == LEVIER_DEPENSE_FISCALE_UNITE for m in mesures)
+    if generiques > 1 or (generiques and depenses):
+        msg = "double compte : le levier générique regroupe déjà les dépenses choisies"
         raise ValueError(msg)
     leviers = [m.levier for m in mesures if m.levier in LEVIERS_DEPENSES_FISCALES_IMPOT]
     if len(set(leviers)) < len(leviers):

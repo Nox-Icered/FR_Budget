@@ -197,6 +197,10 @@ def calcul_scenario(entree: ScenarioEntree) -> dict[str, Any] | None:
     données (un scénario partagé doit reproduire le même résultat). Rien n'est enregistré.
     """
     mesures = [module_scenario.Mesure(m.levier, m.valeur, m.annee) for m in entree.mesures]
+    # Le levier générique ne sert qu'au calcul du site : par l'API, une dépense fiscale est
+    # désignée par son numéro, ce qui permet de contrôler le double compte.
+    if any(m.levier == module_scenario.LEVIER_DEPENSE_FISCALE_UNITE for m in mesures):
+        return None
     try:
         lignes = module_scenario.scenario(mesures)
         sources, hypotheses = module_scenario.provenance(m.levier for m in mesures)

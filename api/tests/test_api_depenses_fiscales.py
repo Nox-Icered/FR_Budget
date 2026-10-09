@@ -74,3 +74,9 @@ def test_site_une_depense_par_l_unite_generique(client: TestClient, export: Path
         assert ecarts[0] == pytest.approx(ligne["ecart_dette"]["central"], abs=1e-8)
         assert min(ecarts) == pytest.approx(ligne["ecart_dette"]["bas"], abs=1e-8)
         assert max(ecarts) == pytest.approx(ligne["ecart_dette"]["haut"], abs=1e-8)
+
+
+def test_levier_generique_refuse_par_l_api(client: TestClient) -> None:
+    """Le levier générique sert au calcul du site ; l'API demande les dépenses par leur numéro."""
+    corps = {"mesures": [{"levier": "depense_fiscale", "valeur": 1.0, "annee": 2027}]}
+    assert client.post("/scenario", json=corps).status_code == 422

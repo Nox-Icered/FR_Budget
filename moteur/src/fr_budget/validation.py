@@ -13,6 +13,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from functools import partial
 
+from fr_budget.agrege.accises import recette_brute
 from fr_budget.agrege.tva import estimer_point_tva, estimer_recette_totale
 from fr_budget.dette import surcout_choc_taux_etat
 from fr_budget.registres.acces import chiffrage
@@ -71,6 +72,8 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         ("tva_nette_totale_execution_2024", partial(estimer_recette_totale, 2024)),
         ("dette_etat_choc_taux_100pb_an_1", _choc_taux_premiere_annee),
         ("dette_etat_choc_taux_100pb_an_5", _choc_taux_cinquieme_annee),
+        ("accises_ticpe_brute_totale_2023", partial(recette_brute, 2023)),
+        ("accises_ticpe_brute_totale_2024", partial(recette_brute, 2024)),
     ]
     return definitions
 

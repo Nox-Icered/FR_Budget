@@ -229,3 +229,37 @@ def test_export_reponses_unitaires(client: TestClient, tmp_path: Path) -> None:
         assert niveaux[0] == pytest.approx(ligne["dette"]["central"])
         assert min(niveaux) == pytest.approx(ligne["dette"]["bas"])
         assert max(niveaux) == pytest.approx(ligne["dette"]["haut"])
+
+
+def test_export_mesures_de_signes_opposes(client: TestClient, tmp_path: Path) -> None:
+    """Le calcul du site (web/lib/scenario.ts), reproduit ici, égale l'API pour deux mesures
+    de signes opposés : borne basse = réponse basse des mesures positives et réponse haute
+    des mesures négatives."""
+    exporter(tmp_path)
+    u = json.loads((tmp_path / "scenario-unitaire.json").read_text(encoding="utf-8"))
+    mesures = [("accise_gazole", 3.0), ("accise_essences", -2.0)]
+    corps = {"mesures": [{"levier": lv, "valeur": x, "annee": 2027} for lv, x in mesures]}
+    attendu = client.post("/scenario", json=corps).json()["valeurs"]
+    k_bas: int = u["indices_effet"][1]
+    k_haut: int = u["indices_effet"][2]
+
+    def indice(k: int, x: float) -> int:
+        if x >= 0:
+            return k
+        return {k_bas: k_haut, k_haut: k_bas}.get(k, k)
+
+    def somme(k: int, i: int) -> float:
+        return float(
+            sum(
+                x * u["leviers"][lv]["reponses"]["2027"]["unite_dette"][indice(k, x)][i]
+                for lv, x in mesures
+            )
+        )
+
+    for i, ligne in enumerate(attendu):
+        ecarts = [somme(k, i) for k in u["indices_effet"]]
+        assert min(ecarts) == pytest.approx(ligne["ecart_dette"]["bas"])
+        assert max(ecarts) == pytest.approx(ligne["ecart_dette"]["haut"])
+        niveaux = [b[i] + somme(k, i) for k, b in enumerate(u["base_dette"])]
+        assert min(niveaux) == pytest.approx(ligne["dette"]["bas"])
+        assert max(niveaux) == pytest.approx(ligne["dette"]["haut"])

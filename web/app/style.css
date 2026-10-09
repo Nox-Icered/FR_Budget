@@ -88,3 +88,5 @@ th.groupe {
 .reglages { border: 1px solid var(--trait); padding: 8px 12px 12px; display: grid; gap: 6px; }
 .reglages input[type="range"] { width: 100%; }
 .reglages select { max-width: 10rem; font: inherit; }
+.reglage { display: grid; gap: 2px; margin-bottom: 8px; }
+.etiquette { margin-left: 8px; font-size: 0.8rem; padding: 0 6px; border: 1px solid var(--trait); color: var(--discret); }

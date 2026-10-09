@@ -220,6 +220,14 @@ def calcul_scenario(entree: ScenarioEntree) -> dict[str, Any] | None:
     }
 
 
+DECIMALES_EXPORT = 9
+
+
+def _arrondir(series: list[list[float]]) -> list[list[float]]:
+    """Arrondi des réponses exportées (fichier plus léger ; écart inférieur à 1e-9 point)."""
+    return [[round(v, DECIMALES_EXPORT) for v in s] for s in series]
+
+
 def reponses_unitaires() -> dict[str, Any]:
     """Réponses linéaires de chaque levier, pour chaque année d'entrée (site statique)."""
     leviers: dict[str, Any] = {}
@@ -229,8 +237,8 @@ def reponses_unitaires() -> dict[str, Any]:
         for annee in range(module_scenario.ANNEE_PREMIERE_MESURE, module_baseline.ANNEE_FIN + 1):
             r = module_scenario.reponse_lineaire(levier, annee)
             reponses[str(annee)] = {
-                "unite_dette": r.unite_dette,
-                "unite_solde": r.unite_solde,
+                "unite_dette": _arrondir(r.unite_dette),
+                "unite_solde": _arrondir(r.unite_solde),
             }
         effet = module_scenario.effet_solde(
             module_scenario.Mesure(levier, 1.0, module_scenario.ANNEE_PREMIERE_MESURE)

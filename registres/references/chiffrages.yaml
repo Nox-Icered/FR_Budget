@@ -419,3 +419,124 @@ chiffrages:
     localisation: Page 40, « Simulation d'un choc de taux et sensibilité à l'inflation »
     saisi_le: 2026-10-08
     relecture: a_relire
+
+  - id: accises_ticpe_brute_totale_2023
+    levier: accises_energie
+    source: plf2025_voies_et_moyens_tome1
+    millesime: "2023 (exécution)"
+    mesure: Recette brute totale de l'accise sur les produits énergétiques (ex-TICPE), avant transferts et remboursements
+    valeur: 31.7
+    unite: Md€
+    localisation: Page 28, tableau de la ligne 1501, ligne « TICPE brute totale », colonne 2023
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: accises_ticpe_brute_totale_2024
+    levier: accises_energie
+    source: plf2026_voies_et_moyens_tome1
+    millesime: "2024 (exécution)"
+    mesure: Recette brute totale de l'accise sur les produits énergétiques (ex-TICPE), avant transferts et remboursements
+    valeur: 31.6
+    unite: Md€
+    localisation: Page 28, tableau de la ligne 1501, ligne « Accise sur les produits énergétiques (ex-TICPE) brute totale », colonne 2024
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: accises_tarif_gnr_non_agricole_2024
+    levier: accises_energie
+    source: ministere_guide_fiscalite_energies_2026
+    millesime: "2024"
+    mesure: Tarif de l'accise sur le gazole non routier à usage non agricole (€/MWh, égal au tarif en €/hl pour les gazoles)
+    valeur: 24.81
+    unite: €/hl
+    localisation: Page 23, tableau « Tarif de l'accise sur le gazole non routier à usage non agricole », colonne 2024
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: accises_tarif_trm_2025
+    levier: accises_energie
+    source: ministere_guide_fiscalite_energies_2026
+    millesime: "2025"
+    mesure: Tarif réduit de l'accise sur les gazoles du transport routier de marchandises (L. 312-53 du CIBS)
+    valeur: 45.19
+    unite: €/hl
+    localisation: Page 24, tableau des tarifs réduits, ligne « Transport routier de marchandises »
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: accises_tarif_transport_collectif_2025
+    levier: accises_energie
+    source: ministere_guide_fiscalite_energies_2026
+    millesime: "2025"
+    mesure: Tarif réduit de l'accise sur les gazoles du transport collectif routier de personnes (L. 312-51 du CIBS)
+    valeur: 39.19
+    unite: €/hl
+    localisation: Page 24, tableau des tarifs réduits, ligne « Transport collectif routier de personnes »
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: accises_tarif_taxis_gazole_2025
+    levier: accises_energie
+    source: ministere_guide_fiscalite_energies_2026
+    millesime: "2025"
+    mesure: Tarif réduit de l'accise sur les gazoles des taxis (L. 312-52 du CIBS)
+    valeur: 30.20
+    unite: €/hl
+    localisation: Page 24, tableau des tarifs réduits, ligne « Transport de personnes par taxi », gazoles
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: accises_remboursement_trm_2025
+    levier: accises_energie
+    source: plf2025_voies_et_moyens_tome2
+    millesime: "2025 (prévision)"
+    mesure: Dépense fiscale 800221, remboursement partiel de l'accise sur les gazoles des véhicules de transport de marchandises d'au moins 7,5 tonnes
+    valeur: 1272
+    unite: M€
+    localisation: Fiche 800221, impact budgétaire, colonne « Prévision 2025 »
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: accises_remboursement_transport_collectif_2025
+    levier: accises_energie
+    source: plf2025_voies_et_moyens_tome2
+    millesime: "2025 (prévision)"
+    mesure: Dépense fiscale 800222, remboursement partiel de l'accise sur les gazoles des véhicules de transport public collectif de voyageurs
+    valeur: 183
+    unite: M€
+    localisation: Fiche 800222, impact budgétaire, colonne « Prévision 2025 »
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: accises_remboursement_taxis_2025
+    levier: accises_energie
+    source: plf2025_voies_et_moyens_tome2
+    millesime: "2025 (prévision)"
+    mesure: Dépense fiscale 800220, remboursement partiel de l'accise sur les carburants des taxis
+    valeur: 50
+    unite: M€
+    localisation: Fiche 800220, impact budgétaire, colonne « Prévision 2025 »
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: accises_ticpe_comptabilite_nationale_2024_fipeco
+    levier: accises_energie
+    source: fipeco_taxes_carburants
+    millesime: "2024 (comptabilité nationale, INSEE)"
+    mesure: Produit de la TICPE en comptabilité nationale (source indépendante, non utilisée pour la validation)
+    valeur: 30.2
+    unite: Md€
+    localisation: Section « B) Le rendement budgétaire », première phrase
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: accises_ticpe_comptabilite_nationale_2025_fipeco
+    levier: accises_energie
+    source: fipeco_taxes_carburants
+    millesime: "2025 (comptabilité nationale, INSEE)"
+    mesure: Produit de la TICPE en comptabilité nationale (source indépendante, non utilisée pour la validation)
+    valeur: 30.5
+    unite: Md€
+    localisation: Section « B) Le rendement budgétaire », première phrase
+    saisi_le: 2026-10-09
+    relecture: a_relire

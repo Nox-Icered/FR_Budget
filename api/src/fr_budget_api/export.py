@@ -36,9 +36,15 @@ INDICATEURS = (
 )
 
 
-def _ecrire(dossier: Path, nom: str, contenu: Any) -> None:
+def _ecrire(dossier: Path, nom: str, contenu: Any, compact: bool = False) -> None:
+    indent = None if compact else 1
+    separateurs = (",", ":") if compact else None
     (dossier / nom).write_text(
-        json.dumps(contenu, ensure_ascii=False, indent=1, sort_keys=True) + "\n", encoding="utf-8"
+        json.dumps(
+            contenu, ensure_ascii=False, indent=indent, separators=separateurs, sort_keys=True
+        )
+        + "\n",
+        encoding="utf-8",
     )
 
 
@@ -64,7 +70,8 @@ def exporter(dossier: Path) -> None:
     _ecrire(dossier, "cofog.json", depenses_fonctions(derniere_annee, "S13"))
     _ecrire(dossier, "validation.json", resume_validation())
     _ecrire(dossier, "baseline.json", serie_baseline())
-    _ecrire(dossier, "scenario-unitaire.json", reponses_unitaires())
+    # Fichier volumineux (réponses par levier, année d'entrée et trajectoire) : sans indentation.
+    _ecrire(dossier, "scenario-unitaire.json", reponses_unitaires(), compact=True)
 
 
 if __name__ == "__main__":

@@ -109,10 +109,8 @@
   },
   "simulateur": {
     "titre": "Simulateur : effet d'une mesure sur le solde et la dette",
-    "bandeau": "Bêta, non validé : le chiffrage de la TVA s'écarte de plus de 10 % de la référence officielle pour certains taux, et la trajectoire sans réforme n'a pas encore été relue.",
-    "intro": "Choisissez une mesure et son année d'entrée en vigueur. Le calcul se fait sur votre appareil : rien n'est envoyé ni enregistré.",
-    "levier_tva": "Taux normal de TVA ({taux} % en {annee})",
-    "points": "Variation du taux normal : {valeur} point(s)",
+    "bandeau": "Bêta, non validé : ces leviers n'ont pas encore franchi la règle de publication, et la trajectoire sans réforme n'a pas encore été relue.",
+    "intro": "Choisissez une ou plusieurs mesures et leur année d'entrée en vigueur. Le calcul se fait sur votre appareil : rien n'est envoyé ni enregistré.",
     "annee_entree": "Année d'entrée en vigueur",
     "sans_mesure": "Sans mesure",
     "graphique_titre": "Dette publique avec la mesure, en % du PIB",
@@ -123,10 +121,26 @@
     "fourchette": "{central} ({bas} à {haut})",
     "unite": "En points de PIB. Valeur centrale, puis fourchette basse et haute entre parenthèses. Un écart de solde positif est une amélioration du solde.",
     "methode_titre": "Méthode",
-    "methode": "Un point de taux normal rapporte {rendement} milliards d'euros en 2025, une fois retirée la TVA payée par les administrations elles-mêmes, soit {effet} % du PIB. Ce montant est tenu constant en part du PIB. La dette est recalculée chaque année avec les mêmes hypothèses que la trajectoire sans réforme ; une dette plus faible porte moins d'intérêts.",
-    "limite_comportement": "Les achats des ménages ne changent pas avec le taux : aucun effet de comportement n'est pris en compte.",
+    "methode": "Un point de taux normal de TVA rapporte {rendement_tva} milliards d'euros en 2025, une fois retirée la TVA payée par les administrations elles-mêmes. Un centime par litre rapporte {rendement_gazole} milliard d'euros sur le gazole, une fois retirés les volumes remboursés aux transporteurs routiers, au transport collectif et aux taxis, et {rendement_essences} milliard d'euros sur les essences. Ces montants sont tenus constants en part du PIB. La dette est recalculée chaque année avec les mêmes hypothèses que la trajectoire sans réforme ; une dette plus faible porte moins d'intérêts.",
+    "limite_comportement": "Les achats ne changent pas avec les prix : aucun effet de comportement n'est pris en compte.",
     "limite_croissance": "La mesure n'a pas d'effet sur la croissance ni sur les prix.",
-    "limite_fourchette": "La fourchette du chiffrage de la TVA est très étroite : elle ne couvre pas l'erreur du modèle, publiée sur la page Validation.",
-    "lien_validation": "Voir les écarts du modèle aux chiffrages officiels"
+    "limite_fourchette": "Les fourchettes des chiffrages sont étroites : elles ne couvrent pas toute l'erreur des modèles, publiée sur la page Validation.",
+    "lien_validation": "Voir les écarts du modèle aux chiffrages officiels",
+    "mesures": "Mesures (elles s'additionnent)",
+    "leviers": {
+      "tva_taux_normal": {
+        "libelle": "Taux normal de TVA ({reference} % en {annee})",
+        "valeur": "{valeur} point(s)"
+      },
+      "accise_gazole": {
+        "libelle": "Accise sur le gazole ({reference} centimes par litre au 1er janvier {annee})",
+        "valeur": "{valeur} centime(s) par litre"
+      },
+      "accise_essences": {
+        "libelle": "Accise sur les essences SP95, SP95-E10 et SP98 (SP95-E10 : {reference} centimes par litre au 1er janvier {annee})",
+        "valeur": "{valeur} centime(s) par litre"
+      }
+    },
+    "limite_tva_accise": "La hausse de l'accise augmente aussi la TVA payée sur le carburant : cet effet n'est pas compté."
   }
 }

@@ -125,3 +125,27 @@ def test_reponse_lineaire_redonne_le_scenario() -> None:
         soldes = [b[i] + x * u[i] for b, u in zip(r.base_solde, r.unite_solde, strict=True)]
         assert min(soldes) == pytest.approx(ligne.solde_primaire.bas)
         assert max(soldes) == pytest.approx(ligne.solde_primaire.haut)
+
+
+def test_levier_accise_gazole_un_centime() -> None:
+    """1 centime par litre de gazole = 1 €/hl sur l'assiette nette des remboursements, 2025."""
+    from fr_budget.agrege.accises import assiette_levier
+    from fr_budget.scenario import LEVIER_ACCISE_GAZOLE, rendement_unitaire
+
+    assert rendement_unitaire(LEVIER_ACCISE_GAZOLE).central == pytest.approx(
+        assiette_levier(2025)["gazole"] / 1e9
+    )
+
+
+def test_leviers_accises_bornes_et_additivite() -> None:
+    from fr_budget.scenario import LEVIER_ACCISE_ESSENCES, LEVIER_ACCISE_GAZOLE
+
+    basse, haute = bornes_levier(LEVIER_ACCISE_GAZOLE)
+    assert basse < 0 < haute
+    gazole = scenario([Mesure(LEVIER_ACCISE_GAZOLE, 2.0, 2027)])
+    essences = scenario([Mesure(LEVIER_ACCISE_ESSENCES, 3.0, 2027)])
+    deux = scenario(
+        [Mesure(LEVIER_ACCISE_GAZOLE, 2.0, 2027), Mesure(LEVIER_ACCISE_ESSENCES, 3.0, 2027)]
+    )
+    for a, b, c in zip(gazole, essences, deux, strict=True):
+        assert c.ecart_dette.central == pytest.approx(a.ecart_dette.central + b.ecart_dette.central)

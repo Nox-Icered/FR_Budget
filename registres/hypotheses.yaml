@@ -151,4 +151,52 @@ hypotheses:
       points de PIB. Aucune source ne fournit encore l'élasticité de chaque recette au PIB : la
       plage est nulle et cette limite est affichée. Une plage sourcée remplacera cette
       convention quand l'élasticité sera saisie.
-    instruments: [tva]
+    instruments: [tva, accises_energie]
+
+  - id: accises_masses_volumiques
+    libelle: Masses volumiques servant à convertir en litres les ventes de carburants publiées en tonnes
+    unite: écart relatif aux masses volumiques de la Base Carbone (gazole 832, essences 747, fioul domestique 845 kg/m³)
+    valeur_centrale: 0.0
+    plage:
+      basse: -0.016
+      haute: 0.016
+    sources: [ademe_base_carbone_pci_masse_volumique, sdes_conso_produits_petroliers]
+    justification: >-
+      Le SDES publie les ventes en tonnes ; les tarifs d'accise sont exprimés par hectolitre. La
+      Base Carbone de l'ADEME donne 832 kg/m³ pour le gazole, 747 kg/m³ pour l'essence et
+      845 kg/m³ pour le fioul domestique ; aucune valeur n'y figure pour le superéthanol E85,
+      converti avec celle de l'essence. La plage reprend l'écart entre les deux valeurs que la
+      même table donne pour des gazoles (832 et 845 kg/m³, soit 1,6 %), appliqué à tous les
+      produits.
+    instruments: [accises_energie]
+
+  - id: accises_gpl_part_carburant
+    libelle: Part des ventes de GPL taxée au tarif carburant plutôt qu'au tarif combustible
+    unite: fraction des ventes de GPL
+    valeur_centrale: 0.0
+    plage:
+      basse: 0.0
+      haute: 1.0
+    sources: [sdes_conso_produits_petroliers, openfisca_france_176_1_2]
+    justification: >-
+      Les ventes de GPL du SDES regroupent butane, propane et GPL carburant, taxés à 6,63 €
+      (combustible) ou 20,71 € (carburant) par 100 kg. Aucune source saisie ne donne la
+      répartition : la valeur centrale applique le tarif combustible, la plage couvre tout le
+      spectre (0,10 à 0,33 Md€ en 2024, environ 0,7 % de la recette).
+    instruments: [accises_energie]
+
+  - id: accises_tarif_moyen_gnr_2024
+    libelle: Tarif moyen d'accise appliqué en 2024 aux ventes de gazole non routier
+    unite: €/hl
+    valeur_centrale: 24.81
+    plage:
+      basse: 18.82
+      haute: 24.81
+    sources: [ministere_guide_fiscalite_energies_2026]
+    justification: >-
+      En 2024, le gazole non routier à usage non agricole est taxé à 24,81 €/hl ; l'usage agricole
+      bénéficie d'un remboursement puis, à partir du 1er juillet 2024, d'un tarif réduit à
+      l'achat (guide 2026, pages 23 et 25). Les ventes du SDES ne séparent pas les deux usages.
+      Valeur centrale : tarif non agricole sur tout le volume, comme en 2023 où tout le gazole
+      non routier était taxé à 18,82 €/hl avant remboursement ; borne basse : tarif de 2023.
+    instruments: [accises_energie]

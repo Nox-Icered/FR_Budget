@@ -43,7 +43,7 @@ leviers:
     parametres_reglables: [Taux sur les carburants, Taux sur le tabac, Taux sur l'alcool]
     moteur: agrege
     references_visees: [Voies et Moyens]
-    statut: non_publie
+    statut: beta
 
   - id: depenses_fiscales
     libelle: Dépenses fiscales (niches fiscales)

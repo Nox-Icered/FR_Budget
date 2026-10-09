@@ -204,6 +204,14 @@ sources:
     acces: direct
     consulte_le: 2026-10-09
 
+  - id: fipeco_taxes_carburants
+    nom: FIPECO, fiche « Les taxes sur les carburants »
+    editeur: FIPECO (François Ecalle)
+    url: https://www.fipeco.fr/fiche/Les-taxes-sur-les-carburants
+    licence: non précisée (citation seulement, page non reproduite)
+    acces: direct
+    consulte_le: 2026-10-09
+
   - id: eurostat_gov_10a_exp
     nom: Eurostat, dépenses des administrations publiques par fonction (CFAP/COFOG), tableau gov_10a_exp
     editeur: Eurostat (données transmises par l'INSEE)

@@ -29,13 +29,18 @@ from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, replace
 
 from fr_budget import baseline as module_baseline
+from fr_budget.agrege import accises
 from fr_budget.agrege.tva import HYPOTHESE_REPARTITION, fourchette_point_tva, taux_tva
 from fr_budget.apu import comptes_apu, ratio_pib
 from fr_budget.baseline import ANNEE_FIN, AnneeBaseline, trajectoires
 from fr_budget.dette import dette_suivante
 from fr_budget.fourchette import Fourchette, encadrer
+from fr_budget.registres.acces import chiffrage, hypothese
 
 LEVIER_TVA_NORMAL = "tva_taux_normal"
+LEVIER_ACCISE_GAZOLE = "accise_gazole"
+LEVIER_ACCISE_ESSENCES = "accise_essences"
+LEVIERS_ACCISES = {LEVIER_ACCISE_GAZOLE: "gazole", LEVIER_ACCISE_ESSENCES: "essences"}
 ANNEE_REFERENCE = 2025
 # Premier exercice dont le budget n'est pas encore voté : celui du PLF 2027.
 ANNEE_PREMIERE_MESURE = 2027
@@ -52,7 +57,20 @@ class Mesure:
 
 
 def rendement_unitaire(levier: str) -> Fourchette:
-    """Rendement d'une unité du levier, en Md€ de l'année de référence."""
+    """Rendement d'une unité du levier, en Md€ de l'année de référence.
+
+    TVA : point net au taux normal. Accises : un centime par litre (1 €/hl) sur l'assiette du
+    levier (``fr_budget.agrege.accises.assiette_levier``), bornes de l'hypothèse des masses
+    volumiques.
+    """
+    if levier in LEVIERS_ACCISES:
+        cle = LEVIERS_ACCISES[levier]
+        plage = hypothese(accises.HYPOTHESE_MASSES).plage
+        valeurs = [
+            accises.assiette_levier(ANNEE_REFERENCE, e)[cle] / accises.EUROS_PAR_MILLIARD
+            for e in (plage.basse, None, plage.haute)
+        ]
+        return encadrer(valeurs[1], [valeurs[0], valeurs[2]])
     if levier == LEVIER_TVA_NORMAL:
         return fourchette_point_tva(annee_comptes=2022, annee_cible=ANNEE_REFERENCE)["net"][
             "taux_20"
@@ -62,7 +80,15 @@ def rendement_unitaire(levier: str) -> Fourchette:
 
 
 def taux_reference(levier: str) -> float:
-    """Valeur du paramètre en vigueur l'année de référence (en %), pour l'affichage."""
+    """Valeur du paramètre au 1er janvier de l'année de référence, pour l'affichage.
+
+    TVA : taux normal en %. Accises : tarif en centimes par litre du gazole, et du SP95-E10
+    (essence la plus vendue en 2025 selon le SDES) pour les essences.
+    """
+    if levier == LEVIER_ACCISE_GAZOLE:
+        return accises.tarifs(ANNEE_REFERENCE)["gazole"]
+    if levier == LEVIER_ACCISE_ESSENCES:
+        return accises.tarifs(ANNEE_REFERENCE)["e10"]
     if levier == LEVIER_TVA_NORMAL:
         return taux_tva(ANNEE_REFERENCE)["normal"] * POURCENT
     msg = f"levier inconnu : {levier}"
@@ -79,6 +105,12 @@ def bornes_levier(levier: str) -> tuple[float, float]:
     if levier == LEVIER_TVA_NORMAL:
         taux = taux_tva(ANNEE_REFERENCE)
         ecart = (taux["normal"] - taux["intermediaire"]) * POURCENT
+        return -ecart, ecart
+    if levier in LEVIERS_ACCISES:
+        # La baisse du gazole s'arrête au tarif réduit du transport routier de marchandises
+        # (au-delà, le mécanisme de remboursement s'inverse) ; même amplitude pour la hausse
+        # et pour les essences.
+        ecart = accises.tarifs(ANNEE_REFERENCE)["gazole"] - chiffrage("accises_tarif_trm_2025")
         return -ecart, ecart
     msg = f"levier inconnu : {levier}"
     raise ValueError(msg)
@@ -182,12 +214,28 @@ def reponse_unitaire(levier: str, annee: int) -> list[AnneeScenario]:
     return scenario([Mesure(levier, 1.0, annee)])
 
 
-LEVIERS_REGISTRE = {LEVIER_TVA_NORMAL: "tva"}
+LEVIERS_REGISTRE = {
+    LEVIER_TVA_NORMAL: "tva",
+    LEVIER_ACCISE_GAZOLE: "accises_energie",
+    LEVIER_ACCISE_ESSENCES: "accises_energie",
+}
 HYPOTHESE_RENDEMENT = "scenario_rendement_constant_pib"
 SOURCE_PIB = "insee_comptes_nationaux_2025"
 # Sources et hypothèses propres à chaque levier (registres/sources.yaml, hypotheses.yaml) :
 # pour la TVA, comptes et consommation de l'INSEE, taux d'OpenFisca-France, dépenses fiscales
 # (tome II de Voies et Moyens), recettes servant au vieillissement du point (agrege.tva).
+# Accises : ventes du SDES, masses volumiques de l'ADEME, tarifs (OpenFisca, guide 2026),
+# remboursements (tome II de Voies et Moyens).
+PROVENANCE_ACCISES = (
+    (
+        "sdes_conso_produits_petroliers",
+        "ademe_base_carbone_pci_masse_volumique",
+        "openfisca_france_176_1_2",
+        "ministere_guide_fiscalite_energies_2026",
+        "plf2025_voies_et_moyens_tome2",
+    ),
+    (accises.HYPOTHESE_MASSES,),
+)
 PROVENANCE_LEVIERS = {
     LEVIER_TVA_NORMAL: (
         (
@@ -199,7 +247,8 @@ PROVENANCE_LEVIERS = {
             "plf2026_voies_et_moyens_tome1",
         ),
         (HYPOTHESE_REPARTITION,),
-    )
+    ),
+    **dict.fromkeys(LEVIERS_ACCISES, PROVENANCE_ACCISES),
 }
 
 

@@ -518,3 +518,25 @@ chiffrages:
     localisation: Fiche 800220, impact budgétaire, colonne « Prévision 2025 »
     saisi_le: 2026-10-09
     relecture: a_relire
+
+  - id: accises_ticpe_comptabilite_nationale_2024_fipeco
+    levier: accises_energie
+    source: fipeco_taxes_carburants
+    millesime: "2024 (comptabilité nationale, INSEE)"
+    mesure: Produit de la TICPE en comptabilité nationale (source indépendante, non utilisée pour la validation)
+    valeur: 30.2
+    unite: Md€
+    localisation: Section « B) Le rendement budgétaire », première phrase
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: accises_ticpe_comptabilite_nationale_2025_fipeco
+    levier: accises_energie
+    source: fipeco_taxes_carburants
+    millesime: "2025 (comptabilité nationale, INSEE)"
+    mesure: Produit de la TICPE en comptabilité nationale (source indépendante, non utilisée pour la validation)
+    valeur: 30.5
+    unite: Md€
+    localisation: Section « B) Le rendement budgétaire », première phrase
+    saisi_le: 2026-10-09
+    relecture: a_relire

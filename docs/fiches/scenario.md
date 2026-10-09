@@ -14,7 +14,7 @@ Si l'on applique une mesure à partir d'une année donnée, de combien changent 
 
 ## 2. Ce que l'utilisateur règle
 
-- Le levier et sa valeur. Premier levier : hausse ou baisse de x points du taux normal de TVA, de -10 à +10 points (la baisse s'arrête au taux intermédiaire de 10 % ; la hausse admise est de même ampleur).
+- Le levier et sa valeur. Leviers disponibles : taux normal de TVA ; accise sur le gazole et accise sur les essences, en centimes par litre de -14 à +14 (fiche `accises_energie`). Premier levier : hausse ou baisse de x points du taux normal de TVA, de -10 à +10 points (la baisse s'arrête au taux intermédiaire de 10 % ; la hausse admise est de même ampleur).
 - L'année d'entrée en vigueur, de 2027 (premier budget non voté, PLF 2027) à 2046.
 
 ## 3. Méthode
@@ -51,3 +51,4 @@ Tests unitaires `moteur/tests/unitaires/test_scenario.py` : zéro point redonne 
 |------|------------|---------------------|
 | 2026-10-09 | Scénario et levier « taux normal de TVA » | 10 tests unitaires créés ; baseline inchangée (14 tests réussis) |
 | 2026-10-09 | Bornes du levier, réponse linéaire pour le site, `POST /scenario`, page Simulateur | 2 tests unitaires du moteur, 7 tests de l'API et 2 tests du site créés |
+| 2026-10-09 | Leviers « accise sur le gazole » et « accise sur les essences » ; simulateur à plusieurs leviers | 2 tests unitaires du scénario et 1 test du site créés ; aucun résultat existant changé |

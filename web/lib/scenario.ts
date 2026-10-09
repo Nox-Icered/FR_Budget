@@ -21,18 +21,25 @@ function encadrer(central: number, valeurs: number[]): Fourchette {
   };
 }
 
+export type MesureSite = { levier: string; valeur: number };
+
+// Plusieurs leviers s'additionnent (même année d'entrée), comme dans le moteur.
 export function calculer(
   donnees: ReponsesUnitaires,
-  levier: string,
-  valeur: number,
+  mesures: MesureSite[],
   annee: number,
 ): LigneScenario[] {
-  const reponse = donnees.leviers[levier].reponses[String(annee)];
+  const reponses = mesures.map((m) => ({
+    valeur: m.valeur,
+    r: donnees.leviers[m.levier].reponses[String(annee)],
+  }));
+  const somme = (k: number, i: number, cle: "unite_dette" | "unite_solde") =>
+    reponses.reduce((total, { valeur, r }) => total + valeur * r[cle][k][i], 0);
   return donnees.annees.map((a, i) => {
-    const dette = donnees.base_dette.map((b, k) => b[i] + valeur * reponse.unite_dette[k][i]);
-    const solde = donnees.base_solde.map((b, k) => b[i] + valeur * reponse.unite_solde[k][i]);
-    const ecartsDette = donnees.indices_effet.map((k) => valeur * reponse.unite_dette[k][i]);
-    const ecartsSolde = donnees.indices_effet.map((k) => valeur * reponse.unite_solde[k][i]);
+    const dette = donnees.base_dette.map((b, k) => b[i] + somme(k, i, "unite_dette"));
+    const solde = donnees.base_solde.map((b, k) => b[i] + somme(k, i, "unite_solde"));
+    const ecartsDette = donnees.indices_effet.map((k) => somme(k, i, "unite_dette"));
+    const ecartsSolde = donnees.indices_effet.map((k) => somme(k, i, "unite_solde"));
     return {
       annee: a,
       dette: encadrer(dette[0], dette),

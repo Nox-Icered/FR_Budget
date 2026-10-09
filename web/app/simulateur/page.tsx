@@ -2,6 +2,9 @@ import { texte, nombre } from "../../lib/textes";
 import { lire, type Baseline, type ReponsesUnitaires } from "../../lib/donnees";
 import { Simulateur } from "./simulateur";
 
+const deuxDecimales = (v: number) =>
+  new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(v);
+
 export default function PageSimulateur() {
   const donnees = lire<ReponsesUnitaires>("scenario-unitaire.json");
   const baseline = lire<Baseline>("baseline.json");
@@ -16,16 +19,16 @@ export default function PageSimulateur() {
       <h2>{texte("simulateur.methode_titre")}</h2>
       <p>
         {texte("simulateur.methode", {
-          rendement: nombre(donnees.leviers.tva_taux_normal.rendement_unitaire),
-          effet: new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 }).format(
-            donnees.leviers.tva_taux_normal.effet_unitaire,
-          ),
+          rendement_tva: nombre(donnees.leviers.tva_taux_normal.rendement_unitaire),
+          rendement_gazole: deuxDecimales(donnees.leviers.accise_gazole.rendement_unitaire),
+          rendement_essences: deuxDecimales(donnees.leviers.accise_essences.rendement_unitaire),
         })}
       </p>
       <ul>
         <li>{texte("simulateur.limite_comportement")}</li>
         <li>{texte("simulateur.limite_croissance")}</li>
         <li>{texte("simulateur.limite_fourchette")}</li>
+        <li>{texte("simulateur.limite_tva_accise")}</li>
       </ul>
       <p>
         <a href="/validation/">{texte("simulateur.lien_validation")}</a>

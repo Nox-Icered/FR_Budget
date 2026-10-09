@@ -19,6 +19,7 @@ from fr_budget_api.app import (
     REGISTRES,
     depenses_fonctions,
     registre,
+    reponses_unitaires,
     resume_validation,
     serie_baseline,
     serie_comptes,
@@ -63,6 +64,7 @@ def exporter(dossier: Path) -> None:
     _ecrire(dossier, "cofog.json", depenses_fonctions(derniere_annee, "S13"))
     _ecrire(dossier, "validation.json", resume_validation())
     _ecrire(dossier, "baseline.json", serie_baseline())
+    _ecrire(dossier, "scenario-unitaire.json", reponses_unitaires())
 
 
 if __name__ == "__main__":

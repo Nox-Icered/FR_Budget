@@ -10,6 +10,7 @@ from fr_budget.baseline import ANNEE_FIN, baseline, trajectoires
 from fr_budget.scenario import (
     LEVIER_TVA_NORMAL,
     Mesure,
+    bornes_levier,
     effet_solde,
     reponse_unitaire,
     scenario,
@@ -96,3 +97,31 @@ def test_levier_inconnu_refuse() -> None:
 def test_annee_hors_horizon_refusee() -> None:
     with pytest.raises(ValueError, match="année"):
         scenario([Mesure(LEVIER_TVA_NORMAL, 1.0, 2025)])
+
+
+def test_bornes_tva_jusqu_au_taux_intermediaire() -> None:
+    basse, haute = bornes_levier(LEVIER_TVA_NORMAL)
+    assert basse == pytest.approx(-10.0)
+    assert haute == pytest.approx(10.0)
+    with pytest.raises(ValueError, match="bornes"):
+        scenario([Mesure(LEVIER_TVA_NORMAL, 10.5, 2027)])
+
+
+def test_reponse_lineaire_redonne_le_scenario() -> None:
+    """Le calcul du site (niveau = base + x * unité, bornes = extrêmes) égale ``scenario``."""
+    from fr_budget.scenario import reponse_lineaire
+
+    x = -1.5
+    r = reponse_lineaire(LEVIER_TVA_NORMAL, 2029)
+    attendu = scenario([Mesure(LEVIER_TVA_NORMAL, x, 2029)])
+    for i, ligne in enumerate(attendu):
+        niveaux = [b[i] + x * u[i] for b, u in zip(r.base_dette, r.unite_dette, strict=True)]
+        assert min(niveaux) == pytest.approx(ligne.dette.bas)
+        assert niveaux[0] == pytest.approx(ligne.dette.central)
+        assert max(niveaux) == pytest.approx(ligne.dette.haut)
+        ecarts = [x * r.unite_dette[k][i] for k in r.indices_effet]
+        assert min(ecarts) == pytest.approx(ligne.ecart_dette.bas)
+        assert max(ecarts) == pytest.approx(ligne.ecart_dette.haut)
+        soldes = [b[i] + x * u[i] for b, u in zip(r.base_solde, r.unite_solde, strict=True)]
+        assert min(soldes) == pytest.approx(ligne.solde_primaire.bas)
+        assert max(soldes) == pytest.approx(ligne.solde_primaire.haut)

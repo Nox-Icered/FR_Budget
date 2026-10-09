@@ -84,3 +84,7 @@ th.groupe {
 }
 @media (prefers-color-scheme: dark) { .graphique .bande { fill-opacity: 0.3; } }
 @media (max-width: 40rem) { .graphique .axe { font-size: 22px; } }
+.graphique .reference { fill: none; stroke: var(--discret); stroke-width: 2; stroke-dasharray: 6 4; }
+.reglages { border: 1px solid var(--trait); padding: 8px 12px 12px; display: grid; gap: 6px; }
+.reglages input[type="range"] { width: 100%; }
+.reglages select { max-width: 10rem; font: inherit; }

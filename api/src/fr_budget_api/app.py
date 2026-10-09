@@ -6,8 +6,7 @@ unité. Le journal d'accès d'uvicorn (qui contiendrait les paramètres des requ
 désactivé par ``creer_application`` elle-même ; lancer avec ``python -m fr_budget_api.serveur``.
 
 Points d'entrée : ``/sante``, ``/version``, ``/registres/{nom}``, ``/comptes-apu``,
-``/depenses-par-fonction``, ``/validation``, ``/baseline``. Les scénarios viendront avec les
-lots suivants.
+``/depenses-par-fonction``, ``/validation``, ``/baseline``, ``POST /scenario``.
 """
 
 from __future__ import annotations
@@ -21,9 +20,11 @@ from typing import Any
 
 from fastapi import FastAPI, HTTPException
 from fr_budget import baseline as module_baseline
+from fr_budget import scenario as module_scenario
 from fr_budget.apu import comptes_apu, depenses_par_fonction, libelles_cofog, ratio_pib
 from fr_budget.registres.verification import RACINE_DEPOT, Rapport, charger
 from fr_budget.validation import comparaisons
+from pydantic import BaseModel, Field
 
 SOURCE_COMPTES_APU = "insee_comptes_nationaux_2025"
 SOURCE_COFOG = "eurostat_gov_10a_exp"
@@ -177,6 +178,88 @@ def serie_baseline() -> dict[str, Any]:
     }
 
 
+class MesureEntree(BaseModel):
+    levier: str
+    valeur: float
+    annee: int
+
+
+class ScenarioEntree(BaseModel):
+    mesures: list[MesureEntree] = Field(default_factory=list)
+
+
+def _statut_levier(levier: str) -> str:
+    registre_id = module_scenario.LEVIERS_REGISTRE.get(levier)
+    statuts = {lv["id"]: lv["statut"] for lv in _registres()["leviers"]}
+    return statuts[registre_id] if registre_id else "inconnu"
+
+
+def calcul_scenario(entree: ScenarioEntree) -> dict[str, Any] | None:
+    """Scénario en fourchette (``fr_budget.scenario``) ; ``None`` si une mesure est invalide.
+
+    La réponse reprend les mesures, le statut de chaque levier et la version du modèle et des
+    données (un scénario partagé doit reproduire le même résultat). Rien n'est enregistré.
+    """
+    mesures = [module_scenario.Mesure(m.levier, m.valeur, m.annee) for m in entree.mesures]
+    try:
+        lignes = module_scenario.scenario(mesures)
+    except ValueError:
+        return None
+    return {
+        "unite": "% du PIB",
+        "version": version_donnees(),
+        "mesures": [m.model_dump() for m in entree.mesures],
+        "statuts": {m.levier: _statut_levier(m.levier) for m in entree.mesures},
+        "valeurs": [
+            {
+                "annee": ligne.annee,
+                "dette": _fourchette(ligne.dette),
+                "solde_primaire": _fourchette(ligne.solde_primaire),
+                "ecart_dette": _fourchette(ligne.ecart_dette),
+                "ecart_solde_primaire": _fourchette(ligne.ecart_solde_primaire),
+            }
+            for ligne in lignes
+        ],
+    }
+
+
+def reponses_unitaires() -> dict[str, Any]:
+    """Réponses linéaires de chaque levier, pour chaque année d'entrée (site statique)."""
+    leviers: dict[str, Any] = {}
+    for levier in module_scenario.LEVIERS_REGISTRE:
+        basse, haute = module_scenario.bornes_levier(levier)
+        reponses = {}
+        for annee in range(module_scenario.ANNEE_PREMIERE_MESURE, module_baseline.ANNEE_FIN + 1):
+            r = module_scenario.reponse_lineaire(levier, annee)
+            reponses[str(annee)] = {
+                "unite_dette": r.unite_dette,
+                "unite_solde": r.unite_solde,
+            }
+        effet = module_scenario.effet_solde(
+            module_scenario.Mesure(levier, 1.0, module_scenario.ANNEE_PREMIERE_MESURE)
+        )
+        leviers[levier] = {
+            "statut": _statut_levier(levier),
+            "rendement_unitaire": module_scenario.rendement_unitaire(levier).central,
+            "effet_unitaire": effet.central,
+            "taux_reference": module_scenario.taux_reference(levier),
+            "bornes": [basse, haute],
+            "reponses": reponses,
+        }
+    r = module_scenario.reponse_lineaire(
+        next(iter(module_scenario.LEVIERS_REGISTRE)), module_scenario.ANNEE_PREMIERE_MESURE
+    )
+    return {
+        "unite": "% du PIB",
+        "annee_reference": module_scenario.ANNEE_REFERENCE,
+        "annees": r.annees,
+        "base_dette": r.base_dette,
+        "base_solde": r.base_solde,
+        "indices_effet": r.indices_effet,
+        "leviers": leviers,
+    }
+
+
 def creer_application() -> FastAPI:
     # Règle 5 : aucune requête (et donc aucun paramètre saisi) dans les journaux.
     logging.getLogger("uvicorn.access").disabled = True
@@ -227,6 +310,14 @@ def creer_application() -> FastAPI:
     def route_baseline() -> dict[str, Any]:
         """Dette et solde primaire de 2025 à 2046, sans réforme, en fourchette."""
         return serie_baseline()
+
+    @app.post("/scenario")
+    def route_scenario(entree: ScenarioEntree) -> dict[str, Any]:
+        """Effet de mesures sur le solde primaire et la dette, 2025-2046, en fourchette."""
+        resultat = calcul_scenario(entree)
+        if resultat is None:
+            raise HTTPException(status_code=422, detail="mesure invalide")
+        return resultat
 
     return app
 

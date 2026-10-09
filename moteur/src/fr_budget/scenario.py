@@ -28,7 +28,7 @@ from __future__ import annotations
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, replace
 
-from fr_budget.agrege.tva import fourchette_point_tva
+from fr_budget.agrege.tva import fourchette_point_tva, taux_tva
 from fr_budget.apu import comptes_apu, ratio_pib
 from fr_budget.baseline import ANNEE_FIN, AnneeBaseline, trajectoires
 from fr_budget.dette import dette_suivante
@@ -50,12 +50,35 @@ class Mesure:
     annee: int
 
 
-def _rendement_unitaire(levier: str) -> Fourchette:
+def rendement_unitaire(levier: str) -> Fourchette:
     """Rendement d'une unité du levier, en Md€ de l'année de référence."""
     if levier == LEVIER_TVA_NORMAL:
         return fourchette_point_tva(annee_comptes=2022, annee_cible=ANNEE_REFERENCE)["net"][
             "taux_20"
         ]
+    msg = f"levier inconnu : {levier}"
+    raise ValueError(msg)
+
+
+def taux_reference(levier: str) -> float:
+    """Valeur du paramètre en vigueur l'année de référence (en %), pour l'affichage."""
+    if levier == LEVIER_TVA_NORMAL:
+        return taux_tva(ANNEE_REFERENCE)["normal"] * POURCENT
+    msg = f"levier inconnu : {levier}"
+    raise ValueError(msg)
+
+
+def bornes_levier(levier: str) -> tuple[float, float]:
+    """Valeurs admises pour le levier.
+
+    Taux normal de TVA : la baisse s'arrête au taux intermédiaire (au-delà, la structure des
+    taux change et le chiffrage par point ne s'applique plus) ; la hausse admise est de même
+    ampleur. Taux de l'année de référence, paramètres OpenFisca-France.
+    """
+    if levier == LEVIER_TVA_NORMAL:
+        taux = taux_tva(ANNEE_REFERENCE)
+        ecart = (taux["normal"] - taux["intermediaire"]) * POURCENT
+        return -ecart, ecart
     msg = f"levier inconnu : {levier}"
     raise ValueError(msg)
 
@@ -66,7 +89,11 @@ def effet_solde(mesure: Mesure) -> Fourchette:
         periode = f"{ANNEE_PREMIERE_MESURE}-{ANNEE_FIN}"
         msg = f"année d'entrée en vigueur hors de {periode} : {mesure.annee}"
         raise ValueError(msg)
-    unite = _rendement_unitaire(mesure.levier)
+    basse, haute = bornes_levier(mesure.levier)
+    if not basse <= mesure.valeur <= haute:
+        msg = f"valeur hors des bornes {basse:g} à {haute:g} : {mesure.valeur}"
+        raise ValueError(msg)
+    unite = rendement_unitaire(mesure.levier)
     pib = comptes_apu().valeur(ANNEE_REFERENCE, "S1", "pib")
     valeurs = [ratio_pib(mesure.valeur * v, pib) for v in (unite.bas, unite.central, unite.haut)]
     return encadrer(valeurs[1], [valeurs[0], valeurs[2]])
@@ -152,3 +179,58 @@ def reponse_unitaire(levier: str, annee: int) -> list[AnneeScenario]:
     réponse (le site statique s'en sert pour calculer sans serveur).
     """
     return scenario([Mesure(levier, 1.0, annee)])
+
+
+LEVIERS_REGISTRE = {LEVIER_TVA_NORMAL: "tva"}
+"""Levier du registre (``registres/leviers.yaml``) dont chaque levier de scénario dépend."""
+
+
+@dataclass(frozen=True)
+class ReponseLineaire:
+    """Réponse d'une unité du levier sur chaque trajectoire, pour un calcul sans serveur.
+
+    ``base_dette`` et ``base_solde`` : niveaux sans mesure, une liste par trajectoire.
+    ``unite_dette`` et ``unite_solde`` : écart dû à une unité du levier, mêmes trajectoires.
+    Trajectoires : 0 = centrale avec effet central ; puis chaque variante de la baseline avec
+    effet central ; puis la centrale avec l'effet bas et avec l'effet haut (indices
+    ``indices_effet``). Pour x unités : niveau = base + x * unité ; écart = x * unité. Les
+    bornes sont les extrêmes sur les trajectoires (niveaux) ou sur ``indices_effet`` (écarts).
+    """
+
+    annees: list[int]
+    base_dette: list[list[float]]
+    base_solde: list[list[float]]
+    unite_dette: list[list[float]]
+    unite_solde: list[list[float]]
+    indices_effet: list[int]
+
+
+def reponse_lineaire(levier: str, annee: int) -> ReponseLineaire:
+    centrale, variantes = trajectoires()
+    effets = {
+        b: _effets_par_annee([Mesure(levier, 1.0, annee)], b) for b in ("bas", "central", "haut")
+    }
+    paires = [
+        (centrale, effets["central"]),
+        *((v, effets["central"]) for v in variantes),
+        (centrale, effets["bas"]),
+        (centrale, effets["haut"]),
+    ]
+    base_dette, base_solde, unite_dette, unite_solde = [], [], [], []
+    for trajectoire, effet in paires:
+        avec = trajectoire_avec_effet(trajectoire, effet)
+        base_dette.append([a.dette for a in trajectoire])
+        base_solde.append([a.solde_primaire for a in trajectoire])
+        unite_dette.append([b.dette - a.dette for a, b in zip(trajectoire, avec, strict=True)])
+        unite_solde.append(
+            [b.solde_primaire - a.solde_primaire for a, b in zip(trajectoire, avec, strict=True)]
+        )
+    n = len(paires)
+    return ReponseLineaire(
+        annees=[a.annee for a in centrale],
+        base_dette=base_dette,
+        base_solde=base_solde,
+        unite_dette=unite_dette,
+        unite_solde=unite_solde,
+        indices_effet=[0, n - 2, n - 1],
+    )

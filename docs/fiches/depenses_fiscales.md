@@ -86,7 +86,7 @@ Ce que la Cour ajoute :
 - la révision de 2024 (+4,55 Md€) vient de mesures nouvelles (0,85 Md€), de changements de méthode (1,95 Md€) et de l'évolution spontanée (1,76 Md€) (page 19) ;
 - la méthode de chiffrage « suppose le comportement des agents économiques stable » (page 42), comme le modèle.
 
-La valeur centrale du levier ne corrige pas ce biais : décision en attente du mainteneur.
+La valeur centrale du levier ne corrige pas ce biais (décision du mainteneur du 9 octobre 2026, option (a)) : il reste visible dans les fourchettes, orientées vers le haut, et sur cette fiche. Statut maintenu en bêta par le mainteneur.
 
 ## 7. Limites connues
 

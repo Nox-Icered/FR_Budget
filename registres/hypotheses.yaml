@@ -103,3 +103,35 @@ hypotheses:
       de risque sur la santé et la dépendance) en 2046. Le modèle applique chaque variante
       année par année ; la plage indique les extrêmes en 2046.
     instruments: [baseline]
+
+  - id: baseline_croissance_volume
+    libelle: Croissance du PIB en volume de 2031 à 2046
+    unite: "% par an (valeur centrale et borne basse : Ageing Report en 2031, la série varie ensuite ; borne haute maintenue sur toute la période)"
+    valeur_centrale: 0.609
+    plage:
+      basse: 0.609
+      haute: 1.0
+    sources: [ce_ageing_report_2024, plf2027_resf]
+    justification: >-
+      Valeur centrale : croissance potentielle de l'Ageing Report 2024, année par année (0,609 %
+      en 2031, 1,511 % en 2040, 1,399 % en 2046 ; onglet FRa). Variante : croissance potentielle
+      du RESF 2027 pour 2030 (1,0 %, tableau 21), maintenue de 2031 à 2046 (décision du
+      mainteneur du 9 octobre 2026, option (i)). L'Ageing Report ne publie pas la croissance
+      du PIB de ses variantes. La variante relève la croissance tant que la série de l'Ageing
+      Report reste sous 1,0 % et l'abaisse ensuite.
+    instruments: [baseline]
+
+  - id: baseline_taux_marche
+    libelle: Taux d'intérêt de marché auquel la dette est refinancée de 2031 à 2046
+    unite: "% (valeur centrale et borne basse : Ageing Report en 2031, la série varie ensuite ; borne haute maintenue sur toute la période)"
+    valeur_centrale: 3.609
+    plage:
+      basse: 3.609
+      haute: 4.3
+    sources: [ce_ageing_report_2024, plf2027_resf]
+    justification: >-
+      Valeur centrale : taux d'intérêt nominal de l'Ageing Report 2024, année par année (3,609 %
+      en 2031, 3,912 % en 2046 ; onglet FRa). Variante : taux obligataire à 10 ans prévu par le
+      RESF 2027 pour 2027 (4,3 %, annexe macroéconomique, tableau 8), maintenu de 2031 à 2046
+      (décision du mainteneur du 9 octobre 2026, option (i)).
+    instruments: [baseline]

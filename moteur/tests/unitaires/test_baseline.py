@@ -109,3 +109,28 @@ def test_baseline_encadre_la_trajectoire_centrale() -> None:
     for ligne in lignes:
         if ligne.annee <= ANNEE_RACCORD:
             assert ligne.dette.bas == ligne.dette.central == ligne.dette.haut
+
+
+def test_variantes_croissance_et_taux_concordent_avec_les_sources() -> None:
+    """Décision du 9 octobre 2026 : bornes hautes = RESF (croissance potentielle 2030, taux à
+    10 ans 2027) ; valeurs centrales = Ageing Report en 2031."""
+    ar = ageing_report()
+    croissance = hypothese("baseline_croissance_volume")
+    taux = hypothese("baseline_taux_marche")
+    assert croissance.plage.haute == resf()[(ANNEE_RACCORD, "croissance_potentielle")]
+    assert taux.plage.haute == resf()[(2027, "taux_10_ans")]
+    assert croissance.valeur_centrale == round(ar[(ANNEE_RACCORD + 1, "croissance_potentielle")], 3)
+    assert taux.valeur_centrale == round(ar[(ANNEE_RACCORD + 1, "taux_nominal")], 3)
+
+
+def test_taux_de_marche_plus_haut_alourdit_la_dette() -> None:
+    centrale = projection()[-1].dette
+    assert projection(taux_marche=4.3)[-1].dette > centrale
+
+
+def test_croissance_constante_remplace_la_serie() -> None:
+    ar = ageing_report()
+    lignes = projection(croissance_volume=1.0)
+    for ligne in lignes:
+        attendu = 100 * croissance_nominale(0.01, ar[(ligne.annee, "ipc")] / 100)
+        assert ligne.croissance_nominale == pytest.approx(attendu)

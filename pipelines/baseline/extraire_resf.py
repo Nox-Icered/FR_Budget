@@ -71,6 +71,13 @@ LIGNES = (
     ("Perspectives éco_Fiche 7", "Tableau 1", "Déflateur du PIB", "deflateur", "%"),
     ("Perspectives éco_Fiche 7", "Tableau 1", "IPC (hors tabac)", "ipc", "%"),
     (
+        "Annexe macro",
+        "Tableau 8",
+        "Taux obligataire à 10 ans en France (moyenne annuelle)",
+        "taux_10_ans",
+        "%",
+    ),
+    (
         "Annexe finances publiques",
         "Tableau 13",
         "6. Charge d'intérêt",

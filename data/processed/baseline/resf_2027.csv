@@ -15,6 +15,7 @@ annee,indicateur,valeur,unite,tableau
 2025,solde_primaire,-2.9,% du PIB,Annexe finances publiques / Tableau 13
 2025,solde_public,-5.1,% du PIB,Finances publiques / Tableau 21
 2025,solde_structurel,-5.2,% du PIB potentiel,Finances publiques / Tableau 21
+2025,taux_10_ans,3.4,%,Annexe macro / Tableau 8
 2025,taux_apparent,2.0,%,Annexe finances publiques / Tableau 14
 2026,ajustement_structurel,0.1,points de PIB potentiel,Finances publiques / Tableau 21
 2026,ajustement_structurel_primaire,0.4,points de PIB potentiel,Finances publiques / Tableau 21
@@ -32,6 +33,7 @@ annee,indicateur,valeur,unite,tableau
 2026,solde_primaire,-2.8,% du PIB,Annexe finances publiques / Tableau 13
 2026,solde_public,-5.4,% du PIB,Finances publiques / Tableau 21
 2026,solde_structurel,-5.1,% du PIB potentiel,Finances publiques / Tableau 21
+2026,taux_10_ans,3.9,%,Annexe macro / Tableau 8
 2026,taux_apparent,2.3,%,Annexe finances publiques / Tableau 14
 2027,ajustement_structurel,0.5,points de PIB potentiel,Finances publiques / Tableau 21
 2027,ajustement_structurel_primaire,0.8,points de PIB potentiel,Finances publiques / Tableau 21
@@ -49,6 +51,7 @@ annee,indicateur,valeur,unite,tableau
 2027,solde_primaire,-2.1,% du PIB,Annexe finances publiques / Tableau 13
 2027,solde_public,-5.0,% du PIB,Finances publiques / Tableau 21
 2027,solde_structurel,-4.6,% du PIB potentiel,Finances publiques / Tableau 21
+2027,taux_10_ans,4.3,%,Annexe macro / Tableau 8
 2027,taux_apparent,2.5,%,Annexe finances publiques / Tableau 14
 2028,ajustement_structurel,1.2,points de PIB potentiel,Finances publiques / Tableau 21
 2028,ajustement_structurel_primaire,1.5,points de PIB potentiel,Finances publiques / Tableau 21

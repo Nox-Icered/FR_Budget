@@ -39,7 +39,8 @@ Deux segments raccordés en 2030 (décision du mainteneur du 8 octobre 2026, opt
 
 ## 5. Hypothèses et choix
 
-- `baseline_part_refinancee`, `baseline_ajustement_stock_flux`, `baseline_cout_vieillissement_variantes` (registre des hypothèses).
+- `baseline_part_refinancee`, `baseline_ajustement_stock_flux`, `baseline_cout_vieillissement_variantes`, `baseline_croissance_volume`, `baseline_taux_marche` (registre des hypothèses).
+- Variantes de croissance et de taux (décision du mainteneur du 9 octobre 2026, options (i)) : croissance en volume maintenue à 1,0 % (croissance potentielle 2030 du RESF) ; taux de marché maintenu à 4,3 % (taux à 10 ans 2027 du RESF).
 - L'écart de production de 2030 (-0,5 % du PIB potentiel selon le RESF) est tenu constant : la croissance effective suit la croissance potentielle de l'Ageing Report.
 - Fourchette : chaque hypothèse varie seule dans sa plage ; les bornes sont les extrêmes.
 
@@ -50,7 +51,8 @@ Deux segments raccordés en 2030 (décision du mainteneur du 8 octobre 2026, opt
 ## 7. Limites
 
 - **Raccord en 2030.** L'Ageing Report (2023) prévoit une croissance potentielle de 0,6 % en 2030 et 2031, le RESF de 1,0 % en 2030. Le taux de marché de l'Ageing Report (3,5 % en 2030) est inférieur au taux à 10 ans prévu par le RESF pour 2027 (4,3 %).
-- **Pas de fourchette sur la croissance ni sur le taux de marché** à ce stade : l'Ageing Report ne publie pas la croissance du PIB de ses variantes. Décision attendue du mainteneur.
+- **Croissance et taux : une seule variante chacun, à la hausse.** L'Ageing Report ne publie pas la croissance du PIB de ses variantes ; la variante de croissance (1,0 % maintenu) relève la croissance jusqu'en 2036 puis l'abaisse, l'Ageing Report dépassant 1,0 % à partir de 2037. Aucune variante de taux plus bas que l'Ageing Report.
+- Les variantes jouent une à une ; leur combinaison n'est pas calculée.
 - La part refinancée est celle de l'État, appliquée à toute la dette publique.
 - Le coût du vieillissement de l'Ageing Report intègre la réforme des retraites de 2023 ; les mesures postérieures ne sont pas prises en compte.
 - Le RESF 2025-2030 est une prévision du Gouvernement qui intègre ses mesures de redressement : ce n'est pas une trajectoire à politique inchangée.
@@ -60,3 +62,4 @@ Deux segments raccordés en 2030 (décision du mainteneur du 8 octobre 2026, opt
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
 | 2026-10-08 | Baseline RESF 2027 et Ageing Report 2024, méthode (a) | 2 tests de validation et 11 tests unitaires créés |
+| 2026-10-09 | Variantes de croissance (1,0 %) et de taux (4,3 %) tirées du RESF | 3 tests unitaires créés ; dette 2046 : bas 103,6 %, central 108,3 %, haut 116,4 % (inchangés, la borne haute reste le scénario de risque santé et dépendance) ; 2031 : bas 119,7 % (contre 120,1 %) |

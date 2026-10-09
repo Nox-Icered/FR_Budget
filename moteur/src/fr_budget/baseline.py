@@ -21,6 +21,11 @@ Deux segments, raccordés en 2030 (décision du mainteneur du 8 octobre 2026, op
     dépendance, éducation) depuis 2030 selon l'Ageing Report ;
   - ajustement stock-flux : hypothèse ``baseline_ajustement_stock_flux``.
 
+Variantes de la fourchette sur la croissance et le taux (décision du mainteneur du 9 octobre
+2026, options (i)) : croissance en volume maintenue au niveau de la croissance potentielle 2030
+du RESF (``baseline_croissance_volume``) ; taux de marché maintenu au niveau du taux à 10 ans
+2027 du RESF (``baseline_taux_marche``).
+
 Unités : pourcentages et points de PIB, comme dans les sources (3,0 pour 3 %).
 Fourchette : chaque hypothèse varie seule dans sa plage ; les bornes sont les extrêmes.
 """
@@ -45,6 +50,8 @@ POURCENT = 100.0
 HYPOTHESE_PART = "baseline_part_refinancee"
 HYPOTHESE_STOCK_FLUX = "baseline_ajustement_stock_flux"
 HYPOTHESE_VIEILLISSEMENT = "baseline_cout_vieillissement_variantes"
+HYPOTHESE_CROISSANCE = "baseline_croissance_volume"
+HYPOTHESE_TAUX = "baseline_taux_marche"
 
 # Variantes de l'Ageing Report 2024 sur le coût total du vieillissement (tableau FRc, écarts au
 # scénario de référence ; définitions dans le rapport principal, Institutional Paper 279).
@@ -211,10 +218,14 @@ def projection(
     part_refinancee: float | None = None,
     ajustement_stock_flux: float | None = None,
     variante: str | None = None,
+    croissance_volume: float | None = None,
+    taux_marche: float | None = None,
 ) -> list[AnneeBaseline]:
     """Projection 2031-2046 à partir du point 2030 du RESF.
 
-    Par défaut, les valeurs centrales des hypothèses du registre.
+    Par défaut, les valeurs centrales des hypothèses du registre et les séries de l'Ageing
+    Report. ``croissance_volume`` et ``taux_marche`` (en %), s'ils sont donnés, remplacent les
+    séries de l'Ageing Report par une valeur constante sur toute la période.
     """
     part = hypothese(HYPOTHESE_PART).valeur_centrale if part_refinancee is None else part_refinancee
     sfa = (
@@ -227,10 +238,14 @@ def projection(
     dette, taux = depart.dette, depart.taux_apparent
     lignes = []
     for annee in range(ANNEE_RACCORD + 1, ANNEE_FIN + 1):
-        taux = taux_apparent_suivant(taux, ar[(annee, "taux_nominal")], part)
-        g = POURCENT * croissance_nominale(
-            ar[(annee, "croissance_potentielle")] / POURCENT, ar[(annee, "ipc")] / POURCENT
+        marche = ar[(annee, "taux_nominal")] if taux_marche is None else taux_marche
+        volume = (
+            ar[(annee, "croissance_potentielle")]
+            if croissance_volume is None
+            else croissance_volume
         )
+        taux = taux_apparent_suivant(taux, marche, part)
+        g = POURCENT * croissance_nominale(volume / POURCENT, ar[(annee, "ipc")] / POURCENT)
         pb = solde_primaire_projete(depart.solde_primaire, annee, variante)
         dette = dette_suivante(dette, taux / POURCENT, g / POURCENT, pb, sfa)
         lignes.append(AnneeBaseline(annee, dette, pb, taux, g, sfa))
@@ -250,7 +265,8 @@ def baseline() -> list[AnneeFourchette]:
     2025-2030 : RESF, sans fourchette (prévision officielle reprise telle quelle). 2031-2046 :
     projection centrale et variantes, chaque hypothèse variant seule dans sa plage :
     part refinancée et ajustement stock-flux (bornes de leur plage), coût du vieillissement
-    (chaque variante de l'Ageing Report).
+    (chaque variante de l'Ageing Report), croissance en volume et taux de marché (borne haute
+    de leur plage, maintenue de 2031 à 2046).
     """
     part = hypothese(HYPOTHESE_PART)
     sfa = hypothese(HYPOTHESE_STOCK_FLUX)
@@ -261,6 +277,8 @@ def baseline() -> list[AnneeFourchette]:
         projection(ajustement_stock_flux=sfa.plage.basse),
         projection(ajustement_stock_flux=sfa.plage.haute),
         *(projection(variante=v) for v in VARIANTES_VIEILLISSEMENT),
+        projection(croissance_volume=hypothese(HYPOTHESE_CROISSANCE).plage.haute),
+        projection(taux_marche=hypothese(HYPOTHESE_TAUX).plage.haute),
     ]
     lignes = [
         AnneeFourchette(

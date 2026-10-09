@@ -22,6 +22,7 @@ export default function Gabarit({ children }: { children: ReactNode }) {
           <nav aria-label={texte("site.titre")}>
             <Link href="/">{texte("navigation.accueil")}</Link>
             <Link href="/baseline/">{texte("navigation.baseline")}</Link>
+            <Link href="/simulateur/">{texte("navigation.simulateur")}</Link>
             <Link href="/sources/">{texte("navigation.sources")}</Link>
             <Link href="/hypotheses/">{texte("navigation.hypotheses")}</Link>
             <Link href="/validation/">{texte("navigation.validation")}</Link>

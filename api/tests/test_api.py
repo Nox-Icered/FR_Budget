@@ -151,3 +151,81 @@ def test_export_baseline_identique_a_l_api(client: TestClient, tmp_path: Path) -
     exporter(tmp_path)
     exporte = json.loads((tmp_path / "baseline.json").read_text(encoding="utf-8"))
     assert exporte == client.get("/baseline").json()
+
+
+def test_scenario_tva_ecart_et_version(client: TestClient) -> None:
+    corps = {"mesures": [{"levier": "tva_taux_normal", "valeur": 1.0, "annee": 2027}]}
+    reponse = client.post("/scenario", json=corps)
+    assert reponse.status_code == 200
+    donnees = reponse.json()
+    assert set(donnees["version"]) == {"moteur", "registres", "donnees"}
+    assert donnees["unite"] == "% du PIB"
+    assert donnees["mesures"] == corps["mesures"]
+    assert donnees["statuts"] == {"tva_taux_normal": "beta"}
+    # Provenance : sources et hypothèses de la baseline, du PIB et du levier, toutes au registre.
+    sources = {s["id"] for s in client.get("/registres/sources").json()}
+    hypotheses = {h["id"] for h in client.get("/registres/hypotheses").json()}
+    assert {"plf2027_resf", "ce_ageing_report_2024", "insee_comptes_nationaux_2025"} <= set(
+        donnees["sources"]
+    )
+    assert "insee_tes_2025" in donnees["sources"]
+    assert set(donnees["sources"]) <= sources
+    assert {"scenario_rendement_constant_pib", "baseline_part_refinancee"} <= set(
+        donnees["hypotheses"]
+    )
+    assert set(donnees["hypotheses"]) <= hypotheses
+    lignes = {v["annee"]: v for v in donnees["valeurs"]}
+    assert lignes[2026]["ecart_dette"]["central"] == 0.0
+    assert lignes[2046]["ecart_dette"]["central"] < 0.0
+
+
+def test_scenario_sans_mesure_redonne_la_baseline(client: TestClient) -> None:
+    donnees = client.post("/scenario", json={"mesures": []}).json()
+    baseline = client.get("/baseline").json()
+    for s, b in zip(donnees["valeurs"], baseline["valeurs"], strict=True):
+        assert s["dette"] == pytest.approx(b["dette"])
+
+
+@pytest.mark.parametrize(
+    "mesure",
+    [
+        {"levier": "inexistant", "valeur": 1.0, "annee": 2027},
+        {"levier": "tva_taux_normal", "valeur": 1.0, "annee": 2025},
+        {"levier": "tva_taux_normal", "valeur": 50.0, "annee": 2027},
+    ],
+)
+def test_scenario_mesure_invalide(client: TestClient, mesure: dict[str, object]) -> None:
+    assert client.post("/scenario", json={"mesures": [mesure]}).status_code == 422
+
+
+def test_scenario_non_journalise(client: TestClient, caplog: pytest.LogCaptureFixture) -> None:
+    corps = {"mesures": [{"levier": "tva_taux_normal", "valeur": 1.2345, "annee": 2031}]}
+    with caplog.at_level(logging.DEBUG):
+        client.post("/scenario", json=corps)
+    serveur = [r.getMessage() for r in caplog.records if not r.name.startswith("httpx")]
+    assert not any("1.2345" in m for m in serveur)
+
+
+def attendu_provenance(client: TestClient) -> tuple[list[str], list[str]]:
+    corps = {"mesures": [{"levier": "tva_taux_normal", "valeur": 1.0, "annee": 2027}]}
+    donnees = client.post("/scenario", json=corps).json()
+    return donnees["sources"], donnees["hypotheses"]
+
+
+def test_export_reponses_unitaires(client: TestClient, tmp_path: Path) -> None:
+    """x fois la réponse unitaire exportée redonne le scénario de l'API (calcul du site)."""
+    exporter(tmp_path)
+    unitaires = json.loads((tmp_path / "scenario-unitaire.json").read_text(encoding="utf-8"))
+    assert unitaires["leviers"]["tva_taux_normal"]["sources"] == attendu_provenance(client)[0]
+    reponse = unitaires["leviers"]["tva_taux_normal"]["reponses"]["2027"]
+    x = 2.0
+    corps = {"mesures": [{"levier": "tva_taux_normal", "valeur": x, "annee": 2027}]}
+    attendu = client.post("/scenario", json=corps).json()["valeurs"]
+    for i, ligne in enumerate(attendu):
+        niveaux = [
+            b[i] + x * u[i]
+            for b, u in zip(unitaires["base_dette"], reponse["unite_dette"], strict=True)
+        ]
+        assert niveaux[0] == pytest.approx(ligne["dette"]["central"])
+        assert min(niveaux) == pytest.approx(ligne["dette"]["bas"])
+        assert max(niveaux) == pytest.approx(ligne["dette"]["haut"])

@@ -83,3 +83,22 @@ export type Baseline = {
     solde_primaire: FourchetteJson;
   }[];
 };
+export type ReponsesUnitaires = {
+  unite: string;
+  annee_reference: number;
+  annees: number[];
+  base_dette: number[][];
+  base_solde: number[][];
+  indices_effet: number[];
+  leviers: Record<
+    string,
+    {
+      statut: "valide" | "beta" | "non_publie";
+      rendement_unitaire: number;
+      effet_unitaire: number;
+      taux_reference: number;
+      bornes: [number, number];
+      reponses: Record<string, { unite_dette: number[][]; unite_solde: number[][] }>;
+    }
+  >;
+};

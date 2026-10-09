@@ -135,3 +135,20 @@ hypotheses:
       RESF 2027 pour 2027 (4,3 %, annexe macroéconomique, tableau 8), maintenu de 2031 à 2046
       (décision du mainteneur du 9 octobre 2026, option (i)).
     instruments: [baseline]
+
+  - id: scenario_rendement_constant_pib
+    libelle: Rendement d'une mesure constant en points de PIB après son entrée en vigueur
+    unite: écart relatif au rendement de l'année de référence rapporté au PIB
+    valeur_centrale: 0.0
+    plage:
+      basse: 0.0
+      haute: 0.0
+    sources: [insee_comptes_nationaux_2025]
+    justification: >-
+      Le rendement d'une mesure est chiffré pour 2025 (en Md€), rapporté au PIB de 2025
+      (INSEE, comptes nationaux, édition 2025 : 2 991,1 Md€), puis tenu constant en points de
+      PIB : il croît comme le PIB en valeur. C'est la convention de la baseline, exprimée en
+      points de PIB. Aucune source ne fournit encore l'élasticité de chaque recette au PIB : la
+      plage est nulle et cette limite est affichée. Une plage sourcée remplacera cette
+      convention quand l'élasticité sera saisie.
+    instruments: [tva]

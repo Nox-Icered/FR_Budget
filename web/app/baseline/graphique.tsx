@@ -23,15 +23,18 @@ export function GraphiqueDette({
   points,
   raccord,
   libelles,
+  reference,
 }: {
   points: Point[];
   raccord: number;
   libelles: Libelles;
+  reference?: { libelle: string; valeurs: number[] };
 }) {
   const [survol, setSurvol] = useState<number | null>(null);
   const annees = points.map((p) => p.annee);
-  const min = Math.floor(Math.min(...points.map((p) => p.bas)) / 10) * 10;
-  const max = Math.ceil(Math.max(...points.map((p) => p.haut)) / 10) * 10;
+  const extremes = [...points.flatMap((p) => [p.bas, p.haut]), ...(reference?.valeurs ?? [])];
+  const min = Math.floor(Math.min(...extremes) / 10) * 10;
+  const max = Math.ceil(Math.max(...extremes) / 10) * 10;
   const x = (a: number) =>
     MARGE.gauche +
     ((a - annees[0]) / (annees[annees.length - 1] - annees[0])) * (L - MARGE.gauche - MARGE.droite);
@@ -80,6 +83,12 @@ export function GraphiqueDette({
             {libelles.raccord}
           </text>
           <path d={bande} className="bande" />
+          {reference && (
+            <path
+              d={reference.valeurs.map((v, i) => `${i ? "L" : "M"}${x(annees[i])},${y(v)}`).join("")}
+              className="reference"
+            />
+          )}
           <path d={ligne} className="centrale" />
           {actif && (
             <g>
@@ -113,6 +122,11 @@ export function GraphiqueDette({
             <span>
               {libelles.bas} : {nombre(actif.bas)}
             </span>
+            {reference && (
+              <span>
+                {reference.libelle} : {nombre(reference.valeurs[survol!])}
+              </span>
+            )}
           </div>
         )}
       </div>

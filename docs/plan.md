@@ -114,6 +114,8 @@ Porte 1 : baseline et dynamique de la dette relues par deux relecteurs indépend
 
 ## 5. Phase 2 : leviers
 
+Décision du 9 octobre 2026 : la phase 2 commence avant le franchissement de la porte 1. La relecture de la baseline et de la dynamique de la dette par deux relecteurs indépendants est reportée ; la baseline reste affichée « bêta, non validé » et les valeurs saisies restent « à relire » jusque-là.
+
 Porte 2 : 12 leviers validés ou affichés en bêta avec écart publié.
 
 Un levier par branche, dans cet ordre indicatif (des références les plus solides aux plus délicates) :

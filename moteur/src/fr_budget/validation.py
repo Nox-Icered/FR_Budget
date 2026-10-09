@@ -16,6 +16,7 @@ from functools import partial
 from fr_budget.agrege.accises import recette_brute
 from fr_budget.agrege.credits_missions import total_execution
 from fr_budget.agrege.depenses_fiscales import cout_par_impot
+from fr_budget.agrege.dotations import COMPENSATIONS, DGF, execution
 from fr_budget.agrege.impot_societes import is_brut
 from fr_budget.agrege.tva import estimer_point_tva, estimer_recette_totale
 from fr_budget.dette import surcout_choc_taux_etat
@@ -79,6 +80,11 @@ def _credits_votes(exercice: int) -> float:
     return total_execution(exercice)[0] / EUROS_PAR_MILLIARD
 
 
+def _dotation_votee(dotation: str, annee: int) -> float:
+    """Montant voté en LFI d'une dotation du levier, en M€ (unité des références)."""
+    return execution(dotation, annee).lfi * MILLIONS_PAR_MILLIARD
+
+
 def _definitions() -> list[tuple[str, Callable[[], float]]]:
     definitions: list[tuple[str, Callable[[], float]]] = []
     for taux in TAUX_TVA:
@@ -112,6 +118,11 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
     definitions += [
         (f"credits_missions_depenses_constatees_{exercice}", partial(_credits_votes, exercice))
         for exercice in (2023, 2024, 2025)
+    ]
+    definitions += [
+        (f"dotations_{dotation}_execution_{annee}", partial(_dotation_votee, dotation, annee))
+        for dotation in (DGF, COMPENSATIONS)
+        for annee in (2023, 2024)
     ]
     return definitions
 

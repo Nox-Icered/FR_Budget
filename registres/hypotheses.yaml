@@ -369,3 +369,67 @@ hypotheses:
       arrondi au millième. Les écarts mêlent sous-exécution, reports, fonds de concours et
       ouvertures ou annulations en cours d'année.
     instruments: [credits_missions]
+
+  - id: dotations_elasticite_investissement_communes
+    libelle: Élasticité de court terme de l'investissement des communes aux dotations de l'État
+    unite: variation relative de l'investissement pour une variation relative de 1 des dotations
+    valeur_centrale: 0.14
+    plage:
+      basse: 0.1
+      haute: 0.4
+    sources: [cdc_eclairages_8_dotations_investissement]
+    justification: >-
+      Caisse des Dépôts, Éclairages n° 8 (2015), estimation sur données de panel 2001-2013 :
+      valeur centrale du tableau 1 (page 3) ; borne basse : 0,1, bas de la fourchette générale
+      annoncée par l'étude (« comprise entre 0,1 et 0,4 », page 3) ; borne haute : 0,40 après trois baisses successives des dotations (figure 2, page 4). L'investissement
+      est la dépense d'investissement hors remboursement de la dette, les dotations sont les
+      dotations totales de l'État (tableau 5, page 10).
+    instruments: [dotations_collectivites]
+
+  - id: dotations_elasticite_investissement_gfp
+    libelle: Élasticité de court terme de l'investissement des groupements à fiscalité propre (EPCI) aux dotations de l'État
+    unite: variation relative de l'investissement pour une variation relative de 1 des dotations
+    valeur_centrale: 0.19
+    plage:
+      basse: 0.1
+      haute: 0.22
+    sources: [cdc_eclairages_8_dotations_investissement]
+    justification: >-
+      Caisse des Dépôts, Éclairages n° 8 (2015), estimation sur données de panel 2001-2013 :
+      valeur centrale du tableau 1 (page 3) ; borne basse : 0,1, bas de la fourchette générale
+      annoncée par l'étude (« comprise entre 0,1 et 0,4 », page 3) ; borne haute : 0,22 sur les seules baisses ou stagnations des dotations (tableau 3). L'investissement
+      est la dépense d'investissement hors remboursement de la dette, les dotations sont les
+      dotations totales de l'État (tableau 5, page 10).
+    instruments: [dotations_collectivites]
+
+  - id: dotations_elasticite_investissement_departements
+    libelle: Élasticité de court terme de l'investissement des départements aux dotations de l'État
+    unite: variation relative de l'investissement pour une variation relative de 1 des dotations
+    valeur_centrale: 0.4
+    plage:
+      basse: 0.1
+      haute: 0.62
+    sources: [cdc_eclairages_8_dotations_investissement]
+    justification: >-
+      Caisse des Dépôts, Éclairages n° 8 (2015), estimation sur données de panel 2001-2013 :
+      valeur centrale du tableau 1 (page 3) ; borne basse : 0,1, bas de la fourchette générale
+      annoncée par l'étude (« comprise entre 0,1 et 0,4 », page 3) ; borne haute : 0,62 sur les seules baisses ou stagnations des dotations (tableau 3). L'investissement
+      est la dépense d'investissement hors remboursement de la dette, les dotations sont les
+      dotations totales de l'État (tableau 5, page 10).
+    instruments: [dotations_collectivites]
+
+  - id: dotations_elasticite_investissement_regions
+    libelle: Élasticité de court terme de l'investissement des régions aux dotations de l'État
+    unite: variation relative de l'investissement pour une variation relative de 1 des dotations
+    valeur_centrale: 0.32
+    plage:
+      basse: 0.1
+      haute: 0.32
+    sources: [cdc_eclairages_8_dotations_investissement]
+    justification: >-
+      Caisse des Dépôts, Éclairages n° 8 (2015), estimation sur données de panel 2001-2013 :
+      valeur centrale du tableau 1 (page 3) ; borne basse : 0,1, bas de la fourchette générale
+      annoncée par l'étude (« comprise entre 0,1 et 0,4 », page 3) ; borne haute : l'estimation centrale, le coefficient sur les seules baisses n'étant pas significatif pour les régions (tableau 3). L'investissement
+      est la dépense d'investissement hors remboursement de la dette, les dotations sont les
+      dotations totales de l'État (tableau 5, page 10).
+    instruments: [dotations_collectivites]

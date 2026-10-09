@@ -15,7 +15,7 @@ datasets:
     description: Voies et Moyens tome I du PLF 2026 (PDF, 102 pages)
     fichier: data/raw/tva/plf2026_voies_et_moyens_tome1.pdf
     empreinte_sha256: 4703605df8bfd1b4a20b1889839ebc1ea5a9b434eb4460eb2b40749e107371a0
-    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    methode_transformation: valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml ; pipelines/dotations_collectivites/extraire_psr.py → data/processed/dotations_collectivites/psr_collectivites.csv
     telecharge_le: 2026-10-07
 
   - id: plf2025_voies_et_moyens_tome1_pdf
@@ -23,7 +23,7 @@ datasets:
     description: Voies et Moyens tome I du PLF 2025 (PDF, 125 pages)
     fichier: data/raw/tva/plf2025_voies_et_moyens_tome1.pdf
     empreinte_sha256: c01eccd5eb0a96912b0ad84b5db354fc3c9eaf80bd7db20c023e10057ab5648b
-    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    methode_transformation: valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml ; pipelines/dotations_collectivites/extraire_psr.py → data/processed/dotations_collectivites/psr_collectivites.csv
     telecharge_le: 2026-10-07
 
   - id: plf2025_voies_et_moyens_tome2_pdf
@@ -88,6 +88,54 @@ datasets:
     fichier: data/raw/credits_missions/plrg2025_annexe1_etat_cp.csv
     empreinte_sha256: 6e9e0ddb861a6eb47857b0a481d3e1a293ba8ce96bb9c880431f9d689ce9d5c8
     methode_transformation: pipelines/credits_missions/extraire.py → data/processed/credits_missions/plrg_programmes.csv
+    telecharge_le: 2026-10-09
+
+  - id: plf2024_voies_et_moyens_tome1_pdf
+    source: plf2024_voies_et_moyens_tome1
+    description: Voies et Moyens tome I du PLF 2024 (PDF, 125 pages)
+    fichier: data/raw/dotations_collectivites/plf2024_voies_et_moyens_tome1.pdf
+    empreinte_sha256: 983cbe7f1796563cf4ec1d08134cfbe17b70daf028c6f9192ceab4905f313b56
+    methode_transformation: pipelines/dotations_collectivites/extraire_psr.py → data/processed/dotations_collectivites/psr_collectivites.csv
+    telecharge_le: 2026-10-09
+
+  - id: cdc_eclairages_8_pdf
+    source: cdc_eclairages_8_dotations_investissement
+    description: Étude n° 8 de la série Éclairages (PDF, 16 pages)
+    fichier: data/raw/dotations_collectivites/cdc_eclairages_8_dotations_investissement.pdf
+    empreinte_sha256: 64f35183aa94a3cbc45ade6adcb8f1608a11bb78b430877e2fbb581f41b97323
+    methode_transformation: aucune ; élasticités lues dans le document et saisies dans registres/hypotheses.yaml
+    telecharge_le: 2026-10-09
+
+  - id: ofgl_communes_agregats_json
+    source: ofgl_comptes_consolides_collectivites
+    description: Réponse de l'API data.ofgl.fr (jeu ofgl-base-communes-consolidee) - somme par exercice, depuis 2023, des agrégats « Dépenses d'investissement hors remb », « Concours de l'Etat », « Dotation globale de fonctionnement » et « Péréquations et compensations fiscales »
+    fichier: data/raw/dotations_collectivites/ofgl_communes_agregats.json
+    empreinte_sha256: 1663b6ef18eb21610b8317441594988e4c134d139d7f71f42294db77d96451ab
+    methode_transformation: pipelines/dotations_collectivites/extraire_ofgl.py → data/processed/dotations_collectivites/ofgl_agregats.csv
+    telecharge_le: 2026-10-09
+
+  - id: ofgl_gfp_agregats_json
+    source: ofgl_comptes_consolides_collectivites
+    description: Réponse de l'API data.ofgl.fr (jeu ofgl-base-gfp-consolidee) - somme par exercice, depuis 2023, des agrégats « Dépenses d'investissement hors remb », « Concours de l'Etat », « Dotation globale de fonctionnement » et « Péréquations et compensations fiscales »
+    fichier: data/raw/dotations_collectivites/ofgl_gfp_agregats.json
+    empreinte_sha256: 3f61dcea629b375705f23a761e73c857383271d1f1509a47a95b0b8ddcedafc9
+    methode_transformation: pipelines/dotations_collectivites/extraire_ofgl.py → data/processed/dotations_collectivites/ofgl_agregats.csv
+    telecharge_le: 2026-10-09
+
+  - id: ofgl_departements_agregats_json
+    source: ofgl_comptes_consolides_collectivites
+    description: Réponse de l'API data.ofgl.fr (jeu ofgl-base-departements-consolidee) - somme par exercice, depuis 2023, des agrégats « Dépenses d'investissement hors remb », « Concours de l'Etat », « Dotation globale de fonctionnement » et « Péréquations et compensations fiscales »
+    fichier: data/raw/dotations_collectivites/ofgl_departements_agregats.json
+    empreinte_sha256: 7d70538029cddc1c2a1cb46467b2bda429047bea160f3af3a66ac11f9f884e5c
+    methode_transformation: pipelines/dotations_collectivites/extraire_ofgl.py → data/processed/dotations_collectivites/ofgl_agregats.csv
+    telecharge_le: 2026-10-09
+
+  - id: ofgl_regions_agregats_json
+    source: ofgl_comptes_consolides_collectivites
+    description: Réponse de l'API data.ofgl.fr (jeu ofgl-base-regions-consolidee) - somme par exercice, depuis 2023, des agrégats « Dépenses d'investissement hors remb », « Concours de l'Etat », « Dotation globale de fonctionnement » et « Péréquations et compensations fiscales »
+    fichier: data/raw/dotations_collectivites/ofgl_regions_agregats.json
+    empreinte_sha256: ed9173894e9e369698f16b235fef60a8111f64c6d772015d32b866d6fa751a92
+    methode_transformation: pipelines/dotations_collectivites/extraire_ofgl.py → data/processed/dotations_collectivites/ofgl_agregats.csv
     telecharge_le: 2026-10-09
 
   - id: drees_comptes_sante_financement_2026_csv

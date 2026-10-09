@@ -43,6 +43,12 @@ export default function PageSimulateur() {
       </p>
       <p>{texte("simulateur.methode_depenses_fiscales", { annee: catalogue.annee_cout })}</p>
       <p>{texte("simulateur.methode_credits_missions", { annee: missions.annee_credits })}</p>
+      <p>
+        {texte("simulateur.methode_dotations", {
+          etat_dgf: deuxDecimales(-(donnees.leviers.dotations_dgf.effet_etat_unitaire ?? 0)),
+          apu_dgf: deuxDecimales(-donnees.leviers.dotations_dgf.rendement_unitaire),
+        })}
+      </p>
       <ul>
         <li>{texte("simulateur.limite_comportement")}</li>
         <li>{texte("simulateur.limite_croissance")}</li>
@@ -51,6 +57,7 @@ export default function PageSimulateur() {
         <li>{texte("simulateur.limite_is_calendrier")}</li>
         <li>{texte("simulateur.limite_depenses_fiscales")}</li>
         <li>{texte("simulateur.limite_credits_missions")}</li>
+        <li>{texte("simulateur.limite_dotations")}</li>
       </ul>
       <p>
         <a href="/validation/">{texte("simulateur.lien_validation")}</a>

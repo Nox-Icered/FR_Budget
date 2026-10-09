@@ -264,6 +264,12 @@ def reponses_unitaires() -> dict[str, Any]:
             "rendement_unitaire": module_scenario.rendement_unitaire(levier).central,
             "effet_unitaire": effet.central,
             "taux_reference": module_scenario.taux_reference(levier),
+            # Dotations : effet d'un pour cent sur le solde du seul État (affiché à part).
+            **(
+                {"effet_etat_unitaire": module_scenario.effet_etat_unitaire(levier)}
+                if levier in module_scenario.LEVIERS_DOTATIONS
+                else {}
+            ),
             "bornes": [basse, haute],
             "reponses": reponses,
         }

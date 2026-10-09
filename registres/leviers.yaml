@@ -82,7 +82,7 @@ leviers:
 
   - id: dotations_collectivites
     libelle: Dotations de l'État aux collectivités
-    parametres_reglables: [Variation de la DGF, Variation des compensations]
+    parametres_reglables: [Variation de la DGF, Variation des compensations d'exonérations et de réformes fiscales]
     moteur: agrege
     references_visees: [Annexe « Transferts financiers de l'État aux collectivités », DGCL]
-    statut: non_publie
+    statut: beta

@@ -178,6 +178,33 @@ sources:
     acces: direct
     consulte_le: 2026-10-09
 
+  - id: plf2024_voies_et_moyens_tome1
+    nom: Projet de loi de finances pour 2024, annexe « Évaluation des voies et moyens », tome I (recettes)
+    editeur: Ministère de l'Économie et des Finances (document publié par l'Assemblée nationale)
+    url: https://www.assemblee-nationale.fr/dyn/content/download/705205/file/x.pdf
+    licence: Licence Ouverte 2.0
+    millesime: PLF 2024
+    acces: direct
+    consulte_le: 2026-10-09
+
+  - id: cdc_eclairages_8_dotations_investissement
+    nom: « Impact des dotations de l'État sur l'investissement des collectivités locales », Éclairages, étude n° 8
+    editeur: Caisse des Dépôts (publié par la Banque des Territoires)
+    url: https://www.banquedesterritoires.fr/sites/default/files/2018-11/eclairages_8.pdf
+    licence: non précisée (document public ; reprise de chiffres avec citation)
+    millesime: septembre 2015 (données 2001-2013)
+    acces: direct
+    consulte_le: 2026-10-09
+
+  - id: ofgl_comptes_consolides_collectivites
+    nom: Comptes consolidés des communes, des groupements à fiscalité propre, des départements et des régions (budgets principaux et annexes)
+    editeur: Observatoire des finances et de la gestion publique locales (OFGL), à partir des balances comptables de la DGFiP
+    url: https://data.ofgl.fr/
+    licence: Licence Ouverte 2.0
+    millesime: exercices 2023 à 2025 (jeux modifiés en juillet 2026)
+    acces: direct
+    consulte_le: 2026-10-09
+
   - id: drees_comptes_sante_financement_2026
     nom: Les comptes de la santé - Répartition par financeur (édition 2026 du panorama des dépenses de santé)
     editeur: DREES (ministère chargé de la santé)

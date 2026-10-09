@@ -848,3 +848,58 @@ chiffrages:
     localisation: Fichier annexe1_etat_cp_2025, colonne « Depenses_constatees », somme des lignes du périmètre (fr_budget.agrege.credits_missions.total_execution(2025))
     saisi_le: 2026-10-09
     relecture: a_relire
+
+  - id: dotations_dgf_regions_reintegree_2026
+    levier: dotations_collectivites
+    source: plf2026_voies_et_moyens_tome1
+    millesime: "2026 (PLF 2026)"
+    mesure: Montant des fractions de TVA attribuées aux régions depuis 2018 réintégré dans la DGF en 2026 (mesure de périmètre)
+    valeur: 5172
+    unite: M€
+    localisation: Commentaire de la ligne 3101 (prélèvement au titre de la DGF), pages 77 et 78
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: dotations_dgf_execution_2023
+    levier: dotations_collectivites
+    source: plf2025_voies_et_moyens_tome1
+    millesime: "exercice 2023 (exécution)"
+    mesure: Prélèvement sur recettes au titre de la dotation globale de fonctionnement (ligne 3101), exécution
+    valeur: 26929.622
+    unite: M€
+    localisation: Tableau « Prélèvements sur les recettes de l'État au profit des collectivités territoriales », ligne 3101, colonne « Exécution 2023 »
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: dotations_dgf_execution_2024
+    levier: dotations_collectivites
+    source: plf2026_voies_et_moyens_tome1
+    millesime: "exercice 2024 (exécution)"
+    mesure: Prélèvement sur recettes au titre de la dotation globale de fonctionnement (ligne 3101), exécution
+    valeur: 27238.524
+    unite: M€
+    localisation: Tableau « Prélèvements sur les recettes de l'État au profit des collectivités territoriales », ligne 3101, colonne « Exécution 2024 », page 76
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: dotations_compensations_execution_2023
+    levier: dotations_collectivites
+    source: plf2025_voies_et_moyens_tome1
+    millesime: "exercice 2023 (exécution)"
+    mesure: Somme des prélèvements de compensation du levier (lignes 3104, 3107, 3119 à 3123, 3130, 3135, 3145, 3146, 3159, 3163, 3165), exécution ; somme calculée par le moteur
+    valeur: 8091.397
+    unite: M€
+    localisation: Tableau des prélèvements au profit des collectivités, colonne « Exécution 2023 » (fr_budget.agrege.dotations.montant_psr)
+    saisi_le: 2026-10-09
+    relecture: a_relire
+
+  - id: dotations_compensations_execution_2024
+    levier: dotations_collectivites
+    source: plf2026_voies_et_moyens_tome1
+    millesime: "exercice 2024 (exécution)"
+    mesure: Somme des prélèvements de compensation du levier (lignes 3104, 3107, 3119 à 3123, 3130, 3135, 3145, 3146, 3159, 3163, 3165), exécution ; somme calculée par le moteur
+    valeur: 8389.295
+    unite: M€
+    localisation: Tableau des prélèvements au profit des collectivités, colonne « Exécution 2024 », pages 76 et 77 (fr_budget.agrege.dotations.montant_psr)
+    saisi_le: 2026-10-09
+    relecture: a_relire

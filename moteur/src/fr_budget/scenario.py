@@ -31,6 +31,12 @@ Leviers disponibles :
   1 € de crédit compte pour 1 € de solde des administrations publiques (option 3 (a) du
   9 octobre 2026). ``credits_missions`` : unité
   générique (hausse de 1 Md€ de 2025), dont le site se sert pour les missions réglées.
+- ``dotations_dgf`` et ``dotations_compensations`` : variation de x % (de -10 à +10) de la
+  dotation globale de fonctionnement ou des compensations fiscales versées aux collectivités
+  (``fr_budget.agrege.dotations``). Le solde public ne change que par la réaction de
+  l'investissement local : effet d'un pour cent = moins 1 % du montant 2026, ramené en euros de
+  2025, multiplié par le taux de répercussion (élasticités de la Caisse des Dépôts). L'effet
+  sur le seul budget de l'État (``effet_etat_unitaire``) est affiché à part.
 
 Fourchettes : écart au scénario de référence, avec la plage du rendement du levier ; niveau
 de dette et de solde, avec la plage du levier et celle de la baseline, chacune seule.
@@ -42,7 +48,13 @@ from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, replace
 
 from fr_budget import baseline as module_baseline
-from fr_budget.agrege import accises, credits_missions, depenses_fiscales, impot_societes
+from fr_budget.agrege import (
+    accises,
+    credits_missions,
+    depenses_fiscales,
+    dotations,
+    impot_societes,
+)
 from fr_budget.agrege.tva import HYPOTHESE_REPARTITION, fourchette_point_tva, taux_tva
 from fr_budget.apu import comptes_apu, ratio_pib
 from fr_budget.baseline import ANNEE_FIN, AnneeBaseline, trajectoires
@@ -66,6 +78,15 @@ HYPOTHESE_ECART_CREDITS = "credits_missions_ecart_execution"
 # Variation admise des crédits d'une mission, en % : choix du lot 2.5, confirmé par le
 # mainteneur le 9 octobre 2026 (aucune source ne borne une variation de crédits).
 BORNE_CREDITS = 20.0
+LEVIER_DOTATIONS_DGF = "dotations_dgf"
+LEVIER_DOTATIONS_COMPENSATIONS = "dotations_compensations"
+LEVIERS_DOTATIONS = {
+    LEVIER_DOTATIONS_DGF: dotations.DGF,
+    LEVIER_DOTATIONS_COMPENSATIONS: dotations.COMPENSATIONS,
+}
+# Variation admise des dotations, en % (option 3 (a) du 9 octobre 2026) ; repère : la baisse
+# de la DGF de 2014 à 2017, environ 3,5 Md€ par an (Caisse des Dépôts, Éclairages n° 8).
+BORNE_DOTATIONS = 10.0
 MILLIONS_PAR_MILLIARD = 1000.0
 EUROS_PAR_MILLIARD = 1e9
 ANNEE_REFERENCE = 2025
@@ -124,7 +145,12 @@ def mission_du_levier(levier: str) -> credits_missions.Mission | None:
 
 
 ANNEE_MONTANTS_2026 = 2026
-if not depenses_fiscales.ANNEE_COUT_LEVIER == credits_missions.ANNEE_CREDITS == ANNEE_MONTANTS_2026:
+if not (
+    depenses_fiscales.ANNEE_COUT_LEVIER
+    == credits_missions.ANNEE_CREDITS
+    == dotations.PLF_LEVIER
+    == ANNEE_MONTANTS_2026
+):
     msg = "les montants des leviers de dépenses fiscales et de crédits doivent être de 2026"
     raise RuntimeError(msg)
 
@@ -145,6 +171,16 @@ def _cout_un_pourcent(cout_meur: float) -> float:
     return _vers_euros_reference(cout_meur / MILLIONS_PAR_MILLIARD / POURCENT)
 
 
+def effet_etat_unitaire(levier: str) -> float:
+    """Dotations : effet d'une hausse d'un pour cent sur le solde du seul État, en Md€ de 2025.
+
+    C'est l'opposé d'un pour cent du montant proposé pour 2026 ; les collectivités reçoivent
+    autant, et le solde public ne change que par leur réaction (``rendement_unitaire``).
+    """
+    dotation = LEVIERS_DOTATIONS[levier]
+    return -_vers_euros_reference(dotations.montant_levier(dotation) / POURCENT)
+
+
 def rendement_unitaire(levier: str) -> Fourchette:
     """Rendement d'une unité du levier, en Md€ de l'année de référence.
 
@@ -153,6 +189,11 @@ def rendement_unitaire(levier: str) -> Fourchette:
     volumiques. Dépenses fiscales : 1 % du coût 2026, plage de l'écart de prévision. Crédits
     d'une mission : moins 1 % des crédits 2026, plage de l'écart d'exécution.
     """
+    if levier in LEVIERS_DOTATIONS:
+        dotation = LEVIERS_DOTATIONS[levier]
+        un_pourcent = -effet_etat_unitaire(levier)
+        t = dotations.taux_repercussion(dotation)
+        return encadrer(-t.central * un_pourcent, [-t.bas * un_pourcent, -t.haut * un_pourcent])
     if levier == LEVIER_CREDITS_UNITE:
         return _avec_plage(-1.0, HYPOTHESE_ECART_CREDITS)
     mission = mission_du_levier(levier)
@@ -205,6 +246,8 @@ def taux_reference(levier: str) -> float:
         return mission.credits / EUROS_PAR_MILLIARD
     if levier == LEVIER_CREDITS_UNITE:
         return 0.0
+    if levier in LEVIERS_DOTATIONS:
+        return dotations.montant_levier(LEVIERS_DOTATIONS[levier])
     if levier in LEVIERS_DEPENSES_FISCALES_IMPOT:
         impot = LEVIERS_DEPENSES_FISCALES_IMPOT[levier]
         return depenses_fiscales.cout_impot_levier(impot) / MILLIONS_PAR_MILLIARD
@@ -236,6 +279,8 @@ def bornes_levier(levier: str) -> tuple[float, float]:
     """
     if mission_du_levier(levier) is not None:
         return -BORNE_CREDITS, BORNE_CREDITS
+    if levier in LEVIERS_DOTATIONS:
+        return -BORNE_DOTATIONS, BORNE_DOTATIONS
     if levier == LEVIER_CREDITS_UNITE:
         # Md€ de 2025 : la même variation appliquée à toutes les missions du levier.
         total = _vers_euros_reference(credits_missions.total_credits() / EUROS_PAR_MILLIARD)
@@ -422,6 +467,7 @@ LEVIERS_REGISTRE = {
     **dict.fromkeys(LEVIERS_DEPENSES_FISCALES_IMPOT, "depenses_fiscales"),
     LEVIER_DEPENSE_FISCALE_UNITE: "depenses_fiscales",
     LEVIER_CREDITS_UNITE: "credits_missions",
+    **dict.fromkeys(LEVIERS_DOTATIONS, "dotations_collectivites"),
 }
 
 
@@ -468,6 +514,17 @@ SOURCES_CREDITS = (
     "dgfip_plrg_2025",
     "plf2027_resf",
 )
+PROVENANCE_DOTATIONS = (
+    (
+        "plf2026_voies_et_moyens_tome1",
+        "plf2025_voies_et_moyens_tome1",
+        "plf2024_voies_et_moyens_tome1",
+        "ofgl_comptes_consolides_collectivites",
+        "cdc_eclairages_8_dotations_investissement",
+        "plf2027_resf",
+    ),
+    tuple(f"dotations_elasticite_investissement_{n}" for n in dotations.NIVEAUX),
+)
 PROVENANCE_LEVIERS = {
     LEVIER_IS_TAUX_NORMAL: PROVENANCE_IS,
     LEVIER_IS_SURTAXE: PROVENANCE_IS,
@@ -489,6 +546,7 @@ PROVENANCE_LEVIERS = {
     },
     LEVIER_DEPENSE_FISCALE_UNITE: (SOURCES_DEPENSES_FISCALES, (HYPOTHESE_ECART_DEPENSE,)),
     LEVIER_CREDITS_UNITE: (SOURCES_CREDITS, (HYPOTHESE_ECART_CREDITS,)),
+    **dict.fromkeys(LEVIERS_DOTATIONS, PROVENANCE_DOTATIONS),
 }
 
 

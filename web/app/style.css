@@ -48,3 +48,8 @@ footer { margin-top: 32px; border-top: 1px solid var(--trait); }
 @media (min-width: 40rem) {
   .chiffres { grid-template-columns: repeat(2, 1fr); }
 }
+
+th.groupe {
+  text-align: left;
+  padding-top: 1rem;
+}

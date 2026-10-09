@@ -121,3 +121,33 @@ def test_validation_publie_les_ecarts(client: TestClient) -> None:
     assert choc["ecart"] == pytest.approx((choc["modele"] - 3.4) / 3.4)
     assert choc["dans_la_tolerance"] is (abs(choc["ecart"]) <= choc["tolerance"])
     assert choc["unite"] == "Md€"
+
+
+def test_baseline_en_fourchette_avec_sources(client: TestClient) -> None:
+    reponse = client.get("/baseline").json()
+    assert reponse["sources"] == ["plf2027_resf", "ce_ageing_report_2024"]
+    assert reponse["unite"] == "% du PIB"
+    assert reponse["statut"] == "non_publie"
+    annees = [v["annee"] for v in reponse["valeurs"]]
+    assert annees == list(range(2025, 2047))
+    for v in reponse["valeurs"]:
+        for grandeur in ("dette", "solde_primaire"):
+            f = v[grandeur]
+            assert f["bas"] <= f["central"] <= f["haut"]
+        assert v["segment"] == ("resf" if v["annee"] <= reponse["annee_raccord"] else "projection")
+    hypotheses = {h["id"] for h in client.get("/registres/hypotheses").json()}
+    assert set(reponse["hypotheses"]) <= hypotheses
+
+
+def test_baseline_reprend_le_moteur(client: TestClient) -> None:
+    from fr_budget.baseline import baseline
+
+    reponse = client.get("/baseline").json()
+    derniere = baseline()[-1]
+    assert reponse["valeurs"][-1]["dette"]["central"] == pytest.approx(derniere.dette.central)
+
+
+def test_export_baseline_identique_a_l_api(client: TestClient, tmp_path: Path) -> None:
+    exporter(tmp_path)
+    exporte = json.loads((tmp_path / "baseline.json").read_text(encoding="utf-8"))
+    assert exporte == client.get("/baseline").json()

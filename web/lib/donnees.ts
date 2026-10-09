@@ -69,3 +69,17 @@ export type Comparaison = {
   unite: string;
 };
 export type Version = { moteur: string; registres: string; donnees: string };
+export type FourchetteJson = { bas: number; central: number; haut: number };
+export type Baseline = {
+  sources: string[];
+  unite: string;
+  statut: "valide" | "beta" | "non_publie";
+  annee_raccord: number;
+  hypotheses: string[];
+  valeurs: {
+    annee: number;
+    segment: "resf" | "projection";
+    dette: FourchetteJson;
+    solde_primaire: FourchetteJson;
+  }[];
+};

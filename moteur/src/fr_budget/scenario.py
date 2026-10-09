@@ -28,7 +28,8 @@ from __future__ import annotations
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, replace
 
-from fr_budget.agrege.tva import fourchette_point_tva, taux_tva
+from fr_budget import baseline as module_baseline
+from fr_budget.agrege.tva import HYPOTHESE_REPARTITION, fourchette_point_tva, taux_tva
 from fr_budget.apu import comptes_apu, ratio_pib
 from fr_budget.baseline import ANNEE_FIN, AnneeBaseline, trajectoires
 from fr_budget.dette import dette_suivante
@@ -182,6 +183,40 @@ def reponse_unitaire(levier: str, annee: int) -> list[AnneeScenario]:
 
 
 LEVIERS_REGISTRE = {LEVIER_TVA_NORMAL: "tva"}
+HYPOTHESE_RENDEMENT = "scenario_rendement_constant_pib"
+SOURCE_PIB = "insee_comptes_nationaux_2025"
+# Sources et hypothèses propres à chaque levier (registres/sources.yaml, hypotheses.yaml) :
+# pour la TVA, comptes et consommation de l'INSEE, taux d'OpenFisca-France, dépenses fiscales
+# (tome II de Voies et Moyens), recettes servant au vieillissement du point (agrege.tva).
+PROVENANCE_LEVIERS = {
+    LEVIER_TVA_NORMAL: (
+        (
+            "insee_tes_2025",
+            "insee_consommation_produits_2024",
+            "openfisca_france_176_1_2",
+            "plf2025_voies_et_moyens_tome2",
+            "dgtresor_tresor_eco_371",
+            "plf2026_voies_et_moyens_tome1",
+        ),
+        (HYPOTHESE_REPARTITION,),
+    )
+}
+
+
+def provenance(leviers: Iterable[str]) -> tuple[list[str], list[str]]:
+    """Sources et hypothèses d'un scénario : baseline, PIB, puis celles de chaque levier."""
+    sources = [*module_baseline.SOURCES, SOURCE_PIB]
+    hypotheses = [*module_baseline.HYPOTHESES, HYPOTHESE_RENDEMENT]
+    for levier in leviers:
+        if levier not in PROVENANCE_LEVIERS:
+            msg = f"levier inconnu : {levier}"
+            raise ValueError(msg)
+        s, h = PROVENANCE_LEVIERS[levier]
+        sources += [x for x in s if x not in sources]
+        hypotheses += [x for x in h if x not in hypotheses]
+    return sources, hypotheses
+
+
 """Levier du registre (``registres/leviers.yaml``) dont chaque levier de scénario dépend."""
 
 

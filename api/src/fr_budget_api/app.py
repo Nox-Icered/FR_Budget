@@ -155,17 +155,11 @@ def serie_baseline() -> dict[str, Any]:
     """
     raccord = module_baseline.ANNEE_RACCORD
     return {
-        "sources": ["plf2027_resf", "ce_ageing_report_2024"],
+        "sources": list(module_baseline.SOURCES),
         "unite": "% du PIB",
         "statut": "non_publie",
         "annee_raccord": raccord,
-        "hypotheses": [
-            module_baseline.HYPOTHESE_PART,
-            module_baseline.HYPOTHESE_STOCK_FLUX,
-            module_baseline.HYPOTHESE_VIEILLISSEMENT,
-            module_baseline.HYPOTHESE_CROISSANCE,
-            module_baseline.HYPOTHESE_TAUX,
-        ],
+        "hypotheses": list(module_baseline.HYPOTHESES),
         "valeurs": [
             {
                 "annee": ligne.annee,
@@ -203,10 +197,13 @@ def calcul_scenario(entree: ScenarioEntree) -> dict[str, Any] | None:
     mesures = [module_scenario.Mesure(m.levier, m.valeur, m.annee) for m in entree.mesures]
     try:
         lignes = module_scenario.scenario(mesures)
+        sources, hypotheses = module_scenario.provenance(m.levier for m in mesures)
     except ValueError:
         return None
     return {
         "unite": "% du PIB",
+        "sources": sources,
+        "hypotheses": hypotheses,
         "version": version_donnees(),
         "mesures": [m.model_dump() for m in entree.mesures],
         "statuts": {m.levier: _statut_levier(m.levier) for m in entree.mesures},
@@ -238,7 +235,10 @@ def reponses_unitaires() -> dict[str, Any]:
         effet = module_scenario.effet_solde(
             module_scenario.Mesure(levier, 1.0, module_scenario.ANNEE_PREMIERE_MESURE)
         )
+        sources, hypotheses = module_scenario.provenance([levier])
         leviers[levier] = {
+            "sources": sources,
+            "hypotheses": hypotheses,
             "statut": _statut_levier(levier),
             "rendement_unitaire": module_scenario.rendement_unitaire(levier).central,
             "effet_unitaire": effet.central,

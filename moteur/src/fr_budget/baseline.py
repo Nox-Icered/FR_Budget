@@ -52,6 +52,14 @@ HYPOTHESE_STOCK_FLUX = "baseline_ajustement_stock_flux"
 HYPOTHESE_VIEILLISSEMENT = "baseline_cout_vieillissement_variantes"
 HYPOTHESE_CROISSANCE = "baseline_croissance_volume"
 HYPOTHESE_TAUX = "baseline_taux_marche"
+SOURCES = ("plf2027_resf", "ce_ageing_report_2024")
+HYPOTHESES = (
+    HYPOTHESE_PART,
+    HYPOTHESE_STOCK_FLUX,
+    HYPOTHESE_VIEILLISSEMENT,
+    HYPOTHESE_CROISSANCE,
+    HYPOTHESE_TAUX,
+)
 
 # Variantes de l'Ageing Report 2024 sur le coût total du vieillissement (tableau FRc, écarts au
 # scénario de référence ; définitions dans le rapport principal, Institutional Paper 279).

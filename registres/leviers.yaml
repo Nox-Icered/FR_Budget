@@ -54,10 +54,10 @@ leviers:
 
   - id: credits_missions
     libelle: Crédits par mission du budget de l'État
-    parametres_reglables: [Gel ou variation en pourcentage d'une mission]
+    parametres_reglables: [Variation en pourcentage des crédits de paiement d'une mission du budget général]
     moteur: agrege
-    references_visees: [Annexes budgétaires du PLF]
-    statut: non_publie
+    references_visees: [Annexes budgétaires du PLF, PLRG (dépenses constatées)]
+    statut: beta
 
   - id: remunerations_publiques
     libelle: Rémunérations publiques

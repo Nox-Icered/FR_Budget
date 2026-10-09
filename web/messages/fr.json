@@ -178,6 +178,15 @@
       "impot_bloque": "Retirez d'abord les dépenses de cet impôt choisies une à une."
     },
     "limite_depenses_fiscales": "Le coût d'une dépense fiscale n'est pas le gain de sa suppression : l'administration précise qu'il ne tient compte ni des changements de comportement ni des interactions entre dépenses, et que la somme de ces coûts n'a pas de réelle signification. Le rendement affiché est le coût officiel, sans correction : pour un impôt entier ou plusieurs dépenses, c'est un ordre de grandeur.",
-    "methode_depenses_fiscales": "Dépenses fiscales : le rendement d'une réduction de x % est x % du coût prévu pour {annee} dans le projet de loi de finances pour {annee}, rapporté au PIB de la même année. La fourchette reprend les écarts constatés par le passé entre le coût prévu et le coût réalisé."
+    "methode_depenses_fiscales": "Dépenses fiscales : le rendement d'une réduction de x % est x % du coût prévu pour {annee} dans le projet de loi de finances pour {annee}, rapporté au PIB de la même année. La fourchette reprend les écarts constatés par le passé entre le coût prévu et le coût réalisé.",
+    "credits_missions": {
+      "titre": "Crédits des missions du budget de l'État",
+      "intro": "Faire varier de x % les crédits d'une mission change le solde de x % des crédits demandés pour {annee}. Les dotations aux collectivités, les pensions de l'État et la charge de la dette ne sont pas dans ces missions.",
+      "liste": "Les {nombre} missions ({reglees} réglée(s))",
+      "mission": "{mission} ({credits} milliards d'euros demandés pour {annee})",
+      "valeur": "{valeur} %"
+    },
+    "methode_credits_missions": "Crédits des missions : le changement de solde d'une variation de x % est x % des crédits de paiement demandés pour {annee} dans le projet de loi de finances, rapporté au PIB de la même année. La fourchette reprend les écarts constatés de 2023 à 2025 entre les crédits votés et les dépenses réellement faites.",
+    "limite_credits_missions": "Un euro de crédit en moins compte pour un euro de solde en plus, même quand il finance un autre organisme public (université, opérateur, Sécurité sociale) qui pourrait ne pas réduire sa dépense. Les crédits de personnel restent dans chaque mission."
   }
 }

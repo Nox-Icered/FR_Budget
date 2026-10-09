@@ -351,3 +351,21 @@ hypotheses:
       chiffrées lors de la prévision ; convention du tome II pour les dépenses non chiffrées.
       Calcul : fr_budget.agrege.depenses_fiscales.ecart_par_impot, arrondi au millième.
     instruments: [depenses_fiscales]
+
+  - id: credits_missions_ecart_execution
+    libelle: Écart entre les dépenses constatées et les crédits votés d'une mission du budget général
+    unite: écart relatif aux crédits votés en loi de finances initiale
+    valeur_centrale: 0.0
+    plage:
+      basse: -0.145
+      haute: 0.076
+    sources: [dgfip_plrg_2023, dgfip_plrg_2024, dgfip_plrg_2025]
+    justification: >-
+      Le rendement d'une variation des crédits d'une mission est la part correspondante de ses
+      crédits de paiement demandés au PLF 2026 (valeur centrale : aucun écart). La plage reprend
+      les 10e et 90e centiles de l'écart relatif entre dépenses constatées et crédits votés en
+      LFI, par mission du levier, pour les exercices 2023, 2024 et 2025 (89 observations ;
+      annexe 1 des PLRG). Calcul : fr_budget.agrege.credits_missions.plage_ecart_execution(),
+      arrondi au millième. Les écarts mêlent sous-exécution, reports, fonds de concours et
+      ouvertures ou annulations en cours d'année.
+    instruments: [credits_missions]

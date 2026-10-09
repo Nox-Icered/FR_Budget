@@ -58,6 +58,38 @@ datasets:
     methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-09
 
+  - id: db_budget_vert_plf2026_csv
+    source: db_budget_vert_plf2026
+    description: Export CSV (séparateur point-virgule) du jeu « PLF 2026 - Budget vert », 1 816 lignes
+    fichier: data/raw/credits_missions/plf2026_budget_vert.csv
+    empreinte_sha256: 1db81028ead28c073cb2efb46c613417944b8a5bd4832f6a272c848d7f0fa4fb
+    methode_transformation: pipelines/credits_missions/extraire.py → data/processed/credits_missions/plf2026_programmes.csv
+    telecharge_le: 2026-10-09
+
+  - id: dgfip_plrg_2023_annexe1_etat_cp_csv
+    source: dgfip_plrg_2023
+    description: Annexe 1 du PLRG 2023, état des crédits de paiement du budget général par mission, programme et titre (LFI, mouvements, dépenses constatées)
+    fichier: data/raw/credits_missions/plrg2023_annexe1_etat_cp.csv
+    empreinte_sha256: 3729b37c66bce70b1efe08e5e769969f1bdb3302fed8cf3055f74eea8a8270cb
+    methode_transformation: pipelines/credits_missions/extraire.py → data/processed/credits_missions/plrg_programmes.csv
+    telecharge_le: 2026-10-09
+
+  - id: dgfip_plrg_2024_annexe1_etat_cp_csv
+    source: dgfip_plrg_2024
+    description: Annexe 1 du PLRG 2024, état des crédits de paiement du budget général par mission, programme et titre (LFI, mouvements, dépenses constatées)
+    fichier: data/raw/credits_missions/plrg2024_annexe1_etat_cp.csv
+    empreinte_sha256: 2ec0b30f934104ea11c863fc044932c5e260930d0c06e8e05aa0977aa315e90b
+    methode_transformation: pipelines/credits_missions/extraire.py → data/processed/credits_missions/plrg_programmes.csv
+    telecharge_le: 2026-10-09
+
+  - id: dgfip_plrg_2025_annexe1_etat_cp_csv
+    source: dgfip_plrg_2025
+    description: Annexe 1 du PLRG 2025, état des crédits de paiement du budget général par mission, programme et titre (LFI, mouvements, dépenses constatées)
+    fichier: data/raw/credits_missions/plrg2025_annexe1_etat_cp.csv
+    empreinte_sha256: 6e9e0ddb861a6eb47857b0a481d3e1a293ba8ce96bb9c880431f9d689ce9d5c8
+    methode_transformation: pipelines/credits_missions/extraire.py → data/processed/credits_missions/plrg_programmes.csv
+    telecharge_le: 2026-10-09
+
   - id: drees_comptes_sante_financement_2026_csv
     source: drees_comptes_sante_financement_2026
     description: Dépense de santé par poste et par financeur, 2010 à 2025, en euros (export CSV de l'API, séparateur point-virgule)

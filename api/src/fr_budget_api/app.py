@@ -7,6 +7,7 @@ désactivé par ``creer_application`` elle-même ; lancer avec ``python -m fr_bu
 
 Points d'entrée : ``/sante``, ``/version``, ``/registres/{nom}``, ``/comptes-apu``,
 ``/depenses-par-fonction``, ``/validation``, ``/baseline``, ``/depenses-fiscales``,
+``/credits-missions``,
 ``POST /scenario``.
 """
 
@@ -22,6 +23,7 @@ from typing import Any
 from fastapi import FastAPI, HTTPException
 from fr_budget import baseline as module_baseline
 from fr_budget import scenario as module_scenario
+from fr_budget.agrege import credits_missions as module_credits_missions
 from fr_budget.agrege import depenses_fiscales as module_depenses_fiscales
 from fr_budget.apu import comptes_apu, depenses_par_fonction, libelles_cofog, ratio_pib
 from fr_budget.registres.verification import RACINE_DEPOT, Rapport, charger
@@ -197,9 +199,14 @@ def calcul_scenario(entree: ScenarioEntree) -> dict[str, Any] | None:
     données (un scénario partagé doit reproduire le même résultat). Rien n'est enregistré.
     """
     mesures = [module_scenario.Mesure(m.levier, m.valeur, m.annee) for m in entree.mesures]
-    # Le levier générique ne sert qu'au calcul du site : par l'API, une dépense fiscale est
-    # désignée par son numéro, ce qui permet de contrôler le double compte.
-    if any(m.levier == module_scenario.LEVIER_DEPENSE_FISCALE_UNITE for m in mesures):
+    # Les leviers génériques ne servent qu'au calcul du site : par l'API, une dépense fiscale
+    # est désignée par son numéro et une mission par son identifiant, ce qui permet de
+    # contrôler le double compte.
+    generiques = (
+        module_scenario.LEVIER_DEPENSE_FISCALE_UNITE,
+        module_scenario.LEVIER_CREDITS_UNITE,
+    )
+    if any(m.levier in generiques for m in mesures):
         return None
     try:
         lignes = module_scenario.scenario(mesures)
@@ -312,6 +319,32 @@ def catalogue_depenses_fiscales() -> dict[str, Any]:
     }
 
 
+def catalogue_credits_missions() -> dict[str, Any]:
+    """Missions du levier, avec leurs crédits 2026 et l'effet d'une hausse d'un pour cent.
+
+    ``rendement_pourcent`` : Md€ de l'année de référence (négatif : une hausse dégrade le
+    solde) ; le site traduit x % d'une mission en une valeur du levier générique
+    ``credits_missions`` égale à -x * rendement_pourcent.
+    """
+    return {
+        "source": "db_budget_vert_plf2026",
+        "annee_credits": module_credits_missions.ANNEE_CREDITS,
+        "unite_credits": "Md€",
+        "bornes": [-module_scenario.BORNE_CREDITS, module_scenario.BORNE_CREDITS],
+        "missions": [
+            {
+                "identifiant": m.identifiant,
+                "libelle": m.libelle,
+                "credits": m.credits / module_scenario.EUROS_PAR_MILLIARD,
+                "rendement_pourcent": module_scenario.rendement_unitaire(
+                    module_scenario.levier_credits_mission(m.identifiant)
+                ).central,
+            }
+            for m in module_credits_missions.missions()
+        ],
+    }
+
+
 def creer_application() -> FastAPI:
     # Règle 5 : aucune requête (et donc aucun paramètre saisi) dans les journaux.
     logging.getLogger("uvicorn.access").disabled = True
@@ -367,6 +400,11 @@ def creer_application() -> FastAPI:
     def route_depenses_fiscales() -> dict[str, Any]:
         """Dépenses fiscales proposées au levier : coût prévu pour 2026 et rendement d'1 %."""
         return catalogue_depenses_fiscales()
+
+    @app.get("/credits-missions")
+    def route_credits_missions() -> dict[str, Any]:
+        """Missions du levier : crédits demandés au PLF 2026 et effet d'une hausse d'1 %."""
+        return catalogue_credits_missions()
 
     @app.post("/scenario")
     def route_scenario(entree: ScenarioEntree) -> dict[str, Any]:

@@ -142,6 +142,42 @@ sources:
     acces: direct
     consulte_le: 2026-10-09
 
+  - id: db_budget_vert_plf2026
+    nom: PLF 2026 - Budget vert (crédits budgétaires, taxes affectées et dépenses fiscales par action, exécution 2024, LFI 2025 et PLF 2026)
+    editeur: Direction du Budget (data.economie.gouv.fr)
+    url: https://data.economie.gouv.fr/explore/dataset/plf-2026-budget-vert/
+    licence: Licence Ouverte 2.0
+    millesime: PLF 2026 (jeu modifié le 13 novembre 2025)
+    acces: direct
+    consulte_le: 2026-10-09
+
+  - id: dgfip_plrg_2023
+    nom: Projet de loi relatif aux résultats de la gestion et portant approbation des comptes de l'année 2023 (PLRG 2023), données en CSV
+    editeur: DGFiP (data.economie.gouv.fr)
+    url: https://data.economie.gouv.fr/explore/dataset/projet-de-loi-relatif-aux-resultats-de-la-gestion-et-portant-approbation-des-comptes-de-lannee-plrg-2023/
+    licence: Licence Ouverte 2.0
+    millesime: exercice 2023 (jeu modifié le 2025-05-22)
+    acces: direct
+    consulte_le: 2026-10-09
+
+  - id: dgfip_plrg_2024
+    nom: Projet de loi relatif aux résultats de la gestion et portant approbation des comptes de l'année 2024 (PLRG 2024), données en CSV
+    editeur: DGFiP (data.economie.gouv.fr)
+    url: https://data.economie.gouv.fr/explore/dataset/plrg-2024/
+    licence: Licence Ouverte 2.0
+    millesime: exercice 2024 (jeu modifié le 2024-04-17)
+    acces: direct
+    consulte_le: 2026-10-09
+
+  - id: dgfip_plrg_2025
+    nom: Projet de loi relatif aux résultats de la gestion et portant approbation des comptes de l'année 2025 (PLRG 2025), données en CSV
+    editeur: DGFiP (data.economie.gouv.fr)
+    url: https://data.economie.gouv.fr/explore/dataset/projet-de-loi-relatif-aux-resultats-de-la-gestion-et-portant-approbation-des-comptes-de-lannee-plrg-2025/
+    licence: Licence Ouverte 2.0
+    millesime: exercice 2025 (jeu modifié le 2024-04-17)
+    acces: direct
+    consulte_le: 2026-10-09
+
   - id: drees_comptes_sante_financement_2026
     nom: Les comptes de la santé - Répartition par financeur (édition 2026 du panorama des dépenses de santé)
     editeur: DREES (ministère chargé de la santé)

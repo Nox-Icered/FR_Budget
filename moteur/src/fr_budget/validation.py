@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from functools import partial
 
 from fr_budget.agrege.accises import recette_brute
+from fr_budget.agrege.credits_missions import total_execution
 from fr_budget.agrege.depenses_fiscales import cout_par_impot
 from fr_budget.agrege.impot_societes import is_brut
 from fr_budget.agrege.tva import estimer_point_tva, estimer_recette_totale
@@ -24,6 +25,7 @@ TOLERANCE_PUBLICATION = 0.10
 """Règle de publication d'un levier (CLAUDE.md) : ±10 % sur le rendement à 1 an."""
 
 MILLIONS_PAR_MILLIARD = 1000.0
+EUROS_PAR_MILLIARD = 1e9
 IMPOTS_DEPENSES_FISCALES = ("impot_revenu", "impot_revenu_et_societes", "impot_societes")
 TAUX_TVA = ("ensemble", "taux_2_1", "taux_5_5", "taux_10", "taux_20")
 
@@ -72,6 +74,11 @@ def _cout_total_prevu(plf: int, annee: int) -> float:
     return sum(cout_par_impot(plf, annee).values()) / MILLIONS_PAR_MILLIARD
 
 
+def _credits_votes(exercice: int) -> float:
+    """Crédits votés en LFI des missions du levier « crédits par mission », en Md€."""
+    return total_execution(exercice)[0] / EUROS_PAR_MILLIARD
+
+
 def _definitions() -> list[tuple[str, Callable[[], float]]]:
     definitions: list[tuple[str, Callable[[], float]]] = []
     for taux in TAUX_TVA:
@@ -101,6 +108,10 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
     definitions += [
         ("depenses_fiscales_ccomptes_total_2024_revise", partial(_cout_total_prevu, 2024, 2024)),
         ("depenses_fiscales_ccomptes_total_2023_definitif", partial(_cout_total_prevu, 2024, 2023)),
+    ]
+    definitions += [
+        (f"credits_missions_depenses_constatees_{exercice}", partial(_credits_votes, exercice))
+        for exercice in (2023, 2024, 2025)
     ]
     return definitions
 

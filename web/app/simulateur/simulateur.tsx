@@ -2,10 +2,16 @@
 // Simulateur : le calcul se fait dans le navigateur ; rien n'est envoyé ni enregistré.
 import { useId, useState } from "react";
 import { texte, nombre } from "../../lib/textes";
-import type { CatalogueDepensesFiscales, ReponsesUnitaires } from "../../lib/donnees";
+import type {
+  CatalogueCreditsMissions,
+  CatalogueDepensesFiscales,
+  ReponsesUnitaires,
+} from "../../lib/donnees";
 import { calculer } from "../../lib/scenario";
 import { mesuresDepensesFiscales } from "../../lib/depenses-fiscales";
 import { ReglagesDepensesFiscales } from "./depenses-fiscales";
+import { mesuresCreditsMissions } from "../../lib/credits-missions";
+import { ReglagesCreditsMissions } from "./credits-missions";
 import { GraphiqueDette } from "../baseline/graphique";
 
 // Ordre d'affichage et pas de réglage de chaque levier (en points ou en centimes par litre).
@@ -22,10 +28,12 @@ const ANNEES_AFFICHEES = [2027, 2030, 2035, 2040, 2046];
 export function Simulateur({
   donnees,
   catalogue,
+  missions,
   raccord,
 }: {
   donnees: ReponsesUnitaires;
   catalogue: CatalogueDepensesFiscales;
+  missions: CatalogueCreditsMissions;
   raccord: number;
 }) {
   const leviers = LEVIERS.filter((l) => l.id in donnees.leviers);
@@ -35,6 +43,7 @@ export function Simulateur({
   );
   const [parImpot, setParImpot] = useState<Record<string, number>>({});
   const [parDepense, setParDepense] = useState<Record<string, number>>({});
+  const [parMission, setParMission] = useState<Record<string, number>>({});
   const [annee, setAnnee] = useState(annees[0]);
   const idBase = useId();
   const lignes = calculer(
@@ -42,6 +51,7 @@ export function Simulateur({
     [
       ...leviers.map((l) => ({ levier: l.id, valeur: valeurs[l.id] })),
       ...mesuresDepensesFiscales(catalogue, parImpot, parDepense),
+      ...mesuresCreditsMissions(missions, parMission),
     ],
     annee,
   );
@@ -109,6 +119,12 @@ export function Simulateur({
         setParImpot={setParImpot}
         parDepense={parDepense}
         setParDepense={setParDepense}
+      />
+      <ReglagesCreditsMissions
+        catalogue={missions}
+        leviers={donnees.leviers}
+        reglages={parMission}
+        setReglages={setParMission}
       />
       <GraphiqueDette
         points={lignes.map((l) => ({ annee: l.annee, ...l.dette }))}

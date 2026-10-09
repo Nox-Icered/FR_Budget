@@ -24,6 +24,12 @@ Leviers disponibles :
   2025 par la croissance nominale 2026 du RESF 2027 (le rapport au PIB 2025 donne alors le
   rapport du coût 2026 au PIB 2026). ``depense_fiscale`` : unité générique (1 Md€ de 2025, plage
   d'une dépense), dont le site se sert pour une dépense choisie dans le catalogue.
+- ``credits_mission_<mission>`` : variation de x % des crédits de paiement d'une mission du
+  budget général (``fr_budget.agrege.credits_missions``), de -20 à +20 %. Effet d'un pour
+  cent : moins 1 % des crédits demandés au PLF 2026 (une hausse dégrade le solde), ramené en
+  euros de 2025 comme les dépenses fiscales ; 1 € de crédit compte pour 1 € de solde des
+  administrations publiques (option 3 (a) du 9 octobre 2026). ``credits_missions`` : unité
+  générique (hausse de 1 Md€ de 2025), dont le site se sert pour les missions réglées.
 
 Fourchettes : écart au scénario de référence, avec la plage du rendement du levier ; niveau
 de dette et de solde, avec la plage du levier et celle de la baseline, chacune seule.
@@ -35,7 +41,7 @@ from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, replace
 
 from fr_budget import baseline as module_baseline
-from fr_budget.agrege import accises, depenses_fiscales, impot_societes
+from fr_budget.agrege import accises, credits_missions, depenses_fiscales, impot_societes
 from fr_budget.agrege.tva import HYPOTHESE_REPARTITION, fourchette_point_tva, taux_tva
 from fr_budget.apu import comptes_apu, ratio_pib
 from fr_budget.baseline import ANNEE_FIN, AnneeBaseline, trajectoires
@@ -53,7 +59,14 @@ LEVIER_DEPENSE_FISCALE_UNITE = "depense_fiscale"
 PREFIXE_DEPENSE_FISCALE = "depense_fiscale_"
 PREFIXE_DEPENSES_FISCALES_IMPOT = "depenses_fiscales_"
 HYPOTHESE_ECART_DEPENSE = "depenses_fiscales_ecart_depense"
+LEVIER_CREDITS_UNITE = "credits_missions"
+PREFIXE_CREDITS_MISSION = "credits_mission_"
+HYPOTHESE_ECART_CREDITS = "credits_missions_ecart_execution"
+# Variation admise des crédits d'une mission, en % : choix du lot 2.5, à confirmer par le
+# mainteneur (aucune source ne borne une variation de crédits).
+BORNE_CREDITS = 20.0
 MILLIONS_PAR_MILLIARD = 1000.0
+EUROS_PAR_MILLIARD = 1e9
 ANNEE_REFERENCE = 2025
 # Premier exercice dont le budget n'est pas encore voté : celui du PLF 2027.
 ANNEE_PREMIERE_MESURE = 2027
@@ -94,11 +107,30 @@ def depense_du_levier(levier: str) -> depenses_fiscales.DepenseFiscale | None:
         return None
 
 
+def levier_credits_mission(ident: str) -> str:
+    """Identifiant du levier de variation des crédits d'une mission."""
+    return PREFIXE_CREDITS_MISSION + ident
+
+
+def mission_du_levier(levier: str) -> credits_missions.Mission | None:
+    """Mission visée par un levier ``credits_mission_<mission>`` ; ``None`` sinon."""
+    if not levier.startswith(PREFIXE_CREDITS_MISSION):
+        return None
+    try:
+        return credits_missions.mission(levier.removeprefix(PREFIXE_CREDITS_MISSION))
+    except ValueError:
+        return None
+
+
+ANNEE_MONTANTS_2026 = 2026
+if not depenses_fiscales.ANNEE_COUT_LEVIER == credits_missions.ANNEE_CREDITS == ANNEE_MONTANTS_2026:
+    msg = "les montants des leviers de dépenses fiscales et de crédits doivent être de 2026"
+    raise RuntimeError(msg)
+
+
 def _vers_euros_reference(montant_2026: float) -> float:
     """Montant de 2026 ramené en euros de 2025 par la croissance nominale 2026 (RESF 2027)."""
-    croissance = module_baseline.resf()[
-        (depenses_fiscales.ANNEE_COUT_LEVIER, "croissance_nominale")
-    ]
+    croissance = module_baseline.resf()[(ANNEE_MONTANTS_2026, "croissance_nominale")]
     return montant_2026 / (1 + croissance / POURCENT)
 
 
@@ -117,8 +149,15 @@ def rendement_unitaire(levier: str) -> Fourchette:
 
     TVA : point net au taux normal. Accises : un centime par litre (1 €/hl) sur l'assiette du
     levier (``fr_budget.agrege.accises.assiette_levier``), bornes de l'hypothèse des masses
-    volumiques. Dépenses fiscales : 1 % du coût 2026, plage de l'écart de prévision.
+    volumiques. Dépenses fiscales : 1 % du coût 2026, plage de l'écart de prévision. Crédits
+    d'une mission : moins 1 % des crédits 2026, plage de l'écart d'exécution.
     """
+    if levier == LEVIER_CREDITS_UNITE:
+        return _avec_plage(-1.0, HYPOTHESE_ECART_CREDITS)
+    mission = mission_du_levier(levier)
+    if mission is not None:
+        valeur = _vers_euros_reference(mission.credits / EUROS_PAR_MILLIARD / POURCENT)
+        return _avec_plage(-valeur, HYPOTHESE_ECART_CREDITS)
     if levier == LEVIER_DEPENSE_FISCALE_UNITE:
         return _avec_plage(1.0, HYPOTHESE_ECART_DEPENSE)
     if levier in LEVIERS_DEPENSES_FISCALES_IMPOT:
@@ -157,8 +196,14 @@ def taux_reference(levier: str) -> float:
 
     TVA : taux normal en %. Accises : tarif en centimes par litre du gazole, et du SP95-E10
     (essence la plus vendue en 2025 selon le SDES) pour les essences. Dépenses fiscales : coût
-    prévu pour 2026, en Md€ courants (unité générique : 0).
+    prévu pour 2026, en Md€ courants (unité générique : 0). Crédits d'une mission : crédits
+    demandés au PLF 2026, en Md€ courants (unité générique : 0).
     """
+    mission = mission_du_levier(levier)
+    if mission is not None:
+        return mission.credits / EUROS_PAR_MILLIARD
+    if levier == LEVIER_CREDITS_UNITE:
+        return 0.0
     if levier in LEVIERS_DEPENSES_FISCALES_IMPOT:
         impot = LEVIERS_DEPENSES_FISCALES_IMPOT[levier]
         return depenses_fiscales.cout_impot_levier(impot) / MILLIONS_PAR_MILLIARD
@@ -188,6 +233,12 @@ def bornes_levier(levier: str) -> tuple[float, float]:
     taux change et le chiffrage par point ne s'applique plus) ; la hausse admise est de même
     ampleur. Taux de l'année de référence, paramètres OpenFisca-France.
     """
+    if mission_du_levier(levier) is not None:
+        return -BORNE_CREDITS, BORNE_CREDITS
+    if levier == LEVIER_CREDITS_UNITE:
+        # Md€ de 2025 : la même variation appliquée à toutes les missions du levier.
+        total = _vers_euros_reference(credits_missions.total_credits() / EUROS_PAR_MILLIARD)
+        return -total * BORNE_CREDITS / POURCENT, total * BORNE_CREDITS / POURCENT
     if levier in LEVIERS_DEPENSES_FISCALES_IMPOT or depense_du_levier(levier) is not None:
         # Réduction en pourcentage du coût : de 0 (aucune) à 100 (suppression).
         return 0.0, POURCENT
@@ -299,6 +350,22 @@ def verifier_double_compte(mesures: Sequence[Mesure]) -> None:
     if len(set(leviers)) < len(leviers):
         msg = "double compte : un même impôt est visé par deux mesures"
         raise ValueError(msg)
+    _verifier_credits(mesures)
+
+
+def _verifier_credits(mesures: Sequence[Mesure]) -> None:
+    """Une mission au plus une fois ; le levier générique (somme des missions réglées sur le
+    site) au plus une fois par signe (hausses, baisses) et jamais avec une mission nommée."""
+    missions = [m for m in (mission_du_levier(x.levier) for x in mesures) if m is not None]
+    if len({m.identifiant for m in missions}) < len(missions):
+        msg = "double compte : une même mission est visée par deux mesures"
+        raise ValueError(msg)
+    generiques = [m.valeur for m in mesures if m.levier == LEVIER_CREDITS_UNITE]
+    hausses = sum(v > 0 for v in generiques)
+    baisses = sum(v < 0 for v in generiques)
+    if hausses > 1 or baisses > 1 or (generiques and missions):
+        msg = "double compte : le levier générique regroupe déjà les missions réglées"
+        raise ValueError(msg)
 
 
 def scenario(mesures: Sequence[Mesure]) -> list[AnneeScenario]:
@@ -353,6 +420,7 @@ LEVIERS_REGISTRE = {
     LEVIER_ACCISE_ESSENCES: "accises_energie",
     **dict.fromkeys(LEVIERS_DEPENSES_FISCALES_IMPOT, "depenses_fiscales"),
     LEVIER_DEPENSE_FISCALE_UNITE: "depenses_fiscales",
+    LEVIER_CREDITS_UNITE: "credits_missions",
 }
 
 
@@ -360,6 +428,8 @@ def levier_registre(levier: str) -> str | None:
     """Levier du registre dont dépend un levier de scénario ; ``None`` s'il est inconnu."""
     if depense_du_levier(levier) is not None:
         return "depenses_fiscales"
+    if mission_du_levier(levier) is not None:
+        return "credits_missions"
     return LEVIERS_REGISTRE.get(levier)
 
 
@@ -390,6 +460,13 @@ SOURCES_DEPENSES_FISCALES = (
     "plf2024_voies_et_moyens_tome2",
     "plf2027_resf",
 )
+SOURCES_CREDITS = (
+    "db_budget_vert_plf2026",
+    "dgfip_plrg_2023",
+    "dgfip_plrg_2024",
+    "dgfip_plrg_2025",
+    "plf2027_resf",
+)
 PROVENANCE_LEVIERS = {
     LEVIER_IS_TAUX_NORMAL: PROVENANCE_IS,
     LEVIER_IS_SURTAXE: PROVENANCE_IS,
@@ -410,12 +487,15 @@ PROVENANCE_LEVIERS = {
         for levier, impot in LEVIERS_DEPENSES_FISCALES_IMPOT.items()
     },
     LEVIER_DEPENSE_FISCALE_UNITE: (SOURCES_DEPENSES_FISCALES, (HYPOTHESE_ECART_DEPENSE,)),
+    LEVIER_CREDITS_UNITE: (SOURCES_CREDITS, (HYPOTHESE_ECART_CREDITS,)),
 }
 
 
 def _provenance_levier(levier: str) -> tuple[tuple[str, ...], tuple[str, ...]]:
     if depense_du_levier(levier) is not None:
         return PROVENANCE_LEVIERS[LEVIER_DEPENSE_FISCALE_UNITE]
+    if mission_du_levier(levier) is not None:
+        return PROVENANCE_LEVIERS[LEVIER_CREDITS_UNITE]
     if levier not in PROVENANCE_LEVIERS:
         msg = f"levier inconnu : {levier}"
         raise ValueError(msg)

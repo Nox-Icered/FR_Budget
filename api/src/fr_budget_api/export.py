@@ -17,6 +17,7 @@ from fr_budget.apu import depenses_par_fonction
 
 from fr_budget_api.app import (
     REGISTRES,
+    catalogue_credits_missions,
     catalogue_depenses_fiscales,
     depenses_fonctions,
     registre,
@@ -72,6 +73,7 @@ def exporter(dossier: Path) -> None:
     _ecrire(dossier, "validation.json", resume_validation())
     _ecrire(dossier, "baseline.json", serie_baseline())
     _ecrire(dossier, "depenses-fiscales.json", catalogue_depenses_fiscales())
+    _ecrire(dossier, "credits-missions.json", catalogue_credits_missions())
     # Fichier volumineux (réponses par levier, année d'entrée et trajectoire) : sans indentation.
     _ecrire(dossier, "scenario-unitaire.json", reponses_unitaires(), compact=True)
 

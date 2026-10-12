@@ -59,6 +59,22 @@ export type Chiffrage = {
   localisation: string;
   relecture: "a_relire" | "relu";
 };
+export type Relecture = {
+  id: string;
+  date: string;
+  relecteur: string;
+  objet: string[];
+  retour: string;
+  reponse: string;
+  lien?: string;
+};
+export type LigneJournal = {
+  date: string;
+  fiche: string;
+  titre: string;
+  changement: string;
+  tests: string;
+};
 export type Comparaison = {
   reference: string;
   modele: number;

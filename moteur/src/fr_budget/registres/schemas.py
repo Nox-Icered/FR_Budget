@@ -219,3 +219,17 @@ class Correction(Strict):
 class RegistreCorrections(Strict):
     openfisca_france_version: Texte
     corrections: list[Correction]
+
+
+class Relecture(Strict):
+    """Entité « review » : retour d'un relecteur externe, publié tel quel avec la réponse."""
+
+    id: Identifiant
+    date: date
+    relecteur: Texte
+    """Institution ou personne, avec son accord pour être nommée."""
+    objet: Annotated[list[Identifiant], Field(min_length=1)]
+    """Leviers ou modules relus (identifiants du registre des leviers ou des fiches)."""
+    retour: Texte
+    reponse: Texte
+    lien: Texte | None = None

@@ -164,6 +164,10 @@ Décision du 12 octobre 2026 : la phase 3 commence avant le franchissement de la
    - Choix (lot 3.4) : la page Comparer reçoit 2 à 3 liens du simulateur et affiche côte à côte l'écart de solde primaire, l'écart de dette et la dette, en fourchette ; son adresse porte les scénarios (`s1` à `s3`).
    - Exports : toutes les années, en points de PIB, valeurs basse, centrale et haute ; le JSON ajoute les réglages, le lien et la version complète. Séparateur `;` et point décimal dans le CSV.
 5. Pages Journal et Relectures ; mentions légales.
+   - Fait au lot 3.5 (choix à relire) :
+     - le journal est tiré des sections « Journal » des fiches (une seule source, rien à recopier) ;
+     - les relectures externes ont leur registre (`registres/relectures.yaml`, vide à ce jour), publié tel quel ; la page montre aussi combien de valeurs saisies restent « à relire » ;
+     - les mentions légales laissent l'éditeur et l'hébergeur « à compléter ». Ces informations ne peuvent pas être inventées : **à fournir par le mainteneur** avant la mise en ligne.
 6. Accessibilité (RGAA visé), mobile, cache des scénarios courants, hébergement.
 
 ## 7. Tests et CI

@@ -5,7 +5,7 @@ l'utilisateur ; chaque réponse chiffrée indique sa source (identifiant du regi
 unité. Le journal d'accès d'uvicorn (qui contiendrait les paramètres des requêtes) est
 désactivé par ``creer_application`` elle-même ; lancer avec ``python -m fr_budget_api.serveur``.
 
-Points d'entrée : ``/sante``, ``/version``, ``/registres/{nom}``, ``/comptes-apu``,
+Points d'entrée : ``/sante``, ``/version``, ``/journal``, ``/registres/{nom}``, ``/comptes-apu``,
 ``/depenses-par-fonction``, ``/validation``, ``/baseline``, ``/depenses-fiscales``,
 ``/credits-missions``,
 ``POST /scenario``.
@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import re
 from functools import cache
 from importlib.metadata import version
 from pathlib import Path
@@ -41,6 +42,7 @@ REGISTRES = {
     "hypotheses": "hypotheses",
     "leviers": "leviers",
     "chiffrages": "chiffrages",
+    "relectures": "relectures",
 }
 
 
@@ -124,6 +126,48 @@ def depenses_fonctions(annee: int, sous_secteur: str) -> dict[str, Any] | None:
 def registre(nom: str) -> list[dict[str, Any]] | None:
     """Contenu d'un registre ; ``None`` si le nom est inconnu."""
     return _registres()[nom] if nom in REGISTRES else None
+
+
+FICHES = RACINE_DEPOT / "docs" / "fiches"
+TITRE_FICHE = re.compile(r"^# Fiche : (.+)$", re.MULTILINE)
+SECTION_JOURNAL = re.compile(r"^## (?:\d+\. )?Journal$", re.MULTILINE)
+LIGNE_JOURNAL = re.compile(r"^\| (\d{4}-\d{2}-\d{2}) \| (.+?) \| (.+?) \|$")
+LIEN_MARKDOWN = re.compile(r"\[([^\]]+)\]\([^)]+\)")
+
+
+def _texte_brut(texte: str) -> str:
+    """Texte d'une cellule de tableau Markdown sans liens, code ni gras."""
+    return LIEN_MARKDOWN.sub(r"\1", texte).replace("`", "").replace("**", "")
+
+
+def journal() -> list[dict[str, str]]:
+    """Journal des modifications : lignes des sections « Journal » de toutes les fiches, des
+    plus récentes aux plus anciennes (la fiche reste la seule source du journal)."""
+    lignes = []
+    for fichier in sorted(FICHES.glob("*.md")):
+        if fichier.name.startswith("_"):
+            continue
+        contenu = fichier.read_text(encoding="utf-8")
+        titre = TITRE_FICHE.search(contenu)
+        section = SECTION_JOURNAL.search(contenu)
+        if titre is None or section is None:
+            continue
+        for ligne in contenu[section.end() :].splitlines():
+            if ligne.startswith("## "):
+                break
+            m = LIGNE_JOURNAL.match(ligne.strip())
+            if m:
+                lignes.append(
+                    {
+                        "date": m.group(1),
+                        "fiche": fichier.stem,
+                        "titre": titre.group(1),
+                        "changement": _texte_brut(m.group(2)),
+                        "tests": _texte_brut(m.group(3)),
+                    }
+                )
+    # Tri stable : à date égale, l'ordre des fiches puis celui des lignes est conservé.
+    return sorted(lignes, key=lambda x: x["date"], reverse=True)
 
 
 def version_donnees() -> dict[str, str]:
@@ -403,6 +447,11 @@ def creer_application() -> FastAPI:
     @app.get("/sante")
     def sante() -> dict[str, str]:
         return {"statut": "ok"}
+
+    @app.get("/journal")
+    def lire_journal() -> list[dict[str, str]]:
+        """Journal des modifications du modèle et des données."""
+        return journal()
 
     @app.get("/version")
     def route_version() -> dict[str, str]:

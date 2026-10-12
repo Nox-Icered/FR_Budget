@@ -12,7 +12,10 @@
     "validation": "Validation",
     "baseline": "Trajectoire sans réforme",
     "simulateur": "Simulateur",
-    "comparaison": "Comparer"
+    "comparaison": "Comparer",
+    "journal": "Journal",
+    "relectures": "Relectures",
+    "mentions": "Mentions légales"
   },
   "accueil": {
     "titre": "Les comptes des administrations publiques",
@@ -290,5 +293,39 @@
     "entete": "{nom} ({annee}, {croissance})",
     "avec_croissance": "avec effet sur l'activité",
     "sans_croissance": "sans effet sur l'activité"
+  },
+  "journal": {
+    "titre": "Journal des modifications",
+    "intro": "Chaque changement du modèle ou des données, avec les tests de validation qui ont bougé. Ce journal est tiré des fiches de chaque levier et module, dans le dépôt du projet.",
+    "date": "Date",
+    "fiche": "Fiche",
+    "changement": "Changement",
+    "tests": "Tests qui ont bougé"
+  },
+  "relectures": {
+    "titre": "Relectures",
+    "intro": "Les retours des relecteurs externes sont publiés ici tels quels, avec la réponse apportée.",
+    "aucune": "Aucune relecture externe n'a encore eu lieu. Les institutions sollicitées et le suivi des envois sont dans le fichier docs/relecteurs.md du dépôt.",
+    "objet": "Objet",
+    "retour": "Retour",
+    "reponse": "Réponse",
+    "lien": "Lien",
+    "valeurs_titre": "Relecture interne des valeurs saisies",
+    "valeurs": "Sur {total} valeurs de référence saisies à la main dans le registre, {relues} ont été relues par le responsable du projet et {a_relire} restent à relire.",
+    "leviers": "Leviers et modules : {valides} validés, {beta} en bêta, {non_publies} non publiés."
+  },
+  "mentions": {
+    "titre": "Mentions légales",
+    "editeur_titre": "Éditeur",
+    "editeur": "À compléter par le responsable du projet avant la mise en ligne : nom et moyen de contact.",
+    "hebergement_titre": "Hébergement",
+    "hebergement": "À compléter lors du choix de l'hébergeur.",
+    "code_titre": "Code source et licences",
+    "code": "Le code est publié sous licence AGPL-3.0 et les données produites par le projet sous Licence Ouverte 2.0. Chaque source garde sa licence d'origine, indiquée sur la page Sources.",
+    "depot": "Dépôt du projet",
+    "donnees_titre": "Données personnelles",
+    "donnees": "Le site ne demande aucun compte, ne dépose aucun cookie et ne mesure pas l'audience. Les calculs se font dans votre navigateur. Un lien partagé contient seulement les réglages du scénario et la version du modèle ; il n'est enregistré nulle part.",
+    "responsabilite_titre": "Portée des résultats",
+    "responsabilite": "Les résultats sont des estimations en fourchette, à partir de sources publiques citées. Ils ne constituent ni une prévision officielle, ni une recommandation. Les leviers marqués « bêta, non validé » n'ont pas franchi la règle de publication du projet (page Validation)."
   }
 }

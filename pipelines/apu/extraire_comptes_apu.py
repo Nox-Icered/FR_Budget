@@ -4,7 +4,8 @@ Source : INSEE, comptes nationaux annuels base 2020, édition 2025 (compte semi-
 APU du 28 août 2026). Voir registres/datasets.yaml :
 
 - tableaux 3.201 à 3.212 (dépenses et recettes par sous-secteur) : total des dépenses, total
-  des recettes, intérêts versés et reçus (D41), capacité ou besoin de financement (B9NF) ;
+  des recettes, intérêts versés et reçus (D41), capacité ou besoin de financement (B9NF),
+  rémunération des salariés (D1) et, dont, cotisations sociales imputées (D122) ;
 - tableau 3.101 : dette au sens de Maastricht par sous-secteur ;
 - tableau 3.106 : déficit au sens de Maastricht par sous-secteur ;
 - tableau 1.101 : produit intérieur brut (B1GQ).
@@ -40,6 +41,8 @@ LIGNES_DEPENSES_RECETTES = {
     "Total des dépenses": "depenses",
     "Total des recettes": "recettes",
     "Capacité (+) ou besoin (-) de financement (B9NF)": "capacite_financement",
+    "Rémunération des salariés (D1)": "remuneration_salaries",
+    "dont (a) - Cotisations sociales imputées (D122)": "cotisations_sociales_imputees",
 }
 LIBELLE_INTERETS = "Intérêts (D41)"
 """Première occurrence : intérêts versés (dépenses) ; seconde : intérêts reçus (recettes)."""

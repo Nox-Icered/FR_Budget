@@ -155,6 +155,14 @@
       "dotations_compensations": {
         "libelle": "Compensations fiscales versées aux collectivités ({reference} milliards d'euros dans le projet de loi de finances pour 2026)",
         "valeur": "{valeur} %"
+      },
+      "remunerations_point_indice": {
+        "libelle": "Valeur du point d'indice des trois fonctions publiques (masse salariale de {reference} milliards d'euros en {annee})",
+        "valeur": "{valeur} %"
+      },
+      "remunerations_effectifs": {
+        "libelle": "Effectifs des trois fonctions publiques (masse salariale de {reference} milliards d'euros en {annee})",
+        "valeur": "{valeur} %"
       }
     },
     "limite_tva_accise": "La hausse de l'accise augmente aussi la TVA payée sur le carburant : cet effet n'est pas compté.",
@@ -192,11 +200,15 @@
       "intro": "Faire varier de x % les crédits d'une mission change le solde de x % des crédits demandés pour {annee}. Les dotations aux collectivités, les pensions de l'État et la charge de la dette ne sont pas dans ces missions.",
       "liste": "Les {nombre} missions ({reglees} réglée(s))",
       "mission": "{mission} ({credits} milliards d'euros demandés pour {annee})",
-      "valeur": "{valeur} %"
+      "valeur": "{valeur} %",
+      "bloque": "Réglage impossible tant que le point d'indice ou les effectifs sont modifiés : les crédits des missions contiennent déjà les rémunérations de l'État."
     },
     "methode_credits_missions": "Crédits des missions : le changement de solde d'une variation de x % est x % des crédits de paiement demandés pour {annee} dans le projet de loi de finances, rapporté au PIB de la même année. La fourchette reprend les écarts constatés de 2023 à 2025 entre les crédits votés et les dépenses réellement faites.",
     "limite_credits_missions": "Un euro de crédit en moins compte pour un euro de solde en plus, même quand il finance un autre organisme public (université, opérateur, Sécurité sociale) qui pourrait ne pas réduire sa dépense. Les crédits de personnel restent dans chaque mission.",
     "methode_dotations": "Dotations aux collectivités : l'État et les collectivités font partie des administrations publiques. Baisser de 1 % la dotation globale de fonctionnement améliore le budget de l'État de {etat_dgf} milliard d'euros, mais le solde public de {apu_dgf} milliard seulement : le modèle retient la seule baisse de l'investissement des collectivités, estimée par la Caisse des dépôts sur 2001-2013. Le reste est financé par les collectivités (emprunt, impôts, autres dépenses).",
-    "limite_dotations": "La réaction des collectivités à une variation de leurs dotations est estimée sur des données anciennes (2001-2013) et sur l'investissement seul : elle n'est pas encore confrontée à une autre source."
+    "limite_dotations": "La réaction des collectivités à une variation de leurs dotations est estimée sur des données anciennes (2001-2013) et sur l'investissement seul : elle n'est pas encore confrontée à une autre source.",
+    "bloque_remunerations": "Réglage impossible tant que des crédits de missions sont modifiés : ces crédits contiennent déjà les rémunérations de l'État.",
+    "methode_remunerations": "Rémunérations publiques : augmenter de 1 % la valeur du point d'indice coûte {brut_point} milliards d'euros aux employeurs publics, mais {net_point} milliard au solde public, car les cotisations, la CSG et l'impôt payés sur cette hausse reviennent aux administrations publiques. Pour 1 % d'effectifs en plus : {brut_effectifs} milliards brut, {net_effectifs} milliards net.",
+    "limite_remunerations": "Le coût est estimé à partir de la masse salariale des administrations publiques et de la part du traitement indiciaire dans le salaire des fonctionnaires ; il s'écarte des chiffrages officiels par fonction publique (voir la page Validation). Une baisse des effectifs ne tient compte ni des allocations chômage ni des services rendus."
   }
 }

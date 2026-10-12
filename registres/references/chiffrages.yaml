@@ -903,3 +903,355 @@ chiffrages:
     localisation: Tableau des prélèvements au profit des collectivités, colonne « Exécution 2024 », pages 76 et 77 (fr_budget.agrege.dotations.montant_psr)
     saisi_le: 2026-10-09
     relecture: a_relire
+
+  - id: remunerations_tib_fpe_ensemble
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Traitement brut mensuel moyen en EQTP, ensemble des fonctionnaires (FPE)
+    valeur: 2894
+    unite: €
+    localisation: Figure 9, page 113, bloc « Ensemble », ligne « Traitement brut », colonne FPE
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_primes_fpe_ensemble
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement, mensuels moyens en EQTP, ensemble des fonctionnaires (FPE)
+    valeur: 951
+    unite: €
+    localisation: Figure 9, page 113, bloc « Ensemble », ligne « Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement », colonne FPE
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_tib_fpe_a
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Traitement brut mensuel moyen en EQTP, fonctionnaires de catégorie A (FPE)
+    valeur: 3244
+    unite: €
+    localisation: Figure 9, page 113, bloc « A », ligne « Traitement brut », colonne FPE
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_primes_fpe_a
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement, mensuels moyens en EQTP, fonctionnaires de catégorie A (FPE)
+    valeur: 915
+    unite: €
+    localisation: Figure 9, page 113, bloc « A », ligne « Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement », colonne FPE
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_tib_fpe_b
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Traitement brut mensuel moyen en EQTP, fonctionnaires de catégorie B (FPE)
+    valeur: 2212
+    unite: €
+    localisation: Figure 9, page 113, bloc « B », ligne « Traitement brut », colonne FPE
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_primes_fpe_b
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement, mensuels moyens en EQTP, fonctionnaires de catégorie B (FPE)
+    valeur: 1163
+    unite: €
+    localisation: Figure 9, page 113, bloc « B », ligne « Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement », colonne FPE
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_tib_fpe_c
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Traitement brut mensuel moyen en EQTP, fonctionnaires de catégorie C (FPE)
+    valeur: 1981
+    unite: €
+    localisation: Figure 9, page 113, bloc « C », ligne « Traitement brut », colonne FPE
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_primes_fpe_c
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement, mensuels moyens en EQTP, fonctionnaires de catégorie C (FPE)
+    valeur: 832
+    unite: €
+    localisation: Figure 9, page 113, bloc « C », ligne « Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement », colonne FPE
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_tib_fpt_ensemble
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Traitement brut mensuel moyen en EQTP, ensemble des fonctionnaires (FPT)
+    valeur: 2127
+    unite: €
+    localisation: Figure 9, page 113, bloc « Ensemble », ligne « Traitement brut », colonne FPT
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_primes_fpt_ensemble
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement, mensuels moyens en EQTP, ensemble des fonctionnaires (FPT)
+    valeur: 719
+    unite: €
+    localisation: Figure 9, page 113, bloc « Ensemble », ligne « Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement », colonne FPT
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_tib_fpt_a
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Traitement brut mensuel moyen en EQTP, fonctionnaires de catégorie A (FPT)
+    valeur: 3033
+    unite: €
+    localisation: Figure 9, page 113, bloc « A », ligne « Traitement brut », colonne FPT
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_primes_fpt_a
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement, mensuels moyens en EQTP, fonctionnaires de catégorie A (FPT)
+    valeur: 1291
+    unite: €
+    localisation: Figure 9, page 113, bloc « A », ligne « Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement », colonne FPT
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_tib_fpt_b
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Traitement brut mensuel moyen en EQTP, fonctionnaires de catégorie B (FPT)
+    valeur: 2235
+    unite: €
+    localisation: Figure 9, page 113, bloc « B », ligne « Traitement brut », colonne FPT
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_primes_fpt_b
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement, mensuels moyens en EQTP, fonctionnaires de catégorie B (FPT)
+    valeur: 825
+    unite: €
+    localisation: Figure 9, page 113, bloc « B », ligne « Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement », colonne FPT
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_tib_fpt_c
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Traitement brut mensuel moyen en EQTP, fonctionnaires de catégorie C (FPT)
+    valeur: 1944
+    unite: €
+    localisation: Figure 9, page 113, bloc « C », ligne « Traitement brut », colonne FPT
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_primes_fpt_c
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement, mensuels moyens en EQTP, fonctionnaires de catégorie C (FPT)
+    valeur: 595
+    unite: €
+    localisation: Figure 9, page 113, bloc « C », ligne « Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement », colonne FPT
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_tib_fph_ensemble
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Traitement brut mensuel moyen en EQTP, ensemble des fonctionnaires (FPH)
+    valeur: 2491
+    unite: €
+    localisation: Figure 9, page 113, bloc « Ensemble », ligne « Traitement brut », colonne FPH
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_primes_fph_ensemble
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement, mensuels moyens en EQTP, ensemble des fonctionnaires (FPH)
+    valeur: 765
+    unite: €
+    localisation: Figure 9, page 113, bloc « Ensemble », ligne « Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement », colonne FPH
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_tib_fph_a
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Traitement brut mensuel moyen en EQTP, fonctionnaires de catégorie A (FPH)
+    valeur: 2803
+    unite: €
+    localisation: Figure 9, page 113, bloc « A », ligne « Traitement brut », colonne FPH
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_primes_fph_a
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement, mensuels moyens en EQTP, fonctionnaires de catégorie A (FPH)
+    valeur: 931
+    unite: €
+    localisation: Figure 9, page 113, bloc « A », ligne « Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement », colonne FPH
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_tib_fph_b
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Traitement brut mensuel moyen en EQTP, fonctionnaires de catégorie B (FPH)
+    valeur: 2388
+    unite: €
+    localisation: Figure 9, page 113, bloc « B », ligne « Traitement brut », colonne FPH
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_primes_fph_b
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement, mensuels moyens en EQTP, fonctionnaires de catégorie B (FPH)
+    valeur: 726
+    unite: €
+    localisation: Figure 9, page 113, bloc « B », ligne « Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement », colonne FPH
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_tib_fph_c
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Traitement brut mensuel moyen en EQTP, fonctionnaires de catégorie C (FPH)
+    valeur: 2103
+    unite: €
+    localisation: Figure 9, page 113, bloc « C », ligne « Traitement brut », colonne FPH
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_primes_fph_c
+    levier: remunerations_publiques
+    source: dgafp_rapport_annuel_2025
+    millesime: "2023"
+    mesure: Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement, mensuels moyens en EQTP, fonctionnaires de catégorie C (FPH)
+    valeur: 533
+    unite: €
+    localisation: Figure 9, page 113, bloc « C », ligne « Primes et rémunérations annexes, indemnité de résidence et supplément familial de traitement », colonne FPH
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_point_3_5_fpe_2023
+    levier: remunerations_publiques
+    source: senat_avis_plf2024_fonction_publique
+    millesime: "2023 (année pleine)"
+    mesure: Coût de la revalorisation de 3,5 % du point d'indice pour la FPE en 2023, première année pleine (réponses du Gouvernement au questionnaire budgétaire)
+    valeur: 3.6
+    unite: Md€
+    localisation: Tableau « Coûts des dernières revalorisations du point d'indice », page 8, ligne « + 3,5 % », colonnes 2023, FPE
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_point_3_5_fpt_2023
+    levier: remunerations_publiques
+    source: senat_avis_plf2024_fonction_publique
+    millesime: "2023 (année pleine)"
+    mesure: Coût de la revalorisation de 3,5 % du point d'indice pour la FPT en 2023, première année pleine (réponses du Gouvernement au questionnaire budgétaire)
+    valeur: 2.4
+    unite: Md€
+    localisation: Tableau « Coûts des dernières revalorisations du point d'indice », page 8, ligne « + 3,5 % », colonnes 2023, FPT
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_point_3_5_fph_2023
+    levier: remunerations_publiques
+    source: senat_avis_plf2024_fonction_publique
+    millesime: "2023 (année pleine)"
+    mesure: Coût de la revalorisation de 3,5 % du point d'indice pour la FPH en 2023, première année pleine (réponses du Gouvernement au questionnaire budgétaire)
+    valeur: 1.6
+    unite: Md€
+    localisation: Tableau « Coûts des dernières revalorisations du point d'indice », page 8, ligne « + 3,5 % », colonnes 2023, FPH
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_point_3_5_total_2023
+    levier: remunerations_publiques
+    source: senat_avis_plf2024_fonction_publique
+    millesime: "2023 (année pleine)"
+    mesure: Coût de la revalorisation de 3,5 % du point d'indice en 2023, première année pleine (réponses du Gouvernement au questionnaire budgétaire)
+    valeur: 7.6
+    unite: Md€
+    localisation: Tableau « Coûts des dernières revalorisations du point d'indice », page 8, ligne « + 3,5 % », colonnes 2023, Total
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_point_1_5_fpe_2024
+    levier: remunerations_publiques
+    source: senat_avis_plf2024_fonction_publique
+    millesime: "2024 (année pleine)"
+    mesure: Coût de la revalorisation de 1,5 % du point d'indice pour la FPE en 2024, première année pleine (réponses du Gouvernement au questionnaire budgétaire)
+    valeur: 1.5
+    unite: Md€
+    localisation: Tableau « Coûts des dernières revalorisations du point d'indice », page 8, ligne « + 1,5 % », colonnes 2024, FPE
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_point_1_5_fpt_2024
+    levier: remunerations_publiques
+    source: senat_avis_plf2024_fonction_publique
+    millesime: "2024 (année pleine)"
+    mesure: Coût de la revalorisation de 1,5 % du point d'indice pour la FPT en 2024, première année pleine (réponses du Gouvernement au questionnaire budgétaire)
+    valeur: 0.9
+    unite: Md€
+    localisation: Tableau « Coûts des dernières revalorisations du point d'indice », page 8, ligne « + 1,5 % », colonnes 2024, FPT
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_point_1_5_fph_2024
+    levier: remunerations_publiques
+    source: senat_avis_plf2024_fonction_publique
+    millesime: "2024 (année pleine)"
+    mesure: Coût de la revalorisation de 1,5 % du point d'indice pour la FPH en 2024, première année pleine (réponses du Gouvernement au questionnaire budgétaire)
+    valeur: 0.71
+    unite: Md€
+    localisation: Tableau « Coûts des dernières revalorisations du point d'indice », page 8, ligne « + 1,5 % », colonnes 2024, FPH
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: remunerations_point_1_5_total_2024
+    levier: remunerations_publiques
+    source: senat_avis_plf2024_fonction_publique
+    millesime: "2024 (année pleine)"
+    mesure: Coût de la revalorisation de 1,5 % du point d'indice en 2024, première année pleine (réponses du Gouvernement au questionnaire budgétaire)
+    valeur: 3.2
+    unite: Md€
+    localisation: Tableau « Coûts des dernières revalorisations du point d'indice », page 8, ligne « + 1,5 % », colonnes 2024, Total
+    saisi_le: 2026-10-12
+    relecture: a_relire

@@ -14,11 +14,13 @@ export function ReglagesCreditsMissions({
   leviers,
   reglages,
   setReglages,
+  bloque,
 }: {
   catalogue: CatalogueCreditsMissions;
   leviers: ReponsesUnitaires["leviers"];
   reglages: Record<string, number>;
   setReglages: (v: Record<string, number>) => void;
+  bloque: boolean;
 }) {
   const idBase = useId();
   const statut = leviers.credits_missions?.statut;
@@ -33,6 +35,7 @@ export function ReglagesCreditsMissions({
         )}
       </legend>
       <p>{texte("simulateur.credits_missions.intro", { annee: catalogue.annee_credits })}</p>
+      {bloque && <p className="source">{texte("simulateur.credits_missions.bloque")}</p>}
       <details>
         <summary>
           {texte("simulateur.credits_missions.liste", {
@@ -63,6 +66,7 @@ export function ReglagesCreditsMissions({
                 max={Math.floor(haute / PAS) * PAS}
                 step={PAS}
                 value={valeur}
+                disabled={bloque}
                 onChange={(e) =>
                   setReglages({ ...reglages, [m.identifiant]: Number(e.target.value) })
                 }

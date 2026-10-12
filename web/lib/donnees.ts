@@ -98,6 +98,7 @@ export type ReponsesUnitaires = {
       effet_unitaire: number;
       taux_reference: number;
       effet_etat_unitaire?: number;
+      effet_brut_unitaire?: number;
       bornes: [number, number];
       reponses: Record<string, { unite_dette: number[][]; unite_solde: number[][] }>;
     }

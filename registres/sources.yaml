@@ -205,6 +205,24 @@ sources:
     acces: direct
     consulte_le: 2026-10-09
 
+  - id: dgafp_rapport_annuel_2025
+    nom: Rapport annuel sur l'état de la fonction publique, édition 2025 (Faits et chiffres, données 2023)
+    editeur: Direction générale de l'administration et de la fonction publique (DGAFP)
+    url: https://www.fonction-publique.gouv.fr/files/files/publications/rapport-annuel/ra_2025.pdf
+    licence: reproduction autorisée sous réserve de mentionner la source (mention de la DGAFP)
+    millesime: édition 2025 (publiée le 23 octobre 2025)
+    acces: direct
+    consulte_le: 2026-10-12
+
+  - id: senat_avis_plf2024_fonction_publique
+    nom: Avis n° 134 (2023-2024) sur le projet de loi de finances pour 2024, tome V, « Fonction publique », par Catherine Di Folco, commission des lois du Sénat
+    editeur: Sénat
+    url: https://www.senat.fr/rap/a23-134-5/a23-134-51.pdf
+    licence: document parlementaire public
+    millesime: 23 novembre 2023
+    acces: direct
+    consulte_le: 2026-10-12
+
   - id: drees_comptes_sante_financement_2026
     nom: Les comptes de la santé - Répartition par financeur (édition 2026 du panorama des dépenses de santé)
     editeur: DREES (ministère chargé de la santé)

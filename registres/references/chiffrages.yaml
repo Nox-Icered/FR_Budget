@@ -1673,3 +1673,47 @@ chiffrages:
     localisation: Fiche 1.3, tableau 4 « Taux de CSG par risque et par assiette », bloc « Total », page 57, ligne « Sur revenus du capital », colonne 2024
     saisi_le: 2026-10-12
     relecture: a_relire
+
+  - id: csg_valeur_point_activite_2025
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2025"
+    mesure: Valeur d'un point de CSG sur les revenus d'activité
+    valeur: 12030
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 6 « Valeur de point de la CSG par assiette », page 57, ligne « Activité », colonne 2025
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_valeur_point_activite_2027
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2027 (prévision)"
+    mesure: Valeur d'un point de CSG sur les revenus d'activité (prévision)
+    valeur: 12160
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 6 « Valeur de point de la CSG par assiette », page 57, ligne « Activité », colonne 2027 (p)
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_valeur_point_capital_2025
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2025"
+    mesure: Valeur d'un point de CSG sur les revenus du capital
+    valeur: 1910
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 6 « Valeur de point de la CSG par assiette », page 57, ligne « Capital », colonne 2025
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_valeur_point_capital_2027
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2027 (prévision)"
+    mesure: Valeur d'un point de CSG sur les revenus du capital (prévision)
+    valeur: 1960
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 6 « Valeur de point de la CSG par assiette », page 57, ligne « Capital », colonne 2027 (p)
+    saisi_le: 2026-10-12
+    relecture: a_relire

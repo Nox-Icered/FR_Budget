@@ -46,7 +46,7 @@ Repère pour les bornes : la hausse de 1,7 point de la LFSS 2018.
 | `senat_rapport_plfss2026_tome1_pdf` | rendement du passage de 9,2 % à 10,6 % de la CSG sur le capital | 15 novembre 2025 |
 | `drees_eir2020_distribution_pensions_xlsx` | distribution des pensions (part du taux plein) | fin 2020 |
 
-Les 30 valeurs saisies dans `registres/references/chiffrages.yaml` sont à relire.
+Les 34 valeurs saisies dans `registres/references/chiffrages.yaml` sont à relire.
 
 ## 5. Choix faits en autonomie, et leurs limites
 
@@ -75,8 +75,13 @@ Le modèle applique la hausse à l'assiette de l'année précédente (rendement 
 | +1,7 point, revenus du capital | CCSS 2018 | 2,10 Md€ | 2,31 Md€ | **+10,2 %** | non |
 | +1,4 point, revenus du capital | Sénat, PLFSS 2026 | 2,80 Md€ | 2,73 Md€ | -2,5 % | oui |
 | CSG sur les retraites au taux plein en 2017 (contrôle de la part calculée) | CCSS 2018 | 15 780 M€ | 16 349 M€ | +3,6 % | oui |
+| Valeur d'un point, activité, 2025 | CCSS 2026, tableau 6 | 12 030 M€ | 12 029 M€ | -0,0 % | oui |
+| Valeur d'un point, activité, 2027 (prévision) | CCSS 2026, tableau 6 | 12 160 M€ | 12 613 M€ | +3,7 % | oui |
+| Valeur d'un point, capital, 2025 | CCSS 2026, tableau 6 | 1 910 M€ | 1 912 M€ | +0,1 % | oui |
+| Valeur d'un point, capital, 2027 (prévision) | CCSS 2026, tableau 6 | 1 960 M€ | 2 005 M€ | +2,3 % | oui |
 
 Lecture :
+- Les valeurs de point de 2025 sont calculées par la DSS comme le modèle, à partir des mêmes rendements : leur accord est attendu et ne valide que l'arithmétique. Celles de 2027 testent le maintien en part du PIB, qui surestime l'activité (la réforme des indépendants réduit l'assiette). La CCSS donne aussi un point de « remplacement » (3 900 M€ en 2025), sur tous les revenus de remplacement et à tous les taux : il n'est pas comparable au curseur des retraites au taux plein.
 - Deux millésimes (2018 et 2026) sont couverts pour le capital ; un seul pour l'activité et les retraites.
 - Pour le capital en 2018, une explication possible, non vérifiée : une partie des revenus du patrimoine de 2017 a été taxée en 2018 à l'ancien taux.
 - La CCSS d'octobre 2026 chiffre à 1,2 Md€ l'effet en 2026 de la hausse finalement votée. Cette hausse est limitée à « la plupart » des revenus du capital (contribution financière pour l'autonomie de 1,4 %), et le chiffrage porte sur le seul champ des régimes de base. Il n'est pas comparable et n'est pas retenu.
@@ -93,4 +98,5 @@ Aucune source indépendante n'est confrontée (Cour des comptes, IPP, OFCE). Le 
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-12 | Ajout des valeurs de point officielles de la CCSS 2026 (activité et capital, 2025 et 2027) | 4 nouvelles références, toutes dans la tolérance ; tableau : 44 sur 59 |
 | 2026-10-12 | Création du levier | 5 nouvelles références de validation, 4 dans la tolérance ; tableau : 40 sur 55 (avec le lot 2.8) |

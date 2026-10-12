@@ -145,3 +145,9 @@ def rendement_un_point(assiette: str) -> Fourchette:
         for p in parts
     ]
     return encadrer(central, variantes)
+
+
+def valeur_point(assiette: str, annee: int) -> float:
+    """Valeur centrale d'un point en ``annee``, en Md€ courants (validation) : rendement d'un
+    point de 2025 tenu constant en part du PIB nominal."""
+    return rendement_un_point(assiette).central * facteur_pib(annee) / facteur_pib(ANNEE_REFERENCE)

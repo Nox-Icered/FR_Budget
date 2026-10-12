@@ -15,7 +15,14 @@ from functools import partial
 
 from fr_budget.agrege.accises import recette_brute
 from fr_budget.agrege.credits_missions import total_execution
-from fr_budget.agrege.csg import ACTIVITE, CAPITAL, RETRAITES, hausse_mesuree, rendement_taux_plein
+from fr_budget.agrege.csg import (
+    ACTIVITE,
+    CAPITAL,
+    RETRAITES,
+    hausse_mesuree,
+    rendement_taux_plein,
+    valeur_point,
+)
 from fr_budget.agrege.depenses_fiscales import cout_par_impot
 from fr_budget.agrege.dotations import COMPENSATIONS, DGF, execution
 from fr_budget.agrege.impot_societes import is_brut
@@ -113,6 +120,10 @@ def _csg_millions(assiette: str, points: float, annee: int) -> float:
     return hausse_mesuree(assiette, points, annee) * MILLIONS_PAR_MILLIARD
 
 
+def _csg_point_millions(assiette: str, annee: int) -> float:
+    return valeur_point(assiette, annee) * MILLIONS_PAR_MILLIARD
+
+
 def _csg_taux_plein_millions(annee: int) -> float:
     return rendement_taux_plein(annee) * MILLIONS_PAR_MILLIARD
 
@@ -178,6 +189,11 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         ("csg_hausse_1_7_2018_capital", partial(hausse_mesuree, CAPITAL, 1.7, 2018)),
         ("csg_hausse_capital_1_4_2026", partial(hausse_mesuree, CAPITAL, 1.4, 2026)),
         ("csg_rendement_retraites_taux_plein_2017", partial(_csg_taux_plein_millions, 2017)),
+    ]
+    definitions += [
+        (f"csg_valeur_point_{assiette}_{annee}", partial(_csg_point_millions, assiette, annee))
+        for assiette in (ACTIVITE, CAPITAL)
+        for annee in (2025, 2027)
     ]
     return definitions
 

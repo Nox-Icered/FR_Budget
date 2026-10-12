@@ -73,6 +73,9 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
         "csg_hausse_capital_1_4_2026",
         "csg_rendement_retraites_taux_plein_2017",
     }
+    attendues |= {
+        f"csg_valeur_point_{a}_{y}" for a in ("activite", "capital") for y in (2025, 2027)
+    }
     attendues = {a for a in attendues if not a.endswith("_") and "{" not in a}
     assert {r for r, _ in _definitions()} == attendues
 

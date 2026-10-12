@@ -23,7 +23,7 @@ Que changent pour le solde et la dette une hausse (ou une baisse) de x % de la v
 | Valeur du point d'indice | gelée depuis juillet 2023 | de -5 à +5 %, par pas de 0,5 | décret n° 2023-519 |
 | Effectifs des trois fonctions publiques | masse de 317,6 Md€ en 2025 (D1 - D122) | de -5 à +5 %, par pas de 0,5 | `insee_comptes_nationaux_2025` |
 
-La borne de ±5 % vaut pour les deux curseurs ; pour les effectifs, c'est un choix du lot à confirmer. Ces curseurs ne peuvent pas être combinés avec les crédits des missions, qui contiennent les rémunérations de l'État : le moteur refuse la combinaison, et le site bloque l'un quand l'autre est réglé.
+La borne de ±5 % vaut pour les deux curseurs ; elle a été confirmée par le mainteneur pour les effectifs le 12 octobre 2026. Ces curseurs ne peuvent pas être combinés avec les crédits des missions, qui contiennent les rémunérations de l'État : le moteur refuse la combinaison, et le site bloque l'un quand l'autre est réglé.
 
 ## 3. Méthode de calcul
 

@@ -123,23 +123,25 @@ def rendement_officiel_un_pourcent() -> float:
 def rendement_un_pourcent() -> Fourchette:
     """Rendement d'une revalorisation des seuils inférieure de 1 %, en Md€ de 2025.
 
-    Montants des revenus 2024, tenus constants en part du PIB nominal. Valeur centrale :
-    sensibilité officielle ; borne basse : calcul par décile.
+    Valeur centrale : sensibilité officielle, rendement de 2025 ; borne basse : calcul par
+    décile sur les revenus 2024, tenu constant en part du PIB nominal.
     """
+    # Le chiffrage du PLF 2025 est déjà un rendement de 2025 (avis d'imposition des revenus
+    # 2024 et prélèvement à la source) ; seul le calcul structurel, sur les montants des
+    # revenus 2024, est porté en 2025.
     vers_2025 = facteur_pib(ANNEE_REFERENCE) / facteur_pib(ANNEE_REVENUS)
     return encadrer(
-        rendement_officiel_un_pourcent() * vers_2025,
+        rendement_officiel_un_pourcent(),
         [rendement_structurel_un_pourcent() * vers_2025],
     )
 
 
 def rendement_gel(inflation: float, annee: int) -> float:
     """Rendement en ``annee`` d'un gel du barème quand l'inflation retenue vaut ``inflation``
-    (en %), en Md€ (validation). Revenus de ``annee - 1``, tenus constants en part du PIB."""
-    revenus = annee - 1
+    (en %), en Md€ (validation). Rendement de 2025 tenu constant en part du PIB nominal."""
     return (
         inflation
         * rendement_officiel_un_pourcent()
-        * facteur_pib(revenus)
-        / facteur_pib(ANNEE_REVENUS)
+        * facteur_pib(annee)
+        / facteur_pib(ANNEE_REFERENCE)
     )

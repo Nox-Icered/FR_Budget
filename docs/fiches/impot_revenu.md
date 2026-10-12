@@ -23,12 +23,12 @@ Repères : le gel de 2026 proposé par le PLF 2026 (-1,0 %) ; l'indexation de 4,
 ## 3. Méthode de calcul
 
 - Moteur : agrégé, barème d'OpenFisca (`moteur/src/fr_budget/agrege/impot_revenu.py`, levier dans `scenario.py`).
-- **Valeur centrale.** La sensibilité vient de l'évaluation préalable de l'article 2 du PLF 2025 : l'absence d'indexation de 2 % aurait majoré l'impôt d'environ 3,7 Md€ en 2025, soit 1,85 Md€ pour 1 % (revenus de 2024). Tenue constante en part du PIB et ramenée en euros de 2025, elle donne **1,89 Md€**.
+- **Valeur centrale.** La sensibilité vient de l'évaluation préalable de l'article 2 du PLF 2025 : l'absence d'indexation de 2 % aurait majoré l'impôt d'environ 3,7 Md€ en 2025, soit 1,85 Md€ pour 1 % (revenus de 2024). C'est déjà un rendement de 2025 (avis d'imposition et prélèvement à la source) : **1,85 Md€**, sans conversion (correction après la revue de la PR).
 - **Borne basse.** Elle vient d'un calcul structurel à partir de DGFiP Statistiques n° 41, tableau 2, revenus 2024, qui donne l'impôt au barème et le RFR par part par décile, avec le dernier dixième découpé en centième et millième.
   - Pour un foyer dont le quotient q est dans la tranche k, relever les seuils de i réduit l'impôt d'une part de i × (q × t_k − τ(q)), où τ(q) est l'impôt d'une part.
   - Ce rapport est appliqué à l'impôt au barème de chaque segment, avec le RFR par part moyen comme quotient. Le barème des revenus de 2024 vient d'OpenFisca (seuils de 11 497, 29 315, 83 823 et 180 294 €).
   - Résultat : **1,09 Md€** pour 1 %. Ce calcul ignore la décote, les plafonds du quotient familial et l'entrée de foyers dans l'impôt au sein d'un décile : il sous-estime l'effet de 42 % par rapport à la sensibilité officielle.
-- **Effet dans le scénario** : un relèvement de 1 % de plus coûte de 1,09 à 1,89 Md€. Le montant est rapporté au PIB 2025 et tenu constant en points de PIB.
+- **Effet dans le scénario** : un relèvement de 1 % de plus coûte de 1,09 à 1,85 Md€. Le montant est rapporté au PIB 2025 et tenu constant en points de PIB.
 
 ## 4. Données
 
@@ -56,7 +56,7 @@ Test : `moteur/tests/validation/test_levier_impot_revenu.py`. Tolérance : ±10 
 
 | Référence | Millésime | Référence | Modèle | Écart | Dans la tolérance |
 |-----------|-----------|----------:|-------:|------:|-------------------|
-| Gel du barème de 2026 (1,0 %) | PLF 2026 (rapport général du Sénat) | 1,90 Md€ | 1,89 Md€ | -0,8 % | oui |
+| Gel du barème de 2026 (1,0 %) | PLF 2026 (rapport général du Sénat) | 1,90 Md€ | 1,89 Md€ | -0,7 % | oui |
 
 Lecture :
 - Le chiffrage du PLF 2025 sert au calage ; il n'est pas compté en validation.
@@ -68,4 +68,5 @@ Lecture :
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-12 | Revue de la PR : le chiffrage du PLF 2025, déjà en euros de 2025, n'est plus converti une seconde fois | gel de 2026 : -0,8 % → -0,7 % |
 | 2026-10-12 | Création du levier | 1 nouvelle référence de validation, dans la tolérance ; tableau : 49 sur 64 |

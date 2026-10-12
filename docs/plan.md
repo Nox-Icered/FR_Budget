@@ -150,6 +150,8 @@ Décision du 12 octobre 2026 : la phase 3 commence avant le franchissement de la
 
 1. Module retraites : modèle de cohortes calé sur les projections du COR, démographie INSEE, validation contre les variantes publiées par le COR.
 2. Interrupteur de croissance : multiplicateur par instrument et décroissant dans le temps, valeurs et plages sourcées, désactivé par défaut, effet retour par l'élasticité des prélèvements.
+   - Fait au lot 3.2 (choix à relire, `docs/fiches/croissance.md`) : modèle simple de l'OFCE (Policy brief n° 146) ; multiplicateur central tiré de Mésange 2017 (Insee et DG Trésor), plage jusqu'aux valeurs de l'OFCE ; persistance 0,7 et effet sur le solde 0,5, sans plage (une seule source).
+   - Conséquences : effet transitoire, sans effets d'offre de long terme ; résultat central plutôt bas dans la plage des multiplicateurs ; données du site environ 2,7 fois plus lourdes.
 3. Scénarios partagés : PostgreSQL, identifiant court, version du modèle et des données enregistrées avec le scénario.
    - Choix fait en autonomie (lot 3.3, à relire) : **pas de PostgreSQL**. Le scénario tient entièrement dans l'adresse de la page (paramètres `a`, `v`, `l`, `i`, `d`, `m`, `web/lib/etat.ts`) et le calcul se refait dans le navigateur.
    - Conséquences : aucun scénario n'est stocké sur un serveur, le site reste statique et sans état (pas de base à héberger ni à sauvegarder) ; en contrepartie le lien est long et n'a pas d'identifiant court.

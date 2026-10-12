@@ -96,3 +96,5 @@ th.groupe {
 .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0; }
 .actions button { min-height: 44px; padding: 0 12px; }
 .reglage input[type="url"] { min-height: 44px; width: 100%; }
+.interrupteur { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
+.interrupteur input { width: 24px; height: 24px; }

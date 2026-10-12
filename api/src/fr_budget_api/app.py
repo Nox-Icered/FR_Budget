@@ -22,6 +22,7 @@ from typing import Any
 
 from fastapi import FastAPI, HTTPException
 from fr_budget import baseline as module_baseline
+from fr_budget import croissance as module_croissance
 from fr_budget import scenario as module_scenario
 from fr_budget.agrege import credits_missions as module_credits_missions
 from fr_budget.agrege import depenses_fiscales as module_depenses_fiscales
@@ -184,6 +185,8 @@ class MesureEntree(BaseModel):
 
 class ScenarioEntree(BaseModel):
     mesures: list[MesureEntree] = Field(default_factory=list)
+    croissance: bool = False
+    """Effet de croissance (multiplicateur), désactivé par défaut (``fr_budget.croissance``)."""
 
 
 def _statut_levier(levier: str) -> str:
@@ -209,8 +212,14 @@ def calcul_scenario(entree: ScenarioEntree) -> dict[str, Any] | None:
     if any(m.levier in generiques for m in mesures):
         return None
     try:
-        lignes = module_scenario.scenario(mesures)
+        lignes = module_scenario.scenario(mesures, croissance=entree.croissance)
         sources, hypotheses = module_scenario.provenance(m.levier for m in mesures)
+        if entree.croissance:
+            s_cr, h_cr = module_croissance.provenance(
+                module_scenario.categorie_croissance(m.levier) for m in mesures
+            )
+            sources += [x for x in s_cr if x not in sources]
+            hypotheses += [x for x in h_cr if x not in hypotheses]
     except ValueError:
         return None
     return {
@@ -219,6 +228,7 @@ def calcul_scenario(entree: ScenarioEntree) -> dict[str, Any] | None:
         "hypotheses": hypotheses,
         "version": version_donnees(),
         "mesures": [m.model_dump() for m in entree.mesures],
+        "croissance": entree.croissance,
         "statuts": {m.levier: _statut_levier(m.levier) for m in entree.mesures},
         "valeurs": [
             {
@@ -252,11 +262,14 @@ def reponses_unitaires() -> dict[str, Any]:
             reponses[str(annee)] = {
                 "unite_dette": _arrondir(r.unite_dette),
                 "unite_solde": _arrondir(r.unite_solde),
+                "croissance_dette": _arrondir(r.croissance_dette),
+                "croissance_solde": _arrondir(r.croissance_solde),
             }
         effet = module_scenario.effet_solde(
             module_scenario.Mesure(levier, 1.0, module_scenario.ANNEE_PREMIERE_MESURE)
         )
         sources, hypotheses = module_scenario.provenance([levier])
+        categorie = module_scenario.categorie_croissance(levier)
         leviers[levier] = {
             "sources": sources,
             "hypotheses": hypotheses,
@@ -277,6 +290,7 @@ def reponses_unitaires() -> dict[str, Any]:
                 else {}
             ),
             "bornes": [basse, haute],
+            "multiplicateur": _fourchette(module_croissance.multiplicateur(categorie)),
             "reponses": reponses,
         }
     r = module_scenario.reponse_lineaire(
@@ -289,6 +303,17 @@ def reponses_unitaires() -> dict[str, Any]:
         "base_dette": r.base_dette,
         "base_solde": r.base_solde,
         "indices_effet": r.indices_effet,
+        "croissance": {
+            **dict(
+                zip(
+                    ("sources", "hypotheses"),
+                    module_croissance.provenance(module_croissance.CATEGORIES),
+                    strict=True,
+                )
+            ),
+            "persistance": module_croissance.persistance(),
+            "effet_solde": module_croissance.effet_sur_le_solde(),
+        },
         "leviers": leviers,
     }
 

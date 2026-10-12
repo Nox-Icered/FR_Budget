@@ -124,7 +124,7 @@
     "methode_titre": "Méthode",
     "methode": "Un point de taux normal de TVA rapporte {rendement_tva} milliards d'euros en 2025, une fois retirée la TVA payée par les administrations elles-mêmes. Un centime par litre rapporte {rendement_gazole} milliard d'euros sur le gazole, une fois retirés les volumes remboursés aux transporteurs routiers, au transport collectif et aux taxis, et {rendement_essences} milliard d'euros sur les essences. Un point de taux normal de l'impôt sur les sociétés rapporte {rendement_is} milliards d'euros, et un point de surtaxe sur l'impôt des grandes entreprises {rendement_surtaxe} milliard d'euros (bénéfices 2025). Ces montants sont tenus constants en part du PIB. La dette est recalculée chaque année avec les mêmes hypothèses que la trajectoire sans réforme ; une dette plus faible porte moins d'intérêts.",
     "limite_comportement": "Les achats ne changent pas avec les prix : aucun effet de comportement n'est pris en compte.",
-    "limite_croissance": "La mesure n'a pas d'effet sur la croissance ni sur les prix.",
+    "limite_croissance": "Sans la case « effet sur l'activité », la mesure n'a pas d'effet sur la croissance. Elle n'en a jamais sur les prix.",
     "limite_fourchette": "Les fourchettes des chiffrages sont étroites : elles ne couvrent pas toute l'erreur des modèles, publiée sur la page Validation.",
     "lien_validation": "Voir les écarts du modèle aux chiffrages officiels",
     "mesures": "Mesures (elles s'additionnent)",
@@ -254,7 +254,11 @@
     "limite_cotisations": "La hausse de taux est supposée hors du champ des allègements généraux : sinon, une partie serait annulée par la hausse des allègements sur les bas salaires. Le rendement ne déduit pas la baisse de l'impôt sur les sociétés due à des charges plus élevées, ni l'effet sur l'emploi et les salaires.",
     "methode_ir": "Impôt sur le revenu : chaque année, les seuils du barème sont en général relevés comme l'inflation. Les relever de 1 % de moins rapporte {rendement} milliards d'euros, d'après le chiffrage de l'administration pour le projet de loi de finances pour 2025 ; un calcul à partir des statistiques de l'impôt par décile donne un montant plus faible, retenu comme borne basse.",
     "limite_ir": "Le rendement repose sur un seul chiffrage de l'administration, confirmé par celui du gel de 2026. Il ne tient pas compte des changements de comportement, ni des seuils sociaux et locaux qui suivent le barème.",
-    "limite_remunerations": "Le coût est estimé à partir de la masse salariale des administrations publiques et de la part du traitement indiciaire dans le salaire des fonctionnaires ; il s'écarte des chiffrages officiels par fonction publique (voir la page Validation). Une baisse des effectifs ne tient compte ni des allocations chômage ni des services rendus."
+    "limite_remunerations": "Le coût est estimé à partir de la masse salariale des administrations publiques et de la part du traitement indiciaire dans le salaire des fonctionnaires ; il s'écarte des chiffrages officiels par fonction publique (voir la page Validation). Une baisse des effectifs ne tient compte ni des allocations chômage ni des services rendus.",
+    "croissance": "Inclure l'effet de la mesure sur l'activité (multiplicateur)",
+    "croissance_aide": "Désactivé par défaut. Une hausse d'impôt ou une baisse de dépense ralentit l'activité pendant quelques années, ce qui réduit les recettes et pèse sur le ratio de dette ; une baisse d'impôt ou une hausse de dépense fait l'inverse. Voir la méthode plus bas.",
+    "methode_croissance": "Effet sur l'activité (si la case est cochée) : la mesure crée un écart de production égal à son effet sur le solde multiplié par un multiplicateur propre à l'instrument ; chaque année, {persistance} % de cet écart subsiste. Chaque point d'écart réduit le solde de {alpha} point et modifie le PIB qui sert de dénominateur à la dette. Les multiplicateurs à un an viennent du modèle Mésange de l'Insee et de la DG Trésor (2017) et de l'OFCE (2025) : de {tva_bas} à {tva_haut} pour la TVA, de {depenses_bas} à {depenses_haut} pour les crédits des missions.",
+    "limite_croissance_module": "L'effet sur l'activité est un modèle simplifié : il ne tient compte ni de la politique monétaire, ni des effets d'offre de long terme (emploi, capital), ni de l'état de la conjoncture. La vitesse de résorption et l'effet sur le solde n'ont qu'une source, sans plage."
   },
   "partage": {
     "scenario": "Scénario",
@@ -276,6 +280,9 @@
     "nom": "Scénario {numero}",
     "exemple": "Lien copié depuis le simulateur",
     "ouvrir": "Ouvrir dans le simulateur",
-    "deux_au_moins": "Collez au moins deux liens valides pour afficher la comparaison."
+    "deux_au_moins": "Collez au moins deux liens valides pour afficher la comparaison.",
+    "entete": "{nom} ({annee}, {croissance})",
+    "avec_croissance": "avec effet sur l'activité",
+    "sans_croissance": "sans effet sur l'activité"
   }
 }

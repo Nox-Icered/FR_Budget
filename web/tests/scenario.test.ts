@@ -79,3 +79,51 @@ test("mesures de signes opposés : bornes combinées comme dans le moteur", () =
   assert.ok(Math.abs(l.ecart_solde_primaire.bas + 0.2) < 1e-12);
   assert.ok(Math.abs(l.ecart_solde_primaire.haut - 0.2) < 1e-12);
 });
+
+// Croissance : supplément de 0,5 point de dette par unité et par point de multiplicateur sur
+// toutes les trajectoires ; multiplicateur 0,4 (bas 0,2, haut 0,6).
+const avecCroissance: ReponsesUnitaires = {
+  ...donnees,
+  leviers: {
+    l: {
+      ...donnees.leviers.l,
+      multiplicateur: { bas: 0.2, central: 0.4, haut: 0.6 },
+      reponses: {
+        "2027": {
+          ...donnees.leviers.l.reponses["2027"],
+          croissance_dette: [
+            [0, 0.5],
+            [0, 0.5],
+            [0, 0.5],
+            [0, 0.5],
+          ],
+          croissance_solde: [
+            [0, -0.2],
+            [0, -0.2],
+            [0, -0.2],
+            [0, -0.2],
+          ],
+        },
+      },
+    },
+  },
+};
+
+test("croissance désactivée par défaut", () => {
+  assert.deepEqual(
+    calculer(avecCroissance, [{ levier: "l", valeur: 1 }], 2027),
+    calculer(donnees, [{ levier: "l", valeur: 1 }], 2027),
+  );
+});
+
+test("croissance : unité + m * supplément, coins du multiplicateur dans la fourchette", () => {
+  const [, l] = calculer(avecCroissance, [{ levier: "l", valeur: 1 }], 2027, true);
+  // Central : -1 + 0,4 x 0,5 = -0,8. Coins : -0,9 + 0,2 x 0,5 = -0,8 ; -1,1 + 0,1 = -1,0 ;
+  // -0,9 + 0,3 = -0,6 ; -1,1 + 0,3 = -0,8.
+  assert.ok(Math.abs(l.ecart_dette.central + 0.8) < 1e-12);
+  assert.ok(Math.abs(l.ecart_dette.bas + 1.0) < 1e-12);
+  assert.ok(Math.abs(l.ecart_dette.haut + 0.6) < 1e-12);
+  assert.ok(Math.abs(l.ecart_solde_primaire.central - 0.92) < 1e-12);
+  // Niveaux : la variante de baseline (103) avec l'effet central.
+  assert.ok(Math.abs(l.dette.haut - 102.2) < 1e-12);
+});

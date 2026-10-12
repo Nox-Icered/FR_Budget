@@ -77,8 +77,10 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, replace
+from functools import cache
 
 from fr_budget import baseline as module_baseline
+from fr_budget import croissance as module_croissance
 from fr_budget.agrege import (
     accises,
     cotisations,
@@ -162,6 +164,7 @@ BORNES_INDEXATION = (-2.0, 1.0)
 # Mission qui finance l'AAH et la prime d'activité (programmes 157 et 304), comprises dans le
 # levier d'indexation.
 MISSION_SOLIDARITE = "solidarite_insertion_et_egalite_des_chances"
+IMPOT_REVENU_DEPENSES_FISCALES = "impot_revenu"
 MILLIONS_PAR_MILLIARD = 1000.0
 EUROS_PAR_MILLIARD = 1e9
 ANNEE_REFERENCE = 2025
@@ -456,6 +459,7 @@ def bornes_levier(levier: str) -> tuple[float, float]:
     raise ValueError(msg)
 
 
+@cache
 def effet_solde(mesure: Mesure) -> Fourchette:
     """Effet de la mesure sur le solde primaire, en points de PIB (positif : solde amélioré)."""
     if not ANNEE_PREMIERE_MESURE <= mesure.annee <= ANNEE_FIN:
@@ -585,21 +589,107 @@ def _verifier_credits(mesures: Sequence[Mesure]) -> None:
         raise ValueError(msg)
 
 
-def scenario(mesures: Sequence[Mesure]) -> list[AnneeScenario]:
+def categorie_croissance(levier: str) -> str:
+    """Catégorie d'instruments dont le levier prend le multiplicateur (``fr_budget.croissance``).
+
+    Choix du lot 3.2 (à relire) : le levier des dépenses fiscales de l'impôt sur le revenu suit
+    l'impôt sur le revenu ; les autres dépenses fiscales, y compris celles choisies une à une
+    (regroupées par le site dans le levier générique, quel que soit leur impôt), et l'impôt sur
+    les sociétés suivent la catégorie « autres prélèvements » ; dotations, rémunérations et
+    crédits des missions la dépense publique.
+    """
+    if depense_du_levier(levier) is not None:
+        return module_croissance.AUTRES_PRELEVEMENTS
+    if mission_du_levier(levier) is not None:
+        return module_croissance.DEPENSES
+    categories = {
+        LEVIER_TVA_NORMAL: module_croissance.TVA,
+        **dict.fromkeys(LEVIERS_ACCISES, module_croissance.ACCISES),
+        **dict.fromkeys(LEVIERS_CSG, module_croissance.CSG),
+        LEVIER_COTISATIONS_TAUX: module_croissance.COTISATIONS_EMPLOYEURS,
+        LEVIER_ALLEGEMENTS: module_croissance.COTISATIONS_EMPLOYEURS,
+        LEVIER_IR_SEUILS: module_croissance.IMPOT_REVENU,
+        levier_depenses_fiscales_impot(
+            IMPOT_REVENU_DEPENSES_FISCALES
+        ): module_croissance.IMPOT_REVENU,
+        LEVIER_INDEXATION: module_croissance.PRESTATIONS,
+        LEVIER_PA_PENTE: module_croissance.PRESTATIONS,
+        **dict.fromkeys(LEVIERS_REMUNERATIONS, module_croissance.DEPENSES),
+        **dict.fromkeys(LEVIERS_DOTATIONS, module_croissance.DEPENSES),
+        LEVIER_CREDITS_UNITE: module_croissance.DEPENSES,
+        LEVIER_IS_TAUX_NORMAL: module_croissance.AUTRES_PRELEVEMENTS,
+        LEVIER_IS_SURTAXE: module_croissance.AUTRES_PRELEVEMENTS,
+        **dict.fromkeys(LEVIERS_DEPENSES_FISCALES_IMPOT, module_croissance.AUTRES_PRELEVEMENTS),
+        LEVIER_DEPENSE_FISCALE_UNITE: module_croissance.AUTRES_PRELEVEMENTS,
+    }
+    if levier in categories:
+        return categories[levier]
+    msg = f"levier inconnu : {levier}"
+    raise ValueError(msg)
+
+
+def _trajectoire_mesures(
+    trajectoire: Sequence[AnneeBaseline],
+    mesures: Sequence[Mesure],
+    borne_effet: str,
+    borne_multiplicateur: str | None,
+) -> list[AnneeBaseline]:
+    """Trajectoire avec les mesures ; avec l'effet de croissance si ``borne_multiplicateur``
+    désigne la borne du multiplicateur retenue pour toutes les mesures."""
+    effets = _effets_par_annee(mesures, borne_effet)
+    if borne_multiplicateur is None:
+        return trajectoire_avec_effet(trajectoire, effets)
+    annees = [a.annee for a in trajectoire]
+    rho = module_croissance.persistance()
+    ecart = [0.0] * len(annees)
+    # L'écart de production est la somme de ceux de chaque mesure (multiplicateur propre).
+    for m in mesures:
+        multiplicateur = module_croissance.multiplicateur(categorie_croissance(m.levier))
+        og = module_croissance.ecart_production(
+            _effets_par_annee([m], borne_effet),
+            annees,
+            getattr(multiplicateur, borne_multiplicateur),
+            rho,
+        )
+        ecart = [x + y for x, y in zip(ecart, og, strict=True)]
+    return module_croissance.trajectoire_avec_croissance(
+        trajectoire, effets, ecart, module_croissance.effet_sur_le_solde()
+    )
+
+
+CENTRAL = "central"
+BORNES_EFFET = ("bas", "haut")
+
+
+def _bornes(croissance: bool) -> list[tuple[str, str | None]]:
+    """Couples (borne de l'effet, borne du multiplicateur) des trajectoires qui encadrent le
+    scénario, hors centrale : effet bas et haut ; avec la croissance, s'y ajoutent les coins
+    (effet bas ou haut, multiplicateur bas ou haut), le multiplicateur étant commun à toutes
+    les mesures."""
+    if not croissance:
+        return [(b, None) for b in BORNES_EFFET]
+    bornes: list[tuple[str, str | None]] = [(b, CENTRAL) for b in BORNES_EFFET]
+    return bornes + [(b, j) for j in BORNES_EFFET for b in BORNES_EFFET]
+
+
+def scenario(mesures: Sequence[Mesure], *, croissance: bool = False) -> list[AnneeScenario]:
     """Scénario 2025-2046 : niveaux et écarts à la baseline, en points de PIB, en fourchette.
 
     Plusieurs mesures s'additionnent (pas d'interaction entre leviers à ce stade). Deux
-    mesures sur la même dépense fiscale sont refusées (``verifier_double_compte``).
+    mesures sur la même dépense fiscale sont refusées (``verifier_double_compte``). Avec
+    ``croissance``, l'effet sur l'activité (``fr_budget.croissance``) s'ajoute ; il est
+    désactivé par défaut.
     """
     verifier_double_compte(mesures)
     centrale, variantes = trajectoires()
-    effets = {b: _effets_par_annee(mesures, b) for b in ("bas", "central", "haut")}
-    avec = {b: trajectoire_avec_effet(centrale, e) for b, e in effets.items()}
-    variantes_avec = [trajectoire_avec_effet(v, effets["central"]) for v in variantes]
+    m_central = CENTRAL if croissance else None
+    c_traj = _trajectoire_mesures(centrale, mesures, CENTRAL, m_central)
+    autres_traj = [_trajectoire_mesures(centrale, mesures, b, j) for b, j in _bornes(croissance)]
+    variantes_avec = [_trajectoire_mesures(v, mesures, CENTRAL, m_central) for v in variantes]
     resultat = []
     for i, ref in enumerate(centrale):
-        c = avec["central"][i]
-        autres = [avec["bas"][i], avec["haut"][i]]
+        c = c_traj[i]
+        autres = [t[i] for t in autres_traj]
         ecarts_dette = [a.dette - ref.dette for a in autres]
         ecarts_solde = [a.solde_primaire - ref.solde_primaire for a in autres]
         resultat.append(
@@ -844,27 +934,42 @@ class ReponseLineaire:
     unite_dette: list[list[float]]
     unite_solde: list[list[float]]
     indices_effet: list[int]
+    croissance_dette: list[list[float]]
+    croissance_solde: list[list[float]]
+    """Supplément dû à l'effet de croissance pour une unité du levier et un multiplicateur de 1,
+    mêmes trajectoires : avec le multiplicateur m, l'écart vaut unité + m * supplément (le
+    calcul est linéaire dans m)."""
 
 
 def reponse_lineaire(levier: str, annee: int) -> ReponseLineaire:
     centrale, variantes = trajectoires()
-    effets = {
-        b: _effets_par_annee([Mesure(levier, 1.0, annee)], b) for b in ("bas", "central", "haut")
-    }
+    mesures = [Mesure(levier, 1.0, annee)]
+    m_central = module_croissance.multiplicateur(categorie_croissance(levier)).central
     paires = [
-        (centrale, effets["central"]),
-        *((v, effets["central"]) for v in variantes),
-        (centrale, effets["bas"]),
-        (centrale, effets["haut"]),
+        (centrale, CENTRAL),
+        *((v, CENTRAL) for v in variantes),
+        (centrale, "bas"),
+        (centrale, "haut"),
     ]
     base_dette, base_solde, unite_dette, unite_solde = [], [], [], []
-    for trajectoire, effet in paires:
-        avec = trajectoire_avec_effet(trajectoire, effet)
+    croissance_dette, croissance_solde = [], []
+    for trajectoire, borne in paires:
+        avec = _trajectoire_mesures(trajectoire, mesures, borne, None)
+        avec_croissance = _trajectoire_mesures(trajectoire, mesures, borne, CENTRAL)
         base_dette.append([a.dette for a in trajectoire])
         base_solde.append([a.solde_primaire for a in trajectoire])
         unite_dette.append([b.dette - a.dette for a, b in zip(trajectoire, avec, strict=True)])
         unite_solde.append(
             [b.solde_primaire - a.solde_primaire for a, b in zip(trajectoire, avec, strict=True)]
+        )
+        croissance_dette.append(
+            [(c.dette - b.dette) / m_central for b, c in zip(avec, avec_croissance, strict=True)]
+        )
+        croissance_solde.append(
+            [
+                (c.solde_primaire - b.solde_primaire) / m_central
+                for b, c in zip(avec, avec_croissance, strict=True)
+            ]
         )
     n = len(paires)
     return ReponseLineaire(
@@ -874,4 +979,6 @@ def reponse_lineaire(levier: str, annee: int) -> ReponseLineaire:
         unite_dette=unite_dette,
         unite_solde=unite_solde,
         indices_effet=[0, n - 2, n - 1],
+        croissance_dette=croissance_dette,
+        croissance_solde=croissance_solde,
     )

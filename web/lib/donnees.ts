@@ -90,6 +90,8 @@ export type ReponsesUnitaires = {
   base_dette: number[][];
   base_solde: number[][];
   indices_effet: number[];
+  // Sources et hypothèses de l'effet de croissance (interrupteur, désactivé par défaut).
+  croissance?: { sources: string[]; hypotheses: string[]; persistance: number; effet_solde: number };
   leviers: Record<
     string,
     {
@@ -100,7 +102,17 @@ export type ReponsesUnitaires = {
       effet_etat_unitaire?: number;
       effet_brut_unitaire?: number;
       bornes: [number, number];
-      reponses: Record<string, { unite_dette: number[][]; unite_solde: number[][] }>;
+      multiplicateur?: { bas: number; central: number; haut: number };
+      // croissance_* : supplément d'une unité du levier pour un multiplicateur de 1.
+      reponses: Record<
+        string,
+        {
+          unite_dette: number[][];
+          unite_solde: number[][];
+          croissance_dette?: number[][];
+          croissance_solde?: number[][];
+        }
+      >;
     }
   >;
 };

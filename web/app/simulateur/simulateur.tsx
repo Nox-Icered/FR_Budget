@@ -51,6 +51,7 @@ export function Simulateur({
   const [parDepense, setParDepense] = useState<Record<string, number>>({});
   const [parMission, setParMission] = useState<Record<string, number>>({});
   const [annee, setAnnee] = useState(annees[0]);
+  const [croissance, setCroissance] = useState(false);
   const idBase = useId();
   // Lecture du lien partagé au chargement, puis l'adresse suit les réglages (sans historique).
   const [lu, setLu] = useState(false);
@@ -62,6 +63,7 @@ export function Simulateur({
     parImpot,
     parDepense,
     parMission,
+    ...(croissance ? { croissance: true } : {}),
     version: empreinte,
   };
   useEffect(() => {
@@ -77,6 +79,7 @@ export function Simulateur({
         setParDepense(lien.parDepense);
         setParMission(lien.parMission);
         setAnnee(lien.annee);
+        setCroissance(lien.croissance === true);
         if (lien.version && lien.version !== empreinte) setAlerte(texte("partage.autre_version"));
       }
     }
@@ -98,6 +101,7 @@ export function Simulateur({
       ...mesuresCreditsMissions(missions, parMission),
     ],
     annee,
+    croissance,
   );
   const signe = (v: number) => (v > 0 ? `+${nombre(v)}` : nombre(v));
   // Écarts au centième de point : les effets des accises sont de l'ordre de 0,01 point de PIB.
@@ -171,6 +175,17 @@ export function Simulateur({
             </option>
           ))}
         </select>
+        <div className="interrupteur">
+          <input
+            id={`${idBase}-croissance`}
+            type="checkbox"
+            checked={croissance}
+            onChange={(e) => setCroissance(e.target.checked)}
+          />
+          <label htmlFor={`${idBase}-croissance`}>{texte("simulateur.croissance")}</label>
+          <span className="etiquette">{texte("validation.statuts.beta")}</span>
+        </div>
+        <span className="source">{texte("simulateur.croissance_aide")}</span>
       </fieldset>
       <ReglagesDepensesFiscales
         catalogue={catalogue}

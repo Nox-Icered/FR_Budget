@@ -3,7 +3,6 @@ import {
   lire,
   type CatalogueCreditsMissions,
   type CatalogueDepensesFiscales,
-  type ReponsesUnitaires,
   type Version,
 } from "../../lib/donnees";
 import { Comparaison } from "./comparaison";
@@ -17,7 +16,6 @@ export default function PageComparaison() {
       </p>
       <p>{texte("comparaison.intro")}</p>
       <Comparaison
-        donnees={lire<ReponsesUnitaires>("scenario-unitaire.json")}
         catalogue={lire<CatalogueDepensesFiscales>("depenses-fiscales.json")}
         missions={lire<CatalogueCreditsMissions>("credits-missions.json")}
         version={lire<Version>("version.json")}

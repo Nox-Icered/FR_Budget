@@ -27,11 +27,13 @@ import {
 } from "../../lib/etat";
 import { CopierLien, Exports } from "../partage/actions";
 import { region } from "../../lib/region";
+import { useReponses } from "../../lib/chargement";
+import Link from "next/link";
 
 
 const ANNEES_AFFICHEES = [2027, 2030, 2035, 2040, 2046];
 
-export function Simulateur({
+function SimulateurCharge({
   donnees,
   catalogue,
   missions,
@@ -271,9 +273,28 @@ export function Simulateur({
           version={version}
           nomFichier="scenario"
         />
-        <a href="/comparaison/">{texte("partage.lien_comparaison")}</a>
+        <Link href="/comparaison/">{texte("partage.lien_comparaison")}</Link>
       </div>
       <p className="source">{texte("partage.explication")}</p>
     </>
   );
+}
+
+// Les réponses unitaires (plusieurs mégaoctets) sont chargées par le navigateur, pas
+// incluses dans la page (lib/chargement.ts).
+export function Simulateur(props: {
+  catalogue: CatalogueDepensesFiscales;
+  missions: CatalogueCreditsMissions;
+  raccord: number;
+  version: Version;
+}) {
+  const chargement = useReponses(empreinteVersion(props.version));
+  if (chargement.etat === "en_cours") return <p role="status">{texte("site.chargement")}</p>;
+  if (chargement.etat === "erreur")
+    return (
+      <p className="avertissement" role="alert">
+        {texte("site.chargement_erreur")}
+      </p>
+    );
+  return <SimulateurCharge donnees={chargement.donnees} {...props} />;
 }

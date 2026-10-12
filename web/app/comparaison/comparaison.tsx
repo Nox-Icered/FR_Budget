@@ -20,6 +20,8 @@ import {
 } from "../../lib/etat";
 import { Exports } from "../partage/actions";
 import { region } from "../../lib/region";
+import { useReponses } from "../../lib/chargement";
+import Link from "next/link";
 
 
 const NOMBRE_SCENARIOS = 3;
@@ -27,7 +29,7 @@ const ANNEES_AFFICHEES = [2027, 2030, 2035, 2040, 2046];
 
 type Lecture = { scenario?: ScenarioExporte; alerte?: string };
 
-export function Comparaison({
+function ComparaisonChargee({
   donnees,
   catalogue,
   missions,
@@ -112,9 +114,9 @@ export function Comparaison({
               </span>
             )}
             {lectures[k].scenario && (
-              <a href={`/simulateur/?${encoder(lectures[k].scenario.etat)}`}>
+              <Link href={`/simulateur/?${encoder(lectures[k].scenario.etat)}`}>
                 {texte("comparaison.ouvrir")}
-              </a>
+              </Link>
             )}
           </div>
         ))}
@@ -175,4 +177,22 @@ export function Comparaison({
       )}
     </>
   );
+}
+
+// Les réponses unitaires (plusieurs mégaoctets) sont chargées par le navigateur, pas
+// incluses dans la page (lib/chargement.ts).
+export function Comparaison(props: {
+  catalogue: CatalogueDepensesFiscales;
+  missions: CatalogueCreditsMissions;
+  version: Version;
+}) {
+  const chargement = useReponses(empreinteVersion(props.version));
+  if (chargement.etat === "en_cours") return <p role="status">{texte("site.chargement")}</p>;
+  if (chargement.etat === "erreur")
+    return (
+      <p className="avertissement" role="alert">
+        {texte("site.chargement_erreur")}
+      </p>
+    );
+  return <ComparaisonChargee donnees={chargement.donnees} {...props} />;
 }

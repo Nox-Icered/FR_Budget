@@ -26,7 +26,6 @@ export default function PageSimulateur() {
       </p>
       <p>{texte("simulateur.intro")}</p>
       <Simulateur
-        donnees={donnees}
         catalogue={catalogue}
         missions={missions}
         raccord={baseline.annee_raccord}

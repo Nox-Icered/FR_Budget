@@ -5,7 +5,7 @@
 // Usage (après pnpm build) : pnpm accessibilite
 // Navigateur : CHROMIUM=/chemin/vers/chrome, sinon celui installé par playwright-core.
 import { createServer } from "node:http";
-import { readFile, readdir } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { extname, join, normalize } from "node:path";
 import { chromium } from "playwright-core";
@@ -20,19 +20,26 @@ const COMPARAISON = "/comparaison/?s1=a%3D2027%26l%3Dtva_taux_normal%3A1&s2=a%3D
 const serveur = createServer(async (req, res) => {
   const chemin = normalize(decodeURIComponent(new URL(req.url, "http://x").pathname));
   const fichier = join(SORTIE, chemin.endsWith("/") ? `${chemin}index.html` : chemin);
+  let contenu;
   try {
-    res.writeHead(200, { "content-type": TYPES[extname(fichier)] ?? "application/octet-stream" });
-    res.end(await readFile(fichier));
+    contenu = await readFile(fichier);
   } catch {
     res.writeHead(404).end();
+    return;
   }
+  res.writeHead(200, { "content-type": TYPES[extname(fichier)] ?? "application/octet-stream" });
+  res.end(contenu);
 });
 await new Promise((ok) => serveur.listen(0, ok));
 const racine = `http://localhost:${serveur.address().port}`;
 
-const pages = (await readdir(SORTIE, { withFileTypes: true }))
-  .filter((e) => e.isDirectory() && !e.name.startsWith("_") && e.name !== "404")
-  .map((e) => `/${e.name}/`);
+// Une page = un dossier qui contient index.html (les données, comme donnees/, n'en ont pas).
+const estPage = (nom) => access(join(SORTIE, nom, "index.html")).then(() => true, () => false);
+const dossiers = (await readdir(SORTIE, { withFileTypes: true })).filter(
+  (e) => e.isDirectory() && !e.name.startsWith("_") && e.name !== "404",
+);
+const pages = [];
+for (const e of dossiers) if (await estPage(e.name)) pages.push(`/${e.name}/`);
 pages.unshift("/");
 pages.push(COMPARAISON);
 

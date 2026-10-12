@@ -592,18 +592,14 @@ def _verifier_credits(mesures: Sequence[Mesure]) -> None:
 def categorie_croissance(levier: str) -> str:
     """Catégorie d'instruments dont le levier prend le multiplicateur (``fr_budget.croissance``).
 
-    Choix du lot 3.2 (à relire) : les dépenses fiscales de l'impôt sur le revenu suivent
-    l'impôt sur le revenu, les autres et l'impôt sur les sociétés la catégorie « autres
-    prélèvements » ; dotations, rémunérations et crédits des missions la dépense publique.
+    Choix du lot 3.2 (à relire) : le levier des dépenses fiscales de l'impôt sur le revenu suit
+    l'impôt sur le revenu ; les autres dépenses fiscales, y compris celles choisies une à une
+    (regroupées par le site dans le levier générique, quel que soit leur impôt), et l'impôt sur
+    les sociétés suivent la catégorie « autres prélèvements » ; dotations, rémunérations et
+    crédits des missions la dépense publique.
     """
-    depense = depense_du_levier(levier)
-    if depense is not None:
-        impot_revenu = depense.impot == IMPOT_REVENU_DEPENSES_FISCALES
-        return (
-            module_croissance.IMPOT_REVENU
-            if impot_revenu
-            else module_croissance.AUTRES_PRELEVEMENTS
-        )
+    if depense_du_levier(levier) is not None:
+        return module_croissance.AUTRES_PRELEVEMENTS
     if mission_du_levier(levier) is not None:
         return module_croissance.DEPENSES
     categories = {

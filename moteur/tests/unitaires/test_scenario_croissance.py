@@ -71,3 +71,12 @@ def test_reponse_lineaire_avec_croissance() -> None:
     for i, ligne in enumerate(attendu):
         ecart = x * (r.unite_dette[0][i] + m * r.croissance_dette[0][i])
         assert ecart == pytest.approx(ligne.ecart_dette.central, abs=1e-9)
+
+
+def test_depense_choisie_comme_le_levier_generique_du_site() -> None:
+    """Le site regroupe les dépenses fiscales choisies une à une dans le levier générique :
+    chacune prend donc le même multiplicateur que lui, y compris pour l'impôt sur le revenu
+    (le calcul du site et celui du moteur doivent concorder)."""
+    generique = sc.categorie_croissance(sc.LEVIER_DEPENSE_FISCALE_UNITE)
+    for depense in depenses_fiscales.catalogue():
+        assert sc.categorie_croissance(sc.levier_depense_fiscale(depense.code)) == generique

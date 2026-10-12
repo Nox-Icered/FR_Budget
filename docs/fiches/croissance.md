@@ -49,8 +49,8 @@ Pour chaque catégorie, la valeur centrale est la variante du modèle Mésange (
 | Accises | gazole, essences | 0,51 | 0,5 à 0,51 | taxe carbone (page 121) |
 | Cotisations employeurs | taux, allègements généraux | 0,20 | 0,20 à 0,5 | cotisations employeurs (page 108) |
 | CSG | activité, retraites, capital | 0,41 | 0,41 à 0,5 | CSG (page 116) |
-| Impôt sur le revenu | seuils du barème, dépenses fiscales de l'IR | 0,41 | 0,41 à 0,5 | impôt sur le revenu (page 118) |
-| Autres prélèvements | IS, surtaxe, autres dépenses fiscales | 0,5 | 0,20 à 0,51 | aucune ; extrêmes des variantes de prélèvements |
+| Impôt sur le revenu | seuils du barème, curseur des dépenses fiscales de l'IR | 0,41 | 0,41 à 0,5 | impôt sur le revenu (page 118) |
+| Autres prélèvements | IS, surtaxe, autres dépenses fiscales, dépenses choisies une à une | 0,5 | 0,20 à 0,51 | aucune ; extrêmes des variantes de prélèvements |
 
 ## 5. Choix faits en autonomie, et leurs limites
 
@@ -65,7 +65,9 @@ Pour chaque catégorie, la valeur centrale est la variante du modèle Mésange (
 5. **ρ et α sans plage.** Une seule source a été saisie pour chacun (valeurs « usuelles » citées par l'OFCE). La fourchette sous-estime donc l'incertitude. Une seconde source (Commission européenne, OCDE) est à ajouter.
 6. **Pas de conjoncture ni de politique monétaire.** Le multiplicateur ne dépend ni de l'état de l'économie (plus élevé en récession selon l'OFCE, page 14), ni d'une réaction de la BCE. Les variantes de Mésange sont à taux d'intérêt réels inchangés.
 7. **Mésange 2017 date.** Le modèle a été réestimé en 2017 sur des données antérieures. Le document de l'Insee de 2024 (DT 2024-07) donne des intervalles de confiance seulement pour l'investissement public : il n'est pas repris.
-8. **Poids des données du site.** Le supplément de croissance double les réponses exportées : la page du simulateur passe d'environ 225 à 610 ko compressés. L'allègement (chargement différé, cache) relève du lot 3.6.
+8. **Dépenses fiscales choisies une à une.** Le site les regroupe dans un levier générique, qui prend le multiplicateur des « autres prélèvements », même pour une dépense de l'impôt sur le revenu (correction après la revue de la PR, pour que le site et le moteur concordent).
+   - Limite : une dépense de l'impôt sur le revenu choisie seule a un multiplicateur central de 0,5 au lieu de 0,41.
+9. **Poids des données du site.** Le supplément de croissance double les réponses exportées : la page du simulateur passe d'environ 225 à 610 ko compressés. L'allègement (chargement différé, cache) relève du lot 3.6.
 
 ## 6. Validation
 
@@ -84,4 +86,5 @@ Le module reste en bêta.
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-12 | Revue de la PR : dépenses fiscales choisies une à une rattachées aux « autres prélèvements » | aucun test de validation ; 1 test unitaire ajouté |
 | 2026-10-12 | Création du module | aucun test de validation (interrupteur désactivé par défaut) ; 59 nouveaux tests unitaires et d'API, tous passent |

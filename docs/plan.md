@@ -169,6 +169,13 @@ Décision du 12 octobre 2026 : la phase 3 commence avant le franchissement de la
      - les relectures externes ont leur registre (`registres/relectures.yaml`, vide à ce jour), publié tel quel ; la page montre aussi combien de valeurs saisies restent « à relire » ;
      - les mentions légales laissent l'éditeur et l'hébergeur « à compléter ». Ces informations ne peuvent pas être inventées : **à fournir par le mainteneur** avant la mise en ligne.
 6. Accessibilité (RGAA visé), mobile, cache des scénarios courants, hébergement.
+   - Fait au lot 3.6 (première partie) :
+     - contrôle automatique axe-core (WCAG 2.0 A et AA, WCAG 2.1 AA) de chaque page en largeur mobile, à chaque modification (CI, `pnpm accessibilite`) ;
+     - seule anomalie trouvée et corrigée : les tableaux défilants n'étaient pas atteignables au clavier.
+   - Limite : un contrôle automatique couvre une partie seulement des critères du RGAA ; un audit manuel (lecteur d'écran, contrastes du graphique, navigation clavier complète) reste à faire.
+   - Reste à faire, et **à décider par le mainteneur** :
+     - hébergement (choix de l'hébergeur, du nom de domaine, archives par version pour que les anciens liens restent reproductibles) ;
+     - allègement des pages du simulateur et de la comparaison (environ 610 ko compressés depuis le lot 3.2) par un chargement différé des réponses et leur mise en cache.
 
 ## 7. Tests et CI
 

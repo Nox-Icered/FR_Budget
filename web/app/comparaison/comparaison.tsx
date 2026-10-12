@@ -19,6 +19,8 @@ import {
   type ScenarioExporte,
 } from "../../lib/etat";
 import { Exports } from "../partage/actions";
+import { REGION } from "../../lib/region";
+
 
 const NOMBRE_SCENARIOS = 3;
 const ANNEES_AFFICHEES = [2027, 2030, 2035, 2040, 2046];
@@ -128,7 +130,7 @@ export function Comparaison({
               ["dette", "simulateur.dette", nombre],
             ] as const
           ).map(([cle, titre, format]) => (
-            <div key={cle} className="defilement">
+            <div key={cle} className="defilement" {...REGION}>
               <table>
                 <caption>{texte(titre)}</caption>
                 <thead>

@@ -1,5 +1,7 @@
 import { texte, nombre } from "../lib/textes";
 import { lire, type ComptesApu, type Cofog } from "../lib/donnees";
+import { REGION } from "../lib/region";
+
 
 export default function Accueil() {
   const comptes = lire<ComptesApu>("comptes-apu.json");
@@ -44,7 +46,7 @@ export default function Accueil() {
       ))}
       <section>
         <h2>{texte("accueil.fonctions_titre", { annee: cofog.annee })}</h2>
-        <div className="defilement">
+        <div className="defilement" {...REGION}>
         <table>
           <thead>
             <tr>

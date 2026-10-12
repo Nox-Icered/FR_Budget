@@ -71,6 +71,10 @@ jobs:
         run: pnpm donnees
       - run: pnpm test
       - run: pnpm build
+      - name: Navigateur du contrôle d'accessibilité
+        run: pnpm exec playwright-core install --with-deps chromium
+      - name: Contrôle d'accessibilité (axe-core, WCAG 2.1 AA)
+        run: pnpm accessibilite
 
   validation:
     name: Tests de validation (écarts aux références)

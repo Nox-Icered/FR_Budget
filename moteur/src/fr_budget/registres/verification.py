@@ -24,6 +24,7 @@ from fr_budget.registres.schemas import (
     Hypothese,
     Levier,
     RegistreCorrections,
+    Relecture,
     Source,
 )
 
@@ -47,6 +48,7 @@ class Registres:
     corrections: RegistreCorrections | None
     libelles_interdits: list[str]
     depenses_fiscales_tva: list[DepenseFiscaleTva] = field(default_factory=list)
+    relectures: list[Relecture] = field(default_factory=list)
 
 
 def _lire(fichier: Path) -> Any:
@@ -123,6 +125,12 @@ def charger(dossier: Path, rapport: Rapport) -> Registres:
             if (dossier / "tva" / "depenses_fiscales.yaml").is_file()
             else []
         ),
+        # Registre des relectures externes : facultatif.
+        relectures=(
+            _liste(dossier / "relectures.yaml", "relectures", Relecture, rapport)
+            if (dossier / "relectures.yaml").is_file()
+            else []
+        ),
     )
 
 
@@ -194,6 +202,12 @@ def verifier(registres: Registres, racine: Path, rapport: Rapport) -> None:
                 leviers | modules,
                 "levier ou module",
                 rapport,
+            )
+    _doublons("relectures.yaml", [r.id for r in registres.relectures], rapport)
+    for r in registres.relectures:
+        for objet in r.objet:
+            _renvoi(
+                f"relectures.yaml / {r.id}", objet, leviers | modules, "levier ou module", rapport
             )
     for c in registres.chiffrages:
         if c.levier is not None:

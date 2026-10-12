@@ -20,6 +20,7 @@ from fr_budget_api.app import (
     catalogue_credits_missions,
     catalogue_depenses_fiscales,
     depenses_fonctions,
+    journal,
     registre,
     reponses_unitaires,
     resume_validation,
@@ -53,6 +54,7 @@ def _ecrire(dossier: Path, nom: str, contenu: Any, compact: bool = False) -> Non
 def exporter(dossier: Path) -> None:
     dossier.mkdir(parents=True, exist_ok=True)
     _ecrire(dossier, "version.json", version_donnees())
+    _ecrire(dossier, "journal.json", journal())
     for nom in REGISTRES:
         _ecrire(dossier, f"registre-{nom}.json", registre(nom))
     _ecrire(

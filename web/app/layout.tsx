@@ -27,11 +27,16 @@ export default function Gabarit({ children }: { children: ReactNode }) {
             <Link href="/sources/">{texte("navigation.sources")}</Link>
             <Link href="/hypotheses/">{texte("navigation.hypotheses")}</Link>
             <Link href="/validation/">{texte("navigation.validation")}</Link>
+            <Link href="/journal/">{texte("navigation.journal")}</Link>
+            <Link href="/relectures/">{texte("navigation.relectures")}</Link>
           </nav>
         </header>
         <main>{children}</main>
         <footer>
           <p>{texte("site.pied")}</p>
+          <p>
+            <Link href="/mentions-legales/">{texte("navigation.mentions")}</Link>
+          </p>
           <p className="version">
             {texte("version.texte", {
               moteur: version.moteur.slice(0, 12),

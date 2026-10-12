@@ -1,0 +1,5 @@
+# Registre des relectures externes : chaque retour est publié tel quel sur la page
+# « Relectures », avec la réponse apportée (docs/specification.md, « Validation externe »).
+# Liste des relecteurs sollicités et suivi des envois : docs/relecteurs.md.
+
+relectures: []

@@ -267,3 +267,21 @@ def test_en_tete_yaml_illisible_signale_sans_planter(tmp_path: Path) -> None:
     verifier_fiches(fiches, set(), rapport)
     assert any("casse.md" in e for e in rapport.erreurs)
     assert modules_documentes(fiches) == set()
+
+
+def test_relecture_nomme_au_moins_un_objet() -> None:
+    from pydantic import ValidationError
+
+    from fr_budget.registres.schemas import Relecture
+
+    base = {
+        "id": "r1",
+        "date": "2026-10-12",
+        "relecteur": "Institution",
+        "objet": ["tva"],
+        "retour": "Texte du retour.",
+        "reponse": "Réponse apportée.",
+    }
+    assert Relecture.model_validate(base).objet == ["tva"]
+    with pytest.raises(ValidationError):
+        Relecture.model_validate({**base, "objet": []})

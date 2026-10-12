@@ -513,3 +513,27 @@ datasets:
     empreinte_sha256: 114c0bb541580c636967e964c28ef8f96775c5806ee612036170babf089179dc
     methode_transformation: aucune ; fiche 1.6 (page 52) saisie dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-12
+
+  - id: dgfip_statistiques_41_xlsx
+    source: dgfip_statistiques_41
+    description: Tableaux de la publication DGFiP Statistiques n° 41 (impôt au barème et RFR par part, par décile de RFR par part, revenus 2024)
+    fichier: data/raw/impot_revenu/dgfip_statistiques_41.xlsx
+    empreinte_sha256: 0d7fd5b950231738da88f7f62827fbd41da8247dac6ca1f3d93812452a76a4f8
+    methode_transformation: aucune ; tableau 2 saisi dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-12
+
+  - id: dgfip_statistiques_41_pdf
+    source: dgfip_statistiques_41
+    description: Publication DGFiP Statistiques n° 41 (PDF, 10 pages)
+    fichier: data/raw/impot_revenu/dgfip_statistiques_41.pdf
+    empreinte_sha256: ffc54026d9082e97d34705a677b7eb20d81536cc952f07f444243a62fc2ecb5a
+    methode_transformation: aucune
+    telecharge_le: 2026-10-12
+
+  - id: senat_rapport_general_plf2026_tome1_pdf
+    source: senat_rapport_general_plf2026_tome1
+    description: Rapport général du Sénat n° 139 (2025-2026), tome I, sur le PLF 2026 (PDF, 267 pages)
+    fichier: data/raw/impot_revenu/senat_rapport_general_plf2026_tome1.pdf
+    empreinte_sha256: 871f14090a9bea2aae1dbf8f49d9f85e323a4c1fa7624d0bcea9027507f7e7bf
+    methode_transformation: aucune ; chiffrage du gel du barème (pages 149 et 150) saisi dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-12

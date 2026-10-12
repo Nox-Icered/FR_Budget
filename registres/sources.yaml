@@ -473,3 +473,21 @@ sources:
     millesime: octobre 2024
     acces: direct
     consulte_le: 2026-10-12
+
+  - id: dgfip_statistiques_41
+    nom: DGFiP Statistiques n° 41, « L'impôt sur le revenu 2024 a été plus dynamique que les revenus » (novembre 2025), et ses tableaux
+    editeur: Direction générale des finances publiques, département des études et statistiques fiscales
+    url: https://www.impots.gouv.fr/dgfip-statistiques-limpot-sur-le-revenu-2024-ete-plus-dynamique-que-les-revenus
+    licence: Licence Ouverte 2.0 (données publiques de la DGFiP)
+    millesime: revenus 2024 (fichier POTE 2024, 3e émission)
+    acces: direct
+    consulte_le: 2026-10-12
+
+  - id: senat_rapport_general_plf2026_tome1
+    nom: Rapport général n° 139 (2025-2026), tome I, sur le projet de loi de finances pour 2026, par Jean-François Husson, commission des finances du Sénat
+    editeur: Sénat
+    url: https://www.senat.fr/rap/l25-139-1/l25-139-11.pdf
+    licence: document parlementaire public
+    millesime: novembre 2025
+    acces: direct
+    consulte_le: 2026-10-12

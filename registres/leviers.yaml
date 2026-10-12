@@ -12,10 +12,10 @@ leviers:
 
   - id: impot_revenu
     libelle: Impôt sur le revenu
-    parametres_reglables: [Tranches, Taux, Plafond du quotient familial, Décote]
+    parametres_reglables: [Revalorisation des seuils du barème par rapport à l'inflation]
     moteur: openfisca_et_agrege
-    references_visees: [Voies et Moyens, TAXIPP (IPP)]
-    statut: non_publie
+    references_visees: [Évaluations préalables des PLF (indexation du barème), rapport général du Sénat sur le PLF 2026, TAXIPP (IPP)]
+    statut: beta
 
   - id: impot_societes
     libelle: Impôt sur les sociétés

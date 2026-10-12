@@ -83,6 +83,11 @@ export default function PageSimulateur() {
           allegements: deuxDecimales(-donnees.leviers.allegements_generaux.rendement_unitaire),
         })}
       </p>
+      <p>
+        {texte("simulateur.methode_ir", {
+          rendement: deuxDecimales(-donnees.leviers.ir_seuils_bareme.rendement_unitaire),
+        })}
+      </p>
       <ul>
         <li>{texte("simulateur.limite_comportement")}</li>
         <li>{texte("simulateur.limite_croissance")}</li>
@@ -96,6 +101,7 @@ export default function PageSimulateur() {
         <li>{texte("simulateur.limite_indexation")}</li>
         <li>{texte("simulateur.limite_csg")}</li>
         <li>{texte("simulateur.limite_cotisations")}</li>
+        <li>{texte("simulateur.limite_ir")}</li>
       </ul>
       <p>
         <a href="/validation/">{texte("simulateur.lien_validation")}</a>

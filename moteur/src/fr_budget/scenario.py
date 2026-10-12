@@ -59,6 +59,10 @@ Leviers disponibles :
   (``fr_budget.agrege.cotisations``) ; effet d'un point : valeur de point de la CCSS.
 - ``allegements_generaux`` : variation de x % (de -20 à +20) du coût des allègements généraux
   de cotisations des salariés ; effet d'un pour cent : moins 1 % du coût constaté en 2025.
+- ``ir_seuils_bareme`` : revalorisation des seuils du barème de l'impôt sur le revenu supérieure
+  (ou inférieure) de x %, de -3 à +3, à l'indexation sur l'inflation
+  (``fr_budget.agrege.impot_revenu``) ; effet d'un pour cent : moins la sensibilité de
+  l'évaluation préalable du PLF 2025 (borne basse : calcul par décile).
 
 Fourchettes : écart au scénario de référence, avec la plage du rendement du levier ; niveau
 de dette et de solde, avec la plage du levier et celle de la baseline, chacune seule.
@@ -77,6 +81,7 @@ from fr_budget.agrege import (
     csg,
     depenses_fiscales,
     dotations,
+    impot_revenu,
     impot_societes,
     indexation,
     remunerations,
@@ -136,6 +141,10 @@ LEVIER_ALLEGEMENTS = "allegements_generaux"
 # en 2027, soit environ 8 % du coût).
 BORNE_COTISATIONS_TAUX = 2.0
 BORNE_ALLEGEMENTS = 20.0
+LEVIER_IR_SEUILS = "ir_seuils_bareme"
+# Écart admis à l'indexation des seuils, en % (choix du lot 2.11, à relire) ; repères : gel de
+# 2026 (-1,0 %), indexation de 4,8 % de la LFI 2024.
+BORNE_IR_SEUILS = 3.0
 LEVIER_INDEXATION = "indexation_pensions_prestations"
 # Écart admis à la revalorisation légale, en points (décision du mainteneur du 12 octobre 2026) ;
 # repère : le gel de 2026 proposé au PLFSS 2026 correspondait à -1,0 point.
@@ -267,6 +276,9 @@ def rendement_unitaire(levier: str) -> Fourchette:
         return csg.rendement_un_point(LEVIERS_CSG[levier])
     if levier == LEVIER_COTISATIONS_TAUX:
         return cotisations.rendement_point_taux()
+    if levier == LEVIER_IR_SEUILS:
+        r = impot_revenu.rendement_un_pourcent()
+        return encadrer(-r.central, [-r.bas, -r.haut])
     if levier == LEVIER_ALLEGEMENTS:
         cout = cotisations.cout_un_pourcent_allegements()
         return encadrer(-cout.central, [-cout.bas, -cout.haut])
@@ -332,6 +344,9 @@ def taux_reference(levier: str) -> float:
     if levier in LEVIERS_REMUNERATIONS:
         # Masse salariale des trois sous-secteurs, hors cotisations imputées, Md€ de 2025.
         return sum(remunerations.masse(v) for v in remunerations.VERSANTS)
+    if levier == LEVIER_IR_SEUILS:
+        # Impôt au barème des revenus de 2024, Md€.
+        return chiffrage("ir_impot_total_total_2024")
     if levier == LEVIER_COTISATIONS_TAUX:
         # Valeur d'un point en 2026 publiée par la CCSS, Md€ courants.
         return cotisations.valeur_point_prive(cotisations.ANNEE_POINT)
@@ -385,6 +400,8 @@ def bornes_levier(levier: str) -> tuple[float, float]:
         return -BORNE_CSG, BORNE_CSG
     if levier == LEVIER_COTISATIONS_TAUX:
         return -BORNE_COTISATIONS_TAUX, BORNE_COTISATIONS_TAUX
+    if levier == LEVIER_IR_SEUILS:
+        return -BORNE_IR_SEUILS, BORNE_IR_SEUILS
     if levier == LEVIER_ALLEGEMENTS:
         return -BORNE_ALLEGEMENTS, BORNE_ALLEGEMENTS
     if levier == LEVIER_CREDITS_UNITE:
@@ -609,6 +626,7 @@ LEVIERS_REGISTRE = {
     **dict.fromkeys(LEVIERS_CSG, "csg"),
     LEVIER_COTISATIONS_TAUX: "cotisations_patronales",
     LEVIER_ALLEGEMENTS: "cotisations_patronales",
+    LEVIER_IR_SEUILS: "impot_revenu",
 }
 
 
@@ -711,6 +729,18 @@ PROVENANCE_COTISATIONS = (
     ),
     (),
 )
+PROVENANCE_IR = (
+    (
+        "plf2025_evaluations_prealables",
+        "dgfip_statistiques_41",
+        "openfisca_france_176_1_2",
+        "senat_rapport_general_plf2026_tome1",
+        "plfss2026_projet_loi",
+        "insee_comptes_nationaux_2025",
+        "plf2027_resf",
+    ),
+    (),
+)
 PROVENANCE_LEVIERS = {
     LEVIER_IS_TAUX_NORMAL: PROVENANCE_IS,
     LEVIER_IS_SURTAXE: PROVENANCE_IS,
@@ -738,6 +768,7 @@ PROVENANCE_LEVIERS = {
     **dict.fromkeys(LEVIERS_CSG, PROVENANCE_CSG),
     LEVIER_COTISATIONS_TAUX: PROVENANCE_COTISATIONS,
     LEVIER_ALLEGEMENTS: PROVENANCE_COTISATIONS,
+    LEVIER_IR_SEUILS: PROVENANCE_IR,
 }
 
 

@@ -113,6 +113,22 @@ test("contrôles repris du moteur", () => {
   );
 });
 
+test("leviers internes de calcul et identifiants hérités refusés", () => {
+  const internes = { ...donnees, leviers: { ...donnees.leviers, depense_fiscale: levier([-1e9, 1e9]) } };
+  assert.deepEqual(problemes(base({ leviers: { depense_fiscale: 1 } }), internes, catalogue, missions), [
+    "levier_inconnu",
+  ]);
+  for (const cle of ["constructor", "toString", "hasOwnProperty"]) {
+    assert.deepEqual(problemes(base({ leviers: { [cle]: 1 } }), donnees, catalogue, missions), [
+      "levier_inconnu",
+    ]);
+    assert.deepEqual(problemes(base({ parImpot: { [cle]: 1 } }), donnees, catalogue, missions), [
+      "impot_inconnu",
+    ]);
+  }
+  assert.equal(decoder("?a=2027&l=__proto__:1"), null);
+});
+
 test("exports CSV et JSON", () => {
   const f = { bas: -1, central: 0, haut: 1 };
   const lignes = [{ annee: 2027, dette: f, solde_primaire: f, ecart_dette: f, ecart_solde_primaire: f }];

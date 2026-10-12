@@ -15,6 +15,7 @@ import { mesuresCreditsMissions } from "../../lib/credits-missions";
 import { ReglagesCreditsMissions } from "./credits-missions";
 import { GraphiqueDette } from "../baseline/graphique";
 import {
+  LEVIERS_PUBLICS,
   LEVIERS_REMUNERATIONS,
   LEVIERS_SOLIDARITE,
   MISSION_SOLIDARITE,
@@ -26,27 +27,6 @@ import {
 } from "../../lib/etat";
 import { CopierLien, Exports } from "../partage/actions";
 
-// Ordre d'affichage et pas de réglage de chaque levier (en points ou en centimes par litre).
-// Les bornes du curseur sont arrondies vers l'intérieur au pas, pour que 0 reste sur la grille.
-const LEVIERS: { id: string; pas: number }[] = [
-  { id: "tva_taux_normal", pas: 0.5 },
-  { id: "accise_gazole", pas: 1 },
-  { id: "accise_essences", pas: 1 },
-  { id: "is_taux_normal", pas: 0.5 },
-  { id: "is_surtaxe_grandes_entreprises", pas: 1 },
-  { id: "dotations_dgf", pas: 1 },
-  { id: "dotations_compensations", pas: 1 },
-  { id: "remunerations_point_indice", pas: 0.5 },
-  { id: "remunerations_effectifs", pas: 0.5 },
-  { id: "indexation_pensions_prestations", pas: 0.1 },
-  { id: "csg_activite", pas: 0.1 },
-  { id: "csg_retraites", pas: 0.1 },
-  { id: "csg_capital", pas: 0.1 },
-  { id: "cotisations_patronales_taux", pas: 0.1 },
-  { id: "allegements_generaux", pas: 1 },
-  { id: "ir_seuils_bareme", pas: 0.1 },
-  { id: "prime_activite_pente", pas: 0.1 },
-];
 const ANNEES_AFFICHEES = [2027, 2030, 2035, 2040, 2046];
 
 export function Simulateur({
@@ -62,7 +42,7 @@ export function Simulateur({
   raccord: number;
   version: Version;
 }) {
-  const leviers = LEVIERS.filter((l) => l.id in donnees.leviers);
+  const leviers = LEVIERS_PUBLICS.filter((l) => l.id in donnees.leviers);
   const annees = Object.keys(donnees.leviers[leviers[0].id].reponses).map(Number);
   const [valeurs, setValeurs] = useState<Record<string, number>>(
     Object.fromEntries(leviers.map((l) => [l.id, 0])),
@@ -159,6 +139,7 @@ export function Simulateur({
                   <span className="etiquette">{texte(`validation.statuts.${levier.statut}`)}</span>
                 )}
               </label>
+              {/* Bornes arrondies vers l'intérieur au pas, pour que 0 reste sur la grille. */}
               <input
                 id={id}
                 type="range"

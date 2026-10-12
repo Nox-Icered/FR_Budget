@@ -1717,3 +1717,157 @@ chiffrages:
     localisation: Fiche 1.3, tableau 6 « Valeur de point de la CSG par assiette », page 57, ligne « Capital », colonne 2027 (p)
     saisi_le: 2026-10-12
     relecture: a_relire
+
+  - id: cotisations_point_prive_2026
+    levier: cotisations_patronales
+    source: ccss_octobre_2026
+    millesime: "2026 (prévision)"
+    mesure: Valeur d'un point de cotisation déplafonnée des employeurs du secteur privé (régimes de base), rendement théorique d'une hausse d'un point supposant compensée la hausse des exonérations induite
+    valeur: 7590
+    unite: "M€"
+    localisation: Fiche 1.2, encadré 2 « Valeurs de point de cotisation déplafonné des actifs des régimes de base », ligne « Secteur privé », colonne 2026, page 51
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: cotisations_point_prive_2025
+    levier: cotisations_patronales
+    source: ccss_octobre_2025
+    millesime: "2025 (prévision)"
+    mesure: Valeur d'un point de cotisation déplafonnée des employeurs du secteur privé (régimes de base), rendement théorique d'une hausse d'un point supposant compensée la hausse des exonérations induite
+    valeur: 7380
+    unite: "M€"
+    localisation: Fiche 1.2, encadré 2 « Valeurs de point de cotisation », ligne « Secteur privé », colonne 2025, page 47
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: cotisations_point_prive_2017
+    levier: cotisations_patronales
+    source: ccss_septembre_2018
+    millesime: "2017"
+    mesure: Valeur d'un point de cotisation déplafonnée des employeurs du secteur privé (régimes de base), rendement théorique d'une hausse d'un point supposant compensée la hausse des exonérations induite
+    valeur: 5570
+    unite: "M€"
+    localisation: Fiche 1.2, encadré 1 « Valeur de point de cotisation », ligne « Secteur privé », colonne 2017, page 39
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: allegements_generaux_total_2024
+    levier: cotisations_patronales
+    source: ccss_octobre_2026
+    millesime: "2024"
+    mesure: Allègements généraux et mesures de modulation des taux, tous attributaires
+    valeur: 79562
+    unite: "M€"
+    localisation: Fiche 1.6, tableau 2 « Les dispositifs d'allégements généraux de sécurité sociale et hors sécurité sociale », page 67, ligne « Allègements généraux et mesures de modulation des taux », colonne 2024
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: allegements_tns_famille_2024
+    levier: cotisations_patronales
+    source: ccss_octobre_2026
+    millesime: "2024"
+    mesure: Réduction du taux de cotisations d'allocations familiales des travailleurs non-salariés
+    valeur: 832
+    unite: "M€"
+    localisation: Fiche 1.6, tableau 2 « Les dispositifs d'allégements généraux de sécurité sociale et hors sécurité sociale », page 67, ligne correspondante, colonne 2024
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: allegements_tns_maladie_2024
+    levier: cotisations_patronales
+    source: ccss_octobre_2026
+    millesime: "2024"
+    mesure: Réduction du taux de cotisations d'assurance maladie des travailleurs non salariés
+    valeur: 1145
+    unite: "M€"
+    localisation: Fiche 1.6, tableau 2 « Les dispositifs d'allégements généraux de sécurité sociale et hors sécurité sociale », page 67, ligne correspondante, colonne 2024
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: allegements_generaux_total_2025
+    levier: cotisations_patronales
+    source: ccss_octobre_2026
+    millesime: "2025"
+    mesure: Allègements généraux et mesures de modulation des taux, tous attributaires
+    valeur: 77554
+    unite: "M€"
+    localisation: Fiche 1.6, tableau 2 « Les dispositifs d'allégements généraux de sécurité sociale et hors sécurité sociale », page 67, ligne « Allègements généraux et mesures de modulation des taux », colonne 2025
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: allegements_tns_famille_2025
+    levier: cotisations_patronales
+    source: ccss_octobre_2026
+    millesime: "2025"
+    mesure: Réduction du taux de cotisations d'allocations familiales des travailleurs non-salariés
+    valeur: 811
+    unite: "M€"
+    localisation: Fiche 1.6, tableau 2 « Les dispositifs d'allégements généraux de sécurité sociale et hors sécurité sociale », page 67, ligne correspondante, colonne 2025
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: allegements_tns_maladie_2025
+    levier: cotisations_patronales
+    source: ccss_octobre_2026
+    millesime: "2025"
+    mesure: Réduction du taux de cotisations d'assurance maladie des travailleurs non salariés
+    valeur: 1100
+    unite: "M€"
+    localisation: Fiche 1.6, tableau 2 « Les dispositifs d'allégements généraux de sécurité sociale et hors sécurité sociale », page 67, ligne correspondante, colonne 2025
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: allegements_generaux_total_2027
+    levier: cotisations_patronales
+    source: ccss_octobre_2026
+    millesime: "2027 (prévision)"
+    mesure: Allègements généraux et mesures de modulation des taux, tous attributaires (prévision)
+    valeur: 72762
+    unite: "M€"
+    localisation: Fiche 1.6, tableau 2 « Les dispositifs d'allégements généraux de sécurité sociale et hors sécurité sociale », page 67, ligne « Allègements généraux et mesures de modulation des taux », colonne 2027
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: allegements_tns_famille_2027
+    levier: cotisations_patronales
+    source: ccss_octobre_2026
+    millesime: "2027 (prévision)"
+    mesure: Réduction du taux de cotisations d'allocations familiales des travailleurs non-salariés (prévision)
+    valeur: 799
+    unite: "M€"
+    localisation: Fiche 1.6, tableau 2 « Les dispositifs d'allégements généraux de sécurité sociale et hors sécurité sociale », page 67, ligne correspondante, colonne 2027
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: allegements_tns_maladie_2027
+    levier: cotisations_patronales
+    source: ccss_octobre_2026
+    millesime: "2027 (prévision)"
+    mesure: Réduction du taux de cotisations d'assurance maladie des travailleurs non salariés (prévision)
+    valeur: 1010
+    unite: "M€"
+    localisation: Fiche 1.6, tableau 2 « Les dispositifs d'allégements généraux de sécurité sociale et hors sécurité sociale », page 67, ligne correspondante, colonne 2027
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: allegements_generaux_prevision_2025
+    levier: cotisations_patronales
+    source: ccss_octobre_2025
+    millesime: "2025 (prévision)"
+    mesure: Coût prévu des allègements généraux en 2025, tous attributaires (« les AG s'élèveraient à 74,5 Md€ »)
+    valeur: 74.5
+    unite: "Md€"
+    localisation: Fiche 1.6, texte, page 62
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: allegements_generaux_prevision_2024
+    levier: cotisations_patronales
+    source: ccss_octobre_2024
+    millesime: "2024 (prévision)"
+    mesure: Coût prévu des allègements généraux en 2024 (« Les allègements généraux s'élèveraient à 78,7 Md€ en 2024 »)
+    valeur: 78.7
+    unite: "Md€"
+    localisation: Fiche 1.6, texte, page 52
+    saisi_le: 2026-10-12
+    relecture: a_relire

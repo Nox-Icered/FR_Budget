@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from functools import partial
 
 from fr_budget.agrege.accises import recette_brute
+from fr_budget.agrege.cotisations import cout_allegements, valeur_point_modele
 from fr_budget.agrege.credits_missions import total_execution
 from fr_budget.agrege.csg import (
     ACTIVITE,
@@ -120,6 +121,10 @@ def _csg_millions(assiette: str, points: float, annee: int) -> float:
     return hausse_mesuree(assiette, points, annee) * MILLIONS_PAR_MILLIARD
 
 
+def _point_cotisation_millions(annee: int) -> float:
+    return valeur_point_modele(annee) * MILLIONS_PAR_MILLIARD
+
+
 def _csg_point_millions(assiette: str, annee: int) -> float:
     return valeur_point(assiette, annee) * MILLIONS_PAR_MILLIARD
 
@@ -194,6 +199,14 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         (f"csg_valeur_point_{assiette}_{annee}", partial(_csg_point_millions, assiette, annee))
         for assiette in (ACTIVITE, CAPITAL)
         for annee in (2025, 2027)
+    ]
+    definitions += [
+        (f"cotisations_point_prive_{annee}", partial(_point_cotisation_millions, annee))
+        for annee in (2025, 2017)
+    ]
+    definitions += [
+        (f"allegements_generaux_prevision_{annee}", partial(cout_allegements, annee))
+        for annee in (2024, 2025)
     ]
     return definitions
 

@@ -455,3 +455,21 @@ sources:
     millesime: septembre 2018
     acces: direct
     consulte_le: 2026-10-12
+
+  - id: ccss_octobre_2025
+    nom: Les comptes de la sécurité sociale, rapport à la Commission des comptes de la sécurité sociale, octobre 2025 (résultats 2024, prévisions 2025 et 2026)
+    editeur: Direction de la sécurité sociale (ministère chargé de la sécurité sociale)
+    url: https://www.securite-sociale.fr/files/live/sites/SSFR/files/medias/CCSS/2025/CCSS_octobre%202025_VDEF.pdf
+    licence: document administratif public (réutilisation libre avec mention de la source, loi du 17 juillet 1978)
+    millesime: octobre 2025
+    acces: direct
+    consulte_le: 2026-10-12
+
+  - id: ccss_octobre_2024
+    nom: Les comptes de la sécurité sociale, rapport à la Commission des comptes de la sécurité sociale, octobre 2024 (résultats 2023, prévisions 2024 et 2025)
+    editeur: Direction de la sécurité sociale (ministère chargé de la sécurité sociale)
+    url: https://www.securite-sociale.fr/files/live/sites/SSFR/files/medias/CCSS/2024/CCSS-octobre%202024.pdf
+    licence: document administratif public (réutilisation libre avec mention de la source, loi du 17 juillet 1978)
+    millesime: octobre 2024
+    acces: direct
+    consulte_le: 2026-10-12

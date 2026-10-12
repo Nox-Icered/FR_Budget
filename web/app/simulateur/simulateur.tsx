@@ -30,6 +30,8 @@ const LEVIERS: { id: string; pas: number }[] = [
   { id: "csg_activite", pas: 0.1 },
   { id: "csg_retraites", pas: 0.1 },
   { id: "csg_capital", pas: 0.1 },
+  { id: "cotisations_patronales_taux", pas: 0.1 },
+  { id: "allegements_generaux", pas: 1 },
 ];
 // Leviers dont la combinaison avec les crédits des missions est refusée par le moteur
 // (les crédits des missions contiennent les rémunérations de l'État).

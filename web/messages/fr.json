@@ -176,6 +176,14 @@
         "libelle": "Taux de CSG sur les revenus du capital ({reference} % en {annee}, porté à 10,6 % pour la plupart de ces revenus à partir de 2026)",
         "valeur": "{valeur} pt"
       },
+      "cotisations_patronales_taux": {
+        "libelle": "Taux de cotisation patronale du secteur privé, hors allègements (un point rapporte {reference} milliards d'euros en 2026 selon la Commission des comptes de la sécurité sociale)",
+        "valeur": "{valeur} pt"
+      },
+      "allegements_generaux": {
+        "libelle": "Allègements généraux de cotisations patronales ({reference} milliards d'euros en {annee})",
+        "valeur": "{valeur} %"
+      },
       "indexation_pensions_prestations": {
         "libelle": "Revalorisation des pensions de base et des prestations sociales, par rapport à la revalorisation prévue par la loi ({reference} milliards d'euros versés par an, montants de {annee})",
         "valeur": "{valeur} pt"
@@ -231,6 +239,8 @@
     "limite_indexation": "Les montants versés sont ceux de 2024, tenus constants en part du PIB. Les retours de prélèvements sont calculés pour des retraités vivant seuls ou en couple, avec la distribution des pensions de 2020. Le gel des plafonds de ressources, qui réduit le nombre de bénéficiaires, n'est pas compté. Pour les prestations familiales, le modèle reste en dessous des chiffrages officiels (voir la page Validation).",
     "methode_csg": "CSG : un point de taux rapporte le produit constaté de la CSG en {annee} divisé par son taux, soit {activite} milliards d'euros sur les revenus d'activité, {retraites} milliards sur les pensions de retraite au taux plein et {capital} milliards sur les revenus du capital. Pour les retraites, la part prélevée au taux plein est estimée avec OpenFisca à partir de la distribution des pensions publiée par la DREES.",
     "limite_csg": "Le rendement affiché ne déduit pas la baisse d'impôt sur le revenu due à la part déductible de la CSG, et ne tient pas compte d'un changement de comportement des épargnants. Sur les revenus du capital, le modèle surestime de 10 % la hausse de 2018 (voir la page Validation).",
+    "methode_cotisations": "Cotisations patronales : un point de cotisation sur les salaires du secteur privé rapporte {point} milliards d'euros ; augmenter de 1 % les allègements généraux coûte {allegements} milliard. Les cotisations des employeurs publics ne sont pas proposées : elles sont payées et reçues par les administrations publiques elles-mêmes.",
+    "limite_cotisations": "La hausse de taux est supposée hors du champ des allègements généraux : sinon, une partie serait annulée par la hausse des allègements sur les bas salaires. Le rendement ne déduit pas la baisse de l'impôt sur les sociétés due à des charges plus élevées, ni l'effet sur l'emploi et les salaires.",
     "limite_remunerations": "Le coût est estimé à partir de la masse salariale des administrations publiques et de la part du traitement indiciaire dans le salaire des fonctionnaires ; il s'écarte des chiffrages officiels par fonction publique (voir la page Validation). Une baisse des effectifs ne tient compte ni des allocations chômage ni des services rendus."
   }
 }

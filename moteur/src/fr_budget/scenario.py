@@ -54,6 +54,11 @@ Leviers disponibles :
   plein ou sur les revenus du capital (``fr_budget.agrege.csg``). Effet d'un point : rendement
   constaté en 2025 divisé par le taux (part du taux plein pour les retraites), brut de l'effet
   de la CSG déductible sur l'impôt sur le revenu.
+- ``cotisations_patronales_taux`` : hausse (ou baisse) de x points, de -2 à +2, du taux de
+  cotisation patronale déplafonnée du secteur privé, hors champ des allègements généraux
+  (``fr_budget.agrege.cotisations``) ; effet d'un point : valeur de point de la CCSS.
+- ``allegements_generaux`` : variation de x % (de -20 à +20) du coût des allègements généraux
+  de cotisations des salariés ; effet d'un pour cent : moins 1 % du coût constaté en 2025.
 
 Fourchettes : écart au scénario de référence, avec la plage du rendement du levier ; niveau
 de dette et de solde, avec la plage du levier et celle de la baseline, chacune seule.
@@ -67,6 +72,7 @@ from dataclasses import dataclass, replace
 from fr_budget import baseline as module_baseline
 from fr_budget.agrege import (
     accises,
+    cotisations,
     credits_missions,
     csg,
     depenses_fiscales,
@@ -123,6 +129,13 @@ LEVIERS_CSG = {
 # Variation admise des taux de CSG, en points (choix du lot 2.9, à relire) ; repère : la hausse
 # de 1,7 point de la LFSS 2018.
 BORNE_CSG = 2.0
+LEVIER_COTISATIONS_TAUX = "cotisations_patronales_taux"
+LEVIER_ALLEGEMENTS = "allegements_generaux"
+# Bornes choisies au lot 2.10 (à relire) : ±2 points de taux comme la CSG ; ±20 % des
+# allègements comme les crédits des missions (repère : le gel du barème de la RGDU, 5,6 Md€
+# en 2027, soit environ 8 % du coût).
+BORNE_COTISATIONS_TAUX = 2.0
+BORNE_ALLEGEMENTS = 20.0
 LEVIER_INDEXATION = "indexation_pensions_prestations"
 # Écart admis à la revalorisation légale, en points (décision du mainteneur du 12 octobre 2026) ;
 # repère : le gel de 2026 proposé au PLFSS 2026 correspondait à -1,0 point.
@@ -252,6 +265,11 @@ def rendement_unitaire(levier: str) -> Fourchette:
         return encadrer(-net.central, [-net.bas, -net.haut])
     if levier in LEVIERS_CSG:
         return csg.rendement_un_point(LEVIERS_CSG[levier])
+    if levier == LEVIER_COTISATIONS_TAUX:
+        return cotisations.rendement_point_taux()
+    if levier == LEVIER_ALLEGEMENTS:
+        cout = cotisations.cout_un_pourcent_allegements()
+        return encadrer(-cout.central, [-cout.bas, -cout.haut])
     if levier in LEVIERS_DOTATIONS:
         dotation = LEVIERS_DOTATIONS[levier]
         un_pourcent = -effet_etat_unitaire(levier)
@@ -314,6 +332,12 @@ def taux_reference(levier: str) -> float:
     if levier in LEVIERS_REMUNERATIONS:
         # Masse salariale des trois sous-secteurs, hors cotisations imputées, Md€ de 2025.
         return sum(remunerations.masse(v) for v in remunerations.VERSANTS)
+    if levier == LEVIER_COTISATIONS_TAUX:
+        # Valeur d'un point en 2026 publiée par la CCSS, Md€ courants.
+        return cotisations.valeur_point_prive(cotisations.ANNEE_POINT)
+    if levier == LEVIER_ALLEGEMENTS:
+        # Coût constaté en 2025, Md€.
+        return cotisations.cout_allegements(cotisations.ANNEE_REFERENCE)
     if levier in LEVIERS_CSG:
         # Taux de 2025, en % (taux plein pour les retraites).
         return csg.taux(LEVIERS_CSG[levier], csg.ANNEE_REFERENCE)
@@ -359,6 +383,10 @@ def bornes_levier(levier: str) -> tuple[float, float]:
         return BORNES_INDEXATION
     if levier in LEVIERS_CSG:
         return -BORNE_CSG, BORNE_CSG
+    if levier == LEVIER_COTISATIONS_TAUX:
+        return -BORNE_COTISATIONS_TAUX, BORNE_COTISATIONS_TAUX
+    if levier == LEVIER_ALLEGEMENTS:
+        return -BORNE_ALLEGEMENTS, BORNE_ALLEGEMENTS
     if levier == LEVIER_CREDITS_UNITE:
         # Md€ de 2025 : la même variation appliquée à toutes les missions du levier.
         total = _vers_euros_reference(credits_missions.total_credits() / EUROS_PAR_MILLIARD)
@@ -579,6 +607,8 @@ LEVIERS_REGISTRE = {
     **dict.fromkeys(LEVIERS_REMUNERATIONS, "remunerations_publiques"),
     LEVIER_INDEXATION: "indexation_pensions_prestations",
     **dict.fromkeys(LEVIERS_CSG, "csg"),
+    LEVIER_COTISATIONS_TAUX: "cotisations_patronales",
+    LEVIER_ALLEGEMENTS: "cotisations_patronales",
 }
 
 
@@ -670,6 +700,17 @@ PROVENANCE_CSG = (
     ),
     (),
 )
+PROVENANCE_COTISATIONS = (
+    (
+        "ccss_octobre_2026",
+        "ccss_octobre_2025",
+        "ccss_octobre_2024",
+        "ccss_septembre_2018",
+        "insee_comptes_nationaux_2025",
+        "plf2027_resf",
+    ),
+    (),
+)
 PROVENANCE_LEVIERS = {
     LEVIER_IS_TAUX_NORMAL: PROVENANCE_IS,
     LEVIER_IS_SURTAXE: PROVENANCE_IS,
@@ -695,6 +736,8 @@ PROVENANCE_LEVIERS = {
     **dict.fromkeys(LEVIERS_REMUNERATIONS, PROVENANCE_REMUNERATIONS),
     LEVIER_INDEXATION: PROVENANCE_INDEXATION,
     **dict.fromkeys(LEVIERS_CSG, PROVENANCE_CSG),
+    LEVIER_COTISATIONS_TAUX: PROVENANCE_COTISATIONS,
+    LEVIER_ALLEGEMENTS: PROVENANCE_COTISATIONS,
 }
 
 

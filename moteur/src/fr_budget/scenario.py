@@ -59,6 +59,11 @@ Leviers disponibles :
   (``fr_budget.agrege.cotisations``) ; effet d'un point : valeur de point de la CCSS.
 - ``allegements_generaux`` : variation de x % (de -20 à +20) du coût des allègements généraux
   de cotisations des salariés ; effet d'un pour cent : moins 1 % du coût constaté en 2025.
+- ``prime_activite_pente`` : variation de x points, de -5 à +5, de la fraction des revenus
+  professionnels prise en compte dans le calcul de la prime d'activité
+  (``fr_budget.agrege.prime_activite``) ; effet d'un point : moins le coût en année pleine,
+  calé sur le chiffrage de la baisse de 2025. Combinaison refusée avec la mission
+  « Solidarité, insertion et égalité des chances », qui finance la prime d'activité.
 - ``ir_seuils_bareme`` : revalorisation des seuils du barème de l'impôt sur le revenu supérieure
   (ou inférieure) de x %, de -3 à +3, à l'indexation sur l'inflation
   (``fr_budget.agrege.impot_revenu``) ; effet d'un pour cent : moins la sensibilité de
@@ -84,6 +89,7 @@ from fr_budget.agrege import (
     impot_revenu,
     impot_societes,
     indexation,
+    prime_activite,
     remunerations,
 )
 from fr_budget.agrege.tva import HYPOTHESE_REPARTITION, fourchette_point_tva, taux_tva
@@ -141,6 +147,10 @@ LEVIER_ALLEGEMENTS = "allegements_generaux"
 # en 2027, soit environ 8 % du coût).
 BORNE_COTISATIONS_TAUX = 2.0
 BORNE_ALLEGEMENTS = 20.0
+LEVIER_PA_PENTE = "prime_activite_pente"
+# Variation admise de la pente, en points (choix du lot 2.12, à relire) ; repère : la baisse de
+# 1,15 point de 2025.
+BORNE_PA_PENTE = 5.0
 LEVIER_IR_SEUILS = "ir_seuils_bareme"
 # Écart admis à l'indexation des seuils, en % (choix du lot 2.11, à relire) ; repères : gel de
 # 2026 (-1,0 %), indexation de 4,8 % de la LFI 2024.
@@ -276,6 +286,9 @@ def rendement_unitaire(levier: str) -> Fourchette:
         return csg.rendement_un_point(LEVIERS_CSG[levier])
     if levier == LEVIER_COTISATIONS_TAUX:
         return cotisations.rendement_point_taux()
+    if levier == LEVIER_PA_PENTE:
+        cout = prime_activite.cout_un_point()
+        return encadrer(-cout.central, [-cout.bas, -cout.haut])
     if levier == LEVIER_IR_SEUILS:
         r = impot_revenu.rendement_un_pourcent()
         return encadrer(-r.central, [-r.bas, -r.haut])
@@ -344,6 +357,9 @@ def taux_reference(levier: str) -> float:
     if levier in LEVIERS_REMUNERATIONS:
         # Masse salariale des trois sous-secteurs, hors cotisations imputées, Md€ de 2025.
         return sum(remunerations.masse(v) for v in remunerations.VERSANTS)
+    if levier == LEVIER_PA_PENTE:
+        # Fraction des revenus professionnels prise en compte, en %.
+        return prime_activite.pente_actuelle()
     if levier == LEVIER_IR_SEUILS:
         # Impôt au barème des revenus de 2024, Md€.
         return chiffrage("ir_impot_total_total_2024")
@@ -400,6 +416,8 @@ def bornes_levier(levier: str) -> tuple[float, float]:
         return -BORNE_CSG, BORNE_CSG
     if levier == LEVIER_COTISATIONS_TAUX:
         return -BORNE_COTISATIONS_TAUX, BORNE_COTISATIONS_TAUX
+    if levier == LEVIER_PA_PENTE:
+        return -BORNE_PA_PENTE, BORNE_PA_PENTE
     if levier == LEVIER_IR_SEUILS:
         return -BORNE_IR_SEUILS, BORNE_IR_SEUILS
     if levier == LEVIER_ALLEGEMENTS:
@@ -542,12 +560,12 @@ def verifier_double_compte(mesures: Sequence[Mesure]) -> None:
         # Les crédits de personnel de l'État sont dans les missions (option 4 (a)).
         msg = "double compte : les crédits des missions contiennent les rémunérations de l'État"
         raise ValueError(msg)
-    indexation_reglee = any(m.levier == LEVIER_INDEXATION for m in reglees)
+    indexation_reglee = any(m.levier in (LEVIER_INDEXATION, LEVIER_PA_PENTE) for m in reglees)
     solidarite_reglee = any(m.levier == levier_credits_mission(MISSION_SOLIDARITE) for m in reglees)
     if indexation_reglee and solidarite_reglee:
         msg = (
             "double compte : la mission « Solidarité, insertion et égalité des chances » "
-            "finance l'AAH et la prime d'activité, comprises dans l'indexation"
+            "finance l'AAH et la prime d'activité, visées par l'indexation ou la pente"
         )
         raise ValueError(msg)
 
@@ -627,6 +645,7 @@ LEVIERS_REGISTRE = {
     LEVIER_COTISATIONS_TAUX: "cotisations_patronales",
     LEVIER_ALLEGEMENTS: "cotisations_patronales",
     LEVIER_IR_SEUILS: "impot_revenu",
+    LEVIER_PA_PENTE: "minima_prime_activite",
 }
 
 
@@ -741,6 +760,15 @@ PROVENANCE_IR = (
     ),
     (),
 )
+PROVENANCE_PA = (
+    (
+        "senat_note_presentation_siec_plf2026",
+        "senat_rapport_special_siec_plf2026",
+        "openfisca_france_176_1_2",
+        "insee_comptes_nationaux_2025",
+    ),
+    (),
+)
 PROVENANCE_LEVIERS = {
     LEVIER_IS_TAUX_NORMAL: PROVENANCE_IS,
     LEVIER_IS_SURTAXE: PROVENANCE_IS,
@@ -769,6 +797,7 @@ PROVENANCE_LEVIERS = {
     LEVIER_COTISATIONS_TAUX: PROVENANCE_COTISATIONS,
     LEVIER_ALLEGEMENTS: PROVENANCE_COTISATIONS,
     LEVIER_IR_SEUILS: PROVENANCE_IR,
+    LEVIER_PA_PENTE: PROVENANCE_PA,
 }
 
 

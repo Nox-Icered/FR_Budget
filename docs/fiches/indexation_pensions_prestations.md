@@ -98,6 +98,7 @@ Convention des PLFSS (« nets des effets CSG et CASA ») : le modèle est compar
 | Sous-indexation de 0,5 point des pensions de base en 2027 | PLFSS 2026, lettre rectificative | 1,50 | 1,38 | -8,2 % | oui |
 | Gel de 2026, prestations familiales (1,0 point) | PLFSS 2026, étude d'impact | 0,30 | 0,20 | -32,6 % | non |
 | Gel des prestations familiales au 1er avril 2027 (2,1 points) | PLFSS 2027 | 0,50 | 0,44 | -12,7 % | non |
+| Gel de l'AAH en 2026 (1,0 point) | PLFSS 2026 (rapport spécial du Sénat, page 27) | 122,4 M€ | 107,6 M€ | -12,1 % | non |
 
 En brut, le gel de 2026 vaut 3,57 Md€ dans le modèle, contre 3,8 Md€ dans la référence (3,6 + 0,2 de CSG).
 
@@ -120,5 +121,6 @@ Le levier reste en bêta. Les références viennent toutes du Gouvernement ou du
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-12 | Ajout de la référence du gel de l'AAH en 2026 (demande du mainteneur) | 1 nouvelle référence, hors tolérance (-12,1 %) |
 | 2026-10-12 | Revue de la PR : effet de la première année réduit aux mois qui suivent la revalorisation ; une mesure à zéro ne bloque plus de combinaison | aucun test de validation (ils portaient déjà sur la première année) |
 | 2026-10-12 | Création du levier : extraction des comptes de la protection sociale et de la distribution des pensions de la DREES | 4 nouvelles références de validation, 2 dans la tolérance ; tableau : 36 sur 50 |

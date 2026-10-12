@@ -2245,3 +2245,69 @@ chiffrages:
     localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », bloc des montants, ligne « Total », colonne « impôt au barème »
     saisi_le: 2026-10-12
     relecture: a_relire
+
+  - id: pa_pente_baisse_2025_points
+    levier: minima_prime_activite
+    source: senat_note_presentation_siec_plf2026
+    millesime: "2025"
+    mesure: Baisse de la fraction des revenus professionnels prise en compte dans le calcul de la prime d'activité (décret n° 2025-292 du 29 mars 2025), de 61 % à 59,85 %
+    valeur: 1.15
+    unite: "point"
+    localisation: Encadré « La modification de la pente de la prime d'activité en 2025 », pages 15 et 16
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: pa_pente_rendement_annee_pleine
+    levier: minima_prime_activite
+    source: senat_note_presentation_siec_plf2026
+    millesime: "2025 (année pleine)"
+    mesure: Rendement en année pleine de la baisse de 1,15 point de la pente de la prime d'activité, selon l'administration (« jusqu'à 500 millions d'euros en année pleine »)
+    valeur: 500
+    unite: "M€"
+    localisation: Partie I, B, 2, page 15
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: pa_pente_moindre_depense_2025
+    levier: minima_prime_activite
+    source: senat_rapport_special_siec_plf2026
+    millesime: "2025"
+    mesure: Moindres dépenses de prime d'activité en 2025 dues au décret du 29 mars 2025 (diminution de la pente de 1,15 point)
+    valeur: 290
+    unite: "M€"
+    localisation: Commentaire de l'article 79, page 55
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: pa_depense_2024
+    levier: minima_prime_activite
+    source: senat_note_presentation_siec_plf2026
+    millesime: "2024"
+    mesure: Masses financières versées au titre de la prime d'activité en 2024 (« plus de 10,5 milliards d'euros »)
+    valeur: 10.5
+    unite: "Md€"
+    localisation: Partie I, B, 2, page 14
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: pa_credits_plf2026
+    levier: minima_prime_activite
+    source: senat_note_presentation_siec_plf2026
+    millesime: "PLF 2026"
+    mesure: Crédits prévus au titre de la prime d'activité en PLF 2026 (AE et CP)
+    valeur: 9.3
+    unite: "Md€"
+    localisation: Partie I, B, 2, page 15
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: indexation_gel_aah_2026
+    levier: indexation_pensions_prestations
+    source: senat_rapport_special_siec_plf2026
+    millesime: "PLFSS 2026 (2026)"
+    mesure: Économie attendue en 2026 sur l'AAH de l'« année blanche » (absence de revalorisation légale prévue au V de l'article 44 du PLFSS 2026)
+    valeur: 122.4
+    unite: "M€"
+    localisation: Partie consacrée à l'AAH, page 27
+    saisi_le: 2026-10-12
+    relecture: a_relire

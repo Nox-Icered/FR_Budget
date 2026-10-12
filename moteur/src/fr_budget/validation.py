@@ -29,12 +29,14 @@ from fr_budget.agrege.dotations import COMPENSATIONS, DGF, execution
 from fr_budget.agrege.impot_revenu import rendement_gel
 from fr_budget.agrege.impot_societes import is_brut
 from fr_budget.agrege.indexation import (
+    AAH,
     BLOCS,
     FAMILLE,
     NET_PRELEVEMENTS_SOCIAUX,
     PENSIONS,
     cout_mesure,
 )
+from fr_budget.agrege.prime_activite import economie_baisse_2025
 from fr_budget.agrege.remunerations import VERSANTS, cout_brut_point_mesure
 from fr_budget.agrege.tva import estimer_point_tva, estimer_recette_totale
 from fr_budget.dette import surcout_choc_taux_etat
@@ -122,6 +124,14 @@ def _csg_millions(assiette: str, points: float, annee: int) -> float:
     return hausse_mesuree(assiette, points, annee) * MILLIONS_PAR_MILLIARD
 
 
+def _indexation_millions(taux: float | str, annee: int, blocs: tuple[str, ...]) -> float:
+    return _indexation(taux, annee, blocs) * MILLIONS_PAR_MILLIARD
+
+
+def _pa_pente_millions() -> float:
+    return economie_baisse_2025() * MILLIONS_PAR_MILLIARD
+
+
 def _ir_gel(inflation: str, annee: int) -> float:
     return rendement_gel(chiffrage(inflation), annee)
 
@@ -192,6 +202,7 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         ("indexation_gel_2026_familiales", partial(_indexation, inflation_2025, 2026, (FAMILLE,))),
         ("indexation_sous_indexation_0_5_2027", partial(_indexation, 0.005, 2027, (PENSIONS,))),
         ("indexation_gel_familiales_2027", partial(_indexation, inflation_2026, 2027, (FAMILLE,))),
+        ("indexation_gel_aah_2026", partial(_indexation_millions, inflation_2025, 2026, (AAH,))),
     ]
     definitions += [
         ("csg_hausse_1_7_2018_activite", partial(_csg_millions, ACTIVITE, 1.7, 2018)),
@@ -214,6 +225,7 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         for annee in (2024, 2025)
     ]
     definitions += [("ir_gel_bareme_2026", partial(_ir_gel, inflation_2025, 2026))]
+    definitions += [("pa_pente_moindre_depense_2025", _pa_pente_millions)]
     return definitions
 
 

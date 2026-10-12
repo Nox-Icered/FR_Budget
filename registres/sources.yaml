@@ -491,3 +491,21 @@ sources:
     millesime: novembre 2025
     acces: direct
     consulte_le: 2026-10-12
+
+  - id: senat_note_presentation_siec_plf2026
+    nom: Note de présentation de la mission « Solidarité, insertion et égalité des chances », projet de loi de finances pour 2026, commission des finances du Sénat
+    editeur: Sénat
+    url: https://www.senat.fr/fileadmin/cru-1762483659/Commissions/Finances/2025-2026/PLF_2026/NP/SIEC_NP_PLF_2026.pdf
+    licence: document parlementaire public
+    millesime: novembre 2025
+    acces: direct
+    consulte_le: 2026-10-12
+
+  - id: senat_rapport_special_siec_plf2026
+    nom: Rapport général n° 139 (2025-2026), tome III, annexe 29, « Solidarité, insertion et égalité des chances », commission des finances du Sénat
+    editeur: Sénat
+    url: https://www.senat.fr/rap/l25-139-329/l25-139-3291.pdf
+    licence: document parlementaire public
+    millesime: 24 novembre 2025
+    acces: direct
+    consulte_le: 2026-10-12

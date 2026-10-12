@@ -392,3 +392,48 @@ sources:
     millesime: TES A38 1978-2024
     acces: direct
     consulte_le: 2026-10-07
+
+  - id: drees_comptes_protection_sociale_2025
+    nom: Les comptes de la protection sociale (édition 2025, données 2012 à 2024), prestations par régime et par secteur institutionnel
+    editeur: DREES (ministère chargé des solidarités et de la santé)
+    url: https://data.drees.solidarites-sante.gouv.fr/explore/dataset/305_les-comptes-de-la-protection-sociale/
+    licence: Licence Ouverte v2.0 (Etalab)
+    millesime: édition 2025 (mise à jour du 18 décembre 2025), données 2024
+    acces: direct
+    consulte_le: 2026-10-12
+
+  - id: drees_eir_2020_distribution_pensions
+    nom: Caractéristiques des retraités fin 2020, distributions des pensions mensuelles (échantillon interrégimes de retraités 2020)
+    editeur: DREES (ministère chargé des solidarités et de la santé)
+    url: https://data.drees.solidarites-sante.gouv.fr/explore/dataset/4178_distribution-des-pensions-mensuelles/
+    licence: Licence Ouverte v2.0 (Etalab), conditions générales de data.drees
+    millesime: EIR 2020 (données au 31 décembre 2020)
+    acces: direct
+    consulte_le: 2026-10-12
+
+  - id: plfss2026_projet_loi
+    nom: Projet de loi de financement de la sécurité sociale pour 2026, n° 1907 (exposé des motifs et annexe sur les prévisions de recettes et objectifs de dépenses)
+    editeur: Assemblée nationale (texte du Gouvernement)
+    url: https://www.assemblee-nationale.fr/dyn/17/textes/l17b1907_projet-loi.pdf
+    licence: document parlementaire public
+    millesime: PLFSS 2026 (enregistré le 14 octobre 2025)
+    acces: direct
+    consulte_le: 2026-10-12
+
+  - id: plfss2027_projet_loi
+    nom: Projet de loi de financement de la sécurité sociale pour 2027, n° 3211 (exposé des motifs et annexe sur les prévisions de recettes et objectifs de dépenses)
+    editeur: Assemblée nationale (texte du Gouvernement)
+    url: https://www.assemblee-nationale.fr/dyn/17/textes/l17b3211_projet-loi.pdf
+    licence: document parlementaire public
+    millesime: PLFSS 2027 (enregistré le 1er octobre 2026)
+    acces: direct
+    consulte_le: 2026-10-12
+
+  - id: senat_rapport_plfss2026_tome1
+    nom: Rapport n° 131 (2025-2026), tome I, sur le projet de loi de financement de la sécurité sociale pour 2026, par Élisabeth Doineau et les rapporteurs de la commission des affaires sociales du Sénat
+    editeur: Sénat
+    url: https://www.senat.fr/rap/l25-131-1/l25-131-11.pdf
+    licence: document parlementaire public
+    millesime: 15 novembre 2025
+    acces: direct
+    consulte_le: 2026-10-12

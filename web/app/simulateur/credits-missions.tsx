@@ -15,12 +15,14 @@ export function ReglagesCreditsMissions({
   reglages,
   setReglages,
   bloque,
+  missionsBloquees,
 }: {
   catalogue: CatalogueCreditsMissions;
   leviers: ReponsesUnitaires["leviers"];
   reglages: Record<string, number>;
   setReglages: (v: Record<string, number>) => void;
   bloque: boolean;
+  missionsBloquees: string[];
 }) {
   const idBase = useId();
   const statut = leviers.credits_missions?.statut;
@@ -46,6 +48,7 @@ export function ReglagesCreditsMissions({
         {catalogue.missions.map((m) => {
           const id = `${idBase}-${m.identifiant}`;
           const valeur = reglages[m.identifiant] ?? 0;
+          const bloqueeSeule = missionsBloquees.includes(m.identifiant);
           return (
             <div key={m.identifiant} className="reglage">
               <label htmlFor={id}>
@@ -66,11 +69,14 @@ export function ReglagesCreditsMissions({
                 max={Math.floor(haute / PAS) * PAS}
                 step={PAS}
                 value={valeur}
-                disabled={bloque}
+                disabled={bloque || bloqueeSeule}
                 onChange={(e) =>
                   setReglages({ ...reglages, [m.identifiant]: Number(e.target.value) })
                 }
               />
+              {bloqueeSeule && (
+                <span className="source">{texte("simulateur.credits_missions.bloque_indexation")}</span>
+              )}
             </div>
           );
         })}

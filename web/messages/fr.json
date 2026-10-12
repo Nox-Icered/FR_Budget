@@ -163,6 +163,10 @@
       "remunerations_effectifs": {
         "libelle": "Effectifs des trois fonctions publiques (masse salariale de {reference} milliards d'euros en {annee})",
         "valeur": "{valeur} %"
+      },
+      "indexation_pensions_prestations": {
+        "libelle": "Revalorisation des pensions de base et des prestations sociales, par rapport à la revalorisation prévue par la loi ({reference} milliards d'euros versés par an, montants de {annee})",
+        "valeur": "{valeur} pt"
       }
     },
     "limite_tva_accise": "La hausse de l'accise augmente aussi la TVA payée sur le carburant : cet effet n'est pas compté.",
@@ -201,7 +205,8 @@
       "liste": "Les {nombre} missions ({reglees} réglée(s))",
       "mission": "{mission} ({credits} milliards d'euros demandés pour {annee})",
       "valeur": "{valeur} %",
-      "bloque": "Réglage impossible tant que le point d'indice ou les effectifs sont modifiés : les crédits des missions contiennent déjà les rémunérations de l'État."
+      "bloque": "Réglage impossible tant que le point d'indice ou les effectifs sont modifiés : les crédits des missions contiennent déjà les rémunérations de l'État.",
+      "bloque_indexation": "Réglage impossible tant que la revalorisation des pensions et prestations est modifiée : cette mission finance l'allocation aux adultes handicapés et la prime d'activité."
     },
     "methode_credits_missions": "Crédits des missions : le changement de solde d'une variation de x % est x % des crédits de paiement demandés pour {annee} dans le projet de loi de finances, rapporté au PIB de la même année. La fourchette reprend les écarts constatés de 2023 à 2025 entre les crédits votés et les dépenses réellement faites.",
     "limite_credits_missions": "Un euro de crédit en moins compte pour un euro de solde en plus, même quand il finance un autre organisme public (université, opérateur, Sécurité sociale) qui pourrait ne pas réduire sa dépense. Les crédits de personnel restent dans chaque mission.",
@@ -209,6 +214,9 @@
     "limite_dotations": "La réaction des collectivités à une variation de leurs dotations est estimée sur des données anciennes (2001-2013) et sur l'investissement seul : elle n'est pas encore confrontée à une autre source.",
     "bloque_remunerations": "Réglage impossible tant que des crédits de missions sont modifiés : ces crédits contiennent déjà les rémunérations de l'État.",
     "methode_remunerations": "Rémunérations publiques : augmenter de 1 % la valeur du point d'indice coûte {brut_point} milliards d'euros aux employeurs publics, mais {net_point} milliard au solde public, car les cotisations, la CSG et l'impôt payés sur cette hausse reviennent aux administrations publiques. Pour 1 % d'effectifs en plus : {brut_effectifs} milliards brut, {net_effectifs} milliards net.",
+    "bloque_indexation": "Réglage impossible tant que les crédits de la mission « Solidarité, insertion et égalité des chances » sont modifiés : elle finance l'allocation aux adultes handicapés et la prime d'activité.",
+    "methode_indexation": "Revalorisation des pensions et prestations : chaque année, la loi revalorise les pensions de base (en janvier) et la plupart des prestations sociales (en avril) selon l'inflation. Revaloriser d'un point de plus coûte {brut} milliards d'euros par an, mais {net} milliards au solde public, car la CSG, la CRDS, la CASA et l'impôt sur le revenu payés sur les pensions reviennent aux administrations publiques. L'écart choisi s'applique une fois ; le niveau des prestations reste ensuite décalé d'autant. Les retraites complémentaires (Agirc-Arrco), décidées par les partenaires sociaux, les allocations chômage et les aides au logement ne sont pas comprises.",
+    "limite_indexation": "Les montants versés sont ceux de 2024, tenus constants en part du PIB. Les retours de prélèvements sont calculés pour des retraités vivant seuls ou en couple, avec la distribution des pensions de 2020. Le gel des plafonds de ressources, qui réduit le nombre de bénéficiaires, n'est pas compté. Pour les prestations familiales, le modèle reste en dessous des chiffrages officiels (voir la page Validation).",
     "limite_remunerations": "Le coût est estimé à partir de la masse salariale des administrations publiques et de la part du traitement indiciaire dans le salaire des fonctionnaires ; il s'écarte des chiffrages officiels par fonction publique (voir la page Validation). Une baisse des effectifs ne tient compte ni des allocations chômage ni des services rendus."
   }
 }

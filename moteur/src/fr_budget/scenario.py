@@ -42,6 +42,13 @@ Leviers disponibles :
   (``fr_budget.agrege.remunerations``). Effet d'un pour cent : moins le coût net pour les
   administrations publiques (hausse du revenu après impôt des agents) ; le coût brut
   (``effet_brut_unitaire``) est affiché à part. Montants de 2025 : aucune conversion.
+- ``indexation_pensions_prestations`` : revalorisation des pensions de base et des prestations
+  revalorisées par la loi supérieure (ou inférieure) de x points à la revalorisation légale,
+  une année, de -2 à +1 point (décision du mainteneur du 12 octobre 2026)
+  (``fr_budget.agrege.indexation``). Effet d'un point : moins le coût net en année pleine
+  (prélèvements sociaux et impôt sur le revenu déduits), sur les montants de 2025 ; le coût
+  brut (``effet_brut_unitaire``) est affiché à part. Combinaison refusée avec la mission
+  « Solidarité, insertion et égalité des chances », qui finance l'AAH et la prime d'activité.
 
 Fourchettes : écart au scénario de référence, avec la plage du rendement du levier ; niveau
 de dette et de solde, avec la plage du levier et celle de la baseline, chacune seule.
@@ -59,6 +66,7 @@ from fr_budget.agrege import (
     depenses_fiscales,
     dotations,
     impot_societes,
+    indexation,
     remunerations,
 )
 from fr_budget.agrege.tva import HYPOTHESE_REPARTITION, fourchette_point_tva, taux_tva
@@ -101,6 +109,13 @@ LEVIERS_REMUNERATIONS = {
 }
 # Variation admise du point et des effectifs, en % (décision du mainteneur du 12 octobre 2026).
 BORNE_REMUNERATIONS = 5.0
+LEVIER_INDEXATION = "indexation_pensions_prestations"
+# Écart admis à la revalorisation légale, en points (décision du mainteneur du 12 octobre 2026) ;
+# repère : le gel de 2026 proposé au PLFSS 2026 correspondait à -1,0 point.
+BORNES_INDEXATION = (-2.0, 1.0)
+# Mission qui finance l'AAH et la prime d'activité (programmes 157 et 304), comprises dans le
+# levier d'indexation.
+MISSION_SOLIDARITE = "solidarite_insertion_et_egalite_des_chances"
 MILLIONS_PAR_MILLIARD = 1000.0
 EUROS_PAR_MILLIARD = 1e9
 ANNEE_REFERENCE = 2025
@@ -195,9 +210,15 @@ def effet_etat_unitaire(levier: str) -> float:
     return -_vers_euros_reference(dotations.montant_levier(dotation) / POURCENT)
 
 
+LEVIERS_EFFET_BRUT = (*LEVIERS_REMUNERATIONS, LEVIER_INDEXATION)
+
+
 def effet_brut_unitaire(levier: str) -> float:
-    """Rémunérations : effet brut d'une hausse d'un pour cent, avant les retours de
-    cotisations, de CSG et d'impôt aux administrations publiques, en Md€ de 2025."""
+    """Rémunérations et indexation : effet brut d'une unité (1 %, ou 1 point de
+    revalorisation), avant les retours de cotisations, de CSG et d'impôt aux administrations
+    publiques, en Md€ de 2025."""
+    if levier == LEVIER_INDEXATION:
+        return -indexation.cout_brut_un_point()
     return -remunerations.cout_brut_un_pourcent(LEVIERS_REMUNERATIONS[levier])
 
 
@@ -211,6 +232,9 @@ def rendement_unitaire(levier: str) -> Fourchette:
     """
     if levier in LEVIERS_REMUNERATIONS:
         net = remunerations.cout_net_un_pourcent(LEVIERS_REMUNERATIONS[levier])
+        return encadrer(-net.central, [-net.bas, -net.haut])
+    if levier == LEVIER_INDEXATION:
+        net = indexation.cout_un_point()
         return encadrer(-net.central, [-net.bas, -net.haut])
     if levier in LEVIERS_DOTATIONS:
         dotation = LEVIERS_DOTATIONS[levier]
@@ -274,6 +298,9 @@ def taux_reference(levier: str) -> float:
     if levier in LEVIERS_REMUNERATIONS:
         # Masse salariale des trois sous-secteurs, hors cotisations imputées, Md€ de 2025.
         return sum(remunerations.masse(v) for v in remunerations.VERSANTS)
+    if levier == LEVIER_INDEXATION:
+        # Pensions et prestations du levier, Md€ de 2025.
+        return sum(indexation.montant(b) for b in indexation.BLOCS)
     if levier in LEVIERS_DEPENSES_FISCALES_IMPOT:
         impot = LEVIERS_DEPENSES_FISCALES_IMPOT[levier]
         return depenses_fiscales.cout_impot_levier(impot) / MILLIONS_PAR_MILLIARD
@@ -309,6 +336,8 @@ def bornes_levier(levier: str) -> tuple[float, float]:
         return -BORNE_DOTATIONS, BORNE_DOTATIONS
     if levier in LEVIERS_REMUNERATIONS:
         return -BORNE_REMUNERATIONS, BORNE_REMUNERATIONS
+    if levier == LEVIER_INDEXATION:
+        return BORNES_INDEXATION
     if levier == LEVIER_CREDITS_UNITE:
         # Md€ de 2025 : la même variation appliquée à toutes les missions du levier.
         total = _vers_euros_reference(credits_missions.total_credits() / EUROS_PAR_MILLIARD)
@@ -433,6 +462,14 @@ def verifier_double_compte(mesures: Sequence[Mesure]) -> None:
         # Les crédits de personnel de l'État sont dans les missions (option 4 (a)).
         msg = "double compte : les crédits des missions contiennent les rémunérations de l'État"
         raise ValueError(msg)
+    indexation_reglee = any(m.levier == LEVIER_INDEXATION for m in mesures)
+    solidarite_reglee = any(m.levier == levier_credits_mission(MISSION_SOLIDARITE) for m in mesures)
+    if indexation_reglee and solidarite_reglee:
+        msg = (
+            "double compte : la mission « Solidarité, insertion et égalité des chances » "
+            "finance l'AAH et la prime d'activité, comprises dans l'indexation"
+        )
+        raise ValueError(msg)
 
 
 def _verifier_credits(mesures: Sequence[Mesure]) -> None:
@@ -505,6 +542,7 @@ LEVIERS_REGISTRE = {
     LEVIER_CREDITS_UNITE: "credits_missions",
     **dict.fromkeys(LEVIERS_DOTATIONS, "dotations_collectivites"),
     **dict.fromkeys(LEVIERS_REMUNERATIONS, "remunerations_publiques"),
+    LEVIER_INDEXATION: "indexation_pensions_prestations",
 }
 
 
@@ -571,6 +609,19 @@ PROVENANCE_REMUNERATIONS = (
     ),
     (),
 )
+PROVENANCE_INDEXATION = (
+    (
+        "drees_comptes_protection_sociale_2025",
+        "drees_eir_2020_distribution_pensions",
+        "openfisca_france_176_1_2",
+        "insee_comptes_nationaux_2025",
+        "plf2027_resf",
+        "plfss2026_projet_loi",
+        "plfss2027_projet_loi",
+        "senat_rapport_plfss2026_tome1",
+    ),
+    (),
+)
 PROVENANCE_LEVIERS = {
     LEVIER_IS_TAUX_NORMAL: PROVENANCE_IS,
     LEVIER_IS_SURTAXE: PROVENANCE_IS,
@@ -594,6 +645,7 @@ PROVENANCE_LEVIERS = {
     LEVIER_CREDITS_UNITE: (SOURCES_CREDITS, (HYPOTHESE_ECART_CREDITS,)),
     **dict.fromkeys(LEVIERS_DOTATIONS, PROVENANCE_DOTATIONS),
     **dict.fromkeys(LEVIERS_REMUNERATIONS, PROVENANCE_REMUNERATIONS),
+    LEVIER_INDEXATION: PROVENANCE_INDEXATION,
 }
 
 

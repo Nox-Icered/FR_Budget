@@ -26,10 +26,14 @@ const LEVIERS: { id: string; pas: number }[] = [
   { id: "dotations_compensations", pas: 1 },
   { id: "remunerations_point_indice", pas: 0.5 },
   { id: "remunerations_effectifs", pas: 0.5 },
+  { id: "indexation_pensions_prestations", pas: 0.1 },
 ];
 // Leviers dont la combinaison avec les crédits des missions est refusée par le moteur
 // (les crédits des missions contiennent les rémunérations de l'État).
 const LEVIERS_REMUNERATIONS = ["remunerations_point_indice", "remunerations_effectifs"];
+// Levier refusé par le moteur avec la mission qui finance l'AAH et la prime d'activité.
+const LEVIER_INDEXATION = "indexation_pensions_prestations";
+const MISSION_SOLIDARITE = "solidarite_insertion_et_egalite_des_chances";
 const ANNEES_AFFICHEES = [2027, 2030, 2035, 2040, 2046];
 
 export function Simulateur({
@@ -55,6 +59,8 @@ export function Simulateur({
   const idBase = useId();
   const remunerationsReglees = LEVIERS_REMUNERATIONS.some((id) => (valeurs[id] ?? 0) !== 0);
   const missionsReglees = Object.values(parMission).some((v) => v !== 0);
+  const indexationReglee = (valeurs[LEVIER_INDEXATION] ?? 0) !== 0;
+  const solidariteReglee = (parMission[MISSION_SOLIDARITE] ?? 0) !== 0;
   const lignes = calculer(
     donnees,
     [
@@ -81,7 +87,9 @@ export function Simulateur({
         {leviers.map((l) => {
           const levier = donnees.leviers[l.id];
           const id = `${idBase}-${l.id}`;
-          const bloque = missionsReglees && LEVIERS_REMUNERATIONS.includes(l.id);
+          const bloqueRemunerations = missionsReglees && LEVIERS_REMUNERATIONS.includes(l.id);
+          const bloqueIndexation = solidariteReglee && l.id === LEVIER_INDEXATION;
+          const bloque = bloqueRemunerations || bloqueIndexation;
           return (
             <div key={l.id} className="reglage">
               <label htmlFor={id}>
@@ -107,7 +115,12 @@ export function Simulateur({
                 disabled={bloque}
                 onChange={(e) => setValeurs({ ...valeurs, [l.id]: Number(e.target.value) })}
               />
-              {bloque && <span className="source">{texte("simulateur.bloque_remunerations")}</span>}
+              {bloqueRemunerations && (
+                <span className="source">{texte("simulateur.bloque_remunerations")}</span>
+              )}
+              {bloqueIndexation && (
+                <span className="source">{texte("simulateur.bloque_indexation")}</span>
+              )}
             </div>
           );
         })}
@@ -137,6 +150,7 @@ export function Simulateur({
         leviers={donnees.leviers}
         reglages={parMission}
         bloque={remunerationsReglees}
+        missionsBloquees={indexationReglee ? [MISSION_SOLIDARITE] : []}
         setReglages={setParMission}
       />
       <GraphiqueDette

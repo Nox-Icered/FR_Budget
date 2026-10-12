@@ -68,10 +68,10 @@ leviers:
 
   - id: indexation_pensions_prestations
     libelle: Revalorisation des pensions et prestations
-    parametres_reglables: [Règle de revalorisation (inflation, salaires, gel)]
+    parametres_reglables: [Écart à la revalorisation légale des pensions de base et des prestations, en points]
     moteur: agrege
-    references_visees: [Rapport annuel du COR, CNAV, CNAF]
-    statut: non_publie
+    references_visees: [PLFSS 2026 et 2027 (chiffrages des gels et sous-indexations), rapport du Sénat sur le PLFSS 2026, Cour des comptes]
+    statut: beta
 
   - id: minima_prime_activite
     libelle: Minima sociaux et prime d'activité

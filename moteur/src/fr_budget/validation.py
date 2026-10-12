@@ -18,6 +18,13 @@ from fr_budget.agrege.credits_missions import total_execution
 from fr_budget.agrege.depenses_fiscales import cout_par_impot
 from fr_budget.agrege.dotations import COMPENSATIONS, DGF, execution
 from fr_budget.agrege.impot_societes import is_brut
+from fr_budget.agrege.indexation import (
+    BLOCS,
+    FAMILLE,
+    NET_PRELEVEMENTS_SOCIAUX,
+    PENSIONS,
+    cout_mesure,
+)
 from fr_budget.agrege.remunerations import VERSANTS, cout_brut_point_mesure
 from fr_budget.agrege.tva import estimer_point_tva, estimer_recette_totale
 from fr_budget.dette import surcout_choc_taux_etat
@@ -29,6 +36,7 @@ TOLERANCE_PUBLICATION = 0.10
 MILLIONS_PAR_MILLIARD = 1000.0
 EUROS_PAR_MILLIARD = 1e9
 IMPOTS_DEPENSES_FISCALES = ("impot_revenu", "impot_revenu_et_societes", "impot_societes")
+POURCENT = 100.0
 TAUX_TVA = ("ensemble", "taux_2_1", "taux_5_5", "taux_10", "taux_20")
 
 
@@ -92,6 +100,13 @@ def _cout_point(taux: float, annee: int, versant: str) -> float:
     return sum(cout_brut_point_mesure(v, taux, annee) for v in versants)
 
 
+def _indexation(taux: float | str, annee: int, blocs: tuple[str, ...]) -> float:
+    """Rendement en première année d'un gel ou d'une sous-indexation, net des prélèvements
+    sociaux, en Md€. ``taux`` : écart de revalorisation, ou chiffrage de l'inflation évitée (%)."""
+    ecart = taux if isinstance(taux, float) else chiffrage(taux) / POURCENT
+    return cout_mesure(ecart, annee, blocs, NET_PRELEVEMENTS_SOCIAUX)
+
+
 def _definitions() -> list[tuple[str, Callable[[], float]]]:
     definitions: list[tuple[str, Callable[[], float]]] = []
     for taux in TAUX_TVA:
@@ -138,6 +153,14 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         )
         for mesure, taux, annee in (("3_5", 0.035, 2023), ("1_5", 0.015, 2024))
         for versant in (*VERSANTS, "total")
+    ]
+    inflation_2025 = "indexation_inflation_hors_tabac_2025_plfss2026"
+    inflation_2026 = "indexation_inflation_hors_tabac_2026_plfss2027"
+    definitions += [
+        ("indexation_gel_2026_apu", partial(_indexation, inflation_2025, 2026, tuple(BLOCS))),
+        ("indexation_gel_2026_familiales", partial(_indexation, inflation_2025, 2026, (FAMILLE,))),
+        ("indexation_sous_indexation_0_5_2027", partial(_indexation, 0.005, 2027, (PENSIONS,))),
+        ("indexation_gel_familiales_2027", partial(_indexation, inflation_2026, 2027, (FAMILLE,))),
     ]
     return definitions
 

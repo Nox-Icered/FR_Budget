@@ -1255,3 +1255,91 @@ chiffrages:
     localisation: Tableau « Coûts des dernières revalorisations du point d'indice », page 8, ligne « + 1,5 % », colonnes 2024, Total
     saisi_le: 2026-10-12
     relecture: a_relire
+
+  - id: indexation_gel_2026_apu
+    levier: indexation_pensions_prestations
+    source: plfss2026_projet_loi
+    millesime: PLFSS 2026 (2026)
+    mesure: Économie en 2026 du maintien des prestations sociales, y compris les pensions de retraite, à leur niveau de 2025 (article 44), pour l'ensemble des administrations publiques (2,5 Md€ pour la sécurité sociale, 1,1 Md€ pour l'État), nette de l'effet sur la CSG
+    valeur: 3.6
+    unite: Md€
+    localisation: Exposé des motifs de l'article 44, page 138 ; le rapport du Sénat n° 131 (tome I, page 134, note 2) précise que les 2,5 Md€ de la sécurité sociale sont nets de 0,2 Md€ de CSG
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: indexation_gel_2026_retour_csg
+    levier: indexation_pensions_prestations
+    source: senat_rapport_plfss2026_tome1
+    millesime: PLFSS 2026 (2026)
+    mesure: Effet retour du gel des prestations de 2026 sur la CSG sur les revenus de remplacement (moindres recettes de la sécurité sociale)
+    valeur: 0.2
+    unite: Md€
+    localisation: Tableau des mesures du PLFSS, page 134, note 2 (« Avant cet effet retour, ce gain est de 2,7 milliards d'euros »)
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: indexation_gel_2026_familiales
+    levier: indexation_pensions_prestations
+    source: senat_rapport_plfss2026_tome1
+    millesime: PLFSS 2026 (2026)
+    mesure: Économie en 2026 du gel des prestations familiales (prestation d'accueil du jeune enfant, allocations familiales, complément familial, allocation de soutien familial, allocation de rentrée scolaire, allocation forfaitaire en cas de décès d'un enfant), selon l'étude d'impact du PLFSS 2026 citée par la rapporteure de la branche vieillesse
+    valeur: 0.3
+    unite: Md€
+    localisation: Audition de la CNAF, question de Mme Pascale Gruny, page 164
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: indexation_sous_indexation_0_5_2027
+    levier: indexation_pensions_prestations
+    source: senat_rapport_plfss2026_tome1
+    millesime: PLFSS 2026, lettre rectificative (2027)
+    mesure: Rendement en 2027 d'une sous-indexation supplémentaire de 0,5 point des pensions de retraite de base (lettre rectificative du 23 octobre 2025)
+    valeur: 1.5
+    unite: Md€
+    localisation: Page 101 (« a majoré la sous-indexation en 2027 de 0,5 point, soit 1,5 milliard d'euros ») ; aussi page 34
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: indexation_gel_familiales_2027
+    levier: indexation_pensions_prestations
+    source: plfss2027_projet_loi
+    millesime: PLFSS 2027 (2027)
+    mesure: Rendement attendu en 2027 du maintien des prestations familiales à leur niveau de 2026 (pas de revalorisation au 1er avril 2027)
+    valeur: 0.5
+    unite: Md€
+    localisation: Annexe, solde de la branche famille, page 134
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: indexation_inflation_hors_tabac_2025_plfss2026
+    levier: indexation_pensions_prestations
+    source: plfss2026_projet_loi
+    millesime: PLFSS 2026 (prévision pour 2025)
+    mesure: Inflation hors tabac prévue pour 2025, qui détermine la revalorisation légale de 2026
+    valeur: 1.0
+    unite: "%"
+    localisation: Annexe, tableau des hypothèses d'évolution, ligne « Inflation hors tabac », colonne 2025 (p), page 152
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: indexation_inflation_hors_tabac_2026_plfss2027
+    levier: indexation_pensions_prestations
+    source: plfss2027_projet_loi
+    millesime: PLFSS 2027 (prévision pour 2026)
+    mesure: Inflation hors tabac prévue pour 2026, qui détermine la revalorisation légale de 2027
+    valeur: 2.1
+    unite: "%"
+    localisation: Annexe, tableau des hypothèses, ligne « Inflation hors tabac », colonne 2026 (p), page 127
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: indexation_mois_revalorisation_pensions
+    levier: indexation_pensions_prestations
+    source: plfss2027_projet_loi
+    millesime: PLFSS 2027
+    mesure: Mois de la revalorisation légale des pensions de retraite (« la loi garantit aujourd'hui la revalorisation automatique des pensions au 1er janvier »)
+    valeur: 1
+    unite: mois
+    localisation: Exposé des motifs de l'article 35, page 106
+    saisi_le: 2026-10-12
+    relecture: a_relire

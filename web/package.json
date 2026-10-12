@@ -9,7 +9,9 @@
     "build": "next build",
     "typecheck": "tsc --noEmit",
     "test": "node --test --experimental-strip-types tests/*.test.ts",
-    "accessibilite": "node outils/accessibilite.mjs"
+    "accessibilite": "node outils/accessibilite.mjs",
+    "prebuild": "node outils/copier-donnees.mjs",
+    "predev": "node outils/copier-donnees.mjs"
   },
   "dependencies": {
     "next": "^16.4.0",

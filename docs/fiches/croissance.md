@@ -67,7 +67,7 @@ Pour chaque catégorie, la valeur centrale est la variante du modèle Mésange (
 7. **Mésange 2017 date.** Le modèle a été réestimé en 2017 sur des données antérieures. Le document de l'Insee de 2024 (DT 2024-07) donne des intervalles de confiance seulement pour l'investissement public : il n'est pas repris.
 8. **Dépenses fiscales choisies une à une.** Le site les regroupe dans un levier générique, qui prend le multiplicateur des « autres prélèvements », même pour une dépense de l'impôt sur le revenu (correction après la revue de la PR, pour que le site et le moteur concordent).
    - Limite : une dépense de l'impôt sur le revenu choisie seule a un multiplicateur central de 0,5 au lieu de 0,41.
-9. **Poids des données du site.** Le supplément de croissance double les réponses exportées : la page du simulateur passe d'environ 225 à 610 ko compressés. L'allègement (chargement différé, cache) relève du lot 3.6.
+9. **Poids des données du site.** Le supplément de croissance double les réponses exportées : la page du simulateur passe d'environ 225 à 610 ko compressés. Depuis le lot 3.6, ces données sont chargées à part, une fois par visite : la page elle-même ne pèse plus que 27 ko compressés.
 
 ## 6. Validation
 

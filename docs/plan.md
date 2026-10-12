@@ -175,7 +175,8 @@ Décision du 12 octobre 2026 : la phase 3 commence avant le franchissement de la
    - Limite : un contrôle automatique couvre une partie seulement des critères du RGAA ; un audit manuel (lecteur d'écran, contrastes du graphique, navigation clavier complète) reste à faire.
    - Reste à faire, et **à décider par le mainteneur** :
      - hébergement (choix de l'hébergeur, du nom de domaine, archives par version pour que les anciens liens restent reproductibles) ;
-     - allègement des pages du simulateur et de la comparaison (environ 610 ko compressés depuis le lot 3.2) par un chargement différé des réponses et leur mise en cache.
+   - Fait au lot 3.6 (deuxième partie) : les réponses unitaires du simulateur ne sont plus incluses dans le HTML. Elles sont copiées en fichier statique (`/donnees/scenario-unitaire.json`) et chargées une fois par visite, partagées entre le simulateur et la comparaison. La page du simulateur passe de 5,7 Mo à 123 ko (27 ko compressés) ; le fichier de données fait environ 600 ko compressés, mis en cache par le navigateur selon l'hébergement.
+     - Conséquence : sans JavaScript, le simulateur affiche seulement un message de chargement (c'était déjà le cas pour le calcul).
 
 ## 7. Tests et CI
 

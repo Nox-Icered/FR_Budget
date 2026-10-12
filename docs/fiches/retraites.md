@@ -58,10 +58,12 @@ Les 6 valeurs du tableau 2.10 saisies dans `registres/references/chiffrages.yaml
 
 Test : `moteur/tests/validation/test_levier_retraites.py`. Tolérance : ±10 %.
 
-La référence est le tableau 2.10 du COR (page 123) : l'effet d'un an de plus sur l'âge d'ouverture des droits sur le solde primaire des APU, selon les simulations de la DG Trésor, d'I-MIP et de l'OFCE. Le modèle est comparé à chaque borne de la fourchette publiée.
+La référence est le tableau 2.10 du COR (page 123) : l'effet d'un an de plus sur l'âge d'ouverture des droits sur le solde primaire des APU, selon les simulations de la DG Trésor, d'I-MIP et de l'OFCE. Le modèle est comparé à chaque borne de la fourchette publiée (court terme à 2 ans, moyen terme à 10 ans, long terme à 20 ans).
 
 | Référence | Référence | Modèle | Écart | Dans la tolérance |
 |-----------|----------:|-------:|------:|-------------------|
+| À 2 ans, borne basse | 0,05 | 0,48 | +860,3 % | non |
+| À 2 ans, borne haute | 0,40 | 0,48 | +20,0 % | non |
 | À 10 ans, borne basse | 0,30 | 0,84 | +179,7 % | non |
 | À 10 ans, borne haute | 0,60 | 0,84 | +39,9 % | non |
 | À 20 ans, borne basse | 0,30 | 0,78 | +161,3 % | non |
@@ -78,4 +80,5 @@ Les simulations du COR comptent en revanche des recettes supplémentaires dues �
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-12 | Revue de la PR : références à 2 ans ajoutées à la validation | 2 nouvelles références, hors tolérance ; tableau : 49 sur 72 |
 | 2026-10-12 | Création du module (première étape) | 4 nouvelles références de validation, toutes hors tolérance ; tableau : 49 sur 70 |

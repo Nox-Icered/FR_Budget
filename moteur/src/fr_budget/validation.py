@@ -229,7 +229,7 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
     definitions += [("pa_pente_moindre_depense_2025", _pa_pente_millions)]
     definitions += [
         (f"cor_aod_un_an_solde_apu_{horizon}ans_{borne}", partial(effet_a_horizon, horizon, 2027))
-        for horizon in (10, 20)
+        for horizon in (2, 10, 20)
         for borne in ("bas", "haut")
     ]
     return definitions

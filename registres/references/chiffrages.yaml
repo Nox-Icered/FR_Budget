@@ -1343,3 +1343,377 @@ chiffrages:
     localisation: Exposé des motifs de l'article 35, page 106
     saisi_le: 2026-10-12
     relecture: a_relire
+
+  - id: csg_rendement_activite_2024
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2024"
+    mesure: Rendement de la CSG sur les revenus d'activité, tous affectataires
+    valeur: 108175
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 1 « Rendement de la CSG par assiette, tous affectataires », page 55, ligne « CSG sur les revenus d'activité », colonne 2024
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_rendement_activite_2025
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2025"
+    mesure: Rendement de la CSG sur les revenus d'activité, tous affectataires
+    valeur: 110670
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 1 « Rendement de la CSG par assiette, tous affectataires », page 55, ligne « CSG sur les revenus d'activité », colonne 2025
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_rendement_activite_2027
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2027 (prévision)"
+    mesure: Rendement de la CSG sur les revenus d'activité, tous affectataires (prévision)
+    valeur: 111880
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 1 « Rendement de la CSG par assiette, tous affectataires », page 55, ligne « CSG sur les revenus d'activité », colonne 2027
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_rendement_capital_2024
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2024"
+    mesure: Rendement de la CSG sur les revenus ou produits du capital, tous affectataires
+    valeur: 17627
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 1 « Rendement de la CSG par assiette, tous affectataires », page 55, ligne « CSG sur les revenus ou produits du capital », colonne 2024
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_rendement_capital_2025
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2025"
+    mesure: Rendement de la CSG sur les revenus ou produits du capital, tous affectataires
+    valeur: 17590
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 1 « Rendement de la CSG par assiette, tous affectataires », page 55, ligne « CSG sur les revenus ou produits du capital », colonne 2025
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_rendement_capital_2027
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2027 (prévision)"
+    mesure: Rendement de la CSG sur les revenus ou produits du capital, tous affectataires (prévision)
+    valeur: 19171
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 1 « Rendement de la CSG par assiette, tous affectataires », page 55, ligne « CSG sur les revenus ou produits du capital », colonne 2027
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_rendement_retraites_2024
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2024"
+    mesure: Rendement de la CSG sur les pensions de retraite (tous taux), tous affectataires
+    valeur: 24812
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 3 « Décomposition de l'évolution de la CSG sur revenus de remplacement par assiette », ligne « Retraites », page 55, colonne 2024
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_rendement_retraites_2025
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2025"
+    mesure: Rendement de la CSG sur les pensions de retraite (tous taux), tous affectataires
+    valeur: 25439
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 3 « Décomposition de l'évolution de la CSG sur revenus de remplacement par assiette », ligne « Retraites », page 55, colonne 2025
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_rendement_retraites_2027
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2027 (prévision)"
+    mesure: Rendement de la CSG sur les pensions de retraite (tous taux), tous affectataires (prévision)
+    valeur: 27558
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 3 « Décomposition de l'évolution de la CSG sur revenus de remplacement par assiette », ligne « Retraites », page 55, colonne 2027
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_taux_activite_2025
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2025"
+    mesure: Taux de CSG sur les revenus d'activité
+    valeur: 9.2
+    unite: "%"
+    localisation: Fiche 1.3, tableau 4 « Taux de CSG par risque et par assiette », bloc « Total », page 57, ligne « Sur revenus d'activité »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_taux_retraites_2025
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2025"
+    mesure: Taux plein de CSG sur les revenus de retraite et d'invalidité
+    valeur: 8.3
+    unite: "%"
+    localisation: Fiche 1.3, tableau 4 « Taux de CSG par risque et par assiette », bloc « Total », page 57, ligne « Sur revenus de retraites et d'invalidité (taux plein) »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_taux_capital_2025
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2025"
+    mesure: Taux de CSG sur les revenus du capital (taux plein et taux réduit)
+    valeur: 9.2
+    unite: "%"
+    localisation: Fiche 1.3, tableau 4 « Taux de CSG par risque et par assiette », bloc « Total », page 57, lignes « Sur revenus du capital »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_taux_capital_2027
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2027 (prévision)"
+    mesure: Taux plein de CSG sur les revenus du capital après la LFSS 2026 (le taux réduit reste à 9,2 %)
+    valeur: 10.6
+    unite: "%"
+    localisation: Fiche 1.3, tableau 4 « Taux de CSG par risque et par assiette », bloc « Total », page 57, ligne « Sur revenus du capital (taux plein) », colonne 2027 (p)
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_rendement_activite_2017
+    levier: csg
+    source: ccss_septembre_2018
+    millesime: "2017"
+    mesure: Rendement de la CSG activité
+    valeur: 68811
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 1 « Rendement de la CSG par assiette », page 45, ligne « CSG activité », colonne 2017
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_rendement_patrimoine_2017
+    levier: csg
+    source: ccss_septembre_2018
+    millesime: "2017"
+    mesure: Rendement de la CSG patrimoine
+    valeur: 5044
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 1 « Rendement de la CSG par assiette », page 45, ligne « CSG patrimoine », colonne 2017
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_rendement_placement_2017
+    levier: csg
+    source: ccss_septembre_2018
+    millesime: "2017"
+    mesure: Rendement de la CSG placement
+    valeur: 5816
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 1 « Rendement de la CSG par assiette », page 45, ligne « CSG placement », colonne 2017
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_rendement_retraites_2017
+    levier: csg
+    source: ccss_septembre_2018
+    millesime: "2017"
+    mesure: Rendement de la CSG sur les retraites (tous taux)
+    valeur: 17232
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 3 « Décomposition de l'évolution de la CSG sur revenu de remplacement par assiette », page 45, ligne « Retraites », colonne 2017
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_rendement_retraites_taux_plein_2017
+    levier: csg
+    source: ccss_septembre_2018
+    millesime: "2017"
+    mesure: Rendement de la CSG sur les retraites au taux plein
+    valeur: 15780
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 3 « Décomposition de l'évolution de la CSG sur revenu de remplacement par assiette », page 45, ligne « Taux plein », colonne 2017
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_taux_activite_2017
+    levier: csg
+    source: ccss_septembre_2018
+    millesime: "2017"
+    mesure: Taux de CSG sur les revenus d'activité
+    valeur: 7.5
+    unite: "%"
+    localisation: Fiche 1.3, tableau 4 « Taux de CSG par risque et par assiette », bloc « Total », page 47, ligne « Sur revenus d'activité », colonne 2017
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_taux_retraites_2017
+    levier: csg
+    source: ccss_septembre_2018
+    millesime: "2017"
+    mesure: Taux plein de CSG sur les revenus de retraite et d'invalidité
+    valeur: 6.6
+    unite: "%"
+    localisation: Fiche 1.3, tableau 4 « Taux de CSG par risque et par assiette », bloc « Total », page 47, ligne « Sur revenus de retraites et d'invalidité (taux plein) », colonne 2017
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_taux_capital_2017
+    levier: csg
+    source: ccss_septembre_2018
+    millesime: "2017"
+    mesure: Taux de CSG sur les revenus du capital
+    valeur: 8.2
+    unite: "%"
+    localisation: Fiche 1.3, tableau 4 « Taux de CSG par risque et par assiette », bloc « Total », page 47, ligne « Sur revenus du capital », colonne 2017
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_hausse_1_7_2018_activite
+    levier: csg
+    source: ccss_septembre_2018
+    millesime: "2018 (prévision)"
+    mesure: Supplément de rendement en 2018 de la hausse de 1,7 point du taux de CSG sur les revenus d'activité (LFSS 2018, article 7)
+    valeur: 16052
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 2 « Décomposition de l’évolution de la CSG sur revenus d’activité par assiette », page 45, ligne « Hausse de 1,7 point du taux », colonne 2018 (p)
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_hausse_1_7_2018_retraites
+    levier: csg
+    source: ccss_septembre_2018
+    millesime: "2018 (prévision)"
+    mesure: Supplément de rendement en 2018 de la hausse de 1,7 point du taux plein de CSG sur les retraites (LFSS 2018, article 7)
+    valeur: 4181
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 3 « Décomposition de l'évolution de la CSG sur revenu de remplacement par assiette », page 45, ligne « Retraites », sous-ligne « Taux plein », « Hausse de 1,7 point du taux », colonne 2018 (p)
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_hausse_1_7_2018_capital
+    levier: csg
+    source: ccss_septembre_2018
+    millesime: "2018 (prévision)"
+    mesure: Supplément de rendement en 2018 de la hausse de 1,7 point du taux de CSG sur les revenus du capital (LFSS 2018, article 7)
+    valeur: 2.1
+    unite: "Md€"
+    localisation: Fiche 1.3, texte, page 46 (« 2,1 Md€ sur les revenus de capital »)
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_hausse_capital_1_4_2026
+    levier: csg
+    source: senat_rapport_plfss2026_tome1
+    millesime: "PLFSS 2026 (2026)"
+    mesure: Rendement en 2026 du passage de 9,2 % à 10,6 % du taux de la CSG sur les revenus du patrimoine et des placements (article 6 bis adopté par l'Assemblée nationale en première lecture), toutes administrations publiques
+    valeur: 2.8
+    unite: "Md€"
+    localisation: Tableau « Chiffrage pour 2026 des mesures adoptées par l'Assemblée nationale », ligne « Article 6 bis », colonne « Toutes APU », page 112
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_taux_activite_2024
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2024"
+    mesure: Taux de CSG sur les revenus d'activité
+    valeur: 9.2
+    unite: "%"
+    localisation: Fiche 1.3, tableau 4 « Taux de CSG par risque et par assiette », bloc « Total », page 57, ligne « Sur revenus d'activité », colonne 2024
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_taux_activite_2027
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2027 (prévision)"
+    mesure: Taux de CSG sur les revenus d'activité
+    valeur: 9.2
+    unite: "%"
+    localisation: Fiche 1.3, tableau 4 « Taux de CSG par risque et par assiette », bloc « Total », page 57, ligne « Sur revenus d'activité », colonne 2027 (p)
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_taux_retraites_2024
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2024"
+    mesure: Taux plein de CSG sur les revenus de retraite et d'invalidité
+    valeur: 8.3
+    unite: "%"
+    localisation: Fiche 1.3, tableau 4 « Taux de CSG par risque et par assiette », bloc « Total », page 57, ligne « Sur revenus de retraites et d'invalidité (taux plein) », colonne 2024
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_taux_retraites_2027
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2027 (prévision)"
+    mesure: Taux plein de CSG sur les revenus de retraite et d'invalidité
+    valeur: 8.3
+    unite: "%"
+    localisation: Fiche 1.3, tableau 4 « Taux de CSG par risque et par assiette », bloc « Total », page 57, ligne « Sur revenus de retraites et d'invalidité (taux plein) », colonne 2027 (p)
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_taux_capital_2024
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2024"
+    mesure: Taux de CSG sur les revenus du capital (taux plein et taux réduit)
+    valeur: 9.2
+    unite: "%"
+    localisation: Fiche 1.3, tableau 4 « Taux de CSG par risque et par assiette », bloc « Total », page 57, ligne « Sur revenus du capital », colonne 2024
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_valeur_point_activite_2025
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2025"
+    mesure: Valeur d'un point de CSG sur les revenus d'activité
+    valeur: 12030
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 6 « Valeur de point de la CSG par assiette », page 57, ligne « Activité », colonne 2025
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_valeur_point_activite_2027
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2027 (prévision)"
+    mesure: Valeur d'un point de CSG sur les revenus d'activité (prévision)
+    valeur: 12160
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 6 « Valeur de point de la CSG par assiette », page 57, ligne « Activité », colonne 2027 (p)
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_valeur_point_capital_2025
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2025"
+    mesure: Valeur d'un point de CSG sur les revenus du capital
+    valeur: 1910
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 6 « Valeur de point de la CSG par assiette », page 57, ligne « Capital », colonne 2025
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: csg_valeur_point_capital_2027
+    levier: csg
+    source: ccss_octobre_2026
+    millesime: "2027 (prévision)"
+    mesure: Valeur d'un point de CSG sur les revenus du capital (prévision)
+    valeur: 1960
+    unite: "M€"
+    localisation: Fiche 1.3, tableau 6 « Valeur de point de la CSG par assiette », page 57, ligne « Capital », colonne 2027 (p)
+    saisi_le: 2026-10-12
+    relecture: a_relire

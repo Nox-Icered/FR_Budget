@@ -164,6 +164,18 @@
         "libelle": "Effectifs des trois fonctions publiques (masse salariale de {reference} milliards d'euros en {annee})",
         "valeur": "{valeur} %"
       },
+      "csg_activite": {
+        "libelle": "Taux de CSG sur les revenus d'activité ({reference} % en {annee})",
+        "valeur": "{valeur} pt"
+      },
+      "csg_retraites": {
+        "libelle": "Taux plein de CSG sur les pensions de retraite ({reference} % en {annee} ; les taux réduit et médian ne changent pas)",
+        "valeur": "{valeur} pt"
+      },
+      "csg_capital": {
+        "libelle": "Taux de CSG sur les revenus du capital ({reference} % en {annee}, porté à 10,6 % pour la plupart de ces revenus à partir de 2026)",
+        "valeur": "{valeur} pt"
+      },
       "indexation_pensions_prestations": {
         "libelle": "Revalorisation des pensions de base et des prestations sociales, par rapport à la revalorisation prévue par la loi ({reference} milliards d'euros versés par an, montants de {annee})",
         "valeur": "{valeur} pt"
@@ -217,6 +229,8 @@
     "bloque_indexation": "Réglage impossible tant que les crédits de la mission « Solidarité, insertion et égalité des chances » sont modifiés : elle finance l'allocation aux adultes handicapés et la prime d'activité.",
     "methode_indexation": "Revalorisation des pensions et prestations : chaque année, la loi revalorise les pensions de base (en janvier) et la plupart des prestations sociales (en avril) selon l'inflation. Revaloriser d'un point de plus coûte {brut} milliards d'euros par an, mais {net} milliards au solde public, car la CSG, la CRDS, la CASA et l'impôt sur le revenu payés sur les pensions reviennent aux administrations publiques. L'écart choisi s'applique une fois ; le niveau des prestations reste ensuite décalé d'autant. Les retraites complémentaires (Agirc-Arrco), décidées par les partenaires sociaux, les allocations chômage et les aides au logement ne sont pas comprises.",
     "limite_indexation": "Les montants versés sont ceux de 2024, tenus constants en part du PIB. Les retours de prélèvements sont calculés pour des retraités vivant seuls ou en couple, avec la distribution des pensions de 2020. Le gel des plafonds de ressources, qui réduit le nombre de bénéficiaires, n'est pas compté. Pour les prestations familiales, le modèle reste en dessous des chiffrages officiels (voir la page Validation).",
+    "methode_csg": "CSG : un point de taux rapporte le produit constaté de la CSG en {annee} divisé par son taux, soit {activite} milliards d'euros sur les revenus d'activité, {retraites} milliards sur les pensions de retraite au taux plein et {capital} milliards sur les revenus du capital. Pour les retraites, la part prélevée au taux plein est estimée avec OpenFisca à partir de la distribution des pensions publiée par la DREES.",
+    "limite_csg": "Le rendement affiché ne déduit pas la baisse d'impôt sur le revenu due à la part déductible de la CSG, et ne tient pas compte d'un changement de comportement des épargnants. Sur les revenus du capital, le modèle surestime de 10 % la hausse de 2018 (voir la page Validation).",
     "limite_remunerations": "Le coût est estimé à partir de la masse salariale des administrations publiques et de la part du traitement indiciaire dans le salaire des fonctionnaires ; il s'écarte des chiffrages officiels par fonction publique (voir la page Validation). Une baisse des effectifs ne tient compte ni des allocations chômage ni des services rendus."
   }
 }

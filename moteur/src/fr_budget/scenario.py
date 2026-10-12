@@ -49,6 +49,11 @@ Leviers disponibles :
   (prélèvements sociaux et impôt sur le revenu déduits), sur les montants de 2025 ; le coût
   brut (``effet_brut_unitaire``) est affiché à part. Combinaison refusée avec la mission
   « Solidarité, insertion et égalité des chances », qui finance l'AAH et la prime d'activité.
+- ``csg_activite``, ``csg_retraites`` et ``csg_capital`` : hausse (ou baisse) de x points, de
+  -2 à +2, du taux de CSG sur les revenus d'activité, sur les pensions de retraite au taux
+  plein ou sur les revenus du capital (``fr_budget.agrege.csg``). Effet d'un point : rendement
+  constaté en 2025 divisé par le taux (part du taux plein pour les retraites), brut de l'effet
+  de la CSG déductible sur l'impôt sur le revenu.
 
 Fourchettes : écart au scénario de référence, avec la plage du rendement du levier ; niveau
 de dette et de solde, avec la plage du levier et celle de la baseline, chacune seule.
@@ -63,6 +68,7 @@ from fr_budget import baseline as module_baseline
 from fr_budget.agrege import (
     accises,
     credits_missions,
+    csg,
     depenses_fiscales,
     dotations,
     impot_societes,
@@ -109,6 +115,14 @@ LEVIERS_REMUNERATIONS = {
 }
 # Variation admise du point et des effectifs, en % (décision du mainteneur du 12 octobre 2026).
 BORNE_REMUNERATIONS = 5.0
+LEVIERS_CSG = {
+    "csg_activite": csg.ACTIVITE,
+    "csg_retraites": csg.RETRAITES,
+    "csg_capital": csg.CAPITAL,
+}
+# Variation admise des taux de CSG, en points (choix du lot 2.9, à relire) ; repère : la hausse
+# de 1,7 point de la LFSS 2018.
+BORNE_CSG = 2.0
 LEVIER_INDEXATION = "indexation_pensions_prestations"
 # Écart admis à la revalorisation légale, en points (décision du mainteneur du 12 octobre 2026) ;
 # repère : le gel de 2026 proposé au PLFSS 2026 correspondait à -1,0 point.
@@ -236,6 +250,8 @@ def rendement_unitaire(levier: str) -> Fourchette:
     if levier == LEVIER_INDEXATION:
         net = indexation.cout_un_point()
         return encadrer(-net.central, [-net.bas, -net.haut])
+    if levier in LEVIERS_CSG:
+        return csg.rendement_un_point(LEVIERS_CSG[levier])
     if levier in LEVIERS_DOTATIONS:
         dotation = LEVIERS_DOTATIONS[levier]
         un_pourcent = -effet_etat_unitaire(levier)
@@ -298,6 +314,9 @@ def taux_reference(levier: str) -> float:
     if levier in LEVIERS_REMUNERATIONS:
         # Masse salariale des trois sous-secteurs, hors cotisations imputées, Md€ de 2025.
         return sum(remunerations.masse(v) for v in remunerations.VERSANTS)
+    if levier in LEVIERS_CSG:
+        # Taux de 2025, en % (taux plein pour les retraites).
+        return csg.taux(LEVIERS_CSG[levier], csg.ANNEE_REFERENCE)
     if levier == LEVIER_INDEXATION:
         # Pensions et prestations du levier, Md€ de 2025.
         return sum(indexation.montant(b) for b in indexation.BLOCS)
@@ -338,6 +357,8 @@ def bornes_levier(levier: str) -> tuple[float, float]:
         return -BORNE_REMUNERATIONS, BORNE_REMUNERATIONS
     if levier == LEVIER_INDEXATION:
         return BORNES_INDEXATION
+    if levier in LEVIERS_CSG:
+        return -BORNE_CSG, BORNE_CSG
     if levier == LEVIER_CREDITS_UNITE:
         # Md€ de 2025 : la même variation appliquée à toutes les missions du levier.
         total = _vers_euros_reference(credits_missions.total_credits() / EUROS_PAR_MILLIARD)
@@ -557,6 +578,7 @@ LEVIERS_REGISTRE = {
     **dict.fromkeys(LEVIERS_DOTATIONS, "dotations_collectivites"),
     **dict.fromkeys(LEVIERS_REMUNERATIONS, "remunerations_publiques"),
     LEVIER_INDEXATION: "indexation_pensions_prestations",
+    **dict.fromkeys(LEVIERS_CSG, "csg"),
 }
 
 
@@ -636,6 +658,18 @@ PROVENANCE_INDEXATION = (
     ),
     (),
 )
+PROVENANCE_CSG = (
+    (
+        "ccss_octobre_2026",
+        "ccss_septembre_2018",
+        "senat_rapport_plfss2026_tome1",
+        "drees_eir_2020_distribution_pensions",
+        "openfisca_france_176_1_2",
+        "insee_comptes_nationaux_2025",
+        "plf2027_resf",
+    ),
+    (),
+)
 PROVENANCE_LEVIERS = {
     LEVIER_IS_TAUX_NORMAL: PROVENANCE_IS,
     LEVIER_IS_SURTAXE: PROVENANCE_IS,
@@ -660,6 +694,7 @@ PROVENANCE_LEVIERS = {
     **dict.fromkeys(LEVIERS_DOTATIONS, PROVENANCE_DOTATIONS),
     **dict.fromkeys(LEVIERS_REMUNERATIONS, PROVENANCE_REMUNERATIONS),
     LEVIER_INDEXATION: PROVENANCE_INDEXATION,
+    **dict.fromkeys(LEVIERS_CSG, PROVENANCE_CSG),
 }
 
 

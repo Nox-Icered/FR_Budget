@@ -481,3 +481,19 @@ datasets:
     empreinte_sha256: 3d7fa83535c7e5050fa5d932b781f2b03640e5226fceffeeaa06dcc164a78598
     methode_transformation: aucune ; valeurs des pages 101, 134 et 164 saisies dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-12
+
+  - id: ccss_octobre_2026_pdf
+    source: ccss_octobre_2026
+    description: Rapport à la Commission des comptes de la sécurité sociale, octobre 2026 (PDF, 256 pages)
+    fichier: data/raw/csg/ccss_octobre_2026.pdf
+    empreinte_sha256: 96a554026dbffb08d380098b9e712f4519b2db50eb18e9672f1e0cd9385b5c9c
+    methode_transformation: aucune ; fiche 1.3, tableaux 1, 3 et 4 (pages 55 à 57) saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-12
+
+  - id: ccss_septembre_2018_pdf
+    source: ccss_septembre_2018
+    description: Rapport à la Commission des comptes de la sécurité sociale, septembre 2018 (PDF, 306 pages)
+    fichier: data/raw/csg/ccss_septembre_2018.pdf
+    empreinte_sha256: 47ec969ceb6c029fea354243d06cfe59476ad41d4168ad91ba31c78cec8a039d
+    methode_transformation: aucune ; fiche 1.3, tableaux 1 à 4 et texte (pages 45 à 47) saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-12

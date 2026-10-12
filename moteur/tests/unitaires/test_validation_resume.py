@@ -33,6 +33,7 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
             "test_levier_dotations.py",
             "test_levier_remunerations.py",
             "test_levier_indexation.py",
+            "test_levier_csg.py",
         )
     )
     attendues = set(re.findall(r'"((?:tva|dette)_[a-z0-9_]+)"', textes))
@@ -66,6 +67,14 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
         "indexation_gel_2026_familiales",
         "indexation_sous_indexation_0_5_2027",
         "indexation_gel_familiales_2027",
+        "csg_hausse_1_7_2018_activite",
+        "csg_hausse_1_7_2018_retraites",
+        "csg_hausse_1_7_2018_capital",
+        "csg_hausse_capital_1_4_2026",
+        "csg_rendement_retraites_taux_plein_2017",
+    }
+    attendues |= {
+        f"csg_valeur_point_{a}_{y}" for a in ("activite", "capital") for y in (2025, 2027)
     }
     attendues = {a for a in attendues if not a.endswith("_") and "{" not in a}
     assert {r for r, _ in _definitions()} == attendues

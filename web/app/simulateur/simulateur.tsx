@@ -27,6 +27,9 @@ const LEVIERS: { id: string; pas: number }[] = [
   { id: "remunerations_point_indice", pas: 0.5 },
   { id: "remunerations_effectifs", pas: 0.5 },
   { id: "indexation_pensions_prestations", pas: 0.1 },
+  { id: "csg_activite", pas: 0.1 },
+  { id: "csg_retraites", pas: 0.1 },
+  { id: "csg_capital", pas: 0.1 },
 ];
 // Leviers dont la combinaison avec les crédits des missions est refusée par le moteur
 // (les crédits des missions contiennent les rémunérations de l'État).

@@ -253,7 +253,7 @@ class Retour:
 
 
 @cache
-def _distribution() -> tuple[np.ndarray, np.ndarray]:
+def distribution_pensions() -> tuple[np.ndarray, np.ndarray]:
     """Pension mensuelle de chaque tranche (milieu, ou borne basse pour la dernière) et part."""
     niveaux, parts = [], []
     with (DOSSIER / "distribution_pensions_2020.csv").open(encoding="utf-8") as f:
@@ -264,8 +264,12 @@ def _distribution() -> tuple[np.ndarray, np.ndarray]:
     return np.array(niveaux), np.array(parts)
 
 
-def _situation(pensions: np.ndarray, foyer: str) -> dict[str, Any]:
-    annees = range(ANNEE_DISTRIBUTION - ANNEES_RFR, ANNEE_DISTRIBUTION + 1)
+def situation_retraites(
+    pensions: np.ndarray, foyer: str, annee: int = ANNEE_DISTRIBUTION
+) -> dict[str, Any]:
+    """Un foyer de retraités par pension mensuelle brute, versée de N-2 à N (la CSG dépend du
+    revenu fiscal de référence de N-2) ; personne seule ou couple à la même pension."""
+    annees = range(annee - ANNEES_RFR, annee + 1)
     mois = [f"{a}-{m:02d}" for a in annees for m in range(1, MOIS_PAR_AN + 1)]
     personnes = 2 if foyer == COUPLE else 1
     individus: dict[str, Any] = {}
@@ -294,8 +298,8 @@ def _situation(pensions: np.ndarray, foyer: str) -> dict[str, Any]:
 def _revenus(foyer: str, facteur: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Pour chaque tranche : pension brute, pension après CSG, CRDS et CASA, impôt sur le revenu
     (par foyer, sur l'année)."""
-    niveaux, _ = _distribution()
-    situation = _situation(niveaux * facteur, foyer)
+    niveaux, _ = distribution_pensions()
+    situation = situation_retraites(niveaux * facteur, foyer)
     simulation = SimulationBuilder().build_from_entities(systeme_socio_fiscal(), situation)
     annee = str(ANNEE_DISTRIBUTION)
     with warnings.catch_warnings():
@@ -323,7 +327,7 @@ def retour_pension(foyer: str) -> Retour:
     Hausse de 1 % de la pension de chaque tranche de l'EIR 2020 (législation 2020), moyenne
     pondérée par la masse de pension de chaque tranche (part des retraités * pension).
     """
-    niveaux, parts = _distribution()
+    niveaux, parts = distribution_pensions()
     brute0, nette0, impot0 = _revenus(foyer, 1.0)
     brute1, nette1, impot1 = _revenus(foyer, 1 + HAUSSE_TEST)
     hausse = brute1 - brute0

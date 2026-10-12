@@ -69,6 +69,14 @@ export default function PageSimulateur() {
           net: deuxDecimales(-donnees.leviers.indexation_pensions_prestations.rendement_unitaire),
         })}
       </p>
+      <p>
+        {texte("simulateur.methode_csg", {
+          annee: donnees.annee_reference,
+          activite: deuxDecimales(donnees.leviers.csg_activite.rendement_unitaire),
+          retraites: deuxDecimales(donnees.leviers.csg_retraites.rendement_unitaire),
+          capital: deuxDecimales(donnees.leviers.csg_capital.rendement_unitaire),
+        })}
+      </p>
       <ul>
         <li>{texte("simulateur.limite_comportement")}</li>
         <li>{texte("simulateur.limite_croissance")}</li>
@@ -80,6 +88,7 @@ export default function PageSimulateur() {
         <li>{texte("simulateur.limite_dotations")}</li>
         <li>{texte("simulateur.limite_remunerations")}</li>
         <li>{texte("simulateur.limite_indexation")}</li>
+        <li>{texte("simulateur.limite_csg")}</li>
       </ul>
       <p>
         <a href="/validation/">{texte("simulateur.lien_validation")}</a>

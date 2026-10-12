@@ -37,6 +37,11 @@ Leviers disponibles :
   l'investissement local : effet d'un pour cent = moins 1 % du montant 2026, ramené en euros de
   2025, multiplié par le taux de répercussion (élasticités de la Caisse des Dépôts). L'effet
   sur le seul budget de l'État (``effet_etat_unitaire``) est affiché à part.
+- ``remunerations_point_indice`` et ``remunerations_effectifs`` : variation de x % (de -5 à
+  +5) de la valeur du point d'indice ou des effectifs des trois fonctions publiques
+  (``fr_budget.agrege.remunerations``). Effet d'un pour cent : moins le coût net pour les
+  administrations publiques (hausse du revenu après impôt des agents) ; le coût brut
+  (``effet_brut_unitaire``) est affiché à part. Montants de 2025 : aucune conversion.
 
 Fourchettes : écart au scénario de référence, avec la plage du rendement du levier ; niveau
 de dette et de solde, avec la plage du levier et celle de la baseline, chacune seule.
@@ -54,6 +59,7 @@ from fr_budget.agrege import (
     depenses_fiscales,
     dotations,
     impot_societes,
+    remunerations,
 )
 from fr_budget.agrege.tva import HYPOTHESE_REPARTITION, fourchette_point_tva, taux_tva
 from fr_budget.apu import comptes_apu, ratio_pib
@@ -87,6 +93,14 @@ LEVIERS_DOTATIONS = {
 # Variation admise des dotations, en % (option 3 (a) du 9 octobre 2026) ; repère : la baisse
 # de la DGF de 2014 à 2017, environ 3,5 Md€ par an (Caisse des Dépôts, Éclairages n° 8).
 BORNE_DOTATIONS = 10.0
+LEVIER_POINT_INDICE = "remunerations_point_indice"
+LEVIER_EFFECTIFS = "remunerations_effectifs"
+LEVIERS_REMUNERATIONS = {
+    LEVIER_POINT_INDICE: remunerations.POINT,
+    LEVIER_EFFECTIFS: remunerations.EFFECTIFS,
+}
+# Variation admise du point et des effectifs, en % (décision du mainteneur du 12 octobre 2026).
+BORNE_REMUNERATIONS = 5.0
 MILLIONS_PAR_MILLIARD = 1000.0
 EUROS_PAR_MILLIARD = 1e9
 ANNEE_REFERENCE = 2025
@@ -181,6 +195,12 @@ def effet_etat_unitaire(levier: str) -> float:
     return -_vers_euros_reference(dotations.montant_levier(dotation) / POURCENT)
 
 
+def effet_brut_unitaire(levier: str) -> float:
+    """Rémunérations : effet brut d'une hausse d'un pour cent, avant les retours de
+    cotisations, de CSG et d'impôt aux administrations publiques, en Md€ de 2025."""
+    return -remunerations.cout_brut_un_pourcent(LEVIERS_REMUNERATIONS[levier])
+
+
 def rendement_unitaire(levier: str) -> Fourchette:
     """Rendement d'une unité du levier, en Md€ de l'année de référence.
 
@@ -189,6 +209,9 @@ def rendement_unitaire(levier: str) -> Fourchette:
     volumiques. Dépenses fiscales : 1 % du coût 2026, plage de l'écart de prévision. Crédits
     d'une mission : moins 1 % des crédits 2026, plage de l'écart d'exécution.
     """
+    if levier in LEVIERS_REMUNERATIONS:
+        net = remunerations.cout_net_un_pourcent(LEVIERS_REMUNERATIONS[levier])
+        return encadrer(-net.central, [-net.bas, -net.haut])
     if levier in LEVIERS_DOTATIONS:
         dotation = LEVIERS_DOTATIONS[levier]
         un_pourcent = -effet_etat_unitaire(levier)
@@ -248,6 +271,9 @@ def taux_reference(levier: str) -> float:
         return 0.0
     if levier in LEVIERS_DOTATIONS:
         return dotations.montant_levier(LEVIERS_DOTATIONS[levier])
+    if levier in LEVIERS_REMUNERATIONS:
+        # Masse salariale des trois sous-secteurs, hors cotisations imputées, Md€ de 2025.
+        return sum(remunerations.masse(v) for v in remunerations.VERSANTS)
     if levier in LEVIERS_DEPENSES_FISCALES_IMPOT:
         impot = LEVIERS_DEPENSES_FISCALES_IMPOT[levier]
         return depenses_fiscales.cout_impot_levier(impot) / MILLIONS_PAR_MILLIARD
@@ -281,6 +307,8 @@ def bornes_levier(levier: str) -> tuple[float, float]:
         return -BORNE_CREDITS, BORNE_CREDITS
     if levier in LEVIERS_DOTATIONS:
         return -BORNE_DOTATIONS, BORNE_DOTATIONS
+    if levier in LEVIERS_REMUNERATIONS:
+        return -BORNE_REMUNERATIONS, BORNE_REMUNERATIONS
     if levier == LEVIER_CREDITS_UNITE:
         # Md€ de 2025 : la même variation appliquée à toutes les missions du levier.
         total = _vers_euros_reference(credits_missions.total_credits() / EUROS_PAR_MILLIARD)
@@ -397,6 +425,14 @@ def verifier_double_compte(mesures: Sequence[Mesure]) -> None:
         msg = "double compte : un même impôt est visé par deux mesures"
         raise ValueError(msg)
     _verifier_credits(mesures)
+    remunerations_reglees = any(m.levier in LEVIERS_REMUNERATIONS for m in mesures)
+    credits_regles = any(
+        m.levier == LEVIER_CREDITS_UNITE or mission_du_levier(m.levier) is not None for m in mesures
+    )
+    if remunerations_reglees and credits_regles:
+        # Les crédits de personnel de l'État sont dans les missions (option 4 (a)).
+        msg = "double compte : les crédits des missions contiennent les rémunérations de l'État"
+        raise ValueError(msg)
 
 
 def _verifier_credits(mesures: Sequence[Mesure]) -> None:
@@ -468,6 +504,7 @@ LEVIERS_REGISTRE = {
     LEVIER_DEPENSE_FISCALE_UNITE: "depenses_fiscales",
     LEVIER_CREDITS_UNITE: "credits_missions",
     **dict.fromkeys(LEVIERS_DOTATIONS, "dotations_collectivites"),
+    **dict.fromkeys(LEVIERS_REMUNERATIONS, "remunerations_publiques"),
 }
 
 
@@ -525,6 +562,15 @@ PROVENANCE_DOTATIONS = (
     ),
     tuple(f"dotations_elasticite_investissement_{n}" for n in dotations.NIVEAUX),
 )
+PROVENANCE_REMUNERATIONS = (
+    (
+        "insee_comptes_nationaux_2025",
+        "dgafp_rapport_annuel_2025",
+        "openfisca_france_176_1_2",
+        "senat_avis_plf2024_fonction_publique",
+    ),
+    (),
+)
 PROVENANCE_LEVIERS = {
     LEVIER_IS_TAUX_NORMAL: PROVENANCE_IS,
     LEVIER_IS_SURTAXE: PROVENANCE_IS,
@@ -547,6 +593,7 @@ PROVENANCE_LEVIERS = {
     LEVIER_DEPENSE_FISCALE_UNITE: (SOURCES_DEPENSES_FISCALES, (HYPOTHESE_ECART_DEPENSE,)),
     LEVIER_CREDITS_UNITE: (SOURCES_CREDITS, (HYPOTHESE_ECART_CREDITS,)),
     **dict.fromkeys(LEVIERS_DOTATIONS, PROVENANCE_DOTATIONS),
+    **dict.fromkeys(LEVIERS_REMUNERATIONS, PROVENANCE_REMUNERATIONS),
 }
 
 

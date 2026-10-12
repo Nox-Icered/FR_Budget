@@ -24,7 +24,12 @@ const LEVIERS: { id: string; pas: number }[] = [
   { id: "is_surtaxe_grandes_entreprises", pas: 1 },
   { id: "dotations_dgf", pas: 1 },
   { id: "dotations_compensations", pas: 1 },
+  { id: "remunerations_point_indice", pas: 0.5 },
+  { id: "remunerations_effectifs", pas: 0.5 },
 ];
+// Leviers dont la combinaison avec les crédits des missions est refusée par le moteur
+// (les crédits des missions contiennent les rémunérations de l'État).
+const LEVIERS_REMUNERATIONS = ["remunerations_point_indice", "remunerations_effectifs"];
 const ANNEES_AFFICHEES = [2027, 2030, 2035, 2040, 2046];
 
 export function Simulateur({
@@ -48,6 +53,8 @@ export function Simulateur({
   const [parMission, setParMission] = useState<Record<string, number>>({});
   const [annee, setAnnee] = useState(annees[0]);
   const idBase = useId();
+  const remunerationsReglees = LEVIERS_REMUNERATIONS.some((id) => (valeurs[id] ?? 0) !== 0);
+  const missionsReglees = Object.values(parMission).some((v) => v !== 0);
   const lignes = calculer(
     donnees,
     [
@@ -74,6 +81,7 @@ export function Simulateur({
         {leviers.map((l) => {
           const levier = donnees.leviers[l.id];
           const id = `${idBase}-${l.id}`;
+          const bloque = missionsReglees && LEVIERS_REMUNERATIONS.includes(l.id);
           return (
             <div key={l.id} className="reglage">
               <label htmlFor={id}>
@@ -96,8 +104,10 @@ export function Simulateur({
                 max={Math.floor(levier.bornes[1] / l.pas) * l.pas}
                 step={l.pas}
                 value={valeurs[l.id]}
+                disabled={bloque}
                 onChange={(e) => setValeurs({ ...valeurs, [l.id]: Number(e.target.value) })}
               />
+              {bloque && <span className="source">{texte("simulateur.bloque_remunerations")}</span>}
             </div>
           );
         })}
@@ -126,6 +136,7 @@ export function Simulateur({
         catalogue={missions}
         leviers={donnees.leviers}
         reglages={parMission}
+        bloque={remunerationsReglees}
         setReglages={setParMission}
       />
       <GraphiqueDette

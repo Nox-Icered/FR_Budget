@@ -138,6 +138,22 @@ datasets:
     methode_transformation: pipelines/dotations_collectivites/extraire_ofgl.py → data/processed/dotations_collectivites/ofgl_agregats.csv
     telecharge_le: 2026-10-09
 
+  - id: dgafp_rapport_annuel_2025_pdf
+    source: dgafp_rapport_annuel_2025
+    description: Rapport annuel sur l'état de la fonction publique, édition 2025 (PDF, 196 pages)
+    fichier: data/raw/remunerations/dgafp_rapport_annuel_2025.pdf
+    empreinte_sha256: 1e85e8b295b482848d613f5a31d91c171906cb09c510534ea972bca3eaf12a48
+    methode_transformation: aucune ; valeurs de la figure 9 (page 113) saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-12
+
+  - id: senat_avis_plf2024_fonction_publique_pdf
+    source: senat_avis_plf2024_fonction_publique
+    description: Avis du Sénat sur le PLF 2024, programme « Fonction publique » (PDF, 35 pages)
+    fichier: data/raw/remunerations/senat_avis_plf2024_fonction_publique.pdf
+    empreinte_sha256: e94ef88c71d7a8d5091896bd61efb486c7015fd4386cdff7268b476d6ee0e546
+    methode_transformation: aucune ; tableau « Coûts des dernières revalorisations du point d'indice » (page 8) saisi dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-12
+
   - id: drees_comptes_sante_financement_2026_csv
     source: drees_comptes_sante_financement_2026
     description: Dépense de santé par poste et par financeur, 2010 à 2025, en euros (export CSV de l'API, séparateur point-virgule)

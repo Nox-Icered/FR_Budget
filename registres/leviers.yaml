@@ -61,10 +61,10 @@ leviers:
 
   - id: remunerations_publiques
     libelle: Rémunérations publiques
-    parametres_reglables: [Point d'indice, Effectifs]
+    parametres_reglables: [Variation de la valeur du point d'indice, Variation des effectifs des trois fonctions publiques]
     moteur: agrege
     references_visees: [Annexe « Rémunérations de la fonction publique », Cour des comptes]
-    statut: non_publie
+    statut: beta
 
   - id: indexation_pensions_prestations
     libelle: Revalorisation des pensions et prestations

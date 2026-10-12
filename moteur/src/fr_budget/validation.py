@@ -18,6 +18,7 @@ from fr_budget.agrege.credits_missions import total_execution
 from fr_budget.agrege.depenses_fiscales import cout_par_impot
 from fr_budget.agrege.dotations import COMPENSATIONS, DGF, execution
 from fr_budget.agrege.impot_societes import is_brut
+from fr_budget.agrege.remunerations import VERSANTS, cout_brut_point_mesure
 from fr_budget.agrege.tva import estimer_point_tva, estimer_recette_totale
 from fr_budget.dette import surcout_choc_taux_etat
 from fr_budget.registres.acces import chiffrage
@@ -85,6 +86,12 @@ def _dotation_votee(dotation: str, annee: int) -> float:
     return execution(dotation, annee).lfi * MILLIONS_PAR_MILLIARD
 
 
+def _cout_point(taux: float, annee: int, versant: str) -> float:
+    """Coût brut d'une hausse du point d'indice en année pleine, en Md€ (total ou versant)."""
+    versants = list(VERSANTS) if versant == "total" else [versant]
+    return sum(cout_brut_point_mesure(v, taux, annee) for v in versants)
+
+
 def _definitions() -> list[tuple[str, Callable[[], float]]]:
     definitions: list[tuple[str, Callable[[], float]]] = []
     for taux in TAUX_TVA:
@@ -123,6 +130,14 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         (f"dotations_{dotation}_execution_{annee}", partial(_dotation_votee, dotation, annee))
         for dotation in (DGF, COMPENSATIONS)
         for annee in (2023, 2024)
+    ]
+    definitions += [
+        (
+            f"remunerations_point_{mesure}_{versant}_{annee}",
+            partial(_cout_point, taux, annee, versant),
+        )
+        for mesure, taux, annee in (("3_5", 0.035, 2023), ("1_5", 0.015, 2024))
+        for versant in (*VERSANTS, "total")
     ]
     return definitions
 

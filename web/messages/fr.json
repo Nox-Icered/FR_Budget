@@ -312,7 +312,7 @@
     "lien": "Lien",
     "valeurs_titre": "Relecture interne des valeurs saisies",
     "valeurs": "Sur {total} valeurs de référence saisies à la main dans le registre, {relues} ont été relues par le mainteneur du projet et {a_relire} restent à relire.",
-    "leviers": "Leviers et modules : {valides} validés, {beta} en bêta, {non_publies} non publiés."
+    "leviers": "Leviers du registre : {valides} validés, {beta} en bêta, {non_publies} non publiés. Le statut des modules (baseline, dette, croissance) est indiqué sur leur fiche et sur la page Validation."
   },
   "mentions": {
     "titre": "Mentions légales",

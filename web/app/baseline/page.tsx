@@ -1,7 +1,7 @@
 import { texte, nombre } from "../../lib/textes";
 import { lire, type Baseline } from "../../lib/donnees";
 import { GraphiqueDette } from "./graphique";
-import { REGION } from "../../lib/region";
+import { region } from "../../lib/region";
 
 export default function PageBaseline() {
   const b = lire<Baseline>("baseline.json");
@@ -26,7 +26,7 @@ export default function PageBaseline() {
           unite: texte("baseline.graphique_lecture"),
         }}
       />
-      <div className="defilement" {...REGION}>
+      <div className="defilement" {...region(texte("baseline.titre"))}>
         <table>
           <thead>
             <tr>

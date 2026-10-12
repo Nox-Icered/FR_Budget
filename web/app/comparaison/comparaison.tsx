@@ -19,7 +19,7 @@ import {
   type ScenarioExporte,
 } from "../../lib/etat";
 import { Exports } from "../partage/actions";
-import { REGION } from "../../lib/region";
+import { region } from "../../lib/region";
 
 
 const NOMBRE_SCENARIOS = 3;
@@ -130,7 +130,7 @@ export function Comparaison({
               ["dette", "simulateur.dette", nombre],
             ] as const
           ).map(([cle, titre, format]) => (
-            <div key={cle} className="defilement" {...REGION}>
+            <div key={cle} className="defilement" {...region(texte(titre))}>
               <table>
                 <caption>{texte(titre)}</caption>
                 <thead>

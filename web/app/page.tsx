@@ -1,6 +1,6 @@
 import { texte, nombre } from "../lib/textes";
 import { lire, type ComptesApu, type Cofog } from "../lib/donnees";
-import { REGION } from "../lib/region";
+import { region } from "../lib/region";
 
 
 export default function Accueil() {
@@ -46,7 +46,7 @@ export default function Accueil() {
       ))}
       <section>
         <h2>{texte("accueil.fonctions_titre", { annee: cofog.annee })}</h2>
-        <div className="defilement" {...REGION}>
+        <div className="defilement" {...region(texte("accueil.fonctions_titre", { annee: cofog.annee }))}>
         <table>
           <thead>
             <tr>

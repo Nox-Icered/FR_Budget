@@ -26,7 +26,7 @@ import {
   type EtatScenario,
 } from "../../lib/etat";
 import { CopierLien, Exports } from "../partage/actions";
-import { REGION } from "../../lib/region";
+import { region } from "../../lib/region";
 
 
 const ANNEES_AFFICHEES = [2027, 2030, 2035, 2040, 2046];
@@ -221,7 +221,7 @@ export function Simulateur({
           unite: texte("simulateur.graphique_lecture"),
         }}
       />
-      <div className="defilement" {...REGION}>
+      <div className="defilement" {...region(texte("simulateur.titre"))}>
         <table>
           <thead>
             <tr>

@@ -441,3 +441,43 @@ datasets:
     empreinte_sha256: e87d2a1e6513dfde921e0ec70f201fb37e3b95bc157fe5f6863ecdefe0397027
     methode_transformation: pipelines/tva/extraire_tes.py
     telecharge_le: 2026-10-07
+
+  - id: drees_comptes_protection_sociale_csv
+    source: drees_comptes_protection_sociale_2025
+    description: Prestations de protection sociale par code, régime et secteur institutionnel, 2012 à 2024, en millions d'euros (export CSV de l'API, séparateur point-virgule)
+    fichier: data/raw/indexation/drees_comptes_protection_sociale.csv
+    empreinte_sha256: 87ff104c571e2a921cc4e69f4fd93b49761c221cfe36f1b1ebb3560217824288
+    methode_transformation: pipelines/indexation/extraire_drees.py
+    telecharge_le: 2026-10-12
+
+  - id: drees_eir2020_distribution_pensions_xlsx
+    source: drees_eir_2020_distribution_pensions
+    description: Distributions des pensions mensuelles fin 2020 (classeur, 8 tableaux agrégés) ; tableau 5, pension brute totale des retraités de droit direct d'un régime de base
+    fichier: data/raw/indexation/drees_eir2020_distribution_pensions.xlsx
+    empreinte_sha256: 36e89fea552d2384f7317d6d2c9cbe258cdd1415681dbcdd5ae5d379816300cc
+    methode_transformation: pipelines/indexation/extraire_drees.py
+    telecharge_le: 2026-10-12
+
+  - id: plfss2026_projet_loi_pdf
+    source: plfss2026_projet_loi
+    description: Projet de loi de financement de la sécurité sociale pour 2026, n° 1907 (PDF, 162 pages)
+    fichier: data/raw/indexation/plfss2026_projet_loi.pdf
+    empreinte_sha256: 0660a073102c0335871ff2bcf5e50bc11e667cfb7547edbdcc30ed68e09cd051
+    methode_transformation: aucune ; valeurs des pages 138 et 152 saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-12
+
+  - id: plfss2027_projet_loi_pdf
+    source: plfss2027_projet_loi
+    description: Projet de loi de financement de la sécurité sociale pour 2027, n° 3211 (PDF, 138 pages)
+    fichier: data/raw/indexation/plfss2027_projet_loi.pdf
+    empreinte_sha256: 47f5fc0d1581c90634449516281070495b92cfe062c20c2a366919622906eab6
+    methode_transformation: aucune ; valeurs des pages 106, 127 et 134 saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-12
+
+  - id: senat_rapport_plfss2026_tome1_pdf
+    source: senat_rapport_plfss2026_tome1
+    description: Rapport du Sénat n° 131 (2025-2026), tome I, sur le PLFSS 2026 (PDF)
+    fichier: data/raw/indexation/senat_rapport_plfss2026_tome1.pdf
+    empreinte_sha256: 3d7fa83535c7e5050fa5d932b781f2b03640e5226fceffeeaa06dcc164a78598
+    methode_transformation: aucune ; valeurs des pages 101, 134 et 164 saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-12

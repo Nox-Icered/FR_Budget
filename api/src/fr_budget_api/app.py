@@ -270,10 +270,10 @@ def reponses_unitaires() -> dict[str, Any]:
                 if levier in module_scenario.LEVIERS_DOTATIONS
                 else {}
             ),
-            # Rémunérations : effet brut d'un pour cent, avant les retours aux APU.
+            # Rémunérations et indexation : effet brut d'une unité, avant les retours aux APU.
             **(
                 {"effet_brut_unitaire": module_scenario.effet_brut_unitaire(levier)}
-                if levier in module_scenario.LEVIERS_REMUNERATIONS
+                if levier in module_scenario.LEVIERS_EFFET_BRUT
                 else {}
             ),
             "bornes": [basse, haute],

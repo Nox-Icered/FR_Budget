@@ -1,0 +1,970 @@
+annee,ps_code,ps_lib,si_code,millions
+2020,E11-11.1.01,Indemnités journalières (maladie),S13111,9.56
+2020,E11-11.1.01,Indemnités journalières (maladie),S13141,10249.23
+2020,E11-11.1.02,Congés maladie de longue durée des agents de l'Etat,S13111,281.89
+2020,E11-11.1.11,Indemnités journalières accidents du travail et maladies professionnelles (AT-MP),S13141,3398.45
+2020,E11-11.1.14,Maintien de salaire pour les personnes vulnérables arrêtées durant le Covid (via IJ dérogatoires/chômage partiel),S13111,466.67
+2020,E11-11.1.14,Maintien de salaire pour les personnes vulnérables arrêtées durant le Covid (via IJ dérogatoires/chômage partiel),S13141,431.73
+2020,E11-11.2.11,Soins de ville - Prestations (maladie),S13141,39251.38
+2020,E11-11.2.12,Soins de ville - Médicaments (maladie),S13141,23067.87
+2020,E11-11.2.13,Soins de ville - Matériel (maladie),S13141,7420.83
+2020,E11-11.2.14,Soins de ville - Transports (maladie),S13141,4379.63
+2020,E11-11.2.15,Soins de ville - Contrats divers (maladie),S13141,2173.44
+2020,E11-11.2.16,Soins de ville - Cures thermales (maladie),S13141,82.06
+2020,E11-11.2.17,Soins de ville - Permanence de soins (maladie),S13141,0.07
+2020,E11-11.2.19,Soins de ville - Autres (maladie),S13111,324.48
+2020,E11-11.2.19,Soins de ville - Autres (maladie),S1313,32.18
+2020,E11-11.2.19,Soins de ville - Autres (maladie),S13141,735.76
+2020,E11-11.2.21,Prestations de soins du secteur public hospitalier,S13142,76744.59
+2020,E11-11.2.22,Prestations de soins en USLD du secteur public hospitalier,S13142,1105.01
+2020,E11-11.2.28,Transferts aux hôpitaux militaires,S13141,417.92
+2020,E11-11.2.39,Soins en clinique privée (maladie) [non ventilés],S13141,14393.35
+2020,E11-11.2.41,Prestations de santé de la Camieg,S13141,225.93
+2020,E11-11.2.52,Soins de ville - Médicaments (AT-MP),S13141,9.55
+2020,E11-11.2.56,Soins de ville - Cures thermales (AT-MP),S13141,1.55
+2020,E11-11.2.59,Soins de ville - Autres (AT-MP),S13111,18.57
+2020,E11-11.2.59,Soins de ville - Autres (AT-MP),S13141,852.32
+2020,E11-11.2.69,Soins en clinique privée (AT-MP) [non ventilés],S13141,112.55
+2020,E11-11.2.72,Soins de ville - Médicaments (maternité),S13141,16.53
+2020,E11-11.2.73,Soins de ville - Matériel (maternité),S13141,5.05
+2020,E11-11.2.79,Soins de ville - Autres (maternité),S13141,858.66
+2020,E11-11.2.89,Soins en clinique privée (maternité) [non ventilés],S13141,432.12
+2020,E11-11.2.99,Autres prestations de santé nca,S13141,0.05
+2020,E11-11.3.01,Prestations maladie prises en charge par le Fonds C2S,S13112,2230.96
+2020,E11-11.4.01,"Établissement d'hébergement pour personnes âgées, Établissement d'hébergement pour personnes âgées dépendantes",S13141,10288.95
+2020,E11-11.4.02,Services de soins infirmiers à domicile (Ssiad),S13141,1679.22
+2020,E11-11.4.99,Autres prestations médico-sociales,S13141,105.25
+2020,E11-12.1.10,Allocations temporaires d'invalidité,S13141,143.37
+2020,E11-12.1.21,Pensions d'invalidité (y compris majorations enfant et tierce personne),S13111,355.02
+2020,E11-12.1.21,Pensions d'invalidité (y compris majorations enfant et tierce personne),S13141,7689.25
+2020,E11-12.1.23,Allocation temporaire d'invalidité (Fonction publique),S13111,5.63
+2020,E11-12.1.31,Pensions militaires d'invalidité - victimes civiles,S13111,57.4
+2020,E11-12.2.11,Allocation aux adultes handicapés (AAH),S13111,11093.66
+2020,E11-12.2.12,Garantie de ressources s'adressant aux travailleurs handicapés (GRTH),S13111,1511.04
+2020,E11-12.2.13,Allocation supplémentaire d'invalidité (ASI),S13111,249.43
+2020,E11-12.2.13,Allocation supplémentaire d'invalidité (ASI),S13112,24.7
+2020,E11-12.3.21,Prestation de compensation du handicap (PCH) moins de 60 ans,S1313,1648.89
+2020,E11-12.3.22,Allocation compensatrice pour tierce personne (ACTP) moins de 60 ans,S1313,215.87
+2020,E11-12.3.31,Allocation journalière de présence parentale (AJPP),S13141,96.73
+2020,E11-12.3.33,Allocation d'éducation de l'enfant handicapé (AEEH),S13141,1162.79
+2020,E11-12.3.35,Crédit d'impôt pour dépenses d'équipement de l'habitation principale (aide aux personnes de moins de 60 ans),S13111,7.03
+2020,E11-12.3.36,Crédit d'impôt au titre de l'emploi salarié à domicile (assistance aux personnes handicapées),S13111,52.31
+2020,E11-12.3.99,Autres allocations liées au handicap,S13111,30.65
+2020,E11-12.3.99,Autres allocations liées au handicap,S13112,16.43
+2020,E11-12.3.99,Autres allocations liées au handicap,S1313,35.2
+2020,E11-12.3.99,Autres allocations liées au handicap,S13141,6.25
+2020,E11-12.3.99,Autres allocations liées au handicap,S13142,26.26
+2020,E11-12.4.01,Ssiad personnes handicapées et ajustement des prestations médico-sociales,S13141,102.52
+2020,E11-12.4.03,Hébergement des adultes handicapés,S1313,8.76
+2020,E11-13.2.11,Rentes AT-MP,S13141,5220.71
+2020,E11-13.2.12,Pensions militaires d'invalidité - victimes militaires,S13111,412.97
+2020,E11-13.2.19,"Pensions d'invalidité diverses, suite à accident",S13111,71.07
+2020,E11-13.2.32,Indemnisations du Fiva,S13141,234.0
+2020,E11-13.2.33,Allocation de cessation anticipée d'activité des travailleurs de l'amiante (Acaata),S13141,258.14
+2020,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13111,55.98
+2020,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13112,32.28
+2020,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S1313,46.82
+2020,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13141,12.28
+2020,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13142,51.6
+2020,E11-13.2.35,Prestations du Fonds d'indemnisation des victimes de pesticides,S13141,0.02
+2020,E11-21.1.11,Pensions normales,S13111,46798.63
+2020,E11-21.1.11,Pensions normales,S13141,136539.91
+2020,E11-21.1.12,Pensions d'inaptitude,S13141,7713.57
+2020,E11-21.1.13,Pensions d'invalidité (y compris ATI définitive aux retraités et rentes viagères d'invalidité après 60 ans),S13111,1829.57
+2020,E11-21.1.13,Pensions d'invalidité (y compris ATI définitive aux retraités et rentes viagères d'invalidité après 60 ans),S13141,9570.02
+2020,E11-21.1.14,Retraites du combattant,S13111,641.59
+2020,E11-21.1.21,Indemnités temporaires de la Fonction publique,S13111,150.0
+2020,E11-21.1.31,Pensions de vieillesse complémentaires,S13141,81912.23
+2020,E11-21.1.41,Majorations sur pensions de base - enfant,S13111,1500.49
+2020,E11-21.1.41,Majorations sur pensions de base - enfant,S13141,5231.6
+2020,E11-21.1.42,Majorations sur pensions de base - tierce personne,S13111,41.72
+2020,E11-21.1.42,Majorations sur pensions de base - tierce personne,S13141,265.06
+2020,E11-21.1.43,Majorations sur pensions de base - conjoint à charge,S13141,109.76
+2020,E11-21.1.44,Majorations sur pensions de base - assurés handicapés,S13141,24.53
+2020,E11-21.1.45,Majorations sur pensions de base - autres,S13141,65.1
+2020,E11-21.1.99,Autres pensions vieillesse,S13111,23.22
+2020,E11-21.1.99,Autres pensions vieillesse,S13141,727.1
+2020,E11-21.2.01,Allocation de solidarité aux personnes âgées (Aspa),S13141,2618.0
+2020,E11-21.2.02,Majorations L814-2 ancien,S13111,0.27
+2020,E11-21.2.02,Majorations L814-2 ancien,S13141,256.11
+2020,E11-21.2.03,Majorations L815-2 ancien (allocation supplémentaire),S13111,0.72
+2020,E11-21.2.03,Majorations L815-2 ancien (allocation supplémentaire),S13141,871.0
+2020,E11-21.2.04,Allocations spéciales,S13141,72.01
+2020,E11-21.2.06,Minimum vieillesse associé au versement d'une pension de droit dérivé,S13111,0.87
+2020,E11-21.2.06,Minimum vieillesse associé au versement d'une pension de droit dérivé,S13141,180.57
+2020,E11-21.2.99,Autres composantes du minimum vieillesse nca,S13141,8.66
+2020,E11-21.4.11,Allocation compensatrice pour tierce personne (ACTP) plus de 60 ans,S1313,130.17
+2020,E11-21.4.13,Allocation personnalisée d'autonomie (APA),S1313,6210.89
+2020,E11-21.4.14,Prestation de compensation du handicap (PCH) plus de 60 ans,S1313,594.88
+2020,E11-21.4.16,Crédit d'impôt pour dépenses d'équipement de l'habitation principale (aide aux personnes de plus de 60 ans),S13111,43.97
+2020,E11-21.4.17,Crédit d'impôt au titre de l'emploi salarié à domicile (assistance aux personnes âgées),S13111,420.92
+2020,E11-21.4.20,Hébergement des personnes âgées dépendantes,S1313,2054.81
+2020,E11-22.1.11,Pensions de réversion sans condition de ressources,S13141,6775.05
+2020,E11-22.1.12,Pensions de réversion avec condition de ressources,S13141,9093.01
+2020,E11-22.1.13,Pensions d'accidents du travail (ayants droit),S13111,33.78
+2020,E11-22.1.14,Pensions d'invalidité (ayants droit),S13141,697.92
+2020,E11-22.1.15,Pensions militaires d'invalidité (ayants droit),S13111,372.97
+2020,E11-22.1.16,"Pensions de conjoint survivant, d'orphelins, d'ascendants au titre des retraites et de l'invalidité",S13111,5109.66
+2020,E11-22.1.16,"Pensions de conjoint survivant, d'orphelins, d'ascendants au titre des retraites et de l'invalidité",S13141,46.73
+2020,E11-22.1.19,Autres droits dérivés,S13141,142.41
+2020,E11-22.1.20,Majorations sur pensions de réversion de base,S13111,215.82
+2020,E11-22.1.20,Majorations sur pensions de réversion de base,S13141,918.95
+2020,E11-22.1.21,Indemnités temporaires de la Fonction publique (ayants cause),S13111,9.96
+2020,E11-22.1.31,Pensions complémentaires obligatoires,S13141,13087.44
+2020,E11-30.1.01,Allocations familiales (AF),S13111,15.92
+2020,E11-30.1.01,Allocations familiales (AF),S13141,12716.0
+2020,E11-30.1.02,Complément familial (CF),S13111,2.31
+2020,E11-30.1.02,Complément familial (CF),S13141,2348.31
+2020,E11-30.1.03,Allocation de soutien familial (ASF),S13111,0.12
+2020,E11-30.1.03,Allocation de soutien familial (ASF),S13141,1793.13
+2020,E11-30.1.06,Paje - Prime d'adoption,S13141,0.83
+2020,E11-30.1.07,Paje - Base,S13141,3135.68
+2020,E11-30.1.08,Paje - Allocation d'adoption,S13141,3.46
+2020,E11-30.1.09,Allocation différentielle,S13141,26.27
+2020,E11-30.1.10,Allocation jeune enfant « longue » (APJE longue),S13111,4.09
+2020,E11-30.1.10,Allocation jeune enfant « longue » (APJE longue),S13141,0.01
+2020,E11-30.2.02,Allocation de rentrée scolaire (ARS),S13111,0.89
+2020,E11-30.2.02,Allocation de rentrée scolaire (ARS),S13141,2575.88
+2020,E11-30.2.03,Bourses de l'enseignement primaire et secondaire,S13111,803.41
+2020,E11-30.2.03,Bourses de l'enseignement primaire et secondaire,S1313,251.57
+2020,E11-30.2.99,Autres prestations liées à l'éducation nca,S13111,0.52
+2020,E11-30.3.03,Paje - CLCA et Colca,S13141,3.14
+2020,E11-30.3.04,Paje - Assistante maternelle,S13141,5132.46
+2020,E11-30.3.05,Paje - Employée à domicile,S13141,775.1
+2020,E11-30.3.07,Crédit d'impôt frais de garde d'enfants de moins de 6 ans,S13111,1163.0
+2020,E11-30.3.08,Paje - Prepare,S13141,865.08
+2020,E11-30.3.09,Crédit d'impôt au titre de l'emploi salarié à domicile (garde d'enfant à domicile),S13111,440.55
+2020,E11-30.3.20,Accueil des jeunes enfants,S1313,4452.28
+2020,E11-30.3.20,Accueil des jeunes enfants,S13141,1732.72
+2020,E11-30.3.30,Maintien de salaire pour les parents en garde d'enfant durant le Covid (via IJ dérogatoires/chômage partiel),S13111,800.01
+2020,E11-30.3.30,Maintien de salaire pour les parents en garde d'enfant durant le Covid (via IJ dérogatoires/chômage partiel),S13141,1392.86
+2020,E11-30.4.01,Prestations d'hébergement et d'accueil,S1313,1321.4
+2020,E11-30.4.02,"Actions éducatives à domicile (AED), actions éducatives en milieu ouvert (AEMO)",S1313,496.21
+2020,E11-30.4.03,Prévention spécialisée,S1313,199.78
+2020,E11-30.4.04,"Dépenses diverses liées à l'ASE (bourses, subventions, frais de placement…)",S1313,899.34
+2020,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S13111,785.4
+2020,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S1313,656.88
+2020,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S13142,724.07
+2020,E11-30.5.12,Majorations familiales,S13111,87.42
+2020,E11-30.5.12,Majorations familiales,S13112,503.35
+2020,E11-30.5.12,Majorations familiales,S1313,73.12
+2020,E11-30.5.12,Majorations familiales,S13141,191.5
+2020,E11-30.5.12,Majorations familiales,S13142,80.59
+2020,E11-30.6.01,Indemnités journalières,S13141,3110.56
+2020,E11-30.6.02,Congés de naissance,S13141,226.75
+2020,E11-30.6.05,Paje - Prime de naissance,S13141,541.01
+2020,E11-41.1.01,Allocation d'aide au retour à l'emploi - Formation (ARE-F),S13141,1631.18
+2020,E11-41.1.02,Stages de formation professionnelle des régions,S1313,935.91
+2020,E11-41.1.04,Rémunération de fin de formation (RFF),S13142,112.19
+2020,E11-41.1.99,Autres dépenses de formation,S13111,0.17
+2020,E11-41.2.01,Aide à la reprise ou à la création d'entreprise,S13141,453.16
+2020,E11-41.2.04,Bourses et subventions diverses,S1313,2.85
+2020,E11-41.2.06,Insertion professionnelle des jeunes,S13111,631.19
+2020,E11-41.2.99,Autres prestations liées à l'insertion professionnelle,S13111,0.02
+2020,E11-41.2.99,Autres prestations liées à l'insertion professionnelle,S13142,1004.2
+2020,E11-42.1.01,Allocation d'aide au retour à l'emploi (ARE),S13111,417.15
+2020,E11-42.1.01,Allocation d'aide au retour à l'emploi (ARE),S13141,35506.82
+2020,E11-42.1.05,"ASS, AER, ASS-F, ASS-ACCRE (anciennement prestations versées par le Fonds de solidarité)",S13111,2155.48
+2020,E11-42.1.06,Dépenses de placement de Pôle emploi,S13142,231.85
+2020,E11-42.1.07,Aides de Pôle emploi et de l'Unedic,S13141,19.78
+2020,E11-42.1.07,Aides de Pôle emploi et de l'Unedic,S13142,17.77
+2020,E11-42.1.09,Allocation de sécurisation professionnelle (ASP),S13141,1337.74
+2020,E11-42.1.10,"Aide exceptionnelle de fin d'année (Prime de noël) des bénéficiaires de l'ASS, l'AER et l'ATS (comptabilisée dans les prestations du Fonds de solidarité avant 2013)",S13111,75.56
+2020,E11-42.1.20,Prestations de chômage partiel,S13111,14936.74
+2020,E11-42.1.20,Prestations de chômage partiel,S13141,7779.78
+2020,E11-42.1.99,Autres prestations chômage nca,S13111,291.23
+2020,E11-42.1.99,Autres prestations chômage nca,S13141,2.0
+2020,E11-42.2.03,Préretraites d'entreprises,S13141,296.28
+2020,E11-42.2.04,"Allocations financées par l'État (Allocation spéciale du fonds national de l'emploi, etc.)",S13111,3.28
+2020,E11-42.2.99,Autres préretraites,S13141,0.78
+2020,E11-50.1.01,ALF location,S13111,3671.28
+2020,E11-50.1.02,ALF accédants,S13111,314.98
+2020,E11-50.2.01,APL location HLM + foyers,S13111,6309.75
+2020,E11-50.2.02,APL location hors HLM + foyers,S13111,818.33
+2020,E11-50.2.03,APL accédants,S13111,163.9
+2020,E11-50.3.01,ALS location,S13111,5279.33
+2020,E11-50.3.02,ALS accédants,S13111,73.16
+2020,E11-60.1.01,Revenu minimum d'insertion (RMI),S1313,0.14
+2020,E11-60.1.02,RSA socle,S13111,862.51
+2020,E11-60.1.02,RSA socle,S1313,11313.66
+2020,E11-60.1.03,Prime de solidarité active (avril 2009) et aide exceptionnelle de fin d'année (Prime de noël),S13111,410.14
+2020,E11-60.2.01,Prime d'activité,S13111,9915.73
+2020,E11-60.3.01,Aide exceptionnelle de solidarité,S13111,2017.72
+2020,E11-60.4.01,Prestations liées à l'hébergement,S13111,164.07
+2020,E11-60.5.01,Chèque-Énergie,S13111,683.73
+2020,E11-60.6.01,Bourses de l'enseignement supérieur,S13111,2474.22
+2021,E11-11.1.01,Indemnités journalières (maladie),S13111,10.99
+2021,E11-11.1.01,Indemnités journalières (maladie),S13141,10332.17
+2021,E11-11.1.02,Congés maladie de longue durée des agents de l'Etat,S13111,289.65
+2021,E11-11.1.11,Indemnités journalières accidents du travail et maladies professionnelles (AT-MP),S13141,3575.95
+2021,E11-11.1.14,Maintien de salaire pour les personnes vulnérables arrêtées durant le Covid (via IJ dérogatoires/chômage partiel),S13111,67.33
+2021,E11-11.1.14,Maintien de salaire pour les personnes vulnérables arrêtées durant le Covid (via IJ dérogatoires/chômage partiel),S13141,33.68
+2021,E11-11.2.11,Soins de ville - Prestations (maladie),S13112,17.18
+2021,E11-11.2.11,Soins de ville - Prestations (maladie),S13141,44635.87
+2021,E11-11.2.12,Soins de ville - Médicaments (maladie),S13141,26360.12
+2021,E11-11.2.13,Soins de ville - Matériel (maladie),S13141,7893.95
+2021,E11-11.2.14,Soins de ville - Transports (maladie),S13112,8.0
+2021,E11-11.2.14,Soins de ville - Transports (maladie),S13141,5152.1
+2021,E11-11.2.15,Soins de ville - Contrats divers (maladie),S13141,2282.43
+2021,E11-11.2.16,Soins de ville - Cures thermales (maladie),S13141,138.77
+2021,E11-11.2.17,Soins de ville - Permanence de soins (maladie),S13141,0.06
+2021,E11-11.2.19,Soins de ville - Autres (maladie),S13111,361.48
+2021,E11-11.2.19,Soins de ville - Autres (maladie),S1313,35.61
+2021,E11-11.2.19,Soins de ville - Autres (maladie),S13141,743.42
+2021,E11-11.2.21,Prestations de soins du secteur public hospitalier,S13142,81150.38
+2021,E11-11.2.22,Prestations de soins en USLD du secteur public hospitalier,S13142,1189.68
+2021,E11-11.2.28,Transferts aux hôpitaux militaires,S13141,492.63
+2021,E11-11.2.39,Soins en clinique privée (maladie) [non ventilés],S13141,16931.13
+2021,E11-11.2.41,Prestations de santé de la Camieg,S13141,260.21
+2021,E11-11.2.52,Soins de ville - Médicaments (AT-MP),S13141,8.79
+2021,E11-11.2.56,Soins de ville - Cures thermales (AT-MP),S13141,2.48
+2021,E11-11.2.59,Soins de ville - Autres (AT-MP),S13111,19.19
+2021,E11-11.2.59,Soins de ville - Autres (AT-MP),S13141,903.13
+2021,E11-11.2.69,Soins en clinique privée (AT-MP) [non ventilés],S13141,93.39
+2021,E11-11.2.72,Soins de ville - Médicaments (maternité),S13141,15.23
+2021,E11-11.2.73,Soins de ville - Matériel (maternité),S13141,4.31
+2021,E11-11.2.79,Soins de ville - Autres (maternité),S13141,882.56
+2021,E11-11.2.89,Soins en clinique privée (maternité) [non ventilés],S13141,444.87
+2021,E11-11.2.99,Autres prestations de santé nca,S13141,0.04
+2021,E11-11.3.01,Prestations maladie prises en charge par le Fonds C2S,S13141,2496.0
+2021,E11-11.4.01,"Établissement d'hébergement pour personnes âgées, Établissement d'hébergement pour personnes âgées dépendantes",S13141,12078.16
+2021,E11-11.4.02,Services de soins infirmiers à domicile (Ssiad),S13141,1779.06
+2021,E11-11.4.99,Autres prestations médico-sociales,S13141,71.22
+2021,E11-12.1.10,Allocations temporaires d'invalidité,S13141,147.38
+2021,E11-12.1.21,Pensions d'invalidité (y compris majorations enfant et tierce personne),S13111,351.46
+2021,E11-12.1.21,Pensions d'invalidité (y compris majorations enfant et tierce personne),S13141,7703.42
+2021,E11-12.1.23,Allocation temporaire d'invalidité (Fonction publique),S13111,5.85
+2021,E11-12.1.31,Pensions militaires d'invalidité - victimes civiles,S13111,50.87
+2021,E11-12.2.11,Allocation aux adultes handicapés (AAH),S13111,11222.89
+2021,E11-12.2.12,Garantie de ressources s'adressant aux travailleurs handicapés (GRTH),S13111,1388.45
+2021,E11-12.2.13,Allocation supplémentaire d'invalidité (ASI),S13141,300.87
+2021,E11-12.3.21,Prestation de compensation du handicap (PCH) moins de 60 ans,S1313,1704.86
+2021,E11-12.3.22,Allocation compensatrice pour tierce personne (ACTP) moins de 60 ans,S1313,196.88
+2021,E11-12.3.31,Allocation journalière de présence parentale (AJPP),S13111,0.01
+2021,E11-12.3.31,Allocation journalière de présence parentale (AJPP),S13141,104.13
+2021,E11-12.3.33,Allocation d'éducation de l'enfant handicapé (AEEH),S13141,1213.21
+2021,E11-12.3.35,Crédit d'impôt pour dépenses d'équipement de l'habitation principale (aide aux personnes de moins de 60 ans),S13111,7.86
+2021,E11-12.3.36,Crédit d'impôt au titre de l'emploi salarié à domicile (assistance aux personnes handicapées),S13111,45.39
+2021,E11-12.3.99,Autres allocations liées au handicap,S13111,32.28
+2021,E11-12.3.99,Autres allocations liées au handicap,S13112,18.04
+2021,E11-12.3.99,Autres allocations liées au handicap,S1313,38.62
+2021,E11-12.3.99,Autres allocations liées au handicap,S13141,6.98
+2021,E11-12.3.99,Autres allocations liées au handicap,S13142,30.27
+2021,E11-12.4.01,Ssiad personnes handicapées et ajustement des prestations médico-sociales,S13141,118.49
+2021,E11-13.2.11,Rentes AT-MP,S13141,5232.29
+2021,E11-13.2.12,Pensions militaires d'invalidité - victimes militaires,S13111,385.61
+2021,E11-13.2.19,"Pensions d'invalidité diverses, suite à accident",S13111,67.07
+2021,E11-13.2.32,Indemnisations du Fiva,S13141,274.0
+2021,E11-13.2.33,Allocation de cessation anticipée d'activité des travailleurs de l'amiante (Acaata),S13141,229.58
+2021,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13111,54.27
+2021,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13112,32.43
+2021,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S1313,47.09
+2021,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13141,12.55
+2021,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13142,54.42
+2021,E11-13.2.35,Prestations du Fonds d'indemnisation des victimes de pesticides,S13141,2.47
+2021,E11-21.1.11,Pensions normales,S13111,47440.16
+2021,E11-21.1.11,Pensions normales,S13141,139999.87
+2021,E11-21.1.12,Pensions d'inaptitude,S13141,7638.15
+2021,E11-21.1.13,Pensions d'invalidité (y compris ATI définitive aux retraités et rentes viagères d'invalidité après 60 ans),S13111,1821.64
+2021,E11-21.1.13,Pensions d'invalidité (y compris ATI définitive aux retraités et rentes viagères d'invalidité après 60 ans),S13141,9864.61
+2021,E11-21.1.14,Retraites du combattant,S13111,593.75
+2021,E11-21.1.21,Indemnités temporaires de la Fonction publique,S13111,149.62
+2021,E11-21.1.31,Pensions de vieillesse complémentaires,S13141,83413.35
+2021,E11-21.1.41,Majorations sur pensions de base - enfant,S13111,1506.58
+2021,E11-21.1.41,Majorations sur pensions de base - enfant,S13141,5293.73
+2021,E11-21.1.42,Majorations sur pensions de base - tierce personne,S13111,41.92
+2021,E11-21.1.42,Majorations sur pensions de base - tierce personne,S13141,258.62
+2021,E11-21.1.43,Majorations sur pensions de base - conjoint à charge,S13141,95.26
+2021,E11-21.1.44,Majorations sur pensions de base - assurés handicapés,S13141,25.11
+2021,E11-21.1.45,Majorations sur pensions de base - autres,S13141,68.31
+2021,E11-21.1.99,Autres pensions vieillesse,S13111,20.43
+2021,E11-21.1.99,Autres pensions vieillesse,S13141,690.21
+2021,E11-21.2.01,Allocation de solidarité aux personnes âgées (Aspa),S13141,2827.9
+2021,E11-21.2.02,Majorations L814-2 ancien,S13111,0.27
+2021,E11-21.2.02,Majorations L814-2 ancien,S13141,218.64
+2021,E11-21.2.03,Majorations L815-2 ancien (allocation supplémentaire),S13111,0.66
+2021,E11-21.2.03,Majorations L815-2 ancien (allocation supplémentaire),S13141,769.52
+2021,E11-21.2.04,Allocations spéciales,S13141,63.72
+2021,E11-21.2.06,Minimum vieillesse associé au versement d'une pension de droit dérivé,S13111,0.88
+2021,E11-21.2.06,Minimum vieillesse associé au versement d'une pension de droit dérivé,S13141,168.54
+2021,E11-21.2.99,Autres composantes du minimum vieillesse nca,S13141,8.34
+2021,E11-21.4.11,Allocation compensatrice pour tierce personne (ACTP) plus de 60 ans,S1313,132.11
+2021,E11-21.4.13,Allocation personnalisée d'autonomie (APA),S1313,6347.72
+2021,E11-21.4.14,Prestation de compensation du handicap (PCH) plus de 60 ans,S1313,692.26
+2021,E11-21.4.16,Crédit d'impôt pour dépenses d'équipement de l'habitation principale (aide aux personnes de plus de 60 ans),S13111,49.14
+2021,E11-21.4.17,Crédit d'impôt au titre de l'emploi salarié à domicile (assistance aux personnes âgées),S13111,363.24
+2021,E11-21.4.18,Allocation journalière de proche aidant (AJPA),S13141,10.38
+2021,E11-21.4.20,Hébergement des personnes âgées dépendantes,S1313,2011.16
+2021,E11-22.1.11,Pensions de réversion sans condition de ressources,S13141,6460.56
+2021,E11-22.1.12,Pensions de réversion avec condition de ressources,S13141,9435.48
+2021,E11-22.1.13,Pensions d'accidents du travail (ayants droit),S13111,33.25
+2021,E11-22.1.14,Pensions d'invalidité (ayants droit),S13141,695.82
+2021,E11-22.1.15,Pensions militaires d'invalidité (ayants droit),S13111,344.26
+2021,E11-22.1.16,"Pensions de conjoint survivant, d'orphelins, d'ascendants au titre des retraites et de l'invalidité",S13111,5133.26
+2021,E11-22.1.16,"Pensions de conjoint survivant, d'orphelins, d'ascendants au titre des retraites et de l'invalidité",S13141,46.2
+2021,E11-22.1.19,Autres droits dérivés,S13141,132.27
+2021,E11-22.1.20,Majorations sur pensions de réversion de base,S13111,212.85
+2021,E11-22.1.20,Majorations sur pensions de réversion de base,S13141,911.92
+2021,E11-22.1.21,Indemnités temporaires de la Fonction publique (ayants cause),S13111,10.11
+2021,E11-22.1.31,Pensions complémentaires obligatoires,S13141,13166.66
+2021,E11-30.1.01,Allocations familiales (AF),S13111,15.55
+2021,E11-30.1.01,Allocations familiales (AF),S13141,12775.2
+2021,E11-30.1.02,Complément familial (CF),S13111,2.25
+2021,E11-30.1.02,Complément familial (CF),S13141,2382.24
+2021,E11-30.1.03,Allocation de soutien familial (ASF),S13111,0.16
+2021,E11-30.1.03,Allocation de soutien familial (ASF),S13141,1790.59
+2021,E11-30.1.06,Paje - Prime d'adoption,S13141,0.91
+2021,E11-30.1.07,Paje - Base,S13141,3010.69
+2021,E11-30.1.08,Paje - Allocation d'adoption,S13141,2.9
+2021,E11-30.1.09,Allocation différentielle,S13141,24.69
+2021,E11-30.1.10,Allocation jeune enfant « longue » (APJE longue),S13111,3.81
+2021,E11-30.2.02,Allocation de rentrée scolaire (ARS),S13111,1.03
+2021,E11-30.2.02,Allocation de rentrée scolaire (ARS),S13141,2065.86
+2021,E11-30.2.03,Bourses de l'enseignement primaire et secondaire,S13111,803.46
+2021,E11-30.2.03,Bourses de l'enseignement primaire et secondaire,S1313,277.24
+2021,E11-30.2.99,Autres prestations liées à l'éducation nca,S13111,0.52
+2021,E11-30.3.02,Aide à la famille pour l'emploi d'une assistante maternelle (AFEAMA),S13141,0.01
+2021,E11-30.3.03,Paje - CLCA et Colca,S13141,2.2
+2021,E11-30.3.04,Paje - Assistante maternelle,S13141,5473.85
+2021,E11-30.3.05,Paje - Employée à domicile,S13141,941.61
+2021,E11-30.3.06,Allocation parentale d'éducation (APE),S13141,0.01
+2021,E11-30.3.07,Crédit d'impôt frais de garde d'enfants de moins de 6 ans,S13111,1118.0
+2021,E11-30.3.08,Paje - Prepare,S13141,775.05
+2021,E11-30.3.09,Crédit d'impôt au titre de l'emploi salarié à domicile (garde d'enfant à domicile),S13111,463.87
+2021,E11-30.3.20,Accueil des jeunes enfants,S1313,4458.39
+2021,E11-30.3.20,Accueil des jeunes enfants,S13141,1787.61
+2021,E11-30.3.30,Maintien de salaire pour les parents en garde d'enfant durant le Covid (via IJ dérogatoires/chômage partiel),S13111,52.67
+2021,E11-30.3.30,Maintien de salaire pour les parents en garde d'enfant durant le Covid (via IJ dérogatoires/chômage partiel),S13141,26.35
+2021,E11-30.4.01,Prestations d'hébergement et d'accueil,S1313,1410.22
+2021,E11-30.4.02,"Actions éducatives à domicile (AED), actions éducatives en milieu ouvert (AEMO)",S1313,542.35
+2021,E11-30.4.03,Prévention spécialisée,S1313,216.36
+2021,E11-30.4.04,"Dépenses diverses liées à l'ASE (bourses, subventions, frais de placement…)",S1313,749.66
+2021,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S13111,770.83
+2021,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S1313,668.75
+2021,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S13142,772.85
+2021,E11-30.5.12,Majorations familiales,S13111,85.77
+2021,E11-30.5.12,Majorations familiales,S13112,511.8
+2021,E11-30.5.12,Majorations familiales,S1313,74.41
+2021,E11-30.5.12,Majorations familiales,S13141,198.06
+2021,E11-30.5.12,Majorations familiales,S13142,85.99
+2021,E11-30.6.01,Indemnités journalières,S13141,3309.91
+2021,E11-30.6.02,Congés de naissance,S13141,319.31
+2021,E11-30.6.05,Paje - Prime de naissance,S13141,737.15
+2021,E11-41.1.01,Allocation d'aide au retour à l'emploi - Formation (ARE-F),S13141,2121.21
+2021,E11-41.1.02,Stages de formation professionnelle des régions,S1313,1045.95
+2021,E11-41.1.04,Rémunération de fin de formation (RFF),S13142,95.94
+2021,E11-41.1.99,Autres dépenses de formation,S13111,0.32
+2021,E11-41.2.01,Aide à la reprise ou à la création d'entreprise,S13141,486.24
+2021,E11-41.2.04,Bourses et subventions diverses,S1313,2.79
+2021,E11-41.2.06,Insertion professionnelle des jeunes,S13111,810.41
+2021,E11-41.2.06,Insertion professionnelle des jeunes,S13142,22.27
+2021,E11-41.2.99,Autres prestations liées à l'insertion professionnelle,S13111,171.98
+2021,E11-41.2.99,Autres prestations liées à l'insertion professionnelle,S13142,1301.01
+2021,E11-42.1.01,Allocation d'aide au retour à l'emploi (ARE),S13111,464.54
+2021,E11-42.1.01,Allocation d'aide au retour à l'emploi (ARE),S13141,33571.35
+2021,E11-42.1.02,Allocation spécifique de reclassement (ASR),S13141,0.01
+2021,E11-42.1.05,"ASS, AER, ASS-F, ASS-ACCRE (anciennement prestations versées par le Fonds de solidarité)",S13111,2017.09
+2021,E11-42.1.06,Dépenses de placement de Pôle emploi,S13142,412.98
+2021,E11-42.1.07,Aides de Pôle emploi et de l'Unedic,S13141,15.78
+2021,E11-42.1.07,Aides de Pôle emploi et de l'Unedic,S13142,28.81
+2021,E11-42.1.09,Allocation de sécurisation professionnelle (ASP),S13141,1442.3
+2021,E11-42.1.10,"Aide exceptionnelle de fin d'année (Prime de noël) des bénéficiaires de l'ASS, l'AER et l'ATS (comptabilisée dans les prestations du Fonds de solidarité avant 2013)",S13111,75.59
+2021,E11-42.1.20,Prestations de chômage partiel,S13111,6206.66
+2021,E11-42.1.20,Prestations de chômage partiel,S13141,3036.62
+2021,E11-42.1.99,Autres prestations chômage nca,S13111,1022.3
+2021,E11-42.1.99,Autres prestations chômage nca,S13141,1.0
+2021,E11-42.2.03,Préretraites d'entreprises,S13141,315.65
+2021,E11-42.2.04,"Allocations financées par l'État (Allocation spéciale du fonds national de l'emploi, etc.)",S13111,2.29
+2021,E11-42.2.99,Autres préretraites,S13141,0.76
+2021,E11-50.1.01,ALF location,S13111,3366.35
+2021,E11-50.1.02,ALF accédants,S13111,250.97
+2021,E11-50.2.01,APL location HLM + foyers,S13111,6012.67
+2021,E11-50.2.02,APL location hors HLM + foyers,S13111,757.08
+2021,E11-50.2.03,APL accédants,S13111,123.1
+2021,E11-50.3.01,ALS location,S13111,5113.85
+2021,E11-50.3.02,ALS accédants,S13111,62.93
+2021,E11-60.1.02,RSA socle,S13111,844.41
+2021,E11-60.1.02,RSA socle,S1313,11268.75
+2021,E11-60.1.03,Prime de solidarité active (avril 2009) et aide exceptionnelle de fin d'année (Prime de noël),S13111,410.31
+2021,E11-60.2.01,Prime d'activité,S13111,9835.55
+2021,E11-60.3.02,Indemnité inflation,S13111,3800.11
+2021,E11-60.4.01,Prestations liées à l'hébergement,S13111,284.58
+2021,E11-60.5.01,Chèque-Énergie,S13111,956.13
+2021,E11-60.6.01,Bourses de l'enseignement supérieur,S13111,2437.67
+2022,E11-11.1.01,Indemnités journalières (maladie),S13111,10.07
+2022,E11-11.1.01,Indemnités journalières (maladie),S13141,12278.02
+2022,E11-11.1.02,Congés maladie de longue durée des agents de l'Etat,S13111,302.27
+2022,E11-11.1.11,Indemnités journalières accidents du travail et maladies professionnelles (AT-MP),S13141,3957.03
+2022,E11-11.1.14,Maintien de salaire pour les personnes vulnérables arrêtées durant le Covid (via IJ dérogatoires/chômage partiel),S13111,25.33
+2022,E11-11.1.14,Maintien de salaire pour les personnes vulnérables arrêtées durant le Covid (via IJ dérogatoires/chômage partiel),S13141,12.67
+2022,E11-11.2.11,Soins de ville - Prestations (maladie),S13141,44354.55
+2022,E11-11.2.12,Soins de ville - Médicaments (maladie),S13141,27951.73
+2022,E11-11.2.13,Soins de ville - Matériel (maladie),S13141,8194.47
+2022,E11-11.2.14,Soins de ville - Transports (maladie),S13112,1.95
+2022,E11-11.2.14,Soins de ville - Transports (maladie),S13141,5574.66
+2022,E11-11.2.15,Soins de ville - Contrats divers (maladie),S13141,2513.15
+2022,E11-11.2.16,Soins de ville - Cures thermales (maladie),S13141,186.23
+2022,E11-11.2.17,Soins de ville - Permanence de soins (maladie),S13141,10.66
+2022,E11-11.2.19,Soins de ville - Autres (maladie),S13111,302.14
+2022,E11-11.2.19,Soins de ville - Autres (maladie),S1313,38.57
+2022,E11-11.2.19,Soins de ville - Autres (maladie),S13141,634.57
+2022,E11-11.2.21,Prestations de soins du secteur public hospitalier,S13142,84422.69
+2022,E11-11.2.22,Prestations de soins en USLD du secteur public hospitalier,S13142,1272.89
+2022,E11-11.2.28,Transferts aux hôpitaux militaires,S13141,400.95
+2022,E11-11.2.39,Soins en clinique privée (maladie) [non ventilés],S13141,17283.52
+2022,E11-11.2.41,Prestations de santé de la Camieg,S13141,271.93
+2022,E11-11.2.52,Soins de ville - Médicaments (AT-MP),S13141,8.23
+2022,E11-11.2.56,Soins de ville - Cures thermales (AT-MP),S13141,3.29
+2022,E11-11.2.59,Soins de ville - Autres (AT-MP),S13111,21.78
+2022,E11-11.2.59,Soins de ville - Autres (AT-MP),S13141,801.46
+2022,E11-11.2.69,Soins en clinique privée (AT-MP) [non ventilés],S13141,104.03
+2022,E11-11.2.72,Soins de ville - Médicaments (maternité),S13141,14.09
+2022,E11-11.2.73,Soins de ville - Matériel (maternité),S13141,2.54
+2022,E11-11.2.79,Soins de ville - Autres (maternité),S13141,832.58
+2022,E11-11.2.89,Soins en clinique privée (maternité) [non ventilés],S13141,432.13
+2022,E11-11.2.99,Autres prestations de santé nca,S13141,0.06
+2022,E11-11.3.01,Prestations maladie prises en charge par le Fonds C2S,S13141,2298.0
+2022,E11-11.4.01,"Établissement d'hébergement pour personnes âgées, Établissement d'hébergement pour personnes âgées dépendantes",S13141,12583.57
+2022,E11-11.4.02,Services de soins infirmiers à domicile (Ssiad),S13141,1909.12
+2022,E11-11.4.99,Autres prestations médico-sociales,S13141,72.28
+2022,E11-12.1.10,Allocations temporaires d'invalidité,S13141,162.32
+2022,E11-12.1.21,Pensions d'invalidité (y compris majorations enfant et tierce personne),S13111,357.09
+2022,E11-12.1.21,Pensions d'invalidité (y compris majorations enfant et tierce personne),S13141,8118.88
+2022,E11-12.1.23,Allocation temporaire d'invalidité (Fonction publique),S13111,5.04
+2022,E11-12.1.31,Pensions militaires d'invalidité - victimes civiles,S13111,46.19
+2022,E11-12.2.11,Allocation aux adultes handicapés (AAH),S13111,11937.6
+2022,E11-12.2.12,Garantie de ressources s'adressant aux travailleurs handicapés (GRTH),S13111,1436.6
+2022,E11-12.2.13,Allocation supplémentaire d'invalidité (ASI),S13141,301.86
+2022,E11-12.3.21,Prestation de compensation du handicap (PCH) moins de 60 ans,S1313,1870.13
+2022,E11-12.3.22,Allocation compensatrice pour tierce personne (ACTP) moins de 60 ans,S1313,186.07
+2022,E11-12.3.31,Allocation journalière de présence parentale (AJPP),S13111,0.05
+2022,E11-12.3.31,Allocation journalière de présence parentale (AJPP),S13141,147.96
+2022,E11-12.3.33,Allocation d'éducation de l'enfant handicapé (AEEH),S13141,1333.44
+2022,E11-12.3.35,Crédit d'impôt pour dépenses d'équipement de l'habitation principale (aide aux personnes de moins de 60 ans),S13111,8.97
+2022,E11-12.3.36,Crédit d'impôt au titre de l'emploi salarié à domicile (assistance aux personnes handicapées),S13111,61.87
+2022,E11-12.3.99,Autres allocations liées au handicap,S13111,90.98
+2022,E11-12.3.99,Autres allocations liées au handicap,S13112,20.65
+2022,E11-12.3.99,Autres allocations liées au handicap,S1313,41.88
+2022,E11-12.3.99,Autres allocations liées au handicap,S13141,7.57
+2022,E11-12.3.99,Autres allocations liées au handicap,S13142,34.67
+2022,E11-12.4.01,Ssiad personnes handicapées et ajustement des prestations médico-sociales,S13141,101.01
+2022,E11-13.2.11,Rentes AT-MP,S13141,5347.4
+2022,E11-13.2.12,Pensions militaires d'invalidité - victimes militaires,S13111,371.16
+2022,E11-13.2.19,"Pensions d'invalidité diverses, suite à accident",S13111,65.65
+2022,E11-13.2.32,Indemnisations du Fiva,S13141,265.0
+2022,E11-13.2.33,Allocation de cessation anticipée d'activité des travailleurs de l'amiante (Acaata),S13141,210.8
+2022,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13111,54.86
+2022,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13112,34.65
+2022,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S1313,49.5
+2022,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13141,12.7
+2022,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13142,58.18
+2022,E11-13.2.35,Prestations du Fonds d'indemnisation des victimes de pesticides,S13141,8.16
+2022,E11-21.1.11,Pensions normales,S13111,49437.35
+2022,E11-21.1.11,Pensions normales,S13141,147758.41
+2022,E11-21.1.12,Pensions d'inaptitude,S13141,7787.27
+2022,E11-21.1.13,Pensions d'invalidité (y compris ATI définitive aux retraités et rentes viagères d'invalidité après 60 ans),S13111,1864.75
+2022,E11-21.1.13,Pensions d'invalidité (y compris ATI définitive aux retraités et rentes viagères d'invalidité après 60 ans),S13141,10452.61
+2022,E11-21.1.14,Retraites du combattant,S13111,560.75
+2022,E11-21.1.21,Indemnités temporaires de la Fonction publique,S13111,148.84
+2022,E11-21.1.31,Pensions de vieillesse complémentaires,S13141,86718.67
+2022,E11-21.1.41,Majorations sur pensions de base - enfant,S13111,1555.88
+2022,E11-21.1.41,Majorations sur pensions de base - enfant,S13141,5512.0
+2022,E11-21.1.42,Majorations sur pensions de base - tierce personne,S13111,42.85
+2022,E11-21.1.42,Majorations sur pensions de base - tierce personne,S13141,259.74
+2022,E11-21.1.43,Majorations sur pensions de base - conjoint à charge,S13141,84.71
+2022,E11-21.1.44,Majorations sur pensions de base - assurés handicapés,S13141,26.4
+2022,E11-21.1.45,Majorations sur pensions de base - autres,S13141,72.32
+2022,E11-21.1.99,Autres pensions vieillesse,S13111,18.27
+2022,E11-21.1.99,Autres pensions vieillesse,S13141,675.29
+2022,E11-21.2.01,Allocation de solidarité aux personnes âgées (Aspa),S13141,3148.26
+2022,E11-21.2.02,Majorations L814-2 ancien,S13111,0.31
+2022,E11-21.2.02,Majorations L814-2 ancien,S13141,192.08
+2022,E11-21.2.03,Majorations L815-2 ancien (allocation supplémentaire),S13111,0.77
+2022,E11-21.2.03,Majorations L815-2 ancien (allocation supplémentaire),S13141,691.07
+2022,E11-21.2.04,Allocations spéciales,S13141,57.25
+2022,E11-21.2.06,Minimum vieillesse associé au versement d'une pension de droit dérivé,S13111,0.76
+2022,E11-21.2.06,Minimum vieillesse associé au versement d'une pension de droit dérivé,S13141,163.4
+2022,E11-21.2.99,Autres composantes du minimum vieillesse nca,S13141,7.88
+2022,E11-21.4.11,Allocation compensatrice pour tierce personne (ACTP) plus de 60 ans,S1313,131.55
+2022,E11-21.4.13,Allocation personnalisée d'autonomie (APA),S1313,6629.65
+2022,E11-21.4.14,Prestation de compensation du handicap (PCH) plus de 60 ans,S1313,836.93
+2022,E11-21.4.16,Crédit d'impôt pour dépenses d'équipement de l'habitation principale (aide aux personnes de plus de 60 ans),S13111,56.03
+2022,E11-21.4.17,Crédit d'impôt au titre de l'emploi salarié à domicile (assistance aux personnes âgées),S13111,494.72
+2022,E11-21.4.18,Allocation journalière de proche aidant (AJPA),S13141,8.64
+2022,E11-21.4.20,Hébergement des personnes âgées dépendantes,S1313,1979.65
+2022,E11-22.1.11,Pensions de réversion sans condition de ressources,S13141,6337.51
+2022,E11-22.1.12,Pensions de réversion avec condition de ressources,S13141,10000.04
+2022,E11-22.1.13,Pensions d'accidents du travail (ayants droit),S13111,33.67
+2022,E11-22.1.14,Pensions d'invalidité (ayants droit),S13141,713.58
+2022,E11-22.1.15,Pensions militaires d'invalidité (ayants droit),S13111,320.7
+2022,E11-22.1.16,"Pensions de conjoint survivant, d'orphelins, d'ascendants au titre des retraites et de l'invalidité",S13111,5296.98
+2022,E11-22.1.16,"Pensions de conjoint survivant, d'orphelins, d'ascendants au titre des retraites et de l'invalidité",S13141,46.98
+2022,E11-22.1.19,Autres droits dérivés,S13141,126.12
+2022,E11-22.1.20,Majorations sur pensions de réversion de base,S13111,215.15
+2022,E11-22.1.20,Majorations sur pensions de réversion de base,S13141,933.23
+2022,E11-22.1.21,Indemnités temporaires de la Fonction publique (ayants cause),S13111,10.21
+2022,E11-22.1.31,Pensions complémentaires obligatoires,S13141,13487.23
+2022,E11-30.1.01,Allocations familiales (AF),S13111,15.3
+2022,E11-30.1.01,Allocations familiales (AF),S13141,13066.96
+2022,E11-30.1.02,Complément familial (CF),S13111,2.16
+2022,E11-30.1.02,Complément familial (CF),S13141,2406.43
+2022,E11-30.1.03,Allocation de soutien familial (ASF),S13111,0.11
+2022,E11-30.1.03,Allocation de soutien familial (ASF),S13141,2016.67
+2022,E11-30.1.06,Paje - Prime d'adoption,S13141,0.98
+2022,E11-30.1.07,Paje - Base,S13141,3008.4
+2022,E11-30.1.08,Paje - Allocation d'adoption,S13141,2.77
+2022,E11-30.1.09,Allocation différentielle,S13141,24.68
+2022,E11-30.1.10,Allocation jeune enfant « longue » (APJE longue),S13111,3.65
+2022,E11-30.2.02,Allocation de rentrée scolaire (ARS),S13111,1.02
+2022,E11-30.2.02,Allocation de rentrée scolaire (ARS),S13141,2135.74
+2022,E11-30.2.03,Bourses de l'enseignement primaire et secondaire,S13111,818.0
+2022,E11-30.2.03,Bourses de l'enseignement primaire et secondaire,S1313,285.4
+2022,E11-30.2.99,Autres prestations liées à l'éducation nca,S13111,0.5
+2022,E11-30.3.03,Paje - CLCA et Colca,S13141,2.1
+2022,E11-30.3.04,Paje - Assistante maternelle,S13141,5679.45
+2022,E11-30.3.05,Paje - Employée à domicile,S13141,1091.47
+2022,E11-30.3.07,Crédit d'impôt frais de garde d'enfants de moins de 6 ans,S13111,1260.0
+2022,E11-30.3.08,Paje - Prepare,S13141,759.19
+2022,E11-30.3.09,Crédit d'impôt au titre de l'emploi salarié à domicile (garde d'enfant à domicile),S13111,488.43
+2022,E11-30.3.20,Accueil des jeunes enfants,S1313,4752.75
+2022,E11-30.3.20,Accueil des jeunes enfants,S13141,1957.25
+2022,E11-30.3.30,Maintien de salaire pour les parents en garde d'enfant durant le Covid (via IJ dérogatoires/chômage partiel),S13111,5.33
+2022,E11-30.3.30,Maintien de salaire pour les parents en garde d'enfant durant le Covid (via IJ dérogatoires/chômage partiel),S13141,2.67
+2022,E11-30.4.01,Prestations d'hébergement et d'accueil,S1313,1164.7
+2022,E11-30.4.02,"Actions éducatives à domicile (AED), actions éducatives en milieu ouvert (AEMO)",S1313,551.38
+2022,E11-30.4.03,Prévention spécialisée,S1313,211.69
+2022,E11-30.4.04,"Dépenses diverses liées à l'ASE (bourses, subventions, frais de placement…)",S1313,1131.97
+2022,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S13111,762.0
+2022,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S1313,687.59
+2022,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S13142,808.1
+2022,E11-30.5.12,Majorations familiales,S13111,86.78
+2022,E11-30.5.12,Majorations familiales,S13112,536.04
+2022,E11-30.5.12,Majorations familiales,S1313,78.31
+2022,E11-30.5.12,Majorations familiales,S13141,196.52
+2022,E11-30.5.12,Majorations familiales,S13142,92.03
+2022,E11-30.6.01,Indemnités journalières,S13141,3363.38
+2022,E11-30.6.02,Congés de naissance,S13141,555.52
+2022,E11-30.6.05,Paje - Prime de naissance,S13141,534.48
+2022,E11-41.1.01,Allocation d'aide au retour à l'emploi - Formation (ARE-F),S13141,2032.08
+2022,E11-41.1.02,Stages de formation professionnelle des régions,S1313,1061.86
+2022,E11-41.1.04,Rémunération de fin de formation (RFF),S13142,129.36
+2022,E11-41.1.99,Autres dépenses de formation,S13111,1.76
+2022,E11-41.2.01,Aide à la reprise ou à la création d'entreprise,S13141,596.44
+2022,E11-41.2.04,Bourses et subventions diverses,S1313,2.63
+2022,E11-41.2.06,Insertion professionnelle des jeunes,S13111,927.9
+2022,E11-41.2.06,Insertion professionnelle des jeunes,S13142,39.81
+2022,E11-41.2.99,Autres prestations liées à l'insertion professionnelle,S13111,11.03
+2022,E11-41.2.99,Autres prestations liées à l'insertion professionnelle,S13142,1287.5
+2022,E11-42.1.01,Allocation d'aide au retour à l'emploi (ARE),S13111,397.72
+2022,E11-42.1.01,Allocation d'aide au retour à l'emploi (ARE),S13141,29449.36
+2022,E11-42.1.02,Allocation spécifique de reclassement (ASR),S13141,0.02
+2022,E11-42.1.05,"ASS, AER, ASS-F, ASS-ACCRE (anciennement prestations versées par le Fonds de solidarité)",S13111,1926.03
+2022,E11-42.1.06,Dépenses de placement de Pôle emploi,S13142,539.76
+2022,E11-42.1.07,Aides de Pôle emploi et de l'Unedic,S13141,18.94
+2022,E11-42.1.07,Aides de Pôle emploi et de l'Unedic,S13142,33.57
+2022,E11-42.1.09,Allocation de sécurisation professionnelle (ASP),S13141,942.99
+2022,E11-42.1.10,"Aide exceptionnelle de fin d'année (Prime de noël) des bénéficiaires de l'ASS, l'AER et l'ATS (comptabilisée dans les prestations du Fonds de solidarité avant 2013)",S13111,74.44
+2022,E11-42.1.20,Prestations de chômage partiel,S13111,445.48
+2022,E11-42.1.20,Prestations de chômage partiel,S13141,182.86
+2022,E11-42.1.99,Autres prestations chômage nca,S13111,12.91
+2022,E11-42.1.99,Autres prestations chômage nca,S13141,0.19
+2022,E11-42.2.03,Préretraites d'entreprises,S13141,326.07
+2022,E11-42.2.04,"Allocations financées par l'État (Allocation spéciale du fonds national de l'emploi, etc.)",S13111,0.93
+2022,E11-42.2.99,Autres préretraites,S13141,0.85
+2022,E11-50.1.01,ALF location,S13111,3173.76
+2022,E11-50.1.02,ALF accédants,S13111,201.37
+2022,E11-50.2.01,APL location HLM + foyers,S13111,5976.95
+2022,E11-50.2.02,APL location hors HLM + foyers,S13111,759.59
+2022,E11-50.2.03,APL accédants,S13111,107.78
+2022,E11-50.3.01,ALS location,S13111,5152.13
+2022,E11-50.3.02,ALS accédants,S13111,54.37
+2022,E11-60.1.01,Revenu minimum d'insertion (RMI),S1313,0.04
+2022,E11-60.1.02,RSA socle,S13111,1540.3
+2022,E11-60.1.02,RSA socle,S1313,10211.45
+2022,E11-60.1.03,Prime de solidarité active (avril 2009) et aide exceptionnelle de fin d'année (Prime de noël),S13111,404.06
+2022,E11-60.2.01,Prime d'activité,S13111,10330.19
+2022,E11-60.3.01,Aide exceptionnelle de solidarité,S13111,1130.04
+2022,E11-60.4.01,Prestations liées à l'hébergement,S13111,55.63
+2022,E11-60.5.01,Chèque-Énergie,S13111,1595.83
+2022,E11-60.6.01,Bourses de l'enseignement supérieur,S13111,2384.15
+2023,E11-11.1.01,Indemnités journalières (maladie),S13111,11.59
+2023,E11-11.1.01,Indemnités journalières (maladie),S13141,11021.65
+2023,E11-11.1.02,Congés maladie de longue durée des agents de l'Etat,S13111,317.88
+2023,E11-11.1.11,Indemnités journalières accidents du travail et maladies professionnelles (AT-MP),S13141,4271.53
+2023,E11-11.1.14,Maintien de salaire pour les personnes vulnérables arrêtées durant le Covid (via IJ dérogatoires/chômage partiel),S13111,2.37
+2023,E11-11.1.14,Maintien de salaire pour les personnes vulnérables arrêtées durant le Covid (via IJ dérogatoires/chômage partiel),S13141,1.18
+2023,E11-11.2.11,Soins de ville - Prestations (maladie),S13141,43742.54
+2023,E11-11.2.12,Soins de ville - Médicaments (maladie),S13141,27581.61
+2023,E11-11.2.13,Soins de ville - Matériel (maladie),S13141,8491.11
+2023,E11-11.2.14,Soins de ville - Transports (maladie),S13141,5986.08
+2023,E11-11.2.15,Soins de ville - Contrats divers (maladie),S13141,2817.69
+2023,E11-11.2.16,Soins de ville - Cures thermales (maladie),S13141,212.73
+2023,E11-11.2.17,Soins de ville - Permanence de soins (maladie),S13141,31.64
+2023,E11-11.2.19,Soins de ville - Autres (maladie),S13111,299.38
+2023,E11-11.2.19,Soins de ville - Autres (maladie),S1313,42.49
+2023,E11-11.2.19,Soins de ville - Autres (maladie),S13141,598.4
+2023,E11-11.2.21,Prestations de soins du secteur public hospitalier,S13142,89675.38
+2023,E11-11.2.22,Prestations de soins en USLD du secteur public hospitalier,S13142,1336.91
+2023,E11-11.2.28,Transferts aux hôpitaux militaires,S13141,435.94
+2023,E11-11.2.39,Soins en clinique privée (maladie) [non ventilés],S13141,18354.75
+2023,E11-11.2.41,Prestations de santé de la Camieg,S13141,288.64
+2023,E11-11.2.52,Soins de ville - Médicaments (AT-MP),S13141,8.38
+2023,E11-11.2.56,Soins de ville - Cures thermales (AT-MP),S13141,4.96
+2023,E11-11.2.59,Soins de ville - Autres (AT-MP),S13111,23.68
+2023,E11-11.2.59,Soins de ville - Autres (AT-MP),S13141,869.42
+2023,E11-11.2.69,Soins en clinique privée (AT-MP) [non ventilés],S13141,114.11
+2023,E11-11.2.72,Soins de ville - Médicaments (maternité),S13141,14.13
+2023,E11-11.2.73,Soins de ville - Matériel (maternité),S13141,3.04
+2023,E11-11.2.79,Soins de ville - Autres (maternité),S13141,851.34
+2023,E11-11.2.89,Soins en clinique privée (maternité) [non ventilés],S13141,393.89
+2023,E11-11.2.99,Autres prestations de santé nca,S13141,0.07
+2023,E11-11.3.01,Prestations maladie prises en charge par le Fonds C2S,S13141,2469.0
+2023,E11-11.4.01,"Établissement d'hébergement pour personnes âgées, Établissement d'hébergement pour personnes âgées dépendantes",S13141,13298.3
+2023,E11-11.4.02,Services de soins infirmiers à domicile (Ssiad),S13141,2061.25
+2023,E11-11.4.99,Autres prestations médico-sociales,S13141,82.62
+2023,E11-12.1.10,Allocations temporaires d'invalidité,S13141,172.51
+2023,E11-12.1.21,Pensions d'invalidité (y compris majorations enfant et tierce personne),S13111,372.37
+2023,E11-12.1.21,Pensions d'invalidité (y compris majorations enfant et tierce personne),S13141,8540.37
+2023,E11-12.1.23,Allocation temporaire d'invalidité (Fonction publique),S13111,5.1
+2023,E11-12.1.31,Pensions militaires d'invalidité - victimes civiles,S13111,42.54
+2023,E11-12.2.11,Allocation aux adultes handicapés (AAH),S13111,12679.6
+2023,E11-12.2.12,Garantie de ressources s'adressant aux travailleurs handicapés (GRTH),S13111,1499.09
+2023,E11-12.2.13,Allocation supplémentaire d'invalidité (ASI),S13141,308.69
+2023,E11-12.3.21,Prestation de compensation du handicap (PCH) moins de 60 ans,S1313,2055.47
+2023,E11-12.3.22,Allocation compensatrice pour tierce personne (ACTP) moins de 60 ans,S1313,183.41
+2023,E11-12.3.31,Allocation journalière de présence parentale (AJPP),S13111,0.07
+2023,E11-12.3.31,Allocation journalière de présence parentale (AJPP),S13141,208.5
+2023,E11-12.3.33,Allocation d'éducation de l'enfant handicapé (AEEH),S13141,1480.65
+2023,E11-12.3.35,Crédit d'impôt pour dépenses d'équipement de l'habitation principale (aide aux personnes de moins de 60 ans),S13111,7.17
+2023,E11-12.3.36,Crédit d'impôt au titre de l'emploi salarié à domicile (assistance aux personnes handicapées),S13111,66.09
+2023,E11-12.3.99,Autres allocations liées au handicap,S13111,94.38
+2023,E11-12.3.99,Autres allocations liées au handicap,S13112,23.67
+2023,E11-12.3.99,Autres allocations liées au handicap,S1313,48.11
+2023,E11-12.3.99,Autres allocations liées au handicap,S13141,8.72
+2023,E11-12.3.99,Autres allocations liées au handicap,S13142,40.59
+2023,E11-12.4.01,Ssiad personnes handicapées et ajustement des prestations médico-sociales,S13141,102.84
+2023,E11-12.4.03,Hébergement des adultes handicapés,S1313,0.4
+2023,E11-13.2.11,Rentes AT-MP,S13141,5577.61
+2023,E11-13.2.12,Pensions militaires d'invalidité - victimes militaires,S13111,362.38
+2023,E11-13.2.19,"Pensions d'invalidité diverses, suite à accident",S13111,62.98
+2023,E11-13.2.32,Indemnisations du Fiva,S13141,336.0
+2023,E11-13.2.33,Allocation de cessation anticipée d'activité des travailleurs de l'amiante (Acaata),S13141,204.88
+2023,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13111,56.63
+2023,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13112,37.31
+2023,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S1313,52.11
+2023,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13141,13.74
+2023,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13142,63.98
+2023,E11-13.2.35,Prestations du Fonds d'indemnisation des victimes de pesticides,S13141,14.74
+2023,E11-21.1.11,Pensions normales,S13111,51504.99
+2023,E11-21.1.11,Pensions normales,S13141,155241.57
+2023,E11-21.1.12,Pensions d'inaptitude,S13141,7919.57
+2023,E11-21.1.13,Pensions d'invalidité (y compris ATI définitive aux retraités et rentes viagères d'invalidité après 60 ans),S13111,1917.47
+2023,E11-21.1.13,Pensions d'invalidité (y compris ATI définitive aux retraités et rentes viagères d'invalidité après 60 ans),S13141,11024.44
+2023,E11-21.1.14,Retraites du combattant,S13111,491.73
+2023,E11-21.1.21,Indemnités temporaires de la Fonction publique,S13111,247.1
+2023,E11-21.1.31,Pensions de vieillesse complémentaires,S13141,92705.55
+2023,E11-21.1.41,Majorations sur pensions de base - enfant,S13111,1615.23
+2023,E11-21.1.41,Majorations sur pensions de base - enfant,S13141,5719.96
+2023,E11-21.1.42,Majorations sur pensions de base - tierce personne,S13111,43.36
+2023,E11-21.1.42,Majorations sur pensions de base - tierce personne,S13141,259.99
+2023,E11-21.1.43,Majorations sur pensions de base - conjoint à charge,S13141,75.54
+2023,E11-21.1.44,Majorations sur pensions de base - assurés handicapés,S13141,28.8
+2023,E11-21.1.45,Majorations sur pensions de base - autres,S13141,77.87
+2023,E11-21.1.99,Autres pensions vieillesse,S13111,16.31
+2023,E11-21.1.99,Autres pensions vieillesse,S13141,656.28
+2023,E11-21.2.01,Allocation de solidarité aux personnes âgées (Aspa),S13141,3505.84
+2023,E11-21.2.02,Majorations L814-2 ancien,S13111,0.27
+2023,E11-21.2.02,Majorations L814-2 ancien,S13141,173.37
+2023,E11-21.2.03,Majorations L815-2 ancien (allocation supplémentaire),S13111,0.79
+2023,E11-21.2.03,Majorations L815-2 ancien (allocation supplémentaire),S13141,621.75
+2023,E11-21.2.04,Allocations spéciales,S13141,51.83
+2023,E11-21.2.06,Minimum vieillesse associé au versement d'une pension de droit dérivé,S13111,0.65
+2023,E11-21.2.06,Minimum vieillesse associé au versement d'une pension de droit dérivé,S13141,159.28
+2023,E11-21.2.99,Autres composantes du minimum vieillesse nca,S13141,7.3
+2023,E11-21.4.11,Allocation compensatrice pour tierce personne (ACTP) plus de 60 ans,S1313,129.08
+2023,E11-21.4.13,Allocation personnalisée d'autonomie (APA),S1313,7018.37
+2023,E11-21.4.14,Prestation de compensation du handicap (PCH) plus de 60 ans,S1313,970.45
+2023,E11-21.4.16,Crédit d'impôt pour dépenses d'équipement de l'habitation principale (aide aux personnes de plus de 60 ans),S13111,44.83
+2023,E11-21.4.17,Crédit d'impôt au titre de l'emploi salarié à domicile (assistance aux personnes âgées),S13111,518.48
+2023,E11-21.4.18,Allocation journalière de proche aidant (AJPA),S13141,11.96
+2023,E11-21.4.20,Hébergement des personnes âgées dépendantes,S1313,2010.98
+2023,E11-22.1.11,Pensions de réversion sans condition de ressources,S13141,6196.51
+2023,E11-22.1.12,Pensions de réversion avec condition de ressources,S13141,10616.62
+2023,E11-22.1.13,Pensions d'accidents du travail (ayants droit),S13111,34.35
+2023,E11-22.1.14,Pensions d'invalidité (ayants droit),S13141,736.99
+2023,E11-22.1.15,Pensions militaires d'invalidité (ayants droit),S13111,303.86
+2023,E11-22.1.16,"Pensions de conjoint survivant, d'orphelins, d'ascendants au titre des retraites et de l'invalidité",S13111,5514.54
+2023,E11-22.1.16,"Pensions de conjoint survivant, d'orphelins, d'ascendants au titre des retraites et de l'invalidité",S13141,46.62
+2023,E11-22.1.19,Autres droits dérivés,S13141,121.09
+2023,E11-22.1.20,Majorations sur pensions de réversion de base,S13111,219.47
+2023,E11-22.1.20,Majorations sur pensions de réversion de base,S13141,950.46
+2023,E11-22.1.21,Indemnités temporaires de la Fonction publique (ayants cause),S13111,19.82
+2023,E11-22.1.31,Pensions complémentaires obligatoires,S13141,14248.86
+2023,E11-30.1.01,Allocations familiales (AF),S13111,16.75
+2023,E11-30.1.01,Allocations familiales (AF),S13141,13248.34
+2023,E11-30.1.02,Complément familial (CF),S13111,2.11
+2023,E11-30.1.02,Complément familial (CF),S13141,2414.69
+2023,E11-30.1.03,Allocation de soutien familial (ASF),S13111,0.08
+2023,E11-30.1.03,Allocation de soutien familial (ASF),S13141,3017.35
+2023,E11-30.1.06,Paje - Prime d'adoption,S13141,0.93
+2023,E11-30.1.07,Paje - Base,S13141,2963.81
+2023,E11-30.1.08,Paje - Allocation d'adoption,S13141,2.84
+2023,E11-30.1.09,Allocation différentielle,S13141,26.09
+2023,E11-30.1.10,Allocation jeune enfant « longue » (APJE longue),S13111,4.0
+2023,E11-30.2.02,Allocation de rentrée scolaire (ARS),S13111,0.99
+2023,E11-30.2.02,Allocation de rentrée scolaire (ARS),S13141,2088.14
+2023,E11-30.2.03,Bourses de l'enseignement primaire et secondaire,S13111,800.71
+2023,E11-30.2.03,Bourses de l'enseignement primaire et secondaire,S1313,301.58
+2023,E11-30.2.99,Autres prestations liées à l'éducation nca,S13111,0.46
+2023,E11-30.3.03,Paje - CLCA et Colca,S13141,1.62
+2023,E11-30.3.04,Paje - Assistante maternelle,S13141,5834.1
+2023,E11-30.3.05,Paje - Employée à domicile,S13141,1216.62
+2023,E11-30.3.07,Crédit d'impôt frais de garde d'enfants de moins de 6 ans,S13111,1614.0
+2023,E11-30.3.08,Paje - Prepare,S13141,736.55
+2023,E11-30.3.09,Crédit d'impôt au titre de l'emploi salarié à domicile (garde d'enfant à domicile),S13111,541.53
+2023,E11-30.3.20,Accueil des jeunes enfants,S1313,4901.43
+2023,E11-30.3.20,Accueil des jeunes enfants,S13141,2088.57
+2023,E11-30.4.01,Prestations d'hébergement et d'accueil,S1313,1345.79
+2023,E11-30.4.02,"Actions éducatives à domicile (AED), actions éducatives en milieu ouvert (AEMO)",S1313,605.3
+2023,E11-30.4.03,Prévention spécialisée,S1313,227.47
+2023,E11-30.4.04,"Dépenses diverses liées à l'ASE (bourses, subventions, frais de placement…)",S1313,1215.47
+2023,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S13111,759.39
+2023,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S1313,698.72
+2023,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S13142,857.91
+2023,E11-30.5.12,Majorations familiales,S13111,88.63
+2023,E11-30.5.12,Majorations familiales,S13112,558.71
+2023,E11-30.5.12,Majorations familiales,S1313,81.55
+2023,E11-30.5.12,Majorations familiales,S13141,205.8
+2023,E11-30.5.12,Majorations familiales,S13142,100.13
+2023,E11-30.6.01,Indemnités journalières,S13141,3302.94
+2023,E11-30.6.02,Congés de naissance,S13141,586.09
+2023,E11-30.6.05,Paje - Prime de naissance,S13141,508.95
+2023,E11-41.1.01,Allocation d'aide au retour à l'emploi - Formation (ARE-F),S13141,2004.39
+2023,E11-41.1.02,Stages de formation professionnelle des régions,S1313,1043.59
+2023,E11-41.1.04,Rémunération de fin de formation (RFF),S13142,108.41
+2023,E11-41.1.99,Autres dépenses de formation,S13111,0.45
+2023,E11-41.2.01,Aide à la reprise ou à la création d'entreprise,S13141,622.99
+2023,E11-41.2.04,Bourses et subventions diverses,S1313,1.53
+2023,E11-41.2.06,Insertion professionnelle des jeunes,S13111,729.43
+2023,E11-41.2.06,Insertion professionnelle des jeunes,S13142,22.38
+2023,E11-41.2.99,Autres prestations liées à l'insertion professionnelle,S13111,30.26
+2023,E11-41.2.99,Autres prestations liées à l'insertion professionnelle,S13142,1248.8
+2023,E11-42.1.01,Allocation d'aide au retour à l'emploi (ARE),S13111,439.97
+2023,E11-42.1.01,Allocation d'aide au retour à l'emploi (ARE),S13141,30997.87
+2023,E11-42.1.02,Allocation spécifique de reclassement (ASR),S13141,0.01
+2023,E11-42.1.05,"ASS, AER, ASS-F, ASS-ACCRE (anciennement prestations versées par le Fonds de solidarité)",S13111,1667.52
+2023,E11-42.1.06,Dépenses de placement de Pôle emploi,S13142,633.55
+2023,E11-42.1.07,Aides de Pôle emploi et de l'Unedic,S13141,21.93
+2023,E11-42.1.07,Aides de Pôle emploi et de l'Unedic,S13142,28.86
+2023,E11-42.1.09,Allocation de sécurisation professionnelle (ASP),S13141,1291.93
+2023,E11-42.1.10,"Aide exceptionnelle de fin d'année (Prime de noël) des bénéficiaires de l'ASS, l'AER et l'ATS (comptabilisée dans les prestations du Fonds de solidarité avant 2013)",S13111,83.39
+2023,E11-42.1.20,Prestations de chômage partiel,S13111,100.25
+2023,E11-42.1.20,Prestations de chômage partiel,S13141,134.54
+2023,E11-42.1.99,Autres prestations chômage nca,S13111,5.13
+2023,E11-42.1.99,Autres prestations chômage nca,S13141,0.07
+2023,E11-42.2.03,Préretraites d'entreprises,S13141,349.85
+2023,E11-42.2.04,"Allocations financées par l'État (Allocation spéciale du fonds national de l'emploi, etc.)",S13111,0.03
+2023,E11-42.2.99,Autres préretraites,S13141,0.79
+2023,E11-50.1.01,ALF location,S13111,3150.43
+2023,E11-50.1.02,ALF accédants,S13111,175.96
+2023,E11-50.2.01,APL location HLM + foyers,S13111,6139.46
+2023,E11-50.2.02,APL location hors HLM + foyers,S13111,710.84
+2023,E11-50.2.03,APL accédants,S13111,98.91
+2023,E11-50.3.01,ALS location,S13111,5287.39
+2023,E11-50.3.02,ALS accédants,S13111,60.13
+2023,E11-60.1.01,Revenu minimum d'insertion (RMI),S1313,0.36
+2023,E11-60.1.02,RSA socle,S13111,1588.6
+2023,E11-60.1.02,RSA socle,S1313,10234.04
+2023,E11-60.1.03,Prime de solidarité active (avril 2009) et aide exceptionnelle de fin d'année (Prime de noël),S13111,452.62
+2023,E11-60.2.01,Prime d'activité,S13111,10652.68
+2023,E11-60.2.01,Prime d'activité,S1313,4.18
+2023,E11-60.3.04,Mesure exceptionnelle d’aide à l’acquisition du carburant,S13111,433.39
+2023,E11-60.4.01,Prestations liées à l'hébergement,S13111,56.73
+2023,E11-60.5.01,Chèque-Énergie,S13111,1632.55
+2023,E11-60.6.01,Bourses de l'enseignement supérieur,S13111,2443.82
+2024,E11-11.1.01,Indemnités journalières (maladie),S13111,11.67
+2024,E11-11.1.01,Indemnités journalières (maladie),S13141,11763.97
+2024,E11-11.1.02,Congés maladie de longue durée des agents de l'Etat,S13111,331.49
+2024,E11-11.1.11,Indemnités journalières accidents du travail et maladies professionnelles (AT-MP),S13141,4693.36
+2024,E11-11.2.11,Soins de ville - Prestations (maladie),S13141,45333.18
+2024,E11-11.2.12,Soins de ville - Médicaments (maladie),S13141,29495.95
+2024,E11-11.2.13,Soins de ville - Matériel (maladie),S13141,9085.11
+2024,E11-11.2.14,Soins de ville - Transports (maladie),S13141,6307.33
+2024,E11-11.2.15,Soins de ville - Contrats divers (maladie),S13141,2966.91
+2024,E11-11.2.16,Soins de ville - Cures thermales (maladie),S13141,225.98
+2024,E11-11.2.17,Soins de ville - Permanence de soins (maladie),S13141,32.24
+2024,E11-11.2.19,Soins de ville - Autres (maladie),S13111,251.98
+2024,E11-11.2.19,Soins de ville - Autres (maladie),S1313,42.52
+2024,E11-11.2.19,Soins de ville - Autres (maladie),S13141,595.19
+2024,E11-11.2.21,Prestations de soins du secteur public hospitalier,S13142,90850.67
+2024,E11-11.2.22,Prestations de soins en USLD du secteur public hospitalier,S13142,1363.76
+2024,E11-11.2.28,Transferts aux hôpitaux militaires,S13141,442.08
+2024,E11-11.2.39,Soins en clinique privée (maladie) [non ventilés],S13141,18822.89
+2024,E11-11.2.41,Prestations de santé de la Camieg,S13141,293.49
+2024,E11-11.2.52,Soins de ville - Médicaments (AT-MP),S13141,7.56
+2024,E11-11.2.56,Soins de ville - Cures thermales (AT-MP),S13141,4.29
+2024,E11-11.2.59,Soins de ville - Autres (AT-MP),S13111,21.93
+2024,E11-11.2.59,Soins de ville - Autres (AT-MP),S13141,959.28
+2024,E11-11.2.69,Soins en clinique privée (AT-MP) [non ventilés],S13141,103.47
+2024,E11-11.2.72,Soins de ville - Médicaments (maternité),S13141,15.01
+2024,E11-11.2.73,Soins de ville - Matériel (maternité),S13141,2.83
+2024,E11-11.2.79,Soins de ville - Autres (maternité),S13141,907.94
+2024,E11-11.2.89,Soins en clinique privée (maternité) [non ventilés],S13141,376.48
+2024,E11-11.2.99,Autres prestations de santé nca,S13141,0.04
+2024,E11-11.3.01,Prestations maladie prises en charge par le Fonds C2S,S13141,2958.58
+2024,E11-11.4.01,"Établissement d'hébergement pour personnes âgées, Établissement d'hébergement pour personnes âgées dépendantes",S13141,14001.93
+2024,E11-11.4.02,Services de soins infirmiers à domicile (Ssiad),S13141,2130.71
+2024,E11-11.4.99,Autres prestations médico-sociales,S13141,79.82
+2024,E11-12.1.10,Allocations temporaires d'invalidité,S13141,162.73
+2024,E11-12.1.21,Pensions d'invalidité (y compris majorations enfant et tierce personne),S13111,388.27
+2024,E11-12.1.21,Pensions d'invalidité (y compris majorations enfant et tierce personne),S13141,9068.0
+2024,E11-12.1.23,Allocation temporaire d'invalidité (Fonction publique),S13111,5.57
+2024,E11-12.1.31,Pensions militaires d'invalidité - victimes civiles,S13111,37.98
+2024,E11-12.2.11,Allocation aux adultes handicapés (AAH),S13111,13797.05
+2024,E11-12.2.12,Garantie de ressources s'adressant aux travailleurs handicapés (GRTH),S13111,1566.23
+2024,E11-12.2.13,Allocation supplémentaire d'invalidité (ASI),S13141,321.8
+2024,E11-12.3.21,Prestation de compensation du handicap (PCH) moins de 60 ans,S1313,2265.05
+2024,E11-12.3.22,Allocation compensatrice pour tierce personne (ACTP) moins de 60 ans,S1313,181.49
+2024,E11-12.3.31,Allocation journalière de présence parentale (AJPP),S13111,0.15
+2024,E11-12.3.31,Allocation journalière de présence parentale (AJPP),S13141,261.3
+2024,E11-12.3.32,Allocation de présence parentale (APP),S13141,0.01
+2024,E11-12.3.33,Allocation d'éducation de l'enfant handicapé (AEEH),S13141,1615.62
+2024,E11-12.3.35,Crédit d'impôt pour dépenses d'équipement de l'habitation principale (aide aux personnes de moins de 60 ans),S13111,7.31
+2024,E11-12.3.36,Crédit d'impôt au titre de l'emploi salarié à domicile (assistance aux personnes handicapées),S13111,75.75
+2024,E11-12.3.99,Autres allocations liées au handicap,S13111,43.75
+2024,E11-12.3.99,Autres allocations liées au handicap,S13112,28.3
+2024,E11-12.3.99,Autres allocations liées au handicap,S1313,52.02
+2024,E11-12.3.99,Autres allocations liées au handicap,S13141,10.27
+2024,E11-12.3.99,Autres allocations liées au handicap,S13142,46.14
+2024,E11-12.4.01,Ssiad personnes handicapées et ajustement des prestations médico-sociales,S13141,104.96
+2024,E11-12.4.03,Hébergement des adultes handicapés,S1313,0.5
+2024,E11-13.2.11,Rentes AT-MP,S13141,5795.98
+2024,E11-13.2.12,Pensions militaires d'invalidité - victimes militaires,S13111,348.68
+2024,E11-13.2.19,"Pensions d'invalidité diverses, suite à accident",S13111,63.55
+2024,E11-13.2.32,Indemnisations du Fiva,S13141,377.0
+2024,E11-13.2.33,Allocation de cessation anticipée d'activité des travailleurs de l'amiante (Acaata),S13141,221.65
+2024,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13111,57.33
+2024,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13112,40.06
+2024,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S1313,52.4
+2024,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13141,14.53
+2024,E11-13.2.34,Allocation spécifique de cessation d'activité au titre de l'amiante (Ascaa),S13142,65.31
+2024,E11-13.2.35,Prestations du Fonds d'indemnisation des victimes de pesticides,S13141,19.6
+2024,E11-21.1.11,Pensions normales,S13111,54553.92
+2024,E11-21.1.11,Pensions normales,S13141,167144.89
+2024,E11-21.1.12,Pensions d'inaptitude,S13141,8289.04
+2024,E11-21.1.13,Pensions d'invalidité (y compris ATI définitive aux retraités et rentes viagères d'invalidité après 60 ans),S13111,1973.93
+2024,E11-21.1.13,Pensions d'invalidité (y compris ATI définitive aux retraités et rentes viagères d'invalidité après 60 ans),S13141,11934.75
+2024,E11-21.1.14,Retraites du combattant,S13111,504.28
+2024,E11-21.1.21,Indemnités temporaires de la Fonction publique,S13111,239.82
+2024,E11-21.1.31,Pensions de vieillesse complémentaires,S13141,98627.97
+2024,E11-21.1.41,Majorations sur pensions de base - enfant,S13111,1703.41
+2024,E11-21.1.41,Majorations sur pensions de base - enfant,S13141,6073.18
+2024,E11-21.1.42,Majorations sur pensions de base - tierce personne,S13111,44.17
+2024,E11-21.1.42,Majorations sur pensions de base - tierce personne,S13141,263.56
+2024,E11-21.1.43,Majorations sur pensions de base - conjoint à charge,S13141,69.23
+2024,E11-21.1.44,Majorations sur pensions de base - assurés handicapés,S13141,31.83
+2024,E11-21.1.45,Majorations sur pensions de base - autres,S13141,86.27
+2024,E11-21.1.99,Autres pensions vieillesse,S13111,14.85
+2024,E11-21.1.99,Autres pensions vieillesse,S13141,657.63
+2024,E11-21.2.01,Allocation de solidarité aux personnes âgées (Aspa),S13141,3994.08
+2024,E11-21.2.02,Majorations L814-2 ancien,S13111,0.28
+2024,E11-21.2.02,Majorations L814-2 ancien,S13141,159.07
+2024,E11-21.2.03,Majorations L815-2 ancien (allocation supplémentaire),S13111,0.94
+2024,E11-21.2.03,Majorations L815-2 ancien (allocation supplémentaire),S13141,570.46
+2024,E11-21.2.04,Allocations spéciales,S13141,47.31
+2024,E11-21.2.06,Minimum vieillesse associé au versement d'une pension de droit dérivé,S13111,0.69
+2024,E11-21.2.06,Minimum vieillesse associé au versement d'une pension de droit dérivé,S13141,161.31
+2024,E11-21.2.99,Autres composantes du minimum vieillesse nca,S13141,7.01
+2024,E11-21.4.11,Allocation compensatrice pour tierce personne (ACTP) plus de 60 ans,S1313,126.8
+2024,E11-21.4.13,Allocation personnalisée d'autonomie (APA),S1313,7325.54
+2024,E11-21.4.14,Prestation de compensation du handicap (PCH) plus de 60 ans,S1313,1069.19
+2024,E11-21.4.16,Crédit d'impôt pour dépenses d'équipement de l'habitation principale (aide aux personnes de plus de 60 ans),S13111,45.69
+2024,E11-21.4.17,Crédit d'impôt au titre de l'emploi salarié à domicile (assistance aux personnes âgées),S13111,593.32
+2024,E11-21.4.18,Allocation journalière de proche aidant (AJPA),S13141,13.58
+2024,E11-21.4.20,Hébergement des personnes âgées dépendantes,S1313,2068.04
+2024,E11-22.1.11,Pensions de réversion sans condition de ressources,S13141,6211.52
+2024,E11-22.1.12,Pensions de réversion avec condition de ressources,S13141,11434.57
+2024,E11-22.1.13,Pensions d'accidents du travail (ayants droit),S13111,35.04
+2024,E11-22.1.14,Pensions d'invalidité (ayants droit),S13141,771.49
+2024,E11-22.1.15,Pensions militaires d'invalidité (ayants droit),S13111,281.48
+2024,E11-22.1.16,"Pensions de conjoint survivant, d'orphelins, d'ascendants au titre des retraites et de l'invalidité",S13111,5788.91
+2024,E11-22.1.16,"Pensions de conjoint survivant, d'orphelins, d'ascendants au titre des retraites et de l'invalidité",S13141,48.29
+2024,E11-22.1.19,Autres droits dérivés,S13141,118.89
+2024,E11-22.1.20,Majorations sur pensions de réversion de base,S13111,225.46
+2024,E11-22.1.20,Majorations sur pensions de réversion de base,S13141,990.99
+2024,E11-22.1.21,Indemnités temporaires de la Fonction publique (ayants cause),S13111,19.15
+2024,E11-22.1.31,Pensions complémentaires obligatoires,S13141,14943.13
+2024,E11-30.1.01,Allocations familiales (AF),S13111,16.93
+2024,E11-30.1.01,Allocations familiales (AF),S13141,13772.69
+2024,E11-30.1.02,Complément familial (CF),S13111,2.1
+2024,E11-30.1.02,Complément familial (CF),S13141,2532.04
+2024,E11-30.1.03,Allocation de soutien familial (ASF),S13111,0.09
+2024,E11-30.1.03,Allocation de soutien familial (ASF),S13141,3266.31
+2024,E11-30.1.06,Paje - Prime d'adoption,S13141,0.96
+2024,E11-30.1.07,Paje - Base,S13141,3028.27
+2024,E11-30.1.08,Paje - Allocation d'adoption,S13141,3.04
+2024,E11-30.1.09,Allocation différentielle,S13141,29.78
+2024,E11-30.1.10,Allocation jeune enfant « longue » (APJE longue),S13111,3.97
+2024,E11-30.2.02,Allocation de rentrée scolaire (ARS),S13111,1.06
+2024,E11-30.2.02,Allocation de rentrée scolaire (ARS),S13141,2198.33
+2024,E11-30.2.03,Bourses de l'enseignement primaire et secondaire,S13111,928.15
+2024,E11-30.2.03,Bourses de l'enseignement primaire et secondaire,S1313,337.06
+2024,E11-30.2.99,Autres prestations liées à l'éducation nca,S13111,0.44
+2024,E11-30.3.03,Paje - CLCA et Colca,S13141,1.46
+2024,E11-30.3.04,Paje - Assistante maternelle,S13141,5963.72
+2024,E11-30.3.05,Paje - Employée à domicile,S13141,1339.84
+2024,E11-30.3.07,Crédit d'impôt frais de garde d'enfants de moins de 6 ans,S13111,1721.0
+2024,E11-30.3.08,Paje - Prepare,S13141,713.88
+2024,E11-30.3.09,Crédit d'impôt au titre de l'emploi salarié à domicile (garde d'enfant à domicile),S13111,570.2
+2024,E11-30.3.20,Accueil des jeunes enfants,S1313,5241.45
+2024,E11-30.3.20,Accueil des jeunes enfants,S13141,2274.55
+2024,E11-30.4.01,Prestations d'hébergement et d'accueil,S1313,3342.62
+2024,E11-30.4.02,"Actions éducatives à domicile (AED), actions éducatives en milieu ouvert (AEMO)",S1313,10.57
+2024,E11-30.4.04,"Dépenses diverses liées à l'ASE (bourses, subventions, frais de placement…)",S1313,206.72
+2024,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S13111,767.97
+2024,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S1313,701.88
+2024,E11-30.5.11,Supplément familial de traitement et supplément familial de solde,S13142,874.83
+2024,E11-30.5.12,Majorations familiales,S13111,89.24
+2024,E11-30.5.12,Majorations familiales,S13112,599.05
+2024,E11-30.5.12,Majorations familiales,S1313,81.56
+2024,E11-30.5.12,Majorations familiales,S13141,217.28
+2024,E11-30.5.12,Majorations familiales,S13142,101.66
+2024,E11-30.6.01,Indemnités journalières,S13141,3319.79
+2024,E11-30.6.02,Congés de naissance,S13141,608.5
+2024,E11-30.6.05,Paje - Prime de naissance,S13141,518.37
+2024,E11-41.1.01,Allocation d'aide au retour à l'emploi - Formation (ARE-F),S13141,1937.5
+2024,E11-41.1.02,Stages de formation professionnelle des régions,S1313,1003.1
+2024,E11-41.1.04,Rémunération de fin de formation (RFF),S13142,101.97
+2024,E11-41.1.99,Autres dépenses de formation,S13111,0.28
+2024,E11-41.2.01,Aide à la reprise ou à la création d'entreprise,S13111,20.04
+2024,E11-41.2.01,Aide à la reprise ou à la création d'entreprise,S13141,812.72
+2024,E11-41.2.04,Bourses et subventions diverses,S1313,0.33
+2024,E11-41.2.06,Insertion professionnelle des jeunes,S13111,703.39
+2024,E11-41.2.99,Autres prestations liées à l'insertion professionnelle,S13111,5.48
+2024,E11-41.2.99,Autres prestations liées à l'insertion professionnelle,S13142,885.16
+2024,E11-42.1.01,Allocation d'aide au retour à l'emploi (ARE),S13111,462.43
+2024,E11-42.1.01,Allocation d'aide au retour à l'emploi (ARE),S13141,32461.49
+2024,E11-42.1.05,"ASS, AER, ASS-F, ASS-ACCRE (anciennement prestations versées par le Fonds de solidarité)",S13111,1680.37
+2024,E11-42.1.06,Dépenses de placement de Pôle emploi,S13142,688.68
+2024,E11-42.1.07,Aides de Pôle emploi et de l'Unedic,S13141,29.41
+2024,E11-42.1.07,Aides de Pôle emploi et de l'Unedic,S13142,28.8
+2024,E11-42.1.09,Allocation de sécurisation professionnelle (ASP),S13141,1731.44
+2024,E11-42.1.10,"Aide exceptionnelle de fin d'année (Prime de noël) des bénéficiaires de l'ASS, l'AER et l'ATS (comptabilisée dans les prestations du Fonds de solidarité avant 2013)",S13111,72.19
+2024,E11-42.1.20,Prestations de chômage partiel,S13111,170.15
+2024,E11-42.1.20,Prestations de chômage partiel,S13141,97.27
+2024,E11-42.1.99,Autres prestations chômage nca,S13141,0.19
+2024,E11-42.2.03,Préretraites d'entreprises,S13141,364.75
+2024,E11-42.2.99,Autres préretraites,S13141,0.8
+2024,E11-50.1.00,Allocation de logement familiale (ALF) - ventilation non disponible,S13111,3323.48
+2024,E11-50.2.00,Aide personnalisée au logement (APL) - ventilation non disponible,S13111,7111.39
+2024,E11-50.3.00,Allocation de logement sociale (ALS) - ventilation non disponible,S13111,5524.86
+2024,E11-60.1.01,Revenu minimum d'insertion (RMI),S1313,0.5
+2024,E11-60.1.02,RSA socle,S13111,1616.66
+2024,E11-60.1.02,RSA socle,S1313,10367.04
+2024,E11-60.1.03,Prime de solidarité active (avril 2009) et aide exceptionnelle de fin d'année (Prime de noël),S13111,391.82
+2024,E11-60.2.01,Prime d'activité,S13111,10552.46
+2024,E11-60.2.01,Prime d'activité,S1313,4.72
+2024,E11-60.3.04,Mesure exceptionnelle d’aide à l’acquisition du carburant,S13111,0.02
+2024,E11-60.4.01,Prestations liées à l'hébergement,S13111,58.11
+2024,E11-60.5.01,Chèque-Énergie,S13111,789.03
+2024,E11-60.6.01,Bourses de l'enseignement supérieur,S13111,2603.4

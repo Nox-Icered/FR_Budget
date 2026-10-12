@@ -61,6 +61,14 @@ export default function PageSimulateur() {
           net_effectifs: deuxDecimales(-donnees.leviers.remunerations_effectifs.rendement_unitaire),
         })}
       </p>
+      <p>
+        {texte("simulateur.methode_indexation", {
+          brut: deuxDecimales(
+            -(donnees.leviers.indexation_pensions_prestations.effet_brut_unitaire ?? 0),
+          ),
+          net: deuxDecimales(-donnees.leviers.indexation_pensions_prestations.rendement_unitaire),
+        })}
+      </p>
       <ul>
         <li>{texte("simulateur.limite_comportement")}</li>
         <li>{texte("simulateur.limite_croissance")}</li>
@@ -71,6 +79,7 @@ export default function PageSimulateur() {
         <li>{texte("simulateur.limite_credits_missions")}</li>
         <li>{texte("simulateur.limite_dotations")}</li>
         <li>{texte("simulateur.limite_remunerations")}</li>
+        <li>{texte("simulateur.limite_indexation")}</li>
       </ul>
       <p>
         <a href="/validation/">{texte("simulateur.lien_validation")}</a>

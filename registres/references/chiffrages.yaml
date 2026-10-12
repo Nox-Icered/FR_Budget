@@ -2432,3 +2432,69 @@ chiffrages:
     localisation: Page 15, encadré 3, liste des paramètres
     saisi_le: 2026-10-12
     relecture: a_relire
+
+  - id: cor_aod_un_an_solde_apu_2ans_bas
+    levier: retraites
+    source: cor_rapport_annuel_2026
+    millesime: "COR juin 2026"
+    mesure: "Augmentation d'un an de l'âge d'ouverture des droits, effet sur le solde primaire des APU à court terme (2 ans), borne basse des simulations (DG Trésor, I-MIP, OFCE)"
+    valeur: 0.05
+    unite: point de PIB
+    localisation: Page 123 (page 125 du PDF), tableau 2.10, ligne « Solde primaire des APU (en pts de PIB) »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: cor_aod_un_an_solde_apu_2ans_haut
+    levier: retraites
+    source: cor_rapport_annuel_2026
+    millesime: "COR juin 2026"
+    mesure: "Augmentation d'un an de l'âge d'ouverture des droits, effet sur le solde primaire des APU à court terme (2 ans), borne haute des simulations (DG Trésor, I-MIP, OFCE)"
+    valeur: 0.4
+    unite: point de PIB
+    localisation: Page 123 (page 125 du PDF), tableau 2.10, ligne « Solde primaire des APU (en pts de PIB) »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: cor_aod_un_an_solde_apu_10ans_bas
+    levier: retraites
+    source: cor_rapport_annuel_2026
+    millesime: "COR juin 2026"
+    mesure: "Augmentation d'un an de l'âge d'ouverture des droits, effet sur le solde primaire des APU à moyen terme (10 ans), borne basse des simulations (DG Trésor, I-MIP, OFCE)"
+    valeur: 0.3
+    unite: point de PIB
+    localisation: Page 123 (page 125 du PDF), tableau 2.10, ligne « Solde primaire des APU (en pts de PIB) »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: cor_aod_un_an_solde_apu_10ans_haut
+    levier: retraites
+    source: cor_rapport_annuel_2026
+    millesime: "COR juin 2026"
+    mesure: "Augmentation d'un an de l'âge d'ouverture des droits, effet sur le solde primaire des APU à moyen terme (10 ans), borne haute des simulations (DG Trésor, I-MIP, OFCE)"
+    valeur: 0.6
+    unite: point de PIB
+    localisation: Page 123 (page 125 du PDF), tableau 2.10, ligne « Solde primaire des APU (en pts de PIB) »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: cor_aod_un_an_solde_apu_20ans_bas
+    levier: retraites
+    source: cor_rapport_annuel_2026
+    millesime: "COR juin 2026"
+    mesure: "Augmentation d'un an de l'âge d'ouverture des droits, effet sur le solde primaire des APU à long terme (20 ans), borne basse des simulations (DG Trésor, I-MIP, OFCE)"
+    valeur: 0.3
+    unite: point de PIB
+    localisation: Page 123 (page 125 du PDF), tableau 2.10, ligne « Solde primaire des APU (en pts de PIB) »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: cor_aod_un_an_solde_apu_20ans_haut
+    levier: retraites
+    source: cor_rapport_annuel_2026
+    millesime: "COR juin 2026"
+    mesure: "Augmentation d'un an de l'âge d'ouverture des droits, effet sur le solde primaire des APU à long terme (20 ans), borne haute des simulations (DG Trésor, I-MIP, OFCE)"
+    valeur: 0.65
+    unite: point de PIB
+    localisation: Page 123 (page 125 du PDF), tableau 2.10, ligne « Solde primaire des APU (en pts de PIB) »
+    saisi_le: 2026-10-12
+    relecture: a_relire

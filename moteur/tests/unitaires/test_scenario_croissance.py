@@ -29,7 +29,10 @@ def test_desactive_par_defaut() -> None:
     ],
 )
 def test_chaque_levier_a_un_multiplicateur(levier: str) -> None:
-    assert sc.categorie_croissance(levier) in cr.CATEGORIES
+    """Seul le relèvement de l'âge de départ (effet d'offre) n'a pas de multiplicateur de
+    demande (fiche retraites, § 5)."""
+    attendu = (cr.AUCUN,) if levier == sc.LEVIER_RETRAITES_AGE else cr.CATEGORIES
+    assert sc.categorie_croissance(levier) in attendu
 
 
 def test_premiere_annee_le_solde_perd_alpha_fois_m() -> None:

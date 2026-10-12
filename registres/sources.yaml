@@ -527,3 +527,12 @@ sources:
     date_publication: 2025-07-11
     acces: direct
     consulte_le: 2026-10-12
+
+  - id: cor_rapport_annuel_2026
+    nom: Conseil d'orientation des retraites, « Évolutions et perspectives des retraites en France », rapport annuel de juin 2026, et fichiers des tableaux et figures
+    editeur: Conseil d'orientation des retraites (COR)
+    url: https://www.cor-retraites.fr/rapports-du-cor/rapport-annuel-cor-juin-2026-evolutions-perspectives-retraites-france
+    licence: publication administrative en accès libre (réutilisation avec mention de la source)
+    millesime: juin 2026
+    acces: direct
+    consulte_le: 2026-10-12

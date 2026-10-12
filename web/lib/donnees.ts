@@ -101,6 +101,9 @@ export type ReponsesUnitaires = {
       taux_reference: number;
       effet_etat_unitaire?: number;
       effet_brut_unitaire?: number;
+      // Retraites : effet d'un an en points de PIB une fois en place, durée de montée en charge.
+      effet_plein?: number;
+      duree_montee?: number;
       bornes: [number, number];
       multiplicateur?: { bas: number; central: number; haut: number };
       // croissance_* : supplément d'une unité du levier pour un multiplicateur de 1.

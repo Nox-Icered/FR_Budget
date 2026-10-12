@@ -569,3 +569,19 @@ datasets:
     empreinte_sha256: d7bb459956d0468733bd8ecca1ca64c6ac12081be7dfb4681a7c4ce8876d9a58
     methode_transformation: aucune ; paramètres du modèle simple de l'encadré 3 (page 15) et multiplicateurs des recettes et des dépenses (page 17) saisis dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-12
+
+  - id: cor_ra2026_pdf
+    source: cor_rapport_annuel_2026
+    description: Rapport annuel du COR de juin 2026, version définitive (PDF, 260 pages, fichier RA_2026_def_1.pdf)
+    fichier: data/raw/retraites/cor_ra2026.pdf
+    empreinte_sha256: bd083bd5dd373544053fdd06555ab9d22f72c5bda6f8e4caa1f679cd9f2ce18b
+    methode_transformation: aucune ; effets du relèvement d'un an de l'âge d'ouverture des droits (tableau 2.10, page 123) et rythme de la réforme de 2023 (page 206) saisis dans registres/references/chiffrages.yaml et registres/hypotheses.yaml
+    telecharge_le: 2026-10-12
+
+  - id: cor_ra2026_donnees_partie2_xlsx
+    source: cor_rapport_annuel_2026
+    description: Fichier des tableaux et figures de la partie 2 du rapport annuel du COR de juin 2026 (Données_RA2026_P2.xlsx)
+    fichier: data/raw/retraites/cor_ra2026_donnees_partie2.xlsx
+    empreinte_sha256: 0a05bb83be269c72b7148f9b396a36aad73d9d2fc3cb210ef39f6d48d69e33f6
+    methode_transformation: pipelines/retraites/extraire_cor.py → data/processed/retraites/cor_2026_reference.csv (figures 2.2, 2.8 et 2.24, scénario de référence)
+    telecharge_le: 2026-10-12

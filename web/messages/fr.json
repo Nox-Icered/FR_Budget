@@ -184,6 +184,10 @@
         "libelle": "Allègements généraux de cotisations patronales ({reference} milliards d'euros en {annee})",
         "valeur": "{valeur} %"
       },
+      "ir_seuils_bareme": {
+        "libelle": "Revalorisation des seuils du barème de l'impôt sur le revenu, par rapport à l'inflation (impôt au barème de {reference} milliards d'euros sur les revenus de 2024)",
+        "valeur": "{valeur} %"
+      },
       "indexation_pensions_prestations": {
         "libelle": "Revalorisation des pensions de base et des prestations sociales, par rapport à la revalorisation prévue par la loi ({reference} milliards d'euros versés par an, montants de {annee})",
         "valeur": "{valeur} pt"
@@ -241,6 +245,8 @@
     "limite_csg": "Le rendement affiché ne déduit pas la baisse d'impôt sur le revenu due à la part déductible de la CSG, et ne tient pas compte d'un changement de comportement des épargnants. Sur les revenus du capital, le modèle surestime de 10 % la hausse de 2018 (voir la page Validation).",
     "methode_cotisations": "Cotisations patronales : un point de cotisation sur les salaires du secteur privé rapporte {point} milliards d'euros ; augmenter de 1 % les allègements généraux coûte {allegements} milliard. Les cotisations des employeurs publics ne sont pas proposées : elles sont payées et reçues par les administrations publiques elles-mêmes.",
     "limite_cotisations": "La hausse de taux est supposée hors du champ des allègements généraux : sinon, une partie serait annulée par la hausse des allègements sur les bas salaires. Le rendement ne déduit pas la baisse de l'impôt sur les sociétés due à des charges plus élevées, ni l'effet sur l'emploi et les salaires.",
+    "methode_ir": "Impôt sur le revenu : chaque année, les seuils du barème sont en général relevés comme l'inflation. Les relever de 1 % de moins rapporte {rendement} milliards d'euros, d'après le chiffrage de l'administration pour le projet de loi de finances pour 2025 ; un calcul à partir des statistiques de l'impôt par décile donne un montant plus faible, retenu comme borne basse.",
+    "limite_ir": "Le rendement repose sur un seul chiffrage de l'administration, confirmé par celui du gel de 2026. Il ne tient pas compte des changements de comportement, ni des seuils sociaux et locaux qui suivent le barème.",
     "limite_remunerations": "Le coût est estimé à partir de la masse salariale des administrations publiques et de la part du traitement indiciaire dans le salaire des fonctionnaires ; il s'écarte des chiffrages officiels par fonction publique (voir la page Validation). Une baisse des effectifs ne tient compte ni des allocations chômage ni des services rendus."
   }
 }

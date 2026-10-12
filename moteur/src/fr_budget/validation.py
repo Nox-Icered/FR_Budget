@@ -26,6 +26,7 @@ from fr_budget.agrege.csg import (
 )
 from fr_budget.agrege.depenses_fiscales import cout_par_impot
 from fr_budget.agrege.dotations import COMPENSATIONS, DGF, execution
+from fr_budget.agrege.impot_revenu import rendement_gel
 from fr_budget.agrege.impot_societes import is_brut
 from fr_budget.agrege.indexation import (
     BLOCS,
@@ -121,6 +122,10 @@ def _csg_millions(assiette: str, points: float, annee: int) -> float:
     return hausse_mesuree(assiette, points, annee) * MILLIONS_PAR_MILLIARD
 
 
+def _ir_gel(inflation: str, annee: int) -> float:
+    return rendement_gel(chiffrage(inflation), annee)
+
+
 def _point_cotisation_millions(annee: int) -> float:
     return valeur_point_modele(annee) * MILLIONS_PAR_MILLIARD
 
@@ -208,6 +213,7 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         (f"allegements_generaux_prevision_{annee}", partial(cout_allegements, annee))
         for annee in (2024, 2025)
     ]
+    definitions += [("ir_gel_bareme_2026", partial(_ir_gel, inflation_2025, 2026))]
     return definitions
 
 

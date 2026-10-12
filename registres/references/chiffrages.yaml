@@ -1871,3 +1871,377 @@ chiffrages:
     localisation: Fiche 1.6, texte, page 52
     saisi_le: 2026-10-12
     relecture: a_relire
+
+  - id: ir_non_indexation_2025
+    levier: impot_revenu
+    source: plf2025_evaluations_prealables
+    millesime: "PLF 2025 (revenus 2024)"
+    mesure: Rendement supplémentaire de l'impôt sur le revenu en 2025 en l'absence d'indexation du barème et des seuils associés (avis d'imposition des revenus 2024 et prélèvement à la source)
+    valeur: 3.7
+    unite: "Md€"
+    localisation: Article 2 (indexation du barème), § 4.2.1, page 18
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_indexation_plf2025
+    levier: impot_revenu
+    source: plf2025_evaluations_prealables
+    millesime: "PLF 2025"
+    mesure: Taux d'indexation du barème proposé (prévision d'évolution de l'IPC hors tabac de 2024 par rapport à 2023)
+    valeur: 2.0
+    unite: "%"
+    localisation: Article 2, § 1.4, page 15
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_gel_bareme_2026
+    levier: impot_revenu
+    source: senat_rapport_general_plf2026_tome1
+    millesime: "PLF 2026 (revenus 2025)"
+    mesure: Augmentation attendue du produit de l'impôt sur le revenu en 2026 liée à l'absence d'indexation du barème (chiffrage des mesures nouvelles, Voies et moyens tome I)
+    valeur: 1.9
+    unite: "Md€"
+    localisation: Première partie, I, A, 1, pages 149 et 150
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_part_moyen_2_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: RFR par part fiscale moyen, 2e dixième de RFR par part
+    valeur: 5093.267309
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 2e dixième », colonne « RFR par part fiscale, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_part_moyen_3_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: RFR par part fiscale moyen, 3e dixième de RFR par part
+    valeur: 9548.208088
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 3e dixième », colonne « RFR par part fiscale, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_part_moyen_4_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: RFR par part fiscale moyen, 4e dixième de RFR par part
+    valeur: 12704.82424
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 4e dixième », colonne « RFR par part fiscale, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_part_moyen_5_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: RFR par part fiscale moyen, 5e dixième de RFR par part
+    valeur: 15523.31337
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 5e dixième », colonne « RFR par part fiscale, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_part_moyen_6_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: RFR par part fiscale moyen, 6e dixième de RFR par part
+    valeur: 18224.06434
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 6e dixième », colonne « RFR par part fiscale, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_part_moyen_7_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: RFR par part fiscale moyen, 7e dixième de RFR par part
+    valeur: 21127.63412
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 7e dixième », colonne « RFR par part fiscale, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_part_moyen_8_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: RFR par part fiscale moyen, 8e dixième de RFR par part
+    valeur: 24861.98564
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 8e dixième », colonne « RFR par part fiscale, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_part_moyen_9_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: RFR par part fiscale moyen, 9e dixième de RFR par part
+    valeur: 31043.19441
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 9e dixième », colonne « RFR par part fiscale, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_part_moyen_10_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: RFR par part fiscale moyen, dernier dixième de RFR par part
+    valeur: 65532.4266
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « dernier dixième », colonne « RFR par part fiscale, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_part_moyen_c1_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: RFR par part fiscale moyen, dernier centième de RFR par part
+    valeur: 213672.0604
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « dernier centième », colonne « RFR par part fiscale, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_part_moyen_m1_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: RFR par part fiscale moyen, dernier millième de RFR par part
+    valeur: 916590.4786
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « dernier millième », colonne « RFR par part fiscale, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_bareme_moyen_1_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Impôt au barème moyen par foyer, 1er dixième de RFR par part
+    valeur: 14.0676066
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 1er dixième », colonne « Impôt au barème, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_bareme_moyen_2_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Impôt au barème moyen par foyer, 2e dixième de RFR par part
+    valeur: 14.38181912
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 2e dixième », colonne « Impôt au barème, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_bareme_moyen_3_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Impôt au barème moyen par foyer, 3e dixième de RFR par part
+    valeur: 6.435515642
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 3e dixième », colonne « Impôt au barème, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_bareme_moyen_4_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Impôt au barème moyen par foyer, 4e dixième de RFR par part
+    valeur: 5.255422926
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 4e dixième », colonne « Impôt au barème, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_bareme_moyen_5_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Impôt au barème moyen par foyer, 5e dixième de RFR par part
+    valeur: 95.53932426
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 5e dixième », colonne « Impôt au barème, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_bareme_moyen_6_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Impôt au barème moyen par foyer, 6e dixième de RFR par part
+    valeur: 485.6725152
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 6e dixième », colonne « Impôt au barème, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_bareme_moyen_7_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Impôt au barème moyen par foyer, 7e dixième de RFR par part
+    valeur: 1103.330432
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 7e dixième », colonne « Impôt au barème, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_bareme_moyen_8_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Impôt au barème moyen par foyer, 8e dixième de RFR par part
+    valeur: 2008.283098
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 8e dixième », colonne « Impôt au barème, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_bareme_moyen_9_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Impôt au barème moyen par foyer, 9e dixième de RFR par part
+    valeur: 3895.528014
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « 9e dixième », colonne « Impôt au barème, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_bareme_moyen_10_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Impôt au barème moyen par foyer, dernier dixième de RFR par part
+    valeur: 16136.92244
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « dernier dixième », colonne « Impôt au barème, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_bareme_moyen_c1_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Impôt au barème moyen par foyer, dernier centième de RFR par part
+    valeur: 57712.9726
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « dernier centième », colonne « Impôt au barème, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_bareme_moyen_m1_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Impôt au barème moyen par foyer, dernier millième de RFR par part
+    valeur: 163412.9721
+    unite: "€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », ligne « dernier millième », colonne « Impôt au barème, moyenne »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_total_10_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Montant total de RFR, dernier dixième
+    valeur: 272.658212477
+    unite: "Md€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », bloc des montants, ligne « dernier dixième », colonne « RFR »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_total_c1_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Montant total de RFR, dont dernier centième
+    valeur: 88.901549007
+    unite: "Md€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », bloc des montants, ligne « dont dernier centième », colonne « RFR »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_total_m1_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Montant total de RFR, dont dernier millième
+    valeur: 38.136590273
+    unite: "Md€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », bloc des montants, ligne « dont dernier millième », colonne « RFR »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_total_10_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Montant total de impôt au barème, dernier dixième
+    valeur: 67.140264075
+    unite: "Md€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », bloc des montants, ligne « dernier dixième », colonne « impôt au barème »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_total_c1_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Montant total de impôt au barème, dont dernier centième
+    valeur: 24.012370413
+    unite: "Md€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », bloc des montants, ligne « dont dernier centième », colonne « impôt au barème »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_total_m1_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Montant total de impôt au barème, dont dernier millième
+    valeur: 6.7991253551
+    unite: "Md€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », bloc des montants, ligne « dont dernier millième », colonne « impôt au barème »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_rfr_total_total_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Montant total de RFR, Total
+    valeur: 846.911065936
+    unite: "Md€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », bloc des montants, ligne « Total », colonne « RFR »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ir_impot_total_total_2024
+    levier: impot_revenu
+    source: dgfip_statistiques_41
+    millesime: "revenus 2024"
+    mesure: Montant total de impôt au barème, Total
+    valeur: 98.843486993
+    unite: "Md€"
+    localisation: Tableau 2 « Impôt au barème et impôt hors barème par décile de RFR par part, revenus 2024 », bloc des montants, ligne « Total », colonne « impôt au barème »
+    saisi_le: 2026-10-12
+    relecture: a_relire

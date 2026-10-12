@@ -33,10 +33,10 @@ leviers:
 
   - id: cotisations_patronales
     libelle: Cotisations patronales
-    parametres_reglables: [Taux, Réduction générale, Seuils]
-    moteur: openfisca
-    references_visees: [Chiffrages Urssaf / ACOSS, Cour des comptes]
-    statut: non_publie
+    parametres_reglables: [Taux de cotisation patronale déplafonnée du secteur privé, Montant des allègements généraux]
+    moteur: agrege
+    references_visees: [Rapports à la Commission des comptes de la sécurité sociale (2018, 2024 à 2026), Cour des comptes]
+    statut: beta
 
   - id: accises_energie
     libelle: Accises et taxes sur l'énergie

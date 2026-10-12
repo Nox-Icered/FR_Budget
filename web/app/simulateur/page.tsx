@@ -77,6 +77,12 @@ export default function PageSimulateur() {
           capital: deuxDecimales(donnees.leviers.csg_capital.rendement_unitaire),
         })}
       </p>
+      <p>
+        {texte("simulateur.methode_cotisations", {
+          point: deuxDecimales(donnees.leviers.cotisations_patronales_taux.rendement_unitaire),
+          allegements: deuxDecimales(-donnees.leviers.allegements_generaux.rendement_unitaire),
+        })}
+      </p>
       <ul>
         <li>{texte("simulateur.limite_comportement")}</li>
         <li>{texte("simulateur.limite_croissance")}</li>
@@ -89,6 +95,7 @@ export default function PageSimulateur() {
         <li>{texte("simulateur.limite_remunerations")}</li>
         <li>{texte("simulateur.limite_indexation")}</li>
         <li>{texte("simulateur.limite_csg")}</li>
+        <li>{texte("simulateur.limite_cotisations")}</li>
       </ul>
       <p>
         <a href="/validation/">{texte("simulateur.lien_validation")}</a>

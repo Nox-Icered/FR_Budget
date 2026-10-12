@@ -146,10 +146,18 @@ En parallèle :
 
 Porte 3 : mise en ligne avec tests et écarts publics.
 
+Décision du 12 octobre 2026 : la phase 3 commence avant le franchissement de la porte 2. Les 12 leviers sont affichés en bêta avec leurs écarts publiés, mais aucun n'a encore été confronté à une source indépendante ; les ménages types, les entreprises et l'indicateur de dépense incompressible restent à faire. La phase 3 est conduite en autonomie (instruction du mainteneur), lot par lot, avec les choix et leurs conséquences consignés ci-dessous et dans chaque PR.
+
 1. Module retraites : modèle de cohortes calé sur les projections du COR, démographie INSEE, validation contre les variantes publiées par le COR.
 2. Interrupteur de croissance : multiplicateur par instrument et décroissant dans le temps, valeurs et plages sourcées, désactivé par défaut, effet retour par l'élasticité des prélèvements.
 3. Scénarios partagés : PostgreSQL, identifiant court, version du modèle et des données enregistrées avec le scénario.
+   - Choix fait en autonomie (lot 3.3, à relire) : **pas de PostgreSQL**. Le scénario tient entièrement dans l'adresse de la page (paramètres `a`, `v`, `l`, `i`, `d`, `m`, `web/lib/etat.ts`) et le calcul se refait dans le navigateur.
+   - Conséquences : aucun scénario n'est stocké sur un serveur, le site reste statique et sans état (pas de base à héberger ni à sauvegarder) ; en contrepartie le lien est long et n'a pas d'identifiant court.
+   - Limite : le lien porte l'empreinte de la version (moteur, registres, données) mais pas les données elles-mêmes. Après une mise à jour du site, il est recalculé avec la nouvelle version et un avertissement le signale ; il ne reproduit donc le même résultat que tant que la version déployée est la même. Garder chaque version en ligne (archives par version) reste à faire au lot 3.6.
+   - Un lien illisible, hors bornes ou qui combine des mesures refusées par le moteur (double compte) n'est pas chargé ; un message le dit.
 4. Comparaison de 2 à 3 scénarios, export CSV et JSON.
+   - Choix (lot 3.4) : la page Comparer reçoit 2 à 3 liens du simulateur et affiche côte à côte l'écart de solde primaire, l'écart de dette et la dette, en fourchette ; son adresse porte les scénarios (`s1` à `s3`).
+   - Exports : toutes les années, en points de PIB, valeurs basse, centrale et haute ; le JSON ajoute les réglages, le lien et la version complète. Séparateur `;` et point décimal dans le CSV.
 5. Pages Journal et Relectures ; mentions légales.
 6. Accessibilité (RGAA visé), mobile, cache des scénarios courants, hébergement.
 

@@ -5,6 +5,7 @@ import {
   type CatalogueCreditsMissions,
   type CatalogueDepensesFiscales,
   type ReponsesUnitaires,
+  type Version,
 } from "../../lib/donnees";
 import { Simulateur } from "./simulateur";
 
@@ -16,6 +17,7 @@ export default function PageSimulateur() {
   const baseline = lire<Baseline>("baseline.json");
   const catalogue = lire<CatalogueDepensesFiscales>("depenses-fiscales.json");
   const missions = lire<CatalogueCreditsMissions>("credits-missions.json");
+  const version = lire<Version>("version.json");
   return (
     <>
       <h1>{texte("simulateur.titre")}</h1>
@@ -28,6 +30,7 @@ export default function PageSimulateur() {
         catalogue={catalogue}
         missions={missions}
         raccord={baseline.annee_raccord}
+        version={version}
       />
       <h2>{texte("simulateur.methode_titre")}</h2>
       <p>

@@ -1,21 +1,27 @@
 // Chargement, dans le navigateur, des réponses unitaires du simulateur (fichier statique copié
-// par outils/copier-donnees.mjs). Une seule requête par visite : la promesse est partagée par
-// le simulateur et la comparaison ; en cas d'échec, la tentative suivante relance la requête.
+// par outils/copier-donnees.mjs, nommé d'après l'empreinte de la version de la page). Une seule
+// requête par visite : la promesse est partagée par le simulateur et la comparaison, reliés par
+// une navigation interne ; en cas d'échec, la tentative suivante relance la requête.
 import { useEffect, useState } from "react";
 import type { ReponsesUnitaires } from "./donnees";
 
-export const ADRESSE_REPONSES = "/donnees/scenario-unitaire.json";
+export function adresseReponses(empreinte: string): string {
+  return `/donnees/scenario-unitaire.${empreinte}.json`;
+}
 
-let promesse: Promise<ReponsesUnitaires> | null = null;
+const promesses = new Map<string, Promise<ReponsesUnitaires>>();
 
-export function chargerReponses(): Promise<ReponsesUnitaires> {
-  promesse ??= fetch(ADRESSE_REPONSES).then((r) => {
-    if (!r.ok) throw new Error(`${ADRESSE_REPONSES} : ${r.status}`);
-    return r.json() as Promise<ReponsesUnitaires>;
-  });
-  promesse.catch(() => {
-    promesse = null;
-  });
+export function chargerReponses(empreinte: string): Promise<ReponsesUnitaires> {
+  const adresse = adresseReponses(empreinte);
+  let promesse = promesses.get(adresse);
+  if (!promesse) {
+    promesse = fetch(adresse).then((r) => {
+      if (!r.ok) throw new Error(`${adresse} : ${r.status}`);
+      return r.json() as Promise<ReponsesUnitaires>;
+    });
+    promesse.catch(() => promesses.delete(adresse));
+    promesses.set(adresse, promesse);
+  }
   return promesse;
 }
 
@@ -24,17 +30,17 @@ export type EtatChargement =
   | { etat: "pret"; donnees: ReponsesUnitaires }
   | { etat: "erreur" };
 
-export function useReponses(): EtatChargement {
+export function useReponses(empreinte: string): EtatChargement {
   const [resultat, setResultat] = useState<EtatChargement>({ etat: "en_cours" });
   useEffect(() => {
     let actif = true;
-    chargerReponses().then(
+    chargerReponses(empreinte).then(
       (donnees) => actif && setResultat({ etat: "pret", donnees }),
       () => actif && setResultat({ etat: "erreur" }),
     );
     return () => {
       actif = false;
     };
-  }, []);
+  }, [empreinte]);
   return resultat;
 }

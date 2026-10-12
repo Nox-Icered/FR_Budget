@@ -21,6 +21,7 @@ import {
 import { Exports } from "../partage/actions";
 import { region } from "../../lib/region";
 import { useReponses } from "../../lib/chargement";
+import Link from "next/link";
 
 
 const NOMBRE_SCENARIOS = 3;
@@ -113,9 +114,9 @@ function ComparaisonChargee({
               </span>
             )}
             {lectures[k].scenario && (
-              <a href={`/simulateur/?${encoder(lectures[k].scenario.etat)}`}>
+              <Link href={`/simulateur/?${encoder(lectures[k].scenario.etat)}`}>
                 {texte("comparaison.ouvrir")}
-              </a>
+              </Link>
             )}
           </div>
         ))}
@@ -185,7 +186,7 @@ export function Comparaison(props: {
   missions: CatalogueCreditsMissions;
   version: Version;
 }) {
-  const chargement = useReponses();
+  const chargement = useReponses(empreinteVersion(props.version));
   if (chargement.etat === "en_cours") return <p role="status">{texte("site.chargement")}</p>;
   if (chargement.etat === "erreur")
     return (

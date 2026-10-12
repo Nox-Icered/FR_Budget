@@ -311,13 +311,13 @@
     "reponse": "Réponse",
     "lien": "Lien",
     "valeurs_titre": "Relecture interne des valeurs saisies",
-    "valeurs": "Sur {total} valeurs de référence saisies à la main dans le registre, {relues} ont été relues par le responsable du projet et {a_relire} restent à relire.",
+    "valeurs": "Sur {total} valeurs de référence saisies à la main dans le registre, {relues} ont été relues par le mainteneur du projet et {a_relire} restent à relire.",
     "leviers": "Leviers et modules : {valides} validés, {beta} en bêta, {non_publies} non publiés."
   },
   "mentions": {
     "titre": "Mentions légales",
     "editeur_titre": "Éditeur",
-    "editeur": "À compléter par le responsable du projet avant la mise en ligne : nom et moyen de contact.",
+    "editeur": "À compléter par le mainteneur du projet avant la mise en ligne : nom et moyen de contact.",
     "hebergement_titre": "Hébergement",
     "hebergement": "À compléter lors du choix de l'hébergeur.",
     "code_titre": "Code source et licences",

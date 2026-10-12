@@ -41,6 +41,7 @@ from fr_budget.agrege.remunerations import VERSANTS, cout_brut_point_mesure
 from fr_budget.agrege.tva import estimer_point_tva, estimer_recette_totale
 from fr_budget.dette import surcout_choc_taux_etat
 from fr_budget.registres.acces import chiffrage
+from fr_budget.retraites import effet_a_horizon
 
 TOLERANCE_PUBLICATION = 0.10
 """Règle de publication d'un levier (CLAUDE.md) : ±10 % sur le rendement à 1 an."""
@@ -226,6 +227,11 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
     ]
     definitions += [("ir_gel_bareme_2026", partial(_ir_gel, inflation_2025, 2026))]
     definitions += [("pa_pente_moindre_depense_2025", _pa_pente_millions)]
+    definitions += [
+        (f"cor_aod_un_an_solde_apu_{horizon}ans_{borne}", partial(effet_a_horizon, horizon, 2027))
+        for horizon in (10, 20)
+        for borne in ("bas", "haut")
+    ]
     return definitions
 
 

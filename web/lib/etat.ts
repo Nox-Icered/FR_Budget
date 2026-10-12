@@ -50,6 +50,7 @@ export const LEVIERS_PUBLICS: { id: string; pas: number }[] = [
   { id: "allegements_generaux", pas: 1 },
   { id: "ir_seuils_bareme", pas: 0.1 },
   { id: "prime_activite_pente", pas: 0.1 },
+  { id: "retraites_age_depart", pas: 0.25 },
 ];
 const PUBLICS = new Set(LEVIERS_PUBLICS.map((l) => l.id));
 

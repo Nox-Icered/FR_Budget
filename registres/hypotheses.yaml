@@ -571,3 +571,21 @@ hypotheses:
       France. Aucune seconde source n'a été saisie : la plage est nulle, ce qui sous-estime
       l'incertitude.
     instruments: [croissance]
+
+  - id: retraites_duree_montee_en_charge
+    libelle: Durée de montée en charge du relèvement d'un an de l'âge effectif moyen de départ
+    unite: années
+    valeur_centrale: 4.0
+    plage:
+      basse: 4.0
+      haute: 4.0
+    sources: [cor_rapport_annuel_2026]
+    justification: >-
+      La réforme de 2023 a reporté l'âge d'ouverture des droits « à raison de trois mois par
+      génération » (rapport du COR de juin 2026, page 206) : un an de relèvement prend quatre
+      générations, soit quatre ans. Pour rester linéaire dans la valeur du levier (calcul du
+      site), la même durée est appliquée quel que soit l'écart choisi : un relèvement de trois
+      ans monte donc trois fois plus vite qu'à ce rythme. L'âge effectif suit l'âge légal avec
+      retard et partiellement ; aucune source saisie ne donne ce lien, d'où une plage nulle qui
+      sous-estime l'incertitude.
+    instruments: [retraites]

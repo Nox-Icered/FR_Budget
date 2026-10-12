@@ -75,12 +75,14 @@ de dette et de solde, avec la plage du levier et celle de la baseline, chacune s
 
 from __future__ import annotations
 
+import math
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, replace
 from functools import cache
 
 from fr_budget import baseline as module_baseline
 from fr_budget import croissance as module_croissance
+from fr_budget import retraites
 from fr_budget.agrege import (
     accises,
     cotisations,
@@ -165,6 +167,12 @@ BORNES_INDEXATION = (-2.0, 1.0)
 # levier d'indexation.
 MISSION_SOLIDARITE = "solidarite_insertion_et_egalite_des_chances"
 IMPOT_REVENU_DEPENSES_FISCALES = "impot_revenu"
+LEVIER_RETRAITES_AGE = "retraites_age_depart"
+# Écart admis à l'âge effectif moyen de départ projeté par le COR, en années (choix du lot 3.1,
+# à relire) : jusqu'au relèvement qui équilibre le système en 2070 selon le COR (3,0 ans,
+# figure 2.24), et un an de baisse.
+BORNES_RETRAITES_AGE = (-1.0, 3.0)
+BORNES = ("bas", "central", "haut")
 MILLIONS_PAR_MILLIARD = 1000.0
 EUROS_PAR_MILLIARD = 1e9
 ANNEE_REFERENCE = 2025
@@ -279,6 +287,12 @@ def rendement_unitaire(levier: str) -> Fourchette:
     volumiques. Dépenses fiscales : 1 % du coût 2026, plage de l'écart de prévision. Crédits
     d'une mission : moins 1 % des crédits 2026, plage de l'écart d'exécution.
     """
+    if levier == LEVIER_RETRAITES_AGE:
+        # Effet d'un an, une fois la montée en charge achevée pour une mesure entrée la
+        # première année possible, converti en Md€ de l'année de référence (affichage).
+        f = retraites.effet_un_an(_annee_pleine_retraites())
+        k = comptes_apu().valeur(ANNEE_REFERENCE, "S1", "pib") / POURCENT
+        return encadrer(f.central * k, [f.bas * k, f.haut * k])
     if levier in LEVIERS_REMUNERATIONS:
         net = remunerations.cout_net_un_pourcent(LEVIERS_REMUNERATIONS[levier])
         return encadrer(-net.central, [-net.bas, -net.haut])
@@ -342,6 +356,17 @@ def rendement_unitaire(levier: str) -> Fourchette:
     raise ValueError(msg)
 
 
+def _annee_pleine_retraites() -> int:
+    """Première année où l'écart d'âge est entièrement atteint, pour une entrée en 2027."""
+    return ANNEE_PREMIERE_MESURE + math.ceil(retraites.duree_montee_en_charge()) - 1
+
+
+def effet_plein_retraites() -> float:
+    """Effet central d'un an d'âge effectif, en points de PIB, une fois la montée en charge
+    achevée pour une mesure entrée la première année possible (affichage)."""
+    return retraites.effet_un_an(_annee_pleine_retraites()).central
+
+
 def taux_reference(levier: str) -> float:
     """Valeur du paramètre au 1er janvier de l'année de référence, pour l'affichage.
 
@@ -353,6 +378,9 @@ def taux_reference(levier: str) -> float:
     mission = mission_du_levier(levier)
     if mission is not None:
         return mission.credits / EUROS_PAR_MILLIARD
+    if levier == LEVIER_RETRAITES_AGE:
+        # Âge effectif moyen de départ de l'année de référence selon le COR, en années.
+        return retraites.reference()[ANNEE_REFERENCE].age_ref
     if levier == LEVIER_CREDITS_UNITE:
         return 0.0
     if levier in LEVIERS_DOTATIONS:
@@ -409,6 +437,8 @@ def bornes_levier(levier: str) -> tuple[float, float]:
     """
     if mission_du_levier(levier) is not None:
         return -BORNE_CREDITS, BORNE_CREDITS
+    if levier == LEVIER_RETRAITES_AGE:
+        return BORNES_RETRAITES_AGE
     if levier in LEVIERS_DOTATIONS:
         return -BORNE_DOTATIONS, BORNE_DOTATIONS
     if levier in LEVIERS_REMUNERATIONS:
@@ -470,6 +500,10 @@ def effet_solde(mesure: Mesure) -> Fourchette:
     if not basse <= mesure.valeur <= haute:
         msg = f"valeur hors des bornes {basse:g} à {haute:g} : {mesure.valeur}"
         raise ValueError(msg)
+    if mesure.levier == LEVIER_RETRAITES_AGE:
+        # Effet de l'année d'entrée (début de la montée en charge), en points de PIB.
+        valeurs = [retraites.effet(mesure.valeur, mesure.annee, mesure.annee, b) for b in BORNES]
+        return encadrer(valeurs[1], [valeurs[0], valeurs[2]])
     unite = rendement_unitaire(mesure.levier)
     pib = comptes_apu().valeur(ANNEE_REFERENCE, "S1", "pib")
     valeurs = [ratio_pib(mesure.valeur * v, pib) for v in (unite.bas, unite.central, unite.haut)]
@@ -512,6 +546,14 @@ def facteur_premiere_annee(levier: str) -> float:
 def _effets_par_annee(mesures: Iterable[Mesure], borne: str) -> dict[int, float]:
     effets: dict[int, float] = {}
     for m in mesures:
+        if m.levier == LEVIER_RETRAITES_AGE:
+            # Effet propre à chaque année (COR) et montée en charge (fr_budget.retraites).
+            effet_solde(m)  # contrôle de l'année et des bornes
+            for annee in range(m.annee, ANNEE_FIN + 1):
+                effets[annee] = effets.get(annee, 0.0) + retraites.effet(
+                    m.valeur, annee, m.annee, borne
+                )
+            continue
         valeur = getattr(effet_solde(m), borne)
         for annee in range(m.annee, ANNEE_FIN + 1):
             facteur = facteur_premiere_annee(m.levier) if annee == m.annee else 1.0
@@ -621,6 +663,9 @@ def categorie_croissance(levier: str) -> str:
         LEVIER_IS_SURTAXE: module_croissance.AUTRES_PRELEVEMENTS,
         **dict.fromkeys(LEVIERS_DEPENSES_FISCALES_IMPOT, module_croissance.AUTRES_PRELEVEMENTS),
         LEVIER_DEPENSE_FISCALE_UNITE: module_croissance.AUTRES_PRELEVEMENTS,
+        # Le relèvement de l'âge agit sur l'offre de travail, pas sur la demande : le
+        # multiplicateur de demande ne s'applique pas (fiche retraites, § 5).
+        LEVIER_RETRAITES_AGE: module_croissance.AUCUN,
     }
     if levier in categories:
         return categories[levier]
@@ -736,6 +781,7 @@ LEVIERS_REGISTRE = {
     LEVIER_ALLEGEMENTS: "cotisations_patronales",
     LEVIER_IR_SEUILS: "impot_revenu",
     LEVIER_PA_PENTE: "minima_prime_activite",
+    LEVIER_RETRAITES_AGE: "retraites",
 }
 
 
@@ -859,6 +905,10 @@ PROVENANCE_PA = (
     ),
     (),
 )
+PROVENANCE_RETRAITES = (
+    ("cor_rapport_annuel_2026", "insee_comptes_nationaux_2025"),
+    (retraites.HYPOTHESE_MONTEE,),
+)
 PROVENANCE_LEVIERS = {
     LEVIER_IS_TAUX_NORMAL: PROVENANCE_IS,
     LEVIER_IS_SURTAXE: PROVENANCE_IS,
@@ -888,6 +938,7 @@ PROVENANCE_LEVIERS = {
     LEVIER_ALLEGEMENTS: PROVENANCE_COTISATIONS,
     LEVIER_IR_SEUILS: PROVENANCE_IR,
     LEVIER_PA_PENTE: PROVENANCE_PA,
+    LEVIER_RETRAITES_AGE: PROVENANCE_RETRAITES,
 }
 
 
@@ -945,6 +996,7 @@ def reponse_lineaire(levier: str, annee: int) -> ReponseLineaire:
     centrale, variantes = trajectoires()
     mesures = [Mesure(levier, 1.0, annee)]
     m_central = module_croissance.multiplicateur(categorie_croissance(levier)).central
+    sans_croissance = m_central == 0
     paires = [
         (centrale, CENTRAL),
         *((v, CENTRAL) for v in variantes),
@@ -955,7 +1007,9 @@ def reponse_lineaire(levier: str, annee: int) -> ReponseLineaire:
     croissance_dette, croissance_solde = [], []
     for trajectoire, borne in paires:
         avec = _trajectoire_mesures(trajectoire, mesures, borne, None)
-        avec_croissance = _trajectoire_mesures(trajectoire, mesures, borne, CENTRAL)
+        avec_croissance = _trajectoire_mesures(
+            trajectoire, mesures, borne, None if sans_croissance else CENTRAL
+        )
         base_dette.append([a.dette for a in trajectoire])
         base_solde.append([a.solde_primaire for a in trajectoire])
         unite_dette.append([b.dette - a.dette for a, b in zip(trajectoire, avec, strict=True)])
@@ -963,11 +1017,14 @@ def reponse_lineaire(levier: str, annee: int) -> ReponseLineaire:
             [b.solde_primaire - a.solde_primaire for a, b in zip(trajectoire, avec, strict=True)]
         )
         croissance_dette.append(
-            [(c.dette - b.dette) / m_central for b, c in zip(avec, avec_croissance, strict=True)]
+            [
+                0.0 if sans_croissance else (c.dette - b.dette) / m_central
+                for b, c in zip(avec, avec_croissance, strict=True)
+            ]
         )
         croissance_solde.append(
             [
-                (c.solde_primaire - b.solde_primaire) / m_central
+                0.0 if sans_croissance else (c.solde_primaire - b.solde_primaire) / m_central
                 for b, c in zip(avec, avec_croissance, strict=True)
             ]
         )

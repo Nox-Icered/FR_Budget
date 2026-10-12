@@ -97,6 +97,12 @@ export default function PageSimulateur() {
           cout: deuxDecimales(-donnees.leviers.prime_activite_pente.rendement_unitaire),
         })}
       </p>
+      <p>
+        {texte("simulateur.methode_retraites", {
+          effet: deuxDecimales(donnees.leviers.retraites_age_depart.effet_plein ?? 0),
+          duree: donnees.leviers.retraites_age_depart.duree_montee ?? 0,
+        })}
+      </p>
       {donnees.croissance && (
         <p>
           {texte("simulateur.methode_croissance", {
@@ -125,6 +131,7 @@ export default function PageSimulateur() {
         <li>{texte("simulateur.limite_cotisations")}</li>
         <li>{texte("simulateur.limite_ir")}</li>
         <li>{texte("simulateur.limite_prime_activite")}</li>
+        <li>{texte("simulateur.limite_retraites")}</li>
       </ul>
       <p>
         <a href="/validation/">{texte("simulateur.lien_validation")}</a>

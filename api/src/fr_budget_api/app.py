@@ -23,6 +23,7 @@ from typing import Any
 from fastapi import FastAPI, HTTPException
 from fr_budget import baseline as module_baseline
 from fr_budget import croissance as module_croissance
+from fr_budget import retraites as module_retraites
 from fr_budget import scenario as module_scenario
 from fr_budget.agrege import credits_missions as module_credits_missions
 from fr_budget.agrege import depenses_fiscales as module_depenses_fiscales
@@ -287,6 +288,14 @@ def reponses_unitaires() -> dict[str, Any]:
             **(
                 {"effet_brut_unitaire": module_scenario.effet_brut_unitaire(levier)}
                 if levier in module_scenario.LEVIERS_EFFET_BRUT
+                else {}
+            ),
+            **(
+                {
+                    "effet_plein": module_scenario.effet_plein_retraites(),
+                    "duree_montee": module_retraites.duree_montee_en_charge(),
+                }
+                if levier == module_scenario.LEVIER_RETRAITES_AGE
                 else {}
             ),
             "bornes": [basse, haute],

@@ -46,6 +46,9 @@ CATEGORIES = (
     IMPOT_REVENU,
     AUTRES_PRELEVEMENTS,
 )
+AUCUN = "aucun"
+"""Instrument sans effet de demande modélisé (relèvement de l'âge de départ) : multiplicateur
+nul, sans hypothèse au registre."""
 PREFIXE_HYPOTHESE = "croissance_multiplicateur_"
 HYPOTHESE_PERSISTANCE = "croissance_persistance_ecart_production"
 HYPOTHESE_EFFET_SOLDE = "croissance_effet_ecart_production_solde"
@@ -54,6 +57,8 @@ POURCENT = 100.0
 
 def multiplicateur(categorie: str) -> Fourchette:
     """Multiplicateur à un an d'une catégorie d'instruments (registre d'hypothèses)."""
+    if categorie == AUCUN:
+        return Fourchette(0.0, 0.0, 0.0)
     h = hypothese(PREFIXE_HYPOTHESE + categorie)
     return encadrer(h.valeur_centrale, [h.plage.basse, h.plage.haute])
 
@@ -113,7 +118,7 @@ def trajectoire_avec_croissance(
 
 def provenance(categories: Iterable[str]) -> tuple[list[str], list[str]]:
     """Sources et hypothèses de l'effet de croissance pour ces catégories d'instruments."""
-    hypotheses = [PREFIXE_HYPOTHESE + c for c in dict.fromkeys(categories)]
+    hypotheses = [PREFIXE_HYPOTHESE + c for c in dict.fromkeys(categories) if c != AUCUN]
     hypotheses += [HYPOTHESE_PERSISTANCE, HYPOTHESE_EFFET_SOLDE]
     sources: list[str] = []
     for h in hypotheses:

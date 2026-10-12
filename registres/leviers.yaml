@@ -86,3 +86,10 @@ leviers:
     moteur: agrege
     references_visees: [Annexe « Transferts financiers de l'État aux collectivités », DGCL]
     statut: beta
+
+  - id: retraites
+    libelle: Retraites (module structurel, première étape)
+    parametres_reglables: [Âge effectif moyen de départ à la retraite, en écart à la trajectoire du COR à législation inchangée]
+    moteur: structurel
+    references_visees: [Rapport annuel du COR de juin 2026 (figure 2.24 et tableau 2.10), Cour des comptes]
+    statut: beta

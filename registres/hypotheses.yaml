@@ -433,3 +433,141 @@ hypotheses:
       est la dépense d'investissement hors remboursement de la dette, les dotations sont les
       dotations totales de l'État (tableau 5, page 10).
     instruments: [dotations_collectivites]
+
+  - id: croissance_multiplicateur_depenses
+    libelle: Multiplicateur à un an d'une variation des dépenses publiques (crédits des missions, dotations, rémunérations)
+    unite: point de PIB d'écart de production par point de PIB d'impulsion
+    valeur_centrale: 0.78
+    plage:
+      basse: 0.78
+      haute: 1.0
+    sources: [insee_mesange_2017, ofce_policy_brief_146]
+    justification: >-
+      Valeur centrale : effet à un an sur le PIB de la variante « dépense publique générique »
+      de Mésange (0,78, page 106), seule variante de dépense de fonctionnement du modèle. Borne
+      haute : multiplicateur des dépenses retenu par l'OFCE (1, Policy brief n° 146, page 17).
+    instruments: [croissance]
+
+  - id: croissance_multiplicateur_prestations
+    libelle: Multiplicateur à un an d'une variation des prestations (indexation, prime d'activité)
+    unite: point de PIB d'écart de production par point de PIB d'impulsion
+    valeur_centrale: 0.41
+    plage:
+      basse: 0.41
+      haute: 1.0
+    sources: [insee_mesange_2017, ofce_policy_brief_146]
+    justification: >-
+      Mésange ne publie pas de variante de prestations. La valeur centrale reprend les variantes
+      qui passent par le revenu disponible des ménages comme une prestation, CSG et impôt sur le
+      revenu (0,41, pages 116 et 118). Borne haute : multiplicateur des dépenses retenu par
+      l'OFCE (1, page 17), qui classe les prestations parmi les dépenses.
+    instruments: [croissance]
+
+  - id: croissance_multiplicateur_tva
+    libelle: Multiplicateur à un an d'une variation de la TVA
+    unite: point de PIB d'écart de production par point de PIB d'impulsion
+    valeur_centrale: 0.32
+    plage:
+      basse: 0.32
+      haute: 0.5
+    sources: [insee_mesange_2017, ofce_policy_brief_146]
+    justification: >-
+      Valeur centrale : variante TVA de Mésange (0,32, page 113). Borne haute : multiplicateur
+      des recettes retenu par l'OFCE (0,5, page 17).
+    instruments: [croissance]
+
+  - id: croissance_multiplicateur_accises
+    libelle: Multiplicateur à un an d'une variation des accises sur les carburants
+    unite: point de PIB d'écart de production par point de PIB d'impulsion
+    valeur_centrale: 0.51
+    plage:
+      basse: 0.5
+      haute: 0.51
+    sources: [insee_mesange_2017, ofce_policy_brief_146]
+    justification: >-
+      Valeur centrale : variante « taxe carbone » de Mésange, la plus proche d'une accise sur
+      l'énergie (0,51, page 121). Borne basse : multiplicateur des recettes retenu par l'OFCE
+      (0,5, page 17).
+    instruments: [croissance]
+
+  - id: croissance_multiplicateur_cotisations_employeurs
+    libelle: Multiplicateur à un an d'une variation des cotisations patronales ou des allègements généraux
+    unite: point de PIB d'écart de production par point de PIB d'impulsion
+    valeur_centrale: 0.2
+    plage:
+      basse: 0.2
+      haute: 0.5
+    sources: [insee_mesange_2017, ofce_policy_brief_146]
+    justification: >-
+      Valeur centrale : variante « cotisations sociales employeurs » de Mésange (0,20, page 108).
+      Borne haute : multiplicateur des recettes retenu par l'OFCE (0,5, page 17).
+    instruments: [croissance]
+
+  - id: croissance_multiplicateur_csg
+    libelle: Multiplicateur à un an d'une variation de la CSG
+    unite: point de PIB d'écart de production par point de PIB d'impulsion
+    valeur_centrale: 0.41
+    plage:
+      basse: 0.41
+      haute: 0.5
+    sources: [insee_mesange_2017, ofce_policy_brief_146]
+    justification: >-
+      Valeur centrale : variante CSG de Mésange (0,41, page 116). Borne haute : multiplicateur
+      des recettes retenu par l'OFCE (0,5, page 17).
+    instruments: [croissance]
+
+  - id: croissance_multiplicateur_impot_revenu
+    libelle: Multiplicateur à un an d'une variation de l'impôt sur le revenu (barème et dépenses fiscales de l'impôt sur le revenu)
+    unite: point de PIB d'écart de production par point de PIB d'impulsion
+    valeur_centrale: 0.41
+    plage:
+      basse: 0.41
+      haute: 0.5
+    sources: [insee_mesange_2017, ofce_policy_brief_146]
+    justification: >-
+      Valeur centrale : variante « impôt sur le revenu » de Mésange (0,41, page 118). Borne
+      haute : multiplicateur des recettes retenu par l'OFCE (0,5, page 17).
+    instruments: [croissance]
+
+  - id: croissance_multiplicateur_autres_prelevements
+    libelle: Multiplicateur à un an d'une variation des autres prélèvements (impôt sur les sociétés, autres dépenses fiscales)
+    unite: point de PIB d'écart de production par point de PIB d'impulsion
+    valeur_centrale: 0.5
+    plage:
+      basse: 0.2
+      haute: 0.51
+    sources: [insee_mesange_2017, ofce_policy_brief_146]
+    justification: >-
+      Mésange ne publie pas de variante d'impôt sur les sociétés. Valeur centrale :
+      multiplicateur des recettes retenu par l'OFCE (0,5, page 17). Plage : extrêmes des
+      variantes de prélèvements de Mésange, de 0,20 (cotisations employeurs, page 108) à 0,51
+      (taxe carbone, page 121).
+    instruments: [croissance]
+
+  - id: croissance_persistance_ecart_production
+    libelle: Part de l'écart de production d'une année qui subsiste l'année suivante
+    unite: sans unité
+    valeur_centrale: 0.7
+    plage:
+      basse: 0.7
+      haute: 0.7
+    sources: [ofce_policy_brief_146]
+    justification: >-
+      Paramètre rho du modèle simple de l'OFCE (encadré 3, page 15), « valeur usuelle dans les
+      études empiriques ». Aucune seconde source n'a été saisie : la plage est nulle, ce qui
+      sous-estime l'incertitude.
+    instruments: [croissance]
+
+  - id: croissance_effet_ecart_production_solde
+    libelle: Effet d'un point d'écart de production sur le solde public
+    unite: point de PIB de solde par point d'écart de production
+    valeur_centrale: 0.5
+    plage:
+      basse: 0.5
+      haute: 0.5
+    sources: [ofce_policy_brief_146]
+    justification: >-
+      Paramètre alpha du modèle simple de l'OFCE (encadré 3, page 15), « valeur usuelle » en
+      France. Aucune seconde source n'a été saisie : la plage est nulle, ce qui sous-estime
+      l'incertitude.
+    instruments: [croissance]

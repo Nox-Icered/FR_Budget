@@ -18,6 +18,8 @@ export type EtatScenario = {
   parImpot: Record<string, number>;
   parDepense: Record<string, number>;
   parMission: Record<string, number>;
+  // Effet sur l'activité (multiplicateur), désactivé par défaut ; paramètre c=1 du lien.
+  croissance?: boolean;
   version?: string;
 };
 
@@ -86,12 +88,14 @@ function decoderListe(texte: string | null): Record<string, number> | null {
   return resultat;
 }
 
-// Paramètres : a (année d'entrée), v (version), l (leviers), i (dépenses fiscales par impôt),
+// Paramètres : a (année d'entrée), v (version), c (effet sur l'activité, 1 s'il est inclus),
+// l (leviers), i (dépenses fiscales par impôt),
 // d (dépenses fiscales choisies), m (missions). Les réglages à zéro sont omis.
 export function encoder(etat: EtatScenario): string {
   const p = new URLSearchParams();
   p.set("a", String(etat.annee));
   if (etat.version) p.set("v", etat.version);
+  if (etat.croissance) p.set("c", "1");
   const listes: [string, Record<string, number>][] = [
     ["l", etat.leviers],
     ["i", etat.parImpot],
@@ -117,7 +121,17 @@ export function decoder(texte: string): EtatScenario | null {
   const parDepense = decoderListe(p.get("d"));
   const parMission = decoderListe(p.get("m"));
   if (!leviers || !parImpot || !parDepense || !parMission) return null;
-  return { annee, leviers, parImpot, parDepense, parMission, version: p.get("v") ?? undefined };
+  const c = p.get("c");
+  if (c !== null && c !== "1") return null;
+  return {
+    annee,
+    leviers,
+    parImpot,
+    parDepense,
+    parMission,
+    ...(c === "1" ? { croissance: true } : {}),
+    version: p.get("v") ?? undefined,
+  };
 }
 
 export type Probleme =

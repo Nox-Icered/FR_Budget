@@ -54,7 +54,12 @@ export function Comparaison({
     if (problemes(etat, donnees, catalogue, missions).length > 0)
       return { alerte: texte("partage.lien_invalide") };
     const nom = texte("comparaison.nom", { numero: k + 1 });
-    const lignes = calculer(donnees, mesures(etat, catalogue, missions), etat.annee);
+    const lignes = calculer(
+      donnees,
+      mesures(etat, catalogue, missions),
+      etat.annee,
+      etat.croissance === true,
+    );
     return {
       scenario: { nom, etat, lignes },
       alerte:
@@ -131,7 +136,13 @@ export function Comparaison({
                     <th scope="col">{texte("baseline.annee")}</th>
                     {scenarios.map((s) => (
                       <th key={s.nom} scope="col">
-                        {s.nom} ({s.etat.annee})
+                        {texte("comparaison.entete", {
+                          nom: s.nom,
+                          annee: s.etat.annee,
+                          croissance: texte(
+                            s.etat.croissance ? "comparaison.avec_croissance" : "comparaison.sans_croissance",
+                          ),
+                        })}
                       </th>
                     ))}
                   </tr>

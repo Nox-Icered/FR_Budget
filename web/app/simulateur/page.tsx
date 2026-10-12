@@ -97,9 +97,22 @@ export default function PageSimulateur() {
           cout: deuxDecimales(-donnees.leviers.prime_activite_pente.rendement_unitaire),
         })}
       </p>
+      {donnees.croissance && (
+        <p>
+          {texte("simulateur.methode_croissance", {
+            persistance: Math.round(donnees.croissance.persistance * 100),
+            alpha: deuxDecimales(donnees.croissance.effet_solde),
+            tva_bas: deuxDecimales(donnees.leviers.tva_taux_normal.multiplicateur?.bas ?? 0),
+            tva_haut: deuxDecimales(donnees.leviers.tva_taux_normal.multiplicateur?.haut ?? 0),
+            depenses_bas: deuxDecimales(donnees.leviers.credits_missions.multiplicateur?.bas ?? 0),
+            depenses_haut: deuxDecimales(donnees.leviers.credits_missions.multiplicateur?.haut ?? 0),
+          })}
+        </p>
+      )}
       <ul>
         <li>{texte("simulateur.limite_comportement")}</li>
         <li>{texte("simulateur.limite_croissance")}</li>
+        <li>{texte("simulateur.limite_croissance_module")}</li>
         <li>{texte("simulateur.limite_fourchette")}</li>
         <li>{texte("simulateur.limite_tva_accise")}</li>
         <li>{texte("simulateur.limite_is_calendrier")}</li>

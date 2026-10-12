@@ -30,6 +30,14 @@ test("aller-retour par le lien, réglages nuls omis", () => {
   assert.deepEqual(relu, { ...etat, leviers: { tva_taux_normal: 1, csg_activite: -0.5 } });
 });
 
+test("l'effet sur l'activité passe par le lien", () => {
+  const lien = encoder({ ...etat, croissance: true });
+  assert.ok(lien.includes("c=1"));
+  assert.equal(decoder(lien)?.croissance, true);
+  assert.equal(decoder(encoder(etat))?.croissance, undefined);
+  assert.equal(decoder("?a=2027&c=oui"), null);
+});
+
 test("un lien illisible est refusé", () => {
   assert.equal(decoder("?a=2027&l=tva_taux_normal:abc"), null);
   assert.equal(decoder("?l=tva_taux_normal:1"), null);

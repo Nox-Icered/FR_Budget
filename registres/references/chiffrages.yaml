@@ -2311,3 +2311,124 @@ chiffrages:
     localisation: Partie consacrée à l'AAH, page 27
     saisi_le: 2026-10-12
     relecture: a_relire
+
+  - id: mesange_pib_1an_depense_generique
+    module: croissance
+    source: insee_mesange_2017
+    millesime: "Mésange 2017 (choc au 1er trimestre 2015)"
+    mesure: "Hausse de la dépense publique d'un montant de 1 point de PIB : effet sur le PIB en volume à 1 an"
+    valeur: 0.78
+    unite: "% d'écart du PIB au compte central"
+    localisation: Page 106, section 4.1.2, tableau, ligne « PIB en volume », colonne « 1 an »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: mesange_pib_1an_cotisations_employeurs
+    module: croissance
+    source: insee_mesange_2017
+    millesime: "Mésange 2017 (choc au 1er trimestre 2015)"
+    mesure: "Baisse des cotisations sociales employeurs de 1 % du PIB ex ante : effet sur le PIB en volume à 1 an"
+    valeur: 0.2
+    unite: "% d'écart du PIB au compte central"
+    localisation: Page 108, section 4.1.3, tableau, ligne « PIB en volume », colonne « 1 an »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: mesange_pib_1an_cotisations_salaries
+    module: croissance
+    source: insee_mesange_2017
+    millesime: "Mésange 2017 (choc au 1er trimestre 2015)"
+    mesure: "Baisse des cotisations sociales salariés de 1 % du PIB ex ante : effet sur le PIB en volume à 1 an"
+    valeur: 0.38
+    unite: "% d'écart du PIB au compte central"
+    localisation: Page 111, section 4.1.4, tableau, ligne « PIB en volume », colonne « 1 an »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: mesange_pib_1an_tva
+    module: croissance
+    source: insee_mesange_2017
+    millesime: "Mésange 2017 (choc au 1er trimestre 2015)"
+    mesure: "Hausse de la TVA de 1 % du PIB ex ante : effet sur le PIB en volume à 1 an (valeur absolue de -0,32)"
+    valeur: 0.32
+    unite: "% d'écart du PIB au compte central"
+    localisation: Page 113, section 4.1.5, tableau, ligne « PIB en volume », colonne « 1 an »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: mesange_pib_1an_csg
+    module: croissance
+    source: insee_mesange_2017
+    millesime: "Mésange 2017 (choc au 1er trimestre 2015)"
+    mesure: "Baisse de la CSG de 1 % du PIB ex ante : effet sur le PIB en volume à 1 an"
+    valeur: 0.41
+    unite: "% d'écart du PIB au compte central"
+    localisation: Page 116, section 4.1.6, tableau, ligne « PIB en volume », colonne « 1 an »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: mesange_pib_1an_impot_revenu
+    module: croissance
+    source: insee_mesange_2017
+    millesime: "Mésange 2017 (choc au 1er trimestre 2015)"
+    mesure: "Baisse de l'impôt sur le revenu de 1 % du PIB ex ante : effet sur le PIB en volume à 1 an"
+    valeur: 0.41
+    unite: "% d'écart du PIB au compte central"
+    localisation: Page 118, section 4.1.7, tableau, ligne « PIB en volume », colonne « 1 an »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: mesange_pib_1an_taxe_carbone
+    module: croissance
+    source: insee_mesange_2017
+    millesime: "Mésange 2017 (choc au 1er trimestre 2015)"
+    mesure: "Hausse de la taxe carbone de 1 point de PIB : effet sur le PIB en volume à 1 an (valeur absolue de -0,51)"
+    valeur: 0.51
+    unite: "% d'écart du PIB au compte central"
+    localisation: Page 121, section 4.1.8, tableau, ligne « PIB en volume », colonne « 1 an »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ofce_multiplicateur_recettes
+    module: croissance
+    source: ofce_policy_brief_146
+    millesime: "juillet 2025"
+    mesure: Multiplicateur retenu pour la hausse des recettes
+    valeur: 0.5
+    unite: point de PIB par point de PIB d'impulsion
+    localisation: Page 17, « avec un multiplicateur respectif à 0,5 et 1 »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ofce_multiplicateur_depenses
+    module: croissance
+    source: ofce_policy_brief_146
+    millesime: "juillet 2025"
+    mesure: Multiplicateur retenu pour la baisse des dépenses
+    valeur: 1.0
+    unite: point de PIB par point de PIB d'impulsion
+    localisation: Page 17, « avec un multiplicateur respectif à 0,5 et 1 »
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ofce_persistance_ecart_production
+    module: croissance
+    source: ofce_policy_brief_146
+    millesime: "juillet 2025"
+    mesure: Paramètre rho de l'équation de l'écart de production (valeur usuelle dans les études empiriques)
+    valeur: 0.7
+    unite: sans unité
+    localisation: Page 15, encadré 3, liste des paramètres
+    saisi_le: 2026-10-12
+    relecture: a_relire
+
+  - id: ofce_effet_ecart_production_solde
+    module: croissance
+    source: ofce_policy_brief_146
+    millesime: "juillet 2025"
+    mesure: Paramètre alpha, effet du ralentissement sur les recettes (valeur usuelle en France)
+    valeur: 0.5
+    unite: point de PIB de solde par point d'écart de production
+    localisation: Page 15, encadré 3, liste des paramètres
+    saisi_le: 2026-10-12
+    relecture: a_relire

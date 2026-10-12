@@ -553,3 +553,19 @@ datasets:
     empreinte_sha256: 10b0fb3da7054d8b6ff01c0c9517349da743b189927d281e686932da96f9d1c6
     methode_transformation: aucune ; valeurs des pages 27 et 55 saisies dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-12
+
+  - id: insee_mesange_2017_pdf
+    source: insee_mesange_2017
+    description: Document de travail Insee G 2017/04 sur le modèle Mésange (PDF, 153 pages)
+    fichier: data/raw/croissance/insee_mesange_2017.pdf
+    empreinte_sha256: a90bc25445928e3f5573eab4bcecae0670480c28cee5a66e68a60c1030032150
+    methode_transformation: aucune ; effets sur le PIB à un an des variantes budgétaires et fiscales (pages 106 à 121) saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-12
+
+  - id: ofce_policy_brief_146_pdf
+    source: ofce_policy_brief_146
+    description: OFCE Policy brief n° 146 du 11 juillet 2025 (PDF, 22 pages)
+    fichier: data/raw/croissance/ofce_policy_brief_146.pdf
+    empreinte_sha256: d7bb459956d0468733bd8ecca1ca64c6ac12081be7dfb4681a7c4ce8876d9a58
+    methode_transformation: aucune ; paramètres du modèle simple de l'encadré 3 (page 15) et multiplicateurs des recettes et des dépenses (page 17) saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-12

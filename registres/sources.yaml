@@ -509,3 +509,21 @@ sources:
     millesime: 24 novembre 2025
     acces: direct
     consulte_le: 2026-10-12
+
+  - id: insee_mesange_2017
+    nom: Document de travail G 2017/04, « Le modèle macroéconométrique Mésange réestimation et nouveautés », Insee et DG Trésor
+    editeur: Insee (Direction des études et synthèses économiques) et Direction générale du Trésor
+    url: https://www.insee.fr/fr/statistiques/fichier/2848300/G2017-04.pdf
+    licence: réutilisation libre des publications de l'Insee (mention de la source)
+    millesime: mai 2017
+    acces: direct
+    consulte_le: 2026-10-12
+
+  - id: ofce_policy_brief_146
+    nom: OFCE Policy brief n° 146, « Quelles trajectoires pour les finances publiques de la France ? » (Heyer, Plane, Ragot, Sampognaro, Timbeau)
+    editeur: OFCE (Sciences Po)
+    url: https://www.ofce.fr/pdf/pbrief/2025/OFCEpbrief146.pdf
+    licence: publication académique en accès libre (citation de la source)
+    date_publication: 2025-07-11
+    acces: direct
+    consulte_le: 2026-10-12

@@ -407,6 +407,7 @@ def cout_un_point() -> Fourchette:
     return encadrer(float(np.mean(variantes)), variantes)
 
 
+@cache
 def part_effet_premiere_annee() -> float:
     """Part du coût net en année pleine qui porte sur l'année d'entrée en vigueur.
 

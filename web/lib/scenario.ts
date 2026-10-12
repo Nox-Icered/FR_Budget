@@ -23,16 +23,21 @@ function encadrer(central: number, valeurs: number[]): Fourchette {
 
 export type MesureSite = { levier: string; valeur: number };
 
-// Plusieurs leviers s'additionnent (même année d'entrée), comme dans le moteur.
+// Plusieurs leviers s'additionnent (même année d'entrée), comme dans le moteur. Avec
+// ``croissance`` (interrupteur, désactivé par défaut), chaque réponse reçoit m fois son
+// supplément de croissance ; le multiplicateur m est central sur toutes les trajectoires, et
+// les coins (effet bas ou haut, multiplicateur bas ou haut, commun à toutes les mesures)
+// élargissent la fourchette, comme dans fr_budget.scenario.
 export function calculer(
   donnees: ReponsesUnitaires,
   mesures: MesureSite[],
   annee: number,
+  croissance = false,
 ): LigneScenario[] {
-  const reponses = mesures.map((m) => ({
-    valeur: m.valeur,
-    r: donnees.leviers[m.levier].reponses[String(annee)],
-  }));
+  const reponses = mesures.map((m) => {
+    const levier = donnees.leviers[m.levier];
+    return { valeur: m.valeur, r: levier.reponses[String(annee)], mult: levier.multiplicateur };
+  });
   // Trajectoires des bornes de l'effet (indices_effet[1] : effet bas, [2] : effet haut). Comme
   // dans le moteur, la borne basse additionne la réponse basse des mesures positives et la
   // réponse haute des mesures négatives (et inversement pour la borne haute).
@@ -43,13 +48,41 @@ export function calculer(
     if (k === kHaut) return kBas;
     return k;
   };
-  const somme = (k: number, i: number, cle: "unite_dette" | "unite_solde") =>
-    reponses.reduce((total, { valeur, r }) => total + valeur * r[cle][indice(k, valeur)][i], 0);
+  type Borne = "bas" | "central" | "haut";
+  const somme = (k: number, i: number, cle: "dette" | "solde", borne: Borne | null) =>
+    reponses.reduce((total, { valeur, r, mult }) => {
+      const kk = indice(k, valeur);
+      const unite = r[`unite_${cle}`][kk][i];
+      const supplement = borne && mult ? mult[borne] * (r[`croissance_${cle}`]?.[kk][i] ?? 0) : 0;
+      return total + valeur * (unite + supplement);
+    }, 0);
+  const central: Borne | null = croissance ? "central" : null;
+  const coins: [number, Borne][] = croissance
+    ? [
+        [kBas, "bas"],
+        [kHaut, "bas"],
+        [kBas, "haut"],
+        [kHaut, "haut"],
+      ]
+    : [];
   return donnees.annees.map((a, i) => {
-    const dette = donnees.base_dette.map((b, k) => b[i] + somme(k, i, "unite_dette"));
-    const solde = donnees.base_solde.map((b, k) => b[i] + somme(k, i, "unite_solde"));
-    const ecartsDette = donnees.indices_effet.map((k) => somme(k, i, "unite_dette"));
-    const ecartsSolde = donnees.indices_effet.map((k) => somme(k, i, "unite_solde"));
+    const niveaux = (cle: "dette" | "solde") => {
+      const base = cle === "dette" ? donnees.base_dette : donnees.base_solde;
+      return [
+        ...base.map((b, k) => b[i] + somme(k, i, cle, central)),
+        ...coins.map(([k, j]) => base[k][i] + somme(k, i, cle, j)),
+      ];
+    };
+    const ecarts = (cle: "dette" | "solde") => [
+      ...donnees.indices_effet.map((k) => somme(k, i, cle, central)),
+      ...coins.map(([k, j]) => somme(k, i, cle, j)),
+    ];
+    const [dette, solde, ecartsDette, ecartsSolde] = [
+      niveaux("dette"),
+      niveaux("solde"),
+      ecarts("dette"),
+      ecarts("solde"),
+    ];
     return {
       annee: a,
       dette: encadrer(dette[0], dette),

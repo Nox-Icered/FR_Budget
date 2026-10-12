@@ -3,7 +3,8 @@
     "titre": "Budget public : simulateur",
     "description": "Simulateur public et open source du budget des administrations publiques françaises. Chaque chiffre renvoie à sa source.",
     "avertissement": "Version de développement. Aucun levier n'est validé ; les résultats ne sont pas publiés.",
-    "pied": "Code sous licence AGPL-3.0, données sous Licence Ouverte 2.0 sauf mention contraire de la source."
+    "pied": "Code sous licence AGPL-3.0, données sous Licence Ouverte 2.0 sauf mention contraire de la source.",
+    "tableau_defilant": "{libelle} (tableau, défilement horizontal possible)"
   },
   "navigation": {
     "accueil": "Accueil",

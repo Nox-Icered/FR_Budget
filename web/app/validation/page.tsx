@@ -1,5 +1,7 @@
 import { texte, nombre } from "../../lib/textes";
 import { lire, type Chiffrage, type Comparaison, type Levier } from "../../lib/donnees";
+import { region } from "../../lib/region";
+
 
 export default function Validation() {
   const leviers = lire<Levier[]>("registre-leviers.json");
@@ -11,7 +13,7 @@ export default function Validation() {
     <>
       <h1>{texte("validation.titre")}</h1>
       <p>{texte("validation.intro")}</p>
-      <div className="defilement">
+      <div className="defilement" {...region(texte("validation.titre"))}>
         <table>
         <thead>
           <tr>
@@ -31,7 +33,7 @@ export default function Validation() {
         </div>
       <h2>{texte("validation.comparaisons_titre")}</h2>
       <p>{texte("validation.comparaisons_intro", { tolerance: nombre(tolerance) })}</p>
-      <div className="defilement">
+      <div className="defilement" {...region(texte("validation.comparaisons_titre"))}>
         <table>
           <thead>
             <tr>
@@ -60,7 +62,7 @@ export default function Validation() {
         </table>
       </div>
       <h2>{texte("validation.references_titre")}</h2>
-      <div className="defilement">
+      <div className="defilement" {...region(texte("validation.references_titre"))}>
         <table>
         <thead>
           <tr>

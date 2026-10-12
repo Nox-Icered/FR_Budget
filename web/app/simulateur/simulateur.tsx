@@ -1,11 +1,12 @@
 "use client";
 // Simulateur : le calcul se fait dans le navigateur ; rien n'est envoyé ni enregistré.
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { texte, nombre } from "../../lib/textes";
 import type {
   CatalogueCreditsMissions,
   CatalogueDepensesFiscales,
   ReponsesUnitaires,
+  Version,
 } from "../../lib/donnees";
 import { calculer } from "../../lib/scenario";
 import { mesuresDepensesFiscales } from "../../lib/depenses-fiscales";
@@ -13,6 +14,17 @@ import { ReglagesDepensesFiscales } from "./depenses-fiscales";
 import { mesuresCreditsMissions } from "../../lib/credits-missions";
 import { ReglagesCreditsMissions } from "./credits-missions";
 import { GraphiqueDette } from "../baseline/graphique";
+import {
+  LEVIERS_REMUNERATIONS,
+  LEVIERS_SOLIDARITE,
+  MISSION_SOLIDARITE,
+  decoder,
+  empreinteVersion,
+  encoder,
+  problemes,
+  type EtatScenario,
+} from "../../lib/etat";
+import { CopierLien, Exports } from "../partage/actions";
 
 // Ordre d'affichage et pas de réglage de chaque levier (en points ou en centimes par litre).
 // Les bornes du curseur sont arrondies vers l'intérieur au pas, pour que 0 reste sur la grille.
@@ -35,12 +47,6 @@ const LEVIERS: { id: string; pas: number }[] = [
   { id: "ir_seuils_bareme", pas: 0.1 },
   { id: "prime_activite_pente", pas: 0.1 },
 ];
-// Leviers dont la combinaison avec les crédits des missions est refusée par le moteur
-// (les crédits des missions contiennent les rémunérations de l'État).
-const LEVIERS_REMUNERATIONS = ["remunerations_point_indice", "remunerations_effectifs"];
-// Leviers refusés par le moteur avec la mission qui finance l'AAH et la prime d'activité.
-const LEVIERS_SOLIDARITE = ["indexation_pensions_prestations", "prime_activite_pente"];
-const MISSION_SOLIDARITE = "solidarite_insertion_et_egalite_des_chances";
 const ANNEES_AFFICHEES = [2027, 2030, 2035, 2040, 2046];
 
 export function Simulateur({
@@ -48,11 +54,13 @@ export function Simulateur({
   catalogue,
   missions,
   raccord,
+  version,
 }: {
   donnees: ReponsesUnitaires;
   catalogue: CatalogueDepensesFiscales;
   missions: CatalogueCreditsMissions;
   raccord: number;
+  version: Version;
 }) {
   const leviers = LEVIERS.filter((l) => l.id in donnees.leviers);
   const annees = Object.keys(donnees.leviers[leviers[0].id].reponses).map(Number);
@@ -64,6 +72,40 @@ export function Simulateur({
   const [parMission, setParMission] = useState<Record<string, number>>({});
   const [annee, setAnnee] = useState(annees[0]);
   const idBase = useId();
+  // Lecture du lien partagé au chargement, puis l'adresse suit les réglages (sans historique).
+  const [lu, setLu] = useState(false);
+  const [alerte, setAlerte] = useState("");
+  const empreinte = empreinteVersion(version);
+  const etat: EtatScenario = {
+    annee,
+    leviers: valeurs,
+    parImpot,
+    parDepense,
+    parMission,
+    version: empreinte,
+  };
+  useEffect(() => {
+    const recherche = window.location.search;
+    if (recherche) {
+      const lien = decoder(recherche);
+      if (!lien) setAlerte(texte("partage.lien_illisible"));
+      else if (problemes(lien, donnees, catalogue, missions).length > 0)
+        setAlerte(texte("partage.lien_invalide"));
+      else {
+        setValeurs((v) => ({ ...Object.fromEntries(Object.keys(v).map((k) => [k, 0])), ...lien.leviers }));
+        setParImpot(lien.parImpot);
+        setParDepense(lien.parDepense);
+        setParMission(lien.parMission);
+        setAnnee(lien.annee);
+        if (lien.version && lien.version !== empreinte) setAlerte(texte("partage.autre_version"));
+      }
+    }
+    setLu(true);
+  }, [donnees, catalogue, missions, empreinte]);
+  const adresse = encoder(etat);
+  useEffect(() => {
+    if (lu) window.history.replaceState(null, "", `?${adresse}`);
+  }, [lu, adresse]);
   const remunerationsReglees = LEVIERS_REMUNERATIONS.some((id) => (valeurs[id] ?? 0) !== 0);
   const missionsReglees = Object.values(parMission).some((v) => v !== 0);
   const indexationReglee = LEVIERS_SOLIDARITE.some((id) => (valeurs[id] ?? 0) !== 0);
@@ -89,6 +131,11 @@ export function Simulateur({
 
   return (
     <>
+      {alerte && (
+        <p className="avertissement" role="alert">
+          {alerte}
+        </p>
+      )}
       <fieldset className="reglages">
         <legend>{texte("simulateur.mesures")}</legend>
         {leviers.map((l) => {
@@ -219,6 +266,16 @@ export function Simulateur({
         </table>
       </div>
       <p className="source">{texte("simulateur.unite")}</p>
+      <div className="actions">
+        <CopierLien />
+        <Exports
+          scenarios={[{ nom: texte("partage.scenario"), etat, lignes }]}
+          version={version}
+          nomFichier="scenario"
+        />
+        <a href="/comparaison/">{texte("partage.lien_comparaison")}</a>
+      </div>
+      <p className="source">{texte("partage.explication")}</p>
     </>
   );
 }

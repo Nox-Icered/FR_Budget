@@ -11,7 +11,8 @@
     "hypotheses": "Hypothèses",
     "validation": "Validation",
     "baseline": "Trajectoire sans réforme",
-    "simulateur": "Simulateur"
+    "simulateur": "Simulateur",
+    "comparaison": "Comparer"
   },
   "accueil": {
     "titre": "Les comptes des administrations publiques",
@@ -254,5 +255,27 @@
     "methode_ir": "Impôt sur le revenu : chaque année, les seuils du barème sont en général relevés comme l'inflation. Les relever de 1 % de moins rapporte {rendement} milliards d'euros, d'après le chiffrage de l'administration pour le projet de loi de finances pour 2025 ; un calcul à partir des statistiques de l'impôt par décile donne un montant plus faible, retenu comme borne basse.",
     "limite_ir": "Le rendement repose sur un seul chiffrage de l'administration, confirmé par celui du gel de 2026. Il ne tient pas compte des changements de comportement, ni des seuils sociaux et locaux qui suivent le barème.",
     "limite_remunerations": "Le coût est estimé à partir de la masse salariale des administrations publiques et de la part du traitement indiciaire dans le salaire des fonctionnaires ; il s'écarte des chiffrages officiels par fonction publique (voir la page Validation). Une baisse des effectifs ne tient compte ni des allocations chômage ni des services rendus."
+  },
+  "partage": {
+    "scenario": "Scénario",
+    "copier_lien": "Copier le lien de ce scénario",
+    "lien_copie": "Lien copié.",
+    "lien_non_copie": "Copie impossible : copiez l'adresse de la page.",
+    "export_csv": "Télécharger en CSV",
+    "export_json": "Télécharger en JSON",
+    "lien_comparaison": "Comparer avec d'autres scénarios",
+    "lien_illisible": "Ce lien est illisible : le scénario n'a pas été chargé.",
+    "lien_invalide": "Ce lien contient un réglage inconnu, hors des bornes ou une combinaison refusée (double compte) : le scénario n'a pas été chargé.",
+    "autre_version": "Ce lien a été créé avec une autre version du modèle ou des données : le résultat peut différer de celui vu à l'origine.",
+    "explication": "Le lien contient les réglages du scénario et la version du modèle. Il n'est enregistré nulle part : le calcul se refait dans votre navigateur. Les exports donnent toutes les années, en points de PIB, avec la fourchette basse et haute."
+  },
+  "comparaison": {
+    "titre": "Comparer des scénarios",
+    "intro": "Collez de 2 à 3 liens copiés depuis le simulateur. Les résultats s'affichent côte à côte, chacun avec sa fourchette.",
+    "liens": "Liens des scénarios",
+    "nom": "Scénario {numero}",
+    "exemple": "Lien copié depuis le simulateur",
+    "ouvrir": "Ouvrir dans le simulateur",
+    "deux_au_moins": "Collez au moins deux liens valides pour afficher la comparaison."
   }
 }

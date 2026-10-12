@@ -400,3 +400,15 @@ def cout_un_point() -> Fourchette:
         for f in FOYERS
     ]
     return encadrer(float(np.mean(variantes)), variantes)
+
+
+def part_effet_premiere_annee() -> float:
+    """Part du coût net en année pleine qui porte sur l'année d'entrée en vigueur.
+
+    Les pensions sont revalorisées en janvier, la plupart des prestations en avril : la
+    première année ne compte que les mois qui suivent la revalorisation de chaque bloc.
+    """
+    blocs = tuple(BLOCS)
+    premiere = cout_mesure(1 / POURCENT, ANNEE_REFERENCE, blocs, NET_TOTAL)
+    pleine = cout_mesure(1 / POURCENT, ANNEE_REFERENCE, blocs, NET_TOTAL, premiere_annee=False)
+    return premiere / pleine

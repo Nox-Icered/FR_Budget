@@ -11,6 +11,7 @@ from fr_budget.scenario import (
     Mesure,
     bornes_levier,
     effet_brut_unitaire,
+    facteur_premiere_annee,
     levier_credits_mission,
     levier_registre,
     rendement_unitaire,
@@ -54,5 +55,23 @@ def test_combinaison_avec_une_autre_mission_admise() -> None:
         [
             Mesure(LEVIER_INDEXATION, -1.0, 2027),
             Mesure(levier_credits_mission("justice"), -5.0, 2027),
+        ]
+    )
+
+
+def test_premiere_annee_partielle() -> None:
+    """Les prestations revalorisées en avril ne comptent que neuf mois la première année."""
+    assert 0.9 < facteur_premiere_annee(LEVIER_INDEXATION) < 1.0
+    lignes = {a.annee: a for a in scenario([Mesure(LEVIER_INDEXATION, -1.0, 2027)])}
+    premiere = lignes[2027].ecart_solde_primaire.central
+    suivante = lignes[2028].ecart_solde_primaire.central
+    assert 0 < premiere < suivante
+
+
+def test_mesure_a_zero_ne_bloque_pas() -> None:
+    scenario(
+        [
+            Mesure(LEVIER_INDEXATION, 0.0, 2027),
+            Mesure(levier_credits_mission(MISSION_SOLIDARITE), -5.0, 2027),
         ]
     )

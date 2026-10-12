@@ -67,7 +67,7 @@ Le levier ne peut pas être combiné avec les crédits de la mission « Solidari
   - net des prélèvements sociaux : 3,49 ;
   - net de l'impôt sur le revenu en plus : 3,01 (2,96 à 3,07).
 
-  L'effet dans le scénario est moins le coût net.
+  L'effet dans le scénario est moins le coût net. L'année d'entrée en vigueur n'en compte que 93,4 % : les prestations revalorisées en avril n'y pèsent que neuf mois (`scenario.facteur_premiere_annee`, ajouté après la revue de la PR).
 
 ## 4. Données
 
@@ -120,4 +120,5 @@ Le levier reste en bêta. Les références viennent toutes du Gouvernement ou du
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-12 | Revue de la PR : effet de la première année réduit aux mois qui suivent la revalorisation ; une mesure à zéro ne bloque plus de combinaison | aucun test de validation (ils portaient déjà sur la première année) |
 | 2026-10-12 | Création du levier : extraction des comptes de la protection sociale et de la distribution des pensions de la DREES | 4 nouvelles références de validation, 2 dans la tolérance ; tableau : 36 sur 50 |

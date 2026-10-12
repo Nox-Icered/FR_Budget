@@ -410,12 +410,24 @@ def trajectoire_avec_effet(
     return lignes
 
 
+def facteur_premiere_annee(levier: str) -> float:
+    """Part de l'effet en année pleine acquise l'année d'entrée en vigueur.
+
+    Indexation : les prestations revalorisées en avril ne comptent que neuf mois la première
+    année (``fr_budget.agrege.indexation.part_effet_premiere_annee``). Autres leviers : 1.
+    """
+    if levier == LEVIER_INDEXATION:
+        return indexation.part_effet_premiere_annee()
+    return 1.0
+
+
 def _effets_par_annee(mesures: Iterable[Mesure], borne: str) -> dict[int, float]:
     effets: dict[int, float] = {}
     for m in mesures:
         valeur = getattr(effet_solde(m), borne)
         for annee in range(m.annee, ANNEE_FIN + 1):
-            effets[annee] = effets.get(annee, 0.0) + valeur
+            facteur = facteur_premiere_annee(m.levier) if annee == m.annee else 1.0
+            effets[annee] = effets.get(annee, 0.0) + valeur * facteur
     return effets
 
 
@@ -454,16 +466,18 @@ def verifier_double_compte(mesures: Sequence[Mesure]) -> None:
         msg = "double compte : un même impôt est visé par deux mesures"
         raise ValueError(msg)
     _verifier_credits(mesures)
-    remunerations_reglees = any(m.levier in LEVIERS_REMUNERATIONS for m in mesures)
+    # Une mesure à zéro ne change rien : elle ne bloque aucune combinaison.
+    reglees = [m for m in mesures if m.valeur != 0]
+    remunerations_reglees = any(m.levier in LEVIERS_REMUNERATIONS for m in reglees)
     credits_regles = any(
-        m.levier == LEVIER_CREDITS_UNITE or mission_du_levier(m.levier) is not None for m in mesures
+        m.levier == LEVIER_CREDITS_UNITE or mission_du_levier(m.levier) is not None for m in reglees
     )
     if remunerations_reglees and credits_regles:
         # Les crédits de personnel de l'État sont dans les missions (option 4 (a)).
         msg = "double compte : les crédits des missions contiennent les rémunérations de l'État"
         raise ValueError(msg)
-    indexation_reglee = any(m.levier == LEVIER_INDEXATION for m in mesures)
-    solidarite_reglee = any(m.levier == levier_credits_mission(MISSION_SOLIDARITE) for m in mesures)
+    indexation_reglee = any(m.levier == LEVIER_INDEXATION for m in reglees)
+    solidarite_reglee = any(m.levier == levier_credits_mission(MISSION_SOLIDARITE) for m in reglees)
     if indexation_reglee and solidarite_reglee:
         msg = (
             "double compte : la mission « Solidarité, insertion et égalité des chances » "

@@ -75,10 +75,10 @@ leviers:
 
   - id: minima_prime_activite
     libelle: Minima sociaux et prime d'activité
-    parametres_reglables: [Montants, Barèmes]
-    moteur: openfisca
-    references_visees: [DREES, CNAF]
-    statut: non_publie
+    parametres_reglables: [Fraction des revenus professionnels prise en compte dans la prime d'activité]
+    moteur: agrege
+    references_visees: [Chiffrages de l'administration repris par le Sénat (PLF 2026), DREES, CNAF]
+    statut: beta
 
   - id: dotations_collectivites
     libelle: Dotations de l'État aux collectivités

@@ -71,6 +71,7 @@ DATE_NAISSANCE = "1950-01-01"
 
 PENSIONS = "pensions"
 FAMILLE = "famille"
+AAH = "aah"
 RETOUR_PENSION = "pension"
 RETOUR_CRDS = "crds"
 AUCUN_RETOUR = "aucun"
@@ -146,7 +147,7 @@ BLOCS: dict[str, Bloc] = {
         date=_INVALIDITE + "pensions_invalidite.revalorisations_invalidite",
         retour=RETOUR_PENSION,
     ),
-    "aah": Bloc(codes=("E11-12.2.11",), date=_INVALIDITE + "aah.montant", retour=AUCUN_RETOUR),
+    AAH: Bloc(codes=("E11-12.2.11",), date=_INVALIDITE + "aah.montant", retour=AUCUN_RETOUR),
     "asi": Bloc(codes=("E11-12.2.13",), date=_INVALIDITE + "asi.montant_seul", retour=AUCUN_RETOUR),
     FAMILLE: Bloc(
         codes=(

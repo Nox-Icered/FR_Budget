@@ -537,3 +537,19 @@ datasets:
     empreinte_sha256: 871f14090a9bea2aae1dbf8f49d9f85e323a4c1fa7624d0bcea9027507f7e7bf
     methode_transformation: aucune ; chiffrage du gel du barème (pages 149 et 150) saisi dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-12
+
+  - id: senat_note_presentation_siec_plf2026_pdf
+    source: senat_note_presentation_siec_plf2026
+    description: Note de présentation de la mission « Solidarité, insertion et égalité des chances » du PLF 2026 (PDF, 51 pages)
+    fichier: data/raw/prime_activite/senat_note_presentation_siec_plf2026.pdf
+    empreinte_sha256: c77930389bce252b74496580c634ac2d00b43b75c1e65b46a69c830b1f3af818
+    methode_transformation: aucune ; valeurs des pages 14 à 16 saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-12
+
+  - id: senat_rapport_special_siec_plf2026_pdf
+    source: senat_rapport_special_siec_plf2026
+    description: Rapport spécial du Sénat sur la mission « Solidarité, insertion et égalité des chances » du PLF 2026 (PDF, 69 pages)
+    fichier: data/raw/prime_activite/senat_rapport_special_siec_plf2026.pdf
+    empreinte_sha256: 10b0fb3da7054d8b6ff01c0c9517349da743b189927d281e686932da96f9d1c6
+    methode_transformation: aucune ; valeurs des pages 27 et 55 saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-12

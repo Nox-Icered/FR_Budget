@@ -33,12 +33,13 @@ const LEVIERS: { id: string; pas: number }[] = [
   { id: "cotisations_patronales_taux", pas: 0.1 },
   { id: "allegements_generaux", pas: 1 },
   { id: "ir_seuils_bareme", pas: 0.1 },
+  { id: "prime_activite_pente", pas: 0.1 },
 ];
 // Leviers dont la combinaison avec les crédits des missions est refusée par le moteur
 // (les crédits des missions contiennent les rémunérations de l'État).
 const LEVIERS_REMUNERATIONS = ["remunerations_point_indice", "remunerations_effectifs"];
-// Levier refusé par le moteur avec la mission qui finance l'AAH et la prime d'activité.
-const LEVIER_INDEXATION = "indexation_pensions_prestations";
+// Leviers refusés par le moteur avec la mission qui finance l'AAH et la prime d'activité.
+const LEVIERS_SOLIDARITE = ["indexation_pensions_prestations", "prime_activite_pente"];
 const MISSION_SOLIDARITE = "solidarite_insertion_et_egalite_des_chances";
 const ANNEES_AFFICHEES = [2027, 2030, 2035, 2040, 2046];
 
@@ -65,7 +66,7 @@ export function Simulateur({
   const idBase = useId();
   const remunerationsReglees = LEVIERS_REMUNERATIONS.some((id) => (valeurs[id] ?? 0) !== 0);
   const missionsReglees = Object.values(parMission).some((v) => v !== 0);
-  const indexationReglee = (valeurs[LEVIER_INDEXATION] ?? 0) !== 0;
+  const indexationReglee = LEVIERS_SOLIDARITE.some((id) => (valeurs[id] ?? 0) !== 0);
   const solidariteReglee = (parMission[MISSION_SOLIDARITE] ?? 0) !== 0;
   const lignes = calculer(
     donnees,
@@ -94,7 +95,7 @@ export function Simulateur({
           const levier = donnees.leviers[l.id];
           const id = `${idBase}-${l.id}`;
           const bloqueRemunerations = missionsReglees && LEVIERS_REMUNERATIONS.includes(l.id);
-          const bloqueIndexation = solidariteReglee && l.id === LEVIER_INDEXATION;
+          const bloqueIndexation = solidariteReglee && LEVIERS_SOLIDARITE.includes(l.id);
           const bloque = bloqueRemunerations || bloqueIndexation;
           return (
             <div key={l.id} className="reglage">

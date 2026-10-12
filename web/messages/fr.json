@@ -184,6 +184,10 @@
         "libelle": "Allègements généraux de cotisations patronales ({reference} milliards d'euros en {annee})",
         "valeur": "{valeur} %"
       },
+      "prime_activite_pente": {
+        "libelle": "Part des revenus d'activité prise en compte dans le calcul de la prime d'activité ({reference} % en {annee})",
+        "valeur": "{valeur} pt"
+      },
       "ir_seuils_bareme": {
         "libelle": "Revalorisation des seuils du barème de l'impôt sur le revenu, par rapport à l'inflation (impôt au barème de {reference} milliards d'euros sur les revenus de 2024)",
         "valeur": "{valeur} %"
@@ -230,7 +234,7 @@
       "mission": "{mission} ({credits} milliards d'euros demandés pour {annee})",
       "valeur": "{valeur} %",
       "bloque": "Réglage impossible tant que le point d'indice ou les effectifs sont modifiés : les crédits des missions contiennent déjà les rémunérations de l'État.",
-      "bloque_indexation": "Réglage impossible tant que la revalorisation des pensions et prestations est modifiée : cette mission finance l'allocation aux adultes handicapés et la prime d'activité."
+      "bloque_indexation": "Réglage impossible tant que la revalorisation des pensions et prestations ou la prime d'activité sont modifiées : cette mission finance l'allocation aux adultes handicapés et la prime d'activité."
     },
     "methode_credits_missions": "Crédits des missions : le changement de solde d'une variation de x % est x % des crédits de paiement demandés pour {annee} dans le projet de loi de finances, rapporté au PIB de la même année. La fourchette reprend les écarts constatés de 2023 à 2025 entre les crédits votés et les dépenses réellement faites.",
     "limite_credits_missions": "Un euro de crédit en moins compte pour un euro de solde en plus, même quand il finance un autre organisme public (université, opérateur, Sécurité sociale) qui pourrait ne pas réduire sa dépense. Les crédits de personnel restent dans chaque mission.",
@@ -239,6 +243,8 @@
     "bloque_remunerations": "Réglage impossible tant que des crédits de missions sont modifiés : ces crédits contiennent déjà les rémunérations de l'État.",
     "methode_remunerations": "Rémunérations publiques : augmenter de 1 % la valeur du point d'indice coûte {brut_point} milliards d'euros aux employeurs publics, mais {net_point} milliard au solde public, car les cotisations, la CSG et l'impôt payés sur cette hausse reviennent aux administrations publiques. Pour 1 % d'effectifs en plus : {brut_effectifs} milliards brut, {net_effectifs} milliards net.",
     "bloque_indexation": "Réglage impossible tant que les crédits de la mission « Solidarité, insertion et égalité des chances » sont modifiés : elle finance l'allocation aux adultes handicapés et la prime d'activité.",
+    "methode_prime_activite": "Prime d'activité : elle augmente avec les revenus d'activité, mais moins vite qu'eux ; la part des revenus prise en compte est de {pente} %. Augmenter cette part d'un point coûte {cout} milliard d'euros par an, d'après le chiffrage de l'administration pour la baisse de 1,15 point de 2025.",
+    "limite_prime_activite": "Ce rendement reprend un seul chiffrage de l'administration, faute de données publiques sur les revenus des allocataires ; la dépense constatée en 2025 a été plus faible que ce chiffrage (voir la page Validation). Les montants forfaitaires du RSA et de la prime d'activité ne sont pas proposés ici : leur revalorisation passe par le curseur de revalorisation des prestations.",
     "methode_indexation": "Revalorisation des pensions et prestations : chaque année, la loi revalorise les pensions de base (en janvier) et la plupart des prestations sociales (en avril) selon l'inflation. Revaloriser d'un point de plus coûte {brut} milliards d'euros par an, mais {net} milliards au solde public, car la CSG, la CRDS, la CASA et l'impôt sur le revenu payés sur les pensions reviennent aux administrations publiques. L'écart choisi s'applique une fois ; le niveau des prestations reste ensuite décalé d'autant. Les retraites complémentaires (Agirc-Arrco), décidées par les partenaires sociaux, les allocations chômage et les aides au logement ne sont pas comprises.",
     "limite_indexation": "Les montants versés sont ceux de 2024, tenus constants en part du PIB. Les retours de prélèvements sont calculés pour des retraités vivant seuls ou en couple, avec la distribution des pensions de 2020. Le gel des plafonds de ressources, qui réduit le nombre de bénéficiaires, n'est pas compté. Pour les prestations familiales, le modèle reste en dessous des chiffrages officiels (voir la page Validation).",
     "methode_csg": "CSG : un point de taux rapporte le produit constaté de la CSG en {annee} divisé par son taux, soit {activite} milliards d'euros sur les revenus d'activité, {retraites} milliards sur les pensions de retraite au taux plein et {capital} milliards sur les revenus du capital. Pour les retraites, la part prélevée au taux plein est estimée avec OpenFisca à partir de la distribution des pensions publiée par la DREES.",

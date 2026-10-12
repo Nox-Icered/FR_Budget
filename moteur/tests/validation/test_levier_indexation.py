@@ -12,7 +12,9 @@ Références (``registres/references/chiffrages.yaml``) :
   base en 2027, 1,5 Md€ (rapport du Sénat, page 101) ;
 - PLFSS 2027, annexe, page 134 : maintien des prestations familiales à leur niveau de 2026,
   0,5 Md€ en 2027 ; revalorisation évitée : inflation hors tabac prévue pour 2026 (2,1 %,
-  page 127).
+  page 127) ;
+- rapport spécial du Sénat sur la mission « Solidarité, insertion et égalité des chances » du
+  PLF 2026, page 27 : « année blanche » de 2026 sur l'AAH, 122,4 M€ (référence en M€, convertie).
 
 Convention commune (celle des PLFSS : « nets des effets CSG et CASA ») : le modèle est comparé
 net des prélèvements sociaux (CSG, CRDS, CASA), avant impôt sur le revenu, pour la première
@@ -25,6 +27,7 @@ from __future__ import annotations
 import pytest
 
 from fr_budget.agrege.indexation import (
+    AAH,
     BLOCS,
     FAMILLE,
     NET_PRELEVEMENTS_SOCIAUX,
@@ -43,8 +46,11 @@ MESURES = {
     "indexation_gel_2026_familiales": (INFLATION_2025, 2026, (FAMILLE,)),
     "indexation_sous_indexation_0_5_2027": (None, 2027, (PENSIONS,)),
     "indexation_gel_familiales_2027": (INFLATION_2026, 2027, (FAMILLE,)),
+    "indexation_gel_aah_2026": (INFLATION_2025, 2026, (AAH,)),
 }
 SOUS_INDEXATION = 0.005
+MILLIONS_PAR_MILLIARD = 1000.0
+EN_MILLIONS = ("indexation_gel_aah_2026",)
 
 
 def taux_mesure(inflation: str | None) -> float:
@@ -56,7 +62,7 @@ def taux_mesure(inflation: str | None) -> float:
 def test_rendement_premiere_annee(reference: str) -> None:
     inflation, annee, blocs = MESURES[reference]
     modele = cout_mesure(taux_mesure(inflation), annee, blocs, NET_PRELEVEMENTS_SOCIAUX)
-    valeur = chiffrage(reference)
+    valeur = chiffrage(reference) / (MILLIONS_PAR_MILLIARD if reference in EN_MILLIONS else 1)
     ecart = (modele - valeur) / valeur
     assert abs(ecart) <= TOLERANCE, (
         f"{reference} : modèle {modele:.2f} Md€, référence {valeur:.2f} Md€, "

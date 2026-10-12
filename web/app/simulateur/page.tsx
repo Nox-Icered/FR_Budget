@@ -88,6 +88,12 @@ export default function PageSimulateur() {
           rendement: deuxDecimales(-donnees.leviers.ir_seuils_bareme.rendement_unitaire),
         })}
       </p>
+      <p>
+        {texte("simulateur.methode_prime_activite", {
+          pente: deuxDecimales(donnees.leviers.prime_activite_pente.taux_reference),
+          cout: deuxDecimales(-donnees.leviers.prime_activite_pente.rendement_unitaire),
+        })}
+      </p>
       <ul>
         <li>{texte("simulateur.limite_comportement")}</li>
         <li>{texte("simulateur.limite_croissance")}</li>
@@ -102,6 +108,7 @@ export default function PageSimulateur() {
         <li>{texte("simulateur.limite_csg")}</li>
         <li>{texte("simulateur.limite_cotisations")}</li>
         <li>{texte("simulateur.limite_ir")}</li>
+        <li>{texte("simulateur.limite_prime_activite")}</li>
       </ul>
       <p>
         <a href="/validation/">{texte("simulateur.lien_validation")}</a>

@@ -195,3 +195,55 @@ def test_sources_des_effets_au_registre() -> None:
     for levier in description["leviers"]:
         assert levier["sources"]
         assert set(levier["sources"]) <= connues
+
+
+def test_scenario_des_menages_types(client: TestClient) -> None:
+    corps = {"mesures": {"csg_activite": 1, "ir_seuils_bareme": -1, "tva_taux_normal": 1}}
+    reponse = client.post("/menages-types/scenario", json=corps)
+    assert reponse.status_code == 200
+    resultat = reponse.json()
+    assert resultat["mesures"] == {"csg_activite": 1, "ir_seuils_bareme": -1}
+    # TVA : levier du simulateur sans effet direct sur la cascade, signalé comme écarté.
+    assert resultat["ignorees"] == ["tva_taux_normal"]
+    base = {m["id"]: m for m in menages_types()["menages"]}
+    cadre = resultat["menages"]["cadre_p95"]
+    assert cadre["net_apres_impot"] < base["cadre_p95"]["net_apres_impot"]
+
+
+@pytest.mark.parametrize(
+    ("mesures", "incidence"),
+    [
+        ({"csg_activite": 50}, "comptable"),
+        ({"inconnu": 1}, "comptable"),
+        ({"csg_activite": 1}, "salaire"),
+    ],
+    ids=["hors_bornes", "inconnu", "salaire_sans_cotisation"],
+)
+def test_scenario_refuse(client: TestClient, mesures: dict[str, float], incidence: str) -> None:
+    corps = {"mesures": mesures, "incidence": incidence}
+    reponse = client.post("/menages-types/scenario", json=corps)
+    assert reponse.status_code == 422
+
+
+def test_mon_menage_avec_scenario(client: TestClient, caplog: pytest.LogCaptureFixture) -> None:
+    """Ménage saisi avant et après un scénario ; rien de la saisie dans les journaux."""
+    corps = {**MENAGE_SAISI, "scenario": {"mesures": {"csg_activite": 1}}}
+    with caplog.at_level(logging.DEBUG):
+        reponse = client.post("/mon-menage", json=corps)
+    assert reponse.status_code == 200
+    resultat = reponse.json()
+    apres = resultat["scenario"]["apres"]
+    assert apres["net_avant_impot"] < resultat["net_avant_impot"]
+    assert resultat["scenario"]["incidence"] == "comptable"
+    for valeur in ("2345", "1432", "1984"):
+        assert valeur not in caplog.text
+
+
+@pytest.mark.parametrize(
+    "scenario",
+    [{"mesures": {"csg_activite": 50}}, {"mesures": {"csg_activite": 1}, "incidence": "salaire"}],
+    ids=["hors_bornes", "salaire_sans_cotisation"],
+)
+def test_mon_menage_scenario_refuse(client: TestClient, scenario: dict[str, object]) -> None:
+    corps = {**MENAGE_SAISI, "scenario": scenario}
+    assert client.post("/mon-menage", json=corps).status_code == 422

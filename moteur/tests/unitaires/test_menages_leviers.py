@@ -269,3 +269,58 @@ def test_incidence_mesure_nulle() -> None:
 def test_incidence_salaire_refusee_hors_cotisations() -> None:
     with pytest.raises(ValueError, match="pas de lecture répercutée"):
         lv.cascade_reformee("celibataire_median", "csg_activite", 1.0, ANNEE, lv.SALAIRE)
+
+
+# Scénario : plusieurs leviers à la fois.
+
+
+def test_mesures_du_scenario() -> None:
+    """Valeurs nulles et leviers sans effet direct écartés ; levier inconnu refusé."""
+    assert lv.mesures({"csg_activite": 1.0, "tva_taux_normal": 2.0, "ir_seuils_bareme": 0.0}) == (
+        ("csg_activite", 1.0),
+    )
+    with pytest.raises(ValueError, match="inconnus"):
+        lv.mesures({"inconnu": 1.0})
+    # Une mission du budget de l'État prise à part : levier du simulateur, sans effet direct.
+    assert lv.mesures({f"{scenario.PREFIXE_CREDITS_MISSION}defense": 5.0}) == ()
+
+
+def test_scenario_vide() -> None:
+    assert lv.cascade_scenario("celibataire_median", ()) == t.cascade_annuelle("celibataire_median")
+
+
+def test_scenario_de_deux_leviers_independants() -> None:
+    """CSG d'un point et cotisation patronale d'un point (lecture comptable) : le coût suit la
+    cotisation seule, le net suit la CSG seule."""
+    scenario_ = lv.mesures({"csg_activite": 1.0, scenario.LEVIER_COTISATIONS_TAUX: 1.0})
+    combine = lv.cascade_scenario("celibataire_median", scenario_)
+    csg = lv.cascade_reformee("celibataire_median", "csg_activite", 1.0)
+    cotisation = lv.cascade_reformee("celibataire_median", scenario.LEVIER_COTISATIONS_TAUX, 1.0)
+    assert combine is not None
+    assert csg is not None
+    assert cotisation is not None
+    assert combine.cout_employeur == pytest.approx(cotisation.cout_employeur, abs=1)
+    assert combine.net_apres_impot == pytest.approx(csg.net_apres_impot, abs=1)
+
+
+def test_scenario_non_chiffre_si_une_mesure_ne_l_est_pas() -> None:
+    scenario_ = lv.mesures({"csg_retraites": 1.0, scenario.LEVIER_INDEXATION: 1.0})
+    assert lv.cascade_scenario("retraite_seul", scenario_) is None
+
+
+def test_scenario_profil_saisi_comme_le_menage_type() -> None:
+    """Même salaire saisi que le célibataire au SMIC : même cascade sous le scénario."""
+    profil = t.Profil(
+        "Saisi", (t.Adulte("1995-01-01", t.SMIC, montant_mensuel=t.brut_mensuel(t.SMIC)),)
+    )
+    scenario_ = lv.mesures({"csg_activite": 1.0, scenario.LEVIER_PA_PENTE: 2.0})
+    assert lv.cascade_profil_scenario(profil, scenario_) == pytest.approx(
+        lv.cascade_scenario("celibataire_smic", scenario_)
+    )
+
+
+def test_scenario_incidence_salaire_sans_cotisation_refusee() -> None:
+    with pytest.raises(ValueError, match="pas de lecture répercutée"):
+        lv.cascade_scenario(
+            "celibataire_median", lv.mesures({"csg_activite": 1.0}), ANNEE, lv.SALAIRE
+        )

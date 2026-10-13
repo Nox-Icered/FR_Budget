@@ -217,6 +217,14 @@ class AdulteSaisiEntree(BaseModel):
     cadre: bool = False
 
 
+class MesuresEntree(BaseModel):
+    """Mesures d'un scénario (unités du simulateur) et lecture de l'incidence des cotisations
+    patronales."""
+
+    mesures: dict[str, float] = Field(default_factory=dict)
+    incidence: Literal["comptable", "salaire"] = "comptable"
+
+
 class MenageSaisiEntree(BaseModel):
     adultes: list[AdulteSaisiEntree] = Field(
         min_length=1, max_length=module_personnalise.ADULTES_MAX
@@ -224,6 +232,38 @@ class MenageSaisiEntree(BaseModel):
     annees_naissance_enfants: list[int] = Field(
         default_factory=list, max_length=module_personnalise.ENFANTS_MAX
     )
+    scenario: MesuresEntree | None = None
+    """Mesures à appliquer : la réponse donne alors la cascade après les mesures."""
+
+
+class MesuresInvalidesError(ValueError):
+    """Levier inconnu ou valeur hors de ses bornes."""
+
+
+def mesures_scenario(valeurs: dict[str, float]) -> module_leviers_menages.Mesures:
+    """Mesures du scénario, dans les bornes de chaque levier ; écarte les leviers sans effet
+    direct sur les ménages."""
+    for levier, valeur in valeurs.items():
+        try:
+            basse, haute = module_scenario.bornes_levier(levier)
+        except ValueError as erreur:
+            raise MesuresInvalidesError(levier) from erreur
+        if not basse <= valeur <= haute:
+            raise MesuresInvalidesError(levier)
+    try:
+        return module_leviers_menages.mesures(valeurs)
+    except ValueError as erreur:
+        raise MesuresInvalidesError(str(erreur)) from erreur
+
+
+def _verifier_scenario(entree: MesuresEntree) -> module_leviers_menages.Mesures:
+    """Mesures valides et lecture de l'incidence applicable (choix 44 de la fiche)."""
+    mesures = mesures_scenario(entree.mesures)
+    try:
+        module_leviers_menages.verifier_incidence_scenario(mesures, entree.incidence)
+    except ValueError as erreur:
+        raise MesuresInvalidesError(str(erreur)) from erreur
+    return mesures
 
 
 def mon_menage(entree: MenageSaisiEntree) -> dict[str, Any] | None:
@@ -241,15 +281,27 @@ def mon_menage(entree: MenageSaisiEntree) -> dict[str, Any] | None:
         tuple(entree.annees_naissance_enfants),
     )
     try:
-        cascade = module_personnalise.calculer(saisi)
+        profil = module_personnalise.profil(saisi)
     except module_personnalise.SaisieInvalideError:
         return None
-    return {
+    resultat: dict[str, Any] = {
         "unite": "euros par an",
         "annee_revenus": module_menages.ANNEE,
         "sources": SOURCES_MENAGES,
-        **_lignes_cascade(cascade),
+        **_lignes_cascade(module_menages.cascade_profil(profil)),
     }
+    if entree.scenario is not None:
+        mesures = _verifier_scenario(entree.scenario)
+        resultat["scenario"] = {
+            "mesures": dict(mesures),
+            "incidence": entree.scenario.incidence,
+            "apres": _lignes_ou_rien(
+                module_leviers_menages.cascade_profil_scenario(
+                    profil, mesures, module_menages.ANNEE, entree.scenario.incidence
+                )
+            ),
+        }
+    return resultat
 
 
 def menages_types() -> dict[str, Any]:
@@ -342,6 +394,26 @@ def effet_levier_menages(
             i: _lignes_ou_rien(
                 module_leviers_menages.cascade_reformee(
                     i, levier, valeur, module_menages.ANNEE, incidence
+                )
+            )
+            for i in module_menages.PROFILS
+        },
+    }
+
+
+def scenario_menages(entree: MesuresEntree) -> dict[str, Any]:
+    """Cascade de chaque ménage type sous toutes les mesures du scénario ; ``null`` quand
+    l'effet d'une mesure n'est pas chiffré pour un ménage."""
+    mesures = _verifier_scenario(entree)
+    return {
+        **_description_leviers_menages(),
+        "mesures": dict(mesures),
+        "ignorees": sorted(k for k, v in entree.mesures.items() if v and k not in dict(mesures)),
+        "incidence": entree.incidence,
+        "menages": {
+            i: _lignes_ou_rien(
+                module_leviers_menages.cascade_scenario(
+                    i, mesures, module_menages.ANNEE, entree.incidence
                 )
             )
             for i in module_menages.PROFILS
@@ -674,10 +746,22 @@ def creer_application() -> FastAPI:
             )
         return effet_levier_menages(levier, valeur, incidence)
 
+    @app.post("/menages-types/scenario")
+    def route_scenario_menages(entree: MesuresEntree) -> dict[str, Any]:
+        """Cascade des ménages types sous un scénario de plusieurs leviers."""
+        try:
+            return scenario_menages(entree)
+        except MesuresInvalidesError as erreur:
+            raise HTTPException(status_code=422, detail="mesure hors des bornes") from erreur
+
     @app.post("/mon-menage")
     def route_mon_menage(entree: MenageSaisiEntree) -> dict[str, Any]:
-        """Cascade d'un ménage saisi par l'utilisateur, sans stockage ni journal."""
-        resultat = mon_menage(entree)
+        """Cascade d'un ménage saisi par l'utilisateur, avant et, si un scénario est donné,
+        après ses mesures ; sans stockage ni journal."""
+        try:
+            resultat = mon_menage(entree)
+        except MesuresInvalidesError as erreur:
+            raise HTTPException(status_code=422, detail="mesure hors des bornes") from erreur
         if resultat is None:
             raise HTTPException(status_code=422, detail="saisie hors des bornes acceptées")
         return resultat

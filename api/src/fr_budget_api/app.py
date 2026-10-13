@@ -256,6 +256,16 @@ def mesures_scenario(valeurs: dict[str, float]) -> module_leviers_menages.Mesure
         raise MesuresInvalidesError(str(erreur)) from erreur
 
 
+def _verifier_scenario(entree: MesuresEntree) -> module_leviers_menages.Mesures:
+    """Mesures valides et lecture de l'incidence applicable (choix 44 de la fiche)."""
+    mesures = mesures_scenario(entree.mesures)
+    try:
+        module_leviers_menages.verifier_incidence_scenario(mesures, entree.incidence)
+    except ValueError as erreur:
+        raise MesuresInvalidesError(str(erreur)) from erreur
+    return mesures
+
+
 def mon_menage(entree: MenageSaisiEntree) -> dict[str, Any] | None:
     """Cascade du ménage saisi ; ``None`` si la saisie est hors des bornes du moteur.
 
@@ -281,7 +291,7 @@ def mon_menage(entree: MenageSaisiEntree) -> dict[str, Any] | None:
         **_lignes_cascade(module_menages.cascade_profil(profil)),
     }
     if entree.scenario is not None:
-        mesures = mesures_scenario(entree.scenario.mesures)
+        mesures = _verifier_scenario(entree.scenario)
         resultat["scenario"] = {
             "mesures": dict(mesures),
             "incidence": entree.scenario.incidence,
@@ -394,7 +404,7 @@ def effet_levier_menages(
 def scenario_menages(entree: MesuresEntree) -> dict[str, Any]:
     """Cascade de chaque ménage type sous toutes les mesures du scénario ; ``null`` quand
     l'effet d'une mesure n'est pas chiffré pour un ménage."""
-    mesures = mesures_scenario(entree.mesures)
+    mesures = _verifier_scenario(entree)
     return {
         **_description_leviers_menages(),
         "mesures": dict(mesures),

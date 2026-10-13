@@ -317,3 +317,10 @@ def test_scenario_profil_saisi_comme_le_menage_type() -> None:
     assert lv.cascade_profil_scenario(profil, scenario_) == pytest.approx(
         lv.cascade_scenario("celibataire_smic", scenario_)
     )
+
+
+def test_scenario_incidence_salaire_sans_cotisation_refusee() -> None:
+    with pytest.raises(ValueError, match="pas de lecture répercutée"):
+        lv.cascade_scenario(
+            "celibataire_median", lv.mesures({"csg_activite": 1.0}), ANNEE, lv.SALAIRE
+        )

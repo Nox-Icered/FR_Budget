@@ -211,10 +211,17 @@ def test_scenario_des_menages_types(client: TestClient) -> None:
 
 
 @pytest.mark.parametrize(
-    "mesures", [{"csg_activite": 50}, {"inconnu": 1}], ids=["hors_bornes", "inconnu"]
+    ("mesures", "incidence"),
+    [
+        ({"csg_activite": 50}, "comptable"),
+        ({"inconnu": 1}, "comptable"),
+        ({"csg_activite": 1}, "salaire"),
+    ],
+    ids=["hors_bornes", "inconnu", "salaire_sans_cotisation"],
 )
-def test_scenario_refuse(client: TestClient, mesures: dict[str, float]) -> None:
-    reponse = client.post("/menages-types/scenario", json={"mesures": mesures})
+def test_scenario_refuse(client: TestClient, mesures: dict[str, float], incidence: str) -> None:
+    corps = {"mesures": mesures, "incidence": incidence}
+    reponse = client.post("/menages-types/scenario", json=corps)
     assert reponse.status_code == 422
 
 
@@ -232,6 +239,11 @@ def test_mon_menage_avec_scenario(client: TestClient, caplog: pytest.LogCaptureF
         assert valeur not in caplog.text
 
 
-def test_mon_menage_scenario_hors_bornes(client: TestClient) -> None:
-    corps = {**MENAGE_SAISI, "scenario": {"mesures": {"csg_activite": 50}}}
+@pytest.mark.parametrize(
+    "scenario",
+    [{"mesures": {"csg_activite": 50}}, {"mesures": {"csg_activite": 1}, "incidence": "salaire"}],
+    ids=["hors_bornes", "salaire_sans_cotisation"],
+)
+def test_mon_menage_scenario_refuse(client: TestClient, scenario: dict[str, object]) -> None:
+    corps = {**MENAGE_SAISI, "scenario": scenario}
     assert client.post("/mon-menage", json=corps).status_code == 422

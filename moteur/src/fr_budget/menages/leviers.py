@@ -435,6 +435,16 @@ def _verifier_incidence(levier: str, incidence: str) -> None:
         raise ValueError(msg)
 
 
+def verifier_incidence_scenario(mesures_: Mesures, incidence: str) -> None:
+    """Lecture répercutée seulement si une mesure touche les cotisations patronales (choix 44)."""
+    if incidence not in INCIDENCES:
+        msg = f"incidence inconnue : {incidence}"
+        raise ValueError(msg)
+    if incidence == SALAIRE and not any(k in LEVIERS_INCIDENCE for k, _ in mesures_):
+        msg = "pas de lecture répercutée sur le salaire sans mesure sur les cotisations patronales"
+        raise ValueError(msg)
+
+
 def _chiffre_scenario(mesures_: Mesures, profil: types.Profil) -> bool:
     return all(chiffre(levier, profil) for levier, _ in mesures_)
 
@@ -457,9 +467,7 @@ def cascade_scenario(
 ) -> types.CascadeMenage | None:
     """Cascade du ménage type sous toutes les mesures du scénario ; ``None`` si l'effet d'une
     des mesures n'est pas chiffré pour ce ménage."""
-    if incidence not in INCIDENCES:
-        msg = f"incidence inconnue : {incidence}"
-        raise ValueError(msg)
+    verifier_incidence_scenario(mesures_, incidence)
     profil = types.PROFILS[identifiant]
     if not _chiffre_scenario(mesures_, profil):
         return None
@@ -477,9 +485,7 @@ def cascade_profil_scenario(
     incidence: str = COMPTABLE,
 ) -> types.CascadeMenage | None:
     """Même calcul pour un profil saisi, sans cache (règle 5)."""
-    if incidence not in INCIDENCES:
-        msg = f"incidence inconnue : {incidence}"
-        raise ValueError(msg)
+    verifier_incidence_scenario(mesures_, incidence)
     if not _chiffre_scenario(mesures_, profil):
         return None
     return _cascade(profil, mesures_, annee, incidence)

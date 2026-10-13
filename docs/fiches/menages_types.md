@@ -163,7 +163,7 @@ Les autres leviers n'ont pas d'effet direct sur la cascade (TVA et accises : con
 41. **Lecture répercutée.** Le salaire brut de chaque salarié est ajusté pour que son coût employeur annuel, sous la mesure, égale celui de la législation de référence (méthode de la sécante ; précision de 2 euros par an, car le coût calculé par OpenFisca avance par marches de moins d'un euro : taux de la réduction générale arrondi à quatre décimales, calcul en simple précision). Le salaire ajusté vaut pour toutes les années simulées, y compris 2024, dont les salaires servent de ressources aux prestations de 2025.
 42. **Plancher du SMIC.** Le salaire ne descend pas sous le SMIC mensuel à temps plein (paramètre d'OpenFisca), ni sous le salaire saisi s'il est déjà plus bas (temps partiel). Au SMIC, une hausse reste donc au coût employeur, comme en lecture comptable ; une baisse ou des allègements accrus peuvent, eux, relever le salaire.
 43. **Apprenti.** Son salaire est fixé par la loi en pourcentage du SMIC : il ne s'ajuste pas. Les retraités et les indépendants n'ont pas de cotisations patronales.
-44. **Leviers concernés.** Taux de cotisation patronale et allègements généraux. Les autres leviers ne touchent pas le coût employeur ; la lecture répercutée n'a pas d'objet pour eux (refusée par l'API).
+44. **Leviers concernés.** Taux de cotisation patronale et allègements généraux. Les autres leviers ne touchent pas le coût employeur ; la lecture répercutée n'a pas d'objet pour eux (refusée par l'API, y compris pour un scénario sans mesure sur les cotisations patronales).
 
 #### Scénario de plusieurs leviers
 

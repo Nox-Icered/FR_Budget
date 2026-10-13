@@ -5,10 +5,9 @@ l'utilisateur ; chaque réponse chiffrée indique sa source (identifiant du regi
 unité. Le journal d'accès d'uvicorn (qui contiendrait les paramètres des requêtes) est
 désactivé par ``creer_application`` elle-même ; lancer avec ``python -m fr_budget_api.serveur``.
 
-Points d'entrée : ``/sante``, ``/version``, ``/journal``, ``/registres/{nom}``, ``/comptes-apu``,
-``/depenses-par-fonction``, ``/validation``, ``/baseline``, ``/depenses-fiscales``,
-``/credits-missions``,
-``POST /scenario``.
+Points d'entrée : ``/sante``, ``/version``, ``/journal``, ``/menages-types``,
+``/registres/{nom}``, ``/comptes-apu``, ``/depenses-par-fonction``, ``/validation``,
+``/baseline``, ``/depenses-fiscales``, ``/credits-missions``, ``POST /scenario``.
 """
 
 from __future__ import annotations
@@ -29,6 +28,7 @@ from fr_budget import scenario as module_scenario
 from fr_budget.agrege import credits_missions as module_credits_missions
 from fr_budget.agrege import depenses_fiscales as module_depenses_fiscales
 from fr_budget.apu import comptes_apu, depenses_par_fonction, libelles_cofog, ratio_pib
+from fr_budget.menages import types as module_menages
 from fr_budget.registres.verification import RACINE_DEPOT, Rapport, charger
 from fr_budget.validation import comparaisons
 from pydantic import BaseModel, Field
@@ -168,6 +168,30 @@ def journal() -> list[dict[str, str]]:
                 )
     # Tri stable : à date égale, l'ordre des fiches puis celui des lignes est conservé.
     return sorted(lignes, key=lambda x: x["date"], reverse=True)
+
+
+def menages_types() -> list[dict[str, Any]]:
+    """Cascade annuelle de chaque ménage type (revenus de l'année des ménages types), en euros.
+
+    Profils publics de la spécification : aucune donnée saisie par un utilisateur.
+    """
+    resultat = []
+    for identifiant, profil in module_menages.PROFILS.items():
+        c = module_menages.cascade_annuelle(identifiant)
+        resultat.append(
+            {
+                "id": identifiant,
+                "libelle": profil.libelle,
+                "annee": module_menages.ANNEE,
+                "cout_employeur": round(c.cout_employeur, 2),
+                "salaire_brut": round(c.salaire_brut, 2),
+                "net_avant_impot": round(c.net_avant_impot, 2),
+                "impot_revenu": round(c.impot_revenu, 2),
+                "prestations": {k: round(v, 2) for k, v in c.prestations.items()},
+                "net_apres_impot": round(c.net_apres_impot, 2),
+            }
+        )
+    return resultat
 
 
 def version_donnees() -> dict[str, str]:
@@ -447,6 +471,11 @@ def creer_application() -> FastAPI:
     @app.get("/sante")
     def sante() -> dict[str, str]:
         return {"statut": "ok"}
+
+    @app.get("/menages-types")
+    def lire_menages_types() -> list[dict[str, Any]]:
+        """Cascade annuelle des ménages types (avant réforme)."""
+        return menages_types()
 
     @app.get("/journal")
     def lire_journal() -> list[dict[str, str]]:

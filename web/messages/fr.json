@@ -18,7 +18,8 @@
     "comparaison": "Comparer",
     "journal": "Journal",
     "relectures": "Relectures",
-    "mentions": "Mentions légales"
+    "mentions": "Mentions légales",
+    "menages": "Ménages types"
   },
   "accueil": {
     "titre": "Les comptes des administrations publiques",
@@ -330,5 +331,28 @@
     "donnees": "Le site ne demande aucun compte, ne dépose aucun cookie et ne mesure pas l'audience. Les calculs se font dans votre navigateur. Un lien partagé contient seulement les réglages du scénario et la version du modèle ; il n'est enregistré nulle part.",
     "responsabilite_titre": "Portée des résultats",
     "responsabilite": "Les résultats sont des estimations en fourchette, à partir de sources publiques citées. Ils ne constituent ni une prévision officielle, ni une recommandation. Les leviers marqués « bêta, non validé » n'ont pas franchi la règle de publication du projet (page Validation)."
+  },
+  "menages": {
+    "titre": "Ménages types",
+    "bandeau": "Bêta, non validé : l'impôt sur le revenu est vérifié contre le simulateur officiel, pas encore les prestations.",
+    "intro": "Pour chaque ménage type, du coût du travail pour l'employeur au revenu disponible, sur les revenus de {annee}, en euros par an et par mois. Les salaires médian et du haut de la distribution viennent de l'Insee.",
+    "ligne": "Ligne",
+    "an": "Par an",
+    "mois": "Par mois",
+    "cout_employeur": "Coût total pour l'employeur",
+    "salaire_brut": "Salaire brut",
+    "net_avant_impot": "Salaire net avant impôt",
+    "impot_revenu": "Impôt sur le revenu (dû sur ces revenus)",
+    "net_apres_impot": "Net après impôt, prestations comprises",
+    "prestations": {
+      "ppa": "Prime d'activité",
+      "af": "Allocations familiales",
+      "cf": "Complément familial",
+      "asf": "Allocation de soutien familial",
+      "rsa": "RSA",
+      "ars": "Allocation de rentrée scolaire"
+    },
+    "limites": "Non comptés : aides au logement (elles dépendent du loyer), taxe foncière, revenus du patrimoine. Les effets des réformes sur ces ménages viendront dans une prochaine version.",
+    "lien_fiche": "Méthode, sources et validation : fiche « ménages types » du dépôt."
   }
 }

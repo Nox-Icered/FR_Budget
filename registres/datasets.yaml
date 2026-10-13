@@ -585,3 +585,11 @@ datasets:
     empreinte_sha256: 0a05bb83be269c72b7148f9b396a36aad73d9d2fc3cb210ef39f6d48d69e33f6
     methode_transformation: pipelines/retraites/extraire_cor.py → data/processed/retraites/cor_2026_reference.csv (figures 2.2, 2.8 et 2.24, scénario de référence)
     telecharge_le: 2026-10-12
+
+  - id: insee_premiere_2079_pdf
+    source: insee_premiere_2079
+    description: Insee Première n° 2079 (PDF, 4 pages, fichier ip2079.pdf)
+    fichier: data/raw/menages/insee_premiere_2079.pdf
+    empreinte_sha256: eccec002126b970c65a23286f1dba5152ea6525915ae678c2d6eb6f432b3f567
+    methode_transformation: aucune ; médiane et 95e centile des salaires nets en EQTP (page 2, figure 3) saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13

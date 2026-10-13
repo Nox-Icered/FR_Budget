@@ -1,0 +1,57 @@
+{
+  "cas": [
+    {
+      "id": "celibataire_smic",
+      "revenus": 2025,
+      "declaration": {
+        "situation": "C",
+        "0DA": "1995",
+        "0CF": 0,
+        "1AJ": 17732
+      }
+    },
+    {
+      "id": "celibataire_median",
+      "revenus": 2025,
+      "declaration": {
+        "situation": "C",
+        "0DA": "1985",
+        "0CF": 0,
+        "1AJ": 27763
+      }
+    },
+    {
+      "id": "cadre_p95",
+      "revenus": 2025,
+      "declaration": {
+        "situation": "C",
+        "0DA": "1980",
+        "0CF": 0,
+        "1AJ": 70896
+      }
+    },
+    {
+      "id": "couple_2_enfants",
+      "revenus": 2025,
+      "declaration": {
+        "situation": "M",
+        "0DA": "1985",
+        "0CF": 2,
+        "1AJ": 27763,
+        "0DB": "1987",
+        "1BJ": 17732
+      }
+    },
+    {
+      "id": "parent_isole_1_enfant",
+      "revenus": 2025,
+      "declaration": {
+        "situation": "C",
+        "0DA": "1990",
+        "0CF": 1,
+        "1AJ": 17732,
+        "0BT": true
+      }
+    }
+  ]
+}

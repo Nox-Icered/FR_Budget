@@ -589,3 +589,19 @@ hypotheses:
       retard et partiellement ; aucune source saisie ne donne ce lien, d'où une plage nulle qui
       sous-estime l'incertitude.
     instruments: [retraites]
+
+  - id: menages_ecart_evolution_salaire_smic
+    libelle: Écart entre l'évolution des salaires médian et du 95e centile et celle du SMIC net, de 2024 à l'année simulée
+    unite: écart relatif
+    valeur_centrale: 0.0
+    plage:
+      basse: 0.0
+      haute: 0.0
+    sources: [insee_premiere_2079]
+    justification: >-
+      Les salaires de l'Insee portent sur 2024 ; les ménages types sont simulés sur les revenus
+      de 2025. Les niveaux médian et du 95e centile sont portés en 2025 en gardant leur
+      rapport au SMIC net. En 2024, l'Insee constate une hausse du pouvoir d'achat proche dans
+      tout le haut de la distribution (+0,8 % pour la médiane, +0,5 % pour le 95e centile,
+      page 2, figure 3), sans donnée sur 2025 : l'écart est pris nul, sans plage.
+    instruments: [menages_types]

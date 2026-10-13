@@ -536,3 +536,21 @@ sources:
     millesime: juin 2026
     acces: direct
     consulte_le: 2026-10-12
+
+  - id: insee_premiere_2079
+    nom: Insee Première n° 2079, « Les salaires dans le secteur privé en 2024 »
+    editeur: Insee
+    url: https://www.insee.fr/fr/statistiques/8657156
+    licence: réutilisation libre des publications de l'Insee (mention de la source)
+    millesime: octobre 2025 (salaires de 2024)
+    acces: direct
+    consulte_le: 2026-10-13
+
+  - id: impots_gouv_simulateur_ir_2026
+    nom: Simulateur de calcul de l'impôt 2026 sur les revenus 2025, modèle simplifié
+    editeur: Direction générale des Finances publiques
+    url: https://simulateur-ir-ifi.impots.gouv.fr/calcul_impot/2026/simplifie/index.htm
+    licence: service public en ligne (résultats relevés par outils/references_impots/generer.mjs)
+    millesime: impôt 2026 sur les revenus 2025
+    acces: direct
+    consulte_le: 2026-10-13

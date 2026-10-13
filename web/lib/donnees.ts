@@ -68,6 +68,17 @@ export type Relecture = {
   reponse: string;
   lien?: string;
 };
+export type MenageType = {
+  id: string;
+  libelle: string;
+  annee: number;
+  cout_employeur: number;
+  salaire_brut: number;
+  net_avant_impot: number;
+  impot_revenu: number;
+  prestations: Record<string, number>;
+  net_apres_impot: number;
+};
 export type LigneJournal = {
   date: string;
   fiche: string;

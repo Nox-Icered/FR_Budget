@@ -272,7 +272,24 @@
     "methode_croissance": "Effet sur l'activité (si la case est cochée) : la mesure crée un écart de production égal à son effet sur le solde multiplié par un multiplicateur propre à l'instrument ; chaque année, {persistance} % de cet écart subsiste. Chaque point d'écart réduit le solde de {alpha} point et modifie le PIB qui sert de dénominateur à la dette. Les multiplicateurs à un an viennent du modèle Mésange de l'Insee et de la DG Trésor (2017) et de l'OFCE (2025) : de {tva_bas} à {tva_haut} pour la TVA, de {depenses_bas} à {depenses_haut} pour les crédits des missions.",
     "limite_croissance_module": "L'effet sur l'activité est un modèle simplifié : il ne tient compte ni de la politique monétaire, ni des effets d'offre de long terme (emploi, capital), ni de l'état de la conjoncture. La vitesse de résorption et l'effet sur le solde n'ont qu'une source, sans plage.",
     "methode_retraites": "Âge de départ à la retraite (première étape du module retraites) : d'après les projections du COR de juin 2026, un an de plus sur l'âge effectif moyen de départ améliore le solde des retraites d'environ {effet} point de PIB une fois la mesure en place ; l'écart choisi est atteint progressivement en {duree} ans.",
-    "limite_retraites": "Le module retraites reprend un calcul mécanique du COR : il ne compte ni les effets sur l'emploi et l'activité, ni les dépenses de chômage ou d'invalidité, ni la hausse des pensions liée à des carrières plus longues. Les simulations publiées par le COR pour un an de plus sur l'âge légal donnent un effet plus faible (voir la page Validation)."
+    "limite_retraites": "Le module retraites reprend un calcul mécanique du COR : il ne compte ni les effets sur l'emploi et l'activité, ni les dépenses de chômage ou d'invalidité, ni la hausse des pensions liée à des carrières plus longues. Les simulations publiées par le COR pour un an de plus sur l'âge légal donnent un effet plus faible (voir la page Validation).",
+    "menages": {
+      "titre": "Effet sur les ménages types",
+      "intro": "Écart, en euros par an, du revenu après impôt et prestations et du coût pour l'employeur de chaque ménage type, si les mesures réglées s'appliquaient aux revenus de {annee}, toute l'année, sans changement de comportement.",
+      "chargement": "Chargement des effets sur les ménages…",
+      "erreur": "Les effets sur les ménages n'ont pas pu être chargés. Rechargez la page pour réessayer.",
+      "aucune": "Aucune mesure réglée ne change directement la cascade de ces ménages.",
+      "menage": "Ménage",
+      "net": "Net après impôt, prestations comprises",
+      "cout": "Coût pour l'employeur",
+      "fourchette": "Net après impôt selon la lecture de l'incidence",
+      "de_a": "de {bas} à {haut}",
+      "non_chiffre": "Non chiffré : l'effet d'une des mesures n'est pas calculé pour ce ménage (voir la page des ménages types).",
+      "approximation": "Valeurs approchées : pour chaque mesure, l'effet est interpolé entre des cascades calculées exactement, puis les effets des mesures sont additionnés ligne par ligne, sans qu'une prestation devienne négative. Sur les scénarios de contrôle, l'écart au calcul complet atteint {un_levier} euros par an pour une mesure seule et {combinaison} euros par an quand toutes les mesures sont à leurs bornes.",
+      "mon_menage": "Voir l'effet de ces mesures sur mon ménage",
+      "detail": "Détail ligne par ligne, mesure par mesure",
+      "ecartees": "Mesures réglées sans effet direct sur ces ménages :"
+    }
   },
   "partage": {
     "scenario": "Scénario",
@@ -459,6 +476,23 @@
       "naissance_adulte": "Adulte {n} : année de naissance entre {min} et {max}.",
       "naissance_enfant": "Enfant {n} : année de naissance entre {min} et {max}."
     },
-    "limites": "Simplifications : deux adultes forment un couple marié ou pacsé ; le montant saisi est le même toute l'année ; un adulte seul avec enfants est compté comme parent isolé ; un indépendant est un artisan au régime réel."
+    "limites": "Simplifications : deux adultes forment un couple marié ou pacsé ; le montant saisi est le même toute l'année ; un adulte seul avec enfants est compté comme parent isolé ; un indépendant est un artisan au régime réel.",
+    "scenario": {
+      "titre": "Mesures du simulateur appliquées",
+      "intro": "Le résultat montrera votre ménage avant et après ces mesures, appliquées aux revenus de l'année, toute l'année, sans changement de comportement (calcul complet, sans approximation) :",
+      "incidence_salaire": "Cotisations patronales : lecture répercutée sur le salaire.",
+      "retirer": "Calculer sans ces mesures",
+      "non_chiffre": "L'effet de ces mesures n'est pas chiffré pour ce ménage : la revalorisation ne porte que sur les pensions de base, dont la part dans une pension n'est pas connue.",
+      "illisible": "Les mesures transmises par le lien n'ont pas pu être lues : le calcul se fait sans mesure.",
+      "mesures": {
+        "csg_activite": "Taux de CSG sur les revenus d'activité : {valeur} point(s)",
+        "csg_retraites": "Taux plein de CSG sur les pensions : {valeur} point(s)",
+        "cotisations_patronales_taux": "Taux de cotisation patronale du secteur privé : {valeur} point(s)",
+        "allegements_generaux": "Allègements généraux de cotisations patronales : {valeur} %",
+        "ir_seuils_bareme": "Seuils du barème de l'impôt sur le revenu, par rapport à l'inflation : {valeur} %",
+        "prime_activite_pente": "Part des revenus d'activité prise en compte dans la prime d'activité : {valeur} point(s)",
+        "indexation_pensions_prestations": "Revalorisation des pensions de base et des prestations, par rapport à la loi : {valeur} point(s)"
+      }
+    }
   }
 }

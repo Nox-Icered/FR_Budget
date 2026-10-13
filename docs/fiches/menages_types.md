@@ -174,6 +174,14 @@ Module `fr_budget.menages.leviers` (`legislation_scenario`, `cascade_scenario`, 
 47. **Leviers sans effet direct.** Les leviers du simulateur qui ne changent pas la cascade (TVA, accises, impôt sur les sociétés, dotations, crédits, rémunérations publiques, âge de départ, dépenses fiscales) sont écartés du calcul et listés dans la réponse (`ignorees`) ; un levier inconnu ou une valeur hors de ses bornes est refusé.
 48. **Ménage saisi.** Le même scénario s'applique au ménage saisi, sans cache ni journal (règle 5) ; la réponse donne la cascade avant et après.
 
+#### Effet du scénario dans le simulateur et sur « Mon ménage »
+
+49. **Approximation dans le simulateur.** Le site est statique et ne peut pas lancer OpenFisca. Les cascades exactes sont exportées sur une grille de valeurs de chaque levier (pas d'une unité, de 10 % pour les allègements, plus ou moins une unité). Pour une mesure, chaque ligne de la cascade est interpolée entre les deux valeurs de la grille qui l'encadrent ; les écarts des mesures sont additionnés ligne par ligne ; une prestation ne devient jamais négative. Le même calcul existe dans le moteur (`approximation`) et sur le site (`web/lib/effets-menages.ts`) ; un test du site vérifie qu'ils donnent les mêmes valeurs.
+50. **Contrôle publié.** 32 scénarios de contrôle (chaque levier à ses bornes et entre deux points de la grille ; tous les leviers à la moitié de leurs bornes et à leurs bornes) sont calculés exactement, en une seule réforme, et comparés à l'approximation. Écart maximal constaté sur le net après impôt : 61 € par an pour une mesure seule (couple, prime d'activité qui s'annule entre deux points de la grille), 291 € par an pour toutes les mesures à leurs bornes (salaire médian, que la hausse de la pente rend éligible à la prime d'activité). Ces deux écarts sont affichés sous le résultat.
+    - Limite : une première version additionnait les effets d'une seule unité ; elle s'écartait jusqu'à 1 900 € du calcul complet, à cause des seuils de la prime d'activité. Elle n'a pas été publiée.
+51. **Lecture de l'incidence dans le simulateur.** Quand une mesure touche les cotisations patronales, le panneau propose les deux lectures et donne, pour chaque ménage, l'écart du net après impôt dans les deux lectures (fourchette).
+52. **Lien vers « Mon ménage ».** Le simulateur transmet les mesures (et la lecture de l'incidence) dans l'adresse de la page « Mon ménage », jamais la saisie du ménage. La page envoie la saisie et les mesures au service de calcul, qui fait le calcul complet (sans approximation) ; rien n'est gardé ni journalisé.
+
 ## 6. Validation
 
 **Impôt sur le revenu.**
@@ -253,6 +261,7 @@ Le module reste en bêta.
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-13 | Effet du scénario dans le simulateur (approximation sur grille, contrôle publié) et sur « Mon ménage » (calcul complet) | Aucun test de validation ne bouge ; 5 nouveaux tests unitaires (approximation, grille), test d'API de l'export ; 4 tests du site (même approximation que le moteur sur les 32 scénarios de contrôle, adresse du scénario) |
 | 2026-10-13 | Scénario de plusieurs leviers sur les ménages types et le ménage saisi (moteur et API) | Aucun test de validation ne bouge ; 5 nouveaux tests unitaires (mesures, scénario vide, deux leviers indépendants, non chiffré, profil saisi) ; 5 tests d'API |
 | 2026-10-13 | Réglage d'incidence des cotisations patronales (lectures comptable et répercutée sur le salaire) | Aucun test de validation ne bouge ; 6 nouveaux tests unitaires (coût employeur gardé, plancher du SMIC, apprenti, allègements, mesure nulle, refus), tests d'API (refus de la lecture, export) |
 | 2026-10-13 | Effet des leviers sur les ménages types (7 leviers traduits en réformes d'OpenFisca) | Aucun test de validation ne bouge ; 20 nouveaux tests unitaires (identités sans réforme), 6 tests d'API (route, refus, export) ; test du site (écart ligne par ligne) |

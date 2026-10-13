@@ -147,7 +147,7 @@ En parallèle :
   - Effet des leviers sur les ménages types ajouté le 13 octobre 2026 : 7 leviers traduits en réformes d'OpenFisca, hausse et baisse d'une unité publiées sur la page Ménages types ; pension du retraité non chiffrée pour l'indexation (source manquante).
   - Réglage d'incidence ajouté le 13 octobre 2026 : lectures comptable (par défaut) et répercutée sur le salaire, qui bornent l'effet des cotisations patronales et des allègements.
   - Scénario de plusieurs leviers calculé le 13 octobre 2026 (moteur et API) pour les ménages types et le ménage saisi.
-  - Reste à faire : affichage de l'effet du scénario dans le simulateur et sur la page « Mon ménage ».
+  - Effet du scénario affiché le 13 octobre 2026 : panneau du simulateur (approximation sur grille, écart au calcul complet publié : 61 € pour une mesure seule, 291 € pour toutes les mesures à leurs bornes) et page « Mon ménage » (calcul complet, quand l'API sera hébergée).
 - Indicateur de dépense incompressible pour TVA et accises (budgets de famille INSEE).
 - Entreprises : charge par taille et secteur (ESANE, DGFiP), sans effet comportemental.
 - Écrans Catalogue, Simulateur, Ménages, Entreprises, « Comment c'est calculé ? ».

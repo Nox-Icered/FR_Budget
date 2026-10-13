@@ -1,9 +1,10 @@
 import { texte } from "../../lib/textes";
-import { lire, type MenagesTypes } from "../../lib/donnees";
+import { lire, type EffetsMenages, type MenagesTypes } from "../../lib/donnees";
 import { Formulaire } from "./formulaire";
 
 export default function MonMenage() {
   const { saisie } = lire<MenagesTypes>("menages-types.json");
+  const leviers = lire<EffetsMenages>("menages-effets.json").leviers.map((l) => l.id);
   return (
     <>
       <h1>{texte("mon_menage.titre")}</h1>
@@ -12,7 +13,7 @@ export default function MonMenage() {
       </p>
       <p>{texte("mon_menage.intro", { annee: saisie.annee })}</p>
       <p>{texte("mon_menage.confidentialite")}</p>
-      <Formulaire bornes={saisie} />
+      <Formulaire bornes={saisie} leviers={leviers} />
       <p className="source">{texte("mon_menage.limites")}</p>
       <p className="source">{texte("menages.limites")}</p>
       <p className="source">{texte("menages.lien_fiche")}</p>

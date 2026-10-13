@@ -6,6 +6,7 @@ simulation de référence et des paramètres d'OpenFisca.
 
 from __future__ import annotations
 
+import dataclasses
 import warnings
 
 import pytest
@@ -324,3 +325,69 @@ def test_scenario_incidence_salaire_sans_cotisation_refusee() -> None:
         lv.cascade_scenario(
             "celibataire_median", lv.mesures({"csg_activite": 1.0}), ANNEE, lv.SALAIRE
         )
+
+
+# Approximation du simulateur (grille interpolée, prestations jamais négatives).
+
+
+def _effets_un_levier(levier: str, identifiant: str) -> lv.Effets:
+    return {
+        levier: {
+            lv.COMPTABLE: {
+                v: {identifiant: lv.cascade_reformee(identifiant, levier, v)} for v in lv.SENS
+            }
+        }
+    }
+
+
+def test_approximation_exacte_sur_la_grille() -> None:
+    effets = _effets_un_levier("csg_activite", "celibataire_smic")
+    approche = lv.approximation("celibataire_smic", (("csg_activite", 1.0),), effets)
+    exact = lv.cascade_reformee("celibataire_smic", "csg_activite", 1.0)
+    assert approche is not None
+    assert exact is not None
+    assert approche.net_apres_impot == pytest.approx(exact.net_apres_impot, abs=0.01)
+
+
+def test_approximation_interpole_entre_reference_et_grille() -> None:
+    effets = _effets_un_levier("csg_activite", "celibataire_smic")
+    approche = lv.approximation("celibataire_smic", (("csg_activite", 0.5),), effets)
+    exact = lv.cascade_reformee("celibataire_smic", "csg_activite", 1.0)
+    reference = t.cascade_annuelle("celibataire_smic")
+    assert approche is not None
+    assert exact is not None
+    assert approche.net_avant_impot == pytest.approx(
+        (reference.net_avant_impot + exact.net_avant_impot) / 2, abs=0.01
+    )
+
+
+def test_approximation_prestation_jamais_negative() -> None:
+    """Deux mesures qui retirent chacune plus de la moitié de la prime d'activité : la somme
+    des écarts s'arrête à zéro."""
+    reference = t.cascade_annuelle("celibataire_smic")
+    ppa = reference.prestations["ppa"]
+    baisse = dataclasses.replace(reference, prestations={**reference.prestations, "ppa": ppa * 0.3})
+    effets: lv.Effets = {
+        levier: {lv.COMPTABLE: {1.0: {"celibataire_smic": baisse}}}
+        for levier in ("csg_activite", scenario.LEVIER_PA_PENTE)
+    }
+    mesures_ = (("csg_activite", 1.0), (scenario.LEVIER_PA_PENTE, 1.0))
+    approche = lv.approximation("celibataire_smic", mesures_, effets)
+    assert approche is not None
+    assert "ppa" not in approche.prestations
+
+
+def test_approximation_non_chiffree() -> None:
+    effets: lv.Effets = {scenario.LEVIER_INDEXATION: {lv.COMPTABLE: {1.0: {"retraite_seul": None}}}}
+    mesures_ = ((scenario.LEVIER_INDEXATION, 1.0),)
+    assert lv.approximation("retraite_seul", mesures_, effets) is None
+
+
+def test_grille_dans_les_bornes() -> None:
+    for levier in lv.LEVIERS:
+        bas, haut = scenario.bornes_levier(levier)
+        valeurs = lv.grille(levier)
+        assert 0 not in valeurs
+        assert min(valeurs) == bas
+        assert max(valeurs) == haut
+        assert {1.0, -1.0} <= set(valeurs) | ({-1.0} if bas > -1 else set())

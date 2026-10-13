@@ -354,29 +354,78 @@ def _description_leviers_menages() -> dict[str, Any]:
     }
 
 
+def _cle_valeur(valeur: float) -> str:
+    """Valeur d'un levier comme clé JSON (« 1 », « -2.5 »)."""
+    return f"{valeur:g}"
+
+
 def effets_leviers_menages(processus: int | None = None) -> dict[str, Any]:
-    """Cascade de chaque ménage type après une hausse et une baisse d'une unité de chaque
-    levier qui change directement sa législation (``fr_budget.menages.leviers``) ; ``null``
-    quand l'effet n'est pas chiffré."""
-    effets = module_leviers_menages.effets_unitaires(processus)
+    """Cascades exactes des ménages types sur la grille de chaque levier qui change
+    directement leur législation (``fr_budget.menages.leviers``), ``null`` quand l'effet n'est
+    pas chiffré ; hausse et baisse d'une unité pour la page des ménages types ; contrôle de
+    l'approximation du simulateur."""
+    effets = module_leviers_menages.effets_grille(processus)
+    sens = module_leviers_menages.SENS
 
     def lecture(incidence: str) -> dict[str, Any]:
         return {
             levier: {
                 ("hausse" if valeur > 0 else "baisse"): {
-                    i: _lignes_ou_rien(c) for i, c in cascades.items()
+                    i: _lignes_ou_rien(c) for i, c in par_incidence[incidence][valeur].items()
                 }
-                for valeur, cascades in par_incidence[incidence].items()
+                for valeur in sens
             }
             for levier, par_incidence in effets.items()
             if incidence in par_incidence
         }
+
+    grille = {
+        levier: {
+            incidence: {
+                _cle_valeur(valeur): {i: _lignes_ou_rien(c) for i, c in cascades.items()}
+                for valeur, cascades in par_valeur.items()
+            }
+            for incidence, par_valeur in par_incidence.items()
+        }
+        for levier, par_incidence in effets.items()
+    }
+    controle = module_leviers_menages.controle_approximation(processus)
+
+    def ecart_max(un_levier: bool) -> float:
+        return round(
+            max(
+                abs(approche - exact)
+                for c in controle
+                if (len(c.mesures) == 1) == un_levier
+                for m in c.menages.values()
+                if m is not None
+                for exact, approche in (m,)
+            ),
+            2,
+        )
 
     return {
         **_description_leviers_menages(),
         "effets": lecture(module_leviers_menages.COMPTABLE),
         # Cotisations patronales : même mesure, salaire brut ajusté pour garder le coût employeur.
         "effets_salaire": lecture(module_leviers_menages.SALAIRE),
+        "grille": grille,
+        "controle": {
+            "scenarios": [
+                {
+                    "mesures": dict(c.mesures),
+                    "menages": {
+                        i: None
+                        if m is None
+                        else {"exact": round(m[0], 2), "approche": round(m[1], 2)}
+                        for i, m in c.menages.items()
+                    },
+                }
+                for c in controle
+            ],
+            "ecart_max_un_levier": ecart_max(un_levier=True),
+            "ecart_max_combinaison": ecart_max(un_levier=False),
+        },
     }
 
 

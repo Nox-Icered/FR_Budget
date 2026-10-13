@@ -29,11 +29,13 @@ export type MenageFormulaire = { adultes: AdulteFormulaire[]; enfants: string[] 
 export type CorpsRequete = {
   adultes: { statut: Statut; montant_mensuel: number; annee_naissance: number; cadre: boolean }[];
   annees_naissance_enfants: number[];
+  scenario?: ScenarioMenage;
 };
 
 export type ResultatMonMenage = LignesCascade & {
   annee_revenus: number;
   sources: string[];
+  scenario?: ScenarioMenage & { apres: LignesCascade | null };
 };
 
 // Problème de saisie : clé de texte (messages/fr.json, section mon_menage.erreurs).
@@ -127,4 +129,37 @@ export async function calculer(
   });
   if (!reponse.ok) throw new Error(`service de calcul : ${reponse.status}`);
   return (await reponse.json()) as ResultatMonMenage;
+}
+
+// Scénario transmis du simulateur à la page « Mon ménage » par l'adresse : seulement les
+// mesures (paramètre m=levier:valeur;…) et la lecture de l'incidence (i=salaire), jamais la
+// saisie du ménage.
+export type ScenarioMenage = { mesures: Record<string, number>; incidence: "comptable" | "salaire" };
+
+export function encoderScenarioMenage(s: ScenarioMenage): string {
+  const mesures = Object.entries(s.mesures)
+    .filter(([, v]) => v !== 0)
+    .map(([k, v]) => `${k}:${v}`)
+    .join(";");
+  if (!mesures) return "";
+  const params = new URLSearchParams({ m: mesures });
+  if (s.incidence === "salaire") params.set("i", "salaire");
+  return params.toString();
+}
+
+export function decoderScenarioMenage(
+  recherche: string,
+  leviersConnus: string[],
+): ScenarioMenage | null {
+  const params = new URLSearchParams(recherche);
+  const m = params.get("m");
+  if (!m) return null;
+  const mesures: Record<string, number> = {};
+  for (const morceau of m.split(";")) {
+    const [levier, valeur] = morceau.split(":");
+    const v = Number(valeur);
+    if (!leviersConnus.includes(levier) || !Number.isFinite(v)) return null;
+    mesures[levier] = v;
+  }
+  return { mesures, incidence: params.get("i") === "salaire" ? "salaire" : "comptable" };
 }

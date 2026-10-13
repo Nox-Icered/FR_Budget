@@ -26,6 +26,7 @@ import {
   type EtatScenario,
 } from "../../lib/etat";
 import { CopierLien, Exports } from "../partage/actions";
+import { EffetsMenagesScenario } from "./menages";
 import { region } from "../../lib/region";
 import { useReponses } from "../../lib/chargement";
 import Link from "next/link";
@@ -276,6 +277,7 @@ function SimulateurCharge({
         <Link href="/comparaison/">{texte("partage.lien_comparaison")}</Link>
       </div>
       <p className="source">{texte("partage.explication")}</p>
+      <EffetsMenagesScenario valeurs={valeurs} empreinte={empreinte} />
     </>
   );
 }

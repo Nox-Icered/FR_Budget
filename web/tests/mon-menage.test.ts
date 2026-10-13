@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import {
   adresseService,
   calculer,
+  decoderScenarioMenage,
+  encoderScenarioMenage,
   preparer,
   type Bornes,
   type MenageFormulaire,
@@ -89,4 +91,21 @@ test("la saisie part dans le corps d'un POST, jamais dans l'adresse", async () =
 test("une réponse en erreur ne renvoie pas de résultat", async () => {
   const faux = (async () => new Response("", { status: 422 })) as unknown as typeof fetch;
   await assert.rejects(calculer("https://x/mon-menage", { adultes: [], annees_naissance_enfants: [] }, faux));
+});
+
+test("scénario transmis par l'adresse : mesures seulement, aller-retour", () => {
+  const s = { mesures: { csg_activite: 1.5, ir_seuils_bareme: -1, tva_taux_normal: 0 }, incidence: "salaire" as const };
+  const adresse = encoderScenarioMenage(s);
+  assert.equal(adresse, "m=csg_activite%3A1.5%3Bir_seuils_bareme%3A-1&i=salaire");
+  assert.deepEqual(decoderScenarioMenage(adresse, ["csg_activite", "ir_seuils_bareme"]), {
+    mesures: { csg_activite: 1.5, ir_seuils_bareme: -1 },
+    incidence: "salaire",
+  });
+  assert.equal(encoderScenarioMenage({ mesures: { csg_activite: 0 }, incidence: "comptable" }), "");
+});
+
+test("scénario de l'adresse refusé s'il nomme un levier inconnu ou une valeur illisible", () => {
+  assert.equal(decoderScenarioMenage("m=inconnu%3A1", ["csg_activite"]), null);
+  assert.equal(decoderScenarioMenage("m=csg_activite%3Aabc", ["csg_activite"]), null);
+  assert.equal(decoderScenarioMenage("", ["csg_activite"]), null);
 });

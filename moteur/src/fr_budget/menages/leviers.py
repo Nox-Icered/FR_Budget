@@ -517,6 +517,22 @@ def cascade_profil_reformee(
 
 SENS = (1.0, -1.0)
 """Hausse et baisse d'une unité du levier (point ou pourcent), publiées pour chaque ménage."""
+PAS_GRILLE: dict[str, float] = {scenario.LEVIER_ALLEGEMENTS: 10.0}
+"""Pas de la grille des effets exportés (une unité par défaut). Allègements : 10 %, leur effet
+sur le coût employeur étant proportionnel (et nul sur le net en lecture comptable)."""
+
+
+def grille(levier: str) -> tuple[float, ...]:
+    """Valeurs du levier dont l'effet exact est exporté : les multiples du pas dans les bornes
+    du simulateur, plus une unité de chaque côté ; jamais zéro (la référence)."""
+    bas, haut = scenario.bornes_levier(levier)
+    pas = PAS_GRILLE.get(levier, 1.0)
+    valeurs = {*SENS}
+    k = 1
+    while k * pas <= max(-bas, haut) + 1e-9:
+        valeurs |= {v for v in (k * pas, -k * pas) if bas - 1e-9 <= v <= haut + 1e-9}
+        k += 1
+    return tuple(sorted(v for v in valeurs if bas - 1e-9 <= v <= haut + 1e-9))
 
 
 def _cascades_levier(
@@ -530,19 +546,19 @@ Effets = dict[str, dict[str, dict[float, dict[str, types.CascadeMenage | None]]]
 
 
 @cache
-def effets_unitaires(processus: int | None = None) -> Effets:
-    """Cascades des ménages types après une hausse et une baisse d'une unité de chaque levier,
-    en lecture comptable, et aussi répercutée sur le salaire pour les cotisations patronales.
+def effets_grille(processus: int | None = None) -> Effets:
+    """Cascades des ménages types pour chaque valeur de la grille de chaque levier, en lecture
+    comptable, et aussi répercutée sur le salaire pour les cotisations patronales.
 
-    Calcul réparti entre ``processus`` processus (un par levier, incidence et sens), car chaque
-    législation réformée reconstruit ses paramètres (quelques secondes par ménage). Mis en
-    cache : ne dépend d'aucune donnée saisie.
+    Calcul réparti entre ``processus`` processus (un par levier, incidence et valeur), car
+    chaque législation réformée reconstruit ses paramètres (quelques secondes par ménage). Mis
+    en cache : ne dépend d'aucune donnée saisie.
     """
     triplets = [
         (levier, valeur, incidence)
         for levier in LEVIERS
         for incidence in (INCIDENCES if levier in LEVIERS_INCIDENCE else (COMPTABLE,))
-        for valeur in SENS
+        for valeur in grille(levier)
     ]
     # « spawn » plutôt que « fork » : le processus appelant (serveur, tests) peut avoir des
     # fils d'exécution, et un fork les copierait dans un état incohérent.
@@ -553,3 +569,139 @@ def effets_unitaires(processus: int | None = None) -> Effets:
         for (levier, valeur, incidence), cascades in zip(triplets, resultats, strict=True):
             effets.setdefault(levier, {}).setdefault(incidence, {})[valeur] = cascades
     return effets
+
+
+# Approximation du simulateur : le site ne peut pas lancer OpenFisca. Pour chaque mesure, il
+# interpole chaque ligne de la cascade entre les valeurs de la grille qui l'encadrent, additionne
+# les écarts des mesures ligne par ligne, et ne laisse aucune prestation devenir négative. Même
+# calcul en TypeScript : web/lib/effets-menages.ts.
+
+CHAMPS_CASCADE = (
+    "cout_employeur",
+    "salaire_brut",
+    "net_avant_impot",
+    "net_imposable",
+    "impot_revenu",
+    "pension_brute",
+    "pension_nette",
+    "revenu_independant_brut",
+    "cotisations_independant",
+    "csg_crds_independant",
+    "revenu_independant_net",
+)
+
+
+def _vecteur(c: types.CascadeMenage) -> dict[str, float]:
+    return {
+        **{champ: getattr(c, champ) for champ in CHAMPS_CASCADE},
+        **{f"prestations.{k}": v for k, v in c.prestations.items()},
+    }
+
+
+def _interpoler(
+    reference: dict[str, float], points: dict[float, types.CascadeMenage | None], valeur: float
+) -> dict[str, float] | None:
+    """Écart de chaque ligne pour ``valeur``, interpolé entre les deux points qui l'encadrent
+    (la référence est le point zéro) ; ``None`` si l'un d'eux n'est pas chiffré."""
+    if valeur in points:
+        exact = points[valeur]
+        if exact is None:
+            return None
+        vecteur = _vecteur(exact)
+        return {k: vecteur.get(k, 0.0) - reference.get(k, 0.0) for k in {*vecteur, *reference}}
+    abscisses = sorted({0.0, *points})
+    bas = max(x for x in abscisses if x <= valeur)
+    haut = min(x for x in abscisses if x >= valeur)
+    ecarts = []
+    for x in (bas, haut):
+        if x == 0:
+            ecarts.append(dict.fromkeys(reference, 0.0))
+            continue
+        ecart = _interpoler(reference, points, x)
+        if ecart is None:
+            return None
+        ecarts.append(ecart)
+    poids = (valeur - bas) / (haut - bas)
+    cles = {*ecarts[0], *ecarts[1]}
+    return {k: (1 - poids) * ecarts[0].get(k, 0.0) + poids * ecarts[1].get(k, 0.0) for k in cles}
+
+
+def approximation(
+    identifiant: str, mesures_: Mesures, effets: Effets, incidence: str = COMPTABLE
+) -> types.CascadeMenage | None:
+    """Cascade approchée du ménage type sous le scénario ; ``None`` si une mesure n'est pas
+    chiffrée pour ce ménage."""
+    reference = _vecteur(types.cascade_annuelle(identifiant))
+    total = dict(reference)
+    for levier, valeur in mesures_:
+        lecture = incidence if levier in LEVIERS_INCIDENCE else COMPTABLE
+        points = {v: cascades[identifiant] for v, cascades in effets[levier][lecture].items()}
+        ecart = _interpoler(reference, points, valeur)
+        if ecart is None:
+            return None
+        for k, v in ecart.items():
+            total[k] = total.get(k, 0.0) + v
+    prestations = {
+        k.removeprefix("prestations."): max(v, 0.0)
+        for k, v in total.items()
+        if k.startswith("prestations.") and max(v, 0.0) != 0
+    }
+    return types.CascadeMenage(
+        **{champ: total[champ] for champ in CHAMPS_CASCADE}, prestations=prestations
+    )
+
+
+def scenarios_controle() -> list[Mesures]:
+    """Scénarios de contrôle : chaque levier à une valeur hors de la grille (la moitié de sa
+    borne, sauf si elle y est), à sa borne basse et à sa borne haute, puis tous les leviers
+    ensemble à la moitié de leurs bornes et à leurs bornes (bornes du simulateur)."""
+    bornes = {levier: scenario.bornes_levier(levier) for levier in LEVIERS}
+    scenarios: list[Mesures] = []
+    for levier, (bas, haut) in bornes.items():
+        for v in (bas, bas / 2 + 0.25, haut / 2 + 0.25, haut):
+            if v != 0:
+                scenarios.append(((levier, v),))
+    for facteur in (0.5, 1.0):
+        for k in (0, 1):
+            scenarios.append(mesures({lv: b[k] * facteur for lv, b in bornes.items()}))
+    return [m for m in scenarios if m]
+
+
+def _exact(mesures_: Mesures) -> dict[str, types.CascadeMenage | None]:
+    return {i: cascade_scenario(i, mesures_) for i in types.PROFILS}
+
+
+@dataclass(frozen=True)
+class Controle:
+    """Écarts du net après impôt d'un scénario de contrôle, par ménage type : (exact, approché),
+    ou ``None`` si l'effet n'est pas chiffré."""
+
+    mesures: Mesures
+    menages: dict[str, tuple[float, float] | None]
+
+
+@cache
+def controle_approximation(processus: int | None = None) -> list[Controle]:
+    """Pour chaque scénario de contrôle et chaque ménage type : écart du net après impôt
+    calculé exactement (une seule réforme) et approché (grille interpolée), en lecture
+    comptable. Mis en cache : ne dépend d'aucune donnée saisie."""
+    effets = effets_grille(processus)
+    scenarios = scenarios_controle()
+    contexte = multiprocessing.get_context("spawn")
+    with ProcessPoolExecutor(max_workers=processus, mp_context=contexte) as executeur:
+        exacts = list(executeur.map(_exact, scenarios))
+    resultats: list[Controle] = []
+    for mesures_, cascades in zip(scenarios, exacts, strict=True):
+        menages: dict[str, tuple[float, float] | None] = {}
+        for i, cascade in cascades.items():
+            approche = approximation(i, mesures_, effets)
+            if cascade is None or approche is None:
+                menages[i] = None
+                continue
+            reference = types.cascade_annuelle(i).net_apres_impot
+            menages[i] = (
+                cascade.net_apres_impot - reference,
+                approche.net_apres_impot - reference,
+            )
+        resultats.append(Controle(mesures_, menages))
+    return resultats

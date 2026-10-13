@@ -178,6 +178,13 @@ def test_export_des_effets_des_leviers(tmp_path: Path) -> None:
     # Pension du retraité : effet de l'indexation non chiffré (part des pensions de base).
     assert effets["effets"]["indexation_pensions_prestations"]["hausse"]["retraite_seul"] is None
     assert "tva_taux_normal" in effets["sans_effet"]
+    # Grille de chaque levier (simulateur) et contrôle publié de l'approximation.
+    assert set(effets["grille"]) == set(effets["effets"])
+    assert "5" in effets["grille"]["prime_activite_pente"]["comptable"]
+    controle = effets["controle"]
+    assert controle["scenarios"]
+    assert controle["ecart_max_un_levier"] >= 0
+    assert controle["ecart_max_combinaison"] >= 0
     # Lecture répercutée : seulement pour les cotisations patronales ; coût employeur gardé.
     assert set(effets["effets_salaire"]) == set(effets["leviers_incidence"])
     base = {m["id"]: m for m in menages_types()["menages"]}

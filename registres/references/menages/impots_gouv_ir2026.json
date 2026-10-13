@@ -113,6 +113,25 @@
         "impot_net": 0,
         "restant_a_payer": 0
       }
+    },
+    {
+      "id": "retraite_seul",
+      "revenus": 2025,
+      "declaration": {
+        "situation": "C",
+        "0DA": "1955",
+        "0CF": 0,
+        "1AJ": 0,
+        "1AS": 20697
+      },
+      "resultats": {
+        "nombre_parts": 1,
+        "revenu_fiscal_reference": 17216,
+        "droits_simples": 618,
+        "decote": 617,
+        "impot_net": 1,
+        "restant_a_payer": 0
+      }
     }
   ]
 }

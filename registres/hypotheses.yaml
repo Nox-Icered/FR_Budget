@@ -605,3 +605,19 @@ hypotheses:
       tout le haut de la distribution (+0,8 % pour la médiane, +0,5 % pour le 95e centile,
       page 2, figure 3), sans donnée sur 2025 : l'écart est pris nul, sans plage.
     instruments: [menages_types]
+
+  - id: menages_ecart_evolution_pension_moyenne
+    libelle: Écart entre l'évolution de la pension moyenne de droit direct et la revalorisation des pensions de base, de fin 2023 à l'année simulée
+    unite: écart relatif
+    valeur_centrale: 0.0
+    plage:
+      basse: 0.0
+      haute: 0.0
+    sources: [drees_retraites_2025_fiche05, dss_instruction_2023_189, dss_instruction_2024_176]
+    justification: >-
+      La pension moyenne de la DREES porte sur fin 2023 ; le ménage type est simulé sur 2025.
+      Elle est revalorisée comme les pensions de base (coefficients de 1,053 et 1,022). Les
+      pensions complémentaires suivent d'autres règles, et la pension moyenne évolue aussi avec
+      le renouvellement des générations (la DREES décrit les deux effets) ; sans chiffrage pour
+      2024 et 2025, l'écart est pris nul, sans plage.
+    instruments: [menages_types]

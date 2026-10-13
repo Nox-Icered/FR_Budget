@@ -641,3 +641,35 @@ datasets:
     empreinte_sha256: 7184775a8ca6668cbc2982d97514b470d41eea031d35f409ab7ea369c39ff788
     methode_transformation: aucune ; pourcentages du SMIC et règles d'exonération lus dans la page et saisis dans registres/references/chiffrages.yaml et registres/corrections_openfisca.yaml
     telecharge_le: 2026-10-13
+
+  - id: drees_retraites_2025_fiche05_pdf
+    source: drees_retraites_2025_fiche05
+    description: Fiche 5 du panorama « Les retraités et les retraites » 2025 (PDF, 11 pages), déposée par le mainteneur le 13 octobre 2026 (le site de la DREES n'était pas joignable depuis l'environnement de travail)
+    fichier: data/raw/menages/drees_retraites_2025_fiche05.pdf
+    empreinte_sha256: a159756de581a7ce444b61f7471ab5ba6b1743e9a6eaecb5dab59a8ae5cba5cd
+    methode_transformation: aucune ; pension moyenne de droit direct de fin 2023 saisie dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13
+
+  - id: dss_instruction_2023_189_pdf
+    source: dss_instruction_2023_189
+    description: Instruction de revalorisation des pensions au 1er janvier 2024 (PDF)
+    fichier: data/raw/menages/dss_instruction_2023_189.pdf
+    empreinte_sha256: e227a4988b13142421f3c836fe45fe38c315f5fc730e2e57983adfa47943458f
+    methode_transformation: aucune ; coefficient de revalorisation saisi dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13
+
+  - id: dss_instruction_2024_176_pdf
+    source: dss_instruction_2024_176
+    description: Instruction de revalorisation des pensions au 1er janvier 2025 (PDF)
+    fichier: data/raw/menages/dss_instruction_2024_176.pdf
+    empreinte_sha256: 7ee381c0546d326dc7d836724fbd3c779de21d32306dc2eeb84d16bd37465fa4
+    methode_transformation: aucune ; coefficient de revalorisation saisi dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13
+
+  - id: service_public_f2971_html
+    source: service_public_f2971
+    description: Page F2971 de service-public.gouv.fr, CSG et CRDS sur les pensions de retraite (HTML tel que téléchargé)
+    fichier: data/raw/menages/service_public/F2971.html
+    empreinte_sha256: d5f284da282dccbabd38f40c21434108d9e18acabaebdce4408e01fd3939cb30
+    methode_transformation: aucune ; seuils et taux de CSG des pensions saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13

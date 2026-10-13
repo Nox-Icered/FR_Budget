@@ -2641,3 +2641,146 @@ chiffrages:
     localisation: "Même tableau, ligne « 3e année », colonne « 18-20 ans » : « 67 % du Smic »"
     saisi_le: 2026-10-13
     relecture: a_relire
+
+  - id: drees_pension_brute_moyenne_droit_direct_2023
+    module: menages_types
+    source: drees_retraites_2025_fiche05
+    millesime: "2023"
+    mesure: Pension mensuelle moyenne de droit direct, majoration pour trois enfants comprise, des retraités résidant en France, fin 2023, brute
+    valeur: 1666
+    unite: euros par mois
+    localisation: "Premier paragraphe de la fiche : « s’élève à 1 666 euros bruts » ; tableau 1, ligne 2023"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: drees_pension_nette_moyenne_droit_direct_2023
+    module: menages_types
+    source: drees_retraites_2025_fiche05
+    millesime: "2023"
+    mesure: Même pension, nette des prélèvements sociaux
+    valeur: 1541
+    unite: euros par mois
+    localisation: "Premier paragraphe de la fiche : « soit 1 541 euros nets des prélèvements sociaux » ; tableau 1, ligne 2023"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: dss_revalorisation_pensions_base_2024_01
+    module: menages_types
+    source: dss_instruction_2023_189
+    millesime: 1er janvier 2024
+    mesure: Coefficient de revalorisation des pensions de vieillesse de base au 1er janvier 2024
+    valeur: 1.053
+    unite: coefficient
+    localisation: "Résumé et point 1 : « revalorisés d’un coefficient de 1,053 au 1er janvier 2024, soit un taux de 5,3 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: dss_revalorisation_pensions_base_2025_01
+    module: menages_types
+    source: dss_instruction_2024_176
+    millesime: 1er janvier 2025
+    mesure: Coefficient de revalorisation des pensions de vieillesse de base au 1er janvier 2025
+    valeur: 1.022
+    unite: coefficient
+    localisation: "Résumé et point 1 : « revalorisés d’un coefficient de 1,022 au 1er janvier 2025, soit un taux de 2,2 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_csg_pension_seuil_taux_zero_1_part_2026
+    module: menages_types
+    source: service_public_f2971
+    millesime: "2026"
+    mesure: "Revenu fiscal de référence 2024 au-delà duquel la CSG sur les pensions n'est plus à taux zéro, 1 part"
+    valeur: 13048
+    unite: euros de revenu fiscal de référence
+    localisation: "Section « Pension de retraite », tableau « Taux selon le revenu fiscal de référence (RFR) 2024 du foyer », ligne « 1 part », colonne « Taux zéro » : « Jusqu'à 13 048 € »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_csg_pension_seuil_taux_reduit_1_part_2026
+    module: menages_types
+    source: service_public_f2971
+    millesime: "2026"
+    mesure: "Plafond du taux réduit de CSG sur les pensions, 1 part"
+    valeur: 17057
+    unite: euros de revenu fiscal de référence
+    localisation: "Section « Pension de retraite », tableau « Taux selon le revenu fiscal de référence (RFR) 2024 du foyer », ligne « 1 part », colonne « Taux réduit » : « De 13 049 € à 17 057 € »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_csg_pension_seuil_taux_median_1_part_2026
+    module: menages_types
+    source: service_public_f2971
+    millesime: "2026"
+    mesure: "Plafond du taux médian de CSG sur les pensions, 1 part"
+    valeur: 26472
+    unite: euros de revenu fiscal de référence
+    localisation: "Section « Pension de retraite », tableau « Taux selon le revenu fiscal de référence (RFR) 2024 du foyer », ligne « 1 part », colonne « Taux médian » : « De 17 058 € à 26 472 € »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_csg_pension_majoration_demi_part_taux_zero_2026
+    module: menages_types
+    source: service_public_f2971
+    millesime: "2026"
+    mesure: "Majoration du seuil du taux zéro par demi-part supplémentaire"
+    valeur: 3484
+    unite: euros
+    localisation: "Section « Pension de retraite », tableau « Taux selon le revenu fiscal de référence (RFR) 2024 du foyer », ligne « Demi-part supplémentaire », colonne « Taux zéro » : « 3 484 € »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_csg_pension_majoration_demi_part_taux_reduit_2026
+    module: menages_types
+    source: service_public_f2971
+    millesime: "2026"
+    mesure: "Majoration du plafond du taux réduit par demi-part supplémentaire"
+    valeur: 4555
+    unite: euros
+    localisation: "Section « Pension de retraite », tableau « Taux selon le revenu fiscal de référence (RFR) 2024 du foyer », ligne « Demi-part supplémentaire », 3e valeur : « 4 555 € »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_csg_pension_majoration_demi_part_taux_median_2026
+    module: menages_types
+    source: service_public_f2971
+    millesime: "2026"
+    mesure: "Majoration du plafond du taux médian par demi-part supplémentaire"
+    valeur: 7066
+    unite: euros
+    localisation: "Section « Pension de retraite », tableau « Taux selon le revenu fiscal de référence (RFR) 2024 du foyer », ligne « Demi-part supplémentaire », 4e valeur : « 7 066 € »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_csg_pension_taux_reduit_2026
+    module: menages_types
+    source: service_public_f2971
+    millesime: "2026"
+    mesure: "Taux réduit de CSG sur les pensions de retraite"
+    valeur: 0.038
+    unite: fraction
+    localisation: "Section « Pension de retraite », liste « Il existe 4 taux de CSG sur les pensions de retraite » : « Taux réduit ( 3,8 % ) »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_csg_pension_taux_median_2026
+    module: menages_types
+    source: service_public_f2971
+    millesime: "2026"
+    mesure: "Taux médian de CSG sur les pensions de retraite"
+    valeur: 0.066
+    unite: fraction
+    localisation: "Section « Pension de retraite », liste « Il existe 4 taux de CSG sur les pensions de retraite » : « Taux médian ( 6,6 % ) »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_csg_pension_taux_normal_2026
+    module: menages_types
+    source: service_public_f2971
+    millesime: "2026"
+    mesure: "Taux normal de CSG sur les pensions de retraite"
+    valeur: 0.083
+    unite: fraction
+    localisation: "Section « Pension de retraite », liste « Il existe 4 taux de CSG sur les pensions de retraite » : « Taux normal ( 8,3 % ) »"
+    saisi_le: 2026-10-13
+    relecture: a_relire

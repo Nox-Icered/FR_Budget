@@ -53,6 +53,7 @@ for (const c of cas) {
   if (d["0BT"]) await page.check('[name="0BT"]');
   await page.fill('[name="1AJ"]', String(d["1AJ"]));
   if (d["1BJ"]) await page.fill('[name="1BJ"]', String(d["1BJ"]));
+  if (d["1AS"]) await page.fill('[name="1AS"]', String(d["1AS"]));
   await Promise.all([page.waitForURL(/calc-2026\.cgi/), page.getByAltText("lancer la simulation").click()]);
   const texte = await page.locator("body").innerText();
   const resultats = relever(texte);

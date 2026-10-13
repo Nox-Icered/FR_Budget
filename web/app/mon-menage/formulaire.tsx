@@ -1,7 +1,7 @@
 "use client";
 // Formulaire du ménage saisi. Règle 5 : la saisie reste dans la mémoire de la page ; elle n'est
 // ni stockée dans le navigateur ni mise dans l'adresse, et n'est envoyée qu'au service de calcul.
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { texte } from "../../lib/textes";
 import { lignesCascade } from "../../lib/cascade";
 import { region } from "../../lib/region";
@@ -35,6 +35,8 @@ export function Formulaire({ bornes }: { bornes: Bornes }) {
   const [resultat, setResultat] = useState<ResultatMonMenage | null>(null);
   const [erreur, setErreur] = useState(false);
   const [enCours, setEnCours] = useState(false);
+  // Révision de la saisie : une réponse arrivée après une modification est ignorée.
+  const revision = useRef(0);
 
   if (ADRESSE === null) {
     return (
@@ -45,17 +47,20 @@ export function Formulaire({ bornes }: { bornes: Bornes }) {
   }
   const adresse = ADRESSE;
 
-  const changerAdulte = (i: number, champ: Partial<AdulteFormulaire>) => {
-    setMenage({
+  // Toute modification efface le résultat affiché et périme la requête en cours.
+  const modifier = (suivant: MenageFormulaire) => {
+    revision.current += 1;
+    setMenage(suivant);
+    setResultat(null);
+    setErreur(false);
+    setEnCours(false);
+  };
+  const changerAdulte = (i: number, champ: Partial<AdulteFormulaire>) =>
+    modifier({
       ...menage,
       adultes: menage.adultes.map((a, k) => (k === i ? { ...a, ...champ } : a)),
     });
-    setResultat(null);
-  };
-  const changerEnfants = (enfants: string[]) => {
-    setMenage({ ...menage, enfants });
-    setResultat(null);
-  };
+  const changerEnfants = (enfants: string[]) => modifier({ ...menage, enfants });
 
   const envoyer = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,12 +73,14 @@ export function Formulaire({ bornes }: { bornes: Bornes }) {
     }
     setProblemes([]);
     setEnCours(true);
+    const envoi = revision.current;
     try {
-      setResultat(await calculer(adresse, r.corps));
+      const reponse = await calculer(adresse, r.corps);
+      if (envoi === revision.current) setResultat(reponse);
     } catch {
-      setErreur(true);
+      if (envoi === revision.current) setErreur(true);
     } finally {
-      setEnCours(false);
+      if (envoi === revision.current) setEnCours(false);
     }
   };
 
@@ -133,14 +140,14 @@ export function Formulaire({ bornes }: { bornes: Bornes }) {
           {menage.adultes.length < bornes.adultes_max ? (
             <button
               type="button"
-              onClick={() => setMenage({ ...menage, adultes: [...menage.adultes, adulteVide()] })}
+              onClick={() => modifier({ ...menage, adultes: [...menage.adultes, adulteVide()] })}
             >
               {texte("mon_menage.ajouter_adulte")}
             </button>
           ) : (
             <button
               type="button"
-              onClick={() => setMenage({ ...menage, adultes: menage.adultes.slice(0, 1) })}
+              onClick={() => modifier({ ...menage, adultes: menage.adultes.slice(0, 1) })}
             >
               {texte("mon_menage.retirer_adulte")}
             </button>
@@ -224,6 +231,15 @@ function Resultat({ r }: { r: ResultatMonMenage }) {
           </tbody>
         </table>
       </div>
+      <p className="source">
+        {texte("menages.sources")}{" "}
+        {r.sources.map((s, i) => (
+          <span key={s}>
+            {i > 0 && ", "}
+            <a href={`/sources/#${s}`}>{s}</a>
+          </span>
+        ))}
+      </p>
     </section>
   );
 }

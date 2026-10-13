@@ -191,7 +191,7 @@ class Correction(Strict):
     """Correction appliquée à OpenFisca-France (``registres/corrections_openfisca.yaml``)."""
 
     id: Identifiant
-    type: Annotated[str, StringConstraints(pattern=r"^(parametre|variable)$")]
+    type: Annotated[str, StringConstraints(pattern=r"^(parametre|variable|formule)$")]
     libelle: Texte
     constat: Texte
     date_effet: date
@@ -201,14 +201,17 @@ class Correction(Strict):
     valeur: float | None = None
     terme: Identifiant | None = None
     ajouter: dict[Identifiant, int] | None = None
+    valeurs: dict[Identifiant, float | date] | None = None
+    """Taux et dates d'une correction de type ``formule``, lus par sa fonction Python
+    (``fr_budget.menages.corrections_formules``)."""
 
     @model_validator(mode="after")
     def champs_selon_le_type(self) -> Self:
-        attendus = (
-            {"parametre": self.parametre, "valeur": self.valeur}
-            if self.type == "parametre"
-            else {"terme": self.terme, "ajouter": self.ajouter}
-        )
+        attendus: dict[str, object] = {}
+        if self.type == "parametre":
+            attendus = {"parametre": self.parametre, "valeur": self.valeur}
+        elif self.type == "variable":
+            attendus = {"terme": self.terme, "ajouter": self.ajouter}
         manquants = [nom for nom, valeur in attendus.items() if valeur is None]
         if manquants:
             msg = f"{self.id} : champs manquants pour le type {self.type} : {manquants}"

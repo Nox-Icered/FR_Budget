@@ -6,7 +6,7 @@ mise_a_jour: 2026-10-13
 
 # Fiche : ménages types (cascade jusqu'au net après impôt)
 
-Lot « ménages types », première partie (V1, prévu en parallèle de la phase 2). Fait en autonomie (instruction du mainteneur du 13 octobre 2026). Les choix du § 5 et les 10 valeurs saisies (2 de l'Insee, 8 barèmes de service-public.gouv.fr) sont **à relire**.
+Lot « ménages types », première partie (V1, prévu en parallèle de la phase 2). Fait en autonomie (instruction du mainteneur du 13 octobre 2026). Les choix du § 5, les 12 valeurs saisies (2 de l'Insee, 10 de service-public.gouv.fr) et les trois corrections d'OpenFisca propres aux apprentis sont **à relire**.
 
 ## 1. Question posée
 
@@ -21,8 +21,11 @@ Pour un ménage type, combien coûte le travail à l'employeur, et que reste-t-i
 | Cadre célibataire, 95e centile | 95e centile, salarié cadre | aucun | Insee Première n° 2079 : 5 593 € nets par mois en 2024 (2,55 fois la médiane) |
 | Couple marié, deux enfants | médiane et SMIC | nés en 2016 et 2019 | Insee, OpenFisca |
 | Parent seul, un enfant | SMIC, case T | né en 2019 | OpenFisca |
+| Apprenti de 19 ans | salaire minimum de l'apprentissage, contrat débuté le 1er septembre 2024 | aucun | service-public.gouv.fr, fiche F2918 : 43 % du SMIC en 1re année, 51 % en 2e année (18 à 20 ans) |
 
-La spécification prévoit aussi un retraité, un indépendant et un étudiant ou apprenti. Ces profils demandent d'autres sources (pension médiane, cotisations des indépendants) : ils viendront dans une deuxième partie.
+La spécification prévoit aussi un retraité et un indépendant :
+- **Retraité, pension médiane : bloqué.** La source attendue est le panorama de la DREES « Les retraités et les retraites » (édition 2025, fiche 5). Le site de la DREES n'était pas joignable depuis l'environnement de travail le 13 octobre 2026. Le portail de données ouvertes de la DREES ne publie, au plus récent, qu'une distribution par tranches de 100 € à fin 2020, sans médiane.
+- **Indépendant : à faire.** Le revenu médian est publié (Insee Première n° 2060 : 2 620 € par mois en 2023, non-salariés « classiques » hors agriculture). Reste à modéliser les cotisations des indépendants et à les valider.
 
 ## 3. Méthode de calcul
 
@@ -43,6 +46,14 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
   - Net après impôt : net avant impôt, moins l'impôt, plus les prestations.
 - **Hypothèses d'emploi.** Ce sont celles du cas validé contre le modèle Urssaf : effectif de 4, taux AT/MP de 2,08 %, pas de mutuelle d'entreprise.
 
+- **Apprenti.**
+  - Salaire brut de chaque mois : pourcentage du SMIC de l'année d'exécution du contrat (43 % puis 51 %), nul avant le contrat.
+  - La rémunération d'apprenti qu'OpenFisca calcule lui-même est neutralisée. Elle repose sur des pourcentages antérieurs à la fiche F2918 et s'ajoute au salaire de base.
+  - Trois corrections d'OpenFisca 176.1.2 (registre `corrections_openfisca.yaml`) appliquent les exonérations de la fiche F2918 :
+    - cotisations salariales : sous 79 % du SMIC (contrat conclu avant le 1er mars 2025) ou 50 % (depuis) ;
+    - CSG et CRDS : totale (avant), ou sous 50 % du SMIC (depuis) ;
+    - impôt sur le revenu : dans la limite du SMIC, mois par mois.
+
 ## 4. Données
 
 | Jeu de données | Ce qu'il apporte |
@@ -50,6 +61,7 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
 | `insee_premiere_2079_pdf` | médiane et 95e centile des salaires nets en équivalent temps plein, 2024 (page 2, figure 3) |
 | `registres/references/menages/impots_gouv_ir2026.json` | résultats du simulateur officiel de l'impôt (validation) |
 | `service_public_*_html` (5 pages de service-public.gouv.fr) | barèmes de la prime d'activité, des allocations familiales, de l'ARS et de l'ASF au 1er avril 2026 ; base mensuelle des allocations familiales 2025 et 2026 (validation) |
+| `service_public_f2918_html` | salaire minimum de l'apprenti et exonérations (cotisations, CSG-CRDS, impôt) |
 | `registres/references/menages/mesdroitssociaux_pa_2026.json` | résultats du simulateur officiel du RSA et de la prime d'activité (validation) |
 
 ## 5. Choix faits en autonomie, et leurs limites
@@ -64,6 +76,14 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
 8. **Logement des cas de validation.** Le simulateur exige un logement. Les cas sont saisis en locataire d'un logement vide à Paris 11e (code postal 75011), pour un loyer de 700 € hors charges, et le modèle est calculé avec ce même logement. Ce logement est un choix, sans source. Pour le parent seul, OpenFisca calcule alors une aide au logement, qui réduit la prime d'activité du « forfait logement ». Les ménages types du site restent calculés sans logement (choix 5).
 9. **Prestations déclarées au simulateur.** Les allocations versées (ASF, allocations familiales) sont déclarées comme ressources, avec le montant d'OpenFisca net de CRDS arrondi à l'euro. L'allocation de rentrée scolaire, versée en août, n'est pas déclarée : le simulateur ne la propose pas.
 10. **Salaire saisi dans le simulateur.** Le formulaire demande les salaires « en net fiscaux avant prélèvement à la source ». Mais la CAF retient le montant net social (service-public.gouv.fr, fiche F2882), et OpenFisca le salaire net (`ppa_revenu_activite_individu`). C'est ce salaire net qui est saisi (1 478 € par mois au SMIC au lieu de 1 531 € nets imposables), pour que le modèle et le simulateur partent du même revenu. Limite : si le simulateur convertit le net fiscal en un autre revenu, cette conversion n'est pas testée.
+
+11. **Apprenti** : 19 ans, contrat débuté le 1er septembre 2024, payé au minimum légal, vit seul (déclaration d'impôt propre).
+    - Le contrat est conclu avant le 1er mars 2025, pour que toute l'année 2025 relève d'un seul régime d'exonération.
+    - Son salaire est sous 79 % du SMIC : net égal au brut, aucun impôt, pas de prime d'activité. Son salaire est sous le plancher d'OpenFisca pour les apprenants : 55 % de 169 heures de SMIC (paramètre `def_pac.revenu_plafond_pac_non_scolaire`), soit 1 104 € par mois en juin 2025.
+    - Limite : rattaché au foyer de ses parents, il changerait leur impôt, ce qui n'est pas montré.
+    - Les aides au logement, souvent versées à un apprenti qui vit seul, ne sont pas comptées (choix 5).
+12. **Pas de salaire de janvier à août 2024**, avant le contrat. Cela compte pour les ressources des prestations de 2025.
+13. **Exonération d'impôt appliquée mois par mois** (limite : SMIC mensuel), comme dans le modèle de l'Urssaf. La loi fixe une limite annuelle, ce qui revient au même pour un salaire régulier.
 
 ## 6. Validation
 
@@ -83,6 +103,12 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
 Le nombre de parts et le revenu fiscal de référence sont identiques pour les cinq ménages.
 
 **Salaire.** Pour le célibataire au SMIC, la cascade mensuelle (coût employeur, brut, net, imposable) est validée contre le modèle Urssaf (fiche `cascade_salaire`).
+
+**Apprenti.**
+- La cascade mensuelle est comparée au modèle de calcul de l'Urssaf (fiche `cascade_salaire`, deux cas d'apprentis).
+- Le brut, le net et le net imposable sont dans la tolérance de 0,50 € par mois.
+- Le coût employeur est hors tolérance : +2,43 € et +2,22 € par mois. OpenFisca applique encore une exonération patronale propre aux apprentis au lieu de la réduction générale, et compte la taxe d'apprentissage. L'écart est publié tel quel.
+- Impôt : le simulateur d'impots.gouv.fr donne 0 €, comme le modèle (déclaration sans salaire imposable). Le simulateur n'affiche pas de revenu fiscal de référence quand il est nul : le test lit une ligne absente comme 0.
 
 **Barèmes des prestations.**
 - Test : `moteur/tests/validation/test_menages_prestations.py`.
@@ -125,5 +151,6 @@ Le module reste en bêta.
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-13 | Profil apprenti, avec trois corrections d'OpenFisca pour les apprentis | Impôt : 2 nouveaux tests réussis (6 cas sur 6) ; cascade Urssaf : 8 nouvelles comparaisons, 6 réussies, 2 hors tolérance (coût employeur) ; test unitaire de l'ordre de la cascade assoupli (brut égal au net possible pour l'apprenti) |
 | 2026-10-13 | Validation des prestations : barèmes publiés ; cas du simulateur officiel de la prime d'activité préparés | 8 nouveaux tests de validation sur les barèmes, tous réussis ; aucun cas du simulateur (service des communes indisponible) |
 | 2026-10-13 | Création : cinq ménages types salariés, cascade jusqu'au net après impôt | 11 nouveaux tests de validation (impôt, parts, revenu fiscal de référence), tous réussis |

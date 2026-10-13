@@ -52,6 +52,16 @@
         "1AJ": 17732,
         "0BT": true
       }
+    },
+    {
+      "id": "apprenti_19_ans",
+      "revenus": 2025,
+      "declaration": {
+        "situation": "C",
+        "0DA": "2006",
+        "0CF": 0,
+        "1AJ": 0
+      }
     }
   ]
 }

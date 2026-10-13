@@ -28,7 +28,8 @@
         "cout_employeur": 1879.2921419999998,
         "net_avant_impot": 1443.1086290833332,
         "net_imposable": 1495.0514063333333
-      }
+      },
+      "aides_differees_mensuelles": 0
     },
     {
       "id": "celibataire_smic_2026_01_mutuelle_par_defaut",
@@ -47,7 +48,8 @@
         "cout_employeur": 1899.2921419999998,
         "net_avant_impot": 1421.1686290833331,
         "net_imposable": 1493.6914063333331
-      }
+      },
+      "aides_differees_mensuelles": 0
     },
     {
       "id": "celibataire_smic_2026_07_sans_mutuelle",
@@ -69,7 +71,62 @@
         "cout_employeur": 1967.760886,
         "net_avant_impot": 1477.9257257916665,
         "net_imposable": 1531.1216981666666
-      }
+      },
+      "aides_differees_mensuelles": 0
+    },
+    {
+      "id": "apprenti_18_20_ans_1re_annee_2025_06",
+      "mois": "2025-06",
+      "situation": {
+        "salarié . contrat": "'apprentissage'",
+        "salarié . contrat . apprentissage . âge": "'de 18 à 20'",
+        "salarié . contrat . date d'embauche": "'01/09/2024'",
+        "salarié . contrat . salaire brut": "salarié . contrat . apprentissage . rémunération minimale",
+        "salarié . cotisations . prévoyances . santé . montant": "0 €/mois"
+      },
+      "apprentissage": {
+        "contrat_debut": "2024-09-01"
+      },
+      "hypotheses": {
+        "effectif_entreprise": 4,
+        "taux_accident_travail": 0.0212,
+        "mutuelle_montant_mensuel": 0,
+        "mutuelle_part_employeur": 0.5
+      },
+      "resultats_mensuels": {
+        "salaire_brut": 775,
+        "cout_employeur": 788.9965,
+        "net_avant_impot": 775,
+        "net_imposable": 0
+      },
+      "aides_differees_mensuelles": 416.66666666666663
+    },
+    {
+      "id": "apprenti_21_25_ans_1re_annee_2026_06",
+      "mois": "2026-06",
+      "situation": {
+        "salarié . contrat": "'apprentissage'",
+        "salarié . contrat . apprentissage . âge": "'de 21 à 25'",
+        "salarié . contrat . date d'embauche": "'01/09/2025'",
+        "salarié . contrat . salaire brut": "salarié . contrat . apprentissage . rémunération minimale",
+        "salarié . cotisations . prévoyances . santé . montant": "0 €/mois"
+      },
+      "apprentissage": {
+        "contrat_debut": "2025-09-01"
+      },
+      "hypotheses": {
+        "effectif_entreprise": 4,
+        "taux_accident_travail": 0.0208,
+        "mutuelle_montant_mensuel": 0,
+        "mutuelle_part_employeur": 0.5
+      },
+      "resultats_mensuels": {
+        "salaire_brut": 990,
+        "cout_employeur": 1008.3743999999999,
+        "net_avant_impot": 978.2269954375,
+        "net_imposable": 0
+      },
+      "aides_differees_mensuelles": 416.66666666666663
     }
   ]
 }

@@ -55,6 +55,11 @@ L'incidence des cotisations patronales (part répercutée sur le salaire) sera u
 - Tolérance : 0,50 € par mois et par ligne (validée le 7 octobre 2026).
 - Test : `moteur/tests/validation/test_menage_type_urssaf.py`.
 - Résultat au 7 octobre 2026 : 12 comparaisons sur 12 dans la tolérance, sur trois cas du célibataire au SMIC : janvier 2026 sans mutuelle, janvier 2026 avec mutuelle, juillet 2026 sans mutuelle (4 lignes par cas). Juillet 2026 avec mutuelle n'est pas testé. Détail et écarts trouvés : `docs/validation/menage_type_smic.md`.
+- Apprentis, ajoutés le 13 octobre 2026 : deux cas au salaire minimum de l'apprentissage, avec les trois corrections d'OpenFisca propres aux apprentis (registre des corrections) :
+  - juin 2025, 18 à 20 ans, 1re année ;
+  - juin 2026, 21 à 25 ans, 1re année, contrat conclu après le 1er mars 2025.
+
+  Le brut, le net et le net imposable sont dans la tolérance. Le coût employeur ne l'est pas : +2,43 € et +2,22 € par mois. OpenFisca applique encore une exonération patronale propre aux apprentis au lieu de la réduction générale, et compte la taxe d'apprentissage (5,27 € en 2025), que le modèle de l'Urssaf ne compte pas dans ce cas. L'écart est publié tel quel. Le coût comparé est celui de l'Urssaf, aides différées réintégrées (l'aide à l'embauche d'un apprenti n'est pas un allègement de cotisations).
 - Source indépendante : à faire (simulateurs officiels d'impots.gouv.fr et de la CAF pour le net après impôt).
 
 ## 7. Limites connues
@@ -69,4 +74,5 @@ L'incidence des cotisations patronales (part répercutée sur le salaire) sera u
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
 | 2026-10-07 | Première version : cascade sur 4 lignes, comparaison avec le modèle Urssaf | 12 tests de validation créés : 8 réussis avant corrections, 12 après |
+| 2026-10-13 | Deux cas d'apprentis ; corrections des cotisations salariales, de la CSG-CRDS et de l'impôt des apprentis ; coût employeur comparé aides différées réintégrées (sans effet sur les cas existants) | 8 nouvelles comparaisons : 6 dans la tolérance, 2 hors tolérance (coût employeur, +2,43 € et +2,22 €) ; les 12 existantes inchangées |
 | 2026-10-07 | Corrections AGS et mutuelle ; référence de juillet alignée sur le décret n° 2026-509 | 4 tests passés d'échec à réussite |

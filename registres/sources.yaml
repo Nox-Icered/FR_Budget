@@ -608,3 +608,12 @@ sources:
     millesime: législation en vigueur le jour de la simulation (octobre 2026), ressources de juin à septembre 2026
     acces: direct
     consulte_le: 2026-10-13
+
+  - id: service_public_f2918
+    nom: "Fiche « Contrat d'apprentissage » (vérifiée le 8 septembre 2026)"
+    editeur: Direction de l'information légale et administrative (Service Public)
+    url: https://www.service-public.gouv.fr/particuliers/vosdroits/F2918
+    licence: etalab-2.0 (mention du pied de page du site)
+    millesime: rémunération et exonérations en vigueur en septembre 2026
+    acces: direct
+    consulte_le: 2026-10-13

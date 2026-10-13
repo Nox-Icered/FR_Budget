@@ -1,0 +1,125 @@
+{
+  "cas": [
+    {
+      "id": "celibataire_smic",
+      "mois_ressources": [
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09"
+      ],
+      "mois_resultat": "2026-10",
+      "couple": false,
+      "adultes": [
+        {
+          "naissance": "1995-01-01",
+          "salaires": [
+            1478,
+            1478,
+            1478,
+            1478
+          ]
+        }
+      ],
+      "enfants": [],
+      "autres_ressources": [],
+      "logement": {
+        "code_postal": "75011",
+        "depcom": "75111",
+        "loyer": 700
+      }
+    },
+    {
+      "id": "parent_isole_1_enfant",
+      "mois_ressources": [
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09"
+      ],
+      "mois_resultat": "2026-10",
+      "couple": false,
+      "adultes": [
+        {
+          "naissance": "1990-01-01",
+          "salaires": [
+            1478,
+            1478,
+            1478,
+            1478
+          ]
+        }
+      ],
+      "enfants": [
+        "2019-03-01"
+      ],
+      "autres_ressources": [
+        {
+          "prestation": "asf",
+          "montants": [
+            201,
+            201,
+            201,
+            201
+          ]
+        }
+      ],
+      "logement": {
+        "code_postal": "75011",
+        "depcom": "75111",
+        "loyer": 700
+      }
+    },
+    {
+      "id": "couple_2_enfants",
+      "mois_ressources": [
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09"
+      ],
+      "mois_resultat": "2026-10",
+      "couple": true,
+      "adultes": [
+        {
+          "naissance": "1985-01-01",
+          "salaires": [
+            2314,
+            2314,
+            2314,
+            2314
+          ]
+        },
+        {
+          "naissance": "1987-01-01",
+          "salaires": [
+            1478,
+            1478,
+            1478,
+            1478
+          ]
+        }
+      ],
+      "enfants": [
+        "2016-03-01",
+        "2019-03-01"
+      ],
+      "autres_ressources": [
+        {
+          "prestation": "af",
+          "montants": [
+            152,
+            152,
+            152,
+            152
+          ]
+        }
+      ],
+      "logement": {
+        "code_postal": "75011",
+        "depcom": "75111",
+        "loyer": 700
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "source": {
+    "nom": "Simulateur du RSA et de la prime d'activité (mesdroitssociaux.gouv.fr)",
+    "editeur": "Caisse centrale de la MSA (portail mesdroitssociaux.gouv.fr)",
+    "url": "https://www.mesdroitssociaux.gouv.fr/simulateurs/rsa-pa",
+    "script": "outils/references_prestations/generer.mjs"
+  },
+  "cas": []
+}

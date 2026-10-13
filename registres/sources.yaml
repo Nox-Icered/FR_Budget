@@ -554,3 +554,57 @@ sources:
     millesime: impôt 2026 sur les revenus 2025
     acces: direct
     consulte_le: 2026-10-13
+
+  - id: service_public_f2882
+    nom: "Fiche « Prime d'activité : salarié ou fonctionnaire » (vérifiée le 1er juin 2026)"
+    editeur: Direction de l'information légale et administrative (Service Public)
+    url: https://www.service-public.gouv.fr/particuliers/vosdroits/F2882
+    licence: etalab-2.0 (mention du pied de page du site)
+    millesime: montants au 1er avril 2026
+    acces: direct
+    consulte_le: 2026-10-13
+
+  - id: service_public_f13213
+    nom: Fiche « Allocations familiales (famille de 2 enfants ou plus) » (vérifiée le 1er juin 2026)
+    editeur: Direction de l'information légale et administrative (Service Public)
+    url: https://www.service-public.gouv.fr/particuliers/vosdroits/F13213
+    licence: etalab-2.0 (mention du pied de page du site)
+    millesime: montants au 1er avril 2026
+    acces: direct
+    consulte_le: 2026-10-13
+
+  - id: service_public_f1878
+    nom: Fiche « Allocation de rentrée scolaire (ARS) » (vérifiée le 4 août 2026)
+    editeur: Direction de l'information légale et administrative (Service Public)
+    url: https://www.service-public.gouv.fr/particuliers/vosdroits/F1878
+    licence: etalab-2.0 (mention du pied de page du site)
+    millesime: rentrée 2026
+    acces: direct
+    consulte_le: 2026-10-13
+
+  - id: service_public_f815
+    nom: "Fiche « Allocation de soutien familial (ASF) : parents séparés » (vérifiée le 1er avril 2026)"
+    editeur: Direction de l'information légale et administrative (Service Public)
+    url: https://www.service-public.gouv.fr/particuliers/vosdroits/F815
+    licence: etalab-2.0 (mention du pied de page du site)
+    millesime: montants au 1er avril 2026
+    acces: direct
+    consulte_le: 2026-10-13
+
+  - id: service_public_a16506
+    nom: "Actualité « Prestations familiales et sociales : les nouveaux montants au 1er avril » (publiée le 24 mars 2026, mise à jour le 1er avril 2026)"
+    editeur: Direction de l'information légale et administrative (Service Public)
+    url: https://www.service-public.gouv.fr/particuliers/actualites/A16506
+    licence: etalab-2.0 (mention du pied de page du site)
+    millesime: montants au 1er avril 2026
+    acces: direct
+    consulte_le: 2026-10-13
+
+  - id: mesdroitssociaux_simulateur_rsa_pa
+    nom: Simulateur du revenu de solidarité active et de la prime d'activité (mesdroitssociaux.gouv.fr)
+    editeur: Caisse centrale de la MSA (éditeur du portail mesdroitssociaux.gouv.fr, d'après ses mentions légales)
+    url: https://www.mesdroitssociaux.gouv.fr/simulateurs/rsa-pa
+    licence: etalab-2.0 (mention du pied de page du site ; résultats relevés par outils/references_prestations/generer.mjs)
+    millesime: législation en vigueur le jour de la simulation (octobre 2026), ressources de juin à septembre 2026
+    acces: direct
+    consulte_le: 2026-10-13

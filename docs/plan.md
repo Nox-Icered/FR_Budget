@@ -145,7 +145,8 @@ En parallèle :
   - Artisan ajouté le 13 octobre 2026 (assiette réformée de 2025, décret n° 2024-688 et pages de l'Urssaf déposés par le mainteneur) : les huit profils de la spécification sont couverts.
   - Profil saisi par l'utilisateur ajouté le 13 octobre 2026 : page « Mon ménage », calcul par `POST /mon-menage`, sans stockage ni journal (test du journal de l'API). La page attend l'hébergement de l'API.
   - Effet des leviers sur les ménages types ajouté le 13 octobre 2026 : 7 leviers traduits en réformes d'OpenFisca, hausse et baisse d'une unité publiées sur la page Ménages types ; pension du retraité non chiffrée pour l'indexation (source manquante).
-  - Reste à faire : réglage d'incidence ; effet des leviers dans le simulateur (scénario complet) et sur le ménage saisi.
+  - Réglage d'incidence ajouté le 13 octobre 2026 : lectures comptable (par défaut) et répercutée sur le salaire, qui bornent l'effet des cotisations patronales et des allègements.
+  - Reste à faire : effet des leviers dans le simulateur (scénario complet) et sur le ménage saisi.
 - Indicateur de dépense incompressible pour TVA et accises (budgets de famille INSEE).
 - Entreprises : charge par taille et secteur (ESANE, DGFiP), sans effet comportemental.
 - Écrans Catalogue, Simulateur, Ménages, Entreprises, « Comment c'est calculé ? ».

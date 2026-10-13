@@ -5,7 +5,7 @@ import { useId, useState } from "react";
 import { texte } from "../../lib/textes";
 import { lignesComparees } from "../../lib/cascade";
 import { region } from "../../lib/region";
-import type { EffetsMenages, MenageType } from "../../lib/donnees";
+import type { EffetsMenages, Incidence, MenageType } from "../../lib/donnees";
 
 const euros = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
 const ecartSigne = new Intl.NumberFormat("fr-FR", {
@@ -27,9 +27,19 @@ export function EffetsLeviers({
   );
   const [choix, setChoix] = useState(0);
   const [menageId, setMenageId] = useState(menages[0].id);
+  const [incidence, setIncidence] = useState<Incidence>(effets.incidence_par_defaut);
   const { levier, sens } = options[choix];
   const menage = menages.find((m) => m.id === menageId) ?? menages[0];
-  const apres = effets.effets[levier][sens][menage.id];
+  const avecIncidence = effets.leviers_incidence.includes(levier);
+  const lecture = (i: Incidence) =>
+    (i === "salaire" ? effets.effets_salaire : effets.effets)[levier][sens][menage.id];
+  const apres = lecture(avecIncidence ? incidence : "comptable");
+  // Fourchette : les deux lectures de l'incidence bornent l'écart.
+  const lectures = avecIncidence
+    ? (["comptable", "salaire"] as Incidence[]).map(lecture).filter((c) => c !== null)
+    : [];
+  const ecarts = (cle: "net_apres_impot" | "cout_employeur") =>
+    lectures.map((c) => Math.round(c[cle] - menage[cle]));
   const mesure = texte(`menages.effets.leviers.${levier}.${sens}`);
   const lignes = apres ? lignesComparees(menage, apres) : [];
   const aucun = apres !== null && lignes.every((l) => Math.round(l.ecart) === 0);
@@ -57,12 +67,40 @@ export function EffetsLeviers({
           ))}
         </select>
       </div>
+      {avecIncidence && (
+        <fieldset className="reglages">
+          <legend>{texte("menages.effets.incidence.legende")}</legend>
+          {(["comptable", "salaire"] as Incidence[]).map((i) => (
+            <div key={i} className="interrupteur">
+              <input
+                id={`${id}-incidence-${i}`}
+                type="radio"
+                name={`${id}-incidence`}
+                checked={incidence === i}
+                onChange={() => setIncidence(i)}
+              />
+              <label htmlFor={`${id}-incidence-${i}`}>{texte(`menages.effets.incidence.${i}`)}</label>
+            </div>
+          ))}
+          <span className="source">{texte("menages.effets.incidence.aide")}</span>
+        </fieldset>
+      )}
       <div aria-live="polite">
         {apres === null ? (
           <p className="avertissement">{texte("menages.effets.non_chiffre")}</p>
         ) : (
           <>
             {aucun && <p>{texte("menages.effets.aucun")}</p>}
+            {lectures.length === 2 && (
+              <p>
+                {texte("menages.effets.incidence.fourchette", {
+                  bas: ecartSigne.format(Math.min(...ecarts("net_apres_impot"))),
+                  haut: ecartSigne.format(Math.max(...ecarts("net_apres_impot"))),
+                  cout_bas: ecartSigne.format(Math.min(...ecarts("cout_employeur"))),
+                  cout_haut: ecartSigne.format(Math.max(...ecarts("cout_employeur"))),
+                })}
+              </p>
+            )}
             <div className="defilement" {...region(legende)}>
               <table>
                 <caption>{legende}</caption>
@@ -103,9 +141,7 @@ export function EffetsLeviers({
           </span>
         ))}
       </p>
-      {levier === "cotisations_patronales_taux" && (
-        <p className="source">{texte("menages.effets.incidence")}</p>
-      )}
+
       <h3>{texte("menages.effets.sans_effet_titre")}</h3>
       <p>{texte("menages.effets.sans_effet_intro")}</p>
       <ul>

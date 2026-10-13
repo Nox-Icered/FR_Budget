@@ -297,6 +297,8 @@ def _description_leviers_menages() -> dict[str, Any]:
             {"id": i, "unite": d.unite, "sources": list(d.sources)} for i, d in leviers.items()
         ],
         "sans_effet": module_leviers_menages.SANS_EFFET,
+        "leviers_incidence": list(module_leviers_menages.LEVIERS_INCIDENCE),
+        "incidence_par_defaut": module_leviers_menages.COMPTABLE,
     }
 
 
@@ -305,28 +307,43 @@ def effets_leviers_menages(processus: int | None = None) -> dict[str, Any]:
     levier qui change directement sa législation (``fr_budget.menages.leviers``) ; ``null``
     quand l'effet n'est pas chiffré."""
     effets = module_leviers_menages.effets_unitaires(processus)
-    return {
-        **_description_leviers_menages(),
-        "effets": {
+
+    def lecture(incidence: str) -> dict[str, Any]:
+        return {
             levier: {
                 ("hausse" if valeur > 0 else "baisse"): {
                     i: _lignes_ou_rien(c) for i, c in cascades.items()
                 }
-                for valeur, cascades in par_sens.items()
+                for valeur, cascades in par_incidence[incidence].items()
             }
-            for levier, par_sens in effets.items()
-        },
+            for levier, par_incidence in effets.items()
+            if incidence in par_incidence
+        }
+
+    return {
+        **_description_leviers_menages(),
+        "effets": lecture(module_leviers_menages.COMPTABLE),
+        # Cotisations patronales : même mesure, salaire brut ajusté pour garder le coût employeur.
+        "effets_salaire": lecture(module_leviers_menages.SALAIRE),
     }
 
 
-def effet_levier_menages(levier: str, valeur: float) -> dict[str, Any]:
-    """Cascade de chaque ménage type sous ``valeur`` (unité du levier)."""
+def effet_levier_menages(
+    levier: str, valeur: float, incidence: str = module_leviers_menages.COMPTABLE
+) -> dict[str, Any]:
+    """Cascade de chaque ménage type sous ``valeur`` (unité du levier), dans la lecture
+    ``incidence`` des cotisations patronales."""
     return {
         **_description_leviers_menages(),
         "levier": levier,
         "valeur": valeur,
+        "incidence": incidence,
         "menages": {
-            i: _lignes_ou_rien(module_leviers_menages.cascade_reformee(i, levier, valeur))
+            i: _lignes_ou_rien(
+                module_leviers_menages.cascade_reformee(
+                    i, levier, valeur, module_menages.ANNEE, incidence
+                )
+            )
             for i in module_menages.PROFILS
         },
     }
@@ -638,14 +655,24 @@ def creer_application() -> FastAPI:
         return menages_types()
 
     @app.get("/menages-types/effet")
-    def route_effet_levier_menages(levier: str, valeur: float) -> dict[str, Any]:
-        """Cascade des ménages types sous un levier (unité du simulateur), dans ses bornes."""
+    def route_effet_levier_menages(
+        levier: str, valeur: float, incidence: Literal["comptable", "salaire"] = "comptable"
+    ) -> dict[str, Any]:
+        """Cascade des ménages types sous un levier (unité du simulateur), dans ses bornes ;
+        ``incidence`` : lecture des cotisations patronales (comptable par défaut)."""
         if levier not in module_leviers_menages.LEVIERS:
             raise HTTPException(status_code=404, detail="levier sans effet direct sur les ménages")
         basse, haute = module_scenario.bornes_levier(levier)
         if not basse <= valeur <= haute:
             raise HTTPException(status_code=422, detail="valeur hors des bornes du levier")
-        return effet_levier_menages(levier, valeur)
+        if (
+            incidence == module_leviers_menages.SALAIRE
+            and levier not in module_leviers_menages.LEVIERS_INCIDENCE
+        ):
+            raise HTTPException(
+                status_code=422, detail="lecture répercutée sans objet pour ce levier"
+            )
+        return effet_levier_menages(levier, valeur, incidence)
 
     @app.post("/mon-menage")
     def route_mon_menage(entree: MenageSaisiEntree) -> dict[str, Any]:

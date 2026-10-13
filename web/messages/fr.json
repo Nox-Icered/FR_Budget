@@ -373,7 +373,6 @@
       "legende": "{menage} : {mesure}, en euros par an",
       "non_chiffre": "Effet non chiffré pour ce ménage : la mesure ne porte que sur les pensions de base, et la part de base dans la pension moyenne publiée par la DREES n'est pas dans les sources du projet.",
       "aucun": "Cette mesure ne change aucune ligne de la cascade de ce ménage.",
-      "incidence": "Cotisations patronales : lecture comptable, la hausse ou la baisse porte sur le coût employeur et ne change pas le salaire brut.",
       "leviers": {
         "csg_activite": {
           "hausse": "Hausse d'un point du taux de CSG sur les revenus d'activité",
@@ -414,6 +413,13 @@
         "agents_publics": "Rémunérations publiques : aucun de ces ménages n'est agent public.",
         "structurel": "Âge de départ à la retraite : il change les carrières et les pensions futures, pas l'année simulée.",
         "catalogue": "Dépenses fiscales : chacune vise une situation particulière, absente de ces ménages types."
+      },
+      "incidence": {
+        "legende": "Incidence des cotisations patronales",
+        "comptable": "Lecture comptable : le coût employeur change, le salaire brut ne change pas",
+        "salaire": "Lecture répercutée : le coût employeur ne change pas, le salaire brut s'ajuste",
+        "aide": "Qui supporte la mesure, l'employeur ou le salarié, n'est pas établi : les deux lectures bornent le résultat. Le salaire ne descend pas sous le SMIC ; le salaire d'un apprenti, fixé par la loi, ne s'ajuste pas.",
+        "fourchette": "Écart du net après impôt selon la lecture : de {bas} à {haut} euros par an ; écart du coût employeur : de {cout_bas} à {cout_haut} euros par an."
       }
     }
   },

@@ -33,6 +33,8 @@ const scenarioMenages = {
   grille: effets.grille,
   ecart_max_un_levier: effets.controle.ecart_max_un_levier,
   ecart_max_combinaison: effets.controle.ecart_max_combinaison,
+  ecart_max_salaire_un_levier: effets.controle.ecart_max_salaire_un_levier,
+  ecart_max_salaire_combinaison: effets.controle.ecart_max_salaire_combinaison,
 };
 await writeFile(
   new URL(`menages-scenario.${empreinte}.json`, dossier),

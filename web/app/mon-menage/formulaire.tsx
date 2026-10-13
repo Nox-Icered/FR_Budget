@@ -30,7 +30,15 @@ const adulteVide = (): AdulteFormulaire => ({
   cadre: false,
 });
 
-export function Formulaire({ bornes, leviers }: { bornes: Bornes; leviers: string[] }) {
+export function Formulaire({
+  bornes,
+  leviers,
+  leviersIncidence,
+}: {
+  bornes: Bornes;
+  leviers: { id: string; bornes: [number, number] }[];
+  leviersIncidence: string[];
+}) {
   const idBase = useId();
   // Mesures transmises par le simulateur dans l'adresse (jamais la saisie du ménage).
   const [scenario, setScenario] = useState<ScenarioMenage | null>(null);
@@ -38,10 +46,10 @@ export function Formulaire({ bornes, leviers }: { bornes: Bornes; leviers: strin
   useEffect(() => {
     const recherche = window.location.search;
     if (!recherche) return;
-    const lu = decoderScenarioMenage(recherche, leviers);
+    const lu = decoderScenarioMenage(recherche, leviers, leviersIncidence);
     if (lu) setScenario(lu);
     else setScenarioIllisible(true);
-  }, [leviers]);
+  }, [leviers, leviersIncidence]);
   const [menage, setMenage] = useState<MenageFormulaire>({ adultes: [adulteVide()], enfants: [] });
   const [problemes, setProblemes] = useState<Probleme[]>([]);
   const [resultat, setResultat] = useState<ResultatMonMenage | null>(null);

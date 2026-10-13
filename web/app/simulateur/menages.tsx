@@ -112,6 +112,11 @@ export function EffetsMenagesScenario({
               un_levier: entier(d.ecart_max_un_levier).replace("+", ""),
               combinaison: entier(d.ecart_max_combinaison).replace("+", ""),
             })}
+            {lecture === "salaire" &&
+              ` ${texte("simulateur.menages.approximation_salaire", {
+                un_levier: entier(d.ecart_max_salaire_un_levier).replace("+", ""),
+                combinaison: entier(d.ecart_max_salaire_combinaison).replace("+", ""),
+              })}`}
           </p>
           <p>
             <Link href={`/mon-menage/?${lien}`}>{texte("simulateur.menages.mon_menage")}</Link>

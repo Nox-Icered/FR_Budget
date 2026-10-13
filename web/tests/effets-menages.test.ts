@@ -20,6 +20,7 @@ test("même approximation que le moteur sur les scénarios de contrôle", () => 
         Object.entries(s.mesures) as [string, number][],
         effets.grille as Grille,
         effets.leviers_incidence,
+        s.incidence,
       );
       if (attendu === null) {
         assert.equal(approche, null, `${id}`);

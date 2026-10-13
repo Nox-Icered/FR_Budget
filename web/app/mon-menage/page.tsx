@@ -4,7 +4,7 @@ import { Formulaire } from "./formulaire";
 
 export default function MonMenage() {
   const { saisie } = lire<MenagesTypes>("menages-types.json");
-  const leviers = lire<EffetsMenages>("menages-effets.json").leviers.map((l) => l.id);
+  const effets = lire<EffetsMenages>("menages-effets.json");
   return (
     <>
       <h1>{texte("mon_menage.titre")}</h1>
@@ -13,7 +13,11 @@ export default function MonMenage() {
       </p>
       <p>{texte("mon_menage.intro", { annee: saisie.annee })}</p>
       <p>{texte("mon_menage.confidentialite")}</p>
-      <Formulaire bornes={saisie} leviers={leviers} />
+      <Formulaire
+        bornes={saisie}
+        leviers={effets.leviers}
+        leviersIncidence={effets.leviers_incidence}
+      />
       <p className="source">{texte("mon_menage.limites")}</p>
       <p className="source">{texte("menages.limites")}</p>
       <p className="source">{texte("menages.lien_fiche")}</p>

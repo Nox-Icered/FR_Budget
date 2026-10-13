@@ -149,17 +149,28 @@ export function encoderScenarioMenage(s: ScenarioMenage): string {
 
 export function decoderScenarioMenage(
   recherche: string,
-  leviersConnus: string[],
+  leviers: { id: string; bornes: [number, number] }[],
+  leviersIncidence: string[],
 ): ScenarioMenage | null {
+  // Mêmes contrôles que le service de calcul : levier connu, valeur dans ses bornes, lecture
+  // répercutée seulement avec une mesure sur les cotisations patronales.
   const params = new URLSearchParams(recherche);
   const m = params.get("m");
   if (!m) return null;
   const mesures: Record<string, number> = {};
   for (const morceau of m.split(";")) {
-    const [levier, valeur] = morceau.split(":");
+    const [id, valeur] = morceau.split(":");
+    const levier = leviers.find((l) => l.id === id);
     const v = Number(valeur);
-    if (!leviersConnus.includes(levier) || !Number.isFinite(v)) return null;
-    mesures[levier] = v;
+    if (!levier || valeur === undefined || valeur.trim() === "" || !Number.isFinite(v)) return null;
+    if (v < levier.bornes[0] || v > levier.bornes[1]) return null;
+    mesures[id] = v;
   }
-  return { mesures, incidence: params.get("i") === "salaire" ? "salaire" : "comptable" };
+  const i = params.get("i");
+  if (i !== null && i !== "salaire" && i !== "comptable") return null;
+  const incidence = i === "salaire" ? "salaire" : "comptable";
+  if (incidence === "salaire" && !Object.keys(mesures).some((k) => leviersIncidence.includes(k))) {
+    return null;
+  }
+  return { mesures, incidence };
 }

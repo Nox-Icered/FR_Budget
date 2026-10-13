@@ -285,10 +285,11 @@
       "fourchette": "Net après impôt selon la lecture de l'incidence",
       "de_a": "de {bas} à {haut}",
       "non_chiffre": "Non chiffré : l'effet d'une des mesures n'est pas calculé pour ce ménage (voir la page des ménages types).",
-      "approximation": "Valeurs approchées : pour chaque mesure, l'effet est interpolé entre des cascades calculées exactement, puis les effets des mesures sont additionnés ligne par ligne, sans qu'une prestation devienne négative. Sur les scénarios de contrôle, l'écart au calcul complet atteint {un_levier} euros par an pour une mesure seule et {combinaison} euros par an quand toutes les mesures sont à leurs bornes.",
+      "approximation": "Valeurs approchées : pour chaque mesure, l'effet est interpolé entre des cascades calculées exactement, puis les effets des mesures sont additionnés ligne par ligne, sans qu'une prestation devienne négative. Sur les scénarios de contrôle, en lecture comptable, l'écart au calcul complet atteint {un_levier} euros par an pour une mesure seule et {combinaison} euros par an quand toutes les mesures sont à leurs bornes.",
       "mon_menage": "Voir l'effet de ces mesures sur mon ménage",
       "detail": "Détail ligne par ligne, mesure par mesure",
-      "ecartees": "Mesures réglées sans effet direct sur ces ménages :"
+      "ecartees": "Mesures réglées sans effet direct sur ces ménages :",
+      "approximation_salaire": "En lecture répercutée sur le salaire, contrôlée sur les scénarios aux bornes qui touchent les cotisations patronales : {un_levier} euros par an pour une mesure seule, {combinaison} euros par an pour toutes les mesures à leurs bornes."
     }
   },
   "partage": {

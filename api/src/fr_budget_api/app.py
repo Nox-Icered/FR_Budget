@@ -346,7 +346,13 @@ def _description_leviers_menages() -> dict[str, Any]:
         "annee_revenus": module_menages.ANNEE,
         "sources": SOURCES_MENAGES,
         "leviers": [
-            {"id": i, "unite": d.unite, "sources": list(d.sources)} for i, d in leviers.items()
+            {
+                "id": i,
+                "unite": d.unite,
+                "sources": list(d.sources),
+                "bornes": list(module_scenario.bornes_levier(i)),
+            }
+            for i, d in leviers.items()
         ],
         "sans_effet": module_leviers_menages.SANS_EFFET,
         "leviers_incidence": list(module_leviers_menages.LEVIERS_INCIDENCE),
@@ -391,12 +397,12 @@ def effets_leviers_menages(processus: int | None = None) -> dict[str, Any]:
     }
     controle = module_leviers_menages.controle_approximation(processus)
 
-    def ecart_max(un_levier: bool) -> float:
+    def ecart_max(un_levier: bool, incidence: str) -> float:
         return round(
             max(
                 abs(approche - exact)
                 for c in controle
-                if (len(c.mesures) == 1) == un_levier
+                if (len(c.mesures) == 1) == un_levier and c.incidence == incidence
                 for m in c.menages.values()
                 if m is not None
                 for exact, approche in (m,)
@@ -404,16 +410,18 @@ def effets_leviers_menages(processus: int | None = None) -> dict[str, Any]:
             2,
         )
 
+    comptable, salaire = module_leviers_menages.COMPTABLE, module_leviers_menages.SALAIRE
     return {
         **_description_leviers_menages(),
-        "effets": lecture(module_leviers_menages.COMPTABLE),
+        "effets": lecture(comptable),
         # Cotisations patronales : même mesure, salaire brut ajusté pour garder le coût employeur.
-        "effets_salaire": lecture(module_leviers_menages.SALAIRE),
+        "effets_salaire": lecture(salaire),
         "grille": grille,
         "controle": {
             "scenarios": [
                 {
                     "mesures": dict(c.mesures),
+                    "incidence": c.incidence,
                     "menages": {
                         i: None
                         if m is None
@@ -423,8 +431,11 @@ def effets_leviers_menages(processus: int | None = None) -> dict[str, Any]:
                 }
                 for c in controle
             ],
-            "ecart_max_un_levier": ecart_max(un_levier=True),
-            "ecart_max_combinaison": ecart_max(un_levier=False),
+            "ecart_max_un_levier": ecart_max(True, comptable),
+            "ecart_max_combinaison": ecart_max(False, comptable),
+            # Lecture répercutée : scénarios aux bornes touchant les cotisations patronales.
+            "ecart_max_salaire_un_levier": ecart_max(True, salaire),
+            "ecart_max_salaire_combinaison": ecart_max(False, salaire),
         },
     }
 

@@ -391,3 +391,11 @@ def test_grille_dans_les_bornes() -> None:
         assert min(valeurs) == bas
         assert max(valeurs) == haut
         assert {1.0, -1.0} <= set(valeurs) | ({-1.0} if bas > -1 else set())
+
+
+def test_controle_salaire_sur_les_cotisations_patronales() -> None:
+    """Chaque scénario de contrôle de la lecture répercutée touche les cotisations patronales."""
+    scenarios = lv.scenarios_controle_salaire()
+    assert scenarios
+    for mesures_ in scenarios:
+        assert any(k in lv.LEVIERS_INCIDENCE for k, _ in mesures_)

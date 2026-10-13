@@ -89,7 +89,7 @@ export type EffetsMenages = {
   unite: string;
   annee_revenus: number;
   sources: string[];
-  leviers: { id: string; unite: string; sources: string[] }[];
+  leviers: { id: string; unite: string; sources: string[]; bornes: [number, number] }[];
   sans_effet: Record<string, string>;
   effets: Record<string, Record<"hausse" | "baisse", Record<string, LignesCascade | null>>>;
   effets_salaire: Record<string, Record<"hausse" | "baisse", Record<string, LignesCascade | null>>>;
@@ -101,12 +101,14 @@ export type MenagesScenario = {
   annee_revenus: number;
   menages: MenageType[];
   sources: string[];
-  leviers: { id: string; unite: string; sources: string[] }[];
+  leviers: { id: string; unite: string; sources: string[]; bornes: [number, number] }[];
   leviers_incidence: string[];
   sans_effet: Record<string, string>;
   grille: Grille;
   ecart_max_un_levier: number;
   ecart_max_combinaison: number;
+  ecart_max_salaire_un_levier: number;
+  ecart_max_salaire_combinaison: number;
 };
 export type LigneJournal = {
   date: string;

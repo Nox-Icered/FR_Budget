@@ -667,8 +667,19 @@ def scenarios_controle() -> list[Mesures]:
     return [m for m in scenarios if m]
 
 
-def _exact(mesures_: Mesures) -> dict[str, types.CascadeMenage | None]:
-    return {i: cascade_scenario(i, mesures_) for i in types.PROFILS}
+def scenarios_controle_salaire() -> list[Mesures]:
+    """Scénarios de contrôle de la lecture répercutée : ceux qui touchent les cotisations
+    patronales, aux bornes (chaque levier concerné seul, puis tous les leviers ensemble). Le
+    calcul exact ajuste le salaire par itérations : les valeurs intermédiaires ne sont pas
+    reprises, pour garder l'export dans une durée raisonnable."""
+    bornes = {levier: scenario.bornes_levier(levier) for levier in LEVIERS}
+    seuls = [((levier, b),) for levier in LEVIERS_INCIDENCE for b in bornes[levier] if b != 0]
+    ensemble = [mesures({lv: b[k] for lv, b in bornes.items()}) for k in (0, 1)]
+    return [*seuls, *ensemble]
+
+
+def _exact(mesures_: Mesures, incidence: str = COMPTABLE) -> dict[str, types.CascadeMenage | None]:
+    return {i: cascade_scenario(i, mesures_, types.ANNEE, incidence) for i in types.PROFILS}
 
 
 @dataclass(frozen=True)
@@ -677,6 +688,7 @@ class Controle:
     ou ``None`` si l'effet n'est pas chiffré."""
 
     mesures: Mesures
+    incidence: str
     menages: dict[str, tuple[float, float] | None]
 
 
@@ -684,17 +696,20 @@ class Controle:
 def controle_approximation(processus: int | None = None) -> list[Controle]:
     """Pour chaque scénario de contrôle et chaque ménage type : écart du net après impôt
     calculé exactement (une seule réforme) et approché (grille interpolée), en lecture
-    comptable. Mis en cache : ne dépend d'aucune donnée saisie."""
+    comptable, et en lecture répercutée sur le salaire pour les scénarios qui touchent les
+    cotisations patronales. Mis en cache : ne dépend d'aucune donnée saisie."""
     effets = effets_grille(processus)
-    scenarios = scenarios_controle()
+    cas = [(m, COMPTABLE) for m in scenarios_controle()] + [
+        (m, SALAIRE) for m in scenarios_controle_salaire()
+    ]
     contexte = multiprocessing.get_context("spawn")
     with ProcessPoolExecutor(max_workers=processus, mp_context=contexte) as executeur:
-        exacts = list(executeur.map(_exact, scenarios))
+        exacts = list(executeur.map(_exact, *zip(*cas, strict=True)))
     resultats: list[Controle] = []
-    for mesures_, cascades in zip(scenarios, exacts, strict=True):
+    for (mesures_, incidence), cascades in zip(cas, exacts, strict=True):
         menages: dict[str, tuple[float, float] | None] = {}
         for i, cascade in cascades.items():
-            approche = approximation(i, mesures_, effets)
+            approche = approximation(i, mesures_, effets, incidence)
             if cascade is None or approche is None:
                 menages[i] = None
                 continue
@@ -703,5 +718,5 @@ def controle_approximation(processus: int | None = None) -> list[Controle]:
                 cascade.net_apres_impot - reference,
                 approche.net_apres_impot - reference,
             )
-        resultats.append(Controle(mesures_, menages))
+        resultats.append(Controle(mesures_, incidence, menages))
     return resultats

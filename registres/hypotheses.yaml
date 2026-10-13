@@ -621,3 +621,18 @@ hypotheses:
       le renouvellement des générations (la DREES décrit les deux effets) ; sans chiffrage pour
       2024 et 2025, l'écart est pris nul, sans plage.
     instruments: [menages_types]
+
+  - id: menages_ecart_evolution_revenu_independant
+    libelle: Écart entre l'évolution du revenu médian des non-salariés et celle du SMIC horaire brut, de 2023 à l'année simulée
+    unite: écart relatif
+    valeur_centrale: 0.0
+    plage:
+      basse: 0.0
+      haute: 0.0
+    sources: [insee_premiere_2060]
+    justification: >-
+      Le revenu médian de l'Insee porte sur 2023 ; le ménage type est simulé sur 2025. Il est
+      porté en 2025 en gardant son rapport au SMIC horaire brut. L'Insee constate en 2023 une
+      baisse du revenu moyen des non-salariés classiques en euros constants (-4,4 %), sans
+      donnée sur 2024 et 2025 : l'écart est pris nul, sans plage.
+    instruments: [menages_types]

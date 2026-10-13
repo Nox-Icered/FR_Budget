@@ -2784,3 +2784,443 @@ chiffrages:
     localisation: "Section « Pension de retraite », liste « Il existe 4 taux de CSG sur les pensions de retraite » : « Taux normal ( 8,3 % ) »"
     saisi_le: 2026-10-13
     relecture: a_relire
+
+  - id: insee_revenu_median_non_salaries_classiques_2023
+    module: menages_types
+    source: insee_premiere_2060
+    millesime: "2023"
+    mesure: "Revenu d'activité mensuel médian des non-salariés classiques (hors agriculture et micro-entrepreneurs)"
+    valeur: 2620
+    unite: "euros par mois"
+    localisation: "Page 1 : « Un non-salarié classique sur deux gagne plus de 2 620 euros par mois » ; figure 2"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_abattement_assiette
+    module: menages_types
+    source: urssaf_reforme_assiette_independants
+    millesime: "2025"
+    mesure: "Abattement forfaitaire appliqué au revenu brut pour former l'assiette unique des cotisations et de la CSG-CRDS"
+    valeur: 0.26
+    unite: "fraction"
+    localisation: "Section « Pour aller plus loin sur la réforme de l'assiette » : « le revenu brut abattu de 26 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_abattement_plancher
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Plancher de l'abattement, en part du plafond annuel de la Sécurité sociale"
+    valeur: 0.0176
+    unite: "fraction du PSS"
+    localisation: "Article 1er, art. D. 136-5, I : « 1,76 % de la valeur annuelle du plafond »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_abattement_plafond
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Plafond de l'abattement, en part du plafond annuel de la Sécurité sociale"
+    valeur: 1.3
+    unite: "fraction du PSS"
+    localisation: "Article 1er, art. D. 136-5, II : « 130 % de la valeur annuelle du plafond »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_maladie_taux_t1
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Maladie-maternité : taux T1 (assiette à 40 % du PSS)"
+    valeur: 0.015
+    unite: "fraction"
+    localisation: "Article 2, art. D. 621-2, 2° : « T1 est égal à 1,5 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_maladie_taux_t2
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Maladie-maternité : taux T2 (assiette à 60 % du PSS)"
+    valeur: 0.04
+    unite: "fraction"
+    localisation: "Article 2, art. D. 621-2, 3° : « T2 est égal à 4 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_maladie_taux_t3
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Maladie-maternité : taux T3 (assiette à 110 % du PSS)"
+    valeur: 0.065
+    unite: "fraction"
+    localisation: "Article 2, art. D. 621-2, 4° : « T3 est égal à 6,5 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_maladie_taux_t4
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Maladie-maternité : taux T4 (assiette à 200 % du PSS)"
+    valeur: 0.077
+    unite: "fraction"
+    localisation: "Article 2, art. D. 621-2, 5° : « T4 est égal à 7,7 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_maladie_taux_t5
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Maladie-maternité : taux de base T5 jusqu'à 3 PSS"
+    valeur: 0.085
+    unite: "fraction"
+    localisation: "Article 2, art. D. 621-1 : « 8,50 % pour la fraction des revenus qui n'excède pas trois fois » le PSS ; art. D. 621-2, 6°"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_maladie_taux_au_dela_3_pss
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Maladie-maternité : taux de la part au-delà de 3 PSS"
+    valeur: 0.065
+    unite: "fraction"
+    localisation: "Article 2, art. D. 621-1 : « 6,5 % pour la part au-delà de ce montant »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_ij_taux
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Indemnités journalières (artisans, commerçants) : taux, jusqu'à 5 PSS"
+    valeur: 0.005
+    unite: "fraction"
+    localisation: "Article 2, art. D. 621-3, I : « 0,50 % pour les travailleurs indépendants mentionnés à l'article L. 631-1 »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_ij_assiette_minimale
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Indemnités journalières : assiette minimale, en part du PSS"
+    valeur: 0.4
+    unite: "fraction du PSS"
+    localisation: "Article 2, art. D. 621-3, I : « ne peut être calculée sur une assiette inférieure à 40 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_retraite_base_plafonnee
+    module: menages_types
+    source: urssaf_reforme_assiette_independants
+    millesime: "2025"
+    mesure: "Retraite de base des artisans et commerçants : taux plafonné (jusqu'à 1 PSS), hors part déplafonnée"
+    valeur: 0.1715
+    unite: "fraction"
+    localisation: "Tableau « Cotisations retraite de base pour les artisans, commerçant et PLNR », nouveau : « 17,87 % (17,15 + 0,72) »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_retraite_base_deplafonnee
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Retraite de base : taux sur la totalité de l'assiette"
+    valeur: 0.0072
+    unite: "fraction"
+    localisation: "Article 3, I, 1° b) : « 0,60 % » remplacé par « 0,72 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_retraite_complementaire_t1
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Retraite complémentaire des artisans et commerçants : taux jusqu'à 1 PSS"
+    valeur: 0.081
+    unite: "fraction"
+    localisation: "Article 3, I, 2°, art. D. 635-7, 1° : « 8,1 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_retraite_complementaire_t2
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Retraite complémentaire : taux de 1 à 4 PSS"
+    valeur: 0.091
+    unite: "fraction"
+    localisation: "Article 3, I, 2°, art. D. 635-7, 2° : « 9,1 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_invalidite_deces
+    module: menages_types
+    source: urssaf_taux_ac_plnr
+    millesime: "2026"
+    mesure: "Invalidité-décès : taux jusqu'à 1 PSS"
+    valeur: 0.013
+    unite: "fraction"
+    localisation: "Tableau « Invalidité - décès en métropole » : « 1,30 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_allocations_familiales_taux
+    module: menages_types
+    source: urssaf_taux_ac_plnr
+    millesime: "2026"
+    mesure: "Allocations familiales : taux plein (au-delà de 140 % du PSS), progressif de 110 % à 140 %"
+    valeur: 0.031
+    unite: "fraction"
+    localisation: "Tableau « Allocations familiales en métropole » : « Taux progressif de 0 % à 3,10 % » entre 110 % et 140 % du Pass"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_formation_artisan
+    module: menages_types
+    source: urssaf_taux_ac_plnr
+    millesime: "2026"
+    mesure: "Contribution à la formation professionnelle d'un artisan, en part du PSS"
+    valeur: 0.0029
+    unite: "fraction du PSS"
+    localisation: "Tableau « CFP […] - Artisan en métropole » : « Sur la base de 48 060 € (1 Pass) 0,29 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_csg_crds
+    module: menages_types
+    source: urssaf_taux_ac_plnr
+    millesime: "2026"
+    mesure: "CSG-CRDS des indépendants sur les revenus d'activité"
+    valeur: 0.097
+    unite: "fraction"
+    localisation: "Tableau « CSG-CRDS en métropole » : « Revenus d'activité 9,70 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_csg_activite_deductible
+    module: menages_types
+    source: service_public_f2971
+    millesime: "2026"
+    mesure: "Part déductible de l'impôt de la CSG sur les revenus d'activité"
+    valeur: 0.068
+    unite: "fraction"
+    localisation: "Tableau « Taux selon la nature des revenus », ligne « Revenus d'activité salariée » : « 9,2 % 6,8 % 0,5 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_crds_activite
+    module: menages_types
+    source: service_public_f2971
+    millesime: "2026"
+    mesure: "Taux de la CRDS sur les revenus d'activité"
+    valeur: 0.005
+    unite: "fraction"
+    localisation: "Même ligne : CRDS « 0,5 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: urssaf_retraite_complementaire_maximale_2026
+    module: menages_types
+    source: urssaf_taux_ac_plnr
+    millesime: "2026"
+    mesure: "Cotisation maximale de retraite complémentaire (assiette de 4 PSS)"
+    valeur: 17494
+    unite: "euros par an"
+    localisation: "Tableau « Cotisations maximales », « Régime vieillesse complémentaire » : « Cotisation maximale 17 494 € »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: urssaf_ij_maximale_2026
+    module: menages_types
+    source: urssaf_taux_ac_plnr
+    millesime: "2026"
+    mesure: "Cotisation maximale d'indemnités journalières (assiette de 5 PSS)"
+    valeur: 1202
+    unite: "euros par an"
+    localisation: "Tableau « Cotisations maximales », « Maladie 2 » : « Cotisation maximale 1 202 € »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: urssaf_invalidite_maximale_2026
+    module: menages_types
+    source: urssaf_taux_ac_plnr
+    millesime: "2026"
+    mesure: "Cotisation maximale d'invalidité-décès (assiette de 1 PSS)"
+    valeur: 625
+    unite: "euros par an"
+    localisation: "Tableau « Cotisations maximales », « Invalidité-décès » : « Cotisation maximale 625 € »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: urssaf_ij_minimale_2026
+    module: menages_types
+    source: urssaf_taux_ac_plnr
+    millesime: "2026"
+    mesure: "Cotisation minimale d'indemnités journalières (assiette de 40 % du PSS)"
+    valeur: 96
+    unite: "euros par an"
+    localisation: "Tableau « Vos cotisations minimales » : « Montant minimal annuel 96 € »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: urssaf_formation_artisan_2026
+    module: menages_types
+    source: urssaf_taux_ac_plnr
+    millesime: "2026"
+    mesure: "Contribution à la formation professionnelle d'un artisan"
+    valeur: 139
+    unite: "euros par an"
+    localisation: "Tableau « Vos cotisations minimales », formation professionnelle : « 139 € pour les artisans »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_maladie_seuil_s0
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Maladie-maternité : seuil sous lequel le taux est nul"
+    valeur: 0.2
+    unite: "fraction du PSS"
+    localisation: "Article 2, art. D. 621-2, 1° : « inférieur à 20 % » du PSS"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_maladie_seuil_s1
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Maladie-maternité : seuil du taux T1"
+    valeur: 0.4
+    unite: "fraction du PSS"
+    localisation: "Article 2, art. D. 621-2, 2° et 3° : « 40 % » du PSS"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_maladie_seuil_s2
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Maladie-maternité : seuil du taux T2"
+    valeur: 0.6
+    unite: "fraction du PSS"
+    localisation: "Article 2, art. D. 621-2, 3° et 4° : « 60 % » du PSS"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_maladie_seuil_s3
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Maladie-maternité : seuil du taux T3"
+    valeur: 1.1
+    unite: "fraction du PSS"
+    localisation: "Article 2, art. D. 621-2, 4° et 5° : « 110 % » du PSS"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_maladie_seuil_s4
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Maladie-maternité : seuil du taux T4"
+    valeur: 2.0
+    unite: "fraction du PSS"
+    localisation: "Article 2, art. D. 621-2, 5° et 6° : « 200 % » du PSS"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_maladie_seuil_s5
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Maladie-maternité : seuil du taux de base T5 et de la part à 6,5 %"
+    valeur: 3.0
+    unite: "fraction du PSS"
+    localisation: "Article 2, art. D. 621-1 et D. 621-2, 6° : « trois fois » le PSS"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_ij_plafond
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Indemnités journalières : plafond de l'assiette, en PSS"
+    valeur: 5.0
+    unite: "fraction du PSS"
+    localisation: "Article 2, art. D. 621-3, I : « n'excédant pas cinq fois le plafond annuel »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_retraite_complementaire_plafond
+    module: menages_types
+    source: decret_2024_688
+    millesime: "2025"
+    mesure: "Retraite complémentaire : plafond de l'assiette, en PSS"
+    valeur: 4.0
+    unite: "fraction du PSS"
+    localisation: "Article 3, I, 2°, art. D. 635-7, 2° : « dans la limite de quatre fois le plafond annuel »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_allocations_familiales_seuil_bas
+    module: menages_types
+    source: urssaf_taux_ac_plnr
+    millesime: "2026"
+    mesure: "Allocations familiales : seuil sous lequel le taux est nul, en PSS"
+    valeur: 1.1
+    unite: "fraction du PSS"
+    localisation: "Tableau « Allocations familiales en métropole » : « inférieurs à 52 866 € (110 % du plafond annuel » "
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_allocations_familiales_seuil_haut
+    module: menages_types
+    source: urssaf_taux_ac_plnr
+    millesime: "2026"
+    mesure: "Allocations familiales : seuil du taux plein, en PSS"
+    valeur: 1.4
+    unite: "fraction du PSS"
+    localisation: "Même tableau : « supérieurs à 67 284 € (140 % du Pass) 3,10 % »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_retraite_base_assiette_minimale_heures_smic
+    module: menages_types
+    source: urssaf_taux_ac_plnr
+    millesime: "2026"
+    mesure: "Retraite de base : assiette minimale, en heures de SMIC horaire"
+    valeur: 450
+    unite: "heures"
+    localisation: "Tableau « Vos cotisations minimales », retraite de base : « 5 409 € (450 × Smic horaire) »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: independant_invalidite_assiette_minimale
+    module: menages_types
+    source: urssaf_taux_ac_plnr
+    millesime: "2026"
+    mesure: "Invalidité-décès : assiette minimale, en part du PSS"
+    valeur: 0.115
+    unite: "fraction du PSS"
+    localisation: "Tableau « Vos cotisations minimales », invalidité-décès : « 5 527 € (11,5 % du Pass) »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: urssaf_retraite_base_minimale_2026
+    module: menages_types
+    source: urssaf_taux_ac_plnr
+    millesime: "2026"
+    mesure: Cotisation minimale de retraite de base (assiette de 450 heures de SMIC)
+    valeur: 967
+    unite: euros par an
+    localisation: "Tableau « Vos cotisations minimales », retraite de base : « 5 409 € (450 × Smic horaire) », « 17,87 % », « Montant minimal annuel 967 € »"
+    saisi_le: 2026-10-13
+    relecture: a_relire

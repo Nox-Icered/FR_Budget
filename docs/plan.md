@@ -142,7 +142,8 @@ En parallèle :
   - Prestations validées contre les barèmes publiés le 13 octobre 2026 ; cas du simulateur officiel de la prime d'activité en attente (service des communes indisponible).
   - Apprenti ajouté le 13 octobre 2026, avec trois corrections d'OpenFisca (exonérations de 2025).
   - Retraité ajouté le 13 octobre 2026 (pension moyenne de la DREES, la médiane n'étant pas publiée).
-  - Reste à faire : indépendant (réforme de l'assiette des cotisations sur les revenus de 2025, sans référence accessible) ; effet des leviers sur les ménages ; réglage d'incidence ; profil saisi par l'utilisateur.
+  - Artisan ajouté le 13 octobre 2026 (assiette réformée de 2025, décret n° 2024-688 et pages de l'Urssaf déposés par le mainteneur) : les huit profils de la spécification sont couverts.
+  - Reste à faire : effet des leviers sur les ménages ; réglage d'incidence ; profil saisi par l'utilisateur.
 - Indicateur de dépense incompressible pour TVA et accises (budgets de famille INSEE).
 - Entreprises : charge par taille et secteur (ESANE, DGFiP), sans effet comportemental.
 - Écrans Catalogue, Simulateur, Ménages, Entreprises, « Comment c'est calculé ? ».

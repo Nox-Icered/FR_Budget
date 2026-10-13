@@ -673,3 +673,43 @@ datasets:
     empreinte_sha256: d5f284da282dccbabd38f40c21434108d9e18acabaebdce4408e01fd3939cb30
     methode_transformation: aucune ; seuils et taux de CSG des pensions saisis dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-13
+
+  - id: decret_2024_688_pdf
+    source: decret_2024_688
+    description: "Décret n° 2024-688, Journal officiel (PDF, 4 pages), déposé par le mainteneur"
+    fichier: data/raw/menages/independants/jorf_decret_2024_688.pdf
+    empreinte_sha256: 54780a91e6cccdc4e5268f7770e8bd91bdd4d046707860959ac4cba3cd7c1b47
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13
+
+  - id: decret_2025_708_pdf
+    source: decret_2025_708
+    description: "Décret n° 2025-708, Journal officiel (PDF, 3 pages), déposé par le mainteneur"
+    fichier: data/raw/menages/independants/jorf_decret_2025_708.pdf
+    empreinte_sha256: 29c2b855b9d4f94f1b95a63c4523de83b207125361e1620f816623ff7b64a2e0
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13
+
+  - id: urssaf_reforme_assiette_independants_pdf
+    source: urssaf_reforme_assiette_independants
+    description: "Page de l'Urssaf enregistrée en PDF le 13 octobre 2026 par le mainteneur (6 pages)"
+    fichier: data/raw/menages/independants/urssaf_reforme_assiette.pdf
+    empreinte_sha256: f66a240868634e9a36f3a477d2d833ebe976f147fb84a9366d89b223712fc62a
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13
+
+  - id: urssaf_taux_ac_plnr_pdf
+    source: urssaf_taux_ac_plnr
+    description: "Page de l'Urssaf enregistrée en PDF le 13 octobre 2026 par le mainteneur (8 pages)"
+    fichier: data/raw/menages/independants/urssaf_taux_ac_plnr.pdf
+    empreinte_sha256: f78a256629cc482ee3ee655376b9f3a9914a8f27304aa0e7cd784a89aeb3a5f2
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13
+
+  - id: insee_premiere_2060_pdf
+    source: insee_premiere_2060
+    description: "Insee Première n° 2060 (PDF, 4 pages, fichier IP2060.pdf)"
+    fichier: data/raw/menages/insee_premiere_2060.pdf
+    empreinte_sha256: 404c86187556efed0ed47b0fa59ae2f0a42bf23898f094c88d9a14238f8ed2b0
+    methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13

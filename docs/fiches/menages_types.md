@@ -6,7 +6,7 @@ mise_a_jour: 2026-10-13
 
 # Fiche : ménages types (cascade jusqu'au net après impôt)
 
-Lot « ménages types », première partie (V1, prévu en parallèle de la phase 2). Fait en autonomie (instruction du mainteneur du 13 octobre 2026). Les choix du § 5, les 26 valeurs saisies (2 de l'Insee, 2 de la DREES, 2 de la Direction de la Sécurité sociale, 20 de service-public.gouv.fr) et les trois corrections d'OpenFisca propres aux apprentis sont **à relire**.
+Lot « ménages types », première partie (V1, prévu en parallèle de la phase 2). Fait en autonomie (instruction du mainteneur du 13 octobre 2026). Les choix du § 5, les 65 valeurs saisies (3 de l'Insee, 2 de la DREES, 2 de la Direction de la Sécurité sociale, 22 de service-public.gouv.fr, 36 du décret n° 2024-688 et des pages de l'Urssaf) et les trois corrections d'OpenFisca propres aux apprentis sont **à relire**.
 
 ## 1. Question posée
 
@@ -21,11 +21,11 @@ Pour un ménage type, combien coûte le travail à l'employeur, et que reste-t-i
 | Cadre célibataire, 95e centile | 95e centile, salarié cadre | aucun | Insee Première n° 2079 : 5 593 € nets par mois en 2024 (2,55 fois la médiane) |
 | Couple marié, deux enfants | médiane et SMIC | nés en 2016 et 2019 | Insee, OpenFisca |
 | Parent seul, un enfant | SMIC, case T | né en 2019 | OpenFisca |
+| Artisan | revenu d'un indépendant, aucun salaire | aucun | Insee Première n° 2060 : revenu d'activité médian des non-salariés classiques, 2 620 € par mois en 2023 |
 | Retraité seul | pension moyenne de droit direct, aucun salaire | aucun | DREES, « Les retraités et les retraites » 2025, fiche 5 : 1 666 € bruts par mois fin 2023 (retraités résidant en France) |
 | Apprenti de 19 ans | salaire minimum de l'apprentissage, contrat débuté le 1er septembre 2024 | aucun | service-public.gouv.fr, fiche F2918 : 43 % du SMIC en 1re année, 51 % en 2e, 67 % en 3e (18 à 20 ans) |
 
-La spécification prévoit aussi un indépendant :
-- **Indépendant : à faire.** Le revenu médian est publié (Insee Première n° 2060 : 2 620 € par mois en 2023, non-salariés « classiques » hors agriculture). Reste à modéliser les cotisations des indépendants et à les valider.
+Les huit profils de la spécification sont couverts.
 
 ## 3. Méthode de calcul
 
@@ -54,6 +54,13 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
     - CSG et CRDS : totale (avant), ou sous 50 % du SMIC (depuis) ;
     - impôt sur le revenu : dans la limite du SMIC, mois par mois.
 
+- **Artisan.**
+  - Entreprise individuelle à l'impôt sur le revenu, au régime réel, artisan (cotisations de la Sécurité sociale des indépendants).
+  - Le revenu de l'Insee, net de cotisations, sert de résultat fiscal. Il est porté de 2023 à 2025 comme le SMIC horaire brut.
+  - Les cotisations suivent l'assiette réformée de 2025 : revenu brut (avant cotisations et CSG déductible) moins un abattement de 26 %, compris entre 1,76 % et 130 % du plafond annuel de la Sécurité sociale.
+    - Elles sont calculées par `moteur/src/fr_budget/menages/independants.py`, et non par OpenFisca : OpenFisca 176.1.2 applique les nouveaux taux à l'ancienne assiette.
+    - Le revenu brut est retrouvé par dichotomie, à partir du résultat fiscal.
+  - OpenFisca calcule l'impôt sur le revenu, avec le résultat fiscal en entrée (`rpns_imposables`). Il calcule aussi le RSA et la prime d'activité, qu'il lit dans `rpns_autres_revenus`. Sans cette seconde entrée, il versait un RSA à l'artisan.
 - **Retraité.**
   - Pension brute de chaque mois : pension moyenne de fin 2023, multipliée par les coefficients de revalorisation des pensions de base au 1er janvier 2024 (1,053) et 2025 (1,022).
   - La CSG d'une pension dépend du revenu fiscal de référence de l'avant-dernière année, qui dépend à son tour de la CSG. Deux mesures arrêtent cette chaîne :
@@ -70,6 +77,9 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
 | `drees_retraites_2025_fiche05_pdf` | pension moyenne de droit direct, fin 2023 (fichier déposé par le mainteneur) |
 | `dss_instruction_2023_189_pdf`, `dss_instruction_2024_176_pdf` | coefficients de revalorisation des pensions de base, 2024 et 2025 |
 | `service_public_f2971_html` | seuils et taux de CSG sur les pensions, 2026 (validation) |
+| `insee_premiere_2060_pdf` | revenu d'activité médian des non-salariés classiques, 2023 |
+| `decret_2024_688_pdf`, `decret_2025_708_pdf` | barèmes et assiette réformée des indépendants, à partir des cotisations de 2025 (fichiers déposés par le mainteneur) |
+| `urssaf_reforme_assiette_independants_pdf`, `urssaf_taux_ac_plnr_pdf` | abattement de 26 %, taux de 2025 et 2026, montants minimaux et maximaux (pages de l'Urssaf enregistrées par le mainteneur) |
 | `service_public_f2918_html` | salaire minimum de l'apprenti et exonérations (cotisations, CSG-CRDS, impôt) |
 | `registres/references/menages/mesdroitssociaux_pa_2026.json` | résultats du simulateur officiel du RSA et de la prime d'activité (validation) |
 
@@ -101,6 +111,12 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
     - Limite : la règle des deux années consécutives de dépassement n'est pas en jeu pour ce profil, et n'est pas testée.
 17. **Pension stable avant 2023** pour le calcul du taux de CSG de 2023 (point fixe, § 3).
 
+18. **Artisan, revenu médian de l'Insee.** Le profil est un artisan, ce qui détermine la formation professionnelle (0,29 % du plafond de la Sécurité sociale). Le revenu de l'Insee couvre tous les non-salariés classiques hors agriculture : artisans, commerçants et professions libérales.
+19. **Revenu de l'Insee pris comme résultat fiscal.** L'Insee le définit comme le revenu professionnel imposable, avec certaines exonérations et cotisations facultatives réintégrées. Le profil n'a ni exonération ni cotisation facultative.
+20. **Revenu porté en 2025 comme le SMIC horaire** (hypothèse `menages_ecart_evolution_revenu_independant`, nulle, sans plage). L'Insee constate une baisse du revenu moyen des non-salariés en 2023, en euros constants.
+21. **Partage de la CSG-CRDS** (9,7 %, Urssaf) en 6,8 % déductible, 2,4 % non déductible et 0,5 % de CRDS. Ces taux viennent de la ligne « revenus d'activité salariée » de service-public.gouv.fr, faute de source propre aux indépendants.
+22. **Non représentés** : début d'activité (ACRE, assiettes forfaitaires), conjoint collaborateur, cotisations facultatives, régime micro-entreprise.
+
 ## 6. Validation
 
 **Impôt sur le revenu.**
@@ -119,6 +135,14 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
 Le nombre de parts et le revenu fiscal de référence sont identiques pour les cinq ménages.
 
 **Salaire.** Pour le célibataire au SMIC, la cascade mensuelle (coût employeur, brut, net, imposable) est validée contre le modèle Urssaf (fiche `cascade_salaire`).
+
+**Artisan.**
+- **Impôt.** Le simulateur complet d'impots.gouv.fr (bénéfice en case 5KC) donne le même revenu fiscal de référence (33 142 €) et le même impôt (3 047 €) que le modèle.
+- **Barème des cotisations.**
+  - Aucun simulateur accessible n'applique l'assiette réformée : le modèle de l'Urssaf 11.1.0 garde l'ancienne. Les fonctions du barème sont donc confrontées aux montants que l'Urssaf calcule sur sa page des taux de 2026 (`moteur/tests/validation/test_menages_independant.py`, tolérance 1 €).
+  - 5 montants sur 6 concordent : retraite de base minimale (967 €), indemnités journalières minimale (96 €) et maximale (1 202 €), invalidité-décès maximale (625 €), formation professionnelle (139 €).
+  - Écart publié : l'Urssaf affiche une retraite complémentaire maximale de 17 494 €, soit 9,1 % de 4 plafonds. Le décret (art. D. 635-7) applique 8,1 % jusqu'à 1 plafond puis 9,1 %, ce qui donne 17 013 €. Le modèle suit le décret.
+- **Non validé** : les cotisations de l'artisan type lui-même (11 401 € de cotisations, 3 367 € de CSG-CRDS sur 46 903 € de revenu brut). Aucun exemple chiffré publié ne porte sur un revenu comparable.
 
 **Retraité.**
 - Impôt : le simulateur d'impots.gouv.fr donne le même revenu fiscal de référence que le modèle (17 216 €) et le même impôt restant à payer (0 €). La pension est déclarée en case 1AS.
@@ -172,6 +196,7 @@ Le module reste en bêta.
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-13 | Profil artisan, cotisations selon l'assiette réformée de 2025 | Impôt : 2 nouveaux tests réussis (8 cas sur 8) ; barème : 6 nouveaux tests, 5 réussis, 1 hors tolérance (retraite complémentaire maximale, écart entre la page de l'Urssaf et le décret) ; test unitaire de l'ordre de la cascade et test de l'API adaptés à un indépendant |
 | 2026-10-13 | Profil retraité (pension moyenne de la DREES, CSG selon le revenu fiscal de référence de l'avant-dernière année) | Impôt : 2 nouveaux tests réussis (7 cas sur 7) ; CSG des pensions : 9 nouveaux tests réussis ; test unitaire de l'ordre de la cascade et test de l'API adaptés à un ménage sans salaire |
 | 2026-10-13 | Profil apprenti, avec trois corrections d'OpenFisca pour les apprentis | Impôt : 2 nouveaux tests réussis (6 cas sur 6) ; cascade Urssaf : 8 nouvelles comparaisons, 6 réussies, 2 hors tolérance (coût employeur) ; test unitaire de l'ordre de la cascade assoupli (brut égal au net possible pour l'apprenti) |
 | 2026-10-13 | Validation des prestations : barèmes publiés ; cas du simulateur officiel de la prime d'activité préparés | 8 nouveaux tests de validation sur les barèmes, tous réussis ; aucun cas du simulateur (service des communes indisponible) |

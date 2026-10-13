@@ -77,6 +77,10 @@ export type MenageType = {
   net_avant_impot: number;
   pension_brute: number;
   pension_nette: number;
+  revenu_independant_brut: number;
+  cotisations_independant: number;
+  csg_crds_independant: number;
+  revenu_independant_net: number;
   impot_revenu: number;
   prestations: Record<string, number>;
   net_apres_impot: number;

@@ -180,6 +180,11 @@ SOURCES_MENAGES = [
     "dss_instruction_2023_189",
     "dss_instruction_2024_176",
     "service_public_f2971",
+    "insee_premiere_2060",
+    "decret_2024_688",
+    "decret_2025_708",
+    "urssaf_reforme_assiette_independants",
+    "urssaf_taux_ac_plnr",
 ]
 
 
@@ -202,6 +207,10 @@ def menages_types() -> dict[str, Any]:
                 "net_avant_impot": round(c.net_avant_impot, 2),
                 "pension_brute": round(c.pension_brute, 2),
                 "pension_nette": round(c.pension_nette, 2),
+                "revenu_independant_brut": round(c.revenu_independant_brut, 2),
+                "cotisations_independant": round(c.cotisations_independant, 2),
+                "csg_crds_independant": round(c.csg_crds_independant, 2),
+                "revenu_independant_net": round(c.revenu_independant_net, 2),
                 "impot_revenu": round(c.impot_revenu, 2),
                 "prestations": {k: round(v, 2) for k, v in c.prestations.items()},
                 "net_apres_impot": round(c.net_apres_impot, 2),
@@ -211,7 +220,11 @@ def menages_types() -> dict[str, Any]:
         "unite": "euros par an",
         "annee_revenus": module_menages.ANNEE,
         "sources": SOURCES_MENAGES,
-        "hypotheses": [module_menages.HYPOTHESE_EVOLUTION, module_menages.HYPOTHESE_PENSION],
+        "hypotheses": [
+            module_menages.HYPOTHESE_EVOLUTION,
+            module_menages.HYPOTHESE_PENSION,
+            module_menages.HYPOTHESE_INDEPENDANT,
+        ],
         "menages": resultat,
     }
 

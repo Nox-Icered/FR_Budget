@@ -117,6 +117,20 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
 21. **Partage de la CSG-CRDS** (9,7 %, Urssaf) en 6,8 % déductible, 2,4 % non déductible et 0,5 % de CRDS. Ces taux viennent de la ligne « revenus d'activité salariée » de service-public.gouv.fr, faute de source propre aux indépendants.
 22. **Non représentés** : début d'activité (ACRE, assiettes forfaitaires), conjoint collaborateur, cotisations facultatives, régime micro-entreprise.
 
+### Profil saisi par l'utilisateur (page « Mon ménage »)
+
+Le moteur (`fr_budget.menages.personnalise`) traduit la saisie en profil et calcule la même cascade que pour les ménages types (`cascade_profil`). Le site l'appelle par `POST /mon-menage`.
+
+23. **Règle 5 (aucun stockage).** La saisie part dans le corps d'une requête POST, jamais dans l'adresse : elle n'apparaît donc pas dans les journaux d'accès, qui sont de toute façon désactivés. Le moteur et l'API ne mettent rien en cache. Les messages d'erreur ne reprennent aucune valeur saisie. Le navigateur ne garde rien : ni stockage local, ni paramètre dans l'adresse, ni remplissage automatique. Un test vérifie que le journal de l'API ne contient aucune valeur saisie.
+    - Limite : l'hébergeur de l'API voit passer la requête chiffrée ; son contrat doit exclure la capture des corps de requête.
+24. **Statuts proposés** : salarié (salaire brut mensuel, case « cadre »), retraité (pension brute mensuelle), artisan (résultat fiscal mensuel moyen). Les autres indépendants (commerçants, professions libérales, micro-entrepreneurs) ne sont pas proposés, car leurs barèmes ne sont pas codés.
+25. **Montant constant** sur toutes les années de la simulation, comme pour les ménages types. Il sert aussi aux ressources des prestations et au revenu fiscal de référence des années antérieures.
+26. **Deux adultes forment un couple marié ou pacsé** (déclaration commune). Le concubinage, avec deux déclarations, n'est pas proposé. Un adulte seul avec enfants est compté parent isolé (case T), sans pension alimentaire (choix 4).
+27. **Seule l'année de naissance est demandée.** La naissance est fixée au 1er janvier pour un adulte et au 1er juillet pour un enfant. Limite : l'âge exact compte pour certaines prestations (majorations des allocations familiales, rentrée scolaire), qui peuvent donc différer de quelques mois.
+28. **Bornes de saisie** (`personnalise.py`, exportées pour le formulaire) : un ou deux adultes, au plus 8 enfants, montant de 0 à 100 000 € par mois, adultes de 16 à 110 ans, enfants de 0 à 25 ans. Ce sont des garde-fous de saisie, pas des paramètres du modèle ; ils n'ont pas de source et ne changent aucun résultat dans les bornes.
+29. **Pas de validation propre.** Le calcul est celui des ménages types, validé sur ces profils. Un ménage saisi hors de leurs situations (revenus élevés, familles nombreuses, couple retraité et salarié) n'est pas comparé à un simulateur officiel. La page porte le bandeau bêta des ménages types.
+30. **Service de calcul non hébergé.** Le site est statique ; il appelle l'API à l'adresse fixée à la construction (`NEXT_PUBLIC_API_URL`), qui doit autoriser l'origine du site (`FR_BUDGET_ORIGINES`). Tant que l'API n'est pas hébergée, la page l'indique et ne calcule rien.
+
 ## 6. Validation
 
 **Impôt sur le revenu.**
@@ -196,6 +210,7 @@ Le module reste en bêta.
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-13 | Profil saisi par l'utilisateur (moteur, `POST /mon-menage`, page « Mon ménage ») | Aucun test de validation ne bouge ; nouveaux tests unitaires (même cascade qu'un ménage type à saisie égale, bornes, absence de cache) et d'API (réponse, 422, journal sans valeur saisie, CORS) ; tests du site (corps POST, bornes) |
 | 2026-10-13 | Profil artisan, cotisations selon l'assiette réformée de 2025 | Impôt : 2 nouveaux tests réussis (8 cas sur 8) ; barème : 6 nouveaux tests, 5 réussis, 1 hors tolérance (retraite complémentaire maximale, écart entre la page de l'Urssaf et le décret) ; test unitaire de l'ordre de la cascade et test de l'API adaptés à un indépendant |
 | 2026-10-13 | Profil retraité (pension moyenne de la DREES, CSG selon le revenu fiscal de référence de l'avant-dernière année) | Impôt : 2 nouveaux tests réussis (7 cas sur 7) ; CSG des pensions : 9 nouveaux tests réussis ; test unitaire de l'ordre de la cascade et test de l'API adaptés à un ménage sans salaire |
 | 2026-10-13 | Profil apprenti, avec trois corrections d'OpenFisca pour les apprentis | Impôt : 2 nouveaux tests réussis (6 cas sur 6) ; cascade Urssaf : 8 nouvelles comparaisons, 6 réussies, 2 hors tolérance (coût employeur) ; test unitaire de l'ordre de la cascade assoupli (brut égal au net possible pour l'apprenti) |

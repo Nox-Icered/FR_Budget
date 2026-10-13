@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 
 import pytest
@@ -48,3 +49,83 @@ def test_export_des_menages_types(tmp_path: Path) -> None:
 def test_sources_des_menages_au_registre() -> None:
     connues = {s["id"] for s in registre("sources") or []}
     assert set(SOURCES_MENAGES) <= connues
+
+
+MENAGE_SAISI = {
+    "adultes": [
+        {"statut": "salarie", "montant_mensuel": 2345.67, "annee_naissance": 1984},
+        {"statut": "retraite", "montant_mensuel": 1432.1, "annee_naissance": 1957},
+    ],
+    "annees_naissance_enfants": [2014],
+}
+
+
+def test_mon_menage(client: TestClient) -> None:
+    reponse = client.post("/mon-menage", json=MENAGE_SAISI)
+    assert reponse.status_code == 200
+    m = reponse.json()
+    assert m["salaire_brut"] == pytest.approx(12 * 2345.67, abs=0.05)
+    assert m["pension_brute"] == pytest.approx(12 * 1432.1, abs=0.05)
+    attendu = (
+        m["net_avant_impot"]
+        + m["pension_nette"]
+        + m["revenu_independant_net"]
+        - m["impot_revenu"]
+        + sum(m["prestations"].values())
+    )
+    assert m["net_apres_impot"] == pytest.approx(attendu, abs=0.05)
+
+
+def test_mon_menage_comme_le_menage_type(client: TestClient) -> None:
+    from fr_budget.menages import types as t
+
+    brut = t.brut_mensuel(t.SMIC, t.ANNEE)
+    corps = {"adultes": [{"statut": "salarie", "montant_mensuel": brut, "annee_naissance": 1995}]}
+    m = client.post("/mon-menage", json=corps).json()
+    type_ = next(x for x in menages_types()["menages"] if x["id"] == "celibataire_smic")
+    assert m["net_apres_impot"] == pytest.approx(type_["net_apres_impot"])
+
+
+@pytest.mark.parametrize(
+    "corps",
+    [
+        {"adultes": []},
+        {"adultes": [{"statut": "chomeur", "montant_mensuel": 1, "annee_naissance": 1990}]},
+        {"adultes": [{"statut": "salarie", "montant_mensuel": -1, "annee_naissance": 1990}]},
+        {"adultes": [{"statut": "salarie", "montant_mensuel": 1, "annee_naissance": 2024}]},
+    ],
+)
+def test_mon_menage_saisie_invalide(client: TestClient, corps: dict[str, object]) -> None:
+    assert client.post("/mon-menage", json=corps).status_code == 422
+
+
+def test_mon_menage_non_journalise(client: TestClient, caplog: pytest.LogCaptureFixture) -> None:
+    # Règle 5 : aucune valeur saisie dans les journaux du serveur.
+    with caplog.at_level(logging.DEBUG):
+        client.post("/mon-menage", json=MENAGE_SAISI)
+    serveur = [r.getMessage() for r in caplog.records if not r.name.startswith("httpx")]
+    assert not any("2345" in m or "1432" in m or "1984" in m for m in serveur)
+
+
+def test_bornes_saisie(client: TestClient) -> None:
+    saisie = client.get("/menages-types").json()["saisie"]
+    assert saisie["adultes_max"] == 2
+    assert saisie["annee_naissance_adulte_max"] < saisie["annee"]
+    assert saisie["annee_naissance_enfant_max"] == saisie["annee"]
+
+
+def test_cors_absent_par_defaut(client: TestClient) -> None:
+    reponse = client.options(
+        "/mon-menage",
+        headers={"Origin": "https://exemple.fr", "Access-Control-Request-Method": "POST"},
+    )
+    assert "access-control-allow-origin" not in reponse.headers
+
+
+def test_cors_origine_configuree(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("FR_BUDGET_ORIGINES", "https://exemple.fr")
+    reponse = TestClient(creer_application()).options(
+        "/mon-menage",
+        headers={"Origin": "https://exemple.fr", "Access-Control-Request-Method": "POST"},
+    )
+    assert reponse.headers["access-control-allow-origin"] == "https://exemple.fr"

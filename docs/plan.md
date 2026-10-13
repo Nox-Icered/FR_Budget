@@ -143,7 +143,8 @@ En parallèle :
   - Apprenti ajouté le 13 octobre 2026, avec trois corrections d'OpenFisca (exonérations de 2025).
   - Retraité ajouté le 13 octobre 2026 (pension moyenne de la DREES, la médiane n'étant pas publiée).
   - Artisan ajouté le 13 octobre 2026 (assiette réformée de 2025, décret n° 2024-688 et pages de l'Urssaf déposés par le mainteneur) : les huit profils de la spécification sont couverts.
-  - Reste à faire : effet des leviers sur les ménages ; réglage d'incidence ; profil saisi par l'utilisateur.
+  - Profil saisi par l'utilisateur ajouté le 13 octobre 2026 : page « Mon ménage », calcul par `POST /mon-menage`, sans stockage ni journal (test du journal de l'API). La page attend l'hébergement de l'API.
+  - Reste à faire : effet des leviers sur les ménages ; réglage d'incidence.
 - Indicateur de dépense incompressible pour TVA et accises (budgets de famille INSEE).
 - Entreprises : charge par taille et secteur (ESANE, DGFiP), sans effet comportemental.
 - Écrans Catalogue, Simulateur, Ménages, Entreprises, « Comment c'est calculé ? ».

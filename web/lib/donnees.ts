@@ -2,6 +2,9 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
+import type { LignesCascade } from "./cascade";
+import type { Bornes } from "./mon-menage";
+
 const DOSSIER = join(process.cwd(), "donnees");
 
 export function lire<T>(fichier: string): T {
@@ -68,22 +71,10 @@ export type Relecture = {
   reponse: string;
   lien?: string;
 };
-export type MenageType = {
+export type MenageType = LignesCascade & {
   id: string;
   libelle: string;
   annee: number;
-  cout_employeur: number;
-  salaire_brut: number;
-  net_avant_impot: number;
-  pension_brute: number;
-  pension_nette: number;
-  revenu_independant_brut: number;
-  cotisations_independant: number;
-  csg_crds_independant: number;
-  revenu_independant_net: number;
-  impot_revenu: number;
-  prestations: Record<string, number>;
-  net_apres_impot: number;
 };
 export type MenagesTypes = {
   unite: string;
@@ -91,6 +82,7 @@ export type MenagesTypes = {
   sources: string[];
   hypotheses: string[];
   menages: MenageType[];
+  saisie: Bornes;
 };
 export type LigneJournal = {
   date: string;

@@ -19,7 +19,8 @@
     "journal": "Journal",
     "relectures": "Relectures",
     "mentions": "Mentions légales",
-    "menages": "Ménages types"
+    "menages": "Ménages types",
+    "mon_menage": "Mon ménage"
   },
   "accueil": {
     "titre": "Les comptes des administrations publiques",
@@ -361,5 +362,43 @@
     "limites": "Non comptés : aides au logement (elles dépendent du loyer), taxe foncière, revenus du patrimoine. Les effets des réformes sur ces ménages viendront dans une prochaine version.",
     "lien_fiche": "Méthode, sources et validation : fiche « ménages types » du dépôt.",
     "sources": "Sources :"
+  },
+  "mon_menage": {
+    "titre": "Mon ménage",
+    "intro": "Saisissez votre ménage pour voir, sur les revenus de {annee}, le même calcul que pour les ménages types : du revenu brut au revenu après impôt et prestations.",
+    "confidentialite": "Votre saisie n'est ni enregistrée ni journalisée : elle est envoyée au service de calcul, qui renvoie le résultat sans rien garder. Elle n'apparaît pas dans l'adresse de la page et disparaît quand vous la quittez.",
+    "hors_ligne": "Le service de calcul n'est pas encore en ligne : cette page ne peut pas encore calculer un ménage saisi. Les ménages types restent consultables.",
+    "adulte": "Adulte {n}",
+    "statut": "Situation",
+    "statuts": {
+      "salarie": "Salarié",
+      "retraite": "Retraité",
+      "independant": "Artisan (indépendant)"
+    },
+    "montant": {
+      "salarie": "Salaire brut mensuel, en euros",
+      "retraite": "Pension de retraite brute mensuelle, en euros",
+      "independant": "Résultat fiscal mensuel moyen, en euros"
+    },
+    "naissance": "Année de naissance",
+    "cadre": "Cadre",
+    "ajouter_adulte": "Ajouter un second adulte (couple marié ou pacsé)",
+    "retirer_adulte": "Retirer le second adulte",
+    "enfants": "Enfants à charge",
+    "naissance_enfant": "Année de naissance de l'enfant {n}",
+    "ajouter_enfant": "Ajouter un enfant",
+    "retirer_enfant": "Retirer le dernier enfant",
+    "calculer": "Calculer",
+    "en_cours": "Calcul en cours…",
+    "resultat": "Résultat sur les revenus de {annee}",
+    "erreur_service": "Le service de calcul n'a pas pu répondre. Vérifiez la saisie ou réessayez plus tard.",
+    "erreurs": {
+      "adultes": "Le ménage compte un ou {max} adultes.",
+      "enfants": "Au plus {max} enfants.",
+      "montant": "Adulte {n} : montant mensuel entre 0 et {max} euros.",
+      "naissance_adulte": "Adulte {n} : année de naissance entre {min} et {max}.",
+      "naissance_enfant": "Enfant {n} : année de naissance entre {min} et {max}."
+    },
+    "limites": "Simplifications : deux adultes forment un couple marié ou pacsé ; le montant saisi est le même toute l'année ; un adulte seul avec enfants est compté comme parent isolé ; un indépendant est un artisan au régime réel."
   }
 }

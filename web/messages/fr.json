@@ -359,7 +359,7 @@
       "rsa": "RSA",
       "ars": "Allocation de rentrée scolaire"
     },
-    "limites": "Non comptés : aides au logement (elles dépendent du loyer), taxe foncière, revenus du patrimoine. Les effets des mesures sont calculés sans changement de comportement ; la répercussion des cotisations patronales sur les salaires n'est pas encore proposée.",
+    "limites": "Non comptés : aides au logement (elles dépendent du loyer), taxe foncière, revenus du patrimoine. Les effets des mesures sont calculés sans changement de comportement ; pour les cotisations patronales, seules les deux lectures extrêmes de l'incidence (aucune ou complète répercussion sur le salaire) sont proposées.",
     "lien_fiche": "Méthode, sources et validation : fiche « ménages types » du dépôt.",
     "sources": "Sources :",
     "effets": {

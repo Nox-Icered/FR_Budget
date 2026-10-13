@@ -38,23 +38,57 @@ function relever(texte) {
   return resultats;
 }
 
+// Modèle complet, pour les déclarations qui portent un bénéfice (case 5KC, revenus
+// industriels et commerciaux professionnels) : le formulaire est réparti sur plusieurs pages,
+// dont le simulateur range les cases dans un panier par ses propres fonctions (suite1 pour
+// l'état civil, suite2 pour le choix des rubriques, suite11 pour la page 11), puis restit()
+// construit le formulaire envoyé au serveur.
+const ADRESSE_COMPLET = ADRESSE.replace("/simplifie/", "/complet/");
+const CASES_COMPLET = ["5KC"];
+
+async function saisirComplet(page, d) {
+  await page.goto(ADRESSE_COMPLET, { waitUntil: "networkidle" });
+  await page.evaluate((d) => {
+    document.querySelector(`#pre_situation_famille${d.situation}`).checked = true;
+    document.querySelector("#pre_situation_residenceM").checked = true;
+    document.form1._0DA.value = d["0DA"];
+    if (d["0CF"]) document.form1._0CF.value = String(d["0CF"]);
+    suite1();
+    document.querySelector("#revenu9").checked = true;
+    suite2();
+    document.form11._5KC.value = String(d["5KC"]);
+    suite11();
+  }, d);
+  await Promise.all([
+    page.waitForURL(/calc-2026\.cgi/),
+    page.evaluate(() => {
+      restit();
+      document.form19.submit();
+    }),
+  ]);
+}
+
 const { cas } = JSON.parse(readFileSync(ENTREE, "utf8"));
 const navigateur = await chromium.launch({ executablePath: process.env.CHROMIUM || undefined });
 const sorties = [];
 for (const c of cas) {
   const d = c.declaration;
   const page = await navigateur.newPage();
-  await page.goto(ADRESSE, { waitUntil: "domcontentloaded" });
-  await page.check(`#situation_famille${d.situation}`);
-  await page.check("#Bpre_situation_residence");
-  await page.fill('[name="0DA"]', d["0DA"]);
-  if (d["0DB"]) await page.fill('[name="0DB"]', d["0DB"]);
-  if (d["0CF"]) await page.fill('[name="0CF"]', String(d["0CF"]));
-  if (d["0BT"]) await page.check('[name="0BT"]');
-  await page.fill('[name="1AJ"]', String(d["1AJ"]));
-  if (d["1BJ"]) await page.fill('[name="1BJ"]', String(d["1BJ"]));
-  if (d["1AS"]) await page.fill('[name="1AS"]', String(d["1AS"]));
-  await Promise.all([page.waitForURL(/calc-2026\.cgi/), page.getByAltText("lancer la simulation").click()]);
+  if (CASES_COMPLET.some((k) => d[k])) {
+    await saisirComplet(page, d);
+  } else {
+    await page.goto(ADRESSE, { waitUntil: "domcontentloaded" });
+    await page.check(`#situation_famille${d.situation}`);
+    await page.check("#Bpre_situation_residence");
+    await page.fill('[name="0DA"]', d["0DA"]);
+    if (d["0DB"]) await page.fill('[name="0DB"]', d["0DB"]);
+    if (d["0CF"]) await page.fill('[name="0CF"]', String(d["0CF"]));
+    if (d["0BT"]) await page.check('[name="0BT"]');
+    await page.fill('[name="1AJ"]', String(d["1AJ"]));
+    if (d["1BJ"]) await page.fill('[name="1BJ"]', String(d["1BJ"]));
+    if (d["1AS"]) await page.fill('[name="1AS"]', String(d["1AS"]));
+    await Promise.all([page.waitForURL(/calc-2026\.cgi/), page.getByAltText("lancer la simulation").click()]);
+  }
   const texte = await page.locator("body").innerText();
   const resultats = relever(texte);
   if (!("restant_a_payer" in resultats)) throw new Error(`${c.id} : résultat introuvable`);
@@ -68,7 +102,7 @@ writeFileSync(
   JSON.stringify(
     {
       source: {
-        nom: "Simulateur de calcul de l'impôt 2026 sur les revenus 2025 (modèle simplifié)",
+        nom: "Simulateur de calcul de l'impôt 2026 sur les revenus 2025 (modèle simplifié ; modèle complet pour les bénéfices)",
         editeur: "Direction générale des Finances publiques",
         url: ADRESSE,
         script: "outils/references_impots/generer.mjs",

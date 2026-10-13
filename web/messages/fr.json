@@ -335,7 +335,7 @@
   "menages": {
     "titre": "Ménages types",
     "bandeau": "Bêta, non validé : l'impôt sur le revenu est vérifié contre le simulateur officiel, les barèmes des prestations et de la CSG des pensions contre service-public.gouv.fr ; le montant complet de la prime d'activité ne l'est pas encore.",
-    "intro": "Pour chaque ménage type, du coût du travail pour l'employeur au revenu disponible, sur les revenus de {annee}, en euros par an et par mois. Les salaires médian et du haut de la distribution viennent de l'Insee, la pension moyenne de la DREES (la médiane n'est pas publiée).",
+    "intro": "Pour chaque ménage type, du coût du travail pour l'employeur au revenu disponible, sur les revenus de {annee}, en euros par an et par mois. Les salaires médian et du haut de la distribution viennent de l'Insee, la pension moyenne de la DREES (la médiane n'est pas publiée), le revenu médian des indépendants de l'Insee.",
     "ligne": "Ligne",
     "an": "Par an",
     "mois": "Par mois",
@@ -344,6 +344,10 @@
     "net_avant_impot": "Salaire net avant impôt",
     "pension_brute": "Pension de retraite brute",
     "pension_nette": "Pension nette de CSG, CRDS et CASA",
+    "revenu_independant_brut": "Revenu professionnel avant cotisations",
+    "cotisations_independant": "Cotisations sociales",
+    "csg_crds_independant": "CSG et CRDS",
+    "revenu_independant_net": "Revenu professionnel net",
     "impot_revenu": "Impôt sur le revenu (dû sur ces revenus)",
     "net_apres_impot": "Net après impôt, prestations comprises",
     "prestations": {

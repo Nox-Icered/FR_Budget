@@ -30,6 +30,12 @@ def test_niveaux_ordonnes_et_rapport_a_l_insee() -> None:
 @pytest.mark.parametrize("identifiant", t.PROFILS)
 def test_cascade_ordonnee(identifiant: str) -> None:
     c = t.cascade_annuelle(identifiant)
+    if t.PROFILS[identifiant].adultes[0].independant:
+        # Indépendant : pas de salaire, revenu brut puis net de cotisations et contributions.
+        assert c.salaire_brut == 0
+        assert c.revenu_independant_brut > c.revenu_independant_net > 0
+        assert c.impot_revenu >= 0
+        return
     if t.PROFILS[identifiant].adultes[0].retraite:
         # Retraité : pas de salaire, pension brute puis nette.
         assert c.salaire_brut == 0

@@ -1,6 +1,6 @@
 {
   "source": {
-    "nom": "Simulateur de calcul de l'impôt 2026 sur les revenus 2025 (modèle simplifié)",
+    "nom": "Simulateur de calcul de l'impôt 2026 sur les revenus 2025 (modèle simplifié ; modèle complet pour les bénéfices)",
     "editeur": "Direction générale des Finances publiques",
     "url": "https://simulateur-ir-ifi.impots.gouv.fr/calcul_impot/2026/simplifie/index.htm",
     "script": "outils/references_impots/generer.mjs",
@@ -112,6 +112,23 @@
         "droits_simples": 0,
         "impot_net": 0,
         "restant_a_payer": 0
+      }
+    },
+    {
+      "id": "artisan",
+      "revenus": 2025,
+      "declaration": {
+        "situation": "C",
+        "0DA": "1980",
+        "0CF": 0,
+        "5KC": 33142
+      },
+      "resultats": {
+        "nombre_parts": 1,
+        "revenu_fiscal_reference": 33142,
+        "droits_simples": 3047,
+        "impot_net": 3047,
+        "restant_a_payer": 3047
       }
     },
     {

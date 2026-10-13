@@ -31,9 +31,19 @@ export default function Menages() {
                 [texte("menages.pension_nette"), m.pension_nette],
               ]
             : [];
+        const independant: [string, number][] =
+          m.revenu_independant_brut > 0
+            ? [
+                [texte("menages.revenu_independant_brut"), m.revenu_independant_brut],
+                [texte("menages.cotisations_independant"), -m.cotisations_independant],
+                [texte("menages.csg_crds_independant"), -m.csg_crds_independant],
+                [texte("menages.revenu_independant_net"), m.revenu_independant_net],
+              ]
+            : [];
         const lignes: [string, number][] = [
           ...salaire,
           ...pension,
+          ...independant,
           [texte("menages.impot_revenu"), -m.impot_revenu],
           ...Object.entries(m.prestations).map(
             ([cle, v]): [string, number] => [texte(`menages.prestations.${cle}`), v],

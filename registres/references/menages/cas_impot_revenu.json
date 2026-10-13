@@ -64,6 +64,16 @@
       }
     },
     {
+      "id": "artisan",
+      "revenus": 2025,
+      "declaration": {
+        "situation": "C",
+        "0DA": "1980",
+        "0CF": 0,
+        "5KC": 33142
+      }
+    },
+    {
       "id": "retraite_seul",
       "revenus": 2025,
       "declaration": {

@@ -16,6 +16,10 @@ Retraité : pension moyenne de droit direct de fin 2023 (DREES, la médiane n'es
 revalorisée comme les pensions de base (instructions de la DSS ; hypothèse
 ``menages_ecart_evolution_pension_moyenne``).
 
+Indépendant : artisan dont le résultat fiscal est le revenu d'activité médian des non-salariés
+classiques de 2023 (Insee), porté à l'année simulée comme le SMIC horaire brut ; cotisations
+selon l'assiette réformée de 2025 (``fr_budget.menages.independants``), impôt par OpenFisca.
+
 Non comptés : aides au logement (le loyer n'est pas fixé), taxe d'habitation, revenus du
 patrimoine.
 """
@@ -30,6 +34,7 @@ from typing import Any
 from openfisca_core.simulation_builder import SimulationBuilder
 from openfisca_core.simulations import Simulation
 
+from fr_budget.menages import independants
 from fr_budget.menages.openfisca import HypothesesEmploi, smic_mensuel_brut, systeme_socio_fiscal
 from fr_budget.registres.acces import chiffrage, hypothese
 
@@ -40,6 +45,11 @@ MEDIAN = "median"
 P95 = "p95"
 APPRENTI = "apprenti"
 RETRAITE = "retraite"
+INDEPENDANT = "independant"
+REVENU_INSEE_INDEPENDANT = "insee_revenu_median_non_salaries_classiques_2023"
+ANNEE_INSEE_INDEPENDANT = 2023
+HYPOTHESE_INDEPENDANT = "menages_ecart_evolution_revenu_independant"
+MOIS_PAR_AN = 12
 PENSION_DREES = "drees_pension_brute_moyenne_droit_direct_2023"
 ANNEE_DREES = 2023
 # Coefficients de revalorisation des pensions de base au 1er janvier de l'année.
@@ -93,6 +103,10 @@ class Adulte:
     def retraite(self) -> bool:
         return self.niveau == RETRAITE
 
+    @property
+    def independant(self) -> bool:
+        return self.niveau == INDEPENDANT
+
 
 @dataclass(frozen=True)
 class Profil:
@@ -138,6 +152,9 @@ PROFILS: dict[str, Profil] = {
             ),
         ),
     ),
+    "artisan": Profil(
+        "Artisan, revenu médian des indépendants", (Adulte("1980-01-01", INDEPENDANT),)
+    ),
     "retraite_seul": Profil(
         "Retraité seul, pension moyenne de droit direct", (Adulte("1955-01-01", RETRAITE),)
     ),
@@ -159,12 +176,20 @@ class CascadeMenage:
     """Pension de retraite brute (``retraite_brute``)."""
     pension_nette: float = 0.0
     """Pension nette de CSG, CRDS et CASA (``retraite_nette``)."""
+    revenu_independant_brut: float = 0.0
+    """Revenu brut d'un indépendant, avant cotisations et contributions sociales."""
+    cotisations_independant: float = 0.0
+    """Cotisations sociales obligatoires de l'indépendant, formation professionnelle comprise."""
+    csg_crds_independant: float = 0.0
+    revenu_independant_net: float = 0.0
+    """Revenu après cotisations, CSG et CRDS."""
 
     @property
     def net_apres_impot(self) -> float:
         return (
             self.net_avant_impot
             + self.pension_nette
+            + self.revenu_independant_net
             - self.impot_revenu
             + sum(self.prestations.values())
         )
@@ -284,11 +309,28 @@ def pension_brute_mensuelle(annee: int) -> float:
     return pension
 
 
+def resultat_fiscal_independant(annee: int) -> float:
+    """Résultat fiscal annuel de l'artisan type : revenu d'activité médian des non-salariés
+    classiques de 2023 (Insee, net de cotisations sociales), porté à ``annee`` comme le SMIC
+    horaire brut au 1er janvier (hypothèse ``menages_ecart_evolution_revenu_independant``)."""
+    rapport = independants.smic_horaire(annee) / independants.smic_horaire(ANNEE_INSEE_INDEPENDANT)
+    ecart = hypothese(HYPOTHESE_INDEPENDANT).valeur_centrale
+    return chiffrage(REVENU_INSEE_INDEPENDANT) * MOIS_PAR_AN * rapport * (1 + ecart)
+
+
 def _salaires(adulte: Adulte, annee: int, mois: list[str]) -> dict[str, Any]:
     """Salaire de base des ``mois``, pour un apprenti son contrat, pour un retraité sa
     pension (sans salaire)."""
     if adulte.retraite:
         return {"retraite_brute": {m: pension_brute_mensuelle(int(m[:4])) for m in mois}}
+    if adulte.independant:
+        # Résultat fiscal (bénéfice industriel et commercial) pour l'impôt ; les cotisations
+        # sont calculées hors d'OpenFisca (fr_budget.menages.independants).
+        annees = sorted({int(m[:4]) for m in mois})
+        revenu = {str(a): resultat_fiscal_independant(annee) for a in annees}
+        # rpns_imposables pour l'impôt ; rpns_autres_revenus pour les ressources du RSA et de
+        # la prime d'activité, qu'OpenFisca lit dans cette variable pour un non-salarié.
+        return {"rpns_imposables": revenu, "rpns_autres_revenus": revenu}
     if adulte.apprentissage is None:
         return {
             "salaire_de_base": dict.fromkeys(mois, brut_mensuel(adulte.niveau, annee, adulte.cadre))
@@ -420,7 +462,24 @@ def cascade_annuelle(identifiant: str, annee: int = ANNEE) -> CascadeMenage:
         prestations={k: v for k, v in prestations.items() if v},
         pension_brute=total("retraite_brute", mois),
         pension_nette=total("retraite_nette", mois),
+        **_independant(PROFILS[identifiant], annee),
     )
+
+
+def _independant(profil: Profil, annee: int) -> dict[str, float]:
+    """Lignes de l'indépendant (revenu brut, cotisations, CSG-CRDS, revenu net)."""
+    if not any(a.independant for a in profil.adultes):
+        return {}
+    resultat = resultat_fiscal_independant(annee)
+    c = independants.cotisations_artisan(
+        independants.revenu_brut_pour_resultat(resultat, annee), annee
+    )
+    return {
+        "revenu_independant_brut": c.revenu_brut,
+        "cotisations_independant": c.cotisations,
+        "csg_crds_independant": c.csg_crds,
+        "revenu_independant_net": c.revenu_net,
+    }
 
 
 def declaration(identifiant: str, annee: int = ANNEE) -> dict[str, Any]:
@@ -443,6 +502,11 @@ def declaration(identifiant: str, annee: int = ANNEE) -> dict[str, Any]:
     }
     if profil.adultes[0].retraite:
         cases["1AS"] = round(float(pensions[0]))
+    if profil.adultes[0].independant:
+        # Bénéfice industriel et commercial professionnel, régime réel (case 5KC) ; pas de
+        # salaire déclaré.
+        del cases["1AJ"]
+        cases["5KC"] = round(resultat_fiscal_independant(annee))
     if len(profil.adultes) > 1:
         cases["0DB"] = profil.adultes[1].naissance[:4]
         cases["1BJ"] = round(float(salaires[1]))

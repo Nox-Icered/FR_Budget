@@ -267,16 +267,40 @@ SANS_EFFET: dict[str, str] = {
 }
 
 
-class ReformeLevier(Reform):  # type: ignore[misc]
-    name = "Levier du simulateur FR_Budget"
+Mesures = tuple[tuple[str, float], ...]
+"""Mesures d'un scénario : couples (levier, valeur), triés, sans valeur nulle."""
 
-    def __init__(self, systeme: Any, levier: str, valeur: float, debut: str) -> None:
-        self._levier, self._valeur, self._debut = levier, valeur, debut
+
+def mesures(valeurs: dict[str, float]) -> Mesures:
+    """Mesures du scénario qui changent la législation des ménages ; les autres leviers du
+    simulateur (``SANS_EFFET``, et chaque dépense fiscale ou mission prise à part) sont
+    écartés, un levier inconnu du simulateur est refusé."""
+
+    def connu(levier: str) -> bool:
+        try:
+            scenario.bornes_levier(levier)
+        except ValueError:
+            return False
+        return True
+
+    inconnus = {k for k in valeurs if k not in LEVIERS and not connu(k)}
+    if inconnus:
+        msg = f"leviers inconnus : {sorted(inconnus)}"
+        raise ValueError(msg)
+    return tuple(sorted((k, float(v)) for k, v in valeurs.items() if k in LEVIERS and v != 0))
+
+
+class ReformeLevier(Reform):  # type: ignore[misc]
+    name = "Scénario du simulateur FR_Budget"
+
+    def __init__(self, systeme: Any, mesures_: Mesures, debut: str) -> None:
+        self._mesures, self._debut = mesures_, debut
         self.modifications: list[Callable[[Any], None]] = []
         super().__init__(systeme)
 
     def apply(self) -> None:
-        LEVIERS[self._levier].modification(self, self._valeur, self._debut)
+        for levier, valeur in self._mesures:
+            LEVIERS[levier].modification(self, valeur, self._debut)
         if self.modifications:
 
             def modifier(parametres: Any) -> Any:
@@ -288,16 +312,21 @@ class ReformeLevier(Reform):  # type: ignore[misc]
 
 
 @lru_cache(maxsize=CACHE_LEGISLATIONS)
-def legislation(levier: str, valeur: float, annee: int = types.ANNEE) -> types.Legislation:
-    """Législation de référence modifiée par ``valeur`` (unité du levier) à partir du 1er
-    janvier de ``annee``. Mise en cache : elle ne dépend d'aucune donnée saisie."""
-    if levier not in LEVIERS:
-        msg = f"{levier} : pas d'effet direct sur les ménages"
-        raise ValueError(msg)
-    definition = LEVIERS[levier]
-    systeme = ReformeLevier(systeme_socio_fiscal(), levier, valeur, f"{annee}-01-01")
-    ecart = valeur / POURCENT if definition.ecart_csg_independant else 0.0
+def legislation_scenario(mesures_: Mesures, annee: int = types.ANNEE) -> types.Legislation:
+    """Législation de référence modifiée par toutes les mesures à partir du 1er janvier de
+    ``annee``. Mise en cache : elle ne dépend d'aucune donnée saisie."""
+    for levier, _ in mesures_:
+        if levier not in LEVIERS:
+            msg = f"{levier} : pas d'effet direct sur les ménages"
+            raise ValueError(msg)
+    systeme = ReformeLevier(systeme_socio_fiscal(), mesures_, f"{annee}-01-01")
+    ecart = sum(v / POURCENT for k, v in mesures_ if LEVIERS[k].ecart_csg_independant)
     return types.Legislation(systeme=systeme, ecart_csg_activite=ecart)
+
+
+def legislation(levier: str, valeur: float, annee: int = types.ANNEE) -> types.Legislation:
+    """Législation de référence modifiée par un seul levier."""
+    return legislation_scenario(((levier, valeur),), annee)
 
 
 def chiffre(levier: str, profil: types.Profil) -> bool:
@@ -406,7 +435,56 @@ def _verifier_incidence(levier: str, incidence: str) -> None:
         raise ValueError(msg)
 
 
+def _chiffre_scenario(mesures_: Mesures, profil: types.Profil) -> bool:
+    return all(chiffre(levier, profil) for levier, _ in mesures_)
+
+
+def _cascade(
+    profil: types.Profil, mesures_: Mesures, annee: int, incidence: str
+) -> types.CascadeMenage:
+    reforme = legislation_scenario(mesures_, annee)
+    if incidence == SALAIRE:
+        profil = profil_repercute(profil, reforme, annee)
+    return types.cascade_profil(profil, annee, reforme)
+
+
 @lru_cache(maxsize=CACHE_CASCADES)
+def cascade_scenario(
+    identifiant: str,
+    mesures_: Mesures,
+    annee: int = types.ANNEE,
+    incidence: str = COMPTABLE,
+) -> types.CascadeMenage | None:
+    """Cascade du ménage type sous toutes les mesures du scénario ; ``None`` si l'effet d'une
+    des mesures n'est pas chiffré pour ce ménage."""
+    if incidence not in INCIDENCES:
+        msg = f"incidence inconnue : {incidence}"
+        raise ValueError(msg)
+    profil = types.PROFILS[identifiant]
+    if not _chiffre_scenario(mesures_, profil):
+        return None
+    if incidence == COMPTABLE:
+        return types.cascade_type_reformee(
+            identifiant, legislation_scenario(mesures_, annee), annee
+        )
+    return _cascade(profil, mesures_, annee, incidence)
+
+
+def cascade_profil_scenario(
+    profil: types.Profil,
+    mesures_: Mesures,
+    annee: int = types.ANNEE,
+    incidence: str = COMPTABLE,
+) -> types.CascadeMenage | None:
+    """Même calcul pour un profil saisi, sans cache (règle 5)."""
+    if incidence not in INCIDENCES:
+        msg = f"incidence inconnue : {incidence}"
+        raise ValueError(msg)
+    if not _chiffre_scenario(mesures_, profil):
+        return None
+    return _cascade(profil, mesures_, annee, incidence)
+
+
 def cascade_reformee(
     identifiant: str,
     levier: str,
@@ -414,15 +492,9 @@ def cascade_reformee(
     annee: int = types.ANNEE,
     incidence: str = COMPTABLE,
 ) -> types.CascadeMenage | None:
-    """Cascade du ménage type sous le levier ; ``None`` si l'effet n'est pas chiffré."""
+    """Cascade du ménage type sous un seul levier ; ``None`` si l'effet n'est pas chiffré."""
     _verifier_incidence(levier, incidence)
-    profil = types.PROFILS[identifiant]
-    if not chiffre(levier, profil):
-        return None
-    reforme = legislation(levier, valeur, annee)
-    if incidence == SALAIRE:
-        return types.cascade_profil(profil_repercute(profil, reforme, annee), annee, reforme)
-    return types.cascade_type_reformee(identifiant, reforme, annee)
+    return cascade_scenario(identifiant, ((levier, valeur),), annee, incidence)
 
 
 def cascade_profil_reformee(
@@ -434,12 +506,7 @@ def cascade_profil_reformee(
 ) -> types.CascadeMenage | None:
     """Même calcul pour un profil saisi, sans cache (règle 5)."""
     _verifier_incidence(levier, incidence)
-    if not chiffre(levier, profil):
-        return None
-    reforme = legislation(levier, valeur, annee)
-    if incidence == SALAIRE:
-        profil = profil_repercute(profil, reforme, annee)
-    return types.cascade_profil(profil, annee, reforme)
+    return cascade_profil_scenario(profil, ((levier, valeur),), annee, incidence)
 
 
 SENS = (1.0, -1.0)

@@ -165,6 +165,15 @@ Les autres leviers n'ont pas d'effet direct sur la cascade (TVA et accises : con
 43. **Apprenti.** Son salaire est fixé par la loi en pourcentage du SMIC : il ne s'ajuste pas. Les retraités et les indépendants n'ont pas de cotisations patronales.
 44. **Leviers concernés.** Taux de cotisation patronale et allègements généraux. Les autres leviers ne touchent pas le coût employeur ; la lecture répercutée n'a pas d'objet pour eux (refusée par l'API).
 
+#### Scénario de plusieurs leviers
+
+Module `fr_budget.menages.leviers` (`legislation_scenario`, `cascade_scenario`, `cascade_profil_scenario`) ; API `POST /menages-types/scenario` et `POST /mon-menage` (champ `scenario`).
+
+45. **Une seule réforme.** Toutes les mesures du scénario sont appliquées ensemble dans une même réforme d'OpenFisca, puis la cascade est recalculée : les interactions (par exemple CSG déductible et impôt, revenus et prime d'activité) sont donc prises en compte, sans addition d'effets séparés.
+46. **Effet non chiffré.** Si l'effet d'une seule mesure n'est pas chiffré pour un ménage (indexation et pension du retraité), le scénario entier n'est pas chiffré pour ce ménage, plutôt que d'afficher un effet partiel.
+47. **Leviers sans effet direct.** Les leviers du simulateur qui ne changent pas la cascade (TVA, accises, impôt sur les sociétés, dotations, crédits, rémunérations publiques, âge de départ, dépenses fiscales) sont écartés du calcul et listés dans la réponse (`ignorees`) ; un levier inconnu ou une valeur hors de ses bornes est refusé.
+48. **Ménage saisi.** Le même scénario s'applique au ménage saisi, sans cache ni journal (règle 5) ; la réponse donne la cascade avant et après.
+
 ## 6. Validation
 
 **Impôt sur le revenu.**
@@ -244,6 +253,7 @@ Le module reste en bêta.
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-13 | Scénario de plusieurs leviers sur les ménages types et le ménage saisi (moteur et API) | Aucun test de validation ne bouge ; 5 nouveaux tests unitaires (mesures, scénario vide, deux leviers indépendants, non chiffré, profil saisi) ; 5 tests d'API |
 | 2026-10-13 | Réglage d'incidence des cotisations patronales (lectures comptable et répercutée sur le salaire) | Aucun test de validation ne bouge ; 6 nouveaux tests unitaires (coût employeur gardé, plancher du SMIC, apprenti, allègements, mesure nulle, refus), tests d'API (refus de la lecture, export) |
 | 2026-10-13 | Effet des leviers sur les ménages types (7 leviers traduits en réformes d'OpenFisca) | Aucun test de validation ne bouge ; 20 nouveaux tests unitaires (identités sans réforme), 6 tests d'API (route, refus, export) ; test du site (écart ligne par ligne) |
 | 2026-10-13 | Profil saisi par l'utilisateur (moteur, `POST /mon-menage`, page « Mon ménage ») | Aucun test de validation ne bouge ; nouveaux tests unitaires (même cascade qu'un ménage type à saisie égale, bornes, absence de cache) et d'API (réponse, 422, journal sans valeur saisie, CORS) ; tests du site (corps POST, bornes) |

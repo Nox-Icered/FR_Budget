@@ -55,6 +55,10 @@ def test_salaire_apprenti_par_annee_de_contrat() -> None:
     deuxieme = t.salaire_apprenti(contrat, "2025-09") / smic_mensuel_brut("2025-09")
     assert premiere == pytest.approx(0.43)
     assert deuxieme == pytest.approx(0.51)
+    troisieme = t.salaire_apprenti(contrat, "2026-09") / smic_mensuel_brut("2026-09")
+    assert troisieme == pytest.approx(0.67)
+    with pytest.raises(ValueError):
+        t.salaire_apprenti(contrat, "2027-09")
 
 
 def test_declaration_du_couple() -> None:

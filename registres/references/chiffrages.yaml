@@ -2630,3 +2630,14 @@ chiffrages:
     localisation: "Même tableau, ligne « 2e année », colonne « 18-20 ans » : « 51 % du Smic »"
     saisi_le: 2026-10-13
     relecture: a_relire
+
+  - id: service_public_apprenti_18_20_ans_3e_annee
+    module: menages_types
+    source: service_public_f2918
+    millesime: septembre 2026
+    mesure: Rémunération brute mensuelle minimale d'un apprenti de 18 à 20 ans en 3e année, en part du SMIC
+    valeur: 0.67
+    unite: fraction du SMIC
+    localisation: "Même tableau, ligne « 3e année », colonne « 18-20 ans » : « 67 % du Smic »"
+    saisi_le: 2026-10-13
+    relecture: a_relire

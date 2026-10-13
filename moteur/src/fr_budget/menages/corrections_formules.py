@@ -126,31 +126,32 @@ def apprenti_csg_crds(reforme: Reform, correction: dict[str, Any]) -> None:
             _ajouter_ou_remplacer(reforme, variable)
 
 
-def _exoneration_impot_apprenti(individu: Any, period: Any, parameters: Any) -> Any:
-    imposable = np.maximum(individu("salaire_imposable", period), 0)
-    plafond = _smic_mensuel(parameters, period)
-    return individu("apprenti", period) * np.minimum(imposable, plafond)
-
-
-# Variable ajoutée par la correction apprenti_impot_revenu (construite comme les variables
-# corrigées, par type(), pour garder le nom d'OpenFisca).
-EXONERATION_IMPOT_APPRENTI: type[Variable] = type(
-    "exoneration_impot_apprenti",
-    (Variable,),
-    {
-        "value_type": float,
-        "entity": Individu,
-        "label": "Salaire de l'apprenti exonéré d'impôt sur le revenu, dans la limite du SMIC",
-        "definition_period": MONTH,
-        "formula": _exoneration_impot_apprenti,
-    },
-)
-
-
 def apprenti_impot_revenu(reforme: Reform, correction: dict[str, Any]) -> None:
     """Retire du revenu imposé comme des salaires la part exonérée du salaire de l'apprenti."""
     date_effet = str(correction["date_effet"])
-    reforme.add_variable(EXONERATION_IMPOT_APPRENTI)
+
+    def exoneration(individu: Any, period: Any, parameters: Any) -> Any:
+        imposable = np.maximum(individu("salaire_imposable", period), 0)
+        if _avant(period, date_effet):
+            return imposable * 0
+        plafond = _smic_mensuel(parameters, period)
+        return individu("apprenti", period) * np.minimum(imposable, plafond)
+
+    # Variable ajoutée par la correction (construite par type(), comme les variables
+    # corrigées) ; nulle avant la date d'effet, comme la correction du revenu imposable.
+    reforme.add_variable(
+        type(
+            "exoneration_impot_apprenti",
+            (Variable,),
+            {
+                "value_type": float,
+                "entity": Individu,
+                "label": "Salaire de l'apprenti exonéré d'impôt (limite : SMIC)",
+                "definition_period": MONTH,
+                "formula": exoneration,
+            },
+        )
+    )
 
     def fabrique(nom_origine: str) -> Any:
         def formule(individu: Any, period: Any) -> Any:

@@ -6,7 +6,7 @@ mise_a_jour: 2026-10-13
 
 # Fiche : ménages types (cascade jusqu'au net après impôt)
 
-Lot « ménages types », première partie (V1, prévu en parallèle de la phase 2). Fait en autonomie (instruction du mainteneur du 13 octobre 2026). Les choix du § 5, les 12 valeurs saisies (2 de l'Insee, 10 de service-public.gouv.fr) et les trois corrections d'OpenFisca propres aux apprentis sont **à relire**.
+Lot « ménages types », première partie (V1, prévu en parallèle de la phase 2). Fait en autonomie (instruction du mainteneur du 13 octobre 2026). Les choix du § 5, les 13 valeurs saisies (2 de l'Insee, 11 de service-public.gouv.fr) et les trois corrections d'OpenFisca propres aux apprentis sont **à relire**.
 
 ## 1. Question posée
 
@@ -21,7 +21,7 @@ Pour un ménage type, combien coûte le travail à l'employeur, et que reste-t-i
 | Cadre célibataire, 95e centile | 95e centile, salarié cadre | aucun | Insee Première n° 2079 : 5 593 € nets par mois en 2024 (2,55 fois la médiane) |
 | Couple marié, deux enfants | médiane et SMIC | nés en 2016 et 2019 | Insee, OpenFisca |
 | Parent seul, un enfant | SMIC, case T | né en 2019 | OpenFisca |
-| Apprenti de 19 ans | salaire minimum de l'apprentissage, contrat débuté le 1er septembre 2024 | aucun | service-public.gouv.fr, fiche F2918 : 43 % du SMIC en 1re année, 51 % en 2e année (18 à 20 ans) |
+| Apprenti de 19 ans | salaire minimum de l'apprentissage, contrat débuté le 1er septembre 2024 | aucun | service-public.gouv.fr, fiche F2918 : 43 % du SMIC en 1re année, 51 % en 2e, 67 % en 3e (18 à 20 ans) |
 
 La spécification prévoit aussi un retraité et un indépendant :
 - **Retraité, pension médiane : bloqué.** La source attendue est le panorama de la DREES « Les retraités et les retraites » (édition 2025, fiche 5). Le site de la DREES n'était pas joignable depuis l'environnement de travail le 13 octobre 2026. Le portail de données ouvertes de la DREES ne publie, au plus récent, qu'une distribution par tranches de 100 € à fin 2020, sans médiane.
@@ -47,7 +47,7 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
 - **Hypothèses d'emploi.** Ce sont celles du cas validé contre le modèle Urssaf : effectif de 4, taux AT/MP de 2,08 %, pas de mutuelle d'entreprise.
 
 - **Apprenti.**
-  - Salaire brut de chaque mois : pourcentage du SMIC de l'année d'exécution du contrat (43 % puis 51 %), nul avant le contrat.
+  - Salaire brut de chaque mois : pourcentage du SMIC de l'année d'exécution du contrat (43 %, 51 % puis 67 %), nul avant le contrat. Au-delà de la 3e année, le contrat est terminé : le calcul s'arrête au lieu de prolonger le dernier taux.
   - La rémunération d'apprenti qu'OpenFisca calcule lui-même est neutralisée. Elle repose sur des pourcentages antérieurs à la fiche F2918 et s'ajoute au salaire de base.
   - Trois corrections d'OpenFisca 176.1.2 (registre `corrections_openfisca.yaml`) appliquent les exonérations de la fiche F2918 :
     - cotisations salariales : sous 79 % du SMIC (contrat conclu avant le 1er mars 2025) ou 50 % (depuis) ;

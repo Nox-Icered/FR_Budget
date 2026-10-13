@@ -110,6 +110,7 @@ PROFILS: dict[str, Profil] = {
                     (
                         "service_public_apprenti_18_20_ans_1re_annee",
                         "service_public_apprenti_18_20_ans_2e_annee",
+                        "service_public_apprenti_18_20_ans_3e_annee",
                     ),
                 ),
             ),
@@ -221,7 +222,13 @@ def salaire_apprenti(apprentissage: Apprentissage, mois: str) -> float:
     if mois < debut:
         return 0.0
     ecart = (int(mois[:4]) - int(debut[:4])) * 12 + int(mois[5:]) - int(debut[5:])
-    part = chiffrage(apprentissage.parts_smic[min(ecart // 12, len(apprentissage.parts_smic) - 1)])
+    annee_contrat = ecart // 12
+    if annee_contrat >= len(apprentissage.parts_smic):
+        # Pas de taux pour cette année d'exécution : le contrat est terminé, le profil ne
+        # s'applique plus (on ne prolonge pas le dernier taux).
+        msg = f"{mois} : au-delà des {len(apprentissage.parts_smic)} années du contrat"
+        raise ValueError(msg)
+    part = chiffrage(apprentissage.parts_smic[annee_contrat])
     return part * smic_mensuel_brut(mois)
 
 

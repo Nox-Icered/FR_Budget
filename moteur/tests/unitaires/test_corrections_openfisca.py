@@ -1,5 +1,7 @@
 from importlib.metadata import version
 
+import pytest
+
 from fr_budget.menages.corrections import charger_corrections
 from fr_budget.menages.openfisca import HypothesesEmploi, cascade_salaire_mensuelle
 
@@ -84,3 +86,13 @@ def test_apprenti_contrat_recent_preleve_au_dela_de_50_pourcent_du_smic() -> Non
     # Cotisations salariales, CSG et CRDS sur la seule part au-delà de 50 % du SMIC : entre
     # 10 et 30 % de cette part, et rien sur le reste.
     assert 0.10 * au_dela < preleve < 0.30 * au_dela
+
+
+def test_exoneration_impot_apprenti_inactive_avant_la_date_effet() -> None:
+    corrigee = cascade_salaire_mensuelle(
+        900, "2023-06", SANS_MUTUELLE, apprentissage_debut="2022-09-01"
+    )
+    publiee = cascade_salaire_mensuelle(
+        900, "2023-06", SANS_MUTUELLE, apprentissage_debut="2022-09-01", corrige=False
+    )
+    assert corrigee.net_imposable == pytest.approx(publiee.net_imposable)

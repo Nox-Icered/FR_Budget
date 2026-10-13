@@ -29,11 +29,13 @@ export type MenageFormulaire = { adultes: AdulteFormulaire[]; enfants: string[] 
 export type CorpsRequete = {
   adultes: { statut: Statut; montant_mensuel: number; annee_naissance: number; cadre: boolean }[];
   annees_naissance_enfants: number[];
+  scenario?: ScenarioMenage;
 };
 
 export type ResultatMonMenage = LignesCascade & {
   annee_revenus: number;
   sources: string[];
+  scenario?: ScenarioMenage & { apres: LignesCascade | null };
 };
 
 // Problème de saisie : clé de texte (messages/fr.json, section mon_menage.erreurs).
@@ -127,4 +129,48 @@ export async function calculer(
   });
   if (!reponse.ok) throw new Error(`service de calcul : ${reponse.status}`);
   return (await reponse.json()) as ResultatMonMenage;
+}
+
+// Scénario transmis du simulateur à la page « Mon ménage » par l'adresse : seulement les
+// mesures (paramètre m=levier:valeur;…) et la lecture de l'incidence (i=salaire), jamais la
+// saisie du ménage.
+export type ScenarioMenage = { mesures: Record<string, number>; incidence: "comptable" | "salaire" };
+
+export function encoderScenarioMenage(s: ScenarioMenage): string {
+  const mesures = Object.entries(s.mesures)
+    .filter(([, v]) => v !== 0)
+    .map(([k, v]) => `${k}:${v}`)
+    .join(";");
+  if (!mesures) return "";
+  const params = new URLSearchParams({ m: mesures });
+  if (s.incidence === "salaire") params.set("i", "salaire");
+  return params.toString();
+}
+
+export function decoderScenarioMenage(
+  recherche: string,
+  leviers: { id: string; bornes: [number, number] }[],
+  leviersIncidence: string[],
+): ScenarioMenage | null {
+  // Mêmes contrôles que le service de calcul : levier connu, valeur dans ses bornes, lecture
+  // répercutée seulement avec une mesure sur les cotisations patronales.
+  const params = new URLSearchParams(recherche);
+  const m = params.get("m");
+  if (!m) return null;
+  const mesures: Record<string, number> = {};
+  for (const morceau of m.split(";")) {
+    const [id, valeur] = morceau.split(":");
+    const levier = leviers.find((l) => l.id === id);
+    const v = Number(valeur);
+    if (!levier || valeur === undefined || valeur.trim() === "" || !Number.isFinite(v)) return null;
+    if (v < levier.bornes[0] || v > levier.bornes[1]) return null;
+    mesures[id] = v;
+  }
+  const i = params.get("i");
+  if (i !== null && i !== "salaire" && i !== "comptable") return null;
+  const incidence = i === "salaire" ? "salaire" : "comptable";
+  if (incidence === "salaire" && !Object.keys(mesures).some((k) => leviersIncidence.includes(k))) {
+    return null;
+  }
+  return { mesures, incidence };
 }

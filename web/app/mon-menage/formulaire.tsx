@@ -1,20 +1,22 @@
 "use client";
 // Formulaire du ménage saisi. Règle 5 : la saisie reste dans la mémoire de la page ; elle n'est
 // ni stockée dans le navigateur ni mise dans l'adresse, et n'est envoyée qu'au service de calcul.
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { texte } from "../../lib/textes";
-import { lignesCascade } from "../../lib/cascade";
+import { lignesCascade, lignesComparees } from "../../lib/cascade";
 import { region } from "../../lib/region";
 import {
   STATUTS,
   adresseService,
   calculer,
+  decoderScenarioMenage,
   preparer,
   type AdulteFormulaire,
   type Bornes,
   type MenageFormulaire,
   type Probleme,
   type ResultatMonMenage,
+  type ScenarioMenage,
 } from "../../lib/mon-menage";
 
 const MOIS_PAR_AN = 12;
@@ -28,8 +30,26 @@ const adulteVide = (): AdulteFormulaire => ({
   cadre: false,
 });
 
-export function Formulaire({ bornes }: { bornes: Bornes }) {
+export function Formulaire({
+  bornes,
+  leviers,
+  leviersIncidence,
+}: {
+  bornes: Bornes;
+  leviers: { id: string; bornes: [number, number] }[];
+  leviersIncidence: string[];
+}) {
   const idBase = useId();
+  // Mesures transmises par le simulateur dans l'adresse (jamais la saisie du ménage).
+  const [scenario, setScenario] = useState<ScenarioMenage | null>(null);
+  const [scenarioIllisible, setScenarioIllisible] = useState(false);
+  useEffect(() => {
+    const recherche = window.location.search;
+    if (!recherche) return;
+    const lu = decoderScenarioMenage(recherche, leviers, leviersIncidence);
+    if (lu) setScenario(lu);
+    else setScenarioIllisible(true);
+  }, [leviers, leviersIncidence]);
   const [menage, setMenage] = useState<MenageFormulaire>({ adultes: [adulteVide()], enfants: [] });
   const [problemes, setProblemes] = useState<Probleme[]>([]);
   const [resultat, setResultat] = useState<ResultatMonMenage | null>(null);
@@ -75,7 +95,8 @@ export function Formulaire({ bornes }: { bornes: Bornes }) {
     setEnCours(true);
     const envoi = revision.current;
     try {
-      const reponse = await calculer(adresse, r.corps);
+      const corps = scenario ? { ...r.corps, scenario } : r.corps;
+      const reponse = await calculer(adresse, corps);
       if (envoi === revision.current) setResultat(reponse);
     } catch {
       if (envoi === revision.current) setErreur(true);
@@ -86,6 +107,26 @@ export function Formulaire({ bornes }: { bornes: Bornes }) {
 
   return (
     <>
+      {scenarioIllisible && <p className="avertissement">{texte("mon_menage.scenario.illisible")}</p>}
+      {scenario && (
+        <section>
+          <h2>{texte("mon_menage.scenario.titre")}</h2>
+          <p>{texte("mon_menage.scenario.intro")}</p>
+          <ul>
+            {Object.entries(scenario.mesures).map(([k, v]) => (
+              <li key={k}>
+                {texte(`mon_menage.scenario.mesures.${k}`, {
+                  valeur: new Intl.NumberFormat("fr-FR", { signDisplay: "exceptZero" }).format(v),
+                })}
+              </li>
+            ))}
+          </ul>
+          {scenario.incidence === "salaire" && <p>{texte("mon_menage.scenario.incidence_salaire")}</p>}
+          <p>
+            <a href="/mon-menage/">{texte("mon_menage.scenario.retirer")}</a>
+          </p>
+        </section>
+      )}
       <form onSubmit={envoyer} autoComplete="off" noValidate>
         {menage.adultes.map((a, i) => {
           const id = `${idBase}-adulte-${i}`;
@@ -208,26 +249,50 @@ export function Formulaire({ bornes }: { bornes: Bornes }) {
 
 function Resultat({ r }: { r: ResultatMonMenage }) {
   const titre = texte("mon_menage.resultat", { annee: r.annee_revenus });
+  const apres = r.scenario?.apres;
+  const signe = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0, signDisplay: "exceptZero" });
   return (
     <section>
       <h2>{titre}</h2>
+      {r.scenario && apres === null && (
+        <p className="avertissement">{texte("mon_menage.scenario.non_chiffre")}</p>
+      )}
       <div className="defilement" {...region(titre)}>
         <table>
           <thead>
             <tr>
               <th scope="col">{texte("menages.ligne")}</th>
-              <th scope="col">{texte("menages.an")}</th>
-              <th scope="col">{texte("menages.mois")}</th>
+              {apres ? (
+                <>
+                  <th scope="col">{texte("menages.effets.avant")}</th>
+                  <th scope="col">{texte("menages.effets.apres")}</th>
+                  <th scope="col">{texte("menages.effets.ecart")}</th>
+                </>
+              ) : (
+                <>
+                  <th scope="col">{texte("menages.an")}</th>
+                  <th scope="col">{texte("menages.mois")}</th>
+                </>
+              )}
             </tr>
           </thead>
           <tbody>
-            {lignesCascade(r).map(([libelle, v]) => (
-              <tr key={libelle}>
-                <th scope="row">{libelle}</th>
-                <td className="nombre">{euros.format(v)}</td>
-                <td className="nombre">{euros.format(v / MOIS_PAR_AN)}</td>
-              </tr>
-            ))}
+            {apres
+              ? lignesComparees(r, apres).map((l) => (
+                  <tr key={l.libelle}>
+                    <th scope="row">{l.libelle}</th>
+                    <td className="nombre">{euros.format(l.avant)}</td>
+                    <td className="nombre">{euros.format(l.apres)}</td>
+                    <td className="nombre">{signe.format(Math.round(l.ecart))}</td>
+                  </tr>
+                ))
+              : lignesCascade(r).map(([libelle, v]) => (
+                  <tr key={libelle}>
+                    <th scope="row">{libelle}</th>
+                    <td className="nombre">{euros.format(v)}</td>
+                    <td className="nombre">{euros.format(v / MOIS_PAR_AN)}</td>
+                  </tr>
+                ))}
           </tbody>
         </table>
       </div>

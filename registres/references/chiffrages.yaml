@@ -2520,3 +2520,91 @@ chiffrages:
     localisation: Page 2, figure 3, ligne « 95e centile », colonne « Ensemble »
     saisi_le: 2026-10-13
     relecture: a_relire
+
+  - id: service_public_bmaf_2026
+    module: menages_types
+    source: service_public_a16506
+    millesime: avril 2026
+    mesure: Base mensuelle de calcul des allocations familiales au 1er avril 2026
+    valeur: 478.16
+    unite: euros par mois
+    localisation: "Paragraphe « Allocations familiales revalorisées au 1er avril 2026 » : « Elle s’élève à 478,16 € »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_bmaf_2025
+    module: menages_types
+    source: service_public_a16506
+    millesime: avril 2025
+    mesure: Base mensuelle de calcul des allocations familiales au 1er avril 2025
+    valeur: 474.37
+    unite: euros par mois
+    localisation: "Même paragraphe : « contre 474,37 € depuis le 1er avril 2025 »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_pa_montant_forfaitaire_2026
+    module: menages_types
+    source: service_public_f2882
+    millesime: avril 2026
+    mesure: Montant forfaitaire de la prime d'activité, personne seule sans enfant
+    valeur: 638.28
+    unite: euros par mois
+    localisation: "Section « Montant » : « Le montant forfaitaire (montant de base du calcul de la prime d'activité) est égal à 638,28 € » ; tableau « Montants forfaitaires de la prime d'activité », ligne 0, colonne « Vous vivez seul »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_pa_part_revenus_professionnels_2026
+    module: menages_types
+    source: service_public_f2882
+    millesime: avril 2026
+    mesure: Part des revenus professionnels ajoutée au montant forfaitaire de la prime d'activité
+    valeur: 0.5985
+    unite: fraction
+    localisation: "Section « Montant » : « 59,85 % du montant des revenus professionnels du foyer »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_pa_seuil_bonification_2026
+    module: menages_types
+    source: service_public_f2882
+    millesime: avril 2026
+    mesure: Revenu professionnel mensuel au-delà duquel la bonification individuelle de la prime d'activité est due
+    valeur: 726.29
+    unite: euros par mois
+    localisation: "Section « Montant » : « Cette bonification est due si le salaire mensuel moyen est supérieur à 726,29 € »"
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_af_deux_enfants_2026
+    module: menages_types
+    source: service_public_f13213
+    millesime: avril 2026
+    mesure: Allocations familiales pour deux enfants, ressources de 79 980 € ou moins, montant de base après CRDS
+    valeur: 152.25
+    unite: euros par mois
+    localisation: Tableau « Montants des allocations familiales », ligne « 79 980 € ou moins », colonne « Montant de base »
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_ars_6_10_ans_2026
+    module: menages_types
+    source: service_public_f1878
+    millesime: rentrée 2026
+    mesure: Allocation de rentrée scolaire pour un enfant de 6 à 10 ans, après CRDS
+    valeur: 426.87
+    unite: euros par enfant
+    localisation: Tableau « Montant de l'ARS selon l'âge de l'enfant », ligne « 6 à 10 ans »
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: service_public_asf_2026
+    module: menages_types
+    source: service_public_f815
+    millesime: avril 2026
+    mesure: Allocation de soutien familial par enfant
+    valeur: 200.78
+    unite: euros par mois et par enfant
+    localisation: "Section « Quel est le montant de l'allocation de soutien familial (ASF) ? » : « Le montant de l'ASF s'élève à 200,78 € par mois et par enfant »"
+    saisi_le: 2026-10-13
+    relecture: a_relire

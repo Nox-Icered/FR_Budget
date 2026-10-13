@@ -593,3 +593,43 @@ datasets:
     empreinte_sha256: eccec002126b970c65a23286f1dba5152ea6525915ae678c2d6eb6f432b3f567
     methode_transformation: aucune ; médiane et 95e centile des salaires nets en EQTP (page 2, figure 3) saisis dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-13
+
+  - id: service_public_f2882_html
+    source: service_public_f2882
+    description: Page F2882 de service-public.gouv.fr, prime d'activité (HTML tel que téléchargé)
+    fichier: data/raw/menages/service_public/F2882.html
+    empreinte_sha256: 27a79d9567516570e18df3a24f099c6c59de65106ec44fcc8c363d46751aed0e
+    methode_transformation: aucune ; montants lus dans la page et saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13
+
+  - id: service_public_f13213_html
+    source: service_public_f13213
+    description: Page F13213 de service-public.gouv.fr, allocations familiales (HTML tel que téléchargé)
+    fichier: data/raw/menages/service_public/F13213.html
+    empreinte_sha256: 4e926f113478628fbf7d91781f473833c0aee967405d344105bb5e42acded601
+    methode_transformation: aucune ; montants lus dans la page et saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13
+
+  - id: service_public_f1878_html
+    source: service_public_f1878
+    description: Page F1878 de service-public.gouv.fr, allocation de rentrée scolaire (HTML tel que téléchargé)
+    fichier: data/raw/menages/service_public/F1878.html
+    empreinte_sha256: 60be032b97eec6cb412e8b4ad1f4efff83ca5849c8e07481712937e7dc5e8495
+    methode_transformation: aucune ; montants lus dans la page et saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13
+
+  - id: service_public_f815_html
+    source: service_public_f815
+    description: Page F815 de service-public.gouv.fr, allocation de soutien familial (HTML tel que téléchargé)
+    fichier: data/raw/menages/service_public/F815.html
+    empreinte_sha256: 9f49cda5af172568e2a51828179cf7826146c2b4255e135aac00c2eeb9aca1e2
+    methode_transformation: aucune ; montants lus dans la page et saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13
+
+  - id: service_public_a16506_html
+    source: service_public_a16506
+    description: Page A16506 de service-public.gouv.fr, base mensuelle des allocations familiales (HTML tel que téléchargé)
+    fichier: data/raw/menages/service_public/A16506.html
+    empreinte_sha256: 18fc6d2ec28813ed097871c572cb96838368422a7305ac576b32e9f54bef3c37
+    methode_transformation: aucune ; montants lus dans la page et saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-13

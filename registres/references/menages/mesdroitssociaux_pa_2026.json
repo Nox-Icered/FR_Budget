@@ -1,0 +1,46 @@
+{
+  "source": {
+    "nom": "Simulateur du RSA et de la prime d'activité (mesdroitssociaux.gouv.fr)",
+    "editeur": "Caisse centrale de la MSA (portail mesdroitssociaux.gouv.fr)",
+    "url": "https://www.mesdroitssociaux.gouv.fr/simulateurs/rsa-pa",
+    "script": "outils/references_prestations/generer.mjs"
+  },
+  "cas": [
+    {
+      "id": "celibataire_smic",
+      "mois_ressources": [
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09"
+      ],
+      "mois_resultat": "2026-10",
+      "couple": false,
+      "adultes": [
+        {
+          "naissance": "1990-01-01",
+          "salaires": [
+            1531,
+            1531,
+            1531,
+            1531
+          ]
+        }
+      ],
+      "enfants": [],
+      "autres_ressources": [],
+      "logement": {
+        "code_postal": "75011",
+        "depcom": "75111",
+        "loyer": 700
+      },
+      "simule_le": "2026-10-13",
+      "resultats": {
+        "commune": "75011 - Paris",
+        "prime_activite": 230
+      },
+      "texte_resultat": "Prime d'activité Montant estimé : 230€ /mois",
+      "remarque": "Relevé avec les scripts de mise au point qui ont précédé generer.mjs (mêmes étapes) ; date de naissance saisie 1990-01-01 au lieu de 1995-01-01 (âge sans effet sur la prime d'activité au-delà de 25 ans)."
+    }
+  ]
+}

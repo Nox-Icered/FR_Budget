@@ -1,0 +1,11 @@
+{
+  "name": "references-prestations",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generer": "node generer.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "1.55.0"
+  }
+}

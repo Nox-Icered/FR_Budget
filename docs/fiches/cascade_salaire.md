@@ -60,7 +60,7 @@ L'incidence des cotisations patronales (part répercutée sur le salaire) sera u
 ## 7. Limites connues
 
 - Un seul ménage type validé (célibataire au SMIC). Les autres profils de la spécification demandent une source pour le salaire médian.
-- Net après impôt pas encore calculé ni validé.
+- Net après impôt : calculé pour les ménages types (fiche `menages_types`), impôt validé contre le simulateur d'impots.gouv.fr ; prestations pas encore validées.
 - Les sources des corrections d'OpenFisca sont citées d'après des résultats de recherche et restent à confirmer sur les textes primaires.
 - Convention d'heures du SMIC mensuel (OpenFisca et modèle Urssaf diffèrent de 0,04 €) : à choisir pour nos ménages types.
 

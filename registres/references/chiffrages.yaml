@@ -2498,3 +2498,25 @@ chiffrages:
     localisation: Page 123 (page 125 du PDF), tableau 2.10, ligne « Solde primaire des APU (en pts de PIB) »
     saisi_le: 2026-10-12
     relecture: a_relire
+
+  - id: insee_salaire_net_median_2024
+    module: menages_types
+    source: insee_premiere_2079
+    millesime: "2024"
+    mesure: Salaire net médian en équivalent temps plein, secteur privé, ensemble
+    valeur: 2190
+    unite: euros par mois
+    localisation: Page 2, figure 3 (distribution des salaires nets mensuels en EQTP), ligne « Médiane », colonne « Ensemble »
+    saisi_le: 2026-10-13
+    relecture: a_relire
+
+  - id: insee_salaire_net_p95_2024
+    module: menages_types
+    source: insee_premiere_2079
+    millesime: "2024"
+    mesure: 95e centile du salaire net en équivalent temps plein, secteur privé, ensemble
+    valeur: 5593
+    unite: euros par mois
+    localisation: Page 2, figure 3, ligne « 95e centile », colonne « Ensemble »
+    saisi_le: 2026-10-13
+    relecture: a_relire

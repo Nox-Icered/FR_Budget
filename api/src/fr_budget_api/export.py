@@ -21,6 +21,7 @@ from fr_budget_api.app import (
     catalogue_depenses_fiscales,
     depenses_fonctions,
     journal,
+    menages_types,
     registre,
     reponses_unitaires,
     resume_validation,
@@ -55,6 +56,7 @@ def exporter(dossier: Path) -> None:
     dossier.mkdir(parents=True, exist_ok=True)
     _ecrire(dossier, "version.json", version_donnees())
     _ecrire(dossier, "journal.json", journal())
+    _ecrire(dossier, "menages-types.json", menages_types())
     for nom in REGISTRES:
         _ecrire(dossier, f"registre-{nom}.json", registre(nom))
     _ecrire(

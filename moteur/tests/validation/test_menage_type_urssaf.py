@@ -34,8 +34,12 @@ LIGNES = ["salaire_brut", "cout_employeur", "net_avant_impot", "net_imposable"]
 @pytest.mark.parametrize("cas", CAS, ids=[c["id"] for c in CAS])
 def test_cascade_salaire_egale_reference_urssaf(cas: dict[str, Any], ligne: str) -> None:
     reference = cas["resultats_mensuels"]
+    apprentissage = cas.get("apprentissage")
     cascade = cascade_salaire_mensuelle(
-        reference["salaire_brut"], cas["mois"], HypothesesEmploi(**cas["hypotheses"])
+        reference["salaire_brut"],
+        cas["mois"],
+        HypothesesEmploi(**cas["hypotheses"]),
+        apprentissage_debut=apprentissage["contrat_debut"] if apprentissage else None,
     )
     modele = getattr(cascade, ligne)
     ecart = modele - reference[ligne]

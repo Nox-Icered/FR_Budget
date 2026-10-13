@@ -1,5 +1,7 @@
 from importlib.metadata import version
 
+import pytest
+
 from fr_budget.menages.corrections import charger_corrections
 from fr_budget.menages.openfisca import HypothesesEmploi, cascade_salaire_mensuelle
 
@@ -41,3 +43,56 @@ def test_taux_ags_corrige_hausse_le_cout_employeur() -> None:
     publiee = cascade_salaire_mensuelle(3000, "2026-01", hypotheses, corrige=False)
     ecart_de_taux = 0.0025 - 0.002
     assert abs(corrigee.cout_employeur - publiee.cout_employeur - 3000 * ecart_de_taux) < 0.01
+
+
+SANS_MUTUELLE = HypothesesEmploi(
+    effectif_entreprise=4,
+    taux_accident_travail=0.0208,
+    mutuelle_montant_mensuel=0,
+    mutuelle_part_employeur=0.5,
+)
+
+
+def test_chaque_correction_formule_a_sa_fonction() -> None:
+    from fr_budget.menages.corrections_formules import FORMULES
+
+    formules = {c["id"] for c in charger_corrections()["corrections"] if c["type"] == "formule"}
+    assert formules == set(FORMULES)
+
+
+def test_apprenti_contrat_ancien_exonere_sous_79_pourcent_du_smic() -> None:
+    # 1 400 € en juin 2026 : environ 75 % du SMIC, sous le plafond de 79 % des contrats
+    # conclus avant le 1er mars 2025. Net égal au brut ; sans correction, CSG et CRDS.
+    corrigee = cascade_salaire_mensuelle(
+        1400, "2026-06", SANS_MUTUELLE, apprentissage_debut="2024-09-01"
+    )
+    publiee = cascade_salaire_mensuelle(
+        1400, "2026-06", SANS_MUTUELLE, apprentissage_debut="2024-09-01", corrige=False
+    )
+    assert abs(corrigee.net_avant_impot - 1400) < 0.01
+    assert corrigee.net_imposable == 0
+    assert publiee.net_avant_impot < 1400 - 100
+
+
+def test_apprenti_contrat_recent_preleve_au_dela_de_50_pourcent_du_smic() -> None:
+    from fr_budget.menages.openfisca import smic_mensuel_brut
+
+    brut = 1400
+    corrigee = cascade_salaire_mensuelle(
+        brut, "2026-06", SANS_MUTUELLE, apprentissage_debut="2025-09-01"
+    )
+    au_dela = brut - 0.5 * smic_mensuel_brut("2026-06")
+    preleve = brut - corrigee.net_avant_impot
+    # Cotisations salariales, CSG et CRDS sur la seule part au-delà de 50 % du SMIC : entre
+    # 10 et 30 % de cette part, et rien sur le reste.
+    assert 0.10 * au_dela < preleve < 0.30 * au_dela
+
+
+def test_exoneration_impot_apprenti_inactive_avant_la_date_effet() -> None:
+    corrigee = cascade_salaire_mensuelle(
+        900, "2023-06", SANS_MUTUELLE, apprentissage_debut="2022-09-01"
+    )
+    publiee = cascade_salaire_mensuelle(
+        900, "2023-06", SANS_MUTUELLE, apprentissage_debut="2022-09-01", corrige=False
+    )
+    assert corrigee.net_imposable == pytest.approx(publiee.net_imposable)

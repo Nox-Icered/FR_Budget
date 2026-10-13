@@ -49,4 +49,7 @@ def test_impot_egal_au_simulateur(cas: dict[str, Any]) -> None:
 def test_parts_et_revenu_fiscal_de_reference(cas: dict[str, Any]) -> None:
     rfr, parts = revenu_fiscal_et_parts(cas["id"])
     assert parts == cas["resultats"]["nombre_parts"]
-    assert abs(rfr - cas["resultats"]["revenu_fiscal_reference"]) <= TOLERANCE_EUROS
+    # Le simulateur n'affiche pas la ligne du revenu fiscal de référence quand il est nul
+    # (apprenti dont tout le salaire est exonéré) : une ligne absente vaut 0.
+    reference = cas["resultats"].get("revenu_fiscal_reference", 0)
+    assert abs(rfr - reference) <= TOLERANCE_EUROS

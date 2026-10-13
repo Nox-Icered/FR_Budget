@@ -33,6 +33,7 @@ ANNEE_INSEE = 2024
 SMIC = "smic"
 MEDIAN = "median"
 P95 = "p95"
+APPRENTI = "apprenti"
 HYPOTHESE_EVOLUTION = "menages_ecart_evolution_salaire_smic"
 NIVEAUX_INSEE = {MEDIAN: "insee_salaire_net_median_2024", P95: "insee_salaire_net_p95_2024"}
 # Hypothèses d'emploi du cas validé contre le modèle Urssaf (valeurs par défaut du modèle,
@@ -52,11 +53,23 @@ PRESTATIONS_ANNUELLES = ("ars",)
 
 
 @dataclass(frozen=True)
+class Apprentissage:
+    """Contrat d'apprentissage payé au salaire minimum légal (pourcentage du SMIC)."""
+
+    contrat_debut: str
+    """Date de début du contrat (« AAAA-MM-JJ ») ; pas de salaire avant."""
+    parts_smic: tuple[str, ...]
+    """Chiffrages des pourcentages du SMIC, par année d'exécution du contrat."""
+
+
+@dataclass(frozen=True)
 class Adulte:
     naissance: str
     niveau: str
     cadre: bool = False
     """Salarié cadre (cotisations des cadres) ; sinon non cadre, valeur par défaut d'OpenFisca."""
+    apprentissage: Apprentissage | None = None
+    """Apprenti (``niveau`` vaut alors ``APPRENTI``) : salaire et exonérations propres."""
 
 
 @dataclass(frozen=True)
@@ -85,6 +98,23 @@ PROFILS: dict[str, Profil] = {
         (Adulte("1990-01-01", SMIC),),
         ("2019-03-01",),
         parent_isole=True,
+    ),
+    "apprenti_19_ans": Profil(
+        "Apprenti de 19 ans, payé au minimum légal",
+        (
+            Adulte(
+                "2006-01-01",
+                APPRENTI,
+                apprentissage=Apprentissage(
+                    "2024-09-01",
+                    (
+                        "service_public_apprenti_18_20_ans_1re_annee",
+                        "service_public_apprenti_18_20_ans_2e_annee",
+                        "service_public_apprenti_18_20_ans_3e_annee",
+                    ),
+                ),
+            ),
+        ),
     ),
 }
 
@@ -185,6 +215,41 @@ def brut_mensuel(niveau: str, annee: int = ANNEE, cadre: bool = False) -> float:
     return brut_pour_net(net, mois, cadre)
 
 
+def salaire_apprenti(apprentissage: Apprentissage, mois: str) -> float:
+    """Salaire brut d'un mois : pourcentage du SMIC de l'année d'exécution du contrat
+    (service-public.gouv.fr, fiche F2918), nul avant le début du contrat."""
+    debut = apprentissage.contrat_debut[:7]
+    if mois < debut:
+        return 0.0
+    ecart = (int(mois[:4]) - int(debut[:4])) * 12 + int(mois[5:]) - int(debut[5:])
+    annee_contrat = ecart // 12
+    if annee_contrat >= len(apprentissage.parts_smic):
+        # Pas de taux pour cette année d'exécution : le contrat est terminé, le profil ne
+        # s'applique plus (on ne prolonge pas le dernier taux).
+        msg = f"{mois} : au-delà des {len(apprentissage.parts_smic)} années du contrat"
+        raise ValueError(msg)
+    part = chiffrage(apprentissage.parts_smic[annee_contrat])
+    return part * smic_mensuel_brut(mois)
+
+
+def _salaires(adulte: Adulte, annee: int, mois: list[str]) -> dict[str, Any]:
+    """Salaire de base des ``mois`` et, pour un apprenti, contrat d'apprentissage."""
+    if adulte.apprentissage is None:
+        return {
+            "salaire_de_base": dict.fromkeys(mois, brut_mensuel(adulte.niveau, annee, adulte.cadre))
+        }
+    contrat = adulte.apprentissage
+    sous_contrat = [m for m in mois if m >= contrat.contrat_debut[:7]]
+    return {
+        "salaire_de_base": {m: salaire_apprenti(contrat, m) for m in mois},
+        "apprenti": dict.fromkeys(sous_contrat, True),
+        # OpenFisca calcule sa propre rémunération d'apprenti (pourcentages du SMIC antérieurs
+        # à ceux de la fiche F2918) et l'ajoute au salaire de base : elle est neutralisée.
+        "remuneration_apprenti": dict.fromkeys(mois, 0.0),
+        "apprentissage_contrat_debut": dict.fromkeys(sous_contrat, contrat.contrat_debut),
+    }
+
+
 def situation(profil: Profil, annee: int = ANNEE) -> dict[str, Any]:
     """Situation OpenFisca du ménage : salaires de l'année et de la précédente, déclaration
     commune pour un couple (marié), enfants à charge."""
@@ -192,12 +257,11 @@ def situation(profil: Profil, annee: int = ANNEE) -> dict[str, Any]:
     individus: dict[str, Any] = {}
     adultes = []
     for i, a in enumerate(profil.adultes):
-        brut = brut_mensuel(a.niveau, annee, a.cadre)
         nom = f"adulte_{i + 1}"
         adultes.append(nom)
         individus[nom] = {
             "date_naissance": {"ETERNITY": a.naissance},
-            "salaire_de_base": dict.fromkeys(mois, brut),
+            **_salaires(a, annee, mois),
             **_emploi_sur(mois),
             **_categorie(a.cadre, mois),
         }
@@ -245,7 +309,7 @@ def cascade_annuelle(identifiant: str, annee: int = ANNEE) -> CascadeMenage:
         cout_employeur=total("salaire_super_brut", mois),
         salaire_brut=total("salaire_de_base", mois),
         net_avant_impot=total("salaire_net_a_payer", mois),
-        net_imposable=total("salaire_imposable", mois),
+        net_imposable=total("revenu_assimile_salaire", [str(annee)]),
         impot_revenu=-total("impot_revenu_restant_a_payer", [str(annee)]),
         prestations={k: v for k, v in prestations.items() if v},
     )
@@ -261,7 +325,9 @@ def declaration(identifiant: str, annee: int = ANNEE) -> dict[str, Any]:
     )
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", RuntimeWarning)
-        salaires = sum(simulation.calculate("salaire_imposable", m) for m in _mois(annee))
+        # Revenu imposé comme des salaires : salaire imposable, moins la part exonérée du
+        # salaire d'un apprenti (correction apprenti_impot_revenu).
+        salaires = simulation.calculate("revenu_assimile_salaire", str(annee))
     cases: dict[str, Any] = {
         "situation": "M" if len(profil.adultes) > 1 else "C",
         "0DA": profil.adultes[0].naissance[:4],

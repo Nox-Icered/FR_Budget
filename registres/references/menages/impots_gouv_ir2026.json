@@ -97,6 +97,22 @@
         "impot_net": 0,
         "restant_a_payer": 0
       }
+    },
+    {
+      "id": "apprenti_19_ans",
+      "revenus": 2025,
+      "declaration": {
+        "situation": "C",
+        "0DA": "2006",
+        "0CF": 0,
+        "1AJ": 0
+      },
+      "resultats": {
+        "nombre_parts": 1,
+        "droits_simples": 0,
+        "impot_net": 0,
+        "restant_a_payer": 0
+      }
     }
   ]
 }

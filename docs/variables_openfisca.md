@@ -23,6 +23,14 @@ Relevés dans le paquet installé `openfisca-france` 176.1.2 (`openfisca-core` 4
 | `salaire_net` | individu | mois | Salaires nets d'après définition INSEE | 0 | Corrigée en même temps que `salaire_imposable`, dont elle dépend |
 | `impot_revenu_restant_a_payer` | foyer fiscal | année | Impôt sur le revenu restant à payer | 0 | Prochaine étape : net après impôt |
 | `ppa` | famille | mois | Prime pour l'activité | 0 | Prochaine étape : net après impôt |
+| `apprenti` | individu | mois | L'individu est apprenti | calculée (âge et date du contrat) | Entrée : profil apprenti |
+| `apprentissage_contrat_debut` | individu | mois | Date de début du contrat d'apprentissage | — | Entrée : profil apprenti ; date du régime d'exonération |
+| `remuneration_apprenti` | individu | mois | Rémunération de l'apprenti | calculée | Neutralisée (0) : ajoutée au salaire de base avec des pourcentages du SMIC antérieurs à la fiche F2918 |
+| `exoneration_cotisations_salariales_apprenti` | individu | mois | Exonération de cotisations salariales pour l'emploi d'un apprenti | calculée | Corrigée (plafond de 79 % ou 50 % du SMIC) |
+| `assiette_csg_abattue`, `assiette_csg_non_abattue` | individu | mois | Assiettes de la CSG (et de la CRDS) | calculées | Corrigées pour l'apprenti |
+| `assiette_cotisations_sociales` | individu | mois | Assiette des cotisations sociales des salaries | calculée | Lue par les corrections des apprentis |
+| `revenu_assimile_salaire` | individu | année | Revenu imposé comme des salaires | calculée | Corrigée : part exonérée du salaire de l'apprenti retirée ; net imposable annuel des ménages types |
+| `exoneration_impot_apprenti` | individu | mois | Ajoutée par le projet (correction `apprenti_impot_revenu`) | — | Net imposable mensuel de l'apprenti |
 | `revenu_disponible` | ménage | année | Revenu disponible du ménage | 0 | Prochaine étape |
 
 Noms supposés qui n'existent pas dans ce paquet : `irpp`, `prime_activite`.

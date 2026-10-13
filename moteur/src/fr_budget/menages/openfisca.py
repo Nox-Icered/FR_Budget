@@ -77,12 +77,20 @@ def smic_mensuel_brut(mois: str) -> float:
 
 
 def cascade_salaire_mensuelle(
-    salaire_brut: float, mois: str, hypotheses: HypothesesEmploi, *, corrige: bool = True
+    salaire_brut: float,
+    mois: str,
+    hypotheses: HypothesesEmploi,
+    *,
+    corrige: bool = True,
+    apprentissage_debut: str | None = None,
 ) -> CascadeSalaire:
     """Calcule la cascade du salaire d'un salarié célibataire du privé, à temps plein.
 
     Le salarié est non cadre, en CDI (valeurs par défaut d'OpenFisca pour
-    ``categorie_salarie`` et ``contrat_de_travail``).
+    ``categorie_salarie`` et ``contrat_de_travail``), ou apprenti si ``apprentissage_debut``
+    (date de début du contrat, « AAAA-MM-JJ ») est donné. Le net imposable est le salaire
+    imposable moins la part exonérée d'impôt du salaire d'un apprenti
+    (``exoneration_impot_apprenti``, correction ``apprenti_impot_revenu``).
     """
     individu: dict[str, Any] = {
         "salaire_de_base": {mois: salaire_brut},
@@ -91,6 +99,12 @@ def cascade_salaire_mensuelle(
         "complementaire_sante_montant": {mois: hypotheses.mutuelle_montant_mensuel},
         "complementaire_sante_part_employeur": {mois: hypotheses.mutuelle_part_employeur},
     }
+    if apprentissage_debut is not None:
+        individu["apprenti"] = {mois: True}
+        individu["apprentissage_contrat_debut"] = {mois: apprentissage_debut}
+        # Rémunération d'apprenti propre à OpenFisca, ajoutée au salaire de base : neutralisée,
+        # le salaire brut est donné.
+        individu["remuneration_apprenti"] = {mois: 0.0}
     situation = {
         "individus": {"salarie": individu},
         "foyers_fiscaux": {"foyer": {"declarants": ["salarie"]}},
@@ -110,5 +124,6 @@ def cascade_salaire_mensuelle(
         cout_employeur=calcul("salaire_super_brut"),
         salaire_brut=calcul("salaire_de_base"),
         net_avant_impot=calcul("salaire_net_a_payer"),
-        net_imposable=calcul("salaire_imposable"),
+        net_imposable=calcul("salaire_imposable")
+        - (calcul("exoneration_impot_apprenti") if corrige else 0.0),
     )

@@ -43,6 +43,38 @@ const CAS = [
 		},
 		correction: 'smic_reduction_generale_2026',
 	},
+	// Apprentis payés au salaire minimum de l'apprentissage (pourcentage du SMIC selon l'âge et
+	// l'année d'exécution du contrat). Le modèle Urssaf applique le régime des contrats conclus
+	// depuis le 1er mars 2025 selon la date du calcul, et non selon la date du contrat : les
+	// deux cas sont choisis pour que les deux lectures coïncident.
+	{
+		// 18 à 20 ans, 1re année (43 % du SMIC) : sous 50 % du SMIC, exonération totale de
+		// cotisations salariales, de CSG et de CRDS dans les deux régimes.
+		id: 'apprenti_18_20_ans_1re_annee_2025_06',
+		mois: '2025-06',
+		apprentissage: { contrat_debut: '2024-09-01' },
+		situation: {
+			'salarié . contrat': "'apprentissage'",
+			'salarié . contrat . apprentissage . âge': "'de 18 à 20'",
+			"salarié . contrat . date d'embauche": "'01/09/2024'",
+			'salarié . contrat . salaire brut': 'salarié . contrat . apprentissage . rémunération minimale',
+			'salarié . cotisations . prévoyances . santé . montant': '0 €/mois',
+		},
+	},
+	{
+		// 21 à 25 ans, 1re année (53 % du SMIC), contrat conclu après le 1er mars 2025 : la
+		// part du salaire au-delà de 50 % du SMIC supporte cotisations, CSG et CRDS.
+		id: 'apprenti_21_25_ans_1re_annee_2026_06',
+		mois: '2026-06',
+		apprentissage: { contrat_debut: '2025-09-01' },
+		situation: {
+			'salarié . contrat': "'apprentissage'",
+			'salarié . contrat . apprentissage . âge': "'de 21 à 25'",
+			"salarié . contrat . date d'embauche": "'01/09/2025'",
+			'salarié . contrat . salaire brut': 'salarié . contrat . apprentissage . rémunération minimale',
+			'salarié . cotisations . prévoyances . santé . montant': '0 €/mois',
+		},
+	},
 ]
 
 // Corrections appliquées à la version figée du modèle Urssaf, quand l'éditeur a publié
@@ -79,9 +111,13 @@ const HYPOTHESES = {
 	mutuelle_part_employeur: ['salarié . cotisations . prévoyances . santé . taux employeur', 1 / 100],
 }
 
+// Le coût total employeur du modèle Urssaf déduit les aides différées (aide à l'embauche d'un
+// apprenti, par exemple), qui ne sont pas des allègements de cotisations : elles sont
+// réintégrées dans le coût comparé, et relevées à part.
+const AIDES = 'salarié . coût total employeur . aides'
 const RESULTATS = {
 	salaire_brut: 'salarié . contrat . salaire brut',
-	cout_employeur: 'salarié . coût total employeur',
+	cout_employeur: ['salarié . coût total employeur', AIDES],
 	net_avant_impot: 'salarié . rémunération . net . à payer avant impôt',
 	net_imposable: 'salarié . rémunération . net . imposable',
 }
@@ -95,7 +131,15 @@ const valeur = (regle) => {
 	return v
 }
 
-const cas = CAS.map(({ id, mois, situation, correction }) => {
+// Montants en euros par mois, quelle que soit l'unité de la règle (une aide est en €/an).
+const mensuel = (regle) => {
+	const v = moteur.evaluate({ valeur: regle, unité: '€/mois' }).nodeValue
+	if (typeof v !== 'number') throw new Error(`Règle sans valeur numérique : ${regle}`)
+	return v
+}
+const somme = (regles) => (Array.isArray(regles) ? regles : [regles]).reduce((s, r) => s + mensuel(r), 0)
+
+const cas = CAS.map(({ id, mois, situation, correction, apprentissage }) => {
 	const [annee, m] = mois.split('-')
 	const date = { date: `'01/${m}/${annee}'` }
 	moteur.setSituation({ ...date, ...situation })
@@ -109,12 +153,14 @@ const cas = CAS.map(({ id, mois, situation, correction }) => {
 		mois,
 		situation: situationFinale,
 		...(correction && { correction_appliquee: CORRECTIONS[correction].description }),
+		...(apprentissage && { apprentissage }),
 		hypotheses: Object.fromEntries(
 			Object.entries(HYPOTHESES).map(([nom, [regle, facteur]]) => [nom, Number((valeur(regle) * facteur).toPrecision(12))]),
 		),
 		resultats_mensuels: Object.fromEntries(
-			Object.entries(RESULTATS).map(([nom, regle]) => [nom, valeur(regle)]),
+			Object.entries(RESULTATS).map(([nom, regles]) => [nom, somme(regles)]),
 		),
+		aides_differees_mensuelles: mensuel(AIDES),
 	}
 })
 

@@ -139,7 +139,9 @@ En parallèle :
 
 - Ménages types : les 8 profils de la spécification, cascade coût employeur, brut, net avant impôt, net après impôt, avant et après. Réglage d'incidence des cotisations patronales, les deux lectures affichées. Profil saisi par l'utilisateur calculé sans stockage ni journalisation (contrôle de la configuration des logs en test).
   - Première partie faite le 13 octobre 2026 (`docs/fiches/menages_types.md`, choix à relire) : 5 profils salariés (SMIC, médiane et 95e centile de l'Insee, couple avec deux enfants, parent seul), cascade jusqu'au net après impôt et prestations, sans réforme ; impôt validé contre le simulateur officiel d'impots.gouv.fr (5 sur 5, à 1 € près).
-  - Reste à faire : retraité, indépendant, étudiant ; validation des prestations (CAF) ; effet des leviers sur les ménages ; réglage d'incidence ; profil saisi par l'utilisateur.
+  - Prestations validées contre les barèmes publiés le 13 octobre 2026 ; cas du simulateur officiel de la prime d'activité en attente (service des communes indisponible).
+  - Apprenti ajouté le 13 octobre 2026, avec trois corrections d'OpenFisca (exonérations de 2025).
+  - Reste à faire : retraité (source de la DREES inaccessible), indépendant ; effet des leviers sur les ménages ; réglage d'incidence ; profil saisi par l'utilisateur.
 - Indicateur de dépense incompressible pour TVA et accises (budgets de famille INSEE).
 - Entreprises : charge par taille et secteur (ESANE, DGFiP), sans effet comportemental.
 - Écrans Catalogue, Simulateur, Ménages, Entreprises, « Comment c'est calculé ? ».

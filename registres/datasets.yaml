@@ -633,3 +633,11 @@ datasets:
     empreinte_sha256: 18fc6d2ec28813ed097871c572cb96838368422a7305ac576b32e9f54bef3c37
     methode_transformation: aucune ; montants lus dans la page et saisis dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-13
+
+  - id: service_public_f2918_html
+    source: service_public_f2918
+    description: Page F2918 de service-public.gouv.fr, contrat d'apprentissage (HTML tel que téléchargé)
+    fichier: data/raw/menages/service_public/F2918.html
+    empreinte_sha256: 7184775a8ca6668cbc2982d97514b470d41eea031d35f409ab7ea369c39ff788
+    methode_transformation: aucune ; pourcentages du SMIC et règles d'exonération lus dans la page et saisis dans registres/references/chiffrages.yaml et registres/corrections_openfisca.yaml
+    telecharge_le: 2026-10-13

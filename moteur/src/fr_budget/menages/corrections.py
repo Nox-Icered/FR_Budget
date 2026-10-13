@@ -6,6 +6,7 @@ Elles sont appliquées sous forme de réforme OpenFisca : le paquet installé n'
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from importlib.resources import files
 from pathlib import Path
 from typing import Any
@@ -57,13 +58,13 @@ def _corriger_parametre(correction: dict[str, Any]) -> Any:
     return modifier
 
 
-def _envelopper(
-    systeme: TaxBenefitSystem, nom: str, terme: str, signe: int, date_effet: str
+def _remplacer(
+    systeme: TaxBenefitSystem, nom: str, fabrique: Callable[[str], Any], suffixe: str
 ) -> tuple[type[Variable], type[Variable]]:
-    """Ajoute ``signe * terme`` à la variable ``nom`` à partir de ``date_effet``.
+    """Remplace la formule de la variable ``nom`` par ``fabrique(nom_d_origine)``.
 
-    Les formules d'OpenFisca sont conservées telles quelles sous le nom ``{nom}_openfisca`` ;
-    la nouvelle variable ``nom`` vaut ``{nom}_openfisca`` plus la correction.
+    Les formules en vigueur sont conservées telles quelles sous le nom ``{nom}_{suffixe}`` ;
+    ``fabrique`` reçoit ce nom et renvoie la nouvelle formule, qui peut s'en servir.
     """
     origine = systeme.get_variable(nom)
     formules = {
@@ -76,23 +77,12 @@ def _envelopper(
         "definition_period": origine.definition_period,
         "set_input": origine.set_input,
     }
-    nom_openfisca = f"{nom}_openfisca"
+    nom_origine = f"{nom}_{suffixe}"
     sans_correction = type(
-        nom_openfisca,
+        nom_origine,
         (Variable,),
-        {
-            **attributs,
-            "label": f"{origine.label} (formule d'OpenFisca sans correction)",
-            **formules,
-        },
+        {**attributs, "label": f"{origine.label} (avant correction {suffixe})", **formules},
     )
-
-    def formule_corrigee(individu: Any, period: Any) -> Any:
-        valeur = individu(nom_openfisca, period)
-        if str(period.start) < date_effet:
-            return valeur
-        return valeur + signe * individu(terme, period)
-
     corrigee = type(
         nom,
         (Variable,),
@@ -100,10 +90,30 @@ def _envelopper(
             **attributs,
             "label": origine.label,
             "reference": origine.reference,
-            "formula": formule_corrigee,
+            "formula": fabrique(nom_origine),
         },
     )
     return sans_correction, corrigee
+
+
+def _envelopper(
+    systeme: TaxBenefitSystem, nom: str, terme: str, signe: int, date_effet: str
+) -> tuple[type[Variable], type[Variable]]:
+    """Ajoute ``signe * terme`` à la variable ``nom`` à partir de ``date_effet``.
+
+    La formule d'OpenFisca est conservée sous le nom ``{nom}_openfisca``.
+    """
+
+    def fabrique(nom_origine: str) -> Any:
+        def formule_corrigee(individu: Any, period: Any) -> Any:
+            valeur = individu(nom_origine, period)
+            if str(period.start) < date_effet:
+                return valeur
+            return valeur + signe * individu(terme, period)
+
+        return formule_corrigee
+
+    return _remplacer(systeme, nom, fabrique, "openfisca")
 
 
 class CorrectionsOpenFisca(Reform):  # type: ignore[misc]
@@ -126,6 +136,11 @@ class CorrectionsOpenFisca(Reform):  # type: ignore[misc]
                     )
                     self.add_variable(sans_correction)
                     self.update_variable(corrigee)
+            elif correction["type"] == "formule":
+                # Import tardif : les formules s'appuient sur les fonctions de ce module.
+                from fr_budget.menages.corrections_formules import FORMULES
+
+                FORMULES[correction["id"]](self, correction)
             else:
                 msg = f"Correction inconnue : {correction['id']}"
                 raise ValueError(msg)

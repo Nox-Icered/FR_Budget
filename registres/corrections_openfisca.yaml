@@ -45,3 +45,56 @@ corrections:
       - bofip_prevoyance_complementaire
       - ag2r_sort_fiscal_contributions
       - modele_social_11_1_0
+
+  - id: apprenti_cotisations_salariales
+    type: formule
+    date_effet: "2024-01-01"
+    valeurs:
+      date_nouveau_regime: "2025-03-01"
+      part_smic_cotisations_avant: 0.79
+      part_smic_cotisations_depuis: 0.50
+    libelle: >
+      Exonération des cotisations salariales de l'apprenti limitée à la part du salaire
+      inférieure à 79 % du SMIC (contrat conclu avant le 1er mars 2025) ou à 50 % du SMIC
+      (contrat conclu depuis)
+    constat: >
+      OpenFisca 176.1.2 exonère l'apprenti de toutes ses cotisations salariales, sans plafond
+      (variable exoneration_cotisations_salariales_apprenti). Correction appliquée à partir de
+      2024, années calculées par le projet ; elle approche l'exonération par la part du
+      salaire sous le plafond, exacte sous le plafond de la Sécurité sociale.
+    sources:
+      - service_public_f2918
+      - modele_social_11_1_0
+
+  - id: apprenti_csg_crds
+    type: formule
+    date_effet: "2024-01-01"
+    valeurs:
+      date_nouveau_regime: "2025-03-01"
+      part_smic_csg_crds_depuis: 0.50
+    libelle: >
+      Salaire de l'apprenti exonéré de CSG et de CRDS : en totalité pour un contrat conclu
+      avant le 1er mars 2025, dans la limite de 50 % du SMIC pour un contrat conclu depuis
+    constat: >
+      OpenFisca 176.1.2 soumet tout le salaire de l'apprenti à la CSG et à la CRDS. La
+      correction porte sur les deux assiettes de la CSG (assiette_csg_abattue,
+      assiette_csg_non_abattue), qui servent aussi à la CRDS.
+    sources:
+      - service_public_f2918
+      - modele_social_11_1_0
+
+  - id: apprenti_impot_revenu
+    type: formule
+    date_effet: "2024-01-01"
+    libelle: >
+      Salaire de l'apprenti exonéré d'impôt sur le revenu dans la limite du SMIC, appliquée
+      mois par mois
+    constat: >
+      OpenFisca 176.1.2 compte tout le salaire de l'apprenti dans le revenu imposable : le
+      paramètre impot_revenu.calcul_revenus_imposables.exo_ir.conditions_ressources_exoneration_ir
+      existe mais aucune formule ne l'utilise. La limite est le « montant annuel du Smic »
+      (service-public.gouv.fr) ; comme le modèle de l'Urssaf, la correction l'applique mois
+      par mois (SMIC mensuel brut), ce qui revient au même pour un salaire régulier.
+    sources:
+      - service_public_f2918
+      - modele_social_11_1_0

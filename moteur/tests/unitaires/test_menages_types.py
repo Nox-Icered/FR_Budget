@@ -30,11 +30,35 @@ def test_niveaux_ordonnes_et_rapport_a_l_insee() -> None:
 @pytest.mark.parametrize("identifiant", t.PROFILS)
 def test_cascade_ordonnee(identifiant: str) -> None:
     c = t.cascade_annuelle(identifiant)
-    assert c.cout_employeur >= c.salaire_brut > c.net_avant_impot > 0
+    # Égalité possible du brut et du net : apprenti exonéré de cotisations, de CSG et de CRDS.
+    assert c.cout_employeur >= c.salaire_brut >= c.net_avant_impot > 0
     assert c.impot_revenu >= 0
     assert c.net_apres_impot == pytest.approx(
         c.net_avant_impot - c.impot_revenu + sum(c.prestations.values())
     )
+
+
+def test_apprenti_exonere() -> None:
+    """Contrat conclu avant le 1er mars 2025, salaire sous 79 % du SMIC : net égal au brut,
+    salaire entièrement exonéré d'impôt (fiche F2918 de service-public.gouv.fr)."""
+    c = t.cascade_annuelle("apprenti_19_ans")
+    assert c.net_avant_impot == pytest.approx(c.salaire_brut)
+    assert c.net_imposable == 0
+    assert t.declaration("apprenti_19_ans")["1AJ"] == 0
+
+
+def test_salaire_apprenti_par_annee_de_contrat() -> None:
+    contrat = t.PROFILS["apprenti_19_ans"].adultes[0].apprentissage
+    assert contrat is not None
+    assert t.salaire_apprenti(contrat, "2024-08") == 0
+    premiere = t.salaire_apprenti(contrat, "2025-08") / smic_mensuel_brut("2025-08")
+    deuxieme = t.salaire_apprenti(contrat, "2025-09") / smic_mensuel_brut("2025-09")
+    assert premiere == pytest.approx(0.43)
+    assert deuxieme == pytest.approx(0.51)
+    troisieme = t.salaire_apprenti(contrat, "2026-09") / smic_mensuel_brut("2026-09")
+    assert troisieme == pytest.approx(0.67)
+    with pytest.raises(ValueError):
+        t.salaire_apprenti(contrat, "2027-09")
 
 
 def test_declaration_du_couple() -> None:

@@ -87,7 +87,8 @@ export type MenagesTypes = {
 export type EffetsMenages = {
   unite: string;
   annee_revenus: number;
-  leviers: { id: string; unite: string }[];
+  sources: string[];
+  leviers: { id: string; unite: string; sources: string[] }[];
   sans_effet: Record<string, string>;
   effets: Record<string, Record<"hausse" | "baisse", Record<string, LignesCascade | null>>>;
 };

@@ -10,7 +10,13 @@ import pytest
 from fastapi.testclient import TestClient
 from fr_budget.menages import types as module_menages
 
-from fr_budget_api.app import SOURCES_MENAGES, creer_application, menages_types, registre
+from fr_budget_api.app import (
+    SOURCES_MENAGES,
+    _description_leviers_menages,
+    creer_application,
+    menages_types,
+    registre,
+)
 from fr_budget_api.export import exporter
 
 
@@ -162,3 +168,13 @@ def test_export_des_effets_des_leviers(tmp_path: Path) -> None:
     # Pension du retraité : effet de l'indexation non chiffré (part des pensions de base).
     assert effets["effets"]["indexation_pensions_prestations"]["hausse"]["retraite_seul"] is None
     assert "tva_taux_normal" in effets["sans_effet"]
+
+
+def test_sources_des_effets_au_registre() -> None:
+    """Chaque source citée pour l'effet d'un levier est au registre des sources."""
+    description = _description_leviers_menages()
+    connues = {s["id"] for s in registre("sources") or []}
+    assert set(description["sources"]) <= connues
+    for levier in description["leviers"]:
+        assert levier["sources"]
+        assert set(levier["sources"]) <= connues

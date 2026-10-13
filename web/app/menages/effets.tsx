@@ -89,6 +89,20 @@ export function EffetsLeviers({
           </>
         )}
       </div>
+      <p className="source">
+        {texte("menages.sources")}{" "}
+        {[
+          ...new Set([
+            ...(effets.leviers.find((l) => l.id === levier)?.sources ?? []),
+            ...effets.sources,
+          ]),
+        ].map((s, i) => (
+          <span key={s}>
+            {i > 0 && ", "}
+            <a href={`/sources/#${s}`}>{s}</a>
+          </span>
+        ))}
+      </p>
       {levier === "cotisations_patronales_taux" && (
         <p className="source">{texte("menages.effets.incidence")}</p>
       )}

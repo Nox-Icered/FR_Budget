@@ -102,6 +102,8 @@ ALLEGEMENTS = (
 )
 
 Modification = Callable[[Reform, float, str], None]
+OPENFISCA = "openfisca_france_176_1_2"
+CCSS = "ccss_octobre_2026"
 
 
 def _transformer(parametre: Any, f: Callable[[float], float], debut: str) -> None:
@@ -207,6 +209,9 @@ class LevierMenage:
     """Le levier change aussi la CSG de l'artisan (calculée hors d'OpenFisca)."""
     non_chiffre: Callable[[types.Profil], bool] = lambda _p: False
     """Profils dont l'effet n'est pas chiffré, faute de source."""
+    sources: tuple[str, ...] = (OPENFISCA,)
+    """Sources du registre qui définissent le levier et sa traduction (paramètres et formules
+    d'OpenFisca-France, périmètre fixé par la référence du levier)."""
 
 
 def _avec_pension(profil: types.Profil) -> bool:
@@ -215,14 +220,32 @@ def _avec_pension(profil: types.Profil) -> bool:
 
 LEVIERS: dict[str, LevierMenage] = {
     "csg_activite": LevierMenage(
-        _points(PARAMETRE_CSG_ACTIVITE), "points", ecart_csg_independant=True
+        _points(PARAMETRE_CSG_ACTIVITE),
+        "points",
+        ecart_csg_independant=True,
+        sources=(OPENFISCA, CCSS, "service_public_f2971", "urssaf_reforme_assiette_independants"),
     ),
-    "csg_retraites": LevierMenage(_points(PARAMETRE_CSG_RETRAITES), "points"),
-    scenario.LEVIER_COTISATIONS_TAUX: LevierMenage(_cotisation_patronale, "points"),
-    scenario.LEVIER_ALLEGEMENTS: LevierMenage(_allegements, "%"),
-    scenario.LEVIER_IR_SEUILS: LevierMenage(_seuils_ir, "%"),
+    "csg_retraites": LevierMenage(
+        _points(PARAMETRE_CSG_RETRAITES), "points", sources=(OPENFISCA, CCSS)
+    ),
+    scenario.LEVIER_COTISATIONS_TAUX: LevierMenage(
+        _cotisation_patronale, "points", sources=(OPENFISCA, CCSS)
+    ),
+    scenario.LEVIER_ALLEGEMENTS: LevierMenage(_allegements, "%", sources=(OPENFISCA, CCSS)),
+    scenario.LEVIER_IR_SEUILS: LevierMenage(
+        _seuils_ir, "%", sources=(OPENFISCA, "plf2025_evaluations_prealables")
+    ),
     scenario.LEVIER_PA_PENTE: LevierMenage(_points(PARAMETRE_PENTE, ppa=True), "points"),
-    scenario.LEVIER_INDEXATION: LevierMenage(_indexation, "points", non_chiffre=_avec_pension),
+    scenario.LEVIER_INDEXATION: LevierMenage(
+        _indexation,
+        "points",
+        non_chiffre=_avec_pension,
+        sources=(
+            OPENFISCA,
+            "drees_comptes_protection_sociale_2025",
+            "drees_retraites_2025_fiche05",
+        ),
+    ),
 }
 
 # Leviers sans effet direct sur la cascade des ménages types, et la raison (clé de texte).

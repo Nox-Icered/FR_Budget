@@ -292,7 +292,10 @@ def _description_leviers_menages() -> dict[str, Any]:
     return {
         "unite": "euros par an",
         "annee_revenus": module_menages.ANNEE,
-        "leviers": [{"id": i, "unite": d.unite} for i, d in leviers.items()],
+        "sources": SOURCES_MENAGES,
+        "leviers": [
+            {"id": i, "unite": d.unite, "sources": list(d.sources)} for i, d in leviers.items()
+        ],
         "sans_effet": module_leviers_menages.SANS_EFFET,
     }
 

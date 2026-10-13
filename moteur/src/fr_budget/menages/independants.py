@@ -163,17 +163,23 @@ class CotisationsIndependant:
         return self.revenu_brut - self.cotisations - self.csg_crds
 
 
-def cotisations_artisan(revenu_brut: float, annee: int) -> CotisationsIndependant:
+def cotisations_artisan(
+    revenu_brut: float, annee: int, ecart_csg_deductible: float = 0.0
+) -> CotisationsIndependant:
     """Cotisations et contributions dues au titre de ``annee`` (2025 ou après) sur un revenu
     brut annuel. La CSG-CRDS (9,7 %, Urssaf) est répartie entre CSG déductible (6,8 %) et CRDS
-    (0,5 %) d'après les taux des revenus d'activité de service-public.gouv.fr (fiche F2971)."""
+    (0,5 %) d'après les taux des revenus d'activité de service-public.gouv.fr (fiche F2971).
+
+    ``ecart_csg_deductible`` : variation du taux de CSG déductible (en fraction), pour l'effet
+    d'un levier sur la CSG des revenus d'activité (``fr_budget.menages.leviers``)."""
     if annee < ANNEE_REFORME:
         msg = f"{annee} : barème des indépendants antérieur à la réforme non codé"
         raise ValueError(msg)
     pss, smic_h = pss_annuel(annee), smic_horaire(annee)
     a = assiette(revenu_brut, pss)
-    csg_crds = _c("csg_crds") * a
-    csg_deductible = chiffrage("service_public_csg_activite_deductible") * a
+    csg_crds = (_c("csg_crds") + ecart_csg_deductible) * a
+    taux_deductible = chiffrage("service_public_csg_activite_deductible") + ecart_csg_deductible
+    csg_deductible = taux_deductible * a
     crds = chiffrage("service_public_crds_activite") * a
     return CotisationsIndependant(
         revenu_brut=revenu_brut,

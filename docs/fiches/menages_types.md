@@ -131,6 +131,32 @@ Le moteur (`fr_budget.menages.personnalise`) traduit la saisie en profil et calc
 29. **Pas de validation propre.** Le calcul est celui des ménages types, validé sur ces profils. Un ménage saisi hors de leurs situations (revenus élevés, familles nombreuses, couple retraité et salarié) n'est pas comparé à un simulateur officiel. La page porte le bandeau bêta des ménages types.
 30. **Service de calcul non hébergé.** Le site est statique ; il appelle l'API à l'adresse fixée à la construction (`NEXT_PUBLIC_API_URL`), qui doit autoriser l'origine du site (`FR_BUDGET_ORIGINES`). Tant que l'API n'est pas hébergée, la page l'indique et ne calcule rien.
 
+### Effet des leviers sur les ménages types
+
+Module `fr_budget.menages.leviers`. Chaque levier qui change directement la législation d'un ménage devient une réforme d'OpenFisca-France (paramètres ou formules, noms vérifiés dans le paquet installé) ; la cascade est recalculée sous cette réforme. Le site publie, pour chaque ménage et chaque levier, une hausse et une baisse d'une unité (un point ou 1 %) ; l'API (`GET /menages-types/effet`) calcule toute valeur dans les bornes du levier.
+
+| Levier | Traduction pour les ménages |
+|--------|-----------------------------|
+| CSG sur les revenus d'activité | taux de CSG déductible (`csg.activite.deductible`), comme la hausse de 2018 ; même écart sur la CSG de l'artisan, calculée hors d'OpenFisca, à revenu avant cotisations inchangé |
+| CSG sur les pensions (taux plein) | taux plein de CSG déductible des pensions ; taux réduit et médian inchangés |
+| Taux de cotisation patronale du secteur privé | cotisation ajoutée au coût employeur, assise sur l'assiette des cotisations, hors du champ des allègements (lecture de la CCSS) |
+| Allègements généraux | taux de la réduction générale (`taux_allegement_general`) et réductions des taux maladie et famille multipliés par 1 + x |
+| Seuils du barème de l'impôt sur le revenu | limites des tranches, plafonds des effets du quotient familial et seuils de la décote multipliés par 1 + x |
+| Pente de la prime d'activité | fraction des revenus professionnels prise en compte |
+| Indexation des pensions et prestations | base mensuelle des allocations familiales, montants de base du RSA et de la prime d'activité multipliés par 1 + x |
+
+Les autres leviers n'ont pas d'effet direct sur la cascade (TVA et accises : consommation ; CSG sur le capital : pas de patrimoine ; impôt sur les sociétés ; dotations et crédits : entre administrations ; rémunérations publiques : aucun agent public ; âge de départ : pensions futures ; dépenses fiscales : situations absentes des profils). La page le dit.
+
+31. **Année et durée.** La mesure s'applique aux revenus de 2025, du 1er janvier au 31 décembre : effet en année pleine, sans changement de comportement. Les revenus et la législation des années précédentes (ressources des prestations, revenu fiscal de référence) ne changent pas.
+32. **Prime d'activité.** OpenFisca lit les paramètres de la prime d'activité aux mois des ressources, les trois mois qui précèdent le droit. Modifiés au 1er janvier, ils ne joueraient que sur dix mois de droits (constaté : 10/12 de l'effet). Ils sont donc modifiés dès le 1er octobre de l'année précédente, pour que tous les droits de 2025 en tiennent compte.
+33. **Réduction générale.** OpenFisca la régularise mois par mois (cumul depuis janvier moins les mois précédents). Multiplier le montant mensuel fausserait cette régularisation (constaté : −221 € au lieu de −859 € pour 10 %). Le facteur s'applique donc au taux de la réduction.
+34. **Incidence comptable des cotisations patronales.** La hausse change le coût employeur, pas le salaire brut. La lecture où elle se répercute sur les salaires (réglage d'incidence) reste à faire.
+35. **Part déductible.** Une hausse de CSG porte sur la part déductible, comme en 2018 ; elle réduit donc aussi l'impôt. Une hausse sur la part non déductible donnerait un net après impôt un peu plus bas.
+36. **Pension du retraité non revalorisée par le levier d'indexation.** Le levier ne porte que sur les pensions de base. La part de base dans la pension moyenne de la DREES n'est pas dans les sources du registre : l'effet n'est pas chiffré pour ce ménage, et la page le dit. Une source (par exemple le fichier Excel associé à la fiche 5 de la DREES, ou une pension de base moyenne publiée) permettrait de le chiffrer.
+37. **Seuils de l'impôt non arrondis.** La loi arrondit les seuils revalorisés à l'euro ; le modèle ne les arrondit pas (écart de quelques euros au plus).
+38. **Fourchette.** L'effet d'une mesure sur un ménage type est un calcul de la législation, sans hypothèse incertaine : valeurs basse, centrale et haute confondues. La fourchette s'ouvrira avec le réglage d'incidence et, plus tard, avec des élasticités sourcées.
+39. **Contrôles.** Aucun simulateur officiel ne calcule une législation réformée. Chaque effet est donc comparé à une identité calculée sans la réforme : un point de CSG retire un point de l'assiette de la CSG (après l'abattement de 1,75 %) ; une cotisation patronale d'un point ajoute un point de l'assiette au coût ; 10 % d'allègements en plus retirent 10 % des allègements au coût ; des seuils relevés de 1 % donnent l'impôt du barème aux seuils relevés (cadre, une part) ; un point de pente ajoute un point des revenus d'activité à la prime ; un point d'indexation ajoute 1 % aux allocations familiales.
+
 ## 6. Validation
 
 **Impôt sur le revenu.**
@@ -210,6 +236,7 @@ Le module reste en bêta.
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-13 | Effet des leviers sur les ménages types (7 leviers traduits en réformes d'OpenFisca) | Aucun test de validation ne bouge ; 20 nouveaux tests unitaires (identités sans réforme), 6 tests d'API (route, refus, export) ; test du site (écart ligne par ligne) |
 | 2026-10-13 | Profil saisi par l'utilisateur (moteur, `POST /mon-menage`, page « Mon ménage ») | Aucun test de validation ne bouge ; nouveaux tests unitaires (même cascade qu'un ménage type à saisie égale, bornes, absence de cache) et d'API (réponse, 422, journal sans valeur saisie, CORS) ; tests du site (corps POST, bornes) |
 | 2026-10-13 | Profil artisan, cotisations selon l'assiette réformée de 2025 | Impôt : 2 nouveaux tests réussis (8 cas sur 8) ; barème : 6 nouveaux tests, 5 réussis, 1 hors tolérance (retraite complémentaire maximale, écart entre la page de l'Urssaf et le décret) ; test unitaire de l'ordre de la cascade et test de l'API adaptés à un indépendant |
 | 2026-10-13 | Profil retraité (pension moyenne de la DREES, CSG selon le revenu fiscal de référence de l'avant-dernière année) | Impôt : 2 nouveaux tests réussis (7 cas sur 7) ; CSG des pensions : 9 nouveaux tests réussis ; test unitaire de l'ordre de la cascade et test de l'API adaptés à un ménage sans salaire |

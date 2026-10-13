@@ -1,5 +1,6 @@
 import { texte } from "../../lib/textes";
-import { lire, type MenagesTypes } from "../../lib/donnees";
+import { lire, type EffetsMenages, type MenagesTypes } from "../../lib/donnees";
+import { EffetsLeviers } from "./effets";
 import { region } from "../../lib/region";
 import { lignesCascade } from "../../lib/cascade";
 
@@ -8,6 +9,7 @@ const euros = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
 
 export default function Menages() {
   const { menages, annee_revenus, sources } = lire<MenagesTypes>("menages-types.json");
+  const effets = lire<EffetsMenages>("menages-effets.json");
   return (
     <>
       <h1>{texte("menages.titre")}</h1>
@@ -43,6 +45,7 @@ export default function Menages() {
           </section>
         );
       })}
+      <EffetsLeviers effets={effets} menages={menages} />
       <p className="source">{texte("menages.limites")}</p>
       <p className="source">
         {texte("menages.sources")}{" "}

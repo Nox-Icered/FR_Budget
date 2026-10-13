@@ -41,9 +41,10 @@ Les autres leviers n'ont pas d'effet direct sur la cascade de ces ménages (``SA
 from __future__ import annotations
 
 import multiprocessing
+import warnings
 from collections.abc import Callable
 from concurrent.futures import ProcessPoolExecutor
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from functools import cache, lru_cache
 from typing import Any
 
@@ -303,50 +304,179 @@ def chiffre(levier: str, profil: types.Profil) -> bool:
     return not LEVIERS[levier].non_chiffre(profil)
 
 
+# Incidence des cotisations patronales (spécification : réglage visible, incidence comptable
+# par défaut, résultat montré dans les deux lectures).
+COMPTABLE = "comptable"
+"""Le coût employeur change, le salaire brut ne change pas."""
+SALAIRE = "salaire"
+"""Le coût employeur ne change pas : le salaire brut s'ajuste (répercussion complète)."""
+INCIDENCES = (COMPTABLE, SALAIRE)
+LEVIERS_INCIDENCE = (scenario.LEVIER_COTISATIONS_TAUX, scenario.LEVIER_ALLEGEMENTS)
+PRECISION_COUT = 2.0
+"""Écart toléré entre le coût employeur annuel ajusté et celui de référence, en euros. Le coût
+calculé par OpenFisca avance par marches de moins d'un euro (taux de la réduction générale
+arrondi à quatre décimales, calcul en simple précision)."""
+PAS_MINIMAL = 0.005
+"""Variation du salaire mensuel, en euros, sous laquelle l'ajustement s'arrête."""
+ITERATIONS_INCIDENCE = 30
+
+
+def _ajustable(adulte: types.Adulte) -> bool:
+    """Salarié dont le salaire peut s'ajuster : ni retraité, ni indépendant, ni apprenti (payé
+    au minimum légal, en pourcentage du SMIC)."""
+    return not (adulte.retraite or adulte.independant or adulte.apprentissage is not None)
+
+
+def _brut_initial(adulte: types.Adulte, annee: int) -> float:
+    if adulte.montant_mensuel is not None:
+        return adulte.montant_mensuel
+    return types.brut_mensuel(adulte.niveau, annee, adulte.cadre)
+
+
+def _couts(profil: types.Profil, legislation_: types.Legislation, annee: int) -> list[float]:
+    """Coût employeur annuel de chaque adulte (``salaire_super_brut``)."""
+    simulation = types._construire(profil, annee, types.rfr_point_fixe(profil, annee), legislation_)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", RuntimeWarning)
+        total = sum(simulation.calculate("salaire_super_brut", m) for m in types._mois(annee))
+    return [float(total[i]) for i in range(len(profil.adultes))]
+
+
+def profil_repercute(
+    profil: types.Profil, legislation_: types.Legislation, annee: int = types.ANNEE
+) -> types.Profil:
+    """Profil dont le salaire brut de chaque salarié ajustable donne, sous la législation
+    réformée, le coût employeur de la législation de référence (point fixe).
+
+    Le salaire ne descend pas sous le SMIC mensuel à temps plein (paramètre d'OpenFisca), ni
+    sous le salaire initial s'il lui est déjà inférieur (temps partiel saisi) : la part de la
+    hausse qui ne peut pas être répercutée reste au coût employeur. Le salaire ajusté vaut pour
+    toutes les années simulées, comme le salaire de référence.
+    """
+    reference = _couts(profil, types.REFERENCE, annee)
+    smic = types.brut_mensuel(types.SMIC, annee)
+    bruts = [_brut_initial(a, annee) if _ajustable(a) else 0.0 for a in profil.adultes]
+    planchers = [min(b, smic) for b in bruts]
+    precedents: list[tuple[float, float] | None] = [None] * len(bruts)
+    ajuste = profil
+    for _ in range(ITERATIONS_INCIDENCE):
+        ajuste = replace(
+            profil,
+            adultes=tuple(
+                replace(a, montant_mensuel=b) if _ajustable(a) else a
+                for a, b in zip(profil.adultes, bruts, strict=True)
+            ),
+        )
+        couts = _couts(ajuste, legislation_, annee)
+        fini = True
+        for i, adulte in enumerate(profil.adultes):
+            if not _ajustable(adulte) or reference[i] == 0:
+                continue
+            ecart = couts[i] - reference[i]
+            bloque = bruts[i] <= planchers[i] and ecart > 0
+            if abs(ecart) <= PRECISION_COUT or bloque:
+                continue
+            # Sécante sur les deux derniers essais ; au premier, coût supposé proportionnel au
+            # salaire. Le coût marginal diffère du coût moyen là où les allègements décroissent
+            # avec le salaire.
+            precedent = precedents[i]
+            precedents[i] = (bruts[i], couts[i])
+            if precedent is not None and couts[i] != precedent[1]:
+                pente = (couts[i] - precedent[1]) / (bruts[i] - precedent[0])
+                nouveau = bruts[i] - ecart / pente
+            else:
+                nouveau = bruts[i] * reference[i] / couts[i]
+            nouveau = max(planchers[i], nouveau)
+            if abs(nouveau - bruts[i]) < PAS_MINIMAL:
+                continue
+            fini = False
+            bruts[i] = nouveau
+        if fini:
+            return ajuste
+    msg = f"{profil.libelle} : salaire répercuté sans point fixe"
+    raise RuntimeError(msg)
+
+
+def _verifier_incidence(levier: str, incidence: str) -> None:
+    if incidence not in INCIDENCES:
+        msg = f"incidence inconnue : {incidence}"
+        raise ValueError(msg)
+    if incidence == SALAIRE and levier not in LEVIERS_INCIDENCE:
+        msg = f"{levier} : pas de lecture répercutée sur le salaire"
+        raise ValueError(msg)
+
+
 @lru_cache(maxsize=CACHE_CASCADES)
 def cascade_reformee(
-    identifiant: str, levier: str, valeur: float, annee: int = types.ANNEE
+    identifiant: str,
+    levier: str,
+    valeur: float,
+    annee: int = types.ANNEE,
+    incidence: str = COMPTABLE,
 ) -> types.CascadeMenage | None:
     """Cascade du ménage type sous le levier ; ``None`` si l'effet n'est pas chiffré."""
-    if not chiffre(levier, types.PROFILS[identifiant]):
+    _verifier_incidence(levier, incidence)
+    profil = types.PROFILS[identifiant]
+    if not chiffre(levier, profil):
         return None
-    return types.cascade_type_reformee(identifiant, legislation(levier, valeur, annee), annee)
+    reforme = legislation(levier, valeur, annee)
+    if incidence == SALAIRE:
+        return types.cascade_profil(profil_repercute(profil, reforme, annee), annee, reforme)
+    return types.cascade_type_reformee(identifiant, reforme, annee)
 
 
 def cascade_profil_reformee(
-    profil: types.Profil, levier: str, valeur: float, annee: int = types.ANNEE
+    profil: types.Profil,
+    levier: str,
+    valeur: float,
+    annee: int = types.ANNEE,
+    incidence: str = COMPTABLE,
 ) -> types.CascadeMenage | None:
     """Même calcul pour un profil saisi, sans cache (règle 5)."""
+    _verifier_incidence(levier, incidence)
     if not chiffre(levier, profil):
         return None
-    return types.cascade_profil(profil, annee, legislation(levier, valeur, annee))
+    reforme = legislation(levier, valeur, annee)
+    if incidence == SALAIRE:
+        profil = profil_repercute(profil, reforme, annee)
+    return types.cascade_profil(profil, annee, reforme)
 
 
 SENS = (1.0, -1.0)
 """Hausse et baisse d'une unité du levier (point ou pourcent), publiées pour chaque ménage."""
 
 
-def _cascades_levier(levier: str, valeur: float) -> dict[str, types.CascadeMenage | None]:
-    return {i: cascade_reformee(i, levier, valeur) for i in types.PROFILS}
+def _cascades_levier(
+    levier: str, valeur: float, incidence: str
+) -> dict[str, types.CascadeMenage | None]:
+    return {i: cascade_reformee(i, levier, valeur, types.ANNEE, incidence) for i in types.PROFILS}
+
+
+Effets = dict[str, dict[str, dict[float, dict[str, types.CascadeMenage | None]]]]
+"""Levier → incidence → valeur → ménage type → cascade."""
 
 
 @cache
-def effets_unitaires(
-    processus: int | None = None,
-) -> dict[str, dict[float, dict[str, types.CascadeMenage | None]]]:
-    """Cascades des ménages types après une hausse et une baisse d'une unité de chaque levier.
+def effets_unitaires(processus: int | None = None) -> Effets:
+    """Cascades des ménages types après une hausse et une baisse d'une unité de chaque levier,
+    en lecture comptable, et aussi répercutée sur le salaire pour les cotisations patronales.
 
-    Calcul réparti entre ``processus`` processus (un par couple levier-sens), car chaque
+    Calcul réparti entre ``processus`` processus (un par levier, incidence et sens), car chaque
     législation réformée reconstruit ses paramètres (quelques secondes par ménage). Mis en
     cache : ne dépend d'aucune donnée saisie.
     """
-    couples = [(levier, valeur) for levier in LEVIERS for valeur in SENS]
+    triplets = [
+        (levier, valeur, incidence)
+        for levier in LEVIERS
+        for incidence in (INCIDENCES if levier in LEVIERS_INCIDENCE else (COMPTABLE,))
+        for valeur in SENS
+    ]
     # « spawn » plutôt que « fork » : le processus appelant (serveur, tests) peut avoir des
     # fils d'exécution, et un fork les copierait dans un état incohérent.
     contexte = multiprocessing.get_context("spawn")
     with ProcessPoolExecutor(max_workers=processus, mp_context=contexte) as executeur:
-        resultats = executeur.map(_cascades_levier, *zip(*couples, strict=True))
-        effets: dict[str, dict[float, dict[str, types.CascadeMenage | None]]] = {}
-        for (levier, valeur), cascades in zip(couples, resultats, strict=True):
-            effets.setdefault(levier, {})[valeur] = cascades
+        resultats = executeur.map(_cascades_levier, *zip(*triplets, strict=True))
+        effets: Effets = {}
+        for (levier, valeur, incidence), cascades in zip(triplets, resultats, strict=True):
+            effets.setdefault(levier, {}).setdefault(incidence, {})[valeur] = cascades
     return effets

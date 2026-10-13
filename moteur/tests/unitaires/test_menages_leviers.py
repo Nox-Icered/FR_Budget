@@ -206,3 +206,66 @@ def test_indexation_pension_non_chiffree() -> None:
 def test_levier_sans_effet_refuse() -> None:
     with pytest.raises(ValueError, match="pas d'effet direct"):
         lv.legislation(scenario.LEVIER_TVA_NORMAL, 1.0)
+
+
+# Incidence des cotisations patronales : lecture répercutée sur le salaire.
+
+
+def test_incidence_salaire_garde_le_cout_employeur() -> None:
+    """Hausse d'un point répercutée : le coût employeur ne change pas, le brut et le net
+    baissent."""
+    avant = t.cascade_annuelle("celibataire_median")
+    apres = lv.cascade_reformee(
+        "celibataire_median", scenario.LEVIER_COTISATIONS_TAUX, 1.0, ANNEE, lv.SALAIRE
+    )
+    assert apres is not None
+    assert apres.cout_employeur == pytest.approx(avant.cout_employeur, abs=lv.PRECISION_COUT)
+    assert apres.salaire_brut < avant.salaire_brut
+    assert apres.net_apres_impot < avant.net_apres_impot
+
+
+def test_incidence_salaire_plancher_du_smic() -> None:
+    """Au SMIC, le salaire ne peut pas baisser : la hausse reste au coût employeur, comme en
+    lecture comptable."""
+    comptable = lv.cascade_reformee("celibataire_smic", scenario.LEVIER_COTISATIONS_TAUX, 1.0)
+    salaire = lv.cascade_reformee(
+        "celibataire_smic", scenario.LEVIER_COTISATIONS_TAUX, 1.0, ANNEE, lv.SALAIRE
+    )
+    assert salaire is not None
+    assert comptable is not None
+    assert salaire.salaire_brut == pytest.approx(
+        t.cascade_annuelle("celibataire_smic").salaire_brut
+    )
+    assert salaire.cout_employeur == pytest.approx(comptable.cout_employeur, abs=1)
+
+
+def test_incidence_salaire_allegements() -> None:
+    """Allègements augmentés et répercutés : au SMIC, le coût employeur revient à celui de
+    référence et le salaire brut augmente."""
+    avant = t.cascade_annuelle("celibataire_smic")
+    apres = lv.cascade_reformee(
+        "celibataire_smic", scenario.LEVIER_ALLEGEMENTS, 10.0, ANNEE, lv.SALAIRE
+    )
+    assert apres is not None
+    assert apres.cout_employeur == pytest.approx(avant.cout_employeur, abs=lv.PRECISION_COUT)
+    assert apres.salaire_brut > avant.salaire_brut
+
+
+def test_incidence_salaire_apprenti_inchange() -> None:
+    """Apprenti payé au minimum légal : son salaire ne s'ajuste pas."""
+    comptable = lv.cascade_reformee("apprenti_19_ans", scenario.LEVIER_COTISATIONS_TAUX, 1.0)
+    salaire = lv.cascade_reformee(
+        "apprenti_19_ans", scenario.LEVIER_COTISATIONS_TAUX, 1.0, ANNEE, lv.SALAIRE
+    )
+    assert salaire == comptable
+
+
+def test_incidence_mesure_nulle() -> None:
+    assert lv.cascade_reformee(
+        "couple_2_enfants", scenario.LEVIER_ALLEGEMENTS, 0.0, ANNEE, lv.SALAIRE
+    ) == pytest.approx(t.cascade_annuelle("couple_2_enfants"))
+
+
+def test_incidence_salaire_refusee_hors_cotisations() -> None:
+    with pytest.raises(ValueError, match="pas de lecture répercutée"):
+        lv.cascade_reformee("celibataire_median", "csg_activite", 1.0, ANNEE, lv.SALAIRE)

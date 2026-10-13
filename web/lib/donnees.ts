@@ -91,7 +91,11 @@ export type EffetsMenages = {
   leviers: { id: string; unite: string; sources: string[] }[];
   sans_effet: Record<string, string>;
   effets: Record<string, Record<"hausse" | "baisse", Record<string, LignesCascade | null>>>;
+  effets_salaire: Record<string, Record<"hausse" | "baisse", Record<string, LignesCascade | null>>>;
+  leviers_incidence: string[];
+  incidence_par_defaut: Incidence;
 };
+export type Incidence = "comptable" | "salaire";
 export type LigneJournal = {
   date: string;
   fiche: string;

@@ -157,6 +157,16 @@ def test_effet_levier_refuse(client: TestClient, levier: str, valeur: float, sta
     assert reponse.status_code == statut
 
 
+@pytest.mark.parametrize(
+    ("levier", "incidence"), [("csg_activite", "salaire"), ("cotisations_patronales_taux", "x")]
+)
+def test_incidence_refusee(client: TestClient, levier: str, incidence: str) -> None:
+    reponse = client.get(
+        "/menages-types/effet", params={"levier": levier, "valeur": 1, "incidence": incidence}
+    )
+    assert reponse.status_code == 422
+
+
 def test_export_des_effets_des_leviers(tmp_path: Path) -> None:
     exporter(tmp_path)
     effets = json.loads((tmp_path / "menages-effets.json").read_text(encoding="utf-8"))
@@ -168,6 +178,13 @@ def test_export_des_effets_des_leviers(tmp_path: Path) -> None:
     # Pension du retraité : effet de l'indexation non chiffré (part des pensions de base).
     assert effets["effets"]["indexation_pensions_prestations"]["hausse"]["retraite_seul"] is None
     assert "tva_taux_normal" in effets["sans_effet"]
+    # Lecture répercutée : seulement pour les cotisations patronales ; coût employeur gardé.
+    assert set(effets["effets_salaire"]) == set(effets["leviers_incidence"])
+    base = {m["id"]: m for m in menages_types()["menages"]}
+    median = effets["effets_salaire"]["cotisations_patronales_taux"]["hausse"]["celibataire_median"]
+    assert median["cout_employeur"] == pytest.approx(
+        base["celibataire_median"]["cout_employeur"], abs=2
+    )
 
 
 def test_sources_des_effets_au_registre() -> None:

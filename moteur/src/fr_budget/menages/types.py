@@ -98,6 +98,10 @@ class Adulte:
     """Salarié cadre (cotisations des cadres) ; sinon non cadre, valeur par défaut d'OpenFisca."""
     apprentissage: Apprentissage | None = None
     """Apprenti (``niveau`` vaut alors ``APPRENTI``) : salaire et exonérations propres."""
+    montant_mensuel: float | None = None
+    """Montant saisi (profil de l'utilisateur), à la place du niveau statistique : salaire brut
+    d'un salarié, pension brute d'un retraité, résultat fiscal d'un indépendant, par mois.
+    Supposé constant sur toutes les années de la simulation."""
 
     @property
     def retraite(self) -> bool:
@@ -318,19 +322,30 @@ def resultat_fiscal_independant(annee: int) -> float:
     return chiffrage(REVENU_INSEE_INDEPENDANT) * MOIS_PAR_AN * rapport * (1 + ecart)
 
 
+def _resultat_fiscal(adulte: Adulte, annee: int) -> float:
+    if adulte.montant_mensuel is not None:
+        return adulte.montant_mensuel * MOIS_PAR_AN
+    return resultat_fiscal_independant(annee)
+
+
 def _salaires(adulte: Adulte, annee: int, mois: list[str]) -> dict[str, Any]:
     """Salaire de base des ``mois``, pour un apprenti son contrat, pour un retraité sa
     pension (sans salaire)."""
+    montant = adulte.montant_mensuel
     if adulte.retraite:
+        if montant is not None:
+            return {"retraite_brute": dict.fromkeys(mois, montant)}
         return {"retraite_brute": {m: pension_brute_mensuelle(int(m[:4])) for m in mois}}
     if adulte.independant:
         # Résultat fiscal (bénéfice industriel et commercial) pour l'impôt ; les cotisations
         # sont calculées hors d'OpenFisca (fr_budget.menages.independants).
         annees = sorted({int(m[:4]) for m in mois})
-        revenu = {str(a): resultat_fiscal_independant(annee) for a in annees}
+        revenu = {str(a): _resultat_fiscal(adulte, annee) for a in annees}
         # rpns_imposables pour l'impôt ; rpns_autres_revenus pour les ressources du RSA et de
         # la prime d'activité, qu'OpenFisca lit dans cette variable pour un non-salarié.
         return {"rpns_imposables": revenu, "rpns_autres_revenus": revenu}
+    if montant is not None:
+        return {"salaire_de_base": dict.fromkeys(mois, montant)}
     if adulte.apprentissage is None:
         return {
             "salaire_de_base": dict.fromkeys(mois, brut_mensuel(adulte.niveau, annee, adulte.cadre))
@@ -419,10 +434,13 @@ def _construire(profil: Profil, annee: int, rfr_anterieur: float | None) -> Simu
 
 @cache
 def _rfr_point_fixe(identifiant: str, annee: int) -> float | None:
+    return rfr_point_fixe(PROFILS[identifiant], annee)
+
+
+def rfr_point_fixe(profil: Profil, annee: int) -> float | None:
     """Revenu fiscal de référence donné pour les années ``annee - 4`` et ``annee - 3`` d'un
     ménage de retraités : celui que le modèle calcule pour ``annee - 2`` quand on le lui
     donne (point fixe), soit une pension supposée stable avant la période simulée."""
-    profil = PROFILS[identifiant]
     if not _avec_retraite(profil):
         return None
     rfr = 0.0
@@ -432,7 +450,7 @@ def _rfr_point_fixe(identifiant: str, annee: int) -> float | None:
         if abs(nouveau - rfr) < PRECISION_RFR:
             return nouveau
         rfr = nouveau
-    msg = f"{identifiant} : revenu fiscal de référence sans point fixe"
+    msg = f"{profil.libelle} : revenu fiscal de référence sans point fixe"
     raise RuntimeError(msg)
 
 
@@ -443,7 +461,19 @@ def _simulation(identifiant: str, annee: int) -> Simulation:
 @cache
 def cascade_annuelle(identifiant: str, annee: int = ANNEE) -> CascadeMenage:
     """Cascade annuelle d'un ménage type, en euros (revenus de ``annee``)."""
-    simulation = _simulation(identifiant, annee)
+    return _cascade(PROFILS[identifiant], annee, _simulation(identifiant, annee))
+
+
+def cascade_profil(profil: Profil, annee: int = ANNEE) -> CascadeMenage:
+    """Cascade annuelle d'un profil quelconque (profil saisi par l'utilisateur).
+
+    Sans cache : aucune donnée saisie ne reste en mémoire après le calcul (règle 5).
+    """
+    simulation = _construire(profil, annee, rfr_point_fixe(profil, annee))
+    return _cascade(profil, annee, simulation)
+
+
+def _cascade(profil: Profil, annee: int, simulation: Simulation) -> CascadeMenage:
 
     def total(variable: str, periodes: list[str]) -> float:
         with warnings.catch_warnings():
@@ -462,24 +492,33 @@ def cascade_annuelle(identifiant: str, annee: int = ANNEE) -> CascadeMenage:
         prestations={k: v for k, v in prestations.items() if v},
         pension_brute=total("retraite_brute", mois),
         pension_nette=total("retraite_nette", mois),
-        **_independant(PROFILS[identifiant], annee),
+        **_independant(profil, annee),
     )
 
 
 def _independant(profil: Profil, annee: int) -> dict[str, float]:
     """Lignes de l'indépendant (revenu brut, cotisations, CSG-CRDS, revenu net)."""
-    if not any(a.independant for a in profil.adultes):
-        return {}
-    resultat = resultat_fiscal_independant(annee)
-    c = independants.cotisations_artisan(
-        independants.revenu_brut_pour_resultat(resultat, annee), annee
+    lignes = dict.fromkeys(
+        (
+            "revenu_independant_brut",
+            "cotisations_independant",
+            "csg_crds_independant",
+            "revenu_independant_net",
+        ),
+        0.0,
     )
-    return {
-        "revenu_independant_brut": c.revenu_brut,
-        "cotisations_independant": c.cotisations,
-        "csg_crds_independant": c.csg_crds,
-        "revenu_independant_net": c.revenu_net,
-    }
+    for adulte in profil.adultes:
+        if not adulte.independant:
+            continue
+        resultat = _resultat_fiscal(adulte, annee)
+        c = independants.cotisations_artisan(
+            independants.revenu_brut_pour_resultat(resultat, annee), annee
+        )
+        lignes["revenu_independant_brut"] += c.revenu_brut
+        lignes["cotisations_independant"] += c.cotisations
+        lignes["csg_crds_independant"] += c.csg_crds
+        lignes["revenu_independant_net"] += c.revenu_net
+    return lignes if lignes["revenu_independant_brut"] else {}
 
 
 def declaration(identifiant: str, annee: int = ANNEE) -> dict[str, Any]:

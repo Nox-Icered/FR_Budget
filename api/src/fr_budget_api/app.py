@@ -14,13 +14,15 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import os
 import re
 from functools import cache
 from importlib.metadata import version
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fr_budget import baseline as module_baseline
 from fr_budget import croissance as module_croissance
 from fr_budget import retraites as module_retraites
@@ -28,6 +30,7 @@ from fr_budget import scenario as module_scenario
 from fr_budget.agrege import credits_missions as module_credits_missions
 from fr_budget.agrege import depenses_fiscales as module_depenses_fiscales
 from fr_budget.apu import comptes_apu, depenses_par_fonction, libelles_cofog, ratio_pib
+from fr_budget.menages import personnalise as module_personnalise
 from fr_budget.menages import types as module_menages
 from fr_budget.registres.verification import RACINE_DEPOT, Rapport, charger
 from fr_budget.validation import comparaisons
@@ -188,6 +191,66 @@ SOURCES_MENAGES = [
 ]
 
 
+def _lignes_cascade(c: module_menages.CascadeMenage) -> dict[str, Any]:
+    return {
+        "cout_employeur": round(c.cout_employeur, 2),
+        "salaire_brut": round(c.salaire_brut, 2),
+        "net_avant_impot": round(c.net_avant_impot, 2),
+        "pension_brute": round(c.pension_brute, 2),
+        "pension_nette": round(c.pension_nette, 2),
+        "revenu_independant_brut": round(c.revenu_independant_brut, 2),
+        "cotisations_independant": round(c.cotisations_independant, 2),
+        "csg_crds_independant": round(c.csg_crds_independant, 2),
+        "revenu_independant_net": round(c.revenu_independant_net, 2),
+        "impot_revenu": round(c.impot_revenu, 2),
+        "prestations": {k: round(v, 2) for k, v in c.prestations.items()},
+        "net_apres_impot": round(c.net_apres_impot, 2),
+    }
+
+
+class AdulteSaisiEntree(BaseModel):
+    statut: Literal["salarie", "retraite", "independant"]
+    montant_mensuel: float = Field(ge=0, le=module_personnalise.MONTANT_MENSUEL_MAX)
+    """Salaire brut, pension brute ou résultat fiscal, en euros par mois."""
+    annee_naissance: int
+    cadre: bool = False
+
+
+class MenageSaisiEntree(BaseModel):
+    adultes: list[AdulteSaisiEntree] = Field(
+        min_length=1, max_length=module_personnalise.ADULTES_MAX
+    )
+    annees_naissance_enfants: list[int] = Field(
+        default_factory=list, max_length=module_personnalise.ENFANTS_MAX
+    )
+
+
+def mon_menage(entree: MenageSaisiEntree) -> dict[str, Any] | None:
+    """Cascade du ménage saisi ; ``None`` si la saisie est hors des bornes du moteur.
+
+    Règle 5 : rien n'est gardé ni journalisé (le moteur ne met rien en cache).
+    """
+    saisi = module_personnalise.MenageSaisi(
+        tuple(
+            module_personnalise.AdulteSaisi(
+                a.statut, a.montant_mensuel, a.annee_naissance, cadre=a.cadre
+            )
+            for a in entree.adultes
+        ),
+        tuple(entree.annees_naissance_enfants),
+    )
+    try:
+        cascade = module_personnalise.calculer(saisi)
+    except module_personnalise.SaisieInvalideError:
+        return None
+    return {
+        "unite": "euros par an",
+        "annee_revenus": module_menages.ANNEE,
+        "sources": SOURCES_MENAGES,
+        **_lignes_cascade(cascade),
+    }
+
+
 def menages_types() -> dict[str, Any]:
     """Cascade annuelle de chaque ménage type (revenus de l'année des ménages types), en euros
     par an, avec ses sources et hypothèses.
@@ -202,18 +265,7 @@ def menages_types() -> dict[str, Any]:
                 "id": identifiant,
                 "libelle": profil.libelle,
                 "annee": module_menages.ANNEE,
-                "cout_employeur": round(c.cout_employeur, 2),
-                "salaire_brut": round(c.salaire_brut, 2),
-                "net_avant_impot": round(c.net_avant_impot, 2),
-                "pension_brute": round(c.pension_brute, 2),
-                "pension_nette": round(c.pension_nette, 2),
-                "revenu_independant_brut": round(c.revenu_independant_brut, 2),
-                "cotisations_independant": round(c.cotisations_independant, 2),
-                "csg_crds_independant": round(c.csg_crds_independant, 2),
-                "revenu_independant_net": round(c.revenu_independant_net, 2),
-                "impot_revenu": round(c.impot_revenu, 2),
-                "prestations": {k: round(v, 2) for k, v in c.prestations.items()},
-                "net_apres_impot": round(c.net_apres_impot, 2),
+                **_lignes_cascade(c),
             }
         )
     return {
@@ -226,6 +278,22 @@ def menages_types() -> dict[str, Any]:
             module_menages.HYPOTHESE_INDEPENDANT,
         ],
         "menages": resultat,
+        "saisie": bornes_saisie(),
+    }
+
+
+def bornes_saisie() -> dict[str, Any]:
+    """Bornes de la saisie d'un ménage (``fr_budget.menages.personnalise``), pour le formulaire."""
+    p = module_personnalise
+    return {
+        "annee": module_menages.ANNEE,
+        "adultes_max": p.ADULTES_MAX,
+        "enfants_max": p.ENFANTS_MAX,
+        "montant_mensuel_max": p.MONTANT_MENSUEL_MAX,
+        "annee_naissance_adulte_min": module_menages.ANNEE - p.AGE_MAX,
+        "annee_naissance_adulte_max": module_menages.ANNEE - p.AGE_MIN_ADULTE,
+        "annee_naissance_enfant_min": module_menages.ANNEE - p.AGE_MAX_ENFANT,
+        "annee_naissance_enfant_max": module_menages.ANNEE,
     }
 
 
@@ -502,6 +570,13 @@ def creer_application() -> FastAPI:
         description="API sans état : aucune donnée saisie n'est stockée ni journalisée.",
         version=version("fr-budget-api"),
     )
+    # Le site statique appelle POST /mon-menage depuis son propre domaine : origines permises
+    # lues dans FR_BUDGET_ORIGINES (séparées par des virgules), aucune par défaut.
+    origines = [o for o in os.environ.get("FR_BUDGET_ORIGINES", "").split(",") if o]
+    if origines:
+        app.add_middleware(
+            CORSMiddleware, allow_origins=origines, allow_methods=["POST"], allow_headers=["*"]
+        )
 
     @app.get("/sante")
     def sante() -> dict[str, str]:
@@ -511,6 +586,14 @@ def creer_application() -> FastAPI:
     def lire_menages_types() -> dict[str, Any]:
         """Cascade annuelle des ménages types (avant réforme)."""
         return menages_types()
+
+    @app.post("/mon-menage")
+    def route_mon_menage(entree: MenageSaisiEntree) -> dict[str, Any]:
+        """Cascade d'un ménage saisi par l'utilisateur, sans stockage ni journal."""
+        resultat = mon_menage(entree)
+        if resultat is None:
+            raise HTTPException(status_code=422, detail="saisie hors des bornes acceptées")
+        return resultat
 
     @app.get("/journal")
     def lire_journal() -> list[dict[str, str]]:

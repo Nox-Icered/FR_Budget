@@ -1,6 +1,7 @@
 import { texte } from "../../lib/textes";
 import { lire, type MenagesTypes } from "../../lib/donnees";
 import { region } from "../../lib/region";
+import { lignesCascade } from "../../lib/cascade";
 
 const MOIS_PAR_AN = 12;
 const euros = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
@@ -15,41 +16,7 @@ export default function Menages() {
       </p>
       <p>{texte("menages.intro", { annee: annee_revenus })}</p>
       {menages.map((m) => {
-        // Lignes du salaire pour un ménage qui en a un, de la pension pour un retraité.
-        const salaire: [string, number][] =
-          m.salaire_brut > 0
-            ? [
-                [texte("menages.cout_employeur"), m.cout_employeur],
-                [texte("menages.salaire_brut"), m.salaire_brut],
-                [texte("menages.net_avant_impot"), m.net_avant_impot],
-              ]
-            : [];
-        const pension: [string, number][] =
-          m.pension_brute > 0
-            ? [
-                [texte("menages.pension_brute"), m.pension_brute],
-                [texte("menages.pension_nette"), m.pension_nette],
-              ]
-            : [];
-        const independant: [string, number][] =
-          m.revenu_independant_brut > 0
-            ? [
-                [texte("menages.revenu_independant_brut"), m.revenu_independant_brut],
-                [texte("menages.cotisations_independant"), -m.cotisations_independant],
-                [texte("menages.csg_crds_independant"), -m.csg_crds_independant],
-                [texte("menages.revenu_independant_net"), m.revenu_independant_net],
-              ]
-            : [];
-        const lignes: [string, number][] = [
-          ...salaire,
-          ...pension,
-          ...independant,
-          [texte("menages.impot_revenu"), -m.impot_revenu],
-          ...Object.entries(m.prestations).map(
-            ([cle, v]): [string, number] => [texte(`menages.prestations.${cle}`), v],
-          ),
-          [texte("menages.net_apres_impot"), m.net_apres_impot],
-        ];
+        const lignes = lignesCascade(m);
         return (
           <section key={m.id} id={m.id}>
             <h2>{m.libelle}</h2>

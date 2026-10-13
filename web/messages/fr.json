@@ -289,7 +289,7 @@
       "mon_menage": "Voir l'effet de ces mesures sur mon ménage",
       "detail": "Détail ligne par ligne, mesure par mesure",
       "ecartees": "Mesures réglées sans effet direct sur ces ménages :",
-      "approximation_salaire": "En lecture répercutée sur le salaire, contrôlée sur les scénarios aux bornes qui touchent les cotisations patronales : {un_levier} euros par an pour une mesure seule, {combinaison} euros par an pour toutes les mesures à leurs bornes."
+      "approximation_salaire": "En lecture répercutée sur le salaire, contrôlée avec toutes les mesures à leurs bornes : {combinaison} euros par an."
     }
   },
   "partage": {

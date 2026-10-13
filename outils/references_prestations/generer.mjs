@@ -7,6 +7,9 @@
 // Chaque cas (registres/references/menages/cas_prestations.json, écrit par
 // pipelines/menages/cas_prestations.py) est saisi étape par étape : foyer, enfants,
 // ressources de chaque adulte (salaires, puis prestations familiales versées), logement.
+// Les salaires saisis sont les revenus d'activité qu'OpenFisca retient pour la prime d'activité
+// (salaire net), et non le net fiscal que demande le libellé du formulaire : la CAF retient le
+// montant net social, et le modèle et le simulateur doivent partir du même revenu.
 // La ligne « Prime d'activité  Montant estimé : … € /mois » de la page de résultat est relevée.
 //
 // Le code postal est complété par une liste de communes que le site charge auprès de

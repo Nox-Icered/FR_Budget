@@ -6,12 +6,17 @@ applique la législation du jour et demande les ressources des quatre derniers m
 qu'un logement. Les cas de validation sont donc calculés :
 
 - avec la législation de ``ANNEE_SIMULATEUR`` (situation des ménages types pour cette année) ;
-- avec les salaires imposables des mois ``MOIS_RESSOURCES``, arrondis à l'euro comme dans le
-  formulaire ;
+- avec, pour salaires des mois ``MOIS_RESSOURCES``, la base des revenus d'activité de la
+  prime d'activité dans OpenFisca (``ppa_revenu_activite_individu``, égale ici à
+  ``salaire_net``), arrondie à l'euro comme dans le formulaire. Le formulaire demande des
+  montants « en net fiscaux », mais la CAF retient le montant net social (service-public.gouv.fr,
+  fiche F2882) et OpenFisca le salaire net : saisir la base d'OpenFisca garantit que le modèle et
+  le simulateur partent du même revenu ;
 - avec un logement loué vide (``LOGEMENT``), que les ménages types n'ont pas par ailleurs.
 
 Le montant comparé est celui de ``MOIS_RESULTAT``, premier mois qui suit les ressources
-déclarées. Les prestations familiales versées sont déclarées nettes de la CRDS (paramètre
+déclarées, net de CRDS (``ppa_nette_crds``), comme un montant versé. Les prestations
+familiales versées sont déclarées nettes de la CRDS (paramètre
 OpenFisca ``prelevements_sociaux.contributions_sociales.crds``), arrondies à l'euro.
 """
 
@@ -33,6 +38,9 @@ MOIS_RESSOURCES = ("2026-06", "2026-07", "2026-08", "2026-09")
 MOIS_RESULTAT = "2026-10"
 PROFILS_AVEC_PRESTATIONS = ("celibataire_smic", "parent_isole_1_enfant", "couple_2_enfants")
 PRESTATIONS_DECLAREES = ("asf", "af")
+REVENU_ACTIVITE = "ppa_revenu_activite_individu"
+"""Revenus d'activité retenus par OpenFisca pour la prime d'activité, saisis comme salaires."""
+PRIME_ACTIVITE_VERSEE = "ppa_nette_crds"
 """Prestations versées que le simulateur demande comme « autres ressources »."""
 
 
@@ -85,10 +93,11 @@ def taux_crds(periode: str) -> float:
 
 
 def cas_simulateur(identifiant: str) -> dict[str, Any]:
-    """Saisie du ménage type dans le simulateur : salaires imposables par adulte et par mois
-    (arrondis à l'euro), enfants, prestations versées nettes de CRDS, logement."""
+    """Saisie du ménage type dans le simulateur : revenus d'activité retenus pour la prime
+    d'activité, par adulte et par mois (arrondis à l'euro), enfants, prestations versées nettes
+    de CRDS, logement."""
     profil = PROFILS[identifiant]
-    salaires = [calcul(identifiant, "salaire_imposable", m) for m in MOIS_RESSOURCES]
+    salaires = [calcul(identifiant, REVENU_ACTIVITE, m) for m in MOIS_RESSOURCES]
     adultes = [
         {
             "naissance": a.naissance,

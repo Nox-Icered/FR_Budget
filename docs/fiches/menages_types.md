@@ -63,6 +63,7 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
 7. **Validation des prestations sur 2026, pas sur 2025.** Le simulateur officiel applique la législation du jour et demande les ressources des quatre derniers mois (juin à septembre 2026). Les cas de validation reprennent donc les ménages types avec la législation et les salaires de 2026. Limite : les prestations de 2025 affichées sur le site ne sont validées qu'à travers les mêmes formules, avec les paramètres de 2025 (seule la base des allocations familiales de 2025 est vérifiée directement).
 8. **Logement des cas de validation.** Le simulateur exige un logement. Les cas sont saisis en locataire d'un logement vide à Paris 11e (code postal 75011), pour un loyer de 700 € hors charges, et le modèle est calculé avec ce même logement. Ce logement est un choix, sans source. Pour le parent seul, OpenFisca calcule alors une aide au logement, qui réduit la prime d'activité du « forfait logement ». Les ménages types du site restent calculés sans logement (choix 5).
 9. **Prestations déclarées au simulateur.** Les allocations versées (ASF, allocations familiales) sont déclarées comme ressources, avec le montant d'OpenFisca net de CRDS arrondi à l'euro. L'allocation de rentrée scolaire, versée en août, n'est pas déclarée : le simulateur ne la propose pas.
+10. **Salaire saisi dans le simulateur.** Le formulaire demande les salaires « en net fiscaux avant prélèvement à la source ». Mais la CAF retient le montant net social (service-public.gouv.fr, fiche F2882), et OpenFisca le salaire net (`ppa_revenu_activite_individu`). C'est ce salaire net qui est saisi (1 478 € par mois au SMIC au lieu de 1 531 € nets imposables), pour que le modèle et le simulateur partent du même revenu. Limite : si le simulateur convertit le net fiscal en un autre revenu, cette conversion n'est pas testée.
 
 ## 6. Validation
 
@@ -104,19 +105,19 @@ Les écarts d'un centime viennent de l'arrondi du montant net de CRDS. La page d
 Le barème ne suffit pas pour la prime d'activité : la courbe de la bonification n'est pas publiée. Le montant complet est donc comparé au simulateur officiel.
 
 **Prime d'activité, simulateur officiel.**
-- Référence : simulateur du RSA et de la prime d'activité de mesdroitssociaux.gouv.fr, sans connexion, interrogé le 13 octobre 2026 par `outils/references_prestations/generer.mjs`. Le simulateur de la CAF n'a pas été utilisé : il est protégé par un test anti-robot, que le projet ne contourne pas.
-- Cas : `registres/references/menages/cas_prestations.json`, écrit par `pipelines/menages/cas_prestations.py` (choix 7 à 9).
+- Référence : simulateur du RSA et de la prime d'activité de mesdroitssociaux.gouv.fr, sans connexion, interrogé par `outils/references_prestations/generer.mjs`. Le simulateur de la CAF n'a pas été utilisé : il est protégé par un test anti-robot, que le projet ne contourne pas.
+- Cas : `registres/references/menages/cas_prestations.json`, écrit par `pipelines/menages/cas_prestations.py` (choix 7 à 10).
+- Montant comparé : la prime d'activité d'OpenFisca nette de CRDS (`ppa_nette_crds`), comme un montant versé.
 - Tolérance : 2 € par mois. Le simulateur reçoit des ressources arrondies à l'euro et donne un montant à l'euro.
 
-| Ménage type | Simulateur | Modèle | Écart |
-|-------------|-----------:|-------:|------:|
-| Célibataire au SMIC | 230 € | 230,87 € | +0,87 € |
-| Parent seul, un enfant | non obtenu | 289,24 € | — |
-| Couple, deux enfants | non obtenu | 91,50 € | — |
+**Aucun cas n'est encore validé.** Le 13 octobre 2026, le service des communes (geo.api.gouv.fr), que le simulateur utilise à l'étape du logement, n'était plus joignable. Le simulateur renvoyait une erreur 500 à cette étape, et il exige une commune même pour une personne sans domicile stable. Les étapes foyer et ressources passent pour les trois cas. Il suffit de lancer `npm run generer` quand le service répond.
 
-Limites :
-- Le cas du célibataire a été saisi avec les scripts de mise au point qui ont précédé `generer.mjs` (mêmes étapes), avec une date de naissance de 1990 au lieu de 1995. L'âge n'a pas d'effet sur la prime d'activité au-delà de 25 ans.
-- **Deux cas manquent.** Le 13 octobre 2026, le service des communes (geo.api.gouv.fr), que le simulateur utilise à l'étape du logement, n'était plus joignable, et le simulateur renvoyait une erreur 500 à cette étape. Les étapes précédentes (foyer, ressources) passent pour les deux cas. Il suffit de relancer `npm run generer -- parent_isole_1_enfant couple_2_enfants` quand le service répond.
+Un premier essai, fait avant la panne avec le célibataire au SMIC, n'est pas retenu comme référence : il ne part pas du même revenu que le modèle.
+- Il saisissait le salaire net imposable (1 531 €), alors qu'OpenFisca calcule la prime d'activité sur le salaire net (1 478 €).
+- Le simulateur a donné 230 € par mois. Le modèle donne 230,87 € (229,72 € net de CRDS) avec son salaire net de 1 478 €.
+- Si le salaire net valait 1 531 €, OpenFisca donnerait 222,67 €, soit 7 € de moins que le simulateur.
+
+Deux lectures sont possibles : soit le simulateur convertit le net fiscal saisi en un revenu plus bas, proche du net social ; soit le modèle s'écarte du simulateur. Le prochain relevé (choix 10) le dira.
 
 Le module reste en bêta.
 
@@ -124,5 +125,5 @@ Le module reste en bêta.
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
-| 2026-10-13 | Validation des prestations : barèmes publiés et simulateur officiel de la prime d'activité | 9 nouveaux tests de validation (8 barèmes, 1 cas du simulateur), tous réussis |
+| 2026-10-13 | Validation des prestations : barèmes publiés ; cas du simulateur officiel de la prime d'activité préparés | 8 nouveaux tests de validation sur les barèmes, tous réussis ; aucun cas du simulateur (service des communes indisponible) |
 | 2026-10-13 | Création : cinq ménages types salariés, cascade jusqu'au net après impôt | 11 nouveaux tests de validation (impôt, parts, revenu fiscal de référence), tous réussis |

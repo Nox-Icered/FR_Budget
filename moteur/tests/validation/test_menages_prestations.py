@@ -9,8 +9,9 @@
 2. Simulateur : prime d'activité estimée par le simulateur RSA - prime d'activité de
    mesdroitssociaux.gouv.fr (source ``mesdroitssociaux_simulateur_rsa_pa``), législation et
    ressources de 2026, cas saisis par ``outils/references_prestations/generer.mjs``
-   (``registres/references/menages/mesdroitssociaux_pa_2026.json``). Tolérance : 2 € par
-   mois ; le simulateur reçoit des ressources arrondies à l'euro et donne un montant à l'euro.
+   (``registres/references/menages/mesdroitssociaux_pa_2026.json``), comparée à la prime
+   d'activité nette de CRDS d'OpenFisca. Tolérance : 2 € par mois ; le simulateur reçoit des
+   ressources arrondies à l'euro et donne un montant à l'euro.
 """
 
 from __future__ import annotations
@@ -25,6 +26,7 @@ from fr_budget.menages.openfisca import systeme_socio_fiscal
 from fr_budget.menages.prestations import (
     ANNEE_SIMULATEUR,
     MOIS_RESULTAT,
+    PRIME_ACTIVITE_VERSEE,
     PROFILS_AVEC_PRESTATIONS,
     calcul,
     cas_simulateur,
@@ -120,7 +122,7 @@ def test_cas_saisis_dans_le_simulateur_a_jour() -> None:
 @pytest.mark.parametrize("cas", CAS, ids=[c["id"] for c in CAS])
 def test_prime_activite_egale_au_simulateur(cas: dict[str, Any]) -> None:
     reference = cas["resultats"]["prime_activite"]
-    modele = calcul(cas["id"], "ppa", cas["mois_resultat"])[0]
+    modele = calcul(cas["id"], PRIME_ACTIVITE_VERSEE, cas["mois_resultat"])[0]
     assert abs(modele - reference) <= TOLERANCE_SIMULATEUR, (
         f"{cas['id']} : modèle {modele:.2f} €, mesdroitssociaux.gouv.fr {reference} € "
         f"(tolérance ±{TOLERANCE_SIMULATEUR:.0f} €)"

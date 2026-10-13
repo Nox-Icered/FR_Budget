@@ -84,6 +84,13 @@ export type MenagesTypes = {
   menages: MenageType[];
   saisie: Bornes;
 };
+export type EffetsMenages = {
+  unite: string;
+  annee_revenus: number;
+  leviers: { id: string; unite: string }[];
+  sans_effet: Record<string, string>;
+  effets: Record<string, Record<"hausse" | "baisse", Record<string, LignesCascade | null>>>;
+};
 export type LigneJournal = {
   date: string;
   fiche: string;

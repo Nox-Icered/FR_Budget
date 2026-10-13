@@ -8,6 +8,7 @@ from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
+from fr_budget.menages import types as module_menages
 
 from fr_budget_api.app import SOURCES_MENAGES, creer_application, menages_types, registre
 from fr_budget_api.export import exporter
@@ -129,3 +130,35 @@ def test_cors_origine_configuree(monkeypatch: pytest.MonkeyPatch) -> None:
         headers={"Origin": "https://exemple.fr", "Access-Control-Request-Method": "POST"},
     )
     assert reponse.headers["access-control-allow-origin"] == "https://exemple.fr"
+
+
+def test_effet_levier_route(client: TestClient) -> None:
+    reponse = client.get("/menages-types/effet", params={"levier": "csg_activite", "valeur": 1})
+    assert reponse.status_code == 200
+    corps = reponse.json()
+    assert set(corps["menages"]) == set(module_menages.PROFILS)
+    avant = client.get("/menages-types").json()["menages"]
+    median = next(m for m in avant if m["id"] == "celibataire_median")
+    assert corps["menages"]["celibataire_median"]["net_avant_impot"] < median["net_avant_impot"]
+
+
+@pytest.mark.parametrize(
+    ("levier", "valeur", "statut"),
+    [("tva_taux_normal", 1, 404), ("inconnu", 1, 404), ("csg_activite", 50, 422)],
+)
+def test_effet_levier_refuse(client: TestClient, levier: str, valeur: float, statut: int) -> None:
+    reponse = client.get("/menages-types/effet", params={"levier": levier, "valeur": valeur})
+    assert reponse.status_code == statut
+
+
+def test_export_des_effets_des_leviers(tmp_path: Path) -> None:
+    exporter(tmp_path)
+    effets = json.loads((tmp_path / "menages-effets.json").read_text(encoding="utf-8"))
+    assert {lev["id"] for lev in effets["leviers"]} == set(effets["effets"])
+    for par_sens in effets["effets"].values():
+        assert set(par_sens) == {"hausse", "baisse"}
+        for menages in par_sens.values():
+            assert set(menages) == set(module_menages.PROFILS)
+    # Pension du retraité : effet de l'indexation non chiffré (part des pensions de base).
+    assert effets["effets"]["indexation_pensions_prestations"]["hausse"]["retraite_seul"] is None
+    assert "tva_taux_normal" in effets["sans_effet"]

@@ -30,6 +30,7 @@ from fr_budget import scenario as module_scenario
 from fr_budget.agrege import credits_missions as module_credits_missions
 from fr_budget.agrege import depenses_fiscales as module_depenses_fiscales
 from fr_budget.apu import comptes_apu, depenses_par_fonction, libelles_cofog, ratio_pib
+from fr_budget.menages import leviers as module_leviers_menages
 from fr_budget.menages import personnalise as module_personnalise
 from fr_budget.menages import types as module_menages
 from fr_budget.registres.verification import RACINE_DEPOT, Rapport, charger
@@ -279,6 +280,52 @@ def menages_types() -> dict[str, Any]:
         ],
         "menages": resultat,
         "saisie": bornes_saisie(),
+    }
+
+
+def _lignes_ou_rien(c: module_menages.CascadeMenage | None) -> dict[str, Any] | None:
+    return None if c is None else _lignes_cascade(c)
+
+
+def _description_leviers_menages() -> dict[str, Any]:
+    leviers = module_leviers_menages.LEVIERS
+    return {
+        "unite": "euros par an",
+        "annee_revenus": module_menages.ANNEE,
+        "leviers": [{"id": i, "unite": d.unite} for i, d in leviers.items()],
+        "sans_effet": module_leviers_menages.SANS_EFFET,
+    }
+
+
+def effets_leviers_menages(processus: int | None = None) -> dict[str, Any]:
+    """Cascade de chaque ménage type après une hausse et une baisse d'une unité de chaque
+    levier qui change directement sa législation (``fr_budget.menages.leviers``) ; ``null``
+    quand l'effet n'est pas chiffré."""
+    effets = module_leviers_menages.effets_unitaires(processus)
+    return {
+        **_description_leviers_menages(),
+        "effets": {
+            levier: {
+                ("hausse" if valeur > 0 else "baisse"): {
+                    i: _lignes_ou_rien(c) for i, c in cascades.items()
+                }
+                for valeur, cascades in par_sens.items()
+            }
+            for levier, par_sens in effets.items()
+        },
+    }
+
+
+def effet_levier_menages(levier: str, valeur: float) -> dict[str, Any]:
+    """Cascade de chaque ménage type sous ``valeur`` (unité du levier)."""
+    return {
+        **_description_leviers_menages(),
+        "levier": levier,
+        "valeur": valeur,
+        "menages": {
+            i: _lignes_ou_rien(module_leviers_menages.cascade_reformee(i, levier, valeur))
+            for i in module_menages.PROFILS
+        },
     }
 
 
@@ -586,6 +633,16 @@ def creer_application() -> FastAPI:
     def lire_menages_types() -> dict[str, Any]:
         """Cascade annuelle des ménages types (avant réforme)."""
         return menages_types()
+
+    @app.get("/menages-types/effet")
+    def route_effet_levier_menages(levier: str, valeur: float) -> dict[str, Any]:
+        """Cascade des ménages types sous un levier (unité du simulateur), dans ses bornes."""
+        if levier not in module_leviers_menages.LEVIERS:
+            raise HTTPException(status_code=404, detail="levier sans effet direct sur les ménages")
+        basse, haute = module_scenario.bornes_levier(levier)
+        if not basse <= valeur <= haute:
+            raise HTTPException(status_code=422, detail="valeur hors des bornes du levier")
+        return effet_levier_menages(levier, valeur)
 
     @app.post("/mon-menage")
     def route_mon_menage(entree: MenageSaisiEntree) -> dict[str, Any]:

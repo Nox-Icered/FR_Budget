@@ -199,6 +199,25 @@ class CascadeMenage:
         )
 
 
+@dataclass(frozen=True)
+class Legislation:
+    """Législation appliquée à la cascade : celle d'OpenFisca corrigée (par défaut) ou une
+    réforme (effet d'un levier, ``fr_budget.menages.leviers``)."""
+
+    systeme: Any = None
+    """Système socio-fiscal réformé ; ``None`` pour le système de référence."""
+    ecart_csg_activite: float = 0.0
+    """Variation du taux de CSG déductible des revenus d'activité d'un indépendant, en
+    fraction, à partir de l'année simulée (calculée hors d'OpenFisca)."""
+
+
+REFERENCE = Legislation()
+
+
+def _systeme(legislation: Legislation) -> Any:
+    return legislation.systeme if legislation.systeme is not None else systeme_socio_fiscal()
+
+
 def _mois(annee: int) -> list[str]:
     return [f"{annee}-{m:02d}" for m in range(1, 13)]
 
@@ -322,13 +341,30 @@ def resultat_fiscal_independant(annee: int) -> float:
     return chiffrage(REVENU_INSEE_INDEPENDANT) * MOIS_PAR_AN * rapport * (1 + ecart)
 
 
-def _resultat_fiscal(adulte: Adulte, annee: int) -> float:
+def _resultat_fiscal_reference(adulte: Adulte, annee: int) -> float:
     if adulte.montant_mensuel is not None:
         return adulte.montant_mensuel * MOIS_PAR_AN
     return resultat_fiscal_independant(annee)
 
 
-def _salaires(adulte: Adulte, annee: int, mois: list[str]) -> dict[str, Any]:
+def _cotisations_independant(
+    adulte: Adulte, annee: int, ecart_csg: float
+) -> independants.CotisationsIndependant:
+    """Cotisations de l'indépendant ; sous un écart de CSG, le revenu brut (avant cotisations)
+    reste celui de la législation de référence et le résultat fiscal change."""
+    brut = independants.revenu_brut_pour_resultat(_resultat_fiscal_reference(adulte, annee), annee)
+    return independants.cotisations_artisan(brut, annee, ecart_csg)
+
+
+def _resultat_fiscal(adulte: Adulte, annee: int, ecart_csg: float = 0.0) -> float:
+    if ecart_csg == 0:
+        return _resultat_fiscal_reference(adulte, annee)
+    return _cotisations_independant(adulte, annee, ecart_csg).resultat_fiscal
+
+
+def _salaires(
+    adulte: Adulte, annee: int, mois: list[str], ecart_csg: float = 0.0
+) -> dict[str, Any]:
     """Salaire de base des ``mois``, pour un apprenti son contrat, pour un retraité sa
     pension (sans salaire)."""
     montant = adulte.montant_mensuel
@@ -340,7 +376,11 @@ def _salaires(adulte: Adulte, annee: int, mois: list[str]) -> dict[str, Any]:
         # Résultat fiscal (bénéfice industriel et commercial) pour l'impôt ; les cotisations
         # sont calculées hors d'OpenFisca (fr_budget.menages.independants).
         annees = sorted({int(m[:4]) for m in mois})
-        revenu = {str(a): _resultat_fiscal(adulte, annee) for a in annees}
+        # L'écart de CSG d'un levier ne s'applique qu'à l'année simulée.
+        revenu = {
+            str(a): _resultat_fiscal(adulte, annee, ecart_csg if a == annee else 0.0)
+            for a in annees
+        }
         # rpns_imposables pour l'impôt ; rpns_autres_revenus pour les ressources du RSA et de
         # la prime d'activité, qu'OpenFisca lit dans cette variable pour un non-salarié.
         return {"rpns_imposables": revenu, "rpns_autres_revenus": revenu}
@@ -367,7 +407,10 @@ def _avec_retraite(profil: Profil) -> bool:
 
 
 def situation(
-    profil: Profil, annee: int = ANNEE, rfr_anterieur: float | None = None
+    profil: Profil,
+    annee: int = ANNEE,
+    rfr_anterieur: float | None = None,
+    ecart_csg_independant: float = 0.0,
 ) -> dict[str, Any]:
     """Situation OpenFisca du ménage : salaires de l'année et de la précédente, déclaration
     commune pour un couple (marié), enfants à charge.
@@ -386,7 +429,7 @@ def situation(
         adultes.append(nom)
         individus[nom] = {
             "date_naissance": {"ETERNITY": a.naissance},
-            **_salaires(a, annee, mois),
+            **_salaires(a, annee, mois, ecart_csg_independant),
             **_emploi_sur(mois),
             **_categorie(a.cadre, mois),
         }
@@ -416,9 +459,15 @@ def situation(
     }
 
 
-def _construire(profil: Profil, annee: int, rfr_anterieur: float | None) -> Simulation:
+def _construire(
+    profil: Profil,
+    annee: int,
+    rfr_anterieur: float | None,
+    legislation: Legislation = REFERENCE,
+) -> Simulation:
     simulation = SimulationBuilder().build_from_entities(
-        systeme_socio_fiscal(), situation(profil, annee, rfr_anterieur)
+        _systeme(legislation),
+        situation(profil, annee, rfr_anterieur, legislation.ecart_csg_activite),
     )
     if _avec_retraite(profil):
         # OpenFisca met à zéro une variable demandée pour une autre période au cours de son
@@ -464,16 +513,31 @@ def cascade_annuelle(identifiant: str, annee: int = ANNEE) -> CascadeMenage:
     return _cascade(PROFILS[identifiant], annee, _simulation(identifiant, annee))
 
 
-def cascade_profil(profil: Profil, annee: int = ANNEE) -> CascadeMenage:
+def cascade_profil(
+    profil: Profil, annee: int = ANNEE, legislation: Legislation = REFERENCE
+) -> CascadeMenage:
     """Cascade annuelle d'un profil quelconque (profil saisi par l'utilisateur).
 
-    Sans cache : aucune donnée saisie ne reste en mémoire après le calcul (règle 5).
+    Sans cache : aucune donnée saisie ne reste en mémoire après le calcul (règle 5). Le revenu
+    fiscal de référence d'avant la période est celui de la législation de référence : une
+    réforme ne s'applique qu'à partir de l'année simulée.
     """
-    simulation = _construire(profil, annee, rfr_point_fixe(profil, annee))
-    return _cascade(profil, annee, simulation)
+    simulation = _construire(profil, annee, rfr_point_fixe(profil, annee), legislation)
+    return _cascade(profil, annee, simulation, legislation)
 
 
-def _cascade(profil: Profil, annee: int, simulation: Simulation) -> CascadeMenage:
+def cascade_type_reformee(
+    identifiant: str, legislation: Legislation, annee: int = ANNEE
+) -> CascadeMenage:
+    """Cascade annuelle d'un ménage type sous une législation réformée."""
+    profil = PROFILS[identifiant]
+    simulation = _construire(profil, annee, _rfr_point_fixe(identifiant, annee), legislation)
+    return _cascade(profil, annee, simulation, legislation)
+
+
+def _cascade(
+    profil: Profil, annee: int, simulation: Simulation, legislation: Legislation = REFERENCE
+) -> CascadeMenage:
 
     def total(variable: str, periodes: list[str]) -> float:
         with warnings.catch_warnings():
@@ -492,11 +556,11 @@ def _cascade(profil: Profil, annee: int, simulation: Simulation) -> CascadeMenag
         prestations={k: v for k, v in prestations.items() if v},
         pension_brute=total("retraite_brute", mois),
         pension_nette=total("retraite_nette", mois),
-        **_independant(profil, annee),
+        **_independant(profil, annee, legislation.ecart_csg_activite),
     )
 
 
-def _independant(profil: Profil, annee: int) -> dict[str, float]:
+def _independant(profil: Profil, annee: int, ecart_csg: float = 0.0) -> dict[str, float]:
     """Lignes de l'indépendant (revenu brut, cotisations, CSG-CRDS, revenu net)."""
     lignes = dict.fromkeys(
         (
@@ -510,10 +574,7 @@ def _independant(profil: Profil, annee: int) -> dict[str, float]:
     for adulte in profil.adultes:
         if not adulte.independant:
             continue
-        resultat = _resultat_fiscal(adulte, annee)
-        c = independants.cotisations_artisan(
-            independants.revenu_brut_pour_resultat(resultat, annee), annee
-        )
+        c = _cotisations_independant(adulte, annee, ecart_csg)
         lignes["revenu_independant_brut"] += c.revenu_brut
         lignes["cotisations_independant"] += c.cotisations
         lignes["csg_crds_independant"] += c.csg_crds

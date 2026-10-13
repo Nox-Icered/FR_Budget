@@ -359,9 +359,63 @@
       "rsa": "RSA",
       "ars": "Allocation de rentrée scolaire"
     },
-    "limites": "Non comptés : aides au logement (elles dépendent du loyer), taxe foncière, revenus du patrimoine. Les effets des réformes sur ces ménages viendront dans une prochaine version.",
+    "limites": "Non comptés : aides au logement (elles dépendent du loyer), taxe foncière, revenus du patrimoine. Les effets des mesures sont calculés sans changement de comportement ; la répercussion des cotisations patronales sur les salaires n'est pas encore proposée.",
     "lien_fiche": "Méthode, sources et validation : fiche « ménages types » du dépôt.",
-    "sources": "Sources :"
+    "sources": "Sources :",
+    "effets": {
+      "titre": "Effet d'une mesure sur ces ménages",
+      "intro": "Choisissez une mesure et un ménage : la cascade est recalculée avec la mesure appliquée aux revenus de {annee}, toute l'année, sans changement de comportement. L'écart est donné ligne par ligne.",
+      "mesure": "Mesure",
+      "menage": "Ménage",
+      "avant": "Avant",
+      "apres": "Après",
+      "ecart": "Écart",
+      "legende": "{menage} : {mesure}, en euros par an",
+      "non_chiffre": "Effet non chiffré pour ce ménage : la mesure ne porte que sur les pensions de base, et la part de base dans la pension moyenne publiée par la DREES n'est pas dans les sources du projet.",
+      "aucun": "Cette mesure ne change aucune ligne de la cascade de ce ménage.",
+      "incidence": "Cotisations patronales : lecture comptable, la hausse ou la baisse porte sur le coût employeur et ne change pas le salaire brut.",
+      "leviers": {
+        "csg_activite": {
+          "hausse": "Hausse d'un point du taux de CSG sur les revenus d'activité",
+          "baisse": "Baisse d'un point du taux de CSG sur les revenus d'activité"
+        },
+        "csg_retraites": {
+          "hausse": "Hausse d'un point du taux plein de CSG sur les pensions",
+          "baisse": "Baisse d'un point du taux plein de CSG sur les pensions"
+        },
+        "cotisations_patronales_taux": {
+          "hausse": "Hausse d'un point du taux de cotisation patronale du secteur privé",
+          "baisse": "Baisse d'un point du taux de cotisation patronale du secteur privé"
+        },
+        "allegements_generaux": {
+          "hausse": "Allègements généraux de cotisations patronales augmentés de 1 %",
+          "baisse": "Allègements généraux de cotisations patronales réduits de 1 %"
+        },
+        "ir_seuils_bareme": {
+          "hausse": "Seuils du barème de l'impôt sur le revenu relevés de 1 % de plus que l'inflation",
+          "baisse": "Seuils du barème de l'impôt sur le revenu relevés de 1 % de moins que l'inflation"
+        },
+        "prime_activite_pente": {
+          "hausse": "Hausse d'un point de la part des revenus d'activité prise en compte dans la prime d'activité",
+          "baisse": "Baisse d'un point de la part des revenus d'activité prise en compte dans la prime d'activité"
+        },
+        "indexation_pensions_prestations": {
+          "hausse": "Prestations sociales revalorisées d'un point de plus que prévu par la loi",
+          "baisse": "Prestations sociales revalorisées d'un point de moins que prévu par la loi"
+        }
+      },
+      "sans_effet_titre": "Mesures sans effet direct sur ces ménages",
+      "sans_effet_intro": "Les autres mesures du simulateur ne changent pas directement la cascade de ces ménages :",
+      "raisons": {
+        "consommation": "TVA et accises : elles portent sur les dépenses de consommation, que la cascade ne décrit pas.",
+        "patrimoine": "CSG sur les revenus du capital : ces ménages n'ont pas de revenus du patrimoine.",
+        "entreprises": "Impôt sur les sociétés : payé par les entreprises.",
+        "administrations": "Dotations aux collectivités et crédits des missions de l'État : versés entre administrations ou à leurs services.",
+        "agents_publics": "Rémunérations publiques : aucun de ces ménages n'est agent public.",
+        "structurel": "Âge de départ à la retraite : il change les carrières et les pensions futures, pas l'année simulée.",
+        "catalogue": "Dépenses fiscales : chacune vise une situation particulière, absente de ces ménages types."
+      }
+    }
   },
   "mon_menage": {
     "titre": "Mon ménage",

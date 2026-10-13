@@ -53,3 +53,22 @@ export function lignesCascade(m: LignesCascade): [string, number][] {
     [texte("menages.net_apres_impot"), m.net_apres_impot],
   ];
 }
+
+// Avant et après une réforme, ligne par ligne : les prestations des deux cascades sont réunies
+// (une prestation peut apparaître ou disparaître), à zéro quand elles manquent d'un côté.
+export function lignesComparees(
+  avant: LignesCascade,
+  apres: LignesCascade,
+): { libelle: string; avant: number; apres: number; ecart: number }[] {
+  const cles = [...new Set([...Object.keys(avant.prestations), ...Object.keys(apres.prestations)])];
+  const completer = (m: LignesCascade): LignesCascade => ({
+    ...m,
+    prestations: Object.fromEntries(cles.map((c) => [c, m.prestations[c] ?? 0])),
+  });
+  const a = lignesCascade(completer(avant));
+  const b = lignesCascade(completer(apres));
+  if (a.length !== b.length || a.some(([l], i) => l !== b[i][0])) {
+    throw new Error("cascades non comparables");
+  }
+  return a.map(([libelle, v], i) => ({ libelle, avant: v, apres: b[i][1], ecart: b[i][1] - v }));
+}

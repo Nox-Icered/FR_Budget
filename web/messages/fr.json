@@ -353,6 +353,7 @@
       "ars": "Allocation de rentrée scolaire"
     },
     "limites": "Non comptés : aides au logement (elles dépendent du loyer), taxe foncière, revenus du patrimoine. Les effets des réformes sur ces ménages viendront dans une prochaine version.",
-    "lien_fiche": "Méthode, sources et validation : fiche « ménages types » du dépôt."
+    "lien_fiche": "Méthode, sources et validation : fiche « ménages types » du dépôt.",
+    "sources": "Sources :"
   }
 }

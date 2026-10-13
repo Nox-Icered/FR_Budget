@@ -170,8 +170,17 @@ def journal() -> list[dict[str, str]]:
     return sorted(lignes, key=lambda x: x["date"], reverse=True)
 
 
-def menages_types() -> list[dict[str, Any]]:
-    """Cascade annuelle de chaque ménage type (revenus de l'année des ménages types), en euros.
+SOURCES_MENAGES = [
+    "insee_premiere_2079",
+    "openfisca_france_176_1_2",
+    "modele_social_11_1_0",
+    "impots_gouv_simulateur_ir_2026",
+]
+
+
+def menages_types() -> dict[str, Any]:
+    """Cascade annuelle de chaque ménage type (revenus de l'année des ménages types), en euros
+    par an, avec ses sources et hypothèses.
 
     Profils publics de la spécification : aucune donnée saisie par un utilisateur.
     """
@@ -191,7 +200,13 @@ def menages_types() -> list[dict[str, Any]]:
                 "net_apres_impot": round(c.net_apres_impot, 2),
             }
         )
-    return resultat
+    return {
+        "unite": "euros par an",
+        "annee_revenus": module_menages.ANNEE,
+        "sources": SOURCES_MENAGES,
+        "hypotheses": [module_menages.HYPOTHESE_EVOLUTION],
+        "menages": resultat,
+    }
 
 
 def version_donnees() -> dict[str, str]:
@@ -473,7 +488,7 @@ def creer_application() -> FastAPI:
         return {"statut": "ok"}
 
     @app.get("/menages-types")
-    def lire_menages_types() -> list[dict[str, Any]]:
+    def lire_menages_types() -> dict[str, Any]:
         """Cascade annuelle des ménages types (avant réforme)."""
         return menages_types()
 

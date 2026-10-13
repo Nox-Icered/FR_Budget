@@ -79,6 +79,13 @@ export type MenageType = {
   prestations: Record<string, number>;
   net_apres_impot: number;
 };
+export type MenagesTypes = {
+  unite: string;
+  annee_revenus: number;
+  sources: string[];
+  hypotheses: string[];
+  menages: MenageType[];
+};
 export type LigneJournal = {
   date: string;
   fiche: string;

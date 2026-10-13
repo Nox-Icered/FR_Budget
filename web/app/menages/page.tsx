@@ -1,19 +1,19 @@
 import { texte } from "../../lib/textes";
-import { lire, type MenageType } from "../../lib/donnees";
+import { lire, type MenagesTypes } from "../../lib/donnees";
 import { region } from "../../lib/region";
 
 const MOIS_PAR_AN = 12;
 const euros = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
 
 export default function Menages() {
-  const menages = lire<MenageType[]>("menages-types.json");
+  const { menages, annee_revenus, sources } = lire<MenagesTypes>("menages-types.json");
   return (
     <>
       <h1>{texte("menages.titre")}</h1>
       <p className="avertissement" role="note">
         {texte("menages.bandeau")}
       </p>
-      <p>{texte("menages.intro", { annee: menages[0].annee })}</p>
+      <p>{texte("menages.intro", { annee: annee_revenus })}</p>
       {menages.map((m) => {
         const lignes: [string, number][] = [
           [texte("menages.cout_employeur"), m.cout_employeur],
@@ -52,6 +52,15 @@ export default function Menages() {
         );
       })}
       <p className="source">{texte("menages.limites")}</p>
+      <p className="source">
+        {texte("menages.sources")}{" "}
+        {sources.map((s, i) => (
+          <span key={s}>
+            {i > 0 && ", "}
+            <a href={`/sources/#${s}`}>{s}</a>
+          </span>
+        ))}
+      </p>
       <p className="source">{texte("menages.lien_fiche")}</p>
     </>
   );

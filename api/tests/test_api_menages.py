@@ -22,9 +22,14 @@ def test_menages_types(client: TestClient) -> None:
     assert reponse["unite"] == "euros par an"
     assert "insee_premiere_2079" in reponse["sources"]
     menages = reponse["menages"]
-    assert {m["id"] for m in menages} >= {"celibataire_smic", "couple_2_enfants"}
+    assert {m["id"] for m in menages} >= {"celibataire_smic", "couple_2_enfants", "retraite_seul"}
     for m in menages:
-        attendu = m["net_avant_impot"] - m["impot_revenu"] + sum(m["prestations"].values())
+        attendu = (
+            m["net_avant_impot"]
+            + m["pension_nette"]
+            - m["impot_revenu"]
+            + sum(m["prestations"].values())
+        )
         assert m["net_apres_impot"] == pytest.approx(attendu, abs=0.05)
 
 

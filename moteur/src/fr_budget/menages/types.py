@@ -12,6 +12,10 @@ Profils salariés de la spécification (lot « ménages types », choix à relir
   celles versées en 2025. Les salaires de 2024 sont supposés égaux (ressources de référence
   des prestations).
 
+Retraité : pension moyenne de droit direct de fin 2023 (DREES, la médiane n'est pas publiée),
+revalorisée comme les pensions de base (instructions de la DSS ; hypothèse
+``menages_ecart_evolution_pension_moyenne``).
+
 Non comptés : aides au logement (le loyer n'est pas fixé), taxe d'habitation, revenus du
 patrimoine.
 """
@@ -24,6 +28,7 @@ from functools import cache
 from typing import Any
 
 from openfisca_core.simulation_builder import SimulationBuilder
+from openfisca_core.simulations import Simulation
 
 from fr_budget.menages.openfisca import HypothesesEmploi, smic_mensuel_brut, systeme_socio_fiscal
 from fr_budget.registres.acces import chiffrage, hypothese
@@ -34,6 +39,19 @@ SMIC = "smic"
 MEDIAN = "median"
 P95 = "p95"
 APPRENTI = "apprenti"
+RETRAITE = "retraite"
+PENSION_DREES = "drees_pension_brute_moyenne_droit_direct_2023"
+ANNEE_DREES = 2023
+# Coefficients de revalorisation des pensions de base au 1er janvier de l'année.
+REVALORISATIONS = {
+    2024: "dss_revalorisation_pensions_base_2024_01",
+    2025: "dss_revalorisation_pensions_base_2025_01",
+}
+HYPOTHESE_PENSION = "menages_ecart_evolution_pension_moyenne"
+# Point fixe du revenu fiscal de référence d'avant la période simulée (taux de CSG des
+# pensions) : précision en euros et nombre d'itérations.
+PRECISION_RFR = 1.0
+ITERATIONS_RFR = 10
 HYPOTHESE_EVOLUTION = "menages_ecart_evolution_salaire_smic"
 NIVEAUX_INSEE = {MEDIAN: "insee_salaire_net_median_2024", P95: "insee_salaire_net_p95_2024"}
 # Hypothèses d'emploi du cas validé contre le modèle Urssaf (valeurs par défaut du modèle,
@@ -70,6 +88,10 @@ class Adulte:
     """Salarié cadre (cotisations des cadres) ; sinon non cadre, valeur par défaut d'OpenFisca."""
     apprentissage: Apprentissage | None = None
     """Apprenti (``niveau`` vaut alors ``APPRENTI``) : salaire et exonérations propres."""
+
+    @property
+    def retraite(self) -> bool:
+        return self.niveau == RETRAITE
 
 
 @dataclass(frozen=True)
@@ -116,6 +138,9 @@ PROFILS: dict[str, Profil] = {
             ),
         ),
     ),
+    "retraite_seul": Profil(
+        "Retraité seul, pension moyenne de droit direct", (Adulte("1955-01-01", RETRAITE),)
+    ),
 }
 
 
@@ -130,10 +155,19 @@ class CascadeMenage:
     impot_revenu: float
     """Impôt sur le revenu dû sur les revenus de l'année (positif)."""
     prestations: dict[str, float] = field(default_factory=dict)
+    pension_brute: float = 0.0
+    """Pension de retraite brute (``retraite_brute``)."""
+    pension_nette: float = 0.0
+    """Pension nette de CSG, CRDS et CASA (``retraite_nette``)."""
 
     @property
     def net_apres_impot(self) -> float:
-        return self.net_avant_impot - self.impot_revenu + sum(self.prestations.values())
+        return (
+            self.net_avant_impot
+            + self.pension_nette
+            - self.impot_revenu
+            + sum(self.prestations.values())
+        )
 
 
 def _mois(annee: int) -> list[str]:
@@ -232,8 +266,29 @@ def salaire_apprenti(apprentissage: Apprentissage, mois: str) -> float:
     return part * smic_mensuel_brut(mois)
 
 
+def pension_brute_mensuelle(annee: int) -> float:
+    """Pension brute mensuelle du retraité type pour ``annee`` : pension moyenne de droit
+    direct de fin 2023 (DREES), revalorisée au 1er janvier de chaque année suivante comme les
+    pensions de base. Pas de valeur avant 2023 ni sans coefficient de revalorisation sourcé."""
+    if annee < ANNEE_DREES:
+        msg = f"{annee} : pension du retraité type non définie avant {ANNEE_DREES}"
+        raise ValueError(msg)
+    pension = chiffrage(PENSION_DREES)
+    for a in range(ANNEE_DREES + 1, annee + 1):
+        if a not in REVALORISATIONS:
+            msg = f"{a} : coefficient de revalorisation des pensions non saisi"
+            raise ValueError(msg)
+        pension *= chiffrage(REVALORISATIONS[a])
+    if annee > ANNEE_DREES:
+        pension *= 1 + hypothese(HYPOTHESE_PENSION).valeur_centrale
+    return pension
+
+
 def _salaires(adulte: Adulte, annee: int, mois: list[str]) -> dict[str, Any]:
-    """Salaire de base des ``mois`` et, pour un apprenti, contrat d'apprentissage."""
+    """Salaire de base des ``mois``, pour un apprenti son contrat, pour un retraité sa
+    pension (sans salaire)."""
+    if adulte.retraite:
+        return {"retraite_brute": {m: pension_brute_mensuelle(int(m[:4])) for m in mois}}
     if adulte.apprentissage is None:
         return {
             "salaire_de_base": dict.fromkeys(mois, brut_mensuel(adulte.niveau, annee, adulte.cadre))
@@ -250,10 +305,23 @@ def _salaires(adulte: Adulte, annee: int, mois: list[str]) -> dict[str, Any]:
     }
 
 
-def situation(profil: Profil, annee: int = ANNEE) -> dict[str, Any]:
+def _avec_retraite(profil: Profil) -> bool:
+    return any(a.retraite for a in profil.adultes)
+
+
+def situation(
+    profil: Profil, annee: int = ANNEE, rfr_anterieur: float | None = None
+) -> dict[str, Any]:
     """Situation OpenFisca du ménage : salaires de l'année et de la précédente, déclaration
-    commune pour un couple (marié), enfants à charge."""
-    mois = _mois(annee - 1) + _mois(annee)
+    commune pour un couple (marié), enfants à charge.
+
+    Retraité : pensions des deux années précédentes aussi, car le taux de CSG d'une pension
+    dépend du revenu fiscal de référence de l'avant-dernière année. Ce revenu dépend à son
+    tour de la CSG : pour arrêter la chaîne, le revenu fiscal de référence des années
+    ``annee - 4`` et ``annee - 3`` est donné (``rfr_anterieur``, voir :func:`_simulation`).
+    """
+    retraite = _avec_retraite(profil)
+    mois = (_mois(annee - 2) if retraite else []) + _mois(annee - 1) + _mois(annee)
     individus: dict[str, Any] = {}
     adultes = []
     for i, a in enumerate(profil.adultes):
@@ -275,6 +343,8 @@ def situation(profil: Profil, annee: int = ANNEE) -> dict[str, Any]:
     foyer: dict[str, Any] = {"declarants": adultes, "personnes_a_charge": enfants}
     if profil.parent_isole:
         foyer["caseT"] = {str(annee): True}
+    if retraite and rfr_anterieur is not None:
+        foyer["rfr"] = {str(annee - 4): rfr_anterieur, str(annee - 3): rfr_anterieur}
     return {
         "individus": individus,
         "foyers_fiscaux": {"foyer": foyer},
@@ -289,13 +359,49 @@ def situation(profil: Profil, annee: int = ANNEE) -> dict[str, Any]:
     }
 
 
+def _construire(profil: Profil, annee: int, rfr_anterieur: float | None) -> Simulation:
+    simulation = SimulationBuilder().build_from_entities(
+        systeme_socio_fiscal(), situation(profil, annee, rfr_anterieur)
+    )
+    if _avec_retraite(profil):
+        # OpenFisca met à zéro une variable demandée pour une autre période au cours de son
+        # propre calcul (spirale) : le revenu fiscal de référence des années précédentes est
+        # calculé d'abord, pour que le taux de CSG des pensions ne dépende pas de l'ordre des
+        # calculs.
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", RuntimeWarning)
+            simulation.calculate("rfr", str(annee - 2))
+            simulation.calculate("rfr", str(annee - 1))
+    return simulation
+
+
+@cache
+def _rfr_point_fixe(identifiant: str, annee: int) -> float | None:
+    """Revenu fiscal de référence donné pour les années ``annee - 4`` et ``annee - 3`` d'un
+    ménage de retraités : celui que le modèle calcule pour ``annee - 2`` quand on le lui
+    donne (point fixe), soit une pension supposée stable avant la période simulée."""
+    profil = PROFILS[identifiant]
+    if not _avec_retraite(profil):
+        return None
+    rfr = 0.0
+    for _ in range(ITERATIONS_RFR):
+        simulation = _construire(profil, annee, rfr)
+        nouveau = float(simulation.calculate("rfr", str(annee - 2))[0])
+        if abs(nouveau - rfr) < PRECISION_RFR:
+            return nouveau
+        rfr = nouveau
+    msg = f"{identifiant} : revenu fiscal de référence sans point fixe"
+    raise RuntimeError(msg)
+
+
+def _simulation(identifiant: str, annee: int) -> Simulation:
+    return _construire(PROFILS[identifiant], annee, _rfr_point_fixe(identifiant, annee))
+
+
 @cache
 def cascade_annuelle(identifiant: str, annee: int = ANNEE) -> CascadeMenage:
     """Cascade annuelle d'un ménage type, en euros (revenus de ``annee``)."""
-    profil = PROFILS[identifiant]
-    simulation = SimulationBuilder().build_from_entities(
-        systeme_socio_fiscal(), situation(profil, annee)
-    )
+    simulation = _simulation(identifiant, annee)
 
     def total(variable: str, periodes: list[str]) -> float:
         with warnings.catch_warnings():
@@ -312,28 +418,31 @@ def cascade_annuelle(identifiant: str, annee: int = ANNEE) -> CascadeMenage:
         net_imposable=total("revenu_assimile_salaire", [str(annee)]),
         impot_revenu=-total("impot_revenu_restant_a_payer", [str(annee)]),
         prestations={k: v for k, v in prestations.items() if v},
+        pension_brute=total("retraite_brute", mois),
+        pension_nette=total("retraite_nette", mois),
     )
 
 
 def declaration(identifiant: str, annee: int = ANNEE) -> dict[str, Any]:
     """Cases de la déclaration des revenus de ``annee`` pour le ménage type, au format du
     simulateur d'impots.gouv.fr (validation) : situation, années de naissance, enfants à
-    charge, case T, salaires imposables arrondis à l'euro."""
+    charge, case T, salaires et pensions imposables arrondis à l'euro."""
     profil = PROFILS[identifiant]
-    simulation = SimulationBuilder().build_from_entities(
-        systeme_socio_fiscal(), situation(profil, annee)
-    )
+    simulation = _simulation(identifiant, annee)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", RuntimeWarning)
         # Revenu imposé comme des salaires : salaire imposable, moins la part exonérée du
         # salaire d'un apprenti (correction apprenti_impot_revenu).
         salaires = simulation.calculate("revenu_assimile_salaire", str(annee))
+        pensions = simulation.calculate_add("retraite_imposable", str(annee))
     cases: dict[str, Any] = {
         "situation": "M" if len(profil.adultes) > 1 else "C",
         "0DA": profil.adultes[0].naissance[:4],
         "0CF": len(profil.enfants),
         "1AJ": round(float(salaires[0])),
     }
+    if profil.adultes[0].retraite:
+        cases["1AS"] = round(float(pensions[0]))
     if len(profil.adultes) > 1:
         cases["0DB"] = profil.adultes[1].naissance[:4]
         cases["1BJ"] = round(float(salaires[1]))
@@ -344,9 +453,7 @@ def declaration(identifiant: str, annee: int = ANNEE) -> dict[str, Any]:
 
 def revenu_fiscal_et_parts(identifiant: str, annee: int = ANNEE) -> tuple[float, float]:
     """Revenu fiscal de référence (``rfr``) et nombre de parts (``nbptr``) du ménage type."""
-    simulation = SimulationBuilder().build_from_entities(
-        systeme_socio_fiscal(), situation(PROFILS[identifiant], annee)
-    )
+    simulation = _simulation(identifiant, annee)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", RuntimeWarning)
         return (

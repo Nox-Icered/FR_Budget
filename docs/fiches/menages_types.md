@@ -6,7 +6,7 @@ mise_a_jour: 2026-10-13
 
 # Fiche : ménages types (cascade jusqu'au net après impôt)
 
-Lot « ménages types », première partie (V1, prévu en parallèle de la phase 2). Fait en autonomie (instruction du mainteneur du 13 octobre 2026). Les choix du § 5, les 13 valeurs saisies (2 de l'Insee, 11 de service-public.gouv.fr) et les trois corrections d'OpenFisca propres aux apprentis sont **à relire**.
+Lot « ménages types », première partie (V1, prévu en parallèle de la phase 2). Fait en autonomie (instruction du mainteneur du 13 octobre 2026). Les choix du § 5, les 26 valeurs saisies (2 de l'Insee, 2 de la DREES, 2 de la Direction de la Sécurité sociale, 20 de service-public.gouv.fr) et les trois corrections d'OpenFisca propres aux apprentis sont **à relire**.
 
 ## 1. Question posée
 
@@ -21,10 +21,10 @@ Pour un ménage type, combien coûte le travail à l'employeur, et que reste-t-i
 | Cadre célibataire, 95e centile | 95e centile, salarié cadre | aucun | Insee Première n° 2079 : 5 593 € nets par mois en 2024 (2,55 fois la médiane) |
 | Couple marié, deux enfants | médiane et SMIC | nés en 2016 et 2019 | Insee, OpenFisca |
 | Parent seul, un enfant | SMIC, case T | né en 2019 | OpenFisca |
+| Retraité seul | pension moyenne de droit direct, aucun salaire | aucun | DREES, « Les retraités et les retraites » 2025, fiche 5 : 1 666 € bruts par mois fin 2023 (retraités résidant en France) |
 | Apprenti de 19 ans | salaire minimum de l'apprentissage, contrat débuté le 1er septembre 2024 | aucun | service-public.gouv.fr, fiche F2918 : 43 % du SMIC en 1re année, 51 % en 2e, 67 % en 3e (18 à 20 ans) |
 
-La spécification prévoit aussi un retraité et un indépendant :
-- **Retraité, pension médiane : bloqué.** La source attendue est le panorama de la DREES « Les retraités et les retraites » (édition 2025, fiche 5). Le site de la DREES n'était pas joignable depuis l'environnement de travail le 13 octobre 2026. Le portail de données ouvertes de la DREES ne publie, au plus récent, qu'une distribution par tranches de 100 € à fin 2020, sans médiane.
+La spécification prévoit aussi un indépendant :
 - **Indépendant : à faire.** Le revenu médian est publié (Insee Première n° 2060 : 2 620 € par mois en 2023, non-salariés « classiques » hors agriculture). Reste à modéliser les cotisations des indépendants et à les valider.
 
 ## 3. Méthode de calcul
@@ -54,6 +54,12 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
     - CSG et CRDS : totale (avant), ou sous 50 % du SMIC (depuis) ;
     - impôt sur le revenu : dans la limite du SMIC, mois par mois.
 
+- **Retraité.**
+  - Pension brute de chaque mois : pension moyenne de fin 2023, multipliée par les coefficients de revalorisation des pensions de base au 1er janvier 2024 (1,053) et 2025 (1,022).
+  - La CSG d'une pension dépend du revenu fiscal de référence de l'avant-dernière année, qui dépend à son tour de la CSG. Deux mesures arrêtent cette chaîne :
+    - les pensions sont données de 2023 à 2025, et le revenu fiscal de référence de 2021 et 2022 est fixé à celui que le modèle calcule pour 2023 (point fixe) ;
+    - le revenu fiscal de référence des années passées est calculé avant tout le reste. Sinon, OpenFisca met à zéro la CSG quand la même variable revient pour une autre année dans un même calcul, et le résultat dépend de l'ordre des calculs (constaté, puis vérifié par un test).
+
 ## 4. Données
 
 | Jeu de données | Ce qu'il apporte |
@@ -61,6 +67,9 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
 | `insee_premiere_2079_pdf` | médiane et 95e centile des salaires nets en équivalent temps plein, 2024 (page 2, figure 3) |
 | `registres/references/menages/impots_gouv_ir2026.json` | résultats du simulateur officiel de l'impôt (validation) |
 | `service_public_*_html` (5 pages de service-public.gouv.fr) | barèmes de la prime d'activité, des allocations familiales, de l'ARS et de l'ASF au 1er avril 2026 ; base mensuelle des allocations familiales 2025 et 2026 (validation) |
+| `drees_retraites_2025_fiche05_pdf` | pension moyenne de droit direct, fin 2023 (fichier déposé par le mainteneur) |
+| `dss_instruction_2023_189_pdf`, `dss_instruction_2024_176_pdf` | coefficients de revalorisation des pensions de base, 2024 et 2025 |
+| `service_public_f2971_html` | seuils et taux de CSG sur les pensions, 2026 (validation) |
 | `service_public_f2918_html` | salaire minimum de l'apprenti et exonérations (cotisations, CSG-CRDS, impôt) |
 | `registres/references/menages/mesdroitssociaux_pa_2026.json` | résultats du simulateur officiel du RSA et de la prime d'activité (validation) |
 
@@ -85,6 +94,13 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
 12. **Pas de salaire de janvier à août 2024**, avant le contrat. Cela compte pour les ressources des prestations de 2025.
 13. **Exonération d'impôt appliquée mois par mois** (limite : SMIC mensuel), comme dans le modèle de l'Urssaf. La loi fixe une limite annuelle, ce qui revient au même pour un salaire régulier.
 
+14. **Pension moyenne et non médiane.** La spécification demande la pension médiane. La fiche 5 de la DREES (édition 2025) ne publie que la moyenne de fin 2023 et une distribution de fin 2020. La moyenne est retenue, et le libellé le dit.
+    - Limite : la moyenne dépasse sans doute la médiane, car les pensions élevées la tirent vers le haut.
+15. **Pension revalorisée comme les pensions de base** (hypothèse `menages_ecart_evolution_pension_moyenne`, nulle, sans plage). Les pensions complémentaires suivent d'autres règles, et la pension moyenne évolue aussi avec le renouvellement des générations.
+16. **Retraité** né en 1955, seul, sans pension de réversion ni autre revenu. OpenFisca lui applique en 2025 le taux réduit de CSG (3,8 %), sans CASA. Son revenu fiscal de référence de 2023 (15 864 €) est sous le plafond du taux réduit de 2025 d'OpenFisca, une valeur que la page consultée ne publie pas.
+    - Limite : la règle des deux années consécutives de dépassement n'est pas en jeu pour ce profil, et n'est pas testée.
+17. **Pension stable avant 2023** pour le calcul du taux de CSG de 2023 (point fixe, § 3).
+
 ## 6. Validation
 
 **Impôt sur le revenu.**
@@ -103,6 +119,11 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
 Le nombre de parts et le revenu fiscal de référence sont identiques pour les cinq ménages.
 
 **Salaire.** Pour le célibataire au SMIC, la cascade mensuelle (coût employeur, brut, net, imposable) est validée contre le modèle Urssaf (fiche `cascade_salaire`).
+
+**Retraité.**
+- Impôt : le simulateur d'impots.gouv.fr donne le même revenu fiscal de référence que le modèle (17 216 €) et le même impôt restant à payer (0 €). La pension est déclarée en case 1AS.
+- CSG des pensions : les 9 valeurs du barème de 2026 publiées sur service-public.gouv.fr (fiche F2971) sont égales aux paramètres d'OpenFisca : seuils du taux zéro, du taux réduit et du taux médian, leurs majorations par demi-part, et les trois taux. Test : `moteur/tests/validation/test_menages_retraite.py`.
+- Limite : les seuils de 2025, qui s'appliquent au profil (revenus de 2023), ne sont pas publiés sur la page consultée. Ils ne sont pas vérifiés directement.
 
 **Apprenti.**
 - La cascade mensuelle est comparée au modèle de calcul de l'Urssaf (fiche `cascade_salaire`, deux cas d'apprentis).
@@ -151,6 +172,7 @@ Le module reste en bêta.
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-13 | Profil retraité (pension moyenne de la DREES, CSG selon le revenu fiscal de référence de l'avant-dernière année) | Impôt : 2 nouveaux tests réussis (7 cas sur 7) ; CSG des pensions : 9 nouveaux tests réussis ; test unitaire de l'ordre de la cascade et test de l'API adaptés à un ménage sans salaire |
 | 2026-10-13 | Profil apprenti, avec trois corrections d'OpenFisca pour les apprentis | Impôt : 2 nouveaux tests réussis (6 cas sur 6) ; cascade Urssaf : 8 nouvelles comparaisons, 6 réussies, 2 hors tolérance (coût employeur) ; test unitaire de l'ordre de la cascade assoupli (brut égal au net possible pour l'apprenti) |
 | 2026-10-13 | Validation des prestations : barèmes publiés ; cas du simulateur officiel de la prime d'activité préparés | 8 nouveaux tests de validation sur les barèmes, tous réussis ; aucun cas du simulateur (service des communes indisponible) |
 | 2026-10-13 | Création : cinq ménages types salariés, cascade jusqu'au net après impôt | 11 nouveaux tests de validation (impôt, parts, revenu fiscal de référence), tous réussis |

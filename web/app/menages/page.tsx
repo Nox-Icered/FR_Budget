@@ -15,10 +15,25 @@ export default function Menages() {
       </p>
       <p>{texte("menages.intro", { annee: annee_revenus })}</p>
       {menages.map((m) => {
+        // Lignes du salaire pour un ménage qui en a un, de la pension pour un retraité.
+        const salaire: [string, number][] =
+          m.salaire_brut > 0
+            ? [
+                [texte("menages.cout_employeur"), m.cout_employeur],
+                [texte("menages.salaire_brut"), m.salaire_brut],
+                [texte("menages.net_avant_impot"), m.net_avant_impot],
+              ]
+            : [];
+        const pension: [string, number][] =
+          m.pension_brute > 0
+            ? [
+                [texte("menages.pension_brute"), m.pension_brute],
+                [texte("menages.pension_nette"), m.pension_nette],
+              ]
+            : [];
         const lignes: [string, number][] = [
-          [texte("menages.cout_employeur"), m.cout_employeur],
-          [texte("menages.salaire_brut"), m.salaire_brut],
-          [texte("menages.net_avant_impot"), m.net_avant_impot],
+          ...salaire,
+          ...pension,
           [texte("menages.impot_revenu"), -m.impot_revenu],
           ...Object.entries(m.prestations).map(
             ([cle, v]): [string, number] => [texte(`menages.prestations.${cle}`), v],

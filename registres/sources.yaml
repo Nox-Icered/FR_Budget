@@ -617,3 +617,39 @@ sources:
     millesime: rémunération et exonérations en vigueur en septembre 2026
     acces: direct
     consulte_le: 2026-10-13
+
+  - id: drees_retraites_2025_fiche05
+    nom: "Les retraités et les retraites, édition 2025, fiche 5 « Le niveau des pensions »"
+    editeur: DREES
+    url: https://drees.solidarites-sante.gouv.fr/sites/default/files/2025-07/Fiche%2005%20-%20Le%20niveau%20des%20pensions.pdf
+    licence: réutilisation libre des publications de la DREES (mention de la source)
+    millesime: juillet 2025 (pensions de fin 2023)
+    acces: direct
+    consulte_le: 2026-10-13
+
+  - id: dss_instruction_2023_189
+    nom: "Instruction interministérielle n° DSS/3A/2023/189 du 28 novembre 2023 relative à la revalorisation des pensions de vieillesse au 1er janvier 2024"
+    editeur: Direction de la Sécurité sociale (publiée sur legislation.lassuranceretraite.fr)
+    url: https://legislation.lassuranceretraite.fr/Pdf/instruction_ministerielle_2023_189_28112023.pdf
+    licence: document administratif publié au Bulletin officiel
+    millesime: 1er janvier 2024
+    acces: direct
+    consulte_le: 2026-10-13
+
+  - id: dss_instruction_2024_176
+    nom: "Instruction interministérielle n° DSS/SD3A/DB/2024/176 du 13 décembre 2024 relative à la revalorisation des pensions de vieillesse au 1er janvier 2025"
+    editeur: Direction de la Sécurité sociale (publiée sur legislation.lassuranceretraite.fr)
+    url: https://legislation.lassuranceretraite.fr/Pdf/instruction_ministerielle_2024_176_13122024.pdf
+    licence: document administratif publié au Bulletin officiel
+    millesime: 1er janvier 2025
+    acces: direct
+    consulte_le: 2026-10-13
+
+  - id: service_public_f2971
+    nom: "Fiche « CSG et CRDS sur les revenus d'activité et de remplacement » (vérifiée le 1er juin 2026)"
+    editeur: Direction de l'information légale et administrative (Service Public)
+    url: https://www.service-public.gouv.fr/particuliers/vosdroits/F2971
+    licence: etalab-2.0 (mention du pied de page du site)
+    millesime: taux de 2026 (revenu fiscal de référence de 2024)
+    acces: direct
+    consulte_le: 2026-10-13

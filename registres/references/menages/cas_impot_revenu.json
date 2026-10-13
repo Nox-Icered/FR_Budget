@@ -62,6 +62,17 @@
         "0CF": 0,
         "1AJ": 0
       }
+    },
+    {
+      "id": "retraite_seul",
+      "revenus": 2025,
+      "declaration": {
+        "situation": "C",
+        "0DA": "1955",
+        "0CF": 0,
+        "1AJ": 0,
+        "1AS": 20697
+      }
     }
   ]
 }

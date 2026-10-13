@@ -175,6 +175,11 @@ SOURCES_MENAGES = [
     "openfisca_france_176_1_2",
     "modele_social_11_1_0",
     "impots_gouv_simulateur_ir_2026",
+    "service_public_f2918",
+    "drees_retraites_2025_fiche05",
+    "dss_instruction_2023_189",
+    "dss_instruction_2024_176",
+    "service_public_f2971",
 ]
 
 
@@ -195,6 +200,8 @@ def menages_types() -> dict[str, Any]:
                 "cout_employeur": round(c.cout_employeur, 2),
                 "salaire_brut": round(c.salaire_brut, 2),
                 "net_avant_impot": round(c.net_avant_impot, 2),
+                "pension_brute": round(c.pension_brute, 2),
+                "pension_nette": round(c.pension_nette, 2),
                 "impot_revenu": round(c.impot_revenu, 2),
                 "prestations": {k: round(v, 2) for k, v in c.prestations.items()},
                 "net_apres_impot": round(c.net_apres_impot, 2),
@@ -204,7 +211,7 @@ def menages_types() -> dict[str, Any]:
         "unite": "euros par an",
         "annee_revenus": module_menages.ANNEE,
         "sources": SOURCES_MENAGES,
-        "hypotheses": [module_menages.HYPOTHESE_EVOLUTION],
+        "hypotheses": [module_menages.HYPOTHESE_EVOLUTION, module_menages.HYPOTHESE_PENSION],
         "menages": resultat,
     }
 

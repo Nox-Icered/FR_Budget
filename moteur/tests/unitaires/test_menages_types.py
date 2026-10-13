@@ -30,6 +30,12 @@ def test_niveaux_ordonnes_et_rapport_a_l_insee() -> None:
 @pytest.mark.parametrize("identifiant", t.PROFILS)
 def test_cascade_ordonnee(identifiant: str) -> None:
     c = t.cascade_annuelle(identifiant)
+    if t.PROFILS[identifiant].adultes[0].retraite:
+        # Retraité : pas de salaire, pension brute puis nette.
+        assert c.salaire_brut == 0
+        assert c.pension_brute >= c.pension_nette > 0
+        assert c.impot_revenu >= 0
+        return
     # Égalité possible du brut et du net : apprenti exonéré de cotisations, de CSG et de CRDS.
     assert c.cout_employeur >= c.salaire_brut >= c.net_avant_impot > 0
     assert c.impot_revenu >= 0
@@ -71,3 +77,28 @@ def test_declaration_du_couple() -> None:
 def test_case_t_du_parent_isole() -> None:
     assert t.declaration("parent_isole_1_enfant")["0BT"] is True
     assert "0BT" not in t.declaration("celibataire_smic")
+
+
+def test_pension_revalorisee_comme_les_pensions_de_base() -> None:
+    attendu = 1666 * 1.053 * 1.022
+    assert t.pension_brute_mensuelle(2025) == pytest.approx(attendu)
+    assert t.pension_brute_mensuelle(2023) == pytest.approx(1666)
+    with pytest.raises(ValueError):
+        t.pension_brute_mensuelle(2022)
+    with pytest.raises(ValueError):
+        t.pension_brute_mensuelle(2026)
+
+
+def test_csg_du_retraite_independante_de_l_ordre_des_calculs() -> None:
+    variables = [("retraite_nette", "2025-06"), ("csg_deductible_retraite", "2025-06")]
+    variables += [("retraite_imposable", "2025-06"), ("rfr", "2025")]
+    resultats = []
+    for ordre in (variables, list(reversed(variables))):
+        simulation = t._simulation("retraite_seul", 2025)
+        resultats.append({v + p: float(simulation.calculate(v, p)[0]) for v, p in ordre})
+    assert resultats[0] == resultats[1]
+    r = resultats[0]
+    assert r["retraite_imposable2025-06"] == pytest.approx(
+        t.pension_brute_mensuelle(2025) + r["csg_deductible_retraite2025-06"]
+    )
+    assert r["csg_deductible_retraite2025-06"] < 0

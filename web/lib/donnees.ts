@@ -75,6 +75,8 @@ export type MenageType = {
   cout_employeur: number;
   salaire_brut: number;
   net_avant_impot: number;
+  pension_brute: number;
+  pension_nette: number;
   impot_revenu: number;
   prestations: Record<string, number>;
   net_apres_impot: number;

@@ -42,7 +42,7 @@ Code : `moteur/src/fr_budget/entreprises/repartition.py`. Pipelines : `pipelines
 4. **Surtaxe : grandes entreprises au sens de la DGFiP.** La surtaxe vise les entreprises de plus d'un milliard d'euros de chiffre d'affaires ; les « grandes entreprises » de la DGFiP (environ 370 en 2025) en sont proches sans être identiques. Aucune donnée publiée ne permet de la répartir par secteur.
 5. **Nomenclatures séparées.** Les cotisations restent dans les classes de l'Urssaf (tranches de salariés, grands secteurs), l'impôt dans celles de la DGFiP (catégories d'entreprises, secteurs). Aucune table de passage n'est inventée ; les deux tableaux ne s'additionnent pas.
 6. **Années.** Données de l'Urssaf de 2024, de la DGFiP de 2025 (et 2024), appliquées à l'effet national de l'année de référence du simulateur : la structure par classe est supposée stable.
-7. **Licence ODbL.** Les tables dérivées des données de l'Urssaf (`data/processed/entreprises/taille.csv`, `secteur.csv`, `masse_salariale_annuelle.csv`, et l'export `entreprises.json`) sont publiées sous licence ODbL, comme les jeux d'origine.
+7. **Licence ODbL.** Les tables dérivées des données de l'Urssaf (`data/processed/entreprises/taille.csv`, `secteur.csv`, `masse_salariale_annuelle.csv`, et l'export `entreprises.json`) sont publiées sous licence ODbL, comme les jeux d'origine. `LICENCE-DONNEES.md` les exclut de la Licence Ouverte 2.0 et renvoie au texte de l'ODbL (`LICENCE-ODBL.txt`) ; le README le dit aussi. Ce choix est à confirmer par le mainteneur : l'autre voie serait de ne pas publier de table dérivée de l'Urssaf.
 
 ## 6. Validation
 

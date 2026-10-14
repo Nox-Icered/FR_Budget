@@ -734,3 +734,32 @@ sources:
     millesime: "mise à jour du 28 août 2026 (trimestres jusqu'au 2e trimestre 2026)"
     acces: direct
     consulte_le: 2026-10-14
+
+  - id: insee_budget_de_famille_2017
+    nom: "Enquête Budget de famille 2017, « Les dépenses des ménages en 2017 », Insee Résultats, tableaux de la France (dépenses annuelles moyennes par ménage selon le type de ménage et selon le décile de niveau de vie)"
+    editeur: INSEE
+    url: https://www.insee.fr/fr/statistiques/4648335?sommaire=4648339
+    licence: Licence Ouverte 2.0
+    date_publication: 2020-09-15
+    millesime: enquête 2017 (France, y compris DOM)
+    acces: direct
+    consulte_le: 2026-10-14
+
+  - id: sdes_prix_produits_petroliers_2025
+    nom: "Les prix des produits pétroliers poursuivent leur baisse en 2025 avant un rebond début 2026 (données, tableau 3 : prix à la consommation des carburants, 2019-2025)"
+    editeur: Ministère de la Transition écologique, Service des données et études statistiques (SDES), données DGEC
+    url: https://www.statistiques.developpement-durable.gouv.fr/les-prix-des-produits-petroliers-poursuivent-leur-baisse-en-2025-avant-un-rebond-debut-2026
+    licence: Licence Ouverte 2.0
+    date_publication: 2026-06-16
+    millesime: prix moyens annuels 2019-2025, France continentale
+    acces: direct
+    consulte_le: 2026-10-14
+
+  - id: sdes_prix_produits_petroliers_2019
+    nom: "Les prix des produits pétroliers ont connu des fluctuations modérées en 2019 (données, tableau 3 : prix à la consommation des carburants, 2009-2018 et 2019)"
+    editeur: Ministère de la Transition écologique, Service des données et études statistiques (SDES), données DGEC
+    url: https://statistiques.developpement-durable.gouv.fr/les-prix-des-produits-petroliers-ont-connu-des-fluctuations-moderees-en-2019
+    licence: Licence Ouverte 2.0
+    millesime: prix moyens annuels 2009-2018, France métropolitaine
+    acces: direct
+    consulte_le: 2026-10-14

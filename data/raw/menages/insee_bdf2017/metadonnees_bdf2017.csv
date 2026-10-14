@@ -1,0 +1,496 @@
+COD_VAR;LIB_VAR;COD_MOD;LIB_MOD1
+CONSO;INDICATEUR;CONSO;Dépense annuelle moyenne (en euros)
+COEFF_BUDG;INDICATEUR;COEFF_BUDG;Coefficient budgétaire (en %)
+TAUX;INDICATEUR;TAUX;Taux d'équipement (en %)
+NOMENCLATURE;Nomenclature des produits;CTOTALE;TOTAL DE LA CONSOMMATION - CHAMP COMPTABILITE NATIONALE
+NOMENCLATURE;Nomenclature des produits;1;01 - PRODUITS ALIMENTAIRES ET BOISSONS NON-ALCOOLISEES
+NOMENCLATURE;Nomenclature des produits;11;011 - Produits alimentaires (hors café, thé, cacao et boissons)
+NOMENCLATURE;Nomenclature des produits;111;0111 - Pain et céréales, produits à base de céréales (yc pâtisserie, riz, pâtes)
+NOMENCLATURE;Nomenclature des produits;1111;01111 - Riz sous toutes ses formes et produits à base de riz
+NOMENCLATURE;Nomenclature des produits;1112;01112 - Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux
+NOMENCLATURE;Nomenclature des produits;1113;01113 - Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes
+NOMENCLATURE;Nomenclature des produits;1114;01114 - Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza
+NOMENCLATURE;Nomenclature des produits;1115;01115 - Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé
+NOMENCLATURE;Nomenclature des produits;112;0112 - Viande
+NOMENCLATURE;Nomenclature des produits;1121;01121 - Viande bovine fraîche ou surgelée
+NOMENCLATURE;Nomenclature des produits;1122;01122 - Viande porcine fraîche ou surgelée
+NOMENCLATURE;Nomenclature des produits;1123;01123 - Viande ovine ou caprine fraîche ou surgelée
+NOMENCLATURE;Nomenclature des produits;1124;01124 - Viande de volaille fraîche ou surgelée
+NOMENCLATURE;Nomenclature des produits;1125;01125 - Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)
+NOMENCLATURE;Nomenclature des produits;1126;01126 - Conserve de viande, produit de transformation des viandes, plat préparé de viande
+NOMENCLATURE;Nomenclature des produits;1127;01127 - Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied
+NOMENCLATURE;Nomenclature des produits;113;0113 - Poissons et fruits de mer
+NOMENCLATURE;Nomenclature des produits;1130;01130 - Poissons frais
+NOMENCLATURE;Nomenclature des produits;1131;01131 - Poissons surgelés ou congelés (hors poissons panés ou cuisinés)
+NOMENCLATURE;Nomenclature des produits;1132;01132 - Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )
+NOMENCLATURE;Nomenclature des produits;1133;01133 - Poissons et fruits de mer salés, fumés, séchés yc surgelé
+NOMENCLATURE;Nomenclature des produits;1134;01134 - Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer
+NOMENCLATURE;Nomenclature des produits;114;0114 - Lait, fromages et œufs
+NOMENCLATURE;Nomenclature des produits;1145;01145 - Fromage et lait caillé
+NOMENCLATURE;Nomenclature des produits;1147;01147 - Œufs
+NOMENCLATURE;Nomenclature des produits;0114A;0114A - Lait frais, condensé, en poudre
+NOMENCLATURE;Nomenclature des produits;0114B;0114B - Yaourts et produits laitiers
+NOMENCLATURE;Nomenclature des produits;115;0115 - Huiles et graisses
+NOMENCLATURE;Nomenclature des produits;1151;01151 - Beurre
+NOMENCLATURE;Nomenclature des produits;0115A;0115A - Huiles alimentaires
+NOMENCLATURE;Nomenclature des produits;0115B;0115B - Margarine et autres graisses alimentaires
+NOMENCLATURE;Nomenclature des produits;116;0116 - Fruits
+NOMENCLATURE;Nomenclature des produits;1161;01161 - Agrumes frais
+NOMENCLATURE;Nomenclature des produits;1162;01162 - Bananes fraîches
+NOMENCLATURE;Nomenclature des produits;1168;01168 - Fruits séchés
+NOMENCLATURE;Nomenclature des produits;1169;01169 - Fruits au sirop et fruits surgelés
+NOMENCLATURE;Nomenclature des produits;0116A;0116A - Autres fruits frais
+NOMENCLATURE;Nomenclature des produits;117;0117 - Légumes y compris pommes de terre et autres tubercules
+NOMENCLATURE;Nomenclature des produits;1175;01175 - Légumes secs
+NOMENCLATURE;Nomenclature des produits;1176;01176 - Légumes surgelés non cuisinés
+NOMENCLATURE;Nomenclature des produits;1177;01177 - Légumes et plats à base de légume,  en conserve (sans pommes de terre)
+NOMENCLATURE;Nomenclature des produits;1178;01178 - Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)
+NOMENCLATURE;Nomenclature des produits;1179;01179 - Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules
+NOMENCLATURE;Nomenclature des produits;0117A;0117A - Legumes frais
+NOMENCLATURE;Nomenclature des produits;118;0118 - Sucre, confiture, miel, chocolat, glaces et confiserie
+NOMENCLATURE;Nomenclature des produits;1181;01181 - Sucre yc édulcorants
+NOMENCLATURE;Nomenclature des produits;0118A;0118A - Produits à base de sucre et cacao
+NOMENCLATURE;Nomenclature des produits;119;0119 - Autres produits alimentaires
+NOMENCLATURE;Nomenclature des produits;0119Z;0119Z - Autres produits alimentaires
+NOMENCLATURE;Nomenclature des produits;12;012 - Café, thé et boissons non alcoolisées
+NOMENCLATURE;Nomenclature des produits;121;0121 - Café thé cacao
+NOMENCLATURE;Nomenclature des produits;1213;01213 - Cacao et chocolat en poudre
+NOMENCLATURE;Nomenclature des produits;0121A;0121A - Café, thé, plantes à infusion
+NOMENCLATURE;Nomenclature des produits;122;0122 - Eaux minérales, boissons gazeuses, sirops et jus
+NOMENCLATURE;Nomenclature des produits;1221;01221 - Eaux minérales
+NOMENCLATURE;Nomenclature des produits;1222;01222 - Boissons gazeuses
+NOMENCLATURE;Nomenclature des produits;0122A;0122A - Jus de fruits et de légumes
+NOMENCLATURE;Nomenclature des produits;13;013 - Autres dépenses d alimentation
+NOMENCLATURE;Nomenclature des produits;131;0131 - Autres dépenses d alimentation
+NOMENCLATURE;Nomenclature des produits;0131Z;0131Z - Autres dépenses d alimentation
+NOMENCLATURE;Nomenclature des produits;2;02 - BOISSONS ALCOOLISEES ET TABAC
+NOMENCLATURE;Nomenclature des produits;21;021 - Boissons alcoolisées
+NOMENCLATURE;Nomenclature des produits;211;0211 - Spiritueux
+NOMENCLATURE;Nomenclature des produits;2111;02111 - Spiritueux et liqueurs
+NOMENCLATURE;Nomenclature des produits;212;0212 - Vins, apéritifs à base de vin, champagne
+NOMENCLATURE;Nomenclature des produits;0212A;0212A - Vins, apéritifs à base de vin, champagne
+NOMENCLATURE;Nomenclature des produits;213;0213 - Bières
+NOMENCLATURE;Nomenclature des produits;2131;02131 - Bière et boissons à base de bière
+NOMENCLATURE;Nomenclature des produits;22;022 - Tabac et produits connexes
+NOMENCLATURE;Nomenclature des produits;022Z;022Z - Tabac et produits connexes
+NOMENCLATURE;Nomenclature des produits;022ZZ;022ZZ - Tabac et produits connexes
+NOMENCLATURE;Nomenclature des produits;24;024 - Autres dépenses de boissons alcoolisées, tabac et stupéfiants
+NOMENCLATURE;Nomenclature des produits;241;0241 - Autres dépenses de boissons alcoolisées, tabac et stupéfiants
+NOMENCLATURE;Nomenclature des produits;2411;02411 - Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage
+NOMENCLATURE;Nomenclature des produits;3;03 - ARTICLES D’HABILLEMENT ET CHAUSSURES
+NOMENCLATURE;Nomenclature des produits;31;031 - Tissus et vêtements yc services
+NOMENCLATURE;Nomenclature des produits;311;0311 - Tissus d habillement
+NOMENCLATURE;Nomenclature des produits;3111;03111 - Tissus pour vêtements
+NOMENCLATURE;Nomenclature des produits;312;0312 - Vêtements homme, femme, enfant
+NOMENCLATURE;Nomenclature des produits;0312Z;0312Z - Vêtements homme, femme, enfant
+NOMENCLATURE;Nomenclature des produits;313;0313 - Accessoires du vêtement et mercerie
+NOMENCLATURE;Nomenclature des produits;3131;03131 - Accessoires du vêtement et mercerie
+NOMENCLATURE;Nomenclature des produits;314;0314 - Nettoyage, réparation et location de vêtements
+NOMENCLATURE;Nomenclature des produits;3141;03141 - Nettoyage, réparation et location de vêtements
+NOMENCLATURE;Nomenclature des produits;32;032 - Chaussures, yc location et réparation
+NOMENCLATURE;Nomenclature des produits;032Z;032Z - Chaussures, yc location et réparation
+NOMENCLATURE;Nomenclature des produits;032ZZ;032ZZ - Chaussures, yc location et réparation
+NOMENCLATURE;Nomenclature des produits;33;033 - Autres dépenses d habillement
+NOMENCLATURE;Nomenclature des produits;331;0331 - Autres dépenses d habillement
+NOMENCLATURE;Nomenclature des produits;0331Z;0331Z - Autres dépenses d habillement
+NOMENCLATURE;Nomenclature des produits;4;04 - LOGEMENT, EAU, GAZ, ELECTRICITE ET AUTRES COMBUSTIBLES
+NOMENCLATURE;Nomenclature des produits;41;041 - Loyers d habitation (nets des aides au logement) pour la résidence principale
+NOMENCLATURE;Nomenclature des produits;411;0411 - Loyers d habitation (nets des aides au logement) pour la résidence principale
+NOMENCLATURE;Nomenclature des produits;4111;04111 - Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale
+NOMENCLATURE;Nomenclature des produits;412;0412 - Loyers (hors charges ou avec charges non isolables) des locataires autres résidences
+NOMENCLATURE;Nomenclature des produits;4121;04121 - Loyers (hors charges ou avec charges non isolables) des locataires autres résidences
+NOMENCLATURE;Nomenclature des produits;43;043 - Travaux courants d’entretien et de réparation du logement  (hors gros travaux)
+NOMENCLATURE;Nomenclature des produits;431;0431 - Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux)
+NOMENCLATURE;Nomenclature des produits;0431Z;0431Z - Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux)
+NOMENCLATURE;Nomenclature des produits;44;044 - Autres services relatifs au logement (ordures, assainissement, eau, charges)
+NOMENCLATURE;Nomenclature des produits;443;0443 - Factures d’eau
+NOMENCLATURE;Nomenclature des produits;4431;04431 - Factures d’eau résidence principale, autre logement, dépendance, terrain
+NOMENCLATURE;Nomenclature des produits;444;0444 - Charges collectives
+NOMENCLATURE;Nomenclature des produits;4441;04441 - Charges collectives relatives au logement (payées isolément du loyer ou crédit)
+NOMENCLATURE;Nomenclature des produits;45;045 - Electricité, gaz et autres combustibles
+NOMENCLATURE;Nomenclature des produits;450;0450 - Electricité+gaz (non dissociable)
+NOMENCLATURE;Nomenclature des produits;4500;04500 - Facture électricité + gaz (non dissociables)
+NOMENCLATURE;Nomenclature des produits;451;0451 - Electricité
+NOMENCLATURE;Nomenclature des produits;4511;04511 - Facture d électricité résidence principale, autre logement, garage, dépendance
+NOMENCLATURE;Nomenclature des produits;452;0452 - Gaz et combustibles liquéfiés (gaz de ville, butane...)
+NOMENCLATURE;Nomenclature des produits;0452Z;0452Z - Gaz et combustibles liquéfiés (gaz de ville, butane...)
+NOMENCLATURE;Nomenclature des produits;453;0453 - Combustibles liquides
+NOMENCLATURE;Nomenclature des produits;0453Z;0453Z - Combustibles liquides
+NOMENCLATURE;Nomenclature des produits;045A;045A - Combustibles solides
+NOMENCLATURE;Nomenclature des produits;045AZ;045AZ - Combustibles solides
+NOMENCLATURE;Nomenclature des produits;46;046 - Autres dépenses d’habitation
+NOMENCLATURE;Nomenclature des produits;461;0461 - Autres dépenses d’habitation
+NOMENCLATURE;Nomenclature des produits;4611;04611 - Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage)
+NOMENCLATURE;Nomenclature des produits;5;05 - MEUBLES, ARTICLES DE MENAGE ET ENTRETIEN COURANT DE LA MAISON
+NOMENCLATURE;Nomenclature des produits;51;051 - Meubles, articles d’ameublement et décoration, tapis et autres revêtements de sol, réparation de ces articles
+NOMENCLATURE;Nomenclature des produits;511;0511 - Meubles, articles d’ameublement et de décoration
+NOMENCLATURE;Nomenclature des produits;0511Z;0511Z - Meubles, articles d’ameublement et de décoration
+NOMENCLATURE;Nomenclature des produits;051A;051A - Tapis et autres revêtements, pose et réparation
+NOMENCLATURE;Nomenclature des produits;051AZ;051AZ - Tapis et autres revêtements, pose et réparation
+NOMENCLATURE;Nomenclature des produits;52;052 - Articles de ménage en textile (literie, linge de maison, autre textile d ameublement)
+NOMENCLATURE;Nomenclature des produits;521;0521 - Articles de literie et autres articles de ménage en textile
+NOMENCLATURE;Nomenclature des produits;0521Z;0521Z - Articles de literie et autres articles de ménage en textile
+NOMENCLATURE;Nomenclature des produits;53;053 - Gros appareils électroménagers yc de chauffage et réparation de ces appareils
+NOMENCLATURE;Nomenclature des produits;531;0531 - Gros appareils ménagers électriques
+NOMENCLATURE;Nomenclature des produits;0531Z;0531Z - Gros appareils ménagers électriques
+NOMENCLATURE;Nomenclature des produits;532;0532 - Petit électroménager et installation de ces appareils
+NOMENCLATURE;Nomenclature des produits;5321;05321 - Petit électroménager
+NOMENCLATURE;Nomenclature des produits;54;054 - Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette
+NOMENCLATURE;Nomenclature des produits;541;0541 - Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation
+NOMENCLATURE;Nomenclature des produits;0541Z;0541Z - Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation
+NOMENCLATURE;Nomenclature des produits;55;055 - Outillage pour la maison et le jardin, outillage SAI
+NOMENCLATURE;Nomenclature des produits;551;0551 - Gros outillage de bricolage, de jardinage et leur réparation
+NOMENCLATURE;Nomenclature des produits;0551Z;0551Z - Gros outillage de bricolage, de jardinage et leur réparation
+NOMENCLATURE;Nomenclature des produits;552;0552 - Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs
+NOMENCLATURE;Nomenclature des produits;0552Z;0552Z - Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs
+NOMENCLATURE;Nomenclature des produits;56;056 - Biens et services pour l’entretien courant du logement (produits et articles d entretien, services domestiques ou d entretien pour le logement)
+NOMENCLATURE;Nomenclature des produits;561;0561 - Articles de ménage non durables
+NOMENCLATURE;Nomenclature des produits;0561Z;0561Z - Articles de ménage non durables
+NOMENCLATURE;Nomenclature des produits;562;0562 - Services domestiques et autres services pour le logement
+NOMENCLATURE;Nomenclature des produits;0562Z;0562Z - Services domestiques et autres services pour le logement
+NOMENCLATURE;Nomenclature des produits;57;057 - Autres dépenses en équipement
+NOMENCLATURE;Nomenclature des produits;571;0571 - Autres dépenses en équipement
+NOMENCLATURE;Nomenclature des produits;0571Z;0571Z - Autres dépenses en équipement
+NOMENCLATURE;Nomenclature des produits;6;06 - SANTE
+NOMENCLATURE;Nomenclature des produits;61;061 - Produits et appareils thérapeutiques, matériel médical
+NOMENCLATURE;Nomenclature des produits;611;0611 - Produits pharmaceutiques, appareils et matériels thérapeutiques
+NOMENCLATURE;Nomenclature des produits;0611Z;0611Z - Produits pharmaceutiques, appareils et matériels thérapeutiques
+NOMENCLATURE;Nomenclature des produits;62;062 - Services de consultation externe
+NOMENCLATURE;Nomenclature des produits;621;0621 - Services médicaux, dépenses médicales SAI
+NOMENCLATURE;Nomenclature des produits;6211;06211 - Consultations des médecins généralistes ou spécialistes hors hospitalisation
+NOMENCLATURE;Nomenclature des produits;622;0622 - Soins dentaires
+NOMENCLATURE;Nomenclature des produits;6221;06221 - Dentiste, orthodontie
+NOMENCLATURE;Nomenclature des produits;623;0623 - Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)
+NOMENCLATURE;Nomenclature des produits;0623Z;0623Z - Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)
+NOMENCLATURE;Nomenclature des produits;63;063 - Services et soins hospitaliers
+NOMENCLATURE;Nomenclature des produits;631;0631 - Services et soins hospitaliers
+NOMENCLATURE;Nomenclature des produits;6311;06311 - Services et soins hospitaliers
+NOMENCLATURE;Nomenclature des produits;64;064 - Autres dépenses de santé
+NOMENCLATURE;Nomenclature des produits;641;0641 - Autres dépenses de santé
+NOMENCLATURE;Nomenclature des produits;0641Z;0641Z - Autres dépenses de santé
+NOMENCLATURE;Nomenclature des produits;7;07 - TRANSPORTS
+NOMENCLATURE;Nomenclature des produits;71;071 - Achats de véhicules
+NOMENCLATURE;Nomenclature des produits;711;0711 - Achats d automobiles
+NOMENCLATURE;Nomenclature des produits;0711Z;0711Z - Achats d automobiles
+NOMENCLATURE;Nomenclature des produits;712;0712 - Achats de motocycles
+NOMENCLATURE;Nomenclature des produits;7121;07121 - Achats de motocycles neufs et occasion
+NOMENCLATURE;Nomenclature des produits;713;0713 - Achats de cycles
+NOMENCLATURE;Nomenclature des produits;7131;07131 - Achats de cycles neufs et occasion
+NOMENCLATURE;Nomenclature des produits;72;072 - Frais d utilisation de véhicules personnels (entretien, essence, garagiste, parking, péage)
+NOMENCLATURE;Nomenclature des produits;721;0721 - Pièces détachées et accessoires pour les véhicules personnels (hors ceux installés par un professionnel)
+NOMENCLATURE;Nomenclature des produits;7211;07211 - Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo
+NOMENCLATURE;Nomenclature des produits;722;0722 - Carburants et lubrifiants, antigel…
+NOMENCLATURE;Nomenclature des produits;7221;07221 - Carburants, électricité, huiles, lubrifiants…
+NOMENCLATURE;Nomenclature des produits;723;0723 - Services d’entretien et réparation des véhicules personnels
+NOMENCLATURE;Nomenclature des produits;7231;07231 - Réparations, dépannages, révisions, lavage, entretien et contrôle technique
+NOMENCLATURE;Nomenclature des produits;724;0724 - Autres services liés à l’utilisation de véhicules personnels
+NOMENCLATURE;Nomenclature des produits;0724Z;0724Z - Autres services liés à l’utilisation de véhicules personnels
+NOMENCLATURE;Nomenclature des produits;73;073 - Services de transport
+NOMENCLATURE;Nomenclature des produits;736;0736 - Autres services de transport
+NOMENCLATURE;Nomenclature des produits;7361;07361 - Autres services de transport (yc déménagement)
+NOMENCLATURE;Nomenclature des produits;073Z;073Z - Services de transport
+NOMENCLATURE;Nomenclature des produits;073ZZ;073ZZ - Services de transport
+NOMENCLATURE;Nomenclature des produits;74;074 - Autres dépenses de transport
+NOMENCLATURE;Nomenclature des produits;741;0741 - Autres dépenses de transport
+NOMENCLATURE;Nomenclature des produits;0741Z;0741Z - Autres dépenses de transport
+NOMENCLATURE;Nomenclature des produits;8;08 - COMMUNICATIONS
+NOMENCLATURE;Nomenclature des produits;81;081 - Communications et services postaux
+NOMENCLATURE;Nomenclature des produits;811;0811 - Services postaux
+NOMENCLATURE;Nomenclature des produits;8111;08111 - Services postaux (yc timbres, enveloppes)
+NOMENCLATURE;Nomenclature des produits;812;0812 - Achats de téléphones et télécopieurs
+NOMENCLATURE;Nomenclature des produits;8121;08121 - Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires
+NOMENCLATURE;Nomenclature des produits;813;0813 - Services de téléphone, télégraphe et télécopie, internet, recharges téléphoniques
+NOMENCLATURE;Nomenclature des produits;8131;08131 - Services de téléphone et fax, internet, recharges téléphoniques
+NOMENCLATURE;Nomenclature des produits;9;09 - LOISIRS ET CULTURE
+NOMENCLATURE;Nomenclature des produits;91;091 - Equipements audiovisuels, photographiques et informatiques
+NOMENCLATURE;Nomenclature des produits;911;0911 - Appareils de réception, d’enregistrement et de reproduction, du son et de l’image
+NOMENCLATURE;Nomenclature des produits;0911Z;0911Z - Appareils de réception, d’enregistrement et de reproduction, du son et de l’image
+NOMENCLATURE;Nomenclature des produits;913;0913 - Equipement informatique
+NOMENCLATURE;Nomenclature des produits;9131;09131 - Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables
+NOMENCLATURE;Nomenclature des produits;914;0914 - Supports d enregistrement pour l image et le son
+NOMENCLATURE;Nomenclature des produits;9141;09141 - Supports vierges ou enregistrés pour l’image et le son (yc téléchargement)
+NOMENCLATURE;Nomenclature des produits;091A;091A - Equipement photo, cinéma, optique
+NOMENCLATURE;Nomenclature des produits;091AZ;091AZ - Equipement photo, cinéma, optique
+NOMENCLATURE;Nomenclature des produits;92;092 - Autres biens durables importants du domaine des loisirs et de la culture
+NOMENCLATURE;Nomenclature des produits;092Z;092Z - Autres biens durables importants du domaine des loisirs et de la culture
+NOMENCLATURE;Nomenclature des produits;092ZZ;092ZZ - Autres biens durables importants du domaine des loisirs et de la culture
+NOMENCLATURE;Nomenclature des produits;93;093 - Autres articles et équipements de loisirs, de jardinage et animaux d’agrément
+NOMENCLATURE;Nomenclature des produits;931;0931 - Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air
+NOMENCLATURE;Nomenclature des produits;0931Z;0931Z - Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air
+NOMENCLATURE;Nomenclature des produits;932;0932 - Horticulture, accessoires et frais de livraison
+NOMENCLATURE;Nomenclature des produits;9321;09321 - Horticulture, accessoires et frais de livraison
+NOMENCLATURE;Nomenclature des produits;093A;093A - Animaux d’agrément
+NOMENCLATURE;Nomenclature des produits;093AZ;093AZ - Animaux d’agrément
+NOMENCLATURE;Nomenclature des produits;94;094 - Services sportifs, récréatifs et culturels
+NOMENCLATURE;Nomenclature des produits;941;0941 - Services sportifs et récréatifs
+NOMENCLATURE;Nomenclature des produits;9411;09411 - Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )
+NOMENCLATURE;Nomenclature des produits;942;0942 - Services culturels
+NOMENCLATURE;Nomenclature des produits;0942Z;0942Z - Services culturels
+NOMENCLATURE;Nomenclature des produits;943;0943 - jeux de hasard (loto, tiercé …)
+NOMENCLATURE;Nomenclature des produits;9431;09431 - jeux de hasard (loto, tiercé …)
+NOMENCLATURE;Nomenclature des produits;95;095 - Edition, presse, papeterie
+NOMENCLATURE;Nomenclature des produits;951;0951 - Livres
+NOMENCLATURE;Nomenclature des produits;9511;09511 - Livres yc e-books
+NOMENCLATURE;Nomenclature des produits;952;0952 - Journaux et périodiques
+NOMENCLATURE;Nomenclature des produits;9521;09521 - Journaux et périodiques yc par abonnement
+NOMENCLATURE;Nomenclature des produits;953;0953 - Imprimés divers
+NOMENCLATURE;Nomenclature des produits;9531;09531 - Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)
+NOMENCLATURE;Nomenclature des produits;954;0954 - Articles de papeterie et de dessin
+NOMENCLATURE;Nomenclature des produits;9541;09541 - Articles de papeterie et de dessin (yc toner pour imprimante)
+NOMENCLATURE;Nomenclature des produits;96;096 - Voyages à forfait
+NOMENCLATURE;Nomenclature des produits;961;0961 - Voyages à forfait
+NOMENCLATURE;Nomenclature des produits;9611;09611 - Voyages à forfait, week-end, excursions… yc voyage scolaire
+NOMENCLATURE;Nomenclature des produits;97;097 - Autres dépenses de loisirs
+NOMENCLATURE;Nomenclature des produits;971;0971 - Autres dépenses de loisirs
+NOMENCLATURE;Nomenclature des produits;0971Z;0971Z - Autres dépenses de loisirs
+NOMENCLATURE;Nomenclature des produits;10;10 - ENSEIGNEMENT
+NOMENCLATURE;Nomenclature des produits;101;101 - Frais d enseignement, services éducatifs
+NOMENCLATURE;Nomenclature des produits;1011;1011 - Enseignement maternel et primaire
+NOMENCLATURE;Nomenclature des produits;10111;10111 - Enseignement maternel et primaire (scolarité et cours d’alphabétisation)
+NOMENCLATURE;Nomenclature des produits;1012;1012 - Enseignement secondaire
+NOMENCLATURE;Nomenclature des produits;10121;10121 - Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire)
+NOMENCLATURE;Nomenclature des produits;1013;1013 - Enseignement supérieur
+NOMENCLATURE;Nomenclature des produits;10131;10131 - Enseignement supérieur et frais d’inscription aux concours des grandes écoles
+NOMENCLATURE;Nomenclature des produits;1014;1014 - Enseignement ne correspondant à aucun niveau particulier
+NOMENCLATURE;Nomenclature des produits;10141;10141 - Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)
+NOMENCLATURE;Nomenclature des produits;1015;1015 - Autres dépenses d’enseignement
+NOMENCLATURE;Nomenclature des produits;1015Z;1015Z - Autres dépenses d’enseignement
+NOMENCLATURE;Nomenclature des produits;11;11 - RESTAURATION ET HÔTELS
+NOMENCLATURE;Nomenclature des produits;111;111 - Restauration
+NOMENCLATURE;Nomenclature des produits;1111;1111 - Restaurants et cafés
+NOMENCLATURE;Nomenclature des produits;11111;11111 - Repas pris dans un restaurant
+NOMENCLATURE;Nomenclature des produits;11112;11112 - Repas pris dans un café, bars ou assimilé
+NOMENCLATURE;Nomenclature des produits;1112;1112 - Cantines
+NOMENCLATURE;Nomenclature des produits;11121;11121 - Cantines scolaire et professionnelle
+NOMENCLATURE;Nomenclature des produits;1113;1113 - Autres dépenses de restauration
+NOMENCLATURE;Nomenclature des produits;1113Z;1113Z - Autres dépenses de restauration
+NOMENCLATURE;Nomenclature des produits;112;112 - Services d hébergement
+NOMENCLATURE;Nomenclature des produits;1121;1121 - Services d hébergement
+NOMENCLATURE;Nomenclature des produits;11211;11211 - Services d hébergement
+NOMENCLATURE;Nomenclature des produits;12;12 - BIENS ET SERVICES DIVERS
+NOMENCLATURE;Nomenclature des produits;121;121 - Services et produits de soins personnels
+NOMENCLATURE;Nomenclature des produits;1211;1211 - Salons de coiffure et esthétique corporelle
+NOMENCLATURE;Nomenclature des produits;12111;12111 - Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)
+NOMENCLATURE;Nomenclature des produits;1212;1212 - Appareils, articles et produits pour les soins personnels
+NOMENCLATURE;Nomenclature des produits;1212Z;1212Z - Appareils, articles et produits pour les soins personnels
+NOMENCLATURE;Nomenclature des produits;123;123 - Effets personnels
+NOMENCLATURE;Nomenclature des produits;1231;1231 - Articles de bijouterie de joaillerie et d’horlogerie
+NOMENCLATURE;Nomenclature des produits;12311;12311 - Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)
+NOMENCLATURE;Nomenclature des produits;1232;1232 - Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires
+NOMENCLATURE;Nomenclature des produits;1232Z;1232Z - Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires
+NOMENCLATURE;Nomenclature des produits;1233;1233 - Autres biens et services : cadeau  offert (à des personnes extérieures au ménage)
+NOMENCLATURE;Nomenclature des produits;12331;12331 - Autres biens et services offerts  (à des personnes extérieures au ménage)
+NOMENCLATURE;Nomenclature des produits;124;124 - Protection sociale
+NOMENCLATURE;Nomenclature des produits;1241;1241 - Services de protection sociale
+NOMENCLATURE;Nomenclature des produits;12411;12411 - Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)
+NOMENCLATURE;Nomenclature des produits;125;125 - Assurances
+NOMENCLATURE;Nomenclature des produits;1251;1251 - Assurances vie, décès
+NOMENCLATURE;Nomenclature des produits;12511;12511 - Assurances vie, décès
+NOMENCLATURE;Nomenclature des produits;1252;1252 - Assurances liées au logement
+NOMENCLATURE;Nomenclature des produits;12521;12521 - Assurances liées au logement
+NOMENCLATURE;Nomenclature des produits;1253;1253 - Assurances liées à la santé
+NOMENCLATURE;Nomenclature des produits;12531;12531 - Assurances liées à la santé
+NOMENCLATURE;Nomenclature des produits;1254;1254 - Assurances liées aux transports
+NOMENCLATURE;Nomenclature des produits;12541;12541 - Assurances liées aux transports (yc assurance voyage)
+NOMENCLATURE;Nomenclature des produits;1255;1255 - Autres assurances
+NOMENCLATURE;Nomenclature des produits;12551;12551 - Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)
+NOMENCLATURE;Nomenclature des produits;126;126 - Services financiers
+NOMENCLATURE;Nomenclature des produits;1261;1261 - Services financiers
+NOMENCLATURE;Nomenclature des produits;12611;12611 - Services financiers
+NOMENCLATURE;Nomenclature des produits;127;127 - Autres services
+NOMENCLATURE;Nomenclature des produits;1271;1271 - Autres services
+NOMENCLATURE;Nomenclature des produits;1271Z;1271Z - Autres services
+NOMENCLATURE;Nomenclature des produits;128;128 - Autres dépenses de cérémonie
+NOMENCLATURE;Nomenclature des produits;1281;1281 - Autres dépenses occasionnées par une cérémonie
+NOMENCLATURE;Nomenclature des produits;12811;12811 - Autres dépenses occasionnées par une cérémonie
+NOMENCLATURE;Nomenclature des produits;129;129 - Dépenses SAI des personnes hors domicile
+NOMENCLATURE;Nomenclature des produits;1291;1291 - Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine
+NOMENCLATURE;Nomenclature des produits;12911;12911 - Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine
+NOMENCLATURE;Nomenclature des produits;13;13 - HORS CHAMP DE LA CONSOMMATION (IMPOTS ET TAXES, GROS TRAVAUX, REMBOURSEMENT PRET, CADEAUX)
+NOMENCLATURE;Nomenclature des produits;131;131 - Impôts et taxes
+NOMENCLATURE;Nomenclature des produits;1314;1314 - Impôts sur le revenu
+NOMENCLATURE;Nomenclature des produits;13141;13141 - Impôts sur le revenu
+NOMENCLATURE;Nomenclature des produits;1315;1315 - Taxes automobiles
+NOMENCLATURE;Nomenclature des produits;13151;13151 - Taxes automobiles (cartes grises, contraventions)
+NOMENCLATURE;Nomenclature des produits;1316;1316 - Autres impôts et taxes
+NOMENCLATURE;Nomenclature des produits;13161;13161 - Autres impôts et taxes (taxe foncière pour jardin ou autre, amendes, passeport), impôt payé à l’étranger
+NOMENCLATURE;Nomenclature des produits;131A;131A - Impôts et taxes du logement
+NOMENCLATURE;Nomenclature des produits;131AZ;131AZ - Impôts et taxes du logement
+NOMENCLATURE;Nomenclature des produits;132;132 - Remboursements de prêts immobiliers
+NOMENCLATURE;Nomenclature des produits;132Z;132Z - Remboursements de prêts immobiliers
+NOMENCLATURE;Nomenclature des produits;132ZZ;132ZZ - Remboursements de prêts immobiliers
+NOMENCLATURE;Nomenclature des produits;133;133 - Aides et dons en argent offerts par le ménage et pensions
+NOMENCLATURE;Nomenclature des produits;1331;1331 - Aides et dons en argent offerts par le ménage et pensions
+NOMENCLATURE;Nomenclature des produits;13311;13311 - Aides et dons (occasionnels ou réguliers) en argent offerts par le ménage et pensions alimentaires
+NOMENCLATURE;Nomenclature des produits;134;134 - Gros travaux dans le logement
+NOMENCLATURE;Nomenclature des produits;134Z;134Z - Gros travaux dans le logement
+NOMENCLATURE;Nomenclature des produits;134ZZ;134ZZ - Gros travaux dans le logement
+NOMENCLATURE;Nomenclature des produits;135;135 - Remboursements de crédits à la consommation
+NOMENCLATURE;Nomenclature des produits;1351;1351 - Remboursements de crédits à la consommation
+NOMENCLATURE;Nomenclature des produits;13511;13511 - Remboursements de crédits à la consommation (voiture, gros travaux, biens durables)
+NOMENCLATURE2;Nomenclature agrégée;CTOTALE;CONSOMMATION TOTALE - CHAMP COMPTABILITE NATIONALE
+NOMENCLATURE2;Nomenclature agrégée;1;01 - PRODUITS ALIMENTAIRES ET BOISSONS NON-ALCOOLISEES
+NOMENCLATURE2;Nomenclature agrégée;11;011 - Produits alimentaires (hors café, thé, cacao et boissons)
+NOMENCLATURE2;Nomenclature agrégée;12;012 - Café, thé et boissons non alcoolisées
+NOMENCLATURE2;Nomenclature agrégée;13;013 - Autres dépenses d alimentation
+NOMENCLATURE2;Nomenclature agrégée;2;02 - BOISSONS ALCOOLISEES ET TABAC
+NOMENCLATURE2;Nomenclature agrégée;21;021 - Boissons alcoolisées
+NOMENCLATURE2;Nomenclature agrégée;22;022 - Tabac et produits connexes
+NOMENCLATURE2;Nomenclature agrégée;24;024 - Autres dépenses de boissons alcoolisées, tabac et stupéfiants
+NOMENCLATURE2;Nomenclature agrégée;3;03 - ARTICLES D’HABILLEMENT ET CHAUSSURES
+NOMENCLATURE2;Nomenclature agrégée;31;031 - Tissus et vêtements yc services
+NOMENCLATURE2;Nomenclature agrégée;32;032 - Chaussures, yc location et réparation
+NOMENCLATURE2;Nomenclature agrégée;33;033 - Autres dépenses d habillement
+NOMENCLATURE2;Nomenclature agrégée;4;04 - LOGEMENT, EAU, GAZ, ELECTRICITE ET AUTRES COMBUSTIBLES
+NOMENCLATURE2;Nomenclature agrégée;41;041 - Loyers d habitation (nets des aides au logement) pour la résidence principale
+NOMENCLATURE2;Nomenclature agrégée;43;043 - Travaux courants d’entretien et de réparation du logement  (hors gros travaux)
+NOMENCLATURE2;Nomenclature agrégée;44;044 - Autres services relatifs au logement (ordures, assainissement, eau, charges)
+NOMENCLATURE2;Nomenclature agrégée;45;045 - Electricité, gaz et autres combustibles
+NOMENCLATURE2;Nomenclature agrégée;46;046 - Autres dépenses d’habitation
+NOMENCLATURE2;Nomenclature agrégée;5;05 - MEUBLES, ARTICLES DE MENAGE ET ENTRETIEN COURANT DE LA MAISON
+NOMENCLATURE2;Nomenclature agrégée;51;051 - Meubles, articles d’ameublement et décoration, tapis et autres revêtements de sol, réparation de ces articles
+NOMENCLATURE2;Nomenclature agrégée;52;052 - Articles de ménage en textile (literie, linge de maison, autre textile d ameublement)
+NOMENCLATURE2;Nomenclature agrégée;53;053 - Gros appareils électroménagers yc de chauffage et réparation de ces appareils
+NOMENCLATURE2;Nomenclature agrégée;54;054 - Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette
+NOMENCLATURE2;Nomenclature agrégée;55;055 - Outillage pour la maison et le jardin, outillage SAI
+NOMENCLATURE2;Nomenclature agrégée;56;056 - Biens et services pour l’entretien courant du logement (produits et articles d entretien, services domestiques ou d entretien pour le logement)
+NOMENCLATURE2;Nomenclature agrégée;57;057 - Autres dépenses en équipement
+NOMENCLATURE2;Nomenclature agrégée;6;06 - SANTE
+NOMENCLATURE2;Nomenclature agrégée;61;061 - Produits et appareils thérapeutiques, matériel médical
+NOMENCLATURE2;Nomenclature agrégée;62;062 - Services de consultation externe
+NOMENCLATURE2;Nomenclature agrégée;63;063 - Services et soins hospitaliers
+NOMENCLATURE2;Nomenclature agrégée;64;064 - Autres dépenses de santé
+NOMENCLATURE2;Nomenclature agrégée;7;07 - TRANSPORTS
+NOMENCLATURE2;Nomenclature agrégée;71;071 - Achats de véhicules
+NOMENCLATURE2;Nomenclature agrégée;72;072 - Frais d utilisation de véhicules personnels (entretien, essence, garagiste, parking, péage)
+NOMENCLATURE2;Nomenclature agrégée;73;073 - Services de transport
+NOMENCLATURE2;Nomenclature agrégée;74;074 - Autres dépenses de transport
+NOMENCLATURE2;Nomenclature agrégée;8;08 - COMMUNICATIONS
+NOMENCLATURE2;Nomenclature agrégée;81;081 - Communications et services postaux
+NOMENCLATURE2;Nomenclature agrégée;9;09 - LOISIRS ET CULTURE
+NOMENCLATURE2;Nomenclature agrégée;91;091 - Equipements audiovisuels, photographiques et informatiques
+NOMENCLATURE2;Nomenclature agrégée;92;092 - Autres biens durables importants du domaine des loisirs et de la culture
+NOMENCLATURE2;Nomenclature agrégée;93;093 - Autres articles et équipements de loisirs, de jardinage et animaux d’agrément
+NOMENCLATURE2;Nomenclature agrégée;94;094 - Services sportifs, récréatifs et culturels
+NOMENCLATURE2;Nomenclature agrégée;95;095 - Edition, presse, papeterie
+NOMENCLATURE2;Nomenclature agrégée;96;096 - Voyages à forfait
+NOMENCLATURE2;Nomenclature agrégée;97;097 - Autres dépenses de loisirs
+NOMENCLATURE2;Nomenclature agrégée;10;10 - ENSEIGNEMENT
+NOMENCLATURE2;Nomenclature agrégée;101;101 - Frais d enseignement, services éducatifs
+NOMENCLATURE2;Nomenclature agrégée;11;11 - RESTAURATION ET HÔTELS
+NOMENCLATURE2;Nomenclature agrégée;111;111 - Restauration
+NOMENCLATURE2;Nomenclature agrégée;112;112 - Services d hébergement
+NOMENCLATURE2;Nomenclature agrégée;12;12 - BIENS ET SERVICES DIVERS
+NOMENCLATURE2;Nomenclature agrégée;121;121 - Services et produits de soins personnels
+NOMENCLATURE2;Nomenclature agrégée;123;123 - Effets personnels
+NOMENCLATURE2;Nomenclature agrégée;124;124 - Protection sociale
+NOMENCLATURE2;Nomenclature agrégée;125;125 - Assurances
+NOMENCLATURE2;Nomenclature agrégée;126;126 - Services financiers
+NOMENCLATURE2;Nomenclature agrégée;127;127 - Autres services
+NOMENCLATURE2;Nomenclature agrégée;128;128 - Autres dépenses de cérémonie
+NOMENCLATURE2;Nomenclature agrégée;129;129 - Dépenses SAI des personnes hors domicile
+ZEAT;Zone d'étude et d'aménagement du territoire;TOT;Ensemble
+ZEAT;Zone d'étude et d'aménagement du territoire;0;DOM (ensemble)
+ZEAT;Zone d'étude et d'aménagement du territoire;1;REGION PARISIENNE
+ZEAT;Zone d'étude et d'aménagement du territoire;2;BASSIN PARISIEN
+ZEAT;Zone d'étude et d'aménagement du territoire;3;NORD
+ZEAT;Zone d'étude et d'aménagement du territoire;4;EST
+ZEAT;Zone d'étude et d'aménagement du territoire;5;OUEST
+ZEAT;Zone d'étude et d'aménagement du territoire;7;SUD OUEST
+ZEAT;Zone d'étude et d'aménagement du territoire;8;CENTRE EST
+ZEAT;Zone d'étude et d'aménagement du territoire;9;MEDITERRANEE
+ZEAT2;Zone d'étude et d'aménagement du territoire;TOT;Ensemble
+ZEAT2;Zone d'étude et d'aménagement du territoire;1;REGION PARISIENNE
+ZEAT2;Zone d'étude et d'aménagement du territoire;2;BASSIN PARISIEN
+ZEAT2;Zone d'étude et d'aménagement du territoire;3;NORD
+ZEAT2;Zone d'étude et d'aménagement du territoire;4;EST
+ZEAT2;Zone d'étude et d'aménagement du territoire;5;OUEST
+ZEAT2;Zone d'étude et d'aménagement du territoire;7;SUD OUEST
+ZEAT2;Zone d'étude et d'aménagement du territoire;8;CENTRE EST
+ZEAT2;Zone d'étude et d'aménagement du territoire;9;MEDITERRANEE
+AGPR;Âge de la personne de référence;TOT;Ensemble
+AGPR;Âge de la personne de référence;1;Moins de 25 ans
+AGPR;Âge de la personne de référence;2;De 25 à 34 ans
+AGPR;Âge de la personne de référence;3;De 35 à 44 ans
+AGPR;Âge de la personne de référence;4;De 45 à 54 ans
+AGPR;Âge de la personne de référence;5;De 55 à 64 ans
+AGPR;Âge de la personne de référence;6;De 65 à 74 ans
+AGPR;Âge de la personne de référence;7;75 ans et plus
+CSPR;Catégorie socioprofessionnelle de la personne de référence;TOT;Ensemble
+CSPR;Catégorie socioprofessionnelle de la personne de référence;1;Agriculteurs
+CSPR;Catégorie socioprofessionnelle de la personne de référence;2;Artisans, commerçants et chefs d entreprise
+CSPR;Catégorie socioprofessionnelle de la personne de référence;3;Cadres
+CSPR;Catégorie socioprofessionnelle de la personne de référence;4;Professions intermédiaires
+CSPR;Catégorie socioprofessionnelle de la personne de référence;5;Employés
+CSPR;Catégorie socioprofessionnelle de la personne de référence;6;Ouvriers
+CSPR;Catégorie socioprofessionnelle de la personne de référence;7;Retraités
+CSPR;Catégorie socioprofessionnelle de la personne de référence;8;Autres inactifs
+STRATE;Catégorie de commune de résidence;TOT;Ensemble
+STRATE;Catégorie de commune de résidence;0;Rural
+STRATE;Catégorie de commune de résidence;1;Petites villes (- de 20 000 hab.)
+STRATE;Catégorie de commune de résidence;2;Villes moyennes (de 20 000 à 100 000 hab.)
+STRATE;Catégorie de commune de résidence;3;Grandes villes (+ de 100 000 hab.)
+STRATE;Catégorie de commune de résidence;4;Complexe agglo Paris
+TYPMEN;Type de ménage;TOT;Ensemble
+TYPMEN;Type de ménage;1;Personnes seules
+TYPMEN;Type de ménage;2;Familles monoparentales
+TYPMEN;Type de ménage;3;Couples sans enfant
+TYPMEN;Type de ménage;4;Couples avec enfants
+TYPMEN;Type de ménage;5;Autres ménages
+DECUC;Niveau de vie par décile;TOT;Ensemble
+DECUC;Niveau de vie par décile;1;Décile 1
+DECUC;Niveau de vie par décile;2;Décile 2
+DECUC;Niveau de vie par décile;3;Décile 3
+DECUC;Niveau de vie par décile;4;Décile 4
+DECUC;Niveau de vie par décile;5;Décile 5
+DECUC;Niveau de vie par décile;6;Décile 6
+DECUC;Niveau de vie par décile;7;Décile 7
+DECUC;Niveau de vie par décile;8;Décile 8
+DECUC;Niveau de vie par décile;9;Décile 9
+DECUC;Niveau de vie par décile;10;Décile 10
+STATUT;Statut d'occupation du logement selon le niveau de vie par quintile;TOT;Ensemble
+STATUT;Statut d'occupation du logement selon le niveau de vie par quintile;P;Propriétaires Ensemble
+STATUT;Statut d'occupation du logement selon le niveau de vie par quintile;P1;Propriétaires Quintile 1
+STATUT;Statut d'occupation du logement selon le niveau de vie par quintile;P2;Propriétaires Quintile 2
+STATUT;Statut d'occupation du logement selon le niveau de vie par quintile;P3;Propriétaires Quintile 3
+STATUT;Statut d'occupation du logement selon le niveau de vie par quintile;P4;Propriétaires Quintile 4
+STATUT;Statut d'occupation du logement selon le niveau de vie par quintile;P5;Propriétaires Quintile 5
+STATUT;Statut d'occupation du logement selon le niveau de vie par quintile;L;Locataires Ensemble
+STATUT;Statut d'occupation du logement selon le niveau de vie par quintile;L1;Locataires Quintile 1
+STATUT;Statut d'occupation du logement selon le niveau de vie par quintile;L2;Locataires Quintile 2
+STATUT;Statut d'occupation du logement selon le niveau de vie par quintile;L3;Locataires Quintile 3
+STATUT;Statut d'occupation du logement selon le niveau de vie par quintile;L4;Locataires Quintile 4
+STATUT;Statut d'occupation du logement selon le niveau de vie par quintile;L5;Locataires Quintile 5
+EQUIP;Taux d'équipement;1;Réfrigérateur
+EQUIP;Taux d'équipement;2;Congélateur indépendant
+EQUIP;Taux d'équipement;3;Lave-linge
+EQUIP;Taux d'équipement;4;Sèche-linge indépendant
+EQUIP;Taux d'équipement;5;Lave-vaisselle
+EQUIP;Taux d'équipement;6;Cuisinière, plaque de cuisson, four
+EQUIP;Taux d'équipement;7;Four à micro-ondes
+EQUIP;Taux d'équipement;8;Aspirateur
+EQUIP;Taux d'équipement;9;Climatiseur, déshumidificateur
+EQUIP;Taux d'équipement;10;Téléviseur
+EQUIP;Taux d'équipement;11;Lecteur DVD
+EQUIP;Taux d'équipement;12;Chaine hi-fi
+EQUIP;Taux d'équipement;13;Caméscope
+EQUIP;Taux d'équipement;14;Ordinateur portable, netbook, ultraportable
+EQUIP;Taux d'équipement;15;Micro-ordinateur de bureau
+EQUIP;Taux d'équipement;16;Téléphone portable
+EQUIP;Taux d'équipement;17;Tablette PC, IPAD
+EQUIP;Taux d'équipement;18;Appareil photo numérique
+EQUIP;Taux d'équipement;19;Baladeur, lecteur de CD/MP3
+EQUIP;Taux d'équipement;20;Tondeuse à gazon
+EQUIP;Taux d'équipement;21;Motoculteur, motobineuse
+EQUIP;Taux d'équipement;22;Abonnement pour chaîne télé
+EQUIP;Taux d'équipement;23;Abonnement Internet haut débit à domicile
+EQUIP;Taux d'équipement;24;Autre accès internet (téléphone mobile, clé 3 ou 4 G)
+EQUIP;Taux d'équipement;25;Cotisation club de sport
+EQUIP;Taux d'équipement;26;Cotisation club de loisirs
+EQUIP;Taux d'équipement;27;Abonnement théatre, cinéma
+EQUIP;Taux d'équipement;28;Abonnement journaux, revues
+EQUIP;Taux d'équipement;29;Abonnement bibliothèque, médiathèque
+EQUIP;Taux d'équipement;30;Au moins une voiture
+EQUIP;Taux d'équipement;31;2 voitures ou +
+EQUIP;Taux d'équipement;32;Deux roues à moteur
+EQUIP;Taux d'équipement;33;Vélo

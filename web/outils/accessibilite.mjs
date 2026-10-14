@@ -16,6 +16,8 @@ const REGLES = ["wcag2a", "wcag2aa", "wcag21aa"];
 const LARGEUR_MOBILE = 390;
 // Une comparaison remplie, pour contrôler aussi ses tableaux.
 const COMPARAISON = "/comparaison/?s1=a%3D2027%26l%3Dtva_taux_normal%3A1&s2=a%3D2027%26c%3D1%26l%3Dcsg_activite%3A1";
+// Un scénario rempli, pour contrôler aussi les tableaux des ménages et des entreprises.
+const SIMULATEUR = "/simulateur/?a=2027&l=tva_taux_normal%3A1%2Caccise_gazole%3A5%2Ccotisations_patronales_taux%3A1";
 
 const serveur = createServer(async (req, res) => {
   const chemin = normalize(decodeURIComponent(new URL(req.url, "http://x").pathname));
@@ -41,7 +43,7 @@ const dossiers = (await readdir(SORTIE, { withFileTypes: true })).filter(
 const pages = [];
 for (const e of dossiers) if (await estPage(e.name)) pages.push(`/${e.name}/`);
 pages.unshift("/");
-pages.push(COMPARAISON);
+pages.push(COMPARAISON, SIMULATEUR);
 
 const axe = await readFile(createRequire(import.meta.url).resolve("axe-core/axe.min.js"), "utf8");
 const navigateur = await chromium.launch({ executablePath: process.env.CHROMIUM || undefined });

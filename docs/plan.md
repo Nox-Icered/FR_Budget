@@ -149,6 +149,7 @@ En parallèle :
   - Scénario de plusieurs leviers calculé le 13 octobre 2026 (moteur et API) pour les ménages types et le ménage saisi.
   - Effet du scénario affiché le 13 octobre 2026 : panneau du simulateur (approximation sur grille, écart au calcul complet publié : 61 € pour une mesure seule, 291 € pour toutes les mesures à leurs bornes) et page « Mon ménage » (calcul complet, quand l'API sera hébergée).
 - Indicateur de dépense incompressible pour TVA et accises (budgets de famille INSEE).
+  - Fait le 14 octobre 2026 (`docs/fiches/depense_menages.md`, choix à relire) : dépense supplémentaire à consommation inchangée pour les mesures de TVA (taux normal) et d'accises, par décile de niveau de vie et par type de ménage (enquête Budget de famille 2017, prix des carburants du SDES), dans le panneau du simulateur. Part de la consommation au taux normal confrontée aux comptes nationaux (écarts de −1,4 % et −0,1 %).
 - Entreprises : charge par taille et secteur (ESANE, DGFiP), sans effet comportemental.
   - Fait le 14 octobre 2026 (`docs/fiches/entreprises.md`, choix à relire) : quatre leviers (taux de cotisation patronale, allègements, taux normal et surtaxe de l'impôt sur les sociétés) répartis selon les données de l'Urssaf (open data, ODbL) et de la DGFiP, plutôt qu'ESANE, qui ne publie ni cotisations ni impôt par classe ; page Entreprises et panneau du simulateur. Données de l'Urssaf confrontées à la CCSS (écarts de +0,3 % et −4,1 %).
 - Écrans Catalogue, Simulateur, Ménages, Entreprises, « Comment c'est calculé ? ».

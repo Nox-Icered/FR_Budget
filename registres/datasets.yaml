@@ -343,7 +343,7 @@ datasets:
     description: Tableaux de la note DGFiP Statistiques n° 51 (bénéfice imposable par taux, IS brut par taille d'entreprise)
     fichier: data/raw/impot_societes/dgfip/dgfip_stat_51_is-2025.xlsx
     empreinte_sha256: 18fb9a89af1977e0eb4a212dcfdfafe1e0507407b65a4bb78a3038279093c91b
-    methode_transformation: pipelines/impot_societes/extraire_dgfip.py → data/processed/impot_societes/benefice_imposable.csv
+    methode_transformation: pipelines/impot_societes/extraire_dgfip.py → data/processed/impot_societes/benefice_imposable.csv ; pipelines/entreprises/extraire_dgfip.py → data/processed/entreprises/is_taille.csv et is_secteur.csv
     telecharge_le: 2026-10-09
 
   - id: dgfip_stat_51_is_2025_pdf
@@ -359,7 +359,7 @@ datasets:
     description: Tableaux de la note DGFiP Statistiques n° 39 (bénéfice imposable par taux 2018-2024, IS brut par taille d'entreprise)
     fichier: data/raw/impot_societes/dgfip/dgfip_stat_39_is-2024.xlsx
     empreinte_sha256: 9637d62fc2f33c36bad5999025e8b077799ab23d5e6630039d1e0f3c4ab82308
-    methode_transformation: valeur d'IS brut 2024 saisie dans registres/references/chiffrages.yaml
+    methode_transformation: valeur d'IS brut 2024 saisie dans registres/references/chiffrages.yaml ; pipelines/entreprises/extraire_dgfip.py → data/processed/entreprises/is_taille.csv et is_secteur.csv
     telecharge_le: 2026-10-09
 
   - id: dgfip_stat_39_is_2024_pdf
@@ -713,3 +713,35 @@ datasets:
     empreinte_sha256: 404c86187556efed0ed47b0fa59ae2f0a42bf23898f094c88d9a14238f8ed2b0
     methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-13
+
+  - id: urssaf_exonerations_taille_csv
+    source: urssaf_open_data_exonerations_taille
+    description: "Export CSV complet du jeu (séparateur point-virgule), montants annuels d'exonérations par tranche de taille d'entreprise et catégorie de mesures"
+    fichier: data/raw/entreprises/urssaf/exos-secteur-prive-tranche-ent.csv
+    empreinte_sha256: 3746948e4bfb58e45c5927ba5049efd5d198f3985f738033414dfd62d413fe8c
+    methode_transformation: pipelines/entreprises/extraire_urssaf.py → data/processed/entreprises/taille.csv
+    telecharge_le: 2026-10-14
+
+  - id: urssaf_masse_salariale_taille_csv
+    source: urssaf_open_data_masse_salariale_taille
+    description: "Export CSV complet du jeu (séparateur point-virgule), entreprises, effectifs salariés moyens et masse salariale annuels par tranche de taille d'entreprise"
+    fichier: data/raw/entreprises/urssaf/nombre-etab-effectifs-salaries-et-masse-salariale-secteur-prive-tranche-ent.csv
+    empreinte_sha256: ed14cc24226ace81df266eab1cd40d598bcce6ad6b38c53772d451121f3feaec
+    methode_transformation: pipelines/entreprises/extraire_urssaf.py → data/processed/entreprises/taille.csv et masse_salariale_annuelle.csv
+    telecharge_le: 2026-10-14
+
+  - id: urssaf_exonerations_na38_csv
+    source: urssaf_open_data_exonerations_na38
+    description: "Export CSV complet du jeu (séparateur point-virgule), montants annuels d'exonérations par secteur NA38 et catégorie de mesures"
+    fichier: data/raw/entreprises/urssaf/exos-secteur-na38i-grandes-categories.csv
+    empreinte_sha256: 11b872110d26ed47040c61876aa5f8abc2096c1d67d29b54521fd1d633fb310c
+    methode_transformation: pipelines/entreprises/extraire_urssaf.py → data/processed/entreprises/secteur.csv
+    telecharge_le: 2026-10-14
+
+  - id: urssaf_masse_salariale_na88_csv
+    source: urssaf_open_data_masse_salariale_na88
+    description: "Export CSV complet du jeu (séparateur point-virgule), effectifs salariés et masse salariale trimestriels bruts par secteur NA88"
+    fichier: data/raw/entreprises/urssaf/effectifs-salaries-et-masse-salariale-du-secteur-prive-france-entiere-x-na88.csv
+    empreinte_sha256: 9ec16fb077e554518f5a1ade579684a8c91d56f293c7b9897f07b40226833222
+    methode_transformation: pipelines/entreprises/extraire_urssaf.py → data/processed/entreprises/secteur.csv et masse_salariale_annuelle.csv
+    telecharge_le: 2026-10-14

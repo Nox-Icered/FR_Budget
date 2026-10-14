@@ -29,10 +29,13 @@ from fr_budget import retraites as module_retraites
 from fr_budget import scenario as module_scenario
 from fr_budget.agrege import credits_missions as module_credits_missions
 from fr_budget.agrege import depenses_fiscales as module_depenses_fiscales
+from fr_budget.agrege.cotisations import cout_allegements
 from fr_budget.apu import comptes_apu, depenses_par_fonction, libelles_cofog, ratio_pib
+from fr_budget.entreprises import repartition as module_entreprises
 from fr_budget.menages import leviers as module_leviers_menages
 from fr_budget.menages import personnalise as module_personnalise
 from fr_budget.menages import types as module_menages
+from fr_budget.registres.acces import chiffrage as module_registre_chiffrage
 from fr_budget.registres.verification import RACINE_DEPOT, Rapport, charger
 from fr_budget.validation import comparaisons
 from pydantic import BaseModel, Field
@@ -522,6 +525,86 @@ def _fourchette(f: Any) -> dict[str, float]:
     return {"bas": f.bas, "central": f.central, "haut": f.haut}
 
 
+MILLIONS_PAR_MILLIARD = 1000.0
+SOURCES_ENTREPRISES_URSSAF = [
+    "urssaf_open_data_masse_salariale_taille",
+    "urssaf_open_data_exonerations_taille",
+    "urssaf_open_data_masse_salariale_na88",
+    "urssaf_open_data_exonerations_na38",
+]
+SOURCES_ENTREPRISES_IS = ["dgfip_statistiques_51_is_2025", "dgfip_statistiques_39_is_2024"]
+
+
+def entreprises() -> dict[str, Any]:
+    """Effet d'une unité de chaque levier sur la charge des entreprises, par taille et par
+    secteur (``fr_budget.entreprises.repartition``), en milliards d'euros par an, avec les
+    contrôles des données de l'Urssaf contre les comptes de la sécurité sociale."""
+    e = module_entreprises
+    leviers = []
+    for levier in e.LEVIERS_ENTREPRISES:
+        sources, _ = module_scenario.provenance([levier])
+        donnees = (
+            SOURCES_ENTREPRISES_URSSAF
+            if levier
+            in (module_scenario.LEVIER_COTISATIONS_TAUX, module_scenario.LEVIER_ALLEGEMENTS)
+            else SOURCES_ENTREPRISES_IS
+        )
+        leviers.append(
+            {
+                "id": levier,
+                "effet_national": _fourchette(module_scenario.rendement_unitaire(levier)),
+                "sources": sorted({*sources, *donnees}),
+                "nomenclatures": {
+                    nomenclature: [
+                        {
+                            "id": c.id,
+                            "libelle": c.libelle,
+                            "part": _fourchette(c.part),
+                            "effet": _fourchette(f),
+                            "effectifs": c.effectifs,
+                            "entreprises": c.entreprises,
+                        }
+                        for c, f in e.effet_unitaire(levier, nomenclature)
+                    ]
+                    for nomenclature in (e.TAILLE, e.SECTEUR)
+                },
+            }
+        )
+    annee = e.annee_urssaf()
+    # (identifiant, année, valeur de l'Urssaf, référence de la CCSS en Md€, source)
+    reperes: list[tuple[str, int, float, float, str]] = [
+        (
+            f"point_{a}",
+            a,
+            e.point_masse_salariale(a),
+            module_registre_chiffrage(f"cotisations_point_prive_{a}") / MILLIONS_PAR_MILLIARD,
+            source,
+        )
+        for a, source in ((2025, "ccss_octobre_2025"), (2017, "ccss_septembre_2018"))
+    ]
+    reperes.append(
+        ("allegements", annee, e.allegements_urssaf(), cout_allegements(annee), "ccss_octobre_2026")
+    )
+    controles = [
+        {
+            "id": i,
+            "annee": a,
+            "urssaf": u,
+            "reference": ref,
+            "source": s,
+            "ecart": (u - ref) / ref,
+        }
+        for i, a, u, ref, s in reperes
+    ]
+    return {
+        "unite": "milliards d'euros par an, pour une unité du levier",
+        "annee_urssaf": annee,
+        "annees_is": [e.ANNEE_IS, e.ANNEE_IS_ALTERNATIVE],
+        "leviers": leviers,
+        "controles": controles,
+    }
+
+
 @cache
 def serie_baseline() -> dict[str, Any]:
     """Baseline 2025-2046 en fourchette (``fr_budget.baseline``), avec sources et hypothèses.
@@ -813,6 +896,11 @@ def creer_application() -> FastAPI:
             return scenario_menages(entree)
         except MesuresInvalidesError as erreur:
             raise HTTPException(status_code=422, detail="mesure hors des bornes") from erreur
+
+    @app.get("/entreprises")
+    def route_entreprises() -> dict[str, Any]:
+        """Effet d'une unité de chaque levier sur la charge des entreprises."""
+        return entreprises()
 
     @app.post("/mon-menage")
     def route_mon_menage(entree: MenageSaisiEntree) -> dict[str, Any]:

@@ -698,3 +698,39 @@ sources:
     millesime: "2023"
     acces: direct
     consulte_le: 2026-10-13
+
+  - id: urssaf_open_data_exonerations_taille
+    nom: "Urssaf open data, « Exonérations de cotisations sociales de l'ensemble des employeurs du secteur privé, par tranche de taille d'entreprise » (jeu exos-secteur-prive-tranche-ent)"
+    editeur: "Urssaf Caisse nationale"
+    url: https://open.urssaf.fr/explore/dataset/exos-secteur-prive-tranche-ent/
+    licence: "Open Database License (ODbL) : une base dérivée doit être publiée sous la même licence"
+    millesime: "mise à jour du 24 juillet 2026 (années 2004 à 2025)"
+    acces: direct
+    consulte_le: 2026-10-14
+
+  - id: urssaf_open_data_masse_salariale_taille
+    nom: "Urssaf open data, « Nombre d'établissements employeurs, effectifs salariés et masse salariale du secteur privé, France entière x tranche de taille d'entreprise et par an (depuis 1998) »"
+    editeur: "Urssaf Caisse nationale"
+    url: https://open.urssaf.fr/explore/dataset/nombre-etab-effectifs-salaries-et-masse-salariale-secteur-prive-tranche-ent/
+    licence: "Open Database License (ODbL) : une base dérivée doit être publiée sous la même licence"
+    millesime: "mise à jour du 17 septembre 2025 (années 1998 à 2024)"
+    acces: direct
+    consulte_le: 2026-10-14
+
+  - id: urssaf_open_data_exonerations_na38
+    nom: "Urssaf open data, « Exonérations de cotisations sociales de l'ensemble des employeurs du secteur privé, par secteur NA38 x grandes catégories de mesures »"
+    editeur: "Urssaf Caisse nationale"
+    url: https://open.urssaf.fr/explore/dataset/exos-secteur-na38i-grandes-categories/
+    licence: "Open Database License (ODbL) : une base dérivée doit être publiée sous la même licence"
+    millesime: "mise à jour du 24 juillet 2026 (années 2004 à 2025)"
+    acces: direct
+    consulte_le: 2026-10-14
+
+  - id: urssaf_open_data_masse_salariale_na88
+    nom: "Urssaf open data, « Effectifs salariés et masse salariale trimestriels du secteur privé, France entière x secteur NA88 »"
+    editeur: "Urssaf Caisse nationale"
+    url: https://open.urssaf.fr/explore/dataset/effectifs-salaries-et-masse-salariale-du-secteur-prive-france-entiere-x-na88/
+    licence: "Open Database License (ODbL) : une base dérivée doit être publiée sous la même licence"
+    millesime: "mise à jour du 28 août 2026 (trimestres jusqu'au 2e trimestre 2026)"
+    acces: direct
+    consulte_le: 2026-10-14

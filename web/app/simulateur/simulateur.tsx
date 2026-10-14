@@ -5,6 +5,7 @@ import { texte, nombre } from "../../lib/textes";
 import type {
   CatalogueCreditsMissions,
   CatalogueDepensesFiscales,
+  DepenseMenages,
   Entreprises,
   ReponsesUnitaires,
   Version,
@@ -29,6 +30,7 @@ import {
 import { CopierLien, Exports } from "../partage/actions";
 import { EffetsMenagesScenario } from "./menages";
 import { EffetsEntreprisesScenario } from "./entreprises";
+import { DepenseMenagesScenario } from "./depense";
 import { region } from "../../lib/region";
 import { useReponses } from "../../lib/chargement";
 import Link from "next/link";
@@ -43,6 +45,7 @@ function SimulateurCharge({
   raccord,
   version,
   entreprises,
+  depense,
 }: {
   donnees: ReponsesUnitaires;
   catalogue: CatalogueDepensesFiscales;
@@ -50,6 +53,7 @@ function SimulateurCharge({
   raccord: number;
   version: Version;
   entreprises: Entreprises;
+  depense: DepenseMenages;
 }) {
   const leviers = LEVIERS_PUBLICS.filter((l) => l.id in donnees.leviers);
   const annees = Object.keys(donnees.leviers[leviers[0].id].reponses).map(Number);
@@ -282,6 +286,7 @@ function SimulateurCharge({
       </div>
       <p className="source">{texte("partage.explication")}</p>
       <EffetsMenagesScenario valeurs={valeurs} empreinte={empreinte} />
+      <DepenseMenagesScenario donnees={depense} valeurs={valeurs} />
       <EffetsEntreprisesScenario donnees={entreprises} valeurs={valeurs} />
     </>
   );
@@ -295,6 +300,7 @@ export function Simulateur(props: {
   raccord: number;
   version: Version;
   entreprises: Entreprises;
+  depense: DepenseMenages;
 }) {
   const chargement = useReponses(empreinteVersion(props.version));
   if (chargement.etat === "en_cours") return <p role="status">{texte("site.chargement")}</p>;

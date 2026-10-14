@@ -233,3 +233,23 @@ export type Entreprises = {
     ecart: number;
   }[];
 };
+export type ClasseDepense = {
+  id: string;
+  consommation: number;
+  effets: Record<string, FourchetteDonnee>;
+};
+export type DepenseMenages = {
+  annee: number;
+  annee_enquete: number;
+  unite: string;
+  leviers: string[];
+  sources: string[];
+  nomenclatures: Record<"decile" | "type_menage", ClasseDepense[]>;
+  controles: {
+    annee: number;
+    modele: FourchetteDonnee;
+    reference: number;
+    ecart: number;
+    source: string;
+  }[];
+};

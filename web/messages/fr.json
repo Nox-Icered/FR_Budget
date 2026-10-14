@@ -305,6 +305,44 @@
       },
       "methode": "Effet national des mesures réparti selon la part de chaque classe dans l'assiette, sans changement de comportement ; un montant positif augmente la charge. Les deux tableaux ne s'additionnent pas : leurs classes ne sont pas les mêmes.",
       "detail": "Détail par taille et par secteur, sources et contrôles"
+    },
+    "depense": {
+      "titre": "Effet des prix sur les dépenses des ménages (TVA et accises)",
+      "aucune": "Aucune mesure réglée ne change le taux normal de TVA ou les accises sur les carburants.",
+      "intro": "Dépense supplémentaire en {annee} pour acheter les mêmes biens qu'avant la mesure, en euros par ménage et par an, et en part de la consommation du ménage. Un montant négatif est une économie.",
+      "legendes": {
+        "decile": "Par niveau de vie (déciles, du plus modeste au plus aisé)",
+        "type_menage": "Par type de ménage"
+      },
+      "classe": "Ménages",
+      "effet": "Euros par an",
+      "part": "Part de la consommation",
+      "classes": {
+        "decile": {
+          "1": "1er décile",
+          "2": "2e décile",
+          "3": "3e décile",
+          "4": "4e décile",
+          "5": "5e décile",
+          "6": "6e décile",
+          "7": "7e décile",
+          "8": "8e décile",
+          "9": "9e décile",
+          "10": "10e décile",
+          "TOT": "Ensemble"
+        },
+        "type_menage": {
+          "1": "Personnes seules",
+          "2": "Familles monoparentales",
+          "3": "Couples sans enfant",
+          "4": "Couples avec enfants",
+          "5": "Autres ménages",
+          "TOT": "Ensemble"
+        }
+      },
+      "methode": "Dépenses de l'enquête Budget de famille {annee_enquete} de l'Insee, portées à {annee} comme la consommation des ménages des comptes nationaux. Les prix suivent entièrement la mesure et les achats ne changent pas : c'est la dépense à consommation inchangée, pas un effet sur le pouvoir d'achat après adaptation. La fourchette vient des postes de dépense dont seule une partie relève du taux normal de TVA. Les mesures d'accise ne portent que sur les carburants ; la part du gazole est la moyenne nationale.",
+      "controle": "Contrôle : part de la consommation au taux normal de TVA dans l'enquête, {modele}, contre {reference} dans les comptes nationaux de {annee_controle} (écart {ecart}).",
+      "detail": "Méthode, sources et limites : fiche « dépense des ménages » du dépôt."
     }
   },
   "partage": {

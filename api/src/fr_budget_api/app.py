@@ -706,6 +706,22 @@ def _arrondir(series: list[list[float]]) -> list[list[float]]:
     return [[round(v, DECIMALES_EXPORT) for v in s] for s in series]
 
 
+def _grille(levier: str) -> dict[str, dict[str, dict[str, Any]]]:
+    """Réponse exacte (et non par unité) de chaque cran d'un levier non linéaire, pour chaque
+    année d'entrée ; clé : la valeur écrite avec ``:g`` (« 0.25 », « -1 », « 3 »)."""
+    grille: dict[str, dict[str, dict[str, Any]]] = {}
+    for valeur in module_scenario.grille_levier(levier):
+        par_annee = {}
+        for annee in range(module_scenario.ANNEE_PREMIERE_MESURE, module_baseline.ANNEE_FIN + 1):
+            r = module_scenario.reponse_lineaire(levier, annee, valeur)
+            par_annee[str(annee)] = {
+                "unite_dette": _arrondir(r.unite_dette),
+                "unite_solde": _arrondir(r.unite_solde),
+            }
+        grille[f"{valeur:g}"] = par_annee
+    return grille
+
+
 def reponses_unitaires() -> dict[str, Any]:
     """Réponses linéaires de chaque levier, pour chaque année d'entrée (site statique)."""
     leviers: dict[str, Any] = {}
@@ -763,6 +779,12 @@ def reponses_unitaires() -> dict[str, Any]:
             "bornes": [basse, haute],
             "multiplicateur": _fourchette(module_croissance.multiplicateur(categorie)),
             "reponses": reponses,
+            # Levier non linéaire : réponse exacte de chaque cran du curseur (pas par unité).
+            **(
+                {"grille": _grille(levier)}
+                if levier in module_scenario.LEVIERS_NON_LINEAIRES
+                else {}
+            ),
         }
     r = module_scenario.reponse_lineaire(
         next(iter(module_scenario.LEVIERS_REGISTRE)), module_scenario.ANNEE_PREMIERE_MESURE

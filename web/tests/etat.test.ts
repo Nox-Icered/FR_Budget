@@ -155,3 +155,17 @@ test("âge effectif et âge légal de départ ne se cumulent pas", () => {
   const deux = base({ leviers: { retraites_age_legal: 1, retraites_age_depart: 0.5 } });
   assert.deepEqual(problemes(deux, donnees, catalogue, missions), ["double_compte"]);
 });
+
+test("levier non linéaire : seule une valeur de sa grille est admise", () => {
+  const avecGrille = {
+    ...donnees,
+    leviers: {
+      ...donnees.leviers,
+      retraites_age_legal: { ...donnees.leviers.retraites_age_legal, grille: { "0.25": {} } },
+    },
+  } as unknown as ReponsesUnitaires;
+  const sur = base({ leviers: { retraites_age_legal: 0.25 } });
+  const hors = base({ leviers: { retraites_age_legal: 0.3 } });
+  assert.deepEqual(problemes(sur, avecGrille, catalogue, missions), []);
+  assert.deepEqual(problemes(hors, avecGrille, catalogue, missions), ["hors_bornes"]);
+});

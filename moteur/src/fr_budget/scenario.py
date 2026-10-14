@@ -177,6 +177,11 @@ LEVIER_RETRAITES_AGE_LEGAL = "retraites_age_legal"
 # module retraites) : mêmes bornes que le levier sur l'âge effectif. Les deux leviers ne se
 # cumulent pas (double compte).
 LEVIERS_RETRAITES = (LEVIER_RETRAITES_AGE, LEVIER_RETRAITES_AGE_LEGAL)
+# Leviers dont l'effet n'est pas proportionnel à la valeur (montée en charge au rythme de la
+# réforme de 2023 quelle que soit l'ampleur) : le site lit la réponse exacte de chaque cran.
+LEVIERS_NON_LINEAIRES = (LEVIER_RETRAITES_AGE_LEGAL,)
+PAS_RETRAITES_AGE_LEGAL = 0.25
+"""Cran du curseur, en années (trois mois, le rythme de relèvement par génération)."""
 BORNES = ("bas", "central", "haut")
 MILLIONS_PAR_MILLIARD = 1000.0
 EUROS_PAR_MILLIARD = 1e9
@@ -447,6 +452,15 @@ def taux_reference(levier: str) -> float:
         return taux_tva(ANNEE_REFERENCE)["normal"] * POURCENT
     msg = f"levier inconnu : {levier}"
     raise ValueError(msg)
+
+
+def grille_levier(levier: str) -> list[float]:
+    """Valeurs admises d'un levier non linéaire : crans de ``PAS_RETRAITES_AGE_LEGAL`` entre ses
+    bornes, zéro exclu."""
+    basse, haute = bornes_levier(levier)
+    pas = PAS_RETRAITES_AGE_LEGAL
+    crans = range(math.ceil(basse / pas), math.floor(haute / pas) + 1)
+    return [k * pas for k in crans if k != 0]
 
 
 def bornes_levier(levier: str) -> tuple[float, float]:
@@ -1044,9 +1058,11 @@ class ReponseLineaire:
     calcul est linéaire dans m)."""
 
 
-def reponse_lineaire(levier: str, annee: int) -> ReponseLineaire:
+def reponse_lineaire(levier: str, annee: int, valeur: float = 1.0) -> ReponseLineaire:
+    """Réponse d'une unité du levier (``valeur`` = 1) ; pour un levier non linéaire
+    (``LEVIERS_NON_LINEAIRES``), réponse exacte à ``valeur`` (cran de ``grille_levier``)."""
     centrale, variantes = trajectoires()
-    mesures = [Mesure(levier, 1.0, annee)]
+    mesures = [Mesure(levier, valeur, annee)]
     m_central = module_croissance.multiplicateur(categorie_croissance(levier)).central
     sans_croissance = m_central == 0
     paires = [

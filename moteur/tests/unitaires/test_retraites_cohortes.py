@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+import itertools
+
 import pytest
 
 from fr_budget import retraites_cohortes as rc
 from fr_budget import scenario
+from fr_budget.agrege import indexation
 
 ENTREE = 2027
 
@@ -26,11 +29,35 @@ def test_premiere_generation_atteint_l_age_legal_a_l_entree() -> None:
 
 
 def test_decalage_au_rythme_de_la_montee_en_charge() -> None:
+    """Trois mois par génération (un an en quatre générations) quelle que soit l'ampleur,
+    plafonné au relèvement choisi."""
     g = rc.premiere_generation(ENTREE)
+    d = rc.duree_montee_en_charge()
     assert rc.decalage(1.0, g - 1, ENTREE) == 0
-    assert rc.decalage(1.0, g, ENTREE) == pytest.approx(1 / rc.duree_montee_en_charge())
-    assert rc.decalage(1.0, g + 10, ENTREE) == pytest.approx(1.0)
-    assert rc.decalage(2.0, g, ENTREE) == pytest.approx(2 * rc.decalage(1.0, g, ENTREE))
+    assert rc.decalage(1.0, g, ENTREE) == pytest.approx(1 / d)
+    assert rc.decalage(3.0, g, ENTREE) == pytest.approx(1 / d)
+    assert rc.decalage(-1.0, g, ENTREE) == pytest.approx(-1 / d)
+    assert rc.decalage(0.25, g + 10, ENTREE) == pytest.approx(0.25)
+    assert rc.decalage(3.0, g + int(3 * d) - 1, ENTREE) == pytest.approx(3.0)
+    assert rc.decalage(3.0, g + int(3 * d) - 2, ENTREE) < 3.0
+
+
+def test_economie_nette_des_prelevements_sur_la_pension() -> None:
+    """Le taux moyen de prélèvement sur la pension est compris entre zéro et le taux marginal."""
+    for foyer in indexation.FOYERS:
+        moyen = indexation.prelevements_moyens_pension(foyer).total
+        assert 0 < moyen < indexation.retour_pension(foyer).total
+
+
+def test_grille_du_levier() -> None:
+    grille = scenario.grille_levier(scenario.LEVIER_RETRAITES_AGE_LEGAL)
+    basse, haute = scenario.bornes_levier(scenario.LEVIER_RETRAITES_AGE_LEGAL)
+    assert grille[0] == basse
+    assert grille[-1] == haute
+    assert 0 not in grille
+    avec_zero = sorted([*grille, 0.0])
+    ecarts = [b - a for a, b in itertools.pairwise(avec_zero)]
+    assert ecarts == pytest.approx([scenario.PAS_RETRAITES_AGE_LEGAL] * len(ecarts))
 
 
 def test_aucun_effet_avant_l_entree_ni_sans_relevement() -> None:

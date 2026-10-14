@@ -163,6 +163,8 @@ export function problemes(
   for (const [id, v] of Object.entries(etat.leviers)) {
     if (!PUBLICS.has(id) || !possede(donnees.leviers, id)) liste.push("levier_inconnu");
     else if (!dans(v, donnees.leviers[id].bornes)) liste.push("hors_bornes");
+    else if (donnees.leviers[id].grille && v !== 0 && !possede(donnees.leviers[id].grille ?? {}, String(v)))
+      liste.push("hors_bornes");
   }
   for (const [impot, v] of Object.entries(etat.parImpot)) {
     if (!possede(catalogue.impots, impot)) liste.push("impot_inconnu");

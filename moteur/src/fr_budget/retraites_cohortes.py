@@ -2,9 +2,10 @@
 cohortes (fiche ``docs/fiches/retraites.md``, § 8).
 
 Pour chaque année t et chaque âge a, la génération g = t - a voit son âge de départ décalé de
-s(g) : le relèvement choisi, atteint à raison du rythme de la réforme de 2023 (hypothèse
-``retraites_duree_montee_en_charge`` : un an de relèvement en quatre générations), à partir de
-la première génération qui atteint l'âge légal l'année d'entrée en vigueur.
+s(g) : le relèvement choisi, atteint au rythme de la réforme de 2023 quelle que soit son
+ampleur (hypothèse ``retraites_duree_montee_en_charge`` : un an de relèvement en quatre
+générations, soit trois mois par génération), à partir de la première génération qui atteint
+l'âge légal l'année d'entrée en vigueur. Le calcul n'est donc pas linéaire dans le relèvement.
 
 Données :
 
@@ -24,7 +25,10 @@ Calcul, en points de PIB :
 - retraités en moins : somme sur les âges de population * (r(a) - r décalé) * (1 - part des
   départs non décalés, hypothèse ``retraites_part_departs_non_decales``) ;
 - moindres pensions : retraités en moins ÷ retraités de l'année * dépenses du COR * (1 + écart
-  de pension des nouveaux retraités, hypothèse ``retraites_ecart_pension_liquidants``) ;
+  de pension des nouveaux retraités, hypothèse ``retraites_ecart_pension_liquidants``), nettes
+  des prélèvements qu'elles auraient rapportés (CSG, CRDS, CASA et impôt sur le revenu, taux
+  moyen calculé avec OpenFisca, ``fr_budget.agrege.indexation.prelevements_moyens_pension`` ;
+  personne seule ou couple de retraités, valeur centrale à mi-chemin) ;
 - recettes : retraités en moins * part en emploi (hypothèse
   ``retraites_part_emploi_avant_liquidation``) * prélèvements par salarié ÷ PIB ; les
   prélèvements par salarié suivent le PIB par personne de 20 à 64 ans.
@@ -40,6 +44,7 @@ from functools import cache
 
 import numpy as np
 
+from fr_budget.agrege import indexation
 from fr_budget.apu import comptes_apu
 from fr_budget.fourchette import Fourchette
 from fr_budget.menages import types as menages
@@ -97,11 +102,12 @@ def premiere_generation(entree: int) -> int:
 
 
 def decalage(valeur: float, generation: int, entree: int) -> float:
-    """Relèvement de l'âge de départ de ``generation``, en années."""
+    """Relèvement de l'âge de départ de ``generation``, en années : un an en
+    ``duree_montee_en_charge`` générations, plafonné au relèvement choisi (signe compris)."""
     rang = generation - premiere_generation(entree) + 1
     if rang <= 0:
         return 0.0
-    return valeur * min(1.0, rang / duree_montee_en_charge())
+    return float(np.sign(valeur)) * min(abs(valeur), rang / duree_montee_en_charge())
 
 
 def retraites_en_moins(valeur: float, annee: int, entree: int, non_decales: float) -> float:
@@ -147,18 +153,32 @@ def prelevements_par_salarie_pib() -> float:
     return prelevements / pib
 
 
-def _parametres(borne: str) -> tuple[float, float, float]:
-    """(part non décalée, part en emploi, écart de pension) qui donnent l'effet bas, central ou
-    haut sur le solde pour un relèvement."""
-    hypotheses = [
-        hypothese(h) for h in (HYPOTHESE_NON_DECALES, HYPOTHESE_EMPLOI, HYPOTHESE_PENSION)
-    ]
+def _prelevements_pension(borne: str) -> float:
+    """Part moyenne de la pension reprise par les administrations publiques (impôt sur le revenu
+    compris) : à mi-chemin entre personne seule et couple ; bornes : les deux foyers."""
+    parts = [indexation.prelevements_moyens_pension(f).total for f in indexation.FOYERS]
     if borne == "central":
-        return tuple(h.valeur_centrale for h in hypotheses)  # type: ignore[return-value]
-    non_decales, emploi, pension = hypotheses
+        return float(np.mean(parts))
+    # Plus de prélèvements perdus, moins d'économie : borne basse de l'effet.
+    return max(parts) if borne == "bas" else min(parts)
+
+
+def _parametres(borne: str) -> tuple[float, float, float, float]:
+    """(part non décalée, part en emploi, écart de pension, prélèvements sur la pension) qui
+    donnent l'effet bas, central ou haut sur le solde pour un relèvement."""
+    noms = (HYPOTHESE_NON_DECALES, HYPOTHESE_EMPLOI, HYPOTHESE_PENSION)
+    non_decales, emploi, pension = (hypothese(h) for h in noms)
+    prelevements = _prelevements_pension(borne)
+    if borne == "central":
+        return (
+            non_decales.valeur_centrale,
+            emploi.valeur_centrale,
+            pension.valeur_centrale,
+            prelevements,
+        )
     if borne == "bas":
-        return non_decales.plage.haute, emploi.plage.basse, pension.plage.basse
-    return non_decales.plage.basse, emploi.plage.haute, pension.plage.haute
+        return non_decales.plage.haute, emploi.plage.basse, pension.plage.basse, prelevements
+    return non_decales.plage.basse, emploi.plage.haute, pension.plage.haute, prelevements
 
 
 @cache
@@ -167,10 +187,10 @@ def effet_annee(valeur: float, annee: int, entree: int, borne: str) -> float:
     relèvement de ``valeur`` années de l'âge légal entré en ``entree``."""
     if annee < entree:
         return 0.0
-    non_decales, emploi, pension = _parametres(borne)
+    non_decales, emploi, pension, prelevements = _parametres(borne)
     en_moins = retraites_en_moins(valeur, annee, entree, non_decales)
     depenses = reference()[annee].depenses_pib
-    economie = en_moins / retraites(annee) * depenses * (1 + pension)
+    economie = en_moins / retraites(annee) * depenses * (1 + pension) * (1 - prelevements)
     salaire = prelevements_par_salarie_pib()
     recettes = en_moins * emploi * salaire * _facteur_salaire(annee)
     return POURCENT * (economie + recettes)

@@ -82,18 +82,19 @@ Lot du 14 octobre 2026, fait en autonomie (« finir la V1 ») ; choix et 3 hypot
 
 ### Méthode
 
-Pour chaque année t et chaque âge a, la génération g = t − a part plus tard de s(g) : le relèvement choisi, atteint au rythme de la réforme de 2023 (un an en quatre générations, hypothèse `retraites_duree_montee_en_charge`), à partir de la première génération qui atteint l'âge légal l'année d'entrée en vigueur (DREES, fiche 14).
+Pour chaque année t et chaque âge a, la génération g = t − a part plus tard de s(g) : le relèvement choisi, atteint au rythme de la réforme de 2023 quelle que soit son ampleur (trois mois par génération, hypothèse `retraites_duree_montee_en_charge`), à partir de la première génération qui atteint l'âge légal l'année d'entrée en vigueur (DREES, fiche 14). Un relèvement de trois ans prend donc douze générations.
 
 - **Retraités en moins** : population de l'âge (Insee, projections 2021, scénario central) × écart entre le taux de retraités de 2023 à cet âge (DREES, fiche 15) et ce taux décalé de s(g), sans dépasser le taux de référence, et sans décalage à partir de l'âge d'annulation de la décote (67 ans, inchangé) ; × (1 − part des départs non décalés : ex-invalidité, handicap, inaptitude ; hypothèse `retraites_part_departs_non_decales`, DREES fiche 17).
-- **Moindres pensions** : retraités en moins ÷ retraités de l'année × dépenses de retraite du COR (part du PIB, scénario de référence de juin 2026) × (1 + écart de pension des nouveaux retraités ; hypothèse `retraites_ecart_pension_liquidants`, DREES fiche 7).
+- **Moindres pensions** : retraités en moins ÷ retraités de l'année × dépenses de retraite du COR (part du PIB, scénario de référence de juin 2026) × (1 + écart de pension des nouveaux retraités ; hypothèse `retraites_ecart_pension_liquidants`, DREES fiche 7) × (1 − prélèvements que la pension aurait rapportés : CSG, CRDS, CASA et impôt sur le revenu, taux moyen calculé avec OpenFisca sur la distribution des pensions de l'EIR 2020, `fr_budget.agrege.indexation.prelevements_moyens_pension` ; 11,5 % pour une personne seule, 14,0 % pour un couple, valeur centrale à mi-chemin).
 - **Recettes** : retraités en moins × part en emploi l'année précédant la liquidation (hypothèse `retraites_part_emploi_avant_liquidation`, DREES fiche 20) × prélèvements sur un salaire médian (coût employeur moins revenu après impôt, OpenFisca, 2025) ÷ PIB ; ces prélèvements suivent le PIB par personne de 20 à 64 ans.
-- **Fourchette** : combinaison des bornes des trois hypothèses qui donne l'effet le plus faible et le plus fort.
+- **Fourchette** : combinaison des bornes des trois hypothèses et des deux foyers (prélèvements sur la pension) qui donne l'effet le plus faible et le plus fort.
+- **Site** : l'effet n'étant pas proportionnel au relèvement, le site lit la réponse exacte de chaque cran du curseur (16 crans de trois mois, `scenario.grille_levier`, environ 2,2 Mo de données en plus avant compression) ; une valeur hors de ces crans est refusée.
 
 ### Résultats et validation
 
-Un an de plus sur l'âge légal, entrée en 2027 : environ 418 000 retraités de moins la deuxième année, 627 000 la dixième. Effet sur le solde primaire, en points de PIB (central, fourchette) : 0,51 (0,47 à 0,60) à 2 ans, 0,71 (0,65 à 0,85) à 10 ans, 0,67 (0,61 à 0,80) à 20 ans. Une fois la montée en charge achevée : 20,6 Md€ de 2025 (19,0 à 24,4).
+Un an de plus sur l'âge légal, entrée en 2027 : environ 418 000 retraités de moins la deuxième année, 627 000 la dixième. Effet sur le solde primaire, en points de PIB (central, fourchette) : 0,47 (0,42 à 0,56) à 2 ans, 0,66 (0,59 à 0,79) à 10 ans, 0,62 (0,56 à 0,75) à 20 ans. Une fois la montée en charge achevée : 18,9 Md€ de 2025 (17,2 à 22,8).
 
-Comparé au tableau 2.10 du COR (mêmes références que la première étape, test `moteur/tests/validation/test_levier_retraites_cohortes.py`), écart à la borne haute publiée : +26,6 % à 2 ans (première étape : +20,0 %), +18,5 % à 10 ans (+39,9 %), +2,8 % à 20 ans (+20,6 %). Écart aux bornes basses : de +123 % à +912 %. Une comparaison sur six est dans la tolérance (20 ans, borne haute). Les deux modèles sont publiés sur la page Validation.
+Comparé au tableau 2.10 du COR (mêmes références que la première étape, test `moteur/tests/validation/test_levier_retraites_cohortes.py`), écart à la borne haute publiée : +16,4 % à 2 ans (première étape : +20,0 %), +9,4 % à 10 ans (+39,9 %), −4,9 % à 20 ans (+20,6 %). Écart aux bornes basses : de +106 % à +831 %. Deux comparaisons sur six sont dans la tolérance (10 et 20 ans, borne haute). Les deux modèles sont publiés sur la page Validation.
 
 ### Choix et limites
 
@@ -102,12 +103,13 @@ Comparé au tableau 2.10 du COR (mêmes références que la première étape, te
 3. **Population** : projections de l'Insee de 2021 ; une édition 2026 est publiée (Insee Première n° 2108), sans tableaux détaillés par âge trouvés.
 4. **Non comptés** : prestations des personnes décalées sans emploi (chômage, invalidité, minima ; un tiers d'entre elles selon la fiche 20), pensions plus élevées après des carrières plus longues, effets sur l'emploi et l'activité. Les deux premiers réduiraient l'effet ; c'est la raison probable de l'écart au COR.
 5. **Salaire médian.** Les prélèvements sont ceux d'un célibataire au salaire médian ; les seniors en emploi ont des salaires différents.
-6. **Linéarité.** Le site multiplie la réponse à un an par la valeur choisie. Écart au calcul exact : de −4 % à +9 % une fois la montée en charge achevée, jusqu'à ±28 % les premières années pour −1 ou +3 ans.
+6. **Revue de la PR (Codex).** Deux corrections : rythme de trois mois par génération quelle que soit l'ampleur (au lieu d'une montée en quatre ans pour toute valeur), et économie sur les pensions nette des prélèvements qu'elles auraient rapportés (le taux moyen, et non marginal, sert ici : c'est toute la pension qui n'est pas versée).
 
 ## 7. Journal
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-14 | Revue de la PR : rythme de trois mois par génération, pensions nettes des prélèvements, réponses exactes par cran sur le site | Variante « cohortes » : 2 sur 6 dans la tolérance (10 ans : +18,5 % → +9,4 % ; 20 ans : +2,8 % → −4,9 % ; 2 ans : +26,6 % → +16,4 %) |
 | 2026-10-14 | Deuxième étape : levier sur l'âge légal, modèle par cohortes (§ 8) | 6 comparaisons de la variante « cohortes » au tableau 2.10 du COR, 1 dans la tolérance ; références et première étape inchangées |
 | 2026-10-12 | Revue de la PR : références à 2 ans ajoutées à la validation | 2 nouvelles références, hors tolérance ; tableau : 49 sur 72 |
 | 2026-10-12 | Création du module (première étape) | 4 nouvelles références de validation, toutes hors tolérance ; tableau : 49 sur 70 |

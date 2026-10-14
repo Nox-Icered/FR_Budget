@@ -46,7 +46,7 @@ Code : `moteur/src/fr_budget/entreprises/repartition.py`. Pipelines : `pipelines
 
 ## 6. Validation
 
-La répartition elle-même n'a pas de référence officielle. Les données qui la portent sont confrontées à une source indépendante, les comptes de la sécurité sociale (tests `moteur/tests/validation/test_entreprises.py`, affichés sur la page Entreprises) :
+La répartition elle-même n'a pas de référence officielle. Les données qui la portent sont confrontées à une source indépendante, les comptes de la sécurité sociale (tests `moteur/tests/validation/test_entreprises_urssaf_ccss.py`, affichés sur la page Entreprises) :
 
 | Grandeur | Urssaf | CCSS | Écart |
 |----------|--------|------|-------|

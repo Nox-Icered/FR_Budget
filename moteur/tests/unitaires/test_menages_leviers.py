@@ -214,15 +214,21 @@ def test_indexation_pension_de_base() -> None:
 
 
 def test_indexation_pension_saisie() -> None:
-    """Pension saisie égale à celle du retraité type : même effet."""
+    """Pension saisie égale à celle du retraité type pour l'année simulée : même hausse de la
+    pension brute. Les niveaux diffèrent sans réforme : la pension saisie vaut aussi pour les
+    années précédentes, d'où un autre revenu fiscal de référence et un autre taux de CSG."""
     pension = t.pension_brute_mensuelle(ANNEE)
     profil = t.Profil("Saisi", (t.Adulte("1955-01-01", t.RETRAITE, montant_mensuel=pension),))
+    saisi_avant = t.cascade_profil(profil)
     saisi = lv.cascade_profil_reformee(profil, scenario.LEVIER_INDEXATION, 1.0)
+    type_avant = t.cascade_annuelle("retraite_seul")
     type_ = lv.cascade_reformee("retraite_seul", scenario.LEVIER_INDEXATION, 1.0)
     assert saisi is not None
     assert type_ is not None
-    assert saisi.pension_brute == pytest.approx(type_.pension_brute, abs=1)
-    assert saisi.net_apres_impot == pytest.approx(type_.net_apres_impot, abs=1)
+    assert saisi.pension_brute - saisi_avant.pension_brute == pytest.approx(
+        type_.pension_brute - type_avant.pension_brute, abs=1
+    )
+    assert saisi.net_apres_impot > saisi_avant.net_apres_impot
 
 
 def test_levier_sans_effet_refuse() -> None:

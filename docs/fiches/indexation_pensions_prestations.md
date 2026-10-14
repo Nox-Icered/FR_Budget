@@ -121,6 +121,7 @@ Le levier reste en bêta. Les références viennent toutes du Gouvernement ou du
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-14 | Confrontation à l'IPP (gel des pensions de base 2026), `docs/validation/confrontations_independantes.md` | 2 nouvelles références indépendantes, hors tolérance (+20,2 % et +25,1 %) |
 | 2026-10-12 | Ajout de la référence du gel de l'AAH en 2026 (demande du mainteneur) | 1 nouvelle référence, hors tolérance (-12,1 %) |
 | 2026-10-12 | Revue de la PR : effet de la première année réduit aux mois qui suivent la revalorisation ; une mesure à zéro ne bloque plus de combinaison | aucun test de validation (ils portaient déjà sur la première année) |
 | 2026-10-12 | Création du levier : extraction des comptes de la protection sociale et de la distribution des pensions de la DREES | 4 nouvelles références de validation, 2 dans la tolérance ; tableau : 36 sur 50 |

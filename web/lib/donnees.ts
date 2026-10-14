@@ -62,6 +62,7 @@ export type Chiffrage = {
   unite: string;
   localisation: string;
   relecture: "a_relire" | "relu";
+  independante?: boolean;
 };
 export type Relecture = {
   id: string;
@@ -125,6 +126,8 @@ export type Comparaison = {
   tolerance: number;
   dans_la_tolerance: boolean;
   unite: string;
+  levier?: string;
+  independante: boolean;
 };
 export type Version = { moteur: string; registres: string; donnees: string };
 export type FourchetteJson = { bas: number; central: number; haut: number };

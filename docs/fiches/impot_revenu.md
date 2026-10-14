@@ -68,5 +68,6 @@ Lecture :
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-14 | Confrontation à l'IPP et à l'OFCE (gel du barème 2026), `docs/validation/confrontations_independantes.md` | 3 nouvelles références indépendantes, hors tolérance (+71,5 %, +75,2 %, +73,0 %) |
 | 2026-10-12 | Revue de la PR : le chiffrage du PLF 2025, déjà en euros de 2025, n'est plus converti une seconde fois | gel de 2026 : -0,8 % → -0,7 % |
 | 2026-10-12 | Création du levier | 1 nouvelle référence de validation, dans la tolérance ; tableau : 49 sur 64 |

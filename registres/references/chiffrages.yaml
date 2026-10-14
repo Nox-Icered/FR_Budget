@@ -3224,3 +3224,150 @@ chiffrages:
     localisation: "Tableau « Vos cotisations minimales », retraite de base : « 5 409 € (450 × Smic horaire) », « 17,87 % », « Montant minimal annuel 967 € »"
     saisi_le: 2026-10-13
     relecture: a_relire
+
+  # Confrontations à des sources indépendantes de l'administration (lot du 14 octobre 2026).
+  # Documents consultés, non reproduits (licence non précisée) ; empreinte du fichier lu.
+
+  - id: tva_point_brut_ipp_2025_quatre_taux
+    levier: tva
+    source: ipp_perspectives_budgetaires_2025_chapitre2
+    millesime: "Perspectives budgétaires, juin 2025"
+    mesure: Hausse des recettes de TVA pour une hausse d'un point des quatre taux de TVA (IPP)
+    valeur: 13.0
+    unite: "Md€"
+    localisation: "Tableau 2.1 « Effets budgétaires d'une hausse d'un point de la TVA », ligne « Recettes de TVA », page 38 (fichier lu : sha256 aa28c3ae6056457d6991ffa1ed385e337d9fd20f411bd704cc4e6dfee2ba64a2)"
+    saisi_le: 2026-10-14
+    relecture: a_relire
+    independante: true
+
+  - id: tva_point_net_ipp_2025_quatre_taux
+    levier: tva
+    source: ipp_perspectives_budgetaires_2025_chapitre2
+    millesime: "Perspectives budgétaires, juin 2025"
+    mesure: Effet d'une hausse d'un point des quatre taux de TVA sur le solde public, net de la TVA payée par les administrations publiques sur leurs achats (IPP)
+    valeur: 11.0
+    unite: "Md€"
+    localisation: "Page 38 : « 2 Mde étant payé par les administrations publiques sur leurs achats, les dépenses publiques augmentent d'autant, et l'effet sur le solde public se trouve limité à 11 Mde » (sha256 aa28c3ae6056457d6991ffa1ed385e337d9fd20f411bd704cc4e6dfee2ba64a2)"
+    saisi_le: 2026-10-14
+    relecture: a_relire
+    independante: true
+
+  - id: ir_gel_ipp_inflation_1_0_2026
+    levier: impot_revenu
+    source: ipp_actualisation_annee_blanche_2025
+    millesime: "octobre 2025 (inflation de 1 %)"
+    mesure: Recettes de l'impôt sur le revenu d'un gel du barème en 2026, inflation de 1 % (IPP)
+    valeur: 1.1
+    unite: "Md€"
+    localisation: "Tableau, colonne « Inflation à 1 % (septembre 2025) », ligne « dont recettes de l'IR » (page lue : sha256 765f48922ade283e987d0345f7e651d36d0a299631cfff494fc4672fb4435dcf)"
+    saisi_le: 2026-10-14
+    relecture: a_relire
+    independante: true
+
+  - id: ir_gel_ipp_inflation_1_3_2026
+    levier: impot_revenu
+    source: ipp_actualisation_annee_blanche_2025
+    millesime: "juin 2025 (inflation de 1,3 %)"
+    mesure: Recettes de l'impôt sur le revenu d'un gel du barème en 2026, inflation de 1,3 % (IPP)
+    valeur: 1.4
+    unite: "Md€"
+    localisation: "Tableau, colonne « Inflation à 1,3 % (juin 2025) », ligne « dont recettes de l'IR » (sha256 765f48922ade283e987d0345f7e651d36d0a299631cfff494fc4672fb4435dcf)"
+    saisi_le: 2026-10-14
+    relecture: a_relire
+    independante: true
+
+  - id: ir_gel_ofce_2026
+    levier: impot_revenu
+    source: ofce_blog_annee_blanche_2025
+    millesime: "juin 2025 (revalorisation usuelle prévue de 1,1 %)"
+    mesure: Rendement en 2026 d'un gel total du barème de l'impôt sur le revenu, revalorisation évitée de 1,1 % (OFCE)
+    valeur: 1.2
+    unite: "Md€"
+    localisation: "Page 5 : « Le gel total du barème de l'impôt sur le revenu rapporterait quant à lui, selon nos estimations, environ 1,2 milliard d'euros en 2026 » ; note 5 : revalorisation de 1,1 % (sha256 fa4078cd41f39f11560b5050726e2789a112a24ecad9861a782e366658855396)"
+    saisi_le: 2026-10-14
+    relecture: a_relire
+    independante: true
+
+  - id: indexation_pensions_ipp_inflation_1_0_2026
+    levier: indexation_pensions_prestations
+    source: ipp_actualisation_annee_blanche_2025
+    millesime: "octobre 2025 (inflation de 1 %)"
+    mesure: Rendement en 2026 d'un gel des pensions de retraite de base (complémentaires non gelées), inflation de 1 % (IPP)
+    valeur: 2.4
+    unite: "Md€"
+    localisation: "Tableau, colonne « Inflation à 1 % (septembre 2025) », ligne « dont pensions de retraite » ; NB2 : retraites complémentaires non gelées (sha256 765f48922ade283e987d0345f7e651d36d0a299631cfff494fc4672fb4435dcf)"
+    saisi_le: 2026-10-14
+    relecture: a_relire
+    independante: true
+
+  - id: indexation_pensions_ipp_inflation_1_3_2026
+    levier: indexation_pensions_prestations
+    source: ipp_actualisation_annee_blanche_2025
+    millesime: "juin 2025 (inflation de 1,3 %)"
+    mesure: Rendement en 2026 d'un gel des pensions de retraite de base, inflation de 1,3 % (IPP)
+    valeur: 3.0
+    unite: "Md€"
+    localisation: "Tableau, colonne « Inflation à 1,3 % (juin 2025) », ligne « dont pensions de retraite » (sha256 765f48922ade283e987d0345f7e651d36d0a299631cfff494fc4672fb4435dcf)"
+    saisi_le: 2026-10-14
+    relecture: a_relire
+    independante: true
+
+  - id: remunerations_point_1_ccomptes_2017_total
+    levier: remunerations_publiques
+    source: ccomptes_situation_perspectives_finances_publiques_2017
+    millesime: "juin 2017"
+    mesure: Surcoût d'une hausse de 1 % de la valeur du point pour l'ensemble de la fonction publique (Cour des comptes)
+    valeur: 2.07
+    unite: "Md€"
+    localisation: "Chapitre IV, I, A, 1, a, page 141 : « une augmentation de 1 % de la valeur du point se traduit par un surcoût de 2 070 M€ pour l'ensemble de la fonction publique » (sha256 760ebe3d05b1decc3943367894b1a05b5ac30da69f835d6a7dc9b45df9385ef7)"
+    saisi_le: 2026-10-14
+    relecture: a_relire
+    independante: true
+
+  - id: remunerations_point_1_ccomptes_2017_fpe
+    levier: remunerations_publiques
+    source: ccomptes_situation_perspectives_finances_publiques_2017
+    millesime: "juin 2017"
+    mesure: Même surcoût pour l'État, y compris les opérateurs (Cour des comptes)
+    valeur: 0.88
+    unite: "Md€"
+    localisation: "Page 141 : « dont 880 M€ pour l'État (y compris les opérateurs) »"
+    saisi_le: 2026-10-14
+    relecture: a_relire
+    independante: true
+
+  - id: remunerations_point_1_ccomptes_2017_fpt
+    levier: remunerations_publiques
+    source: ccomptes_situation_perspectives_finances_publiques_2017
+    millesime: "juin 2017"
+    mesure: Même surcoût pour les collectivités territoriales (Cour des comptes)
+    valeur: 0.64
+    unite: "Md€"
+    localisation: "Page 141 : « 640 M€ pour les collectivités territoriales »"
+    saisi_le: 2026-10-14
+    relecture: a_relire
+    independante: true
+
+  - id: remunerations_point_1_ccomptes_2017_fph
+    levier: remunerations_publiques
+    source: ccomptes_situation_perspectives_finances_publiques_2017
+    millesime: "juin 2017"
+    mesure: Même surcoût pour les hôpitaux (Cour des comptes)
+    valeur: 0.55
+    unite: "Md€"
+    localisation: "Page 141 : « 550 M€ pour les hôpitaux »"
+    saisi_le: 2026-10-14
+    relecture: a_relire
+    independante: true
+
+  - id: remunerations_point_1_fipeco_2026_total
+    levier: remunerations_publiques
+    source: fipeco_masse_salariale_publique_2026
+    millesime: "juillet 2026"
+    mesure: Coût d'une hausse de 1 % du point de la fonction publique, hors cotisations des employeurs (Fipeco ; source de second rang)
+    valeur: 2.5
+    unite: "Md€"
+    localisation: "Partie B-2 : « Chaque augmentation de 1,0 % du point de la fonction publique a un coût (hors cotisations des employeurs) de 1 000 M€ pour l'Etat, 200 M€ pour ses opérateurs, 700 M€ pour les administrations locales et 700 M€ pour les administrations sociales […] soit un total de 2,5 Md€ » (sha256 ad5ed76725d964a02f0e705ff02d1cdd6dd283c86838f65ddf3e147085f001f7)"
+    saisi_le: 2026-10-14
+    relecture: a_relire
+    independante: true

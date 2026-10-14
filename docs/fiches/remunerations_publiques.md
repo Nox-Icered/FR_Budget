@@ -91,4 +91,5 @@ Le levier reste en bêta. Aucune source indépendante n'est encore confrontée (
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-14 | Confrontation à la Cour des comptes (2017) et à Fipeco (2026) sur le point d'indice, `docs/validation/confrontations_independantes.md` | 5 nouvelles références indépendantes, dans la tolérance (de −9,6 % à −5,1 %) |
 | 2026-10-12 | Création du levier ; extraction de D1 et D122 ajoutée aux comptes des APU (indicateurs existants inchangés) | 8 nouvelles références de validation, 4 dans la tolérance (dont les 2 totaux) ; tableau : 34 sur 46 |

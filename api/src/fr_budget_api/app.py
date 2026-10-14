@@ -506,16 +506,19 @@ def version_donnees() -> dict[str, str]:
 
 def resume_validation() -> list[dict[str, Any]]:
     """Valeur du modèle, référence et écart pour chaque référence de validation."""
-    unites = {c["id"]: c["unite"] for c in _registres()["chiffrages"]}
+    chiffrages = {c["id"]: c for c in _registres()["chiffrages"]}
     return [
         {
             "reference": c.reference,
+            "levier": chiffrages[c.reference].get("levier")
+            or chiffrages[c.reference].get("module"),
+            "independante": bool(chiffrages[c.reference].get("independante", False)),
             "modele": c.modele,
             "valeur_reference": c.valeur_reference,
             "ecart": c.ecart,
             "tolerance": c.tolerance,
             "dans_la_tolerance": c.dans_la_tolerance,
-            "unite": unites[c.reference],
+            "unite": chiffrages[c.reference]["unite"],
         }
         for c in comparaisons()
     ]

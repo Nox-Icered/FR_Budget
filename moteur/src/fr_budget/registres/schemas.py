@@ -137,6 +137,9 @@ class Chiffrage(Strict):
     """Page, tableau ou ligne du document où se trouve la valeur."""
     saisi_le: date
     relecture: StatutRelecture
+    independante: bool = False
+    """Source indépendante de l'administration qui chiffre la mesure (IPP, OFCE, Cour des
+    comptes…) : la règle de publication demande au moins une confrontation de ce type."""
 
     @model_validator(mode="after")
     def un_levier_ou_un_module(self) -> Self:

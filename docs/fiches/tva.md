@@ -90,3 +90,4 @@ Leurs plages serviront au calcul des fourchettes. Restent à créer, une fois so
 | 2026-10-08 | Tolérance maintenue à ±10 % (décision du mainteneur) ; précision des références publiée dans `docs/validation/levier_tva.md` | aucun |
 | 2026-10-08 | Convention du point net maintenue (décision du mainteneur) ; limite publiée dans `docs/validation/levier_tva.md` | aucun |
 | 2026-10-08 | Prototype clos en bêta (décision du mainteneur) ; type `Fourchette` et fourchettes TVA à partir des deux hypothèses du registre | aucun (valeurs centrales inchangées) |
+| 2026-10-14 | Confrontation à l'IPP (hausse d'un point des quatre taux, juin 2025), `docs/validation/confrontations_independantes.md` | 2 nouvelles références indépendantes, dans la tolérance (+9,1 % et +5,4 %) |

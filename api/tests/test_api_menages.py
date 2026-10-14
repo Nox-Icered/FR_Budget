@@ -175,8 +175,12 @@ def test_export_des_effets_des_leviers(tmp_path: Path) -> None:
         assert set(par_sens) == {"hausse", "baisse"}
         for menages in par_sens.values():
             assert set(menages) == set(module_menages.PROFILS)
-    # Pension du retraité : effet de l'indexation non chiffré (part des pensions de base).
-    assert effets["effets"]["indexation_pensions_prestations"]["hausse"]["retraite_seul"] is None
+    # Pension du retraité : l'indexation revalorise sa part de base, son revenu augmente.
+    retraite = effets["effets"]["indexation_pensions_prestations"]["hausse"]["retraite_seul"]
+    assert retraite is not None
+    avant = {m["id"]: m for m in menages_types()["menages"]}["retraite_seul"]
+    assert retraite["pension_brute"] > avant["pension_brute"]
+    assert retraite["net_apres_impot"] > avant["net_apres_impot"]
     assert "tva_taux_normal" in effets["sans_effet"]
     # Grille de chaque levier (simulateur) et contrôle publié de l'approximation.
     assert set(effets["grille"]) == set(effets["effets"])

@@ -209,6 +209,9 @@ class Legislation:
     ecart_csg_activite: float = 0.0
     """Variation du taux de CSG déductible des revenus d'activité d'un indépendant, en
     fraction, à partir de l'année simulée (calculée hors d'OpenFisca)."""
+    ecart_pension: float = 0.0
+    """Variation de la pension d'un retraité, en fraction, sur l'année simulée (revalorisation
+    de sa part de base, ``fr_budget.menages.leviers``)."""
 
 
 REFERENCE = Legislation()
@@ -363,15 +366,22 @@ def _resultat_fiscal(adulte: Adulte, annee: int, ecart_csg: float = 0.0) -> floa
 
 
 def _salaires(
-    adulte: Adulte, annee: int, mois: list[str], ecart_csg: float = 0.0
+    adulte: Adulte,
+    annee: int,
+    mois: list[str],
+    ecart_csg: float = 0.0,
+    ecart_pension: float = 0.0,
 ) -> dict[str, Any]:
     """Salaire de base des ``mois``, pour un apprenti son contrat, pour un retraité sa
-    pension (sans salaire)."""
+    pension (sans salaire), changée de ``ecart_pension`` sur l'année simulée seulement."""
     montant = adulte.montant_mensuel
     if adulte.retraite:
-        if montant is not None:
-            return {"retraite_brute": dict.fromkeys(mois, montant)}
-        return {"retraite_brute": {m: pension_brute_mensuelle(int(m[:4])) for m in mois}}
+
+        def pension(m: str) -> float:
+            p = montant if montant is not None else pension_brute_mensuelle(int(m[:4]))
+            return p * (1 + ecart_pension) if int(m[:4]) == annee else p
+
+        return {"retraite_brute": {m: pension(m) for m in mois}}
     if adulte.independant:
         # Résultat fiscal (bénéfice industriel et commercial) pour l'impôt ; les cotisations
         # sont calculées hors d'OpenFisca (fr_budget.menages.independants).
@@ -411,6 +421,7 @@ def situation(
     annee: int = ANNEE,
     rfr_anterieur: float | None = None,
     ecart_csg_independant: float = 0.0,
+    ecart_pension: float = 0.0,
 ) -> dict[str, Any]:
     """Situation OpenFisca du ménage : salaires de l'année et de la précédente, déclaration
     commune pour un couple (marié), enfants à charge.
@@ -429,7 +440,7 @@ def situation(
         adultes.append(nom)
         individus[nom] = {
             "date_naissance": {"ETERNITY": a.naissance},
-            **_salaires(a, annee, mois, ecart_csg_independant),
+            **_salaires(a, annee, mois, ecart_csg_independant, ecart_pension),
             **_emploi_sur(mois),
             **_categorie(a.cadre, mois),
         }
@@ -467,7 +478,9 @@ def _construire(
 ) -> Simulation:
     simulation = SimulationBuilder().build_from_entities(
         _systeme(legislation),
-        situation(profil, annee, rfr_anterieur, legislation.ecart_csg_activite),
+        situation(
+            profil, annee, rfr_anterieur, legislation.ecart_csg_activite, legislation.ecart_pension
+        ),
     )
     if _avec_retraite(profil):
         # OpenFisca met à zéro une variable demandée pour une autre période au cours de son

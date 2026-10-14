@@ -57,3 +57,18 @@ def test_lectures_ordonnees() -> None:
 def test_cout_net_d_un_point_en_fourchette() -> None:
     f = ix.cout_un_point()
     assert 0 < f.bas <= f.central <= f.haut < ix.cout_brut_un_point()
+
+
+def test_part_base_droit_direct() -> None:
+    """Part des pensions de base dans les pensions de droit direct : codes de droit direct du
+    bloc des pensions, rapportés à ces codes plus les pensions complémentaires."""
+    prestations = ix._prestations()
+    base = sum(
+        prestations.get((ix.ANNEE_COMPTES, c), 0.0)
+        for c in ix.BLOCS[ix.PENSIONS].codes
+        if c.startswith(ix.PREFIXE_DROIT_DIRECT)
+    )
+    complementaires = prestations[(ix.ANNEE_COMPTES, ix.CODE_COMPLEMENTAIRES_DROIT_DIRECT)]
+    part = ix.part_base_droit_direct()
+    assert part == pytest.approx(base / (base + complementaires))
+    assert 0 < part < 1

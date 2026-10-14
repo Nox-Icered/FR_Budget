@@ -7,6 +7,15 @@ Chaque source publique d'origine garde sa propre licence, indiquée dans `regist
 
 Le code du projet est sous AGPL-3.0 (voir `LICENSE`).
 
+**Exception : tables dérivées de données sous licence ODbL.** Les tables suivantes sont dérivées des jeux open data de l'Urssaf, publiés sous Open Database License (ODbL) 1.0. Elles sont distribuées sous cette même licence, et non sous la Licence Ouverte 2.0 ci-dessous ; le texte de l'ODbL est dans `LICENCE-ODBL.txt` (repris sans modification de https://opendatacommons.org/licenses/odbl/odbl-10.txt). Mention de la source : Urssaf, open.urssaf.fr, avec la date de mise à jour de chaque jeu indiquée dans `registres/sources.yaml` (identifiants `urssaf_open_data_*`).
+
+- `data/processed/entreprises/taille.csv`
+- `data/processed/entreprises/secteur.csv`
+- `data/processed/entreprises/masse_salariale_annuelle.csv`
+- le fichier `entreprises.json` produit par l'export de l'API (`api/src/fr_budget_api/export.py`) et publié par le site, ainsi que la réponse de la route `GET /entreprises`
+
+Les tables `data/processed/entreprises/is_taille.csv` et `is_secteur.csv`, dérivées de données de la DGFiP (Licence Etalab 2.0), restent sous la Licence Ouverte 2.0.
+
 Le texte de la licence ci-dessous est repris sans modification de https://github.com/etalab/licence-ouverte (fichier `LO.md`).
 
 ---

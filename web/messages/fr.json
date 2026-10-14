@@ -20,7 +20,8 @@
     "relectures": "Relectures",
     "mentions": "Mentions légales",
     "menages": "Ménages types",
-    "mon_menage": "Mon ménage"
+    "mon_menage": "Mon ménage",
+    "entreprises": "Entreprises"
   },
   "accueil": {
     "titre": "Les comptes des administrations publiques",
@@ -290,6 +291,16 @@
       "detail": "Détail ligne par ligne, mesure par mesure",
       "ecartees": "Mesures réglées sans effet direct sur ces ménages :",
       "approximation_salaire": "En lecture répercutée sur le salaire, contrôlée avec toutes les mesures à leurs bornes : {combinaison} euros par an."
+    },
+    "entreprises": {
+      "titre": "Effet sur les entreprises",
+      "aucune": "Aucune mesure réglée ne change directement les cotisations patronales ou l'impôt sur les sociétés.",
+      "groupes": {
+        "cotisations": "Cotisations patronales, par taille d'entreprise (nombre de salariés, Urssaf)",
+        "impot_societes": "Impôt sur les sociétés, par catégorie d'entreprise (DGFiP)"
+      },
+      "methode": "Effet national des mesures réparti selon la part de chaque classe dans l'assiette, sans changement de comportement ; un montant positif augmente la charge. Les deux tableaux ne s'additionnent pas : leurs classes ne sont pas les mêmes.",
+      "detail": "Détail par taille et par secteur, sources et contrôles"
     }
   },
   "partage": {
@@ -495,5 +506,43 @@
         "indexation_pensions_prestations": "Revalorisation des pensions de base et des prestations, par rapport à la loi : {valeur} point(s)"
       }
     }
+  },
+  "entreprises": {
+    "titre": "Entreprises",
+    "bandeau": "Bêta, non validé : la répartition entre entreprises suppose que chaque classe supporte la mesure en proportion de sa part de l'assiette, sans changement de comportement ni répercussion sur les prix ou les salaires.",
+    "intro": "Pour chaque mesure, l'effet national calculé par le simulateur (en millions d'euros par an, pour une unité de la mesure) est réparti entre les entreprises selon leur part de l'assiette : masse salariale ou allègements de l'Urssaf ({annee_urssaf}) pour les cotisations, impôt sur les sociétés de la DGFiP ({annee_is}, et {annee_is_2} pour la fourchette) pour l'impôt. Un montant positif augmente la charge des entreprises.",
+    "mesure": "Mesure",
+    "leviers": {
+      "cotisations_patronales_taux": "Hausse d'un point du taux de cotisation patronale du secteur privé",
+      "allegements_generaux": "Allègements généraux de cotisations patronales augmentés de 1 %",
+      "is_taux_normal": "Hausse d'un point du taux normal de l'impôt sur les sociétés",
+      "is_surtaxe_grandes_entreprises": "Surtaxe de 1 % de l'impôt sur les sociétés des entreprises dont le chiffre d'affaires dépasse 1 milliard d'euros"
+    },
+    "national": "Effet sur l'ensemble des entreprises : {effet} millions d'euros par an.",
+    "fourchette": "{central} (de {bas} à {haut})",
+    "classe": "Classe d'entreprises",
+    "part": "Part de l'assiette (%)",
+    "effet": "Effet, en millions d'euros par an",
+    "par_salarie": "Par salarié, en euros par an",
+    "par_entreprise": "Par entreprise redevable, en euros par an",
+    "par_taille_urssaf": "Par taille d'entreprise (nombre de salariés, Urssaf)",
+    "par_secteur_urssaf": "Par grand secteur (Urssaf)",
+    "par_taille_dgfip": "Par catégorie d'entreprise (DGFiP)",
+    "par_secteur_dgfip": "Par secteur (DGFiP)",
+    "sans_secteur": "Pas de répartition par secteur : la DGFiP ne publie pas l'assiette de la surtaxe par secteur.",
+    "sources": "Sources :",
+    "controles_titre": "Contrôle des données de l'Urssaf",
+    "controles_intro": "Les données qui répartissent les mesures sur les cotisations sont confrontées aux comptes de la sécurité sociale, en milliards d'euros.",
+    "controle": "Grandeur",
+    "urssaf": "Urssaf",
+    "ccss": "Comptes de la sécurité sociale",
+    "ecart": "Écart",
+    "controles": {
+      "point": "Un point de cotisation sur la masse salariale du secteur privé, {annee}",
+      "allegements": "Allègements généraux des salariés, {annee}"
+    },
+    "limites": "Limites : chaque mesure garde la nomenclature de ses données (tranches de salariés et grands secteurs de l'Urssaf, catégories et secteurs de la DGFiP), sans correspondance entre elles. La surtaxe est attribuée aux grandes entreprises au sens de la DGFiP, proches mais pas identiques aux entreprises de plus d'un milliard d'euros de chiffre d'affaires. TVA et accises, payées par les consommateurs, ne sont pas réparties.",
+    "licence": "Données de l'Urssaf sous licence ODbL : les tables dérivées publiées par ce site le sont sous la même licence.",
+    "lien_fiche": "Méthode, sources et contrôles : fiche « entreprises » du dépôt."
   }
 }

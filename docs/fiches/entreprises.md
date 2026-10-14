@@ -42,7 +42,7 @@ Code : `moteur/src/fr_budget/entreprises/repartition.py`. Pipelines : `pipelines
 4. **Surtaxe : grandes entreprises au sens de la DGFiP.** La surtaxe vise les entreprises de plus d'un milliard d'euros de chiffre d'affaires ; les « grandes entreprises » de la DGFiP (environ 370 en 2025) en sont proches sans être identiques. Aucune donnée publiée ne permet de la répartir par secteur.
 5. **Nomenclatures séparées.** Les cotisations restent dans les classes de l'Urssaf (tranches de salariés, grands secteurs), l'impôt dans celles de la DGFiP (catégories d'entreprises, secteurs). Aucune table de passage n'est inventée ; les deux tableaux ne s'additionnent pas.
 6. **Années.** Données de l'Urssaf de 2024, de la DGFiP de 2025 (et 2024), appliquées à l'effet national de l'année de référence du simulateur : la structure par classe est supposée stable.
-7. **Licence ODbL.** Les tables dérivées des données de l'Urssaf (`data/processed/entreprises/taille.csv`, `secteur.csv`, `masse_salariale_annuelle.csv`, et l'export `entreprises.json`) sont publiées sous licence ODbL, comme les jeux d'origine. `LICENCE-DONNEES.md` les exclut de la Licence Ouverte 2.0 et renvoie au texte de l'ODbL (`LICENCE-ODBL.txt`) ; le README le dit aussi. Ce choix est à confirmer par le mainteneur : l'autre voie serait de ne pas publier de table dérivée de l'Urssaf.
+7. **Licence ODbL.** Les tables dérivées des données de l'Urssaf (`data/processed/entreprises/taille.csv`, `secteur.csv`, `masse_salariale_annuelle.csv`, et l'export `entreprises.json`) sont publiées sous licence ODbL, comme les jeux d'origine. `LICENCE-DONNEES.md` les exclut de la Licence Ouverte 2.0 et renvoie au texte de l'ODbL (`LICENCE-ODBL.txt`) ; le README le dit aussi. Choix confirmé par le mainteneur le 2026-10-14 ; l'autre voie aurait été de ne pas publier de table dérivée de l'Urssaf.
 
 ## 6. Validation
 
@@ -62,4 +62,5 @@ Tests unitaires (`moteur/tests/unitaires/test_entreprises.py`) : les parts somme
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-14 | Licence ODbL des tables dérivées de l'Urssaf confirmée par le mainteneur | aucun |
 | 2026-10-14 | Création : répartition de quatre leviers par taille et par secteur ; page Entreprises et panneau du simulateur | 3 nouveaux tests de validation (Urssaf contre CCSS), tous réussis ; 13 tests unitaires ; 4 tests d'API ; 2 tests du site |

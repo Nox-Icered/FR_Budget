@@ -1,0 +1,2347 @@
+nomenclature,classe,poste,libelle,euros
+type_menage,1,01111,Riz sous toutes ses formes et produits à base de riz,20.0
+type_menage,1,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,280.0
+type_menage,1,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,35.0
+type_menage,1,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",79.0
+type_menage,1,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",30.0
+type_menage,1,01121,Viande bovine fraîche ou surgelée,119.0
+type_menage,1,01122,Viande porcine fraîche ou surgelée,34.0
+type_menage,1,01123,Viande ovine ou caprine fraîche ou surgelée,15.0
+type_menage,1,01124,Viande de volaille fraîche ou surgelée,75.0
+type_menage,1,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",175.0
+type_menage,1,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",78.0
+type_menage,1,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",8.0
+type_menage,1,01130,Poissons frais,65.0
+type_menage,1,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),12.0
+type_menage,1,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",34.0
+type_menage,1,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",16.0
+type_menage,1,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,56.0
+type_menage,1,01145,Fromage et lait caillé,157.0
+type_menage,1,01147,Œufs,28.0
+type_menage,1,0114A,"Lait frais, condensé, en poudre",35.0
+type_menage,1,0114B,Yaourts et produits laitiers,96.0
+type_menage,1,01151,Beurre,24.0
+type_menage,1,0115A,Huiles alimentaires,23.0
+type_menage,1,0115B,Margarine et autres graisses alimentaires,7.0
+type_menage,1,01161,Agrumes frais,44.0
+type_menage,1,01162,Bananes fraîches,18.0
+type_menage,1,01168,Fruits séchés,30.0
+type_menage,1,01169,Fruits au sirop et fruits surgelés,5.0
+type_menage,1,0116A,Autres fruits frais,134.0
+type_menage,1,01175,Légumes secs,5.0
+type_menage,1,01176,Légumes surgelés non cuisinés,7.0
+type_menage,1,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",32.0
+type_menage,1,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",29.0
+type_menage,1,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",47.0
+type_menage,1,0117A,Legumes frais,155.0
+type_menage,1,01181,Sucre yc édulcorants,10.0
+type_menage,1,0118A,Produits à base de sucre et cacao,132.0
+type_menage,1,0119Z,Autres produits alimentaires,76.0
+type_menage,1,01213,Cacao et chocolat en poudre,2.0
+type_menage,1,0121A,"Café, thé, plantes à infusion",80.0
+type_menage,1,01221,Eaux minérales,40.0
+type_menage,1,01222,Boissons gazeuses,25.0
+type_menage,1,0122A,Jus de fruits et de légumes,54.0
+type_menage,1,0131Z,Autres dépenses d alimentation,104.0
+type_menage,1,02111,Spiritueux et liqueurs,77.0
+type_menage,1,0212A,"Vins, apéritifs à base de vin, champagne",135.0
+type_menage,1,02131,Bière et boissons à base de bière,45.0
+type_menage,1,022ZZ,Tabac et produits connexes,329.0
+type_menage,1,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",3.0
+type_menage,1,03111,Tissus pour vêtements,3.0
+type_menage,1,0312Z,"Vêtements homme, femme, enfant",466.0
+type_menage,1,03131,Accessoires du vêtement et mercerie,20.0
+type_menage,1,03141,"Nettoyage, réparation et location de vêtements",16.0
+type_menage,1,032ZZ,"Chaussures, yc location et réparation",142.0
+type_menage,1,0331Z,Autres dépenses d habillement,82.0
+type_menage,1,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,2252.0
+type_menage,1,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,4.0
+type_menage,1,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),89.0
+type_menage,1,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",143.0
+type_menage,1,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),659.0
+type_menage,1,04500,Facture électricité + gaz (non dissociables),125.0
+type_menage,1,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",558.0
+type_menage,1,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",191.0
+type_menage,1,0453Z,Combustibles liquides,96.0
+type_menage,1,045AZ,Combustibles solides,29.0
+type_menage,1,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),43.0
+type_menage,1,0511Z,"Meubles, articles d’ameublement et de décoration",203.0
+type_menage,1,051AZ,"Tapis et autres revêtements, pose et réparation",11.0
+type_menage,1,0521Z,Articles de literie et autres articles de ménage en textile,65.0
+type_menage,1,0531Z,Gros appareils ménagers électriques,91.0
+type_menage,1,05321,Petit électroménager,10.0
+type_menage,1,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",45.0
+type_menage,1,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",31.0
+type_menage,1,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",63.0
+type_menage,1,0561Z,Articles de ménage non durables,138.0
+type_menage,1,0562Z,Services domestiques et autres services pour le logement,225.0
+type_menage,1,0571Z,Autres dépenses en équipement,30.0
+type_menage,1,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",187.0
+type_menage,1,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,49.0
+type_menage,1,06221,"Dentiste, orthodontie",35.0
+type_menage,1,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",33.0
+type_menage,1,06311,Services et soins hospitaliers,14.0
+type_menage,1,0641Z,Autres dépenses de santé,7.0
+type_menage,1,0711Z,Achats d automobiles,627.0
+type_menage,1,07121,Achats de motocycles neufs et occasion,31.0
+type_menage,1,07131,Achats de cycles neufs et occasion,11.0
+type_menage,1,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",75.0
+type_menage,1,07221,"Carburants, électricité, huiles, lubrifiants…",580.0
+type_menage,1,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",164.0
+type_menage,1,0724Z,Autres services liés à l’utilisation de véhicules personnels,60.0
+type_menage,1,07361,Autres services de transport (yc déménagement),10.0
+type_menage,1,073ZZ,Services de transport,379.0
+type_menage,1,0741Z,Autres dépenses de transport,212.0
+type_menage,1,08111,"Services postaux (yc timbres, enveloppes)",16.0
+type_menage,1,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",38.0
+type_menage,1,08131,"Services de téléphone et fax, internet, recharges téléphoniques",464.0
+type_menage,1,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",49.0
+type_menage,1,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",51.0
+type_menage,1,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),42.0
+type_menage,1,091AZ,"Equipement photo, cinéma, optique",23.0
+type_menage,1,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,68.0
+type_menage,1,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",44.0
+type_menage,1,09321,"Horticulture, accessoires et frais de livraison",95.0
+type_menage,1,093AZ,Animaux d’agrément,108.0
+type_menage,1,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",207.0
+type_menage,1,0942Z,Services culturels,347.0
+type_menage,1,09431,"jeux de hasard (loto, tiercé …)",33.0
+type_menage,1,09511,Livres yc e-books,103.0
+type_menage,1,09521,Journaux et périodiques yc par abonnement,108.0
+type_menage,1,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",9.0
+type_menage,1,09541,Articles de papeterie et de dessin (yc toner pour imprimante),31.0
+type_menage,1,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",154.0
+type_menage,1,0971Z,Autres dépenses de loisirs,164.0
+type_menage,1,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),0.0
+type_menage,1,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),0.0
+type_menage,1,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,33.0
+type_menage,1,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",3.0
+type_menage,1,1015Z,Autres dépenses d’enseignement,32.0
+type_menage,1,11111,Repas pris dans un restaurant,367.0
+type_menage,1,11112,"Repas pris dans un café, bars ou assimilé",336.0
+type_menage,1,11121,Cantines scolaire et professionnelle,67.0
+type_menage,1,1113Z,Autres dépenses de restauration,204.0
+type_menage,1,11211,Services d hébergement,116.0
+type_menage,1,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",214.0
+type_menage,1,1212Z,"Appareils, articles et produits pour les soins personnels",236.0
+type_menage,1,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",20.0
+type_menage,1,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",38.0
+type_menage,1,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),39.0
+type_menage,1,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",59.0
+type_menage,1,12511,"Assurances vie, décès",30.0
+type_menage,1,12521,Assurances liées au logement,313.0
+type_menage,1,12531,Assurances liées à la santé,725.0
+type_menage,1,12541,Assurances liées aux transports (yc assurance voyage),348.0
+type_menage,1,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",99.0
+type_menage,1,12611,Services financiers,98.0
+type_menage,1,1271Z,Autres services,342.0
+type_menage,1,12811,Autres dépenses occasionnées par une cérémonie,16.0
+type_menage,1,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,0.0
+type_menage,2,01111,Riz sous toutes ses formes et produits à base de riz,35.0
+type_menage,2,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,407.0
+type_menage,2,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,68.0
+type_menage,2,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",156.0
+type_menage,2,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",55.0
+type_menage,2,01121,Viande bovine fraîche ou surgelée,180.0
+type_menage,2,01122,Viande porcine fraîche ou surgelée,53.0
+type_menage,2,01123,Viande ovine ou caprine fraîche ou surgelée,29.0
+type_menage,2,01124,Viande de volaille fraîche ou surgelée,138.0
+type_menage,2,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",231.0
+type_menage,2,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",92.0
+type_menage,2,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",7.0
+type_menage,2,01130,Poissons frais,73.0
+type_menage,2,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),11.0
+type_menage,2,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",36.0
+type_menage,2,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",19.0
+type_menage,2,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,66.0
+type_menage,2,01145,Fromage et lait caillé,206.0
+type_menage,2,01147,Œufs,52.0
+type_menage,2,0114A,"Lait frais, condensé, en poudre",73.0
+type_menage,2,0114B,Yaourts et produits laitiers,157.0
+type_menage,2,01151,Beurre,28.0
+type_menage,2,0115A,Huiles alimentaires,29.0
+type_menage,2,0115B,Margarine et autres graisses alimentaires,9.0
+type_menage,2,01161,Agrumes frais,47.0
+type_menage,2,01162,Bananes fraîches,28.0
+type_menage,2,01168,Fruits séchés,37.0
+type_menage,2,01169,Fruits au sirop et fruits surgelés,4.0
+type_menage,2,0116A,Autres fruits frais,122.0
+type_menage,2,01175,Légumes secs,5.0
+type_menage,2,01176,Légumes surgelés non cuisinés,10.0
+type_menage,2,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",40.0
+type_menage,2,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",33.0
+type_menage,2,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",72.0
+type_menage,2,0117A,Legumes frais,209.0
+type_menage,2,01181,Sucre yc édulcorants,12.0
+type_menage,2,0118A,Produits à base de sucre et cacao,220.0
+type_menage,2,0119Z,Autres produits alimentaires,122.0
+type_menage,2,01213,Cacao et chocolat en poudre,5.0
+type_menage,2,0121A,"Café, thé, plantes à infusion",84.0
+type_menage,2,01221,Eaux minérales,54.0
+type_menage,2,01222,Boissons gazeuses,54.0
+type_menage,2,0122A,Jus de fruits et de légumes,111.0
+type_menage,2,0131Z,Autres dépenses d alimentation,116.0
+type_menage,2,02111,Spiritueux et liqueurs,60.0
+type_menage,2,0212A,"Vins, apéritifs à base de vin, champagne",139.0
+type_menage,2,02131,Bière et boissons à base de bière,40.0
+type_menage,2,022ZZ,Tabac et produits connexes,443.0
+type_menage,2,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",4.0
+type_menage,2,03111,Tissus pour vêtements,2.0
+type_menage,2,0312Z,"Vêtements homme, femme, enfant",1035.0
+type_menage,2,03131,Accessoires du vêtement et mercerie,37.0
+type_menage,2,03141,"Nettoyage, réparation et location de vêtements",8.0
+type_menage,2,032ZZ,"Chaussures, yc location et réparation",314.0
+type_menage,2,0331Z,Autres dépenses d habillement,84.0
+type_menage,2,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,2311.0
+type_menage,2,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,30.0
+type_menage,2,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),231.0
+type_menage,2,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",229.0
+type_menage,2,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),743.0
+type_menage,2,04500,Facture électricité + gaz (non dissociables),151.0
+type_menage,2,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",635.0
+type_menage,2,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",253.0
+type_menage,2,0453Z,Combustibles liquides,70.0
+type_menage,2,045AZ,Combustibles solides,39.0
+type_menage,2,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),23.0
+type_menage,2,0511Z,"Meubles, articles d’ameublement et de décoration",291.0
+type_menage,2,051AZ,"Tapis et autres revêtements, pose et réparation",7.0
+type_menage,2,0521Z,Articles de literie et autres articles de ménage en textile,63.0
+type_menage,2,0531Z,Gros appareils ménagers électriques,127.0
+type_menage,2,05321,Petit électroménager,19.0
+type_menage,2,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",55.0
+type_menage,2,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",24.0
+type_menage,2,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",66.0
+type_menage,2,0561Z,Articles de ménage non durables,199.0
+type_menage,2,0562Z,Services domestiques et autres services pour le logement,179.0
+type_menage,2,0571Z,Autres dépenses en équipement,26.0
+type_menage,2,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",222.0
+type_menage,2,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,98.0
+type_menage,2,06221,"Dentiste, orthodontie",47.0
+type_menage,2,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",53.0
+type_menage,2,06311,Services et soins hospitaliers,22.0
+type_menage,2,0641Z,Autres dépenses de santé,5.0
+type_menage,2,0711Z,Achats d automobiles,1480.0
+type_menage,2,07121,Achats de motocycles neufs et occasion,45.0
+type_menage,2,07131,Achats de cycles neufs et occasion,20.0
+type_menage,2,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",65.0
+type_menage,2,07221,"Carburants, électricité, huiles, lubrifiants…",849.0
+type_menage,2,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",225.0
+type_menage,2,0724Z,Autres services liés à l’utilisation de véhicules personnels,116.0
+type_menage,2,07361,Autres services de transport (yc déménagement),12.0
+type_menage,2,073ZZ,Services de transport,530.0
+type_menage,2,0741Z,Autres dépenses de transport,249.0
+type_menage,2,08111,"Services postaux (yc timbres, enveloppes)",11.0
+type_menage,2,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",106.0
+type_menage,2,08131,"Services de téléphone et fax, internet, recharges téléphoniques",666.0
+type_menage,2,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",64.0
+type_menage,2,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",72.0
+type_menage,2,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),41.0
+type_menage,2,091AZ,"Equipement photo, cinéma, optique",5.0
+type_menage,2,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,38.0
+type_menage,2,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",203.0
+type_menage,2,09321,"Horticulture, accessoires et frais de livraison",75.0
+type_menage,2,093AZ,Animaux d’agrément,135.0
+type_menage,2,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",311.0
+type_menage,2,0942Z,Services culturels,443.0
+type_menage,2,09431,"jeux de hasard (loto, tiercé …)",20.0
+type_menage,2,09511,Livres yc e-books,115.0
+type_menage,2,09521,Journaux et périodiques yc par abonnement,49.0
+type_menage,2,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",12.0
+type_menage,2,09541,Articles de papeterie et de dessin (yc toner pour imprimante),67.0
+type_menage,2,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",193.0
+type_menage,2,0971Z,Autres dépenses de loisirs,164.0
+type_menage,2,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),29.0
+type_menage,2,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),46.0
+type_menage,2,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,140.0
+type_menage,2,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",56.0
+type_menage,2,1015Z,Autres dépenses d’enseignement,6.0
+type_menage,2,11111,Repas pris dans un restaurant,387.0
+type_menage,2,11112,"Repas pris dans un café, bars ou assimilé",438.0
+type_menage,2,11121,Cantines scolaire et professionnelle,540.0
+type_menage,2,1113Z,Autres dépenses de restauration,162.0
+type_menage,2,11211,Services d hébergement,258.0
+type_menage,2,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",301.0
+type_menage,2,1212Z,"Appareils, articles et produits pour les soins personnels",380.0
+type_menage,2,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",38.0
+type_menage,2,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",61.0
+type_menage,2,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),41.0
+type_menage,2,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",211.0
+type_menage,2,12511,"Assurances vie, décès",26.0
+type_menage,2,12521,Assurances liées au logement,307.0
+type_menage,2,12531,Assurances liées à la santé,720.0
+type_menage,2,12541,Assurances liées aux transports (yc assurance voyage),505.0
+type_menage,2,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",149.0
+type_menage,2,12611,Services financiers,134.0
+type_menage,2,1271Z,Autres services,555.0
+type_menage,2,12811,Autres dépenses occasionnées par une cérémonie,16.0
+type_menage,2,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,34.0
+type_menage,3,01111,Riz sous toutes ses formes et produits à base de riz,27.0
+type_menage,3,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,577.0
+type_menage,3,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,58.0
+type_menage,3,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",136.0
+type_menage,3,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",51.0
+type_menage,3,01121,Viande bovine fraîche ou surgelée,345.0
+type_menage,3,01122,Viande porcine fraîche ou surgelée,106.0
+type_menage,3,01123,Viande ovine ou caprine fraîche ou surgelée,50.0
+type_menage,3,01124,Viande de volaille fraîche ou surgelée,188.0
+type_menage,3,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",415.0
+type_menage,3,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",128.0
+type_menage,3,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",20.0
+type_menage,3,01130,Poissons frais,172.0
+type_menage,3,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),27.0
+type_menage,3,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",92.0
+type_menage,3,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",31.0
+type_menage,3,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,109.0
+type_menage,3,01145,Fromage et lait caillé,347.0
+type_menage,3,01147,Œufs,54.0
+type_menage,3,0114A,"Lait frais, condensé, en poudre",68.0
+type_menage,3,0114B,Yaourts et produits laitiers,200.0
+type_menage,3,01151,Beurre,58.0
+type_menage,3,0115A,Huiles alimentaires,47.0
+type_menage,3,0115B,Margarine et autres graisses alimentaires,19.0
+type_menage,3,01161,Agrumes frais,91.0
+type_menage,3,01162,Bananes fraîches,30.0
+type_menage,3,01168,Fruits séchés,62.0
+type_menage,3,01169,Fruits au sirop et fruits surgelés,10.0
+type_menage,3,0116A,Autres fruits frais,268.0
+type_menage,3,01175,Légumes secs,8.0
+type_menage,3,01176,Légumes surgelés non cuisinés,13.0
+type_menage,3,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",65.0
+type_menage,3,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",42.0
+type_menage,3,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",89.0
+type_menage,3,0117A,Legumes frais,322.0
+type_menage,3,01181,Sucre yc édulcorants,20.0
+type_menage,3,0118A,Produits à base de sucre et cacao,261.0
+type_menage,3,0119Z,Autres produits alimentaires,154.0
+type_menage,3,01213,Cacao et chocolat en poudre,5.0
+type_menage,3,0121A,"Café, thé, plantes à infusion",157.0
+type_menage,3,01221,Eaux minérales,82.0
+type_menage,3,01222,Boissons gazeuses,38.0
+type_menage,3,0122A,Jus de fruits et de légumes,96.0
+type_menage,3,0131Z,Autres dépenses d alimentation,199.0
+type_menage,3,02111,Spiritueux et liqueurs,128.0
+type_menage,3,0212A,"Vins, apéritifs à base de vin, champagne",370.0
+type_menage,3,02131,Bière et boissons à base de bière,66.0
+type_menage,3,022ZZ,Tabac et produits connexes,329.0
+type_menage,3,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",7.0
+type_menage,3,03111,Tissus pour vêtements,7.0
+type_menage,3,0312Z,"Vêtements homme, femme, enfant",812.0
+type_menage,3,03131,Accessoires du vêtement et mercerie,54.0
+type_menage,3,03141,"Nettoyage, réparation et location de vêtements",19.0
+type_menage,3,032ZZ,"Chaussures, yc location et réparation",263.0
+type_menage,3,0331Z,Autres dépenses d habillement,180.0
+type_menage,3,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,1510.0
+type_menage,3,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,24.0
+type_menage,3,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),252.0
+type_menage,3,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",291.0
+type_menage,3,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),463.0
+type_menage,3,04500,Facture électricité + gaz (non dissociables),230.0
+type_menage,3,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",846.0
+type_menage,3,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",284.0
+type_menage,3,0453Z,Combustibles liquides,164.0
+type_menage,3,045AZ,Combustibles solides,73.0
+type_menage,3,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),131.0
+type_menage,3,0511Z,"Meubles, articles d’ameublement et de décoration",512.0
+type_menage,3,051AZ,"Tapis et autres revêtements, pose et réparation",10.0
+type_menage,3,0521Z,Articles de literie et autres articles de ménage en textile,105.0
+type_menage,3,0531Z,Gros appareils ménagers électriques,228.0
+type_menage,3,05321,Petit électroménager,30.0
+type_menage,3,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",107.0
+type_menage,3,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",138.0
+type_menage,3,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",255.0
+type_menage,3,0561Z,Articles de ménage non durables,294.0
+type_menage,3,0562Z,Services domestiques et autres services pour le logement,304.0
+type_menage,3,0571Z,Autres dépenses en équipement,76.0
+type_menage,3,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",290.0
+type_menage,3,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,122.0
+type_menage,3,06221,"Dentiste, orthodontie",68.0
+type_menage,3,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",63.0
+type_menage,3,06311,Services et soins hospitaliers,33.0
+type_menage,3,0641Z,Autres dépenses de santé,10.0
+type_menage,3,0711Z,Achats d automobiles,2462.0
+type_menage,3,07121,Achats de motocycles neufs et occasion,89.0
+type_menage,3,07131,Achats de cycles neufs et occasion,47.0
+type_menage,3,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",160.0
+type_menage,3,07221,"Carburants, électricité, huiles, lubrifiants…",1279.0
+type_menage,3,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",349.0
+type_menage,3,0724Z,Autres services liés à l’utilisation de véhicules personnels,142.0
+type_menage,3,07361,Autres services de transport (yc déménagement),23.0
+type_menage,3,073ZZ,Services de transport,499.0
+type_menage,3,0741Z,Autres dépenses de transport,462.0
+type_menage,3,08111,"Services postaux (yc timbres, enveloppes)",28.0
+type_menage,3,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",69.0
+type_menage,3,08131,"Services de téléphone et fax, internet, recharges téléphoniques",636.0
+type_menage,3,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",110.0
+type_menage,3,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",98.0
+type_menage,3,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),48.0
+type_menage,3,091AZ,"Equipement photo, cinéma, optique",33.0
+type_menage,3,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,123.0
+type_menage,3,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",121.0
+type_menage,3,09321,"Horticulture, accessoires et frais de livraison",208.0
+type_menage,3,093AZ,Animaux d’agrément,189.0
+type_menage,3,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",274.0
+type_menage,3,0942Z,Services culturels,501.0
+type_menage,3,09431,"jeux de hasard (loto, tiercé …)",46.0
+type_menage,3,09511,Livres yc e-books,108.0
+type_menage,3,09521,Journaux et périodiques yc par abonnement,186.0
+type_menage,3,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",14.0
+type_menage,3,09541,Articles de papeterie et de dessin (yc toner pour imprimante),70.0
+type_menage,3,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",525.0
+type_menage,3,0971Z,Autres dépenses de loisirs,285.0
+type_menage,3,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),0.0
+type_menage,3,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),1.0
+type_menage,3,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,31.0
+type_menage,3,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",5.0
+type_menage,3,1015Z,Autres dépenses d’enseignement,32.0
+type_menage,3,11111,Repas pris dans un restaurant,761.0
+type_menage,3,11112,"Repas pris dans un café, bars ou assimilé",397.0
+type_menage,3,11121,Cantines scolaire et professionnelle,89.0
+type_menage,3,1113Z,Autres dépenses de restauration,319.0
+type_menage,3,11211,Services d hébergement,368.0
+type_menage,3,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",411.0
+type_menage,3,1212Z,"Appareils, articles et produits pour les soins personnels",445.0
+type_menage,3,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",69.0
+type_menage,3,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",66.0
+type_menage,3,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),52.0
+type_menage,3,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",33.0
+type_menage,3,12511,"Assurances vie, décès",51.0
+type_menage,3,12521,Assurances liées au logement,435.0
+type_menage,3,12531,Assurances liées à la santé,1554.0
+type_menage,3,12541,Assurances liées aux transports (yc assurance voyage),818.0
+type_menage,3,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",151.0
+type_menage,3,12611,Services financiers,161.0
+type_menage,3,1271Z,Autres services,786.0
+type_menage,3,12811,Autres dépenses occasionnées par une cérémonie,47.0
+type_menage,3,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,5.0
+type_menage,4,01111,Riz sous toutes ses formes et produits à base de riz,43.0
+type_menage,4,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,715.0
+type_menage,4,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,96.0
+type_menage,4,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",231.0
+type_menage,4,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",86.0
+type_menage,4,01121,Viande bovine fraîche ou surgelée,363.0
+type_menage,4,01122,Viande porcine fraîche ou surgelée,103.0
+type_menage,4,01123,Viande ovine ou caprine fraîche ou surgelée,35.0
+type_menage,4,01124,Viande de volaille fraîche ou surgelée,241.0
+type_menage,4,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",423.0
+type_menage,4,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",141.0
+type_menage,4,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",11.0
+type_menage,4,01130,Poissons frais,120.0
+type_menage,4,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),22.0
+type_menage,4,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",70.0
+type_menage,4,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",30.0
+type_menage,4,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,103.0
+type_menage,4,01145,Fromage et lait caillé,384.0
+type_menage,4,01147,Œufs,57.0
+type_menage,4,0114A,"Lait frais, condensé, en poudre",124.0
+type_menage,4,0114B,Yaourts et produits laitiers,263.0
+type_menage,4,01151,Beurre,53.0
+type_menage,4,0115A,Huiles alimentaires,43.0
+type_menage,4,0115B,Margarine et autres graisses alimentaires,15.0
+type_menage,4,01161,Agrumes frais,63.0
+type_menage,4,01162,Bananes fraîches,36.0
+type_menage,4,01168,Fruits séchés,61.0
+type_menage,4,01169,Fruits au sirop et fruits surgelés,9.0
+type_menage,4,0116A,Autres fruits frais,214.0
+type_menage,4,01175,Légumes secs,10.0
+type_menage,4,01176,Légumes surgelés non cuisinés,20.0
+type_menage,4,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",69.0
+type_menage,4,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",57.0
+type_menage,4,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",121.0
+type_menage,4,0117A,Legumes frais,331.0
+type_menage,4,01181,Sucre yc édulcorants,18.0
+type_menage,4,0118A,Produits à base de sucre et cacao,383.0
+type_menage,4,0119Z,Autres produits alimentaires,254.0
+type_menage,4,01213,Cacao et chocolat en poudre,12.0
+type_menage,4,0121A,"Café, thé, plantes à infusion",150.0
+type_menage,4,01221,Eaux minérales,89.0
+type_menage,4,01222,Boissons gazeuses,81.0
+type_menage,4,0122A,Jus de fruits et de légumes,169.0
+type_menage,4,0131Z,Autres dépenses d alimentation,244.0
+type_menage,4,02111,Spiritueux et liqueurs,115.0
+type_menage,4,0212A,"Vins, apéritifs à base de vin, champagne",238.0
+type_menage,4,02131,Bière et boissons à base de bière,86.0
+type_menage,4,022ZZ,Tabac et produits connexes,513.0
+type_menage,4,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",4.0
+type_menage,4,03111,Tissus pour vêtements,3.0
+type_menage,4,0312Z,"Vêtements homme, femme, enfant",1472.0
+type_menage,4,03131,Accessoires du vêtement et mercerie,61.0
+type_menage,4,03141,"Nettoyage, réparation et location de vêtements",17.0
+type_menage,4,032ZZ,"Chaussures, yc location et réparation",496.0
+type_menage,4,0331Z,Autres dépenses d habillement,163.0
+type_menage,4,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,1889.0
+type_menage,4,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,138.0
+type_menage,4,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),192.0
+type_menage,4,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",374.0
+type_menage,4,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),525.0
+type_menage,4,04500,Facture électricité + gaz (non dissociables),207.0
+type_menage,4,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",929.0
+type_menage,4,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",308.0
+type_menage,4,0453Z,Combustibles liquides,123.0
+type_menage,4,045AZ,Combustibles solides,71.0
+type_menage,4,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),64.0
+type_menage,4,0511Z,"Meubles, articles d’ameublement et de décoration",641.0
+type_menage,4,051AZ,"Tapis et autres revêtements, pose et réparation",24.0
+type_menage,4,0521Z,Articles de literie et autres articles de ménage en textile,105.0
+type_menage,4,0531Z,Gros appareils ménagers électriques,240.0
+type_menage,4,05321,Petit électroménager,42.0
+type_menage,4,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",111.0
+type_menage,4,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",85.0
+type_menage,4,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",136.0
+type_menage,4,0561Z,Articles de ménage non durables,309.0
+type_menage,4,0562Z,Services domestiques et autres services pour le logement,385.0
+type_menage,4,0571Z,Autres dépenses en équipement,53.0
+type_menage,4,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",317.0
+type_menage,4,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,152.0
+type_menage,4,06221,"Dentiste, orthodontie",89.0
+type_menage,4,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",76.0
+type_menage,4,06311,Services et soins hospitaliers,34.0
+type_menage,4,0641Z,Autres dépenses de santé,11.0
+type_menage,4,0711Z,Achats d automobiles,2887.0
+type_menage,4,07121,Achats de motocycles neufs et occasion,117.0
+type_menage,4,07131,Achats de cycles neufs et occasion,63.0
+type_menage,4,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",215.0
+type_menage,4,07221,"Carburants, électricité, huiles, lubrifiants…",1679.0
+type_menage,4,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",424.0
+type_menage,4,0724Z,Autres services liés à l’utilisation de véhicules personnels,227.0
+type_menage,4,07361,Autres services de transport (yc déménagement),16.0
+type_menage,4,073ZZ,Services de transport,690.0
+type_menage,4,0741Z,Autres dépenses de transport,521.0
+type_menage,4,08111,"Services postaux (yc timbres, enveloppes)",27.0
+type_menage,4,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",157.0
+type_menage,4,08131,"Services de téléphone et fax, internet, recharges téléphoniques",831.0
+type_menage,4,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",142.0
+type_menage,4,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",140.0
+type_menage,4,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),57.0
+type_menage,4,091AZ,"Equipement photo, cinéma, optique",26.0
+type_menage,4,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,122.0
+type_menage,4,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",353.0
+type_menage,4,09321,"Horticulture, accessoires et frais de livraison",168.0
+type_menage,4,093AZ,Animaux d’agrément,196.0
+type_menage,4,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",545.0
+type_menage,4,0942Z,Services culturels,596.0
+type_menage,4,09431,"jeux de hasard (loto, tiercé …)",43.0
+type_menage,4,09511,Livres yc e-books,146.0
+type_menage,4,09521,Journaux et périodiques yc par abonnement,75.0
+type_menage,4,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",17.0
+type_menage,4,09541,Articles de papeterie et de dessin (yc toner pour imprimante),130.0
+type_menage,4,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",558.0
+type_menage,4,0971Z,Autres dépenses de loisirs,316.0
+type_menage,4,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),70.0
+type_menage,4,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),75.0
+type_menage,4,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,281.0
+type_menage,4,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",56.0
+type_menage,4,1015Z,Autres dépenses d’enseignement,27.0
+type_menage,4,11111,Repas pris dans un restaurant,740.0
+type_menage,4,11112,"Repas pris dans un café, bars ou assimilé",637.0
+type_menage,4,11121,Cantines scolaire et professionnelle,941.0
+type_menage,4,1113Z,Autres dépenses de restauration,298.0
+type_menage,4,11211,Services d hébergement,640.0
+type_menage,4,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",434.0
+type_menage,4,1212Z,"Appareils, articles et produits pour les soins personnels",637.0
+type_menage,4,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",97.0
+type_menage,4,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",124.0
+type_menage,4,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),47.0
+type_menage,4,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",960.0
+type_menage,4,12511,"Assurances vie, décès",43.0
+type_menage,4,12521,Assurances liées au logement,405.0
+type_menage,4,12531,Assurances liées à la santé,1221.0
+type_menage,4,12541,Assurances liées aux transports (yc assurance voyage),1016.0
+type_menage,4,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",203.0
+type_menage,4,12611,Services financiers,201.0
+type_menage,4,1271Z,Autres services,771.0
+type_menage,4,12811,Autres dépenses occasionnées par une cérémonie,24.0
+type_menage,4,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,59.0
+type_menage,5,01111,Riz sous toutes ses formes et produits à base de riz,72.0
+type_menage,5,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,647.0
+type_menage,5,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,88.0
+type_menage,5,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",195.0
+type_menage,5,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",61.0
+type_menage,5,01121,Viande bovine fraîche ou surgelée,347.0
+type_menage,5,01122,Viande porcine fraîche ou surgelée,115.0
+type_menage,5,01123,Viande ovine ou caprine fraîche ou surgelée,71.0
+type_menage,5,01124,Viande de volaille fraîche ou surgelée,231.0
+type_menage,5,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",366.0
+type_menage,5,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",122.0
+type_menage,5,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",17.0
+type_menage,5,01130,Poissons frais,143.0
+type_menage,5,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),29.0
+type_menage,5,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",33.0
+type_menage,5,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",19.0
+type_menage,5,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,106.0
+type_menage,5,01145,Fromage et lait caillé,380.0
+type_menage,5,01147,Œufs,44.0
+type_menage,5,0114A,"Lait frais, condensé, en poudre",99.0
+type_menage,5,0114B,Yaourts et produits laitiers,213.0
+type_menage,5,01151,Beurre,44.0
+type_menage,5,0115A,Huiles alimentaires,38.0
+type_menage,5,0115B,Margarine et autres graisses alimentaires,17.0
+type_menage,5,01161,Agrumes frais,56.0
+type_menage,5,01162,Bananes fraîches,40.0
+type_menage,5,01168,Fruits séchés,28.0
+type_menage,5,01169,Fruits au sirop et fruits surgelés,8.0
+type_menage,5,0116A,Autres fruits frais,211.0
+type_menage,5,01175,Légumes secs,10.0
+type_menage,5,01176,Légumes surgelés non cuisinés,11.0
+type_menage,5,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",69.0
+type_menage,5,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",37.0
+type_menage,5,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",123.0
+type_menage,5,0117A,Legumes frais,306.0
+type_menage,5,01181,Sucre yc édulcorants,18.0
+type_menage,5,0118A,Produits à base de sucre et cacao,267.0
+type_menage,5,0119Z,Autres produits alimentaires,201.0
+type_menage,5,01213,Cacao et chocolat en poudre,6.0
+type_menage,5,0121A,"Café, thé, plantes à infusion",107.0
+type_menage,5,01221,Eaux minérales,87.0
+type_menage,5,01222,Boissons gazeuses,102.0
+type_menage,5,0122A,Jus de fruits et de légumes,122.0
+type_menage,5,0131Z,Autres dépenses d alimentation,154.0
+type_menage,5,02111,Spiritueux et liqueurs,105.0
+type_menage,5,0212A,"Vins, apéritifs à base de vin, champagne",176.0
+type_menage,5,02131,Bière et boissons à base de bière,87.0
+type_menage,5,022ZZ,Tabac et produits connexes,633.0
+type_menage,5,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",1.0
+type_menage,5,03111,Tissus pour vêtements,10.0
+type_menage,5,0312Z,"Vêtements homme, femme, enfant",1077.0
+type_menage,5,03131,Accessoires du vêtement et mercerie,36.0
+type_menage,5,03141,"Nettoyage, réparation et location de vêtements",10.0
+type_menage,5,032ZZ,"Chaussures, yc location et réparation",308.0
+type_menage,5,0331Z,Autres dépenses d habillement,70.0
+type_menage,5,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,2534.0
+type_menage,5,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,2.0
+type_menage,5,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),215.0
+type_menage,5,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",306.0
+type_menage,5,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),613.0
+type_menage,5,04500,Facture électricité + gaz (non dissociables),185.0
+type_menage,5,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",791.0
+type_menage,5,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",217.0
+type_menage,5,0453Z,Combustibles liquides,171.0
+type_menage,5,045AZ,Combustibles solides,95.0
+type_menage,5,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),44.0
+type_menage,5,0511Z,"Meubles, articles d’ameublement et de décoration",246.0
+type_menage,5,051AZ,"Tapis et autres revêtements, pose et réparation",10.0
+type_menage,5,0521Z,Articles de literie et autres articles de ménage en textile,55.0
+type_menage,5,0531Z,Gros appareils ménagers électriques,135.0
+type_menage,5,05321,Petit électroménager,29.0
+type_menage,5,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",52.0
+type_menage,5,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",90.0
+type_menage,5,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",90.0
+type_menage,5,0561Z,Articles de ménage non durables,347.0
+type_menage,5,0562Z,Services domestiques et autres services pour le logement,125.0
+type_menage,5,0571Z,Autres dépenses en équipement,24.0
+type_menage,5,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",278.0
+type_menage,5,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,83.0
+type_menage,5,06221,"Dentiste, orthodontie",113.0
+type_menage,5,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",51.0
+type_menage,5,06311,Services et soins hospitaliers,17.0
+type_menage,5,0641Z,Autres dépenses de santé,3.0
+type_menage,5,0711Z,Achats d automobiles,1404.0
+type_menage,5,07121,Achats de motocycles neufs et occasion,137.0
+type_menage,5,07131,Achats de cycles neufs et occasion,20.0
+type_menage,5,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",158.0
+type_menage,5,07221,"Carburants, électricité, huiles, lubrifiants…",1567.0
+type_menage,5,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",385.0
+type_menage,5,0724Z,Autres services liés à l’utilisation de véhicules personnels,152.0
+type_menage,5,07361,Autres services de transport (yc déménagement),10.0
+type_menage,5,073ZZ,Services de transport,605.0
+type_menage,5,0741Z,Autres dépenses de transport,269.0
+type_menage,5,08111,"Services postaux (yc timbres, enveloppes)",51.0
+type_menage,5,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",100.0
+type_menage,5,08131,"Services de téléphone et fax, internet, recharges téléphoniques",816.0
+type_menage,5,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",109.0
+type_menage,5,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",93.0
+type_menage,5,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),51.0
+type_menage,5,091AZ,"Equipement photo, cinéma, optique",58.0
+type_menage,5,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,64.0
+type_menage,5,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",279.0
+type_menage,5,09321,"Horticulture, accessoires et frais de livraison",132.0
+type_menage,5,093AZ,Animaux d’agrément,326.0
+type_menage,5,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",218.0
+type_menage,5,0942Z,Services culturels,472.0
+type_menage,5,09431,"jeux de hasard (loto, tiercé …)",51.0
+type_menage,5,09511,Livres yc e-books,98.0
+type_menage,5,09521,Journaux et périodiques yc par abonnement,116.0
+type_menage,5,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",3.0
+type_menage,5,09541,Articles de papeterie et de dessin (yc toner pour imprimante),67.0
+type_menage,5,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",184.0
+type_menage,5,0971Z,Autres dépenses de loisirs,139.0
+type_menage,5,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),19.0
+type_menage,5,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),13.0
+type_menage,5,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,245.0
+type_menage,5,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",77.0
+type_menage,5,1015Z,Autres dépenses d’enseignement,5.0
+type_menage,5,11111,Repas pris dans un restaurant,514.0
+type_menage,5,11112,"Repas pris dans un café, bars ou assimilé",566.0
+type_menage,5,11121,Cantines scolaire et professionnelle,351.0
+type_menage,5,1113Z,Autres dépenses de restauration,137.0
+type_menage,5,11211,Services d hébergement,205.0
+type_menage,5,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",392.0
+type_menage,5,1212Z,"Appareils, articles et produits pour les soins personnels",451.0
+type_menage,5,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",21.0
+type_menage,5,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",71.0
+type_menage,5,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),27.0
+type_menage,5,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",122.0
+type_menage,5,12511,"Assurances vie, décès",46.0
+type_menage,5,12521,Assurances liées au logement,381.0
+type_menage,5,12531,Assurances liées à la santé,1432.0
+type_menage,5,12541,Assurances liées aux transports (yc assurance voyage),770.0
+type_menage,5,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",168.0
+type_menage,5,12611,Services financiers,203.0
+type_menage,5,1271Z,Autres services,238.0
+type_menage,5,12811,Autres dépenses occasionnées par une cérémonie,20.0
+type_menage,5,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,42.0
+type_menage,TOT,01111,Riz sous toutes ses formes et produits à base de riz,31.0
+type_menage,TOT,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,496.0
+type_menage,TOT,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,62.0
+type_menage,TOT,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",145.0
+type_menage,TOT,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",53.0
+type_menage,TOT,01121,Viande bovine fraîche ou surgelée,255.0
+type_menage,TOT,01122,Viande porcine fraîche ou surgelée,75.0
+type_menage,TOT,01123,Viande ovine ou caprine fraîche ou surgelée,32.0
+type_menage,TOT,01124,Viande de volaille fraîche ou surgelée,159.0
+type_menage,TOT,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",314.0
+type_menage,TOT,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",111.0
+type_menage,TOT,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",12.0
+type_menage,TOT,01130,Poissons frais,111.0
+type_menage,TOT,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),19.0
+type_menage,TOT,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",59.0
+type_menage,TOT,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",24.0
+type_menage,TOT,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,85.0
+type_menage,TOT,01145,Fromage et lait caillé,278.0
+type_menage,TOT,01147,Œufs,45.0
+type_menage,TOT,0114A,"Lait frais, condensé, en poudre",73.0
+type_menage,TOT,0114B,Yaourts et produits laitiers,177.0
+type_menage,TOT,01151,Beurre,41.0
+type_menage,TOT,0115A,Huiles alimentaires,35.0
+type_menage,TOT,0115B,Margarine et autres graisses alimentaires,13.0
+type_menage,TOT,01161,Agrumes frais,62.0
+type_menage,TOT,01162,Bananes fraîches,27.0
+type_menage,TOT,01168,Fruits séchés,47.0
+type_menage,TOT,01169,Fruits au sirop et fruits surgelés,7.0
+type_menage,TOT,0116A,Autres fruits frais,191.0
+type_menage,TOT,01175,Légumes secs,7.0
+type_menage,TOT,01176,Légumes surgelés non cuisinés,12.0
+type_menage,TOT,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",52.0
+type_menage,TOT,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",41.0
+type_menage,TOT,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",82.0
+type_menage,TOT,0117A,Legumes frais,255.0
+type_menage,TOT,01181,Sucre yc édulcorants,15.0
+type_menage,TOT,0118A,Produits à base de sucre et cacao,245.0
+type_menage,TOT,0119Z,Autres produits alimentaires,152.0
+type_menage,TOT,01213,Cacao et chocolat en poudre,6.0
+type_menage,TOT,0121A,"Café, thé, plantes à infusion",120.0
+type_menage,TOT,01221,Eaux minérales,67.0
+type_menage,TOT,01222,Boissons gazeuses,48.0
+type_menage,TOT,0122A,Jus de fruits et de légumes,103.0
+type_menage,TOT,0131Z,Autres dépenses d alimentation,169.0
+type_menage,TOT,02111,Spiritueux et liqueurs,100.0
+type_menage,TOT,0212A,"Vins, apéritifs à base de vin, champagne",225.0
+type_menage,TOT,02131,Bière et boissons à base de bière,62.0
+type_menage,TOT,022ZZ,Tabac et produits connexes,397.0
+type_menage,TOT,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",4.0
+type_menage,TOT,03111,Tissus pour vêtements,4.0
+type_menage,TOT,0312Z,"Vêtements homme, femme, enfant",894.0
+type_menage,TOT,03131,Accessoires du vêtement et mercerie,42.0
+type_menage,TOT,03141,"Nettoyage, réparation et location de vêtements",16.0
+type_menage,TOT,032ZZ,"Chaussures, yc location et réparation",288.0
+type_menage,TOT,0331Z,Autres dépenses d habillement,129.0
+type_menage,TOT,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,1975.0
+type_menage,TOT,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,47.0
+type_menage,TOT,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),176.0
+type_menage,TOT,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",256.0
+type_menage,TOT,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),578.0
+type_menage,TOT,04500,Facture électricité + gaz (non dissociables),178.0
+type_menage,TOT,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",746.0
+type_menage,TOT,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",253.0
+type_menage,TOT,0453Z,Combustibles liquides,121.0
+type_menage,TOT,045AZ,Combustibles solides,55.0
+type_menage,TOT,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),70.0
+type_menage,TOT,0511Z,"Meubles, articles d’ameublement et de décoration",410.0
+type_menage,TOT,051AZ,"Tapis et autres revêtements, pose et réparation",14.0
+type_menage,TOT,0521Z,Articles de literie et autres articles de ménage en textile,85.0
+type_menage,TOT,0531Z,Gros appareils ménagers électriques,171.0
+type_menage,TOT,05321,Petit électroménager,25.0
+type_menage,TOT,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",80.0
+type_menage,TOT,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",74.0
+type_menage,TOT,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",134.0
+type_menage,TOT,0561Z,Articles de ménage non durables,236.0
+type_menage,TOT,0562Z,Services domestiques et autres services pour le logement,281.0
+type_menage,TOT,0571Z,Autres dépenses en équipement,48.0
+type_menage,TOT,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",254.0
+type_menage,TOT,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,101.0
+type_menage,TOT,06221,"Dentiste, orthodontie",61.0
+type_menage,TOT,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",55.0
+type_menage,TOT,06311,Services et soins hospitaliers,25.0
+type_menage,TOT,0641Z,Autres dépenses de santé,9.0
+type_menage,TOT,0711Z,Achats d automobiles,1808.0
+type_menage,TOT,07121,Achats de motocycles neufs et occasion,74.0
+type_menage,TOT,07131,Achats de cycles neufs et occasion,35.0
+type_menage,TOT,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",136.0
+type_menage,TOT,07221,"Carburants, électricité, huiles, lubrifiants…",1108.0
+type_menage,TOT,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",293.0
+type_menage,TOT,0724Z,Autres services liés à l’utilisation de véhicules personnels,134.0
+type_menage,TOT,07361,Autres services de transport (yc déménagement),15.0
+type_menage,TOT,073ZZ,Services de transport,514.0
+type_menage,TOT,0741Z,Autres dépenses de transport,365.0
+type_menage,TOT,08111,"Services postaux (yc timbres, enveloppes)",22.0
+type_menage,TOT,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",86.0
+type_menage,TOT,08131,"Services de téléphone et fax, internet, recharges téléphoniques",635.0
+type_menage,TOT,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",93.0
+type_menage,TOT,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",90.0
+type_menage,TOT,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),48.0
+type_menage,TOT,091AZ,"Equipement photo, cinéma, optique",26.0
+type_menage,TOT,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,94.0
+type_menage,TOT,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",167.0
+type_menage,TOT,09321,"Horticulture, accessoires et frais de livraison",143.0
+type_menage,TOT,093AZ,Animaux d’agrément,161.0
+type_menage,TOT,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",325.0
+type_menage,TOT,0942Z,Services culturels,466.0
+type_menage,TOT,09431,"jeux de hasard (loto, tiercé …)",38.0
+type_menage,TOT,09511,Livres yc e-books,117.0
+type_menage,TOT,09521,Journaux et périodiques yc par abonnement,114.0
+type_menage,TOT,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",12.0
+type_menage,TOT,09541,Articles de papeterie et de dessin (yc toner pour imprimante),72.0
+type_menage,TOT,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",363.0
+type_menage,TOT,0971Z,Autres dépenses de loisirs,235.0
+type_menage,TOT,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),22.0
+type_menage,TOT,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),25.0
+type_menage,TOT,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,115.0
+type_menage,TOT,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",25.0
+type_menage,TOT,1015Z,Autres dépenses d’enseignement,28.0
+type_menage,TOT,11111,Repas pris dans un restaurant,575.0
+type_menage,TOT,11112,"Repas pris dans un café, bars ou assimilé",448.0
+type_menage,TOT,11121,Cantines scolaire et professionnelle,358.0
+type_menage,TOT,1113Z,Autres dépenses de restauration,253.0
+type_menage,TOT,11211,Services d hébergement,337.0
+type_menage,TOT,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",337.0
+type_menage,TOT,1212Z,"Appareils, articles et produits pour les soins personnels",417.0
+type_menage,TOT,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",55.0
+type_menage,TOT,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",71.0
+type_menage,TOT,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),44.0
+type_menage,TOT,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",309.0
+type_menage,TOT,12511,"Assurances vie, décès",39.0
+type_menage,TOT,12521,Assurances liées au logement,371.0
+type_menage,TOT,12531,Assurances liées à la santé,1093.0
+type_menage,TOT,12541,Assurances liées aux transports (yc assurance voyage),675.0
+type_menage,TOT,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",147.0
+type_menage,TOT,12611,Services financiers,148.0
+type_menage,TOT,1271Z,Autres services,589.0
+type_menage,TOT,12811,Autres dépenses occasionnées par une cérémonie,26.0
+type_menage,TOT,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,21.0
+decile,1,01111,Riz sous toutes ses formes et produits à base de riz,31.0
+decile,1,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,341.0
+decile,1,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,45.0
+decile,1,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",105.0
+decile,1,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",41.0
+decile,1,01121,Viande bovine fraîche ou surgelée,160.0
+decile,1,01122,Viande porcine fraîche ou surgelée,51.0
+decile,1,01123,Viande ovine ou caprine fraîche ou surgelée,22.0
+decile,1,01124,Viande de volaille fraîche ou surgelée,109.0
+decile,1,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",183.0
+decile,1,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",72.0
+decile,1,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",8.0
+decile,1,01130,Poissons frais,59.0
+decile,1,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),13.0
+decile,1,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",25.0
+decile,1,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",12.0
+decile,1,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,53.0
+decile,1,01145,Fromage et lait caillé,170.0
+decile,1,01147,Œufs,32.0
+decile,1,0114A,"Lait frais, condensé, en poudre",60.0
+decile,1,0114B,Yaourts et produits laitiers,115.0
+decile,1,01151,Beurre,28.0
+decile,1,0115A,Huiles alimentaires,31.0
+decile,1,0115B,Margarine et autres graisses alimentaires,7.0
+decile,1,01161,Agrumes frais,36.0
+decile,1,01162,Bananes fraîches,24.0
+decile,1,01168,Fruits séchés,32.0
+decile,1,01169,Fruits au sirop et fruits surgelés,3.0
+decile,1,0116A,Autres fruits frais,112.0
+decile,1,01175,Légumes secs,7.0
+decile,1,01176,Légumes surgelés non cuisinés,6.0
+decile,1,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",38.0
+decile,1,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",18.0
+decile,1,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",64.0
+decile,1,0117A,Legumes frais,177.0
+decile,1,01181,Sucre yc édulcorants,14.0
+decile,1,0118A,Produits à base de sucre et cacao,136.0
+decile,1,0119Z,Autres produits alimentaires,91.0
+decile,1,01213,Cacao et chocolat en poudre,4.0
+decile,1,0121A,"Café, thé, plantes à infusion",64.0
+decile,1,01221,Eaux minérales,36.0
+decile,1,01222,Boissons gazeuses,52.0
+decile,1,0122A,Jus de fruits et de légumes,84.0
+decile,1,0131Z,Autres dépenses d alimentation,92.0
+decile,1,02111,Spiritueux et liqueurs,55.0
+decile,1,0212A,"Vins, apéritifs à base de vin, champagne",73.0
+decile,1,02131,Bière et boissons à base de bière,57.0
+decile,1,022ZZ,Tabac et produits connexes,367.0
+decile,1,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",0.0
+decile,1,03111,Tissus pour vêtements,1.0
+decile,1,0312Z,"Vêtements homme, femme, enfant",618.0
+decile,1,03131,Accessoires du vêtement et mercerie,16.0
+decile,1,03141,"Nettoyage, réparation et location de vêtements",11.0
+decile,1,032ZZ,"Chaussures, yc location et réparation",192.0
+decile,1,0331Z,Autres dépenses d habillement,64.0
+decile,1,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,1840.0
+decile,1,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,30.0
+decile,1,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),65.0
+decile,1,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",191.0
+decile,1,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),537.0
+decile,1,04500,Facture électricité + gaz (non dissociables),111.0
+decile,1,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",592.0
+decile,1,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",159.0
+decile,1,0453Z,Combustibles liquides,73.0
+decile,1,045AZ,Combustibles solides,32.0
+decile,1,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),11.0
+decile,1,0511Z,"Meubles, articles d’ameublement et de décoration",164.0
+decile,1,051AZ,"Tapis et autres revêtements, pose et réparation",2.0
+decile,1,0521Z,Articles de literie et autres articles de ménage en textile,23.0
+decile,1,0531Z,Gros appareils ménagers électriques,81.0
+decile,1,05321,Petit électroménager,12.0
+decile,1,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",35.0
+decile,1,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",16.0
+decile,1,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",32.0
+decile,1,0561Z,Articles de ménage non durables,152.0
+decile,1,0562Z,Services domestiques et autres services pour le logement,63.0
+decile,1,0571Z,Autres dépenses en équipement,14.0
+decile,1,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",139.0
+decile,1,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,42.0
+decile,1,06221,"Dentiste, orthodontie",27.0
+decile,1,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",29.0
+decile,1,06311,Services et soins hospitaliers,10.0
+decile,1,0641Z,Autres dépenses de santé,7.0
+decile,1,0711Z,Achats d automobiles,617.0
+decile,1,07121,Achats de motocycles neufs et occasion,30.0
+decile,1,07131,Achats de cycles neufs et occasion,13.0
+decile,1,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",56.0
+decile,1,07221,"Carburants, électricité, huiles, lubrifiants…",622.0
+decile,1,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",151.0
+decile,1,0724Z,Autres services liés à l’utilisation de véhicules personnels,70.0
+decile,1,07361,Autres services de transport (yc déménagement),7.0
+decile,1,073ZZ,Services de transport,457.0
+decile,1,0741Z,Autres dépenses de transport,166.0
+decile,1,08111,"Services postaux (yc timbres, enveloppes)",12.0
+decile,1,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",68.0
+decile,1,08131,"Services de téléphone et fax, internet, recharges téléphoniques",567.0
+decile,1,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",51.0
+decile,1,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",67.0
+decile,1,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),25.0
+decile,1,091AZ,"Equipement photo, cinéma, optique",25.0
+decile,1,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,5.0
+decile,1,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",126.0
+decile,1,09321,"Horticulture, accessoires et frais de livraison",71.0
+decile,1,093AZ,Animaux d’agrément,123.0
+decile,1,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",118.0
+decile,1,0942Z,Services culturels,290.0
+decile,1,09431,"jeux de hasard (loto, tiercé …)",22.0
+decile,1,09511,Livres yc e-books,82.0
+decile,1,09521,Journaux et périodiques yc par abonnement,32.0
+decile,1,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",3.0
+decile,1,09541,Articles de papeterie et de dessin (yc toner pour imprimante),38.0
+decile,1,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",89.0
+decile,1,0971Z,Autres dépenses de loisirs,90.0
+decile,1,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),11.0
+decile,1,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),24.0
+decile,1,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,208.0
+decile,1,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",42.0
+decile,1,1015Z,Autres dépenses d’enseignement,11.0
+decile,1,11111,Repas pris dans un restaurant,150.0
+decile,1,11112,"Repas pris dans un café, bars ou assimilé",274.0
+decile,1,11121,Cantines scolaire et professionnelle,258.0
+decile,1,1113Z,Autres dépenses de restauration,81.0
+decile,1,11211,Services d hébergement,88.0
+decile,1,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",173.0
+decile,1,1212Z,"Appareils, articles et produits pour les soins personnels",219.0
+decile,1,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",40.0
+decile,1,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",29.0
+decile,1,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),21.0
+decile,1,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",41.0
+decile,1,12511,"Assurances vie, décès",21.0
+decile,1,12521,Assurances liées au logement,258.0
+decile,1,12531,Assurances liées à la santé,493.0
+decile,1,12541,Assurances liées aux transports (yc assurance voyage),374.0
+decile,1,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",74.0
+decile,1,12611,Services financiers,108.0
+decile,1,1271Z,Autres services,212.0
+decile,1,12811,Autres dépenses occasionnées par une cérémonie,7.0
+decile,1,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,11.0
+decile,10,01111,Riz sous toutes ses formes et produits à base de riz,35.0
+decile,10,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,665.0
+decile,10,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,84.0
+decile,10,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",172.0
+decile,10,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",69.0
+decile,10,01121,Viande bovine fraîche ou surgelée,372.0
+decile,10,01122,Viande porcine fraîche ou surgelée,82.0
+decile,10,01123,Viande ovine ou caprine fraîche ou surgelée,41.0
+decile,10,01124,Viande de volaille fraîche ou surgelée,222.0
+decile,10,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",422.0
+decile,10,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",149.0
+decile,10,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",15.0
+decile,10,01130,Poissons frais,236.0
+decile,10,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),28.0
+decile,10,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",119.0
+decile,10,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",49.0
+decile,10,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,150.0
+decile,10,01145,Fromage et lait caillé,442.0
+decile,10,01147,Œufs,66.0
+decile,10,0114A,"Lait frais, condensé, en poudre",82.0
+decile,10,0114B,Yaourts et produits laitiers,231.0
+decile,10,01151,Beurre,48.0
+decile,10,0115A,Huiles alimentaires,53.0
+decile,10,0115B,Margarine et autres graisses alimentaires,10.0
+decile,10,01161,Agrumes frais,113.0
+decile,10,01162,Bananes fraîches,33.0
+decile,10,01168,Fruits séchés,87.0
+decile,10,01169,Fruits au sirop et fruits surgelés,10.0
+decile,10,0116A,Autres fruits frais,353.0
+decile,10,01175,Légumes secs,13.0
+decile,10,01176,Légumes surgelés non cuisinés,20.0
+decile,10,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",69.0
+decile,10,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",69.0
+decile,10,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",102.0
+decile,10,0117A,Legumes frais,443.0
+decile,10,01181,Sucre yc édulcorants,17.0
+decile,10,0118A,Produits à base de sucre et cacao,340.0
+decile,10,0119Z,Autres produits alimentaires,222.0
+decile,10,01213,Cacao et chocolat en poudre,5.0
+decile,10,0121A,"Café, thé, plantes à infusion",222.0
+decile,10,01221,Eaux minérales,91.0
+decile,10,01222,Boissons gazeuses,44.0
+decile,10,0122A,Jus de fruits et de légumes,133.0
+decile,10,0131Z,Autres dépenses d alimentation,329.0
+decile,10,02111,Spiritueux et liqueurs,116.0
+decile,10,0212A,"Vins, apéritifs à base de vin, champagne",513.0
+decile,10,02131,Bière et boissons à base de bière,74.0
+decile,10,022ZZ,Tabac et produits connexes,371.0
+decile,10,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",11.0
+decile,10,03111,Tissus pour vêtements,5.0
+decile,10,0312Z,"Vêtements homme, femme, enfant",1441.0
+decile,10,03131,Accessoires du vêtement et mercerie,84.0
+decile,10,03141,"Nettoyage, réparation et location de vêtements",67.0
+decile,10,032ZZ,"Chaussures, yc location et réparation",473.0
+decile,10,0331Z,Autres dépenses d habillement,275.0
+decile,10,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,1987.0
+decile,10,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,87.0
+decile,10,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),306.0
+decile,10,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",344.0
+decile,10,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),872.0
+decile,10,04500,Facture électricité + gaz (non dissociables),394.0
+decile,10,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",957.0
+decile,10,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",386.0
+decile,10,0453Z,Combustibles liquides,129.0
+decile,10,045AZ,Combustibles solides,59.0
+decile,10,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),267.0
+decile,10,0511Z,"Meubles, articles d’ameublement et de décoration",912.0
+decile,10,051AZ,"Tapis et autres revêtements, pose et réparation",23.0
+decile,10,0521Z,Articles de literie et autres articles de ménage en textile,215.0
+decile,10,0531Z,Gros appareils ménagers électriques,260.0
+decile,10,05321,Petit électroménager,47.0
+decile,10,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",129.0
+decile,10,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",191.0
+decile,10,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",318.0
+decile,10,0561Z,Articles de ménage non durables,318.0
+decile,10,0562Z,Services domestiques et autres services pour le logement,1344.0
+decile,10,0571Z,Autres dépenses en équipement,133.0
+decile,10,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",410.0
+decile,10,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,122.0
+decile,10,06221,"Dentiste, orthodontie",86.0
+decile,10,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",92.0
+decile,10,06311,Services et soins hospitaliers,37.0
+decile,10,0641Z,Autres dépenses de santé,21.0
+decile,10,0711Z,Achats d automobiles,4055.0
+decile,10,07121,Achats de motocycles neufs et occasion,134.0
+decile,10,07131,Achats de cycles neufs et occasion,62.0
+decile,10,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",185.0
+decile,10,07221,"Carburants, électricité, huiles, lubrifiants…",1375.0
+decile,10,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",412.0
+decile,10,0724Z,Autres services liés à l’utilisation de véhicules personnels,302.0
+decile,10,07361,Autres services de transport (yc déménagement),46.0
+decile,10,073ZZ,Services de transport,1232.0
+decile,10,0741Z,Autres dépenses de transport,1010.0
+decile,10,08111,"Services postaux (yc timbres, enveloppes)",34.0
+decile,10,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",119.0
+decile,10,08131,"Services de téléphone et fax, internet, recharges téléphoniques",741.0
+decile,10,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",168.0
+decile,10,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",178.0
+decile,10,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),85.0
+decile,10,091AZ,"Equipement photo, cinéma, optique",51.0
+decile,10,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,119.0
+decile,10,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",211.0
+decile,10,09321,"Horticulture, accessoires et frais de livraison",261.0
+decile,10,093AZ,Animaux d’agrément,188.0
+decile,10,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",800.0
+decile,10,0942Z,Services culturels,799.0
+decile,10,09431,"jeux de hasard (loto, tiercé …)",38.0
+decile,10,09511,Livres yc e-books,291.0
+decile,10,09521,Journaux et périodiques yc par abonnement,206.0
+decile,10,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",25.0
+decile,10,09541,Articles de papeterie et de dessin (yc toner pour imprimante),129.0
+decile,10,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",1171.0
+decile,10,0971Z,Autres dépenses de loisirs,604.0
+decile,10,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),55.0
+decile,10,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),35.0
+decile,10,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,184.0
+decile,10,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",70.0
+decile,10,1015Z,Autres dépenses d’enseignement,129.0
+decile,10,11111,Repas pris dans un restaurant,1691.0
+decile,10,11112,"Repas pris dans un café, bars ou assimilé",808.0
+decile,10,11121,Cantines scolaire et professionnelle,615.0
+decile,10,1113Z,Autres dépenses de restauration,744.0
+decile,10,11211,Services d hébergement,1071.0
+decile,10,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",612.0
+decile,10,1212Z,"Appareils, articles et produits pour les soins personnels",638.0
+decile,10,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",175.0
+decile,10,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",140.0
+decile,10,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),104.0
+decile,10,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",591.0
+decile,10,12511,"Assurances vie, décès",52.0
+decile,10,12521,Assurances liées au logement,546.0
+decile,10,12531,Assurances liées à la santé,1499.0
+decile,10,12541,Assurances liées aux transports (yc assurance voyage),937.0
+decile,10,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",322.0
+decile,10,12611,Services financiers,196.0
+decile,10,1271Z,Autres services,1591.0
+decile,10,12811,Autres dépenses occasionnées par une cérémonie,42.0
+decile,10,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,40.0
+decile,2,01111,Riz sous toutes ses formes et produits à base de riz,30.0
+decile,2,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,407.0
+decile,2,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,50.0
+decile,2,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",120.0
+decile,2,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",47.0
+decile,2,01121,Viande bovine fraîche ou surgelée,194.0
+decile,2,01122,Viande porcine fraîche ou surgelée,53.0
+decile,2,01123,Viande ovine ou caprine fraîche ou surgelée,49.0
+decile,2,01124,Viande de volaille fraîche ou surgelée,141.0
+decile,2,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",237.0
+decile,2,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",88.0
+decile,2,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",10.0
+decile,2,01130,Poissons frais,68.0
+decile,2,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),13.0
+decile,2,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",29.0
+decile,2,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",9.0
+decile,2,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,65.0
+decile,2,01145,Fromage et lait caillé,205.0
+decile,2,01147,Œufs,35.0
+decile,2,0114A,"Lait frais, condensé, en poudre",70.0
+decile,2,0114B,Yaourts et produits laitiers,135.0
+decile,2,01151,Beurre,33.0
+decile,2,0115A,Huiles alimentaires,33.0
+decile,2,0115B,Margarine et autres graisses alimentaires,14.0
+decile,2,01161,Agrumes frais,41.0
+decile,2,01162,Bananes fraîches,25.0
+decile,2,01168,Fruits séchés,38.0
+decile,2,01169,Fruits au sirop et fruits surgelés,3.0
+decile,2,0116A,Autres fruits frais,134.0
+decile,2,01175,Légumes secs,8.0
+decile,2,01176,Légumes surgelés non cuisinés,7.0
+decile,2,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",47.0
+decile,2,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",27.0
+decile,2,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",78.0
+decile,2,0117A,Legumes frais,197.0
+decile,2,01181,Sucre yc édulcorants,14.0
+decile,2,0118A,Produits à base de sucre et cacao,190.0
+decile,2,0119Z,Autres produits alimentaires,118.0
+decile,2,01213,Cacao et chocolat en poudre,8.0
+decile,2,0121A,"Café, thé, plantes à infusion",73.0
+decile,2,01221,Eaux minérales,50.0
+decile,2,01222,Boissons gazeuses,56.0
+decile,2,0122A,Jus de fruits et de légumes,87.0
+decile,2,0131Z,Autres dépenses d alimentation,100.0
+decile,2,02111,Spiritueux et liqueurs,67.0
+decile,2,0212A,"Vins, apéritifs à base de vin, champagne",94.0
+decile,2,02131,Bière et boissons à base de bière,43.0
+decile,2,022ZZ,Tabac et produits connexes,416.0
+decile,2,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",0.0
+decile,2,03111,Tissus pour vêtements,2.0
+decile,2,0312Z,"Vêtements homme, femme, enfant",668.0
+decile,2,03131,Accessoires du vêtement et mercerie,24.0
+decile,2,03141,"Nettoyage, réparation et location de vêtements",9.0
+decile,2,032ZZ,"Chaussures, yc location et réparation",223.0
+decile,2,0331Z,Autres dépenses d habillement,67.0
+decile,2,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,1917.0
+decile,2,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,18.0
+decile,2,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),53.0
+decile,2,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",207.0
+decile,2,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),627.0
+decile,2,04500,Facture électricité + gaz (non dissociables),127.0
+decile,2,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",635.0
+decile,2,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",209.0
+decile,2,0453Z,Combustibles liquides,110.0
+decile,2,045AZ,Combustibles solides,42.0
+decile,2,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),29.0
+decile,2,0511Z,"Meubles, articles d’ameublement et de décoration",204.0
+decile,2,051AZ,"Tapis et autres revêtements, pose et réparation",2.0
+decile,2,0521Z,Articles de literie et autres articles de ménage en textile,44.0
+decile,2,0531Z,Gros appareils ménagers électriques,102.0
+decile,2,05321,Petit électroménager,12.0
+decile,2,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",38.0
+decile,2,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",41.0
+decile,2,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",65.0
+decile,2,0561Z,Articles de ménage non durables,205.0
+decile,2,0562Z,Services domestiques et autres services pour le logement,42.0
+decile,2,0571Z,Autres dépenses en équipement,18.0
+decile,2,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",180.0
+decile,2,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,53.0
+decile,2,06221,"Dentiste, orthodontie",39.0
+decile,2,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",32.0
+decile,2,06311,Services et soins hospitaliers,16.0
+decile,2,0641Z,Autres dépenses de santé,3.0
+decile,2,0711Z,Achats d automobiles,771.0
+decile,2,07121,Achats de motocycles neufs et occasion,27.0
+decile,2,07131,Achats de cycles neufs et occasion,14.0
+decile,2,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",97.0
+decile,2,07221,"Carburants, électricité, huiles, lubrifiants…",754.0
+decile,2,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",214.0
+decile,2,0724Z,Autres services liés à l’utilisation de véhicules personnels,90.0
+decile,2,07361,Autres services de transport (yc déménagement),5.0
+decile,2,073ZZ,Services de transport,351.0
+decile,2,0741Z,Autres dépenses de transport,180.0
+decile,2,08111,"Services postaux (yc timbres, enveloppes)",15.0
+decile,2,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",70.0
+decile,2,08131,"Services de téléphone et fax, internet, recharges téléphoniques",573.0
+decile,2,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",65.0
+decile,2,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",56.0
+decile,2,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),26.0
+decile,2,091AZ,"Equipement photo, cinéma, optique",6.0
+decile,2,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,15.0
+decile,2,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",101.0
+decile,2,09321,"Horticulture, accessoires et frais de livraison",61.0
+decile,2,093AZ,Animaux d’agrément,113.0
+decile,2,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",131.0
+decile,2,0942Z,Services culturels,282.0
+decile,2,09431,"jeux de hasard (loto, tiercé …)",23.0
+decile,2,09511,Livres yc e-books,53.0
+decile,2,09521,Journaux et périodiques yc par abonnement,76.0
+decile,2,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",7.0
+decile,2,09541,Articles de papeterie et de dessin (yc toner pour imprimante),38.0
+decile,2,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",93.0
+decile,2,0971Z,Autres dépenses de loisirs,87.0
+decile,2,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),36.0
+decile,2,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),25.0
+decile,2,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,121.0
+decile,2,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",9.0
+decile,2,1015Z,Autres dépenses d’enseignement,39.0
+decile,2,11111,Repas pris dans un restaurant,184.0
+decile,2,11112,"Repas pris dans un café, bars ou assimilé",249.0
+decile,2,11121,Cantines scolaire et professionnelle,277.0
+decile,2,1113Z,Autres dépenses de restauration,82.0
+decile,2,11211,Services d hébergement,147.0
+decile,2,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",180.0
+decile,2,1212Z,"Appareils, articles et produits pour les soins personnels",282.0
+decile,2,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",14.0
+decile,2,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",39.0
+decile,2,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),21.0
+decile,2,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",94.0
+decile,2,12511,"Assurances vie, décès",30.0
+decile,2,12521,Assurances liées au logement,305.0
+decile,2,12531,Assurances liées à la santé,784.0
+decile,2,12541,Assurances liées aux transports (yc assurance voyage),457.0
+decile,2,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",89.0
+decile,2,12611,Services financiers,124.0
+decile,2,1271Z,Autres services,201.0
+decile,2,12811,Autres dépenses occasionnées par une cérémonie,10.0
+decile,2,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,11.0
+decile,3,01111,Riz sous toutes ses formes et produits à base de riz,26.0
+decile,3,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,431.0
+decile,3,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,51.0
+decile,3,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",122.0
+decile,3,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",48.0
+decile,3,01121,Viande bovine fraîche ou surgelée,201.0
+decile,3,01122,Viande porcine fraîche ou surgelée,71.0
+decile,3,01123,Viande ovine ou caprine fraîche ou surgelée,22.0
+decile,3,01124,Viande de volaille fraîche ou surgelée,123.0
+decile,3,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",277.0
+decile,3,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",84.0
+decile,3,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",6.0
+decile,3,01130,Poissons frais,74.0
+decile,3,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),11.0
+decile,3,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",35.0
+decile,3,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",15.0
+decile,3,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,63.0
+decile,3,01145,Fromage et lait caillé,209.0
+decile,3,01147,Œufs,37.0
+decile,3,0114A,"Lait frais, condensé, en poudre",77.0
+decile,3,0114B,Yaourts et produits laitiers,150.0
+decile,3,01151,Beurre,39.0
+decile,3,0115A,Huiles alimentaires,27.0
+decile,3,0115B,Margarine et autres graisses alimentaires,13.0
+decile,3,01161,Agrumes frais,42.0
+decile,3,01162,Bananes fraîches,25.0
+decile,3,01168,Fruits séchés,34.0
+decile,3,01169,Fruits au sirop et fruits surgelés,4.0
+decile,3,0116A,Autres fruits frais,142.0
+decile,3,01175,Légumes secs,6.0
+decile,3,01176,Légumes surgelés non cuisinés,11.0
+decile,3,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",44.0
+decile,3,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",26.0
+decile,3,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",74.0
+decile,3,0117A,Legumes frais,202.0
+decile,3,01181,Sucre yc édulcorants,16.0
+decile,3,0118A,Produits à base de sucre et cacao,190.0
+decile,3,0119Z,Autres produits alimentaires,121.0
+decile,3,01213,Cacao et chocolat en poudre,5.0
+decile,3,0121A,"Café, thé, plantes à infusion",92.0
+decile,3,01221,Eaux minérales,58.0
+decile,3,01222,Boissons gazeuses,49.0
+decile,3,0122A,Jus de fruits et de légumes,88.0
+decile,3,0131Z,Autres dépenses d alimentation,99.0
+decile,3,02111,Spiritueux et liqueurs,104.0
+decile,3,0212A,"Vins, apéritifs à base de vin, champagne",138.0
+decile,3,02131,Bière et boissons à base de bière,51.0
+decile,3,022ZZ,Tabac et produits connexes,414.0
+decile,3,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",2.0
+decile,3,03111,Tissus pour vêtements,1.0
+decile,3,0312Z,"Vêtements homme, femme, enfant",680.0
+decile,3,03131,Accessoires du vêtement et mercerie,26.0
+decile,3,03141,"Nettoyage, réparation et location de vêtements",3.0
+decile,3,032ZZ,"Chaussures, yc location et réparation",222.0
+decile,3,0331Z,Autres dépenses d habillement,85.0
+decile,3,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,2114.0
+decile,3,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,14.0
+decile,3,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),78.0
+decile,3,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",230.0
+decile,3,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),545.0
+decile,3,04500,Facture électricité + gaz (non dissociables),146.0
+decile,3,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",640.0
+decile,3,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",251.0
+decile,3,0453Z,Combustibles liquides,102.0
+decile,3,045AZ,Combustibles solides,54.0
+decile,3,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),20.0
+decile,3,0511Z,"Meubles, articles d’ameublement et de décoration",268.0
+decile,3,051AZ,"Tapis et autres revêtements, pose et réparation",8.0
+decile,3,0521Z,Articles de literie et autres articles de ménage en textile,52.0
+decile,3,0531Z,Gros appareils ménagers électriques,175.0
+decile,3,05321,Petit électroménager,12.0
+decile,3,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",54.0
+decile,3,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",48.0
+decile,3,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",81.0
+decile,3,0561Z,Articles de ménage non durables,196.0
+decile,3,0562Z,Services domestiques et autres services pour le logement,91.0
+decile,3,0571Z,Autres dépenses en équipement,28.0
+decile,3,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",187.0
+decile,3,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,77.0
+decile,3,06221,"Dentiste, orthodontie",54.0
+decile,3,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",47.0
+decile,3,06311,Services et soins hospitaliers,24.0
+decile,3,0641Z,Autres dépenses de santé,4.0
+decile,3,0711Z,Achats d automobiles,960.0
+decile,3,07121,Achats de motocycles neufs et occasion,46.0
+decile,3,07131,Achats de cycles neufs et occasion,15.0
+decile,3,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",95.0
+decile,3,07221,"Carburants, électricité, huiles, lubrifiants…",868.0
+decile,3,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",235.0
+decile,3,0724Z,Autres services liés à l’utilisation de véhicules personnels,71.0
+decile,3,07361,Autres services de transport (yc déménagement),6.0
+decile,3,073ZZ,Services de transport,251.0
+decile,3,0741Z,Autres dépenses de transport,178.0
+decile,3,08111,"Services postaux (yc timbres, enveloppes)",18.0
+decile,3,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",63.0
+decile,3,08131,"Services de téléphone et fax, internet, recharges téléphoniques",573.0
+decile,3,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",58.0
+decile,3,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",66.0
+decile,3,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),30.0
+decile,3,091AZ,"Equipement photo, cinéma, optique",10.0
+decile,3,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,58.0
+decile,3,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",138.0
+decile,3,09321,"Horticulture, accessoires et frais de livraison",75.0
+decile,3,093AZ,Animaux d’agrément,116.0
+decile,3,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",184.0
+decile,3,0942Z,Services culturels,312.0
+decile,3,09431,"jeux de hasard (loto, tiercé …)",26.0
+decile,3,09511,Livres yc e-books,68.0
+decile,3,09521,Journaux et périodiques yc par abonnement,76.0
+decile,3,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",6.0
+decile,3,09541,Articles de papeterie et de dessin (yc toner pour imprimante),48.0
+decile,3,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",107.0
+decile,3,0971Z,Autres dépenses de loisirs,101.0
+decile,3,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),11.0
+decile,3,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),19.0
+decile,3,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,36.0
+decile,3,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",16.0
+decile,3,1015Z,Autres dépenses d’enseignement,11.0
+decile,3,11111,Repas pris dans un restaurant,250.0
+decile,3,11112,"Repas pris dans un café, bars ou assimilé",286.0
+decile,3,11121,Cantines scolaire et professionnelle,247.0
+decile,3,1113Z,Autres dépenses de restauration,92.0
+decile,3,11211,Services d hébergement,125.0
+decile,3,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",224.0
+decile,3,1212Z,"Appareils, articles et produits pour les soins personnels",296.0
+decile,3,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",22.0
+decile,3,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",42.0
+decile,3,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),35.0
+decile,3,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",169.0
+decile,3,12511,"Assurances vie, décès",35.0
+decile,3,12521,Assurances liées au logement,320.0
+decile,3,12531,Assurances liées à la santé,942.0
+decile,3,12541,Assurances liées aux transports (yc assurance voyage),538.0
+decile,3,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",87.0
+decile,3,12611,Services financiers,127.0
+decile,3,1271Z,Autres services,392.0
+decile,3,12811,Autres dépenses occasionnées par une cérémonie,8.0
+decile,3,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,16.0
+decile,4,01111,Riz sous toutes ses formes et produits à base de riz,28.0
+decile,4,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,461.0
+decile,4,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,56.0
+decile,4,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",144.0
+decile,4,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",43.0
+decile,4,01121,Viande bovine fraîche ou surgelée,266.0
+decile,4,01122,Viande porcine fraîche ou surgelée,83.0
+decile,4,01123,Viande ovine ou caprine fraîche ou surgelée,29.0
+decile,4,01124,Viande de volaille fraîche ou surgelée,147.0
+decile,4,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",328.0
+decile,4,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",106.0
+decile,4,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",11.0
+decile,4,01130,Poissons frais,105.0
+decile,4,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),15.0
+decile,4,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",46.0
+decile,4,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",17.0
+decile,4,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,69.0
+decile,4,01145,Fromage et lait caillé,254.0
+decile,4,01147,Œufs,39.0
+decile,4,0114A,"Lait frais, condensé, en poudre",80.0
+decile,4,0114B,Yaourts et produits laitiers,169.0
+decile,4,01151,Beurre,45.0
+decile,4,0115A,Huiles alimentaires,32.0
+decile,4,0115B,Margarine et autres graisses alimentaires,14.0
+decile,4,01161,Agrumes frais,54.0
+decile,4,01162,Bananes fraîches,31.0
+decile,4,01168,Fruits séchés,36.0
+decile,4,01169,Fruits au sirop et fruits surgelés,8.0
+decile,4,0116A,Autres fruits frais,161.0
+decile,4,01175,Légumes secs,4.0
+decile,4,01176,Légumes surgelés non cuisinés,15.0
+decile,4,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",46.0
+decile,4,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",34.0
+decile,4,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",79.0
+decile,4,0117A,Legumes frais,208.0
+decile,4,01181,Sucre yc édulcorants,18.0
+decile,4,0118A,Produits à base de sucre et cacao,237.0
+decile,4,0119Z,Autres produits alimentaires,152.0
+decile,4,01213,Cacao et chocolat en poudre,5.0
+decile,4,0121A,"Café, thé, plantes à infusion",106.0
+decile,4,01221,Eaux minérales,58.0
+decile,4,01222,Boissons gazeuses,47.0
+decile,4,0122A,Jus de fruits et de légumes,97.0
+decile,4,0131Z,Autres dépenses d alimentation,113.0
+decile,4,02111,Spiritueux et liqueurs,104.0
+decile,4,0212A,"Vins, apéritifs à base de vin, champagne",162.0
+decile,4,02131,Bière et boissons à base de bière,67.0
+decile,4,022ZZ,Tabac et produits connexes,421.0
+decile,4,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",6.0
+decile,4,03111,Tissus pour vêtements,2.0
+decile,4,0312Z,"Vêtements homme, femme, enfant",688.0
+decile,4,03131,Accessoires du vêtement et mercerie,41.0
+decile,4,03141,"Nettoyage, réparation et location de vêtements",4.0
+decile,4,032ZZ,"Chaussures, yc location et réparation",225.0
+decile,4,0331Z,Autres dépenses d habillement,83.0
+decile,4,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,2168.0
+decile,4,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,42.0
+decile,4,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),81.0
+decile,4,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",237.0
+decile,4,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),519.0
+decile,4,04500,Facture électricité + gaz (non dissociables),146.0
+decile,4,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",683.0
+decile,4,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",237.0
+decile,4,0453Z,Combustibles liquides,157.0
+decile,4,045AZ,Combustibles solides,57.0
+decile,4,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),48.0
+decile,4,0511Z,"Meubles, articles d’ameublement et de décoration",221.0
+decile,4,051AZ,"Tapis et autres revêtements, pose et réparation",15.0
+decile,4,0521Z,Articles de literie et autres articles de ménage en textile,51.0
+decile,4,0531Z,Gros appareils ménagers électriques,158.0
+decile,4,05321,Petit électroménager,14.0
+decile,4,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",70.0
+decile,4,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",49.0
+decile,4,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",89.0
+decile,4,0561Z,Articles de ménage non durables,225.0
+decile,4,0562Z,Services domestiques et autres services pour le logement,83.0
+decile,4,0571Z,Autres dépenses en équipement,22.0
+decile,4,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",209.0
+decile,4,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,99.0
+decile,4,06221,"Dentiste, orthodontie",46.0
+decile,4,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",41.0
+decile,4,06311,Services et soins hospitaliers,17.0
+decile,4,0641Z,Autres dépenses de santé,2.0
+decile,4,0711Z,Achats d automobiles,1363.0
+decile,4,07121,Achats de motocycles neufs et occasion,59.0
+decile,4,07131,Achats de cycles neufs et occasion,31.0
+decile,4,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",128.0
+decile,4,07221,"Carburants, électricité, huiles, lubrifiants…",1006.0
+decile,4,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",266.0
+decile,4,0724Z,Autres services liés à l’utilisation de véhicules personnels,92.0
+decile,4,07361,Autres services de transport (yc déménagement),12.0
+decile,4,073ZZ,Services de transport,315.0
+decile,4,0741Z,Autres dépenses de transport,211.0
+decile,4,08111,"Services postaux (yc timbres, enveloppes)",17.0
+decile,4,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",72.0
+decile,4,08131,"Services de téléphone et fax, internet, recharges téléphoniques",614.0
+decile,4,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",54.0
+decile,4,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",63.0
+decile,4,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),47.0
+decile,4,091AZ,"Equipement photo, cinéma, optique",14.0
+decile,4,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,11.0
+decile,4,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",117.0
+decile,4,09321,"Horticulture, accessoires et frais de livraison",96.0
+decile,4,093AZ,Animaux d’agrément,143.0
+decile,4,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",164.0
+decile,4,0942Z,Services culturels,410.0
+decile,4,09431,"jeux de hasard (loto, tiercé …)",45.0
+decile,4,09511,Livres yc e-books,91.0
+decile,4,09521,Journaux et périodiques yc par abonnement,116.0
+decile,4,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",9.0
+decile,4,09541,Articles de papeterie et de dessin (yc toner pour imprimante),72.0
+decile,4,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",174.0
+decile,4,0971Z,Autres dépenses de loisirs,155.0
+decile,4,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),10.0
+decile,4,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),18.0
+decile,4,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,102.0
+decile,4,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",11.0
+decile,4,1015Z,Autres dépenses d’enseignement,29.0
+decile,4,11111,Repas pris dans un restaurant,342.0
+decile,4,11112,"Repas pris dans un café, bars ou assimilé",344.0
+decile,4,11121,Cantines scolaire et professionnelle,299.0
+decile,4,1113Z,Autres dépenses de restauration,154.0
+decile,4,11211,Services d hébergement,234.0
+decile,4,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",252.0
+decile,4,1212Z,"Appareils, articles et produits pour les soins personnels",356.0
+decile,4,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",28.0
+decile,4,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",44.0
+decile,4,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),32.0
+decile,4,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",130.0
+decile,4,12511,"Assurances vie, décès",43.0
+decile,4,12521,Assurances liées au logement,346.0
+decile,4,12531,Assurances liées à la santé,1096.0
+decile,4,12541,Assurances liées aux transports (yc assurance voyage),598.0
+decile,4,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",110.0
+decile,4,12611,Services financiers,139.0
+decile,4,1271Z,Autres services,242.0
+decile,4,12811,Autres dépenses occasionnées par une cérémonie,13.0
+decile,4,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,15.0
+decile,5,01111,Riz sous toutes ses formes et produits à base de riz,29.0
+decile,5,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,483.0
+decile,5,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,58.0
+decile,5,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",151.0
+decile,5,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",50.0
+decile,5,01121,Viande bovine fraîche ou surgelée,219.0
+decile,5,01122,Viande porcine fraîche ou surgelée,72.0
+decile,5,01123,Viande ovine ou caprine fraîche ou surgelée,23.0
+decile,5,01124,Viande de volaille fraîche ou surgelée,154.0
+decile,5,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",308.0
+decile,5,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",115.0
+decile,5,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",9.0
+decile,5,01130,Poissons frais,85.0
+decile,5,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),18.0
+decile,5,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",48.0
+decile,5,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",17.0
+decile,5,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,72.0
+decile,5,01145,Fromage et lait caillé,263.0
+decile,5,01147,Œufs,41.0
+decile,5,0114A,"Lait frais, condensé, en poudre",71.0
+decile,5,0114B,Yaourts et produits laitiers,171.0
+decile,5,01151,Beurre,39.0
+decile,5,0115A,Huiles alimentaires,35.0
+decile,5,0115B,Margarine et autres graisses alimentaires,14.0
+decile,5,01161,Agrumes frais,51.0
+decile,5,01162,Bananes fraîches,23.0
+decile,5,01168,Fruits séchés,39.0
+decile,5,01169,Fruits au sirop et fruits surgelés,8.0
+decile,5,0116A,Autres fruits frais,142.0
+decile,5,01175,Légumes secs,6.0
+decile,5,01176,Légumes surgelés non cuisinés,12.0
+decile,5,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",49.0
+decile,5,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",37.0
+decile,5,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",77.0
+decile,5,0117A,Legumes frais,206.0
+decile,5,01181,Sucre yc édulcorants,15.0
+decile,5,0118A,Produits à base de sucre et cacao,235.0
+decile,5,0119Z,Autres produits alimentaires,146.0
+decile,5,01213,Cacao et chocolat en poudre,6.0
+decile,5,0121A,"Café, thé, plantes à infusion",107.0
+decile,5,01221,Eaux minérales,65.0
+decile,5,01222,Boissons gazeuses,47.0
+decile,5,0122A,Jus de fruits et de légumes,86.0
+decile,5,0131Z,Autres dépenses d alimentation,141.0
+decile,5,02111,Spiritueux et liqueurs,97.0
+decile,5,0212A,"Vins, apéritifs à base de vin, champagne",180.0
+decile,5,02131,Bière et boissons à base de bière,79.0
+decile,5,022ZZ,Tabac et produits connexes,448.0
+decile,5,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",5.0
+decile,5,03111,Tissus pour vêtements,6.0
+decile,5,0312Z,"Vêtements homme, femme, enfant",720.0
+decile,5,03131,Accessoires du vêtement et mercerie,35.0
+decile,5,03141,"Nettoyage, réparation et location de vêtements",5.0
+decile,5,032ZZ,"Chaussures, yc location et réparation",233.0
+decile,5,0331Z,Autres dépenses d habillement,88.0
+decile,5,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,2183.0
+decile,5,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,44.0
+decile,5,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),150.0
+decile,5,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",244.0
+decile,5,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),445.0
+decile,5,04500,Facture électricité + gaz (non dissociables),135.0
+decile,5,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",714.0
+decile,5,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",245.0
+decile,5,0453Z,Combustibles liquides,129.0
+decile,5,045AZ,Combustibles solides,57.0
+decile,5,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),22.0
+decile,5,0511Z,"Meubles, articles d’ameublement et de décoration",282.0
+decile,5,051AZ,"Tapis et autres revêtements, pose et réparation",10.0
+decile,5,0521Z,Articles de literie et autres articles de ménage en textile,75.0
+decile,5,0531Z,Gros appareils ménagers électriques,144.0
+decile,5,05321,Petit électroménager,23.0
+decile,5,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",65.0
+decile,5,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",65.0
+decile,5,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",79.0
+decile,5,0561Z,Articles de ménage non durables,235.0
+decile,5,0562Z,Services domestiques et autres services pour le logement,100.0
+decile,5,0571Z,Autres dépenses en équipement,25.0
+decile,5,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",246.0
+decile,5,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,100.0
+decile,5,06221,"Dentiste, orthodontie",49.0
+decile,5,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",45.0
+decile,5,06311,Services et soins hospitaliers,28.0
+decile,5,0641Z,Autres dépenses de santé,2.0
+decile,5,0711Z,Achats d automobiles,1441.0
+decile,5,07121,Achats de motocycles neufs et occasion,46.0
+decile,5,07131,Achats de cycles neufs et occasion,25.0
+decile,5,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",136.0
+decile,5,07221,"Carburants, électricité, huiles, lubrifiants…",1174.0
+decile,5,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",279.0
+decile,5,0724Z,Autres services liés à l’utilisation de véhicules personnels,127.0
+decile,5,07361,Autres services de transport (yc déménagement),13.0
+decile,5,073ZZ,Services de transport,334.0
+decile,5,0741Z,Autres dépenses de transport,220.0
+decile,5,08111,"Services postaux (yc timbres, enveloppes)",17.0
+decile,5,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",76.0
+decile,5,08131,"Services de téléphone et fax, internet, recharges téléphoniques",611.0
+decile,5,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",86.0
+decile,5,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",68.0
+decile,5,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),44.0
+decile,5,091AZ,"Equipement photo, cinéma, optique",12.0
+decile,5,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,10.0
+decile,5,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",172.0
+decile,5,09321,"Horticulture, accessoires et frais de livraison",108.0
+decile,5,093AZ,Animaux d’agrément,125.0
+decile,5,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",213.0
+decile,5,0942Z,Services culturels,435.0
+decile,5,09431,"jeux de hasard (loto, tiercé …)",40.0
+decile,5,09511,Livres yc e-books,83.0
+decile,5,09521,Journaux et périodiques yc par abonnement,116.0
+decile,5,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",13.0
+decile,5,09541,Articles de papeterie et de dessin (yc toner pour imprimante),53.0
+decile,5,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",227.0
+decile,5,0971Z,Autres dépenses de loisirs,160.0
+decile,5,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),21.0
+decile,5,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),23.0
+decile,5,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,73.0
+decile,5,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",11.0
+decile,5,1015Z,Autres dépenses d’enseignement,3.0
+decile,5,11111,Repas pris dans un restaurant,401.0
+decile,5,11112,"Repas pris dans un café, bars ou assimilé",414.0
+decile,5,11121,Cantines scolaire et professionnelle,339.0
+decile,5,1113Z,Autres dépenses de restauration,166.0
+decile,5,11211,Services d hébergement,205.0
+decile,5,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",306.0
+decile,5,1212Z,"Appareils, articles et produits pour les soins personnels",360.0
+decile,5,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",27.0
+decile,5,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",39.0
+decile,5,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),31.0
+decile,5,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",234.0
+decile,5,12511,"Assurances vie, décès",40.0
+decile,5,12521,Assurances liées au logement,347.0
+decile,5,12531,Assurances liées à la santé,1101.0
+decile,5,12541,Assurances liées aux transports (yc assurance voyage),676.0
+decile,5,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",101.0
+decile,5,12611,Services financiers,138.0
+decile,5,1271Z,Autres services,346.0
+decile,5,12811,Autres dépenses occasionnées par une cérémonie,24.0
+decile,5,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,14.0
+decile,6,01111,Riz sous toutes ses formes et produits à base de riz,32.0
+decile,6,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,511.0
+decile,6,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,56.0
+decile,6,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",147.0
+decile,6,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",48.0
+decile,6,01121,Viande bovine fraîche ou surgelée,264.0
+decile,6,01122,Viande porcine fraîche ou surgelée,80.0
+decile,6,01123,Viande ovine ou caprine fraîche ou surgelée,28.0
+decile,6,01124,Viande de volaille fraîche ou surgelée,169.0
+decile,6,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",329.0
+decile,6,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",116.0
+decile,6,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",15.0
+decile,6,01130,Poissons frais,102.0
+decile,6,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),21.0
+decile,6,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",68.0
+decile,6,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",24.0
+decile,6,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,81.0
+decile,6,01145,Fromage et lait caillé,267.0
+decile,6,01147,Œufs,42.0
+decile,6,0114A,"Lait frais, condensé, en poudre",72.0
+decile,6,0114B,Yaourts et produits laitiers,177.0
+decile,6,01151,Beurre,43.0
+decile,6,0115A,Huiles alimentaires,37.0
+decile,6,0115B,Margarine et autres graisses alimentaires,15.0
+decile,6,01161,Agrumes frais,59.0
+decile,6,01162,Bananes fraîches,24.0
+decile,6,01168,Fruits séchés,37.0
+decile,6,01169,Fruits au sirop et fruits surgelés,9.0
+decile,6,0116A,Autres fruits frais,169.0
+decile,6,01175,Légumes secs,6.0
+decile,6,01176,Légumes surgelés non cuisinés,13.0
+decile,6,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",48.0
+decile,6,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",44.0
+decile,6,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",84.0
+decile,6,0117A,Legumes frais,241.0
+decile,6,01181,Sucre yc édulcorants,14.0
+decile,6,0118A,Produits à base de sucre et cacao,251.0
+decile,6,0119Z,Autres produits alimentaires,146.0
+decile,6,01213,Cacao et chocolat en poudre,6.0
+decile,6,0121A,"Café, thé, plantes à infusion",125.0
+decile,6,01221,Eaux minérales,67.0
+decile,6,01222,Boissons gazeuses,49.0
+decile,6,0122A,Jus de fruits et de légumes,102.0
+decile,6,0131Z,Autres dépenses d alimentation,166.0
+decile,6,02111,Spiritueux et liqueurs,112.0
+decile,6,0212A,"Vins, apéritifs à base de vin, champagne",265.0
+decile,6,02131,Bière et boissons à base de bière,62.0
+decile,6,022ZZ,Tabac et produits connexes,443.0
+decile,6,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",3.0
+decile,6,03111,Tissus pour vêtements,5.0
+decile,6,0312Z,"Vêtements homme, femme, enfant",845.0
+decile,6,03131,Accessoires du vêtement et mercerie,29.0
+decile,6,03141,"Nettoyage, réparation et location de vêtements",15.0
+decile,6,032ZZ,"Chaussures, yc location et réparation",273.0
+decile,6,0331Z,Autres dépenses d habillement,112.0
+decile,6,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,2118.0
+decile,6,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,43.0
+decile,6,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),314.0
+decile,6,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",269.0
+decile,6,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),502.0
+decile,6,04500,Facture électricité + gaz (non dissociables),143.0
+decile,6,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",759.0
+decile,6,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",250.0
+decile,6,0453Z,Combustibles liquides,132.0
+decile,6,045AZ,Combustibles solides,64.0
+decile,6,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),48.0
+decile,6,0511Z,"Meubles, articles d’ameublement et de décoration",368.0
+decile,6,051AZ,"Tapis et autres revêtements, pose et réparation",3.0
+decile,6,0521Z,Articles de literie et autres articles de ménage en textile,76.0
+decile,6,0531Z,Gros appareils ménagers électriques,214.0
+decile,6,05321,Petit électroménager,23.0
+decile,6,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",66.0
+decile,6,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",56.0
+decile,6,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",109.0
+decile,6,0561Z,Articles de ménage non durables,222.0
+decile,6,0562Z,Services domestiques et autres services pour le logement,133.0
+decile,6,0571Z,Autres dépenses en équipement,60.0
+decile,6,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",234.0
+decile,6,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,124.0
+decile,6,06221,"Dentiste, orthodontie",67.0
+decile,6,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",40.0
+decile,6,06311,Services et soins hospitaliers,22.0
+decile,6,0641Z,Autres dépenses de santé,4.0
+decile,6,0711Z,Achats d automobiles,1815.0
+decile,6,07121,Achats de motocycles neufs et occasion,115.0
+decile,6,07131,Achats de cycles neufs et occasion,46.0
+decile,6,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",161.0
+decile,6,07221,"Carburants, électricité, huiles, lubrifiants…",1196.0
+decile,6,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",329.0
+decile,6,0724Z,Autres services liés à l’utilisation de véhicules personnels,99.0
+decile,6,07361,Autres services de transport (yc déménagement),17.0
+decile,6,073ZZ,Services de transport,410.0
+decile,6,0741Z,Autres dépenses de transport,331.0
+decile,6,08111,"Services postaux (yc timbres, enveloppes)",25.0
+decile,6,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",69.0
+decile,6,08131,"Services de téléphone et fax, internet, recharges téléphoniques",652.0
+decile,6,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",68.0
+decile,6,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",75.0
+decile,6,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),50.0
+decile,6,091AZ,"Equipement photo, cinéma, optique",36.0
+decile,6,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,83.0
+decile,6,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",214.0
+decile,6,09321,"Horticulture, accessoires et frais de livraison",167.0
+decile,6,093AZ,Animaux d’agrément,170.0
+decile,6,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",276.0
+decile,6,0942Z,Services culturels,443.0
+decile,6,09431,"jeux de hasard (loto, tiercé …)",57.0
+decile,6,09511,Livres yc e-books,90.0
+decile,6,09521,Journaux et périodiques yc par abonnement,122.0
+decile,6,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",15.0
+decile,6,09541,Articles de papeterie et de dessin (yc toner pour imprimante),72.0
+decile,6,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",276.0
+decile,6,0971Z,Autres dépenses de loisirs,215.0
+decile,6,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),11.0
+decile,6,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),22.0
+decile,6,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,58.0
+decile,6,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",23.0
+decile,6,1015Z,Autres dépenses d’enseignement,20.0
+decile,6,11111,Repas pris dans un restaurant,523.0
+decile,6,11112,"Repas pris dans un café, bars ou assimilé",468.0
+decile,6,11121,Cantines scolaire et professionnelle,346.0
+decile,6,1113Z,Autres dépenses de restauration,204.0
+decile,6,11211,Services d hébergement,225.0
+decile,6,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",339.0
+decile,6,1212Z,"Appareils, articles et produits pour les soins personnels",433.0
+decile,6,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",46.0
+decile,6,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",55.0
+decile,6,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),45.0
+decile,6,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",307.0
+decile,6,12511,"Assurances vie, décès",37.0
+decile,6,12521,Assurances liées au logement,371.0
+decile,6,12531,Assurances liées à la santé,1193.0
+decile,6,12541,Assurances liées aux transports (yc assurance voyage),727.0
+decile,6,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",159.0
+decile,6,12611,Services financiers,152.0
+decile,6,1271Z,Autres services,557.0
+decile,6,12811,Autres dépenses occasionnées par une cérémonie,25.0
+decile,6,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,9.0
+decile,7,01111,Riz sous toutes ses formes et produits à base de riz,30.0
+decile,7,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,510.0
+decile,7,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,66.0
+decile,7,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",159.0
+decile,7,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",63.0
+decile,7,01121,Viande bovine fraîche ou surgelée,274.0
+decile,7,01122,Viande porcine fraîche ou surgelée,78.0
+decile,7,01123,Viande ovine ou caprine fraîche ou surgelée,31.0
+decile,7,01124,Viande de volaille fraîche ou surgelée,175.0
+decile,7,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",327.0
+decile,7,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",113.0
+decile,7,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",11.0
+decile,7,01130,Poissons frais,96.0
+decile,7,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),19.0
+decile,7,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",57.0
+decile,7,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",22.0
+decile,7,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,89.0
+decile,7,01145,Fromage et lait caillé,300.0
+decile,7,01147,Œufs,43.0
+decile,7,0114A,"Lait frais, condensé, en poudre",70.0
+decile,7,0114B,Yaourts et produits laitiers,186.0
+decile,7,01151,Beurre,43.0
+decile,7,0115A,Huiles alimentaires,30.0
+decile,7,0115B,Margarine et autres graisses alimentaires,12.0
+decile,7,01161,Agrumes frais,65.0
+decile,7,01162,Bananes fraîches,27.0
+decile,7,01168,Fruits séchés,44.0
+decile,7,01169,Fruits au sirop et fruits surgelés,10.0
+decile,7,0116A,Autres fruits frais,214.0
+decile,7,01175,Légumes secs,6.0
+decile,7,01176,Légumes surgelés non cuisinés,11.0
+decile,7,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",54.0
+decile,7,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",41.0
+decile,7,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",75.0
+decile,7,0117A,Legumes frais,238.0
+decile,7,01181,Sucre yc édulcorants,14.0
+decile,7,0118A,Produits à base de sucre et cacao,252.0
+decile,7,0119Z,Autres produits alimentaires,136.0
+decile,7,01213,Cacao et chocolat en poudre,8.0
+decile,7,0121A,"Café, thé, plantes à infusion",117.0
+decile,7,01221,Eaux minérales,76.0
+decile,7,01222,Boissons gazeuses,43.0
+decile,7,0122A,Jus de fruits et de légumes,112.0
+decile,7,0131Z,Autres dépenses d alimentation,192.0
+decile,7,02111,Spiritueux et liqueurs,123.0
+decile,7,0212A,"Vins, apéritifs à base de vin, champagne",235.0
+decile,7,02131,Bière et boissons à base de bière,66.0
+decile,7,022ZZ,Tabac et produits connexes,391.0
+decile,7,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",2.0
+decile,7,03111,Tissus pour vêtements,4.0
+decile,7,0312Z,"Vêtements homme, femme, enfant",908.0
+decile,7,03131,Accessoires du vêtement et mercerie,49.0
+decile,7,03141,"Nettoyage, réparation et location de vêtements",15.0
+decile,7,032ZZ,"Chaussures, yc location et réparation",287.0
+decile,7,0331Z,Autres dépenses d habillement,159.0
+decile,7,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,1795.0
+decile,7,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,79.0
+decile,7,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),296.0
+decile,7,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",266.0
+decile,7,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),527.0
+decile,7,04500,Facture électricité + gaz (non dissociables),171.0
+decile,7,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",814.0
+decile,7,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",270.0
+decile,7,0453Z,Combustibles liquides,132.0
+decile,7,045AZ,Combustibles solides,62.0
+decile,7,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),77.0
+decile,7,0511Z,"Meubles, articles d’ameublement et de décoration",417.0
+decile,7,051AZ,"Tapis et autres revêtements, pose et réparation",27.0
+decile,7,0521Z,Articles de literie et autres articles de ménage en textile,92.0
+decile,7,0531Z,Gros appareils ménagers électriques,157.0
+decile,7,05321,Petit électroménager,40.0
+decile,7,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",93.0
+decile,7,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",113.0
+decile,7,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",136.0
+decile,7,0561Z,Articles de ménage non durables,249.0
+decile,7,0562Z,Services domestiques et autres services pour le logement,233.0
+decile,7,0571Z,Autres dépenses en équipement,42.0
+decile,7,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",255.0
+decile,7,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,107.0
+decile,7,06221,"Dentiste, orthodontie",84.0
+decile,7,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",82.0
+decile,7,06311,Services et soins hospitaliers,35.0
+decile,7,0641Z,Autres dépenses de santé,16.0
+decile,7,0711Z,Achats d automobiles,2202.0
+decile,7,07121,Achats de motocycles neufs et occasion,83.0
+decile,7,07131,Achats de cycles neufs et occasion,36.0
+decile,7,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",114.0
+decile,7,07221,"Carburants, électricité, huiles, lubrifiants…",1333.0
+decile,7,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",307.0
+decile,7,0724Z,Autres services liés à l’utilisation de véhicules personnels,140.0
+decile,7,07361,Autres services de transport (yc déménagement),13.0
+decile,7,073ZZ,Services de transport,546.0
+decile,7,0741Z,Autres dépenses de transport,344.0
+decile,7,08111,"Services postaux (yc timbres, enveloppes)",31.0
+decile,7,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",103.0
+decile,7,08131,"Services de téléphone et fax, internet, recharges téléphoniques",643.0
+decile,7,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",153.0
+decile,7,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",88.0
+decile,7,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),51.0
+decile,7,091AZ,"Equipement photo, cinéma, optique",27.0
+decile,7,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,50.0
+decile,7,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",187.0
+decile,7,09321,"Horticulture, accessoires et frais de livraison",151.0
+decile,7,093AZ,Animaux d’agrément,227.0
+decile,7,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",328.0
+decile,7,0942Z,Services culturels,528.0
+decile,7,09431,"jeux de hasard (loto, tiercé …)",47.0
+decile,7,09511,Livres yc e-books,118.0
+decile,7,09521,Journaux et périodiques yc par abonnement,124.0
+decile,7,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",14.0
+decile,7,09541,Articles de papeterie et de dessin (yc toner pour imprimante),87.0
+decile,7,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",340.0
+decile,7,0971Z,Autres dépenses de loisirs,269.0
+decile,7,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),23.0
+decile,7,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),24.0
+decile,7,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,83.0
+decile,7,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",18.0
+decile,7,1015Z,Autres dépenses d’enseignement,12.0
+decile,7,11111,Repas pris dans un restaurant,545.0
+decile,7,11112,"Repas pris dans un café, bars ou assimilé",484.0
+decile,7,11121,Cantines scolaire et professionnelle,379.0
+decile,7,1113Z,Autres dépenses de restauration,242.0
+decile,7,11211,Services d hébergement,317.0
+decile,7,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",389.0
+decile,7,1212Z,"Appareils, articles et produits pour les soins personnels",447.0
+decile,7,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",49.0
+decile,7,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",81.0
+decile,7,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),39.0
+decile,7,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",376.0
+decile,7,12511,"Assurances vie, décès",44.0
+decile,7,12521,Assurances liées au logement,391.0
+decile,7,12531,Assurances liées à la santé,1208.0
+decile,7,12541,Assurances liées aux transports (yc assurance voyage),779.0
+decile,7,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",145.0
+decile,7,12611,Services financiers,153.0
+decile,7,1271Z,Autres services,633.0
+decile,7,12811,Autres dépenses occasionnées par une cérémonie,48.0
+decile,7,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,24.0
+decile,8,01111,Riz sous toutes ses formes et produits à base de riz,34.0
+decile,8,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,578.0
+decile,8,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,76.0
+decile,8,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",163.0
+decile,8,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",59.0
+decile,8,01121,Viande bovine fraîche ou surgelée,277.0
+decile,8,01122,Viande porcine fraîche ou surgelée,96.0
+decile,8,01123,Viande ovine ou caprine fraîche ou surgelée,34.0
+decile,8,01124,Viande de volaille fraîche ou surgelée,174.0
+decile,8,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",358.0
+decile,8,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",130.0
+decile,8,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",20.0
+decile,8,01130,Poissons frais,119.0
+decile,8,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),30.0
+decile,8,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",70.0
+decile,8,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",39.0
+decile,8,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,99.0
+decile,8,01145,Fromage et lait caillé,333.0
+decile,8,01147,Œufs,61.0
+decile,8,0114A,"Lait frais, condensé, en poudre",73.0
+decile,8,0114B,Yaourts et produits laitiers,210.0
+decile,8,01151,Beurre,47.0
+decile,8,0115A,Huiles alimentaires,31.0
+decile,8,0115B,Margarine et autres graisses alimentaires,13.0
+decile,8,01161,Agrumes frais,73.0
+decile,8,01162,Bananes fraîches,32.0
+decile,8,01168,Fruits séchés,57.0
+decile,8,01169,Fruits au sirop et fruits surgelés,9.0
+decile,8,0116A,Autres fruits frais,227.0
+decile,8,01175,Légumes secs,8.0
+decile,8,01176,Légumes surgelés non cuisinés,13.0
+decile,8,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",61.0
+decile,8,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",52.0
+decile,8,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",95.0
+decile,8,0117A,Legumes frais,295.0
+decile,8,01181,Sucre yc édulcorants,13.0
+decile,8,0118A,Produits à base de sucre et cacao,311.0
+decile,8,0119Z,Autres produits alimentaires,202.0
+decile,8,01213,Cacao et chocolat en poudre,5.0
+decile,8,0121A,"Café, thé, plantes à infusion",138.0
+decile,8,01221,Eaux minérales,83.0
+decile,8,01222,Boissons gazeuses,45.0
+decile,8,0122A,Jus de fruits et de légumes,115.0
+decile,8,0131Z,Autres dépenses d alimentation,217.0
+decile,8,02111,Spiritueux et liqueurs,107.0
+decile,8,0212A,"Vins, apéritifs à base de vin, champagne",292.0
+decile,8,02131,Bière et boissons à base de bière,59.0
+decile,8,022ZZ,Tabac et produits connexes,348.0
+decile,8,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",6.0
+decile,8,03111,Tissus pour vêtements,15.0
+decile,8,0312Z,"Vêtements homme, femme, enfant",1054.0
+decile,8,03131,Accessoires du vêtement et mercerie,52.0
+decile,8,03141,"Nettoyage, réparation et location de vêtements",17.0
+decile,8,032ZZ,"Chaussures, yc location et réparation",340.0
+decile,8,0331Z,Autres dépenses d habillement,146.0
+decile,8,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,1902.0
+decile,8,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,47.0
+decile,8,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),246.0
+decile,8,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",280.0
+decile,8,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),565.0
+decile,8,04500,Facture électricité + gaz (non dissociables),168.0
+decile,8,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",808.0
+decile,8,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",259.0
+decile,8,0453Z,Combustibles liquides,133.0
+decile,8,045AZ,Combustibles solides,59.0
+decile,8,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),91.0
+decile,8,0511Z,"Meubles, articles d’ameublement et de décoration",573.0
+decile,8,051AZ,"Tapis et autres revêtements, pose et réparation",33.0
+decile,8,0521Z,Articles de literie et autres articles de ménage en textile,104.0
+decile,8,0531Z,Gros appareils ménagers électriques,202.0
+decile,8,05321,Petit électroménager,29.0
+decile,8,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",137.0
+decile,8,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",89.0
+decile,8,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",265.0
+decile,8,0561Z,Articles de ménage non durables,274.0
+decile,8,0562Z,Services domestiques et autres services pour le logement,249.0
+decile,8,0571Z,Autres dépenses en équipement,59.0
+decile,8,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",283.0
+decile,8,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,184.0
+decile,8,06221,"Dentiste, orthodontie",61.0
+decile,8,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",60.0
+decile,8,06311,Services et soins hospitaliers,37.0
+decile,8,0641Z,Autres dépenses de santé,5.0
+decile,8,0711Z,Achats d automobiles,2527.0
+decile,8,07121,Achats de motocycles neufs et occasion,77.0
+decile,8,07131,Achats de cycles neufs et occasion,45.0
+decile,8,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",190.0
+decile,8,07221,"Carburants, électricité, huiles, lubrifiants…",1288.0
+decile,8,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",360.0
+decile,8,0724Z,Autres services liés à l’utilisation de véhicules personnels,175.0
+decile,8,07361,Autres services de transport (yc déménagement),13.0
+decile,8,073ZZ,Services de transport,499.0
+decile,8,0741Z,Autres dépenses de transport,438.0
+decile,8,08111,"Services postaux (yc timbres, enveloppes)",21.0
+decile,8,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",113.0
+decile,8,08131,"Services de téléphone et fax, internet, recharges téléphoniques",666.0
+decile,8,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",116.0
+decile,8,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",104.0
+decile,8,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),56.0
+decile,8,091AZ,"Equipement photo, cinéma, optique",22.0
+decile,8,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,324.0
+decile,8,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",208.0
+decile,8,09321,"Horticulture, accessoires et frais de livraison",177.0
+decile,8,093AZ,Animaux d’agrément,173.0
+decile,8,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",317.0
+decile,8,0942Z,Services culturels,549.0
+decile,8,09431,"jeux de hasard (loto, tiercé …)",39.0
+decile,8,09511,Livres yc e-books,130.0
+decile,8,09521,Journaux et périodiques yc par abonnement,133.0
+decile,8,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",14.0
+decile,8,09541,Articles de papeterie et de dessin (yc toner pour imprimante),92.0
+decile,8,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",474.0
+decile,8,0971Z,Autres dépenses de loisirs,306.0
+decile,8,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),18.0
+decile,8,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),20.0
+decile,8,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,135.0
+decile,8,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",22.0
+decile,8,1015Z,Autres dépenses d’enseignement,8.0
+decile,8,11111,Repas pris dans un restaurant,690.0
+decile,8,11112,"Repas pris dans un café, bars ou assimilé",523.0
+decile,8,11121,Cantines scolaire et professionnelle,380.0
+decile,8,1113Z,Autres dépenses de restauration,335.0
+decile,8,11211,Services d hébergement,410.0
+decile,8,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",415.0
+decile,8,1212Z,"Appareils, articles et produits pour les soins personnels",541.0
+decile,8,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",79.0
+decile,8,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",109.0
+decile,8,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),52.0
+decile,8,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",638.0
+decile,8,12511,"Assurances vie, décès",47.0
+decile,8,12521,Assurances liées au logement,398.0
+decile,8,12531,Assurances liées à la santé,1271.0
+decile,8,12541,Assurances liées aux transports (yc assurance voyage),837.0
+decile,8,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",158.0
+decile,8,12611,Services financiers,163.0
+decile,8,1271Z,Autres services,844.0
+decile,8,12811,Autres dépenses occasionnées par une cérémonie,45.0
+decile,8,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,50.0
+decile,9,01111,Riz sous toutes ses formes et produits à base de riz,33.0
+decile,9,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,567.0
+decile,9,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,74.0
+decile,9,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",163.0
+decile,9,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",65.0
+decile,9,01121,Viande bovine fraîche ou surgelée,320.0
+decile,9,01122,Viande porcine fraîche ou surgelée,83.0
+decile,9,01123,Viande ovine ou caprine fraîche ou surgelée,43.0
+decile,9,01124,Viande de volaille fraîche ou surgelée,175.0
+decile,9,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",372.0
+decile,9,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",132.0
+decile,9,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",14.0
+decile,9,01130,Poissons frais,164.0
+decile,9,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),21.0
+decile,9,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",93.0
+decile,9,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",36.0
+decile,9,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,106.0
+decile,9,01145,Fromage et lait caillé,333.0
+decile,9,01147,Œufs,54.0
+decile,9,0114A,"Lait frais, condensé, en poudre",70.0
+decile,9,0114B,Yaourts et produits laitiers,221.0
+decile,9,01151,Beurre,48.0
+decile,9,0115A,Huiles alimentaires,47.0
+decile,9,0115B,Margarine et autres graisses alimentaires,14.0
+decile,9,01161,Agrumes frais,87.0
+decile,9,01162,Bananes fraîches,30.0
+decile,9,01168,Fruits séchés,68.0
+decile,9,01169,Fruits au sirop et fruits surgelés,11.0
+decile,9,0116A,Autres fruits frais,259.0
+decile,9,01175,Légumes secs,9.0
+decile,9,01176,Légumes surgelés non cuisinés,16.0
+decile,9,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",67.0
+decile,9,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",59.0
+decile,9,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",93.0
+decile,9,0117A,Legumes frais,338.0
+decile,9,01181,Sucre yc édulcorants,16.0
+decile,9,0118A,Produits à base de sucre et cacao,304.0
+decile,9,0119Z,Autres produits alimentaires,181.0
+decile,9,01213,Cacao et chocolat en poudre,6.0
+decile,9,0121A,"Café, thé, plantes à infusion",154.0
+decile,9,01221,Eaux minérales,84.0
+decile,9,01222,Boissons gazeuses,50.0
+decile,9,0122A,Jus de fruits et de légumes,122.0
+decile,9,0131Z,Autres dépenses d alimentation,236.0
+decile,9,02111,Spiritueux et liqueurs,110.0
+decile,9,0212A,"Vins, apéritifs à base de vin, champagne",297.0
+decile,9,02131,Bière et boissons à base de bière,64.0
+decile,9,022ZZ,Tabac et produits connexes,350.0
+decile,9,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",6.0
+decile,9,03111,Tissus pour vêtements,3.0
+decile,9,0312Z,"Vêtements homme, femme, enfant",1313.0
+decile,9,03131,Accessoires du vêtement et mercerie,60.0
+decile,9,03141,"Nettoyage, réparation et location de vêtements",17.0
+decile,9,032ZZ,"Chaussures, yc location et réparation",414.0
+decile,9,0331Z,Autres dépenses d habillement,213.0
+decile,9,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,1724.0
+decile,9,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,68.0
+decile,9,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),166.0
+decile,9,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",288.0
+decile,9,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),643.0
+decile,9,04500,Facture électricité + gaz (non dissociables),240.0
+decile,9,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",855.0
+decile,9,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",266.0
+decile,9,0453Z,Combustibles liquides,109.0
+decile,9,045AZ,Combustibles solides,60.0
+decile,9,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),83.0
+decile,9,0511Z,"Meubles, articles d’ameublement et de décoration",686.0
+decile,9,051AZ,"Tapis et autres revêtements, pose et réparation",18.0
+decile,9,0521Z,Articles de literie et autres articles de ménage en textile,121.0
+decile,9,0531Z,Gros appareils ménagers électriques,217.0
+decile,9,05321,Petit électroménager,41.0
+decile,9,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",107.0
+decile,9,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",77.0
+decile,9,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",161.0
+decile,9,0561Z,Articles de ménage non durables,280.0
+decile,9,0562Z,Services domestiques et autres services pour le logement,470.0
+decile,9,0571Z,Autres dépenses en équipement,76.0
+decile,9,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",400.0
+decile,9,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,101.0
+decile,9,06221,"Dentiste, orthodontie",99.0
+decile,9,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",79.0
+decile,9,06311,Services et soins hospitaliers,25.0
+decile,9,0641Z,Autres dépenses de santé,21.0
+decile,9,0711Z,Achats d automobiles,2317.0
+decile,9,07121,Achats de motocycles neufs et occasion,117.0
+decile,9,07131,Achats de cycles neufs et occasion,66.0
+decile,9,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",197.0
+decile,9,07221,"Carburants, électricité, huiles, lubrifiants…",1462.0
+decile,9,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",381.0
+decile,9,0724Z,Autres services liés à l’utilisation de véhicules personnels,170.0
+decile,9,07361,Autres services de transport (yc déménagement),20.0
+decile,9,073ZZ,Services de transport,740.0
+decile,9,0741Z,Autres dépenses de transport,565.0
+decile,9,08111,"Services postaux (yc timbres, enveloppes)",35.0
+decile,9,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",106.0
+decile,9,08131,"Services de téléphone et fax, internet, recharges téléphoniques",710.0
+decile,9,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",108.0
+decile,9,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",138.0
+decile,9,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),68.0
+decile,9,091AZ,"Equipement photo, cinéma, optique",55.0
+decile,9,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,266.0
+decile,9,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",199.0
+decile,9,09321,"Horticulture, accessoires et frais de livraison",265.0
+decile,9,093AZ,Animaux d’agrément,236.0
+decile,9,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",710.0
+decile,9,0942Z,Services culturels,611.0
+decile,9,09431,"jeux de hasard (loto, tiercé …)",44.0
+decile,9,09511,Livres yc e-books,162.0
+decile,9,09521,Journaux et périodiques yc par abonnement,141.0
+decile,9,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",18.0
+decile,9,09541,Articles de papeterie et de dessin (yc toner pour imprimante),88.0
+decile,9,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",677.0
+decile,9,0971Z,Autres dépenses de loisirs,366.0
+decile,9,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),23.0
+decile,9,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),40.0
+decile,9,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,147.0
+decile,9,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",24.0
+decile,9,1015Z,Autres dépenses d’enseignement,15.0
+decile,9,11111,Repas pris dans un restaurant,971.0
+decile,9,11112,"Repas pris dans un café, bars ou assimilé",628.0
+decile,9,11121,Cantines scolaire et professionnelle,437.0
+decile,9,1113Z,Autres dépenses de restauration,432.0
+decile,9,11211,Services d hébergement,543.0
+decile,9,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",479.0
+decile,9,1212Z,"Appareils, articles et produits pour les soins personnels",591.0
+decile,9,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",70.0
+decile,9,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",135.0
+decile,9,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),64.0
+decile,9,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",506.0
+decile,9,12511,"Assurances vie, décès",43.0
+decile,9,12521,Assurances liées au logement,425.0
+decile,9,12531,Assurances liées à la santé,1333.0
+decile,9,12541,Assurances liées aux transports (yc assurance voyage),828.0
+decile,9,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",220.0
+decile,9,12611,Services financiers,181.0
+decile,9,1271Z,Autres services,867.0
+decile,9,12811,Autres dépenses occasionnées par une cérémonie,42.0
+decile,9,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,23.0
+decile,TOT,01111,Riz sous toutes ses formes et produits à base de riz,31.0
+decile,TOT,01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,496.0
+decile,TOT,01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,62.0
+decile,TOT,01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",145.0
+decile,TOT,01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",53.0
+decile,TOT,01121,Viande bovine fraîche ou surgelée,255.0
+decile,TOT,01122,Viande porcine fraîche ou surgelée,75.0
+decile,TOT,01123,Viande ovine ou caprine fraîche ou surgelée,32.0
+decile,TOT,01124,Viande de volaille fraîche ou surgelée,159.0
+decile,TOT,01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",314.0
+decile,TOT,01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",111.0
+decile,TOT,01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",12.0
+decile,TOT,01130,Poissons frais,111.0
+decile,TOT,01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),19.0
+decile,TOT,01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",59.0
+decile,TOT,01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",24.0
+decile,TOT,01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,85.0
+decile,TOT,01145,Fromage et lait caillé,278.0
+decile,TOT,01147,Œufs,45.0
+decile,TOT,0114A,"Lait frais, condensé, en poudre",73.0
+decile,TOT,0114B,Yaourts et produits laitiers,177.0
+decile,TOT,01151,Beurre,41.0
+decile,TOT,0115A,Huiles alimentaires,35.0
+decile,TOT,0115B,Margarine et autres graisses alimentaires,13.0
+decile,TOT,01161,Agrumes frais,62.0
+decile,TOT,01162,Bananes fraîches,27.0
+decile,TOT,01168,Fruits séchés,47.0
+decile,TOT,01169,Fruits au sirop et fruits surgelés,7.0
+decile,TOT,0116A,Autres fruits frais,191.0
+decile,TOT,01175,Légumes secs,7.0
+decile,TOT,01176,Légumes surgelés non cuisinés,12.0
+decile,TOT,01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",52.0
+decile,TOT,01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",41.0
+decile,TOT,01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",82.0
+decile,TOT,0117A,Legumes frais,255.0
+decile,TOT,01181,Sucre yc édulcorants,15.0
+decile,TOT,0118A,Produits à base de sucre et cacao,245.0
+decile,TOT,0119Z,Autres produits alimentaires,152.0
+decile,TOT,01213,Cacao et chocolat en poudre,6.0
+decile,TOT,0121A,"Café, thé, plantes à infusion",120.0
+decile,TOT,01221,Eaux minérales,67.0
+decile,TOT,01222,Boissons gazeuses,48.0
+decile,TOT,0122A,Jus de fruits et de légumes,103.0
+decile,TOT,0131Z,Autres dépenses d alimentation,169.0
+decile,TOT,02111,Spiritueux et liqueurs,100.0
+decile,TOT,0212A,"Vins, apéritifs à base de vin, champagne",225.0
+decile,TOT,02131,Bière et boissons à base de bière,62.0
+decile,TOT,022ZZ,Tabac et produits connexes,397.0
+decile,TOT,02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",4.0
+decile,TOT,03111,Tissus pour vêtements,4.0
+decile,TOT,0312Z,"Vêtements homme, femme, enfant",894.0
+decile,TOT,03131,Accessoires du vêtement et mercerie,42.0
+decile,TOT,03141,"Nettoyage, réparation et location de vêtements",16.0
+decile,TOT,032ZZ,"Chaussures, yc location et réparation",288.0
+decile,TOT,0331Z,Autres dépenses d habillement,129.0
+decile,TOT,04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,1975.0
+decile,TOT,04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,47.0
+decile,TOT,0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),176.0
+decile,TOT,04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",256.0
+decile,TOT,04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),578.0
+decile,TOT,04500,Facture électricité + gaz (non dissociables),178.0
+decile,TOT,04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",746.0
+decile,TOT,0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",253.0
+decile,TOT,0453Z,Combustibles liquides,121.0
+decile,TOT,045AZ,Combustibles solides,55.0
+decile,TOT,04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),70.0
+decile,TOT,0511Z,"Meubles, articles d’ameublement et de décoration",410.0
+decile,TOT,051AZ,"Tapis et autres revêtements, pose et réparation",14.0
+decile,TOT,0521Z,Articles de literie et autres articles de ménage en textile,85.0
+decile,TOT,0531Z,Gros appareils ménagers électriques,171.0
+decile,TOT,05321,Petit électroménager,25.0
+decile,TOT,0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",80.0
+decile,TOT,0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",74.0
+decile,TOT,0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",134.0
+decile,TOT,0561Z,Articles de ménage non durables,236.0
+decile,TOT,0562Z,Services domestiques et autres services pour le logement,281.0
+decile,TOT,0571Z,Autres dépenses en équipement,48.0
+decile,TOT,0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",254.0
+decile,TOT,06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,101.0
+decile,TOT,06221,"Dentiste, orthodontie",61.0
+decile,TOT,0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",55.0
+decile,TOT,06311,Services et soins hospitaliers,25.0
+decile,TOT,0641Z,Autres dépenses de santé,9.0
+decile,TOT,0711Z,Achats d automobiles,1808.0
+decile,TOT,07121,Achats de motocycles neufs et occasion,74.0
+decile,TOT,07131,Achats de cycles neufs et occasion,35.0
+decile,TOT,07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",136.0
+decile,TOT,07221,"Carburants, électricité, huiles, lubrifiants…",1108.0
+decile,TOT,07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",293.0
+decile,TOT,0724Z,Autres services liés à l’utilisation de véhicules personnels,134.0
+decile,TOT,07361,Autres services de transport (yc déménagement),15.0
+decile,TOT,073ZZ,Services de transport,514.0
+decile,TOT,0741Z,Autres dépenses de transport,365.0
+decile,TOT,08111,"Services postaux (yc timbres, enveloppes)",22.0
+decile,TOT,08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",86.0
+decile,TOT,08131,"Services de téléphone et fax, internet, recharges téléphoniques",635.0
+decile,TOT,0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",93.0
+decile,TOT,09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",90.0
+decile,TOT,09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),48.0
+decile,TOT,091AZ,"Equipement photo, cinéma, optique",26.0
+decile,TOT,092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,94.0
+decile,TOT,0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",167.0
+decile,TOT,09321,"Horticulture, accessoires et frais de livraison",143.0
+decile,TOT,093AZ,Animaux d’agrément,161.0
+decile,TOT,09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",325.0
+decile,TOT,0942Z,Services culturels,466.0
+decile,TOT,09431,"jeux de hasard (loto, tiercé …)",38.0
+decile,TOT,09511,Livres yc e-books,117.0
+decile,TOT,09521,Journaux et périodiques yc par abonnement,114.0
+decile,TOT,09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",12.0
+decile,TOT,09541,Articles de papeterie et de dessin (yc toner pour imprimante),72.0
+decile,TOT,09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",363.0
+decile,TOT,0971Z,Autres dépenses de loisirs,235.0
+decile,TOT,10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),22.0
+decile,TOT,10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),25.0
+decile,TOT,10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,115.0
+decile,TOT,10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",25.0
+decile,TOT,1015Z,Autres dépenses d’enseignement,28.0
+decile,TOT,11111,Repas pris dans un restaurant,575.0
+decile,TOT,11112,"Repas pris dans un café, bars ou assimilé",448.0
+decile,TOT,11121,Cantines scolaire et professionnelle,358.0
+decile,TOT,1113Z,Autres dépenses de restauration,253.0
+decile,TOT,11211,Services d hébergement,337.0
+decile,TOT,12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",337.0
+decile,TOT,1212Z,"Appareils, articles et produits pour les soins personnels",417.0
+decile,TOT,12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",55.0
+decile,TOT,1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",71.0
+decile,TOT,12331,Autres biens et services offerts  (à des personnes extérieures au ménage),44.0
+decile,TOT,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",309.0
+decile,TOT,12511,"Assurances vie, décès",39.0
+decile,TOT,12521,Assurances liées au logement,371.0
+decile,TOT,12531,Assurances liées à la santé,1093.0
+decile,TOT,12541,Assurances liées aux transports (yc assurance voyage),675.0
+decile,TOT,12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",147.0
+decile,TOT,12611,Services financiers,148.0
+decile,TOT,1271Z,Autres services,589.0
+decile,TOT,12811,Autres dépenses occasionnées par une cérémonie,26.0
+decile,TOT,12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,21.0

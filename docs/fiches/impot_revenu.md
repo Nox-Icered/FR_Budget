@@ -62,7 +62,7 @@ Lecture :
 - Le chiffrage du PLF 2025 sert au calage ; il n'est pas compté en validation.
 - Le PLF 2024 (indexation de 4,8 %) donnerait un deuxième millésime hors calage, mais son évaluation préalable n'a pas été trouvée sur les sites accessibles (Assemblée nationale : adresse introuvable ; budget.gouv : bloqué). **À déposer** pour compléter la validation.
 - Comparaison structurelle : le calcul par décile donne 1,09 Md€ pour 1 %, contre 1,85 Md€ dans le chiffrage officiel. L'écart (-41 %) est publié ici et tient aux limites du § 3.
-- Aucune source indépendante (IPP, OFCE) n'est confrontée. Le levier reste en bêta.
+- Sources indépendantes (`docs/validation/confrontations_independantes.md`) : gel du barème de 2026, IPP 1,1 Md€ pour une inflation de 1 % et 1,4 Md€ pour 1,3 %, OFCE 1,2 Md€ pour 1,1 %. Le modèle, qui reprend le chiffrage officiel, est au-dessus de 71,5 %, 75,2 % et 73,0 %. Le calcul par décile du § 3 (1,09 Md€ pour 1 %) est, lui, proche de l'IPP et de l'OFCE : l'écart porte sur le chiffrage officiel plutôt que sur la méthode. Le levier reste en bêta ; le choix entre le chiffrage officiel et le calcul par décile revient au mainteneur.
 
 ## 7. Journal
 

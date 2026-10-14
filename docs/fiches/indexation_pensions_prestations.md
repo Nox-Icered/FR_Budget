@@ -108,7 +108,7 @@ Le modèle est toujours en dessous des références. Explications possibles, non
 - le complément de libre choix du mode de garde est exclu : le compter ajouterait environ 0,06 Md€ au gel familial de 2026 et 0,12 Md€ à celui de 2027 ;
 - l'inflation prévue n'est qu'une approximation du coefficient légal de revalorisation.
 
-Le levier reste en bêta. Les références viennent toutes du Gouvernement ou du Parlement (qui reprend les évaluations du Gouvernement) : aucune source indépendante n'est encore confrontée. Il faudrait le rapport de la Cour des comptes sur la sécurité sociale ou une évaluation de l'IPP ou de l'OFCE.
+Source indépendante (`docs/validation/confrontations_independantes.md`) : IPP, gel des pensions de retraite de base en 2026, 2,4 Md€ pour une inflation de 1 % et 3,0 Md€ pour 1,3 %. Le modèle (baisse de dépenses brute du bloc « pensions ») est au-dessus de 20,2 % et 25,1 %, alors qu'il est en dessous des références du Gouvernement ; le périmètre des pensions de l'IPP n'est pas détaillé. Le levier reste en bêta.
 
 ## 7. Limites connues
 

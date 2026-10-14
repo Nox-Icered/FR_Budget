@@ -78,7 +78,7 @@ Les totaux passent, sur deux millésimes, mais quatre comparaisons par versant s
 - **FPH** : le modèle surestime. Le sous-secteur S1314 contient aussi le personnel des caisses de sécurité sociale et les médecins hospitaliers, qui ne sont pas rémunérés au point.
 - **FPE 2022** : le modèle sous-estime. La référence de 3,6 Md€ est en outre peu cohérente avec celle de 1,5 Md€ pour une hausse de 1,5 %.
 
-Le levier reste en bêta. Aucune source indépendante n'est encore confrontée (Cour des comptes, situation et perspectives des finances publiques, à déposer).
+Sources indépendantes (`docs/validation/confrontations_independantes.md`) : Cour des comptes, « La situation et les perspectives des finances publiques », juin 2017, hausse de 1 % du point : 2,07 Md€ (modèle 2017 : 1,88, −9,2 %), dont État 0,88 (−9,0 %), territoriale 0,64 (−9,6 %), hôpitaux 0,55 (−9,3 %) ; Fipeco, juillet 2026, 2,5 Md€ hors cotisations des employeurs (modèle 2025 : 2,37, −5,1 %). Toutes dans la tolérance. Le levier reste en bêta (comparaisons par versant aux références officielles hors tolérance).
 
 ## 7. Limites connues
 

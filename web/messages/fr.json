@@ -388,7 +388,7 @@
       "rsa": "RSA",
       "ars": "Allocation de rentrée scolaire"
     },
-    "limites": "Non comptés : aides au logement (elles dépendent du loyer), taxe foncière, revenus du patrimoine. Les effets des mesures sont calculés sans changement de comportement ; pour les cotisations patronales, seules les deux lectures extrêmes de l'incidence (aucune ou complète répercussion sur le salaire) sont proposées.",
+    "limites": "Non comptés : aides au logement (elles dépendent du loyer), taxe foncière, revenus du patrimoine. Les effets des mesures sont calculés sans changement de comportement ; pour les cotisations patronales, seules les deux lectures extrêmes de l'incidence (aucune ou complète répercussion sur le salaire) sont proposées. Une revalorisation ne porte que sur la part de base d'une pension, prise égale à la moyenne nationale.",
     "lien_fiche": "Méthode, sources et validation : fiche « ménages types » du dépôt.",
     "sources": "Sources :",
     "effets": {
@@ -400,7 +400,7 @@
       "apres": "Après",
       "ecart": "Écart",
       "legende": "{menage} : {mesure}, en euros par an",
-      "non_chiffre": "Effet non chiffré pour ce ménage : la mesure ne porte que sur les pensions de base, et la part de base dans la pension moyenne publiée par la DREES n'est pas dans les sources du projet.",
+      "non_chiffre": "Effet non chiffré pour ce ménage : une source manque (voir la fiche « ménages types »).",
       "aucun": "Cette mesure ne change aucune ligne de la cascade de ce ménage.",
       "leviers": {
         "csg_activite": {
@@ -428,8 +428,8 @@
           "baisse": "Baisse d'un point de la part des revenus d'activité prise en compte dans la prime d'activité"
         },
         "indexation_pensions_prestations": {
-          "hausse": "Prestations sociales revalorisées d'un point de plus que prévu par la loi",
-          "baisse": "Prestations sociales revalorisées d'un point de moins que prévu par la loi"
+          "hausse": "Pensions de base et prestations sociales revalorisées d'un point de plus que prévu par la loi",
+          "baisse": "Pensions de base et prestations sociales revalorisées d'un point de moins que prévu par la loi"
         }
       },
       "sans_effet_titre": "Mesures sans effet direct sur ces ménages",
@@ -494,7 +494,7 @@
       "intro": "Le résultat montrera votre ménage avant et après ces mesures, appliquées aux revenus de l'année, toute l'année, sans changement de comportement (calcul complet, sans approximation) :",
       "incidence_salaire": "Cotisations patronales : lecture répercutée sur le salaire.",
       "retirer": "Calculer sans ces mesures",
-      "non_chiffre": "L'effet de ces mesures n'est pas chiffré pour ce ménage : la revalorisation ne porte que sur les pensions de base, dont la part dans une pension n'est pas connue.",
+      "non_chiffre": "L'effet de ces mesures n'est pas chiffré pour ce ménage : une source manque (voir la fiche « ménages types »).",
       "illisible": "Les mesures transmises par le lien n'ont pas pu être lues : le calcul se fait sans mesure.",
       "mesures": {
         "csg_activite": "Taux de CSG sur les revenus d'activité : {valeur} point(s)",

@@ -12,6 +12,7 @@ import warnings
 import pytest
 
 from fr_budget import scenario
+from fr_budget.agrege import indexation
 from fr_budget.menages import leviers as lv
 from fr_budget.menages import types as t
 from fr_budget.menages.openfisca import systeme_socio_fiscal
@@ -200,8 +201,34 @@ def test_indexation_prestations_familiales() -> None:
     assert apres.prestations["af"] == pytest.approx(avant.prestations["af"] * 1.01, abs=1)
 
 
-def test_indexation_pension_non_chiffree() -> None:
-    assert lv.cascade_reformee("retraite_seul", scenario.LEVIER_INDEXATION, 1.0) is None
+def test_indexation_pension_de_base() -> None:
+    """Un point de revalorisation : la pension du retraité augmente de 1 % de sa part de base
+    (part des pensions de base dans les pensions de droit direct, comptes de la protection
+    sociale), et son revenu après impôt augmente."""
+    avant = t.cascade_annuelle("retraite_seul")
+    apres = lv.cascade_reformee("retraite_seul", scenario.LEVIER_INDEXATION, 1.0)
+    assert apres is not None
+    part = indexation.part_base_droit_direct()
+    assert apres.pension_brute == pytest.approx(avant.pension_brute * (1 + 0.01 * part), abs=1)
+    assert apres.net_apres_impot > avant.net_apres_impot
+
+
+def test_indexation_pension_saisie() -> None:
+    """Pension saisie égale à celle du retraité type pour l'année simulée : même hausse de la
+    pension brute. Les niveaux diffèrent sans réforme : la pension saisie vaut aussi pour les
+    années précédentes, d'où un autre revenu fiscal de référence et un autre taux de CSG."""
+    pension = t.pension_brute_mensuelle(ANNEE)
+    profil = t.Profil("Saisi", (t.Adulte("1955-01-01", t.RETRAITE, montant_mensuel=pension),))
+    saisi_avant = t.cascade_profil(profil)
+    saisi = lv.cascade_profil_reformee(profil, scenario.LEVIER_INDEXATION, 1.0)
+    type_avant = t.cascade_annuelle("retraite_seul")
+    type_ = lv.cascade_reformee("retraite_seul", scenario.LEVIER_INDEXATION, 1.0)
+    assert saisi is not None
+    assert type_ is not None
+    assert saisi.pension_brute - saisi_avant.pension_brute == pytest.approx(
+        type_.pension_brute - type_avant.pension_brute, abs=1
+    )
+    assert saisi.net_apres_impot > saisi_avant.net_apres_impot
 
 
 def test_levier_sans_effet_refuse() -> None:
@@ -304,7 +331,12 @@ def test_scenario_de_deux_leviers_independants() -> None:
     assert combine.net_apres_impot == pytest.approx(csg.net_apres_impot, abs=1)
 
 
-def test_scenario_non_chiffre_si_une_mesure_ne_l_est_pas() -> None:
+def test_scenario_non_chiffre_si_une_mesure_ne_l_est_pas(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Aucun levier n'est aujourd'hui sans chiffrage : on en simule un."""
+    non_chiffre = dataclasses.replace(
+        lv.LEVIERS[scenario.LEVIER_INDEXATION], non_chiffre=lambda _p: True
+    )
+    monkeypatch.setitem(lv.LEVIERS, scenario.LEVIER_INDEXATION, non_chiffre)
     scenario_ = lv.mesures({"csg_retraites": 1.0, scenario.LEVIER_INDEXATION: 1.0})
     assert lv.cascade_scenario("retraite_seul", scenario_) is None
 

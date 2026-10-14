@@ -197,6 +197,25 @@ CODES_EXCLUS = (
 )
 
 
+PREFIXE_DROIT_DIRECT = "E11-21"
+"""Codes des prestations de droit direct du risque vieillesse."""
+CODE_COMPLEMENTAIRES_DROIT_DIRECT = "E11-21.1.31"
+
+
+def part_base_droit_direct(annee: int = ANNEE_COMPTES) -> float:
+    """Part des pensions de base dans les pensions de retraite de droit direct de ``annee`` :
+    codes de droit direct du bloc des pensions (pensions de base et de l'État, périmètre du
+    levier) rapportés à ces codes plus les pensions de vieillesse complémentaires
+    (``E11-21.1.31``). Comptes de la protection sociale, DREES, édition 2025."""
+    prestations = _prestations()
+    base = sum(
+        prestations.get((annee, c), 0.0)
+        for c in BLOCS[PENSIONS].codes
+        if c.startswith(PREFIXE_DROIT_DIRECT)
+    )
+    return base / (base + prestations[(annee, CODE_COMPLEMENTAIRES_DROIT_DIRECT)])
+
+
 @cache
 def _prestations() -> dict[tuple[int, str], float]:
     resultat: dict[tuple[int, str], float] = {}

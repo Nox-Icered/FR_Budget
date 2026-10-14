@@ -31,9 +31,10 @@ Leviers traduits (unité du simulateur) :
 - ``prime_activite_pente`` (points) : fraction des revenus professionnels prise en compte
   (``ppa.pa_m.majoration_ressources_revenus_activite``) ;
 - ``indexation_pensions_prestations`` (points) : base mensuelle des allocations familiales, montant
-  de base du RSA et de la prime d'activité multipliés par 1 + x. La pension du retraité n'est pas
-  chiffrée : le levier ne porte que sur les pensions de base, dont la part dans la pension
-  moyenne de la DREES n'est pas publiée dans les sources du registre.
+  de base du RSA et de la prime d'activité multipliés par 1 + x ; pension du retraité multipliée
+  par 1 + x * part des pensions de base dans les pensions de droit direct (comptes de la
+  protection sociale, ``fr_budget.agrege.indexation.part_base_droit_direct``) : le levier ne
+  porte que sur les pensions de base, et la part de base de chaque retraité n'est pas connue.
 
 Les autres leviers n'ont pas d'effet direct sur la cascade de ces ménages (``SANS_EFFET``).
 """
@@ -52,6 +53,7 @@ from openfisca_core.periods import period as periode
 from openfisca_core.reforms import Reform
 
 from fr_budget import scenario
+from fr_budget.agrege import indexation
 from fr_budget.menages import types
 from fr_budget.menages.corrections import _noeud, _remplacer
 from fr_budget.menages.openfisca import systeme_socio_fiscal
@@ -208,15 +210,14 @@ class LevierMenage:
     """« points » ou « % », comme dans le simulateur."""
     ecart_csg_independant: bool = False
     """Le levier change aussi la CSG de l'artisan (calculée hors d'OpenFisca)."""
+    ecart_pension: bool = False
+    """Le levier revalorise la part de base de la pension d'un retraité (donnée d'OpenFisca,
+    changée hors du système socio-fiscal)."""
     non_chiffre: Callable[[types.Profil], bool] = lambda _p: False
     """Profils dont l'effet n'est pas chiffré, faute de source."""
     sources: tuple[str, ...] = (OPENFISCA,)
     """Sources du registre qui définissent le levier et sa traduction (paramètres et formules
     d'OpenFisca-France, périmètre fixé par la référence du levier)."""
-
-
-def _avec_pension(profil: types.Profil) -> bool:
-    return any(a.retraite for a in profil.adultes)
 
 
 LEVIERS: dict[str, LevierMenage] = {
@@ -240,7 +241,7 @@ LEVIERS: dict[str, LevierMenage] = {
     scenario.LEVIER_INDEXATION: LevierMenage(
         _indexation,
         "points",
-        non_chiffre=_avec_pension,
+        ecart_pension=True,
         sources=(
             OPENFISCA,
             "drees_comptes_protection_sociale_2025",
@@ -321,7 +322,12 @@ def legislation_scenario(mesures_: Mesures, annee: int = types.ANNEE) -> types.L
             raise ValueError(msg)
     systeme = ReformeLevier(systeme_socio_fiscal(), mesures_, f"{annee}-01-01")
     ecart = sum(v / POURCENT for k, v in mesures_ if LEVIERS[k].ecart_csg_independant)
-    return types.Legislation(systeme=systeme, ecart_csg_activite=ecart)
+    pension = sum(
+        v / POURCENT * indexation.part_base_droit_direct()
+        for k, v in mesures_
+        if LEVIERS[k].ecart_pension
+    )
+    return types.Legislation(systeme=systeme, ecart_csg_activite=ecart, ecart_pension=pension)
 
 
 def legislation(levier: str, valeur: float, annee: int = types.ANNEE) -> types.Legislation:

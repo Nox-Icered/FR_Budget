@@ -4,6 +4,7 @@ import {
   type Baseline,
   type CatalogueCreditsMissions,
   type CatalogueDepensesFiscales,
+  type DepenseMenages,
   type Entreprises,
   type ReponsesUnitaires,
   type Version,
@@ -20,6 +21,7 @@ export default function PageSimulateur() {
   const missions = lire<CatalogueCreditsMissions>("credits-missions.json");
   const version = lire<Version>("version.json");
   const entreprises = lire<Entreprises>("entreprises.json");
+  const depense = lire<DepenseMenages>("depense-menages.json");
   return (
     <>
       <h1>{texte("simulateur.titre")}</h1>
@@ -33,6 +35,7 @@ export default function PageSimulateur() {
         raccord={baseline.annee_raccord}
         version={version}
         entreprises={entreprises}
+        depense={depense}
       />
       <h2>{texte("simulateur.methode_titre")}</h2>
       <p>

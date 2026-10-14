@@ -32,6 +32,7 @@ from fr_budget.agrege.impot_societes import is_brut
 from fr_budget.agrege.indexation import (
     AAH,
     BLOCS,
+    BRUT,
     FAMILLE,
     NET_PRELEVEMENTS_SOCIAUX,
     PENSIONS,
@@ -236,6 +237,7 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         for horizon in (2, 10, 20)
         for borne in ("bas", "haut")
     ]
+    definitions += _confrontations_independantes()
     return definitions
 
 
@@ -259,6 +261,36 @@ def definitions_variantes() -> list[tuple[str, Callable[[], float], str]]:
         )
         for horizon in (2, 10, 20)
         for borne in ("bas", "haut")
+    ]
+
+
+def _gel_pensions_brut(inflation: float, annee: int) -> float:
+    """Baisse de dépenses brute d'un gel des pensions de base, en Md€ (``inflation`` en %)."""
+    return cout_mesure(inflation / POURCENT, annee, (PENSIONS,), BRUT)
+
+
+def _confrontations_independantes() -> list[tuple[str, Callable[[], float]]]:
+    """Références de sources indépendantes de l'administration (``independante: true`` dans
+    ``registres/references/chiffrages.yaml``). Mêmes mesures, modèle à l'année de la source."""
+    return [
+        (
+            "tva_point_brut_ipp_2025_quatre_taux",
+            partial(_point_tva, 2022, 2025, "brut", "ensemble"),
+        ),
+        ("tva_point_net_ipp_2025_quatre_taux", partial(_point_tva, 2022, 2025, "net", "ensemble")),
+        ("ir_gel_ipp_inflation_1_0_2026", partial(rendement_gel, 1.0, 2026)),
+        ("ir_gel_ipp_inflation_1_3_2026", partial(rendement_gel, 1.3, 2026)),
+        ("ir_gel_ofce_2026", partial(rendement_gel, 1.1, 2026)),
+        ("indexation_pensions_ipp_inflation_1_0_2026", partial(_gel_pensions_brut, 1.0, 2026)),
+        ("indexation_pensions_ipp_inflation_1_3_2026", partial(_gel_pensions_brut, 1.3, 2026)),
+        *[
+            (
+                f"remunerations_point_1_ccomptes_2017_{versant}",
+                partial(_cout_point, 0.01, 2017, versant),
+            )
+            for versant in ("total", *VERSANTS)
+        ],
+        ("remunerations_point_1_fipeco_2026_total", partial(_cout_point, 0.01, 2025, "total")),
     ]
 
 

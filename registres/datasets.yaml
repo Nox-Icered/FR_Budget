@@ -399,7 +399,7 @@ datasets:
     description: Consommation effective par produit, dépenses des ménages, millions d'euros courants (feuille MEURcour)
     fichier: data/raw/tva/insee/T_CONSO_EFF_PRODUITS_MENAGES.xlsx
     empreinte_sha256: 652884d95f675aa919cf9a65167a9e8fed49bf184b3cd59e50291fe612f55f47
-    methode_transformation: pipelines/tva/extraire_consommation.py
+    methode_transformation: pipelines/tva/extraire_consommation.py ; pipelines/menages/extraire_bdf.py (P31 et volume 17_C2) → data/processed/menages/consommation_nationale.csv
     telecharge_le: 2026-10-07
 
   - id: insee_conso_produits_apu
@@ -745,6 +745,55 @@ datasets:
     empreinte_sha256: 9ec16fb077e554518f5a1ade579684a8c91d56f293c7b9897f07b40226833222
     methode_transformation: pipelines/entreprises/extraire_urssaf.py → data/processed/entreprises/secteur.csv et masse_salariale_annuelle.csv
     telecharge_le: 2026-10-14
+
+  - id: insee_bdf2017_tf105
+    source: insee_budget_de_famille_2017
+    description: Tableau TF105, dépenses annuelles moyennes par ménage selon le type de ménage, en euros, par poste de la nomenclature de l'enquête (fichier tf105.csv de l'archive bdf2017fe_csv.zip)
+    fichier: data/raw/menages/insee_bdf2017/tf105.csv
+    empreinte_sha256: 8d31978132d9c08b1ddfb635b78889990102070d0ff64d116c43e1790ad8a333
+    methode_transformation: pipelines/menages/extraire_bdf.py → data/processed/menages/bdf2017_depenses.csv
+    telecharge_le: 2026-10-14
+
+  - id: insee_bdf2017_tf106
+    source: insee_budget_de_famille_2017
+    description: Tableau TF106, dépenses annuelles moyennes par ménage selon le décile de niveau de vie, en euros (fichier tf106.csv de l'archive bdf2017fe_csv.zip)
+    fichier: data/raw/menages/insee_bdf2017/tf106.csv
+    empreinte_sha256: 438e502c70244f40e8eb0b019a1e89287e1c2fe1da0b063284258f8b9ac47f77
+    methode_transformation: pipelines/menages/extraire_bdf.py → data/processed/menages/bdf2017_depenses.csv
+    telecharge_le: 2026-10-14
+
+  - id: insee_bdf2017_metadonnees
+    source: insee_budget_de_famille_2017
+    description: Métadonnées des tableaux (libellés des postes et des classes)
+    fichier: data/raw/menages/insee_bdf2017/metadonnees_bdf2017.csv
+    empreinte_sha256: 135fb2a80c84efad21bf78fe678259852519cebab1514546b9f47f0880fe1e0a
+    methode_transformation: pipelines/menages/extraire_bdf.py (libellés) → data/processed/menages/bdf2017_depenses.csv
+    telecharge_le: 2026-10-14
+
+  - id: insee_bdf2017_archive
+    source: insee_budget_de_famille_2017
+    description: Archive complète des tableaux de la France au format CSV, telle que téléchargée (tf105.csv et tf106.csv en sont extraits sans modification)
+    fichier: data/raw/menages/insee_bdf2017/bdf2017fe_csv.zip
+    empreinte_sha256: f6d4a3344031f4acb6037a2a370deb7774d7b2e3d2192f600b38d75e3627169d
+    methode_transformation: aucune ; extraction de tf105.csv et tf106.csv
+    telecharge_le: 2026-10-14
+
+  - id: sdes_prix_produits_petroliers_2025_xlsx
+    source: sdes_prix_produits_petroliers_2025
+    description: Classeur des données, tableau 3 (prix TTC du gazole et des supercarburants, 2019-2025)
+    fichier: data/raw/accises/sdes/prix_produits_petroliers_2025.xlsx
+    empreinte_sha256: 0f87e93c8438f81ec88e1eb78cac992ce3404d12f3b1928d7cc1fbc7297cb0a6
+    methode_transformation: pipelines/accises/extraire_prix_sdes.py → data/processed/accises/prix_carburants_ttc.csv
+    telecharge_le: 2026-10-14
+
+  - id: sdes_prix_produits_petroliers_2019_xls
+    source: sdes_prix_produits_petroliers_2019
+    description: Classeur des données, tableau 3 (prix TTC du gazole et des supercarburants, 2009-2018)
+    fichier: data/raw/accises/sdes/prix_produits_petroliers_2019.xls
+    empreinte_sha256: cc52f4366f571d964b31e1d7acd6526b27f524c2016d9c3222cf39f1435fa34c
+    methode_transformation: pipelines/accises/extraire_prix_sdes.py → data/processed/accises/prix_carburants_ttc.csv
+    telecharge_le: 2026-10-14
+
 
   - id: drees_retraites_2025_fiche15_xlsx
     source: drees_retraites_2025_donnees

@@ -32,6 +32,7 @@ from fr_budget.agrege import depenses_fiscales as module_depenses_fiscales
 from fr_budget.agrege.cotisations import cout_allegements
 from fr_budget.apu import comptes_apu, depenses_par_fonction, libelles_cofog, ratio_pib
 from fr_budget.entreprises import repartition as module_entreprises
+from fr_budget.menages import depense as module_depense
 from fr_budget.menages import leviers as module_leviers_menages
 from fr_budget.menages import personnalise as module_personnalise
 from fr_budget.menages import types as module_menages
@@ -506,17 +507,20 @@ def version_donnees() -> dict[str, str]:
 
 def resume_validation() -> list[dict[str, Any]]:
     """Valeur du modèle, référence et écart pour chaque référence de validation."""
-    unites = {c["id"]: c["unite"] for c in _registres()["chiffrages"]}
+    chiffrages = {c["id"]: c for c in _registres()["chiffrages"]}
     return [
         {
             "reference": c.reference,
+            "levier": chiffrages[c.reference].get("levier")
+            or chiffrages[c.reference].get("module"),
+            "independante": bool(chiffrages[c.reference].get("independante", False)),
             "variante": c.variante,
             "modele": c.modele,
             "valeur_reference": c.valeur_reference,
             "ecart": c.ecart,
             "tolerance": c.tolerance,
             "dans_la_tolerance": c.dans_la_tolerance,
-            "unite": unites[c.reference],
+            "unite": chiffrages[c.reference]["unite"],
         }
         for c in comparaisons()
     ]
@@ -602,6 +606,57 @@ def entreprises() -> dict[str, Any]:
         "annee_urssaf": annee,
         "annees_is": [e.ANNEE_IS, e.ANNEE_IS_ALTERNATIVE],
         "leviers": leviers,
+        "controles": controles,
+    }
+
+
+SOURCES_DEPENSE = [
+    "insee_budget_de_famille_2017",
+    "insee_consommation_produits_2024",
+    "sdes_prix_produits_petroliers_2019",
+    "sdes_prix_produits_petroliers_2025",
+]
+
+
+@cache
+def depense_menages() -> dict[str, Any]:
+    """Dépense supplémentaire des ménages à consommation inchangée pour une unité de chaque
+    levier de TVA et d'accises (``fr_budget.menages.depense``), en euros par ménage et par an,
+    par décile de niveau de vie et par type de ménage, avec le contrôle de la part de la
+    consommation au taux normal contre les comptes nationaux."""
+    d = module_depense
+    annee = module_scenario.ANNEE_REFERENCE
+    sources, _ = module_scenario.provenance(list(d.LEVIERS))
+    part = d.part_taux_normal()
+    controles = []
+    for a in d.ANNEES_CONTROLE:
+        reference = d.part_taux_normal_comptes_nationaux(a)
+        controles.append(
+            {
+                "annee": a,
+                "modele": _fourchette(part),
+                "reference": reference,
+                "ecart": (part.central - reference) / reference,
+                "source": "insee_consommation_produits_2024",
+            }
+        )
+    return {
+        "annee": annee,
+        "annee_enquete": d.ANNEE_ENQUETE,
+        "unite": "euros par ménage et par an, pour une unité du levier",
+        "leviers": list(d.LEVIERS),
+        "sources": sorted({*sources, *SOURCES_DEPENSE}),
+        "nomenclatures": {
+            nomenclature: [
+                {
+                    "id": e.classe,
+                    "consommation": e.consommation,
+                    "effets": {k: _fourchette(f) for k, f in e.effets.items()},
+                }
+                for e in d.effets(nomenclature, annee)
+            ]
+            for nomenclature in d.NOMENCLATURES
+        },
         "controles": controles,
     }
 
@@ -927,6 +982,11 @@ def creer_application() -> FastAPI:
             return scenario_menages(entree)
         except MesuresInvalidesError as erreur:
             raise HTTPException(status_code=422, detail="mesure hors des bornes") from erreur
+
+    @app.get("/depense-menages")
+    def route_depense_menages() -> dict[str, Any]:
+        """Dépense supplémentaire des ménages pour une unité des leviers de TVA et d'accises."""
+        return depense_menages()
 
     @app.get("/entreprises")
     def route_entreprises() -> dict[str, Any]:

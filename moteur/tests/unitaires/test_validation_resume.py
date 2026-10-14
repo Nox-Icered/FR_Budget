@@ -87,6 +87,19 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
     attendues |= {
         f"cor_aod_un_an_solde_apu_{h}ans_{b}" for h in (2, 10, 20) for b in ("bas", "haut")
     }
+    attendues |= {
+        "tva_point_brut_ipp_2025_quatre_taux",
+        "tva_point_net_ipp_2025_quatre_taux",
+        "ir_gel_ipp_inflation_1_0_2026",
+        "ir_gel_ipp_inflation_1_3_2026",
+        "ir_gel_ofce_2026",
+        "indexation_pensions_ipp_inflation_1_0_2026",
+        "indexation_pensions_ipp_inflation_1_3_2026",
+        "remunerations_point_1_fipeco_2026_total",
+    }
+    attendues |= {
+        f"remunerations_point_1_ccomptes_2017_{v}" for v in ("total", "fpe", "fpt", "fph")
+    }
     attendues = {a for a in attendues if not a.endswith("_") and "{" not in a}
     assert {r for r, _ in _definitions()} == attendues
 

@@ -3,6 +3,17 @@ import { lire, type Chiffrage, type Comparaison, type Levier } from "../../lib/d
 import { region } from "../../lib/region";
 
 
+// Confrontations d'un levier à des sources indépendantes de l'administration (règle de
+// publication) : nombre de références et nombre dans la tolérance.
+function confrontation(comparaisons: Comparaison[], levier: string): string {
+  const liste = comparaisons.filter((c) => c.independante && c.levier === levier);
+  if (liste.length === 0) return texte("validation.independante_aucune");
+  return texte("validation.independante_resultat", {
+    dans: liste.filter((c) => c.dans_la_tolerance).length,
+    total: liste.length,
+  });
+}
+
 export default function Validation() {
   const leviers = lire<Levier[]>("registre-leviers.json");
   const chiffrages = lire<Chiffrage[]>("registre-chiffrages.json");
@@ -19,6 +30,7 @@ export default function Validation() {
           <tr>
             <th scope="col">{texte("validation.levier")}</th>
             <th scope="col">{texte("validation.statut")}</th>
+            <th scope="col">{texte("validation.independante")}</th>
           </tr>
         </thead>
         <tbody>
@@ -26,6 +38,7 @@ export default function Validation() {
             <tr key={l.id}>
               <td>{l.libelle}</td>
               <td>{texte(`validation.statuts.${l.statut}`)}</td>
+              <td>{confrontation(comparaisons, l.id)}</td>
             </tr>
           ))}
         </tbody>
@@ -50,6 +63,7 @@ export default function Validation() {
                 <td>
                   {mesures.get(c.reference)?.mesure ?? c.reference}
                   {c.variante ? ` — ${texte(`validation.variantes.${c.variante}`)}` : ""}
+                  {c.independante ? ` — ${texte("validation.source_independante")}` : ""}
                 </td>
                 <td className="nombre">
                   {nombre(c.modele)} {c.unite}

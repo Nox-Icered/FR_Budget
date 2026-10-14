@@ -1,0 +1,139 @@
+poste,libelle,part_normal_basse,part_normal_haute,carburant,reference,statut,note
+01111,Riz sous toutes ses formes et produits à base de riz,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01112,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01113,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01114,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01115,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner, couscous, taboulé",0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01121,Viande bovine fraîche ou surgelée,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01122,Viande porcine fraîche ou surgelée,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01123,Viande ovine ou caprine fraîche ou surgelée,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01124,Viande de volaille fraîche ou surgelée,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01125,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, saucisses, pâtés, abats, etc.)",0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01126,"Conserve de viande, produit de transformation des viandes, plat préparé de viande",0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01127,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc animaux sur pied",0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01130,Poissons frais,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01131,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01132,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01133,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01134,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou de fruits de mer,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01145,Fromage et lait caillé,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01147,Œufs,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+0114A,"Lait frais, condensé, en poudre",0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+0114B,Yaourts et produits laitiers,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01151,Beurre,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+0115A,Huiles alimentaires,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+0115B,Margarine et autres graisses alimentaires,1,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 278-0 bis A 1° (margarines et graisses végétales exclues du taux réduit)",a_verifier,
+01161,Agrumes frais,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01162,Bananes fraîches,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01168,Fruits séchés,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01169,Fruits au sirop et fruits surgelés,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+0116A,Autres fruits frais,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01175,Légumes secs,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01176,Légumes surgelés non cuisinés,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01177,"Légumes et plats à base de légume,  en conserve (sans pommes de terre)",0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01178,"Légumes préparés et plats à base de légumes,  frais et surgelés (sauf les plats à base de pommes de terre)",0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01179,"Pomme de terre, autres tubercules, produits à base de pommes de terre (chips) et tubercules",0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+0117A,Legumes frais,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01181,Sucre yc édulcorants,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+0118A,Produits à base de sucre et cacao,0,1,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine) ; CGI art. 278-0 bis A 1° (confiseries et certains chocolats exclus du taux réduit),a_verifier,"Poste mixte : confiseries et chocolats au taux normal, autres produits sucrés au taux réduit"
+0119Z,Autres produits alimentaires,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01213,Cacao et chocolat en poudre,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+0121A,"Café, thé, plantes à infusion",0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01221,Eaux minérales,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+01222,Boissons gazeuses,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+0122A,Jus de fruits et de légumes,0,0,0,CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine),a_verifier,
+0131Z,Autres dépenses d alimentation,0,1,0,"CGI art. 278-0 bis A 1° (produits destinés à l'alimentation humaine) ; CGI art. 278 (taux normal, régime par défaut)",a_verifier,Contenu du poste non détaillé par l'Insee : part inconnue
+02111,Spiritueux et liqueurs,1,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 278-0 bis A 1° (boissons alcooliques exclues du taux réduit)",a_verifier,
+0212A,"Vins, apéritifs à base de vin, champagne",1,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 278-0 bis A 1° (boissons alcooliques exclues du taux réduit)",a_verifier,
+02131,Bière et boissons à base de bière,1,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 278-0 bis A 1° (boissons alcooliques exclues du taux réduit)",a_verifier,
+022ZZ,Tabac et produits connexes,1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+02411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre ménage",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+03111,Tissus pour vêtements,1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+0312Z,"Vêtements homme, femme, enfant",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+03131,Accessoires du vêtement et mercerie,1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+03141,"Nettoyage, réparation et location de vêtements",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+032ZZ,"Chaussures, yc location et réparation",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+0331Z,Autres dépenses d habillement,1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+04111,Loyers nets des aides au logement (hors charges ou avec charges non isolables) des locataires résidence principale,0,0,0,CGI art. 261 D 2° (locations de locaux nus à usage d'habitation exonérées),a_verifier,
+04121,Loyers (hors charges ou avec charges non isolables) des locataires autres résidences,0,0,0,CGI art. 261 D 2° (locations de locaux nus à usage d'habitation exonérées),a_verifier,
+0431Z,Produits destinés aux travaux courants d’entretien et de réparation du logement (hors gros travaux),1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,Produits achetés par le ménage ; les travaux facturés par une entreprise relèvent d'autres taux
+04431,"Factures d’eau résidence principale, autre logement, dépendance, terrain",0,0,0,CGI art. 278-0 bis A 2° (eau) ; CGI art. 279 c (assainissement),a_verifier,
+04441,Charges collectives relatives au logement (payées isolément du loyer ou crédit),0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 278-0 bis A 2° (eau)",a_verifier,"Poste mixte : services, énergie et eau"
+04500,Facture électricité + gaz (non dissociables),0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 278-0 bis (abonnements, taux réduit en 2017)",a_verifier,Poste mixte : abonnements au taux réduit et consommation au taux normal en 2017
+04511,"Facture d électricité résidence principale, autre logement, garage, dépendance",0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 278-0 bis (abonnements, taux réduit en 2017)",a_verifier,Poste mixte : abonnements au taux réduit et consommation au taux normal en 2017
+0452Z,"Gaz et combustibles liquéfiés (gaz de ville, butane...)",0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 278-0 bis (abonnements, taux réduit en 2017)",a_verifier,Poste mixte : abonnements au taux réduit et consommation au taux normal en 2017
+0453Z,Combustibles liquides,1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+045AZ,Combustibles solides,0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 279 b decies (bois de chauffage)",a_verifier,"Poste mixte : bois de chauffage à taux réduit, autres combustibles au taux normal"
+04611,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),0,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,Cadeaux : contenu non détaillé
+0511Z,"Meubles, articles d’ameublement et de décoration",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+051AZ,"Tapis et autres revêtements, pose et réparation",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+0521Z,Articles de literie et autres articles de ménage en textile,1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+0531Z,Gros appareils ménagers électriques,1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+05321,Petit électroménager,1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+0541Z,"Verrerie, vaisselle, ustensiles de cuisine et article de ménage ou toilette yc réparation",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+0551Z,"Gros outillage de bricolage, de jardinage et leur réparation",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+0552Z,"Petit outillage et accessoires de bricolage et jardinage, matériaux extérieurs",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+0561Z,Articles de ménage non durables,1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+0562Z,Services domestiques et autres services pour le logement,0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 279 i (services à la personne)",a_verifier,"Poste mixte : services à la personne à taux réduit, autres services au taux normal"
+0571Z,Autres dépenses en équipement,1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+0611Z,"Produits pharmaceutiques, appareils et matériels thérapeutiques",0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 281 octies (médicaments remboursables) ; CGI art. 278 quater (médicaments non remboursables) ; CGI art. 278-0 bis (appareillages)",a_verifier,"Poste mixte : médicaments et appareillages à taux réduits, autres articles (optique notamment) au taux normal"
+06211,Consultations des médecins généralistes ou spécialistes hors hospitalisation,0,0,0,"CGI art. 261 4 1° (soins dispensés par les professions médicales et paramédicales, exonérés)",a_verifier,
+06221,"Dentiste, orthodontie",0,0,0,"CGI art. 261 4 1° (soins dispensés par les professions médicales et paramédicales, exonérés)",a_verifier,
+0623Z,"Services paramédicaux (labo, radio, soins des auxiliaires médicaux et paramédicaux…)",0,0,0,"CGI art. 261 4 1° (soins dispensés par les professions médicales et paramédicales, exonérés)",a_verifier,
+06311,Services et soins hospitaliers,0,0,0,"CGI art. 261 4 1° bis (frais d'hospitalisation, exonérés)",a_verifier,
+0641Z,Autres dépenses de santé,0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 261 4 1°",a_verifier,Autres dépenses de santé : contenu non détaillé
+0711Z,Achats d automobiles,1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+07121,Achats de motocycles neufs et occasion,1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+07131,Achats de cycles neufs et occasion,1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+07211,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux installés par un pro.) yc pour vélo",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+07221,"Carburants, électricité, huiles, lubrifiants…",1,1,1,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,"Carburants, électricité de recharge, huiles et lubrifiants : taux normal"
+07231,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+0724Z,Autres services liés à l’utilisation de véhicules personnels,0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 261 4 4° (enseignement de la conduite, sous conditions)",a_verifier,"Poste mixte : stationnement et péages au taux normal, autres services sous d'autres régimes"
+07361,Autres services de transport (yc déménagement),1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+073ZZ,Services de transport,0,0,0,CGI art. 279 b quater (transports de voyageurs),a_verifier,
+0741Z,Autres dépenses de transport,0,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,Autres dépenses de transport : contenu non détaillé
+08111,"Services postaux (yc timbres, enveloppes)",0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 261 4 5° (prestations du service universel postal, exonérées)",a_verifier,"Poste mixte : service universel exonéré, autres envois au taux normal"
+08121,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+08131,"Services de téléphone et fax, internet, recharges téléphoniques",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+0911Z,"Appareils de réception, d’enregistrement et de reproduction, du son et de l’image",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+09131,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces détachées), consommables",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+09141,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+091AZ,"Equipement photo, cinéma, optique",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+092ZZ,Autres biens durables importants du domaine des loisirs et de la culture,1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+0931Z,"Jeux, jouets et passe temps, articles de sport, de camping et de loisirs en plein air",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+09321,"Horticulture, accessoires et frais de livraison",0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 278 bis (produits de l'horticulture)",a_verifier,"Poste mixte : végétaux à taux réduit, accessoires au taux normal"
+093AZ,Animaux d’agrément,0,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,"Animaux d'agrément, alimentation et soins : régimes différents"
+09411,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )",0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 279 b ter (droits d'accès aux installations sportives) ; CGI art. 261 7 1° (associations)",a_verifier,Poste mixte
+0942Z,Services culturels,0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 278-0 bis F (spectacles, cinéma) ; CGI art. 279 b octies (abonnements audiovisuels)",a_verifier,"Poste mixte : spectacles et cinéma à taux réduits, autres services culturels sous divers régimes"
+09431,"jeux de hasard (loto, tiercé …)",0,0,0,"CGI art. 261 E (jeux de hasard, exonérés)",a_verifier,
+09511,Livres yc e-books,0,0,0,CGI art. 278-0 bis A 3° (livres),a_verifier,
+09521,Journaux et périodiques yc par abonnement,0,0,0,CGI art. 298 septies (publications de presse),a_verifier,
+09531,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, autocollant…)",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+09541,Articles de papeterie et de dessin (yc toner pour imprimante),1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+09611,"Voyages à forfait, week-end, excursions… yc voyage scolaire",0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 266 1 e (régime de la marge des agences de voyages)",a_verifier,"Poste mixte : régime de la marge, prestations sous divers taux"
+0971Z,Autres dépenses de loisirs,0,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,Autres dépenses de loisirs : contenu non détaillé
+10111,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),0,0,0,"CGI art. 261 4 4° (enseignement, exonéré)",a_verifier,
+10121,Enseignement secondaire (scolarité et inscription aux concours de niveau secondaire),0,0,0,"CGI art. 261 4 4° (enseignement, exonéré)",a_verifier,
+10131,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,0,0,0,"CGI art. 261 4 4° (enseignement, exonéré)",a_verifier,
+10141,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, enseignement professionnel par correspondance…)",0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 261 4 4°",a_verifier,Poste mixte : cours exonérés ou au taux normal selon le prestataire
+1015Z,Autres dépenses d’enseignement,0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 261 4 4°",a_verifier,Autres dépenses d'enseignement : contenu non détaillé
+11111,Repas pris dans un restaurant,0,1,0,"CGI art. 279 m (restauration) ; CGI art. 278 (taux normal, régime par défaut) (boissons alcooliques)",a_verifier,"Poste mixte : repas au taux intermédiaire, boissons alcooliques au taux normal"
+11112,"Repas pris dans un café, bars ou assimilé",0,1,0,"CGI art. 279 m (restauration) ; CGI art. 278 (taux normal, régime par défaut) (boissons alcooliques)",a_verifier,"Poste mixte : consommations au taux intermédiaire, boissons alcooliques au taux normal"
+11121,Cantines scolaire et professionnelle,0,0,0,CGI art. 279 a bis et 278-0 bis (cantines) ; CGI art. 261 4 4°,a_verifier,
+1113Z,Autres dépenses de restauration,0,1,0,"CGI art. 279 m (restauration) ; CGI art. 278 (taux normal, régime par défaut)",a_verifier,Autres dépenses de restauration : contenu non détaillé
+11211,Services d hébergement,0,0,0,CGI art. 279 a (hébergement),a_verifier,
+12111,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, piercings)",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+1212Z,"Appareils, articles et produits pour les soins personnels",0,1,0,"CGI art. 278 (taux normal, régime par défaut) ; CGI art. 278-0 bis A (protections hygiéniques)",a_verifier,"Poste mixte : la plupart des articles au taux normal, protections hygiéniques au taux réduit"
+12311,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+1232Z,"Autres effets personnels : maroquinerie, accessoires (briquet, parapluie, lunettes de soleil…), équipements pour bébés, articles funéraires",1,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,
+12331,Autres biens et services offerts  (à des personnes extérieures au ménage),0,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,Cadeaux : contenu non détaillé
+12411,"Services de protection sociale (assistante maternelle, crèche, maison de retraite, foyer)",0,0,0,CGI art. 261 7 1° (organismes sans but lucratif) ; CGI art. 278-0 bis C (hébergement en établissement),a_verifier,
+12511,"Assurances vie, décès",0,0,0,"CGI art. 261 C 2° (opérations d'assurance, exonérées)",a_verifier,
+12521,Assurances liées au logement,0,0,0,"CGI art. 261 C 2° (opérations d'assurance, exonérées)",a_verifier,
+12531,Assurances liées à la santé,0,0,0,"CGI art. 261 C 2° (opérations d'assurance, exonérées)",a_verifier,
+12541,Assurances liées aux transports (yc assurance voyage),0,0,0,"CGI art. 261 C 2° (opérations d'assurance, exonérées)",a_verifier,
+12551,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, obsèques)",0,0,0,"CGI art. 261 C 2° (opérations d'assurance, exonérées)",a_verifier,
+12611,Services financiers,0,1,0,"CGI art. 261 C 1° (opérations bancaires et financières) ; CGI art. 278 (taux normal, régime par défaut)",a_verifier,"Poste mixte : la plupart des services financiers exonérés, certains frais au taux normal"
+1271Z,Autres services,0,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,Autres services : contenu non détaillé
+12811,Autres dépenses occasionnées par une cérémonie,0,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,Dépenses de cérémonie : contenu non détaillé
+12911,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,0,1,0,"CGI art. 278 (taux normal, régime par défaut)",a_verifier,Dépenses sans autre indication

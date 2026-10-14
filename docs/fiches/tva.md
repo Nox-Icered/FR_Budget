@@ -69,8 +69,8 @@ Leurs plages serviront au calcul des fourchettes. Restent à créer, une fois so
 - Constat : l'annexe Voies et Moyens ne chiffre pas le rendement d'une variation de taux ; elle donne la recette totale.
 - Références retenues (`registres/references/chiffrages.yaml`) : point de TVA brut et net 2025 (DG Trésor, Trésor-Éco n° 371), point de TVA 2015 (DG Trésor, Cahier 2016-02), recette totale 2022 (DG Trésor) et 2024 (PLF 2026, Voies et Moyens tome I).
 - Tolérance : ±10 % sur le rendement à 1 an, sur au moins deux millésimes.
-- Source indépendante visée : IPP (TAXIPP), Cour des comptes ou Commission européenne.
-- Test : à écrire avant le code, dans `moteur/tests/validation/`.
+- Source indépendante : IPP, « Perspectives budgétaires », juin 2025, chapitre 2 (TAXIPP), hausse d'un point des quatre taux : recettes de 13,0 Md€ (modèle 14,18, +9,1 %) et 11,0 Md€ net des achats des administrations (modèle 11,59, +5,4 %). L'IPP ne chiffre pas le seul taux normal ; la comparaison porte sur la ligne « ensemble » du modèle. Détail : `docs/validation/confrontations_independantes.md`.
+- Tests : `moteur/tests/validation/test_levier_tva.py` et `test_confrontations_independantes.py`.
 
 ## 7. Limites connues
 
@@ -90,3 +90,4 @@ Leurs plages serviront au calcul des fourchettes. Restent à créer, une fois so
 | 2026-10-08 | Tolérance maintenue à ±10 % (décision du mainteneur) ; précision des références publiée dans `docs/validation/levier_tva.md` | aucun |
 | 2026-10-08 | Convention du point net maintenue (décision du mainteneur) ; limite publiée dans `docs/validation/levier_tva.md` | aucun |
 | 2026-10-08 | Prototype clos en bêta (décision du mainteneur) ; type `Fourchette` et fourchettes TVA à partir des deux hypothèses du registre | aucun (valeurs centrales inchangées) |
+| 2026-10-14 | Confrontation à l'IPP (hausse d'un point des quatre taux, juin 2025), `docs/validation/confrontations_independantes.md` | 2 nouvelles références indépendantes, dans la tolérance (+9,1 % et +5,4 %) |

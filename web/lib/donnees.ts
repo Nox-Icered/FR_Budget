@@ -62,6 +62,7 @@ export type Chiffrage = {
   unite: string;
   localisation: string;
   relecture: "a_relire" | "relu";
+  independante?: boolean;
 };
 export type Relecture = {
   id: string;
@@ -125,6 +126,8 @@ export type Comparaison = {
   tolerance: number;
   dans_la_tolerance: boolean;
   unite: string;
+  levier?: string;
+  independante: boolean;
   variante?: string;
 };
 export type Version = { moteur: string; registres: string; donnees: string };
@@ -242,5 +245,25 @@ export type Entreprises = {
     reference: number;
     source: string;
     ecart: number;
+  }[];
+};
+export type ClasseDepense = {
+  id: string;
+  consommation: number;
+  effets: Record<string, FourchetteDonnee>;
+};
+export type DepenseMenages = {
+  annee: number;
+  annee_enquete: number;
+  unite: string;
+  leviers: string[];
+  sources: string[];
+  nomenclatures: Record<"decile" | "type_menage", ClasseDepense[]>;
+  controles: {
+    annee: number;
+    modele: FourchetteDonnee;
+    reference: number;
+    ecart: number;
+    source: string;
   }[];
 };

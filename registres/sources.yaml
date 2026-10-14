@@ -735,6 +735,83 @@ sources:
     acces: direct
     consulte_le: 2026-10-14
 
+  - id: insee_budget_de_famille_2017
+    nom: "Enquête Budget de famille 2017, « Les dépenses des ménages en 2017 », Insee Résultats, tableaux de la France (dépenses annuelles moyennes par ménage selon le type de ménage et selon le décile de niveau de vie)"
+    editeur: INSEE
+    url: https://www.insee.fr/fr/statistiques/4648335?sommaire=4648339
+    licence: Licence Ouverte 2.0
+    date_publication: 2020-09-15
+    millesime: enquête 2017 (France, y compris DOM)
+    acces: direct
+    consulte_le: 2026-10-14
+
+  - id: sdes_prix_produits_petroliers_2025
+    nom: "Les prix des produits pétroliers poursuivent leur baisse en 2025 avant un rebond début 2026 (données, tableau 3 : prix à la consommation des carburants, 2019-2025)"
+    editeur: Ministère de la Transition écologique, Service des données et études statistiques (SDES), données DGEC
+    url: https://www.statistiques.developpement-durable.gouv.fr/les-prix-des-produits-petroliers-poursuivent-leur-baisse-en-2025-avant-un-rebond-debut-2026
+    licence: Licence Ouverte 2.0
+    date_publication: 2026-06-16
+    millesime: prix moyens annuels 2019-2025, France continentale
+    acces: direct
+    consulte_le: 2026-10-14
+
+  - id: sdes_prix_produits_petroliers_2019
+    nom: "Les prix des produits pétroliers ont connu des fluctuations modérées en 2019 (données, tableau 3 : prix à la consommation des carburants, 2009-2018 et 2019)"
+    editeur: Ministère de la Transition écologique, Service des données et études statistiques (SDES), données DGEC
+    url: https://statistiques.developpement-durable.gouv.fr/les-prix-des-produits-petroliers-ont-connu-des-fluctuations-moderees-en-2019
+    licence: Licence Ouverte 2.0
+    millesime: prix moyens annuels 2009-2018, France métropolitaine
+    acces: direct
+    consulte_le: 2026-10-14
+
+  - id: ipp_perspectives_budgetaires_2025_chapitre2
+    nom: "IPP, Perspectives budgétaires, juin 2025, chapitre 2 « Effets budgétaires et redistributifs des mesures socio-fiscales » (H. Darricau, S. Duchesne, B. Garbinti, L. Josseran, F. Reutzel)"
+    editeur: Institut des politiques publiques (IPP)
+    url: https://www.ipp.eu/wp-content/uploads/2025/06/chapitre_2_fiscalite_web.pdf
+    licence: non précisée (citation seulement, document non reproduit)
+    millesime: juin 2025 (TAXIPP 2.4.1, OpenFisca-France-Indirect-Taxation)
+    acces: direct
+    consulte_le: 2026-10-14
+
+  - id: ipp_actualisation_annee_blanche_2025
+    nom: "IPP, « Actualisation de l'estimation de rendement de l'année blanche »"
+    editeur: Institut des politiques publiques (IPP)
+    url: https://www.ipp.eu/actualisation-de-lestimation-de-rendement-de-lannee-blanche/
+    licence: non précisée (citation seulement, page non reproduite)
+    date_publication: 2025-10-22
+    millesime: septembre 2025 (inflation de 1 %), page modifiée le 16 septembre 2026
+    acces: direct
+    consulte_le: 2026-10-14
+
+  - id: ofce_blog_annee_blanche_2025
+    nom: "OFCE, P. Madec, « Impôts et prestations : quels effets attendre d'une \"année blanche\" ? », blog de l'OFCE"
+    editeur: Observatoire français des conjonctures économiques (OFCE, Sciences Po)
+    url: https://ofce.sciences-po.fr/blog2024/fr/2025/20250630_PIM/Post_AnneeBlanche.fr.pdf
+    licence: non précisée (citation seulement, document non reproduit)
+    date_publication: 2025-06-30
+    millesime: juin 2025 (modèle INES, revalorisation usuelle prévue de 1,1 % en 2026)
+    acces: direct
+    consulte_le: 2026-10-14
+
+  - id: ccomptes_situation_perspectives_finances_publiques_2017
+    nom: "Cour des comptes, « La situation et les perspectives des finances publiques », juin 2017 (copie de la DILA sur vie-publique.fr)"
+    editeur: Cour des comptes
+    url: https://www.vie-publique.fr/files/rapport/pdf/174000536.pdf
+    licence: non précisée (citation seulement, document non reproduit)
+    millesime: juin 2017
+    acces: direct
+    consulte_le: 2026-10-14
+
+  - id: fipeco_masse_salariale_publique_2026
+    nom: "FIPECO, fiche « Le niveau et l'évolution de la masse salariale publique »"
+    editeur: FIPECO (François Ecalle)
+    url: https://www.fipeco.fr/fiche/Le-niveau-et-l%C3%A9volution-de-la-masse-salariale-publique
+    licence: non précisée (citation seulement, page non reproduite)
+    millesime: juillet 2026
+    acces: direct
+    consulte_le: 2026-10-14
+
+
   - id: drees_retraites_2025_donnees
     nom: "Les retraités et les retraites, édition 2025, fichiers de données des fiches (Excel) : fiches 5, 7, 14, 15, 17 et 20"
     editeur: DREES

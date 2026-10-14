@@ -78,7 +78,7 @@ Les totaux passent, sur deux millésimes, mais quatre comparaisons par versant s
 - **FPH** : le modèle surestime. Le sous-secteur S1314 contient aussi le personnel des caisses de sécurité sociale et les médecins hospitaliers, qui ne sont pas rémunérés au point.
 - **FPE 2022** : le modèle sous-estime. La référence de 3,6 Md€ est en outre peu cohérente avec celle de 1,5 Md€ pour une hausse de 1,5 %.
 
-Le levier reste en bêta. Aucune source indépendante n'est encore confrontée (Cour des comptes, situation et perspectives des finances publiques, à déposer).
+Sources indépendantes (`docs/validation/confrontations_independantes.md`) : Cour des comptes, « La situation et les perspectives des finances publiques », juin 2017, hausse de 1 % du point : 2,07 Md€ (modèle 2017 : 1,88, −9,2 %), dont État 0,88 (−9,0 %), territoriale 0,64 (−9,6 %), hôpitaux 0,55 (−9,3 %) ; Fipeco, juillet 2026, 2,5 Md€ hors cotisations des employeurs (modèle 2025 : 2,37, −5,1 %). Toutes dans la tolérance. Le levier reste en bêta (comparaisons par versant aux références officielles hors tolérance).
 
 ## 7. Limites connues
 
@@ -91,4 +91,5 @@ Le levier reste en bêta. Aucune source indépendante n'est encore confrontée (
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-14 | Confrontation à la Cour des comptes (2017) et à Fipeco (2026) sur le point d'indice, `docs/validation/confrontations_independantes.md` | 5 nouvelles références indépendantes, dans la tolérance (de −9,6 % à −5,1 %) |
 | 2026-10-12 | Création du levier ; extraction de D1 et D122 ajoutée aux comptes des APU (indicateurs existants inchangés) | 8 nouvelles références de validation, 4 dans la tolérance (dont les 2 totaux) ; tableau : 34 sur 46 |

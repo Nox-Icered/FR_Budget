@@ -67,7 +67,7 @@
   },
   "validation": {
     "titre": "Validation",
-    "intro": "Un levier n'est publié qu'après comparaison avec un chiffrage officiel. Les écarts sont publiés, y compris quand le modèle est moins bon.",
+    "intro": "Un levier n'est publié qu'après comparaison avec un chiffrage officiel (à ±10 %, sur deux millésimes quand ils existent) et avec une source indépendante de l'administration (IPP, OFCE, Cour des comptes…). Les écarts sont publiés, y compris quand le modèle est moins bon.",
     "levier": "Levier",
     "statut": "Statut",
     "statuts": {
@@ -90,7 +90,11 @@
     "resultat": "Résultat",
     "dans_tolerance": "Dans la tolérance",
     "hors_tolerance": "Hors tolérance",
-    "pourcent": "{valeur} %"
+    "pourcent": "{valeur} %",
+    "independante": "Confrontation à une source indépendante",
+    "independante_aucune": "Aucune pour l'instant",
+    "independante_resultat": "{dans} sur {total} dans la tolérance",
+    "source_independante": "source indépendante de l'administration"
   },
   "version": {
     "texte": "Version du moteur {moteur} ; registres {registres} ; données {donnees}"

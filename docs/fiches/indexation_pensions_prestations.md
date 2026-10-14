@@ -108,7 +108,7 @@ Le modèle est toujours en dessous des références. Explications possibles, non
 - le complément de libre choix du mode de garde est exclu : le compter ajouterait environ 0,06 Md€ au gel familial de 2026 et 0,12 Md€ à celui de 2027 ;
 - l'inflation prévue n'est qu'une approximation du coefficient légal de revalorisation.
 
-Le levier reste en bêta. Les références viennent toutes du Gouvernement ou du Parlement (qui reprend les évaluations du Gouvernement) : aucune source indépendante n'est encore confrontée. Il faudrait le rapport de la Cour des comptes sur la sécurité sociale ou une évaluation de l'IPP ou de l'OFCE.
+Source indépendante (`docs/validation/confrontations_independantes.md`) : IPP, gel des pensions de retraite de base en 2026, 2,4 Md€ pour une inflation de 1 % et 3,0 Md€ pour 1,3 %. Le modèle (baisse de dépenses brute du bloc « pensions ») est au-dessus de 20,2 % et 25,1 %, alors qu'il est en dessous des références du Gouvernement ; le périmètre des pensions de l'IPP n'est pas détaillé. Le levier reste en bêta.
 
 ## 7. Limites connues
 
@@ -121,6 +121,7 @@ Le levier reste en bêta. Les références viennent toutes du Gouvernement ou du
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-14 | Confrontation à l'IPP (gel des pensions de base 2026), `docs/validation/confrontations_independantes.md` | 2 nouvelles références indépendantes, hors tolérance (+20,2 % et +25,1 %) |
 | 2026-10-12 | Ajout de la référence du gel de l'AAH en 2026 (demande du mainteneur) | 1 nouvelle référence, hors tolérance (-12,1 %) |
 | 2026-10-12 | Revue de la PR : effet de la première année réduit aux mois qui suivent la revalorisation ; une mesure à zéro ne bloque plus de combinaison | aucun test de validation (ils portaient déjà sur la première année) |
 | 2026-10-12 | Création du levier : extraction des comptes de la protection sociale et de la distribution des pensions de la DREES | 4 nouvelles références de validation, 2 dans la tolérance ; tableau : 36 sur 50 |

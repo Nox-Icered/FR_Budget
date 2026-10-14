@@ -51,7 +51,10 @@ export const LEVIERS_PUBLICS: { id: string; pas: number }[] = [
   { id: "ir_seuils_bareme", pas: 0.1 },
   { id: "prime_activite_pente", pas: 0.1 },
   { id: "retraites_age_depart", pas: 0.25 },
+  { id: "retraites_age_legal", pas: 0.25 },
 ];
+// Âge effectif et âge légal de départ : le moteur refuse de les cumuler (double compte).
+export const LEVIERS_RETRAITES = ["retraites_age_depart", "retraites_age_legal"];
 const PUBLICS = new Set(LEVIERS_PUBLICS.map((l) => l.id));
 
 // Les identifiants viennent de l'adresse : seules les propriétés propres comptent (pas
@@ -182,6 +185,7 @@ export function problemes(
   );
   if (
     (regle(LEVIERS_REMUNERATIONS) && missionsReglees) ||
+    LEVIERS_RETRAITES.filter((id) => (etat.leviers[id] ?? 0) !== 0).length > 1 ||
     (regle(LEVIERS_SOLIDARITE) && (etat.parMission[MISSION_SOLIDARITE] ?? 0) !== 0) ||
     depenseChoisieDansImpot
   ) {

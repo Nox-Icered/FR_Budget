@@ -13,6 +13,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from functools import partial
 
+from fr_budget import retraites_cohortes
 from fr_budget.agrege.accises import recette_brute
 from fr_budget.agrege.cotisations import cout_allegements, valeur_point_modele
 from fr_budget.agrege.credits_missions import total_execution
@@ -62,6 +63,9 @@ class Comparaison:
     ecart: float
     """Écart relatif (modèle - référence) / référence."""
     tolerance: float
+    variante: str = ""
+    """Modèle comparé quand plusieurs modèles répondent à la même référence (``cohortes`` :
+    retraites, modèle par cohortes) ; vide sinon."""
 
     @property
     def dans_la_tolerance(self) -> bool:
@@ -69,10 +73,10 @@ class Comparaison:
 
 
 def comparer(
-    reference: str, modele: float, tolerance: float = TOLERANCE_PUBLICATION
+    reference: str, modele: float, tolerance: float = TOLERANCE_PUBLICATION, variante: str = ""
 ) -> Comparaison:
     valeur = chiffrage(reference)
-    return Comparaison(reference, modele, valeur, (modele - valeur) / valeur, tolerance)
+    return Comparaison(reference, modele, valeur, (modele - valeur) / valeur, tolerance, variante)
 
 
 def _point_tva(annee_comptes: int, annee_cible: int, nature: str, taux: str) -> float:
@@ -235,9 +239,35 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
     return definitions
 
 
+COHORTES = "cohortes"
+ENTREE_RETRAITES = 2027
+
+
+def _retraites_cohortes(horizon: int) -> float:
+    """Effet central d'un an d'âge légal (modèle par cohortes) la ``horizon``-ième année."""
+    return retraites_cohortes.effet(1.0, ENTREE_RETRAITES + horizon - 1, ENTREE_RETRAITES).central
+
+
+def definitions_variantes() -> list[tuple[str, Callable[[], float], str]]:
+    """Références déjà comparées à un modèle, comparées aussi à une variante : le tableau 2.10
+    du COR (âge d'ouverture des droits) au modèle de retraites par cohortes."""
+    return [
+        (
+            f"cor_aod_un_an_solde_apu_{horizon}ans_{borne}",
+            partial(_retraites_cohortes, horizon),
+            COHORTES,
+        )
+        for horizon in (2, 10, 20)
+        for borne in ("bas", "haut")
+    ]
+
+
 def comparaisons() -> list[Comparaison]:
     """Toutes les comparaisons modèle-référence, dans l'ordre des tests de validation."""
-    return [comparer(reference, calcul()) for reference, calcul in _definitions()]
+    return [comparer(reference, calcul()) for reference, calcul in _definitions()] + [
+        comparer(reference, calcul(), variante=variante)
+        for reference, calcul, variante in definitions_variantes()
+    ]
 
 
 def tableau_markdown(liste: list[Comparaison]) -> str:
@@ -252,7 +282,8 @@ def tableau_markdown(liste: list[Comparaison]) -> str:
     for c in liste:
         resultat = "dans la tolérance" if c.dans_la_tolerance else "**hors tolérance**"
         lignes.append(
-            f"| {c.reference} | {c.modele:.3f} | {c.valeur_reference:.3f} | {c.ecart:+.1%} "
+            f"| {c.reference}{f' ({c.variante})' if c.variante else ''} | {c.modele:.3f} "
+            f"| {c.valeur_reference:.3f} | {c.ecart:+.1%} "
             f"(±{c.tolerance:.0%}) | {resultat} |"
         )
     return "\n".join(lignes) + "\n"

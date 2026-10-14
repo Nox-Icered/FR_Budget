@@ -46,8 +46,11 @@ export default function Validation() {
           </thead>
           <tbody>
             {comparaisons.map((c) => (
-              <tr key={c.reference}>
-                <td>{mesures.get(c.reference)?.mesure ?? c.reference}</td>
+              <tr key={`${c.reference}-${c.variante ?? ""}`}>
+                <td>
+                  {mesures.get(c.reference)?.mesure ?? c.reference}
+                  {c.variante ? ` — ${texte(`validation.variantes.${c.variante}`)}` : ""}
+                </td>
                 <td className="nombre">
                   {nombre(c.modele)} {c.unite}
                 </td>

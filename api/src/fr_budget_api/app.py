@@ -510,6 +510,7 @@ def resume_validation() -> list[dict[str, Any]]:
     return [
         {
             "reference": c.reference,
+            "variante": c.variante,
             "modele": c.modele,
             "valeur_reference": c.valeur_reference,
             "ecart": c.ecart,
@@ -749,6 +750,14 @@ def reponses_unitaires() -> dict[str, Any]:
                     "duree_montee": module_retraites.duree_montee_en_charge(),
                 }
                 if levier == module_scenario.LEVIER_RETRAITES_AGE
+                else {}
+            ),
+            **(
+                {
+                    "effet_plein": module_scenario.effet_plein_retraites_age_legal(),
+                    "duree_montee": module_retraites.duree_montee_en_charge(),
+                }
+                if levier == module_scenario.LEVIER_RETRAITES_AGE_LEGAL
                 else {}
             ),
             "bornes": [basse, haute],

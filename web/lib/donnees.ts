@@ -125,6 +125,7 @@ export type Comparaison = {
   tolerance: number;
   dans_la_tolerance: boolean;
   unite: string;
+  variante?: string;
 };
 export type Version = { moteur: string; registres: string; donnees: string };
 export type FourchetteJson = { bas: number; central: number; haut: number };

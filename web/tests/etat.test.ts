@@ -62,6 +62,8 @@ const donnees = {
     tva_taux_normal: levier([-10, 10]),
     remunerations_point_indice: levier([-5, 5]),
     indexation_pensions_prestations: levier([-2, 1]),
+    retraites_age_depart: levier([-1, 3]),
+    retraites_age_legal: levier([-1, 3]),
   },
 } as unknown as ReponsesUnitaires;
 const catalogue = {
@@ -145,4 +147,11 @@ test("exports CSV et JSON", () => {
   const json = JSON.parse(versJson([{ nom: "A", etat, lignes }], { moteur: "m", registres: "r", donnees: "d" }));
   assert.equal(json.scenarios[0].lien.startsWith("?a=2027"), true);
   assert.equal(json.version.moteur, "m");
+});
+
+test("âge effectif et âge légal de départ ne se cumulent pas", () => {
+  const un = base({ leviers: { retraites_age_legal: 1 } });
+  assert.deepEqual(problemes(un, donnees, catalogue, missions), []);
+  const deux = base({ leviers: { retraites_age_legal: 1, retraites_age_depart: 0.5 } });
+  assert.deepEqual(problemes(deux, donnees, catalogue, missions), ["double_compte"]);
 });

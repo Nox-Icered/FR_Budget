@@ -150,6 +150,7 @@ En parallèle :
   - Effet du scénario affiché le 13 octobre 2026 : panneau du simulateur (approximation sur grille, écart au calcul complet publié : 61 € pour une mesure seule, 291 € pour toutes les mesures à leurs bornes) et page « Mon ménage » (calcul complet, quand l'API sera hébergée).
 - Indicateur de dépense incompressible pour TVA et accises (budgets de famille INSEE).
 - Entreprises : charge par taille et secteur (ESANE, DGFiP), sans effet comportemental.
+  - Fait le 14 octobre 2026 (`docs/fiches/entreprises.md`, choix à relire) : quatre leviers (taux de cotisation patronale, allègements, taux normal et surtaxe de l'impôt sur les sociétés) répartis selon les données de l'Urssaf (open data, ODbL) et de la DGFiP, plutôt qu'ESANE, qui ne publie ni cotisations ni impôt par classe ; page Entreprises et panneau du simulateur. Données de l'Urssaf confrontées à la CCSS (écarts de +0,3 % et −4,1 %).
 - Écrans Catalogue, Simulateur, Ménages, Entreprises, « Comment c'est calculé ? ».
 
 ## 6. Phase 3 : V1

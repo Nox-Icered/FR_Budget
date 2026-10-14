@@ -26,6 +26,7 @@ export default function Gabarit({ children }: { children: ReactNode }) {
             <Link href="/comparaison/">{texte("navigation.comparaison")}</Link>
             <Link href="/menages/">{texte("navigation.menages")}</Link>
             <Link href="/mon-menage/">{texte("navigation.mon_menage")}</Link>
+            <Link href="/entreprises/">{texte("navigation.entreprises")}</Link>
             <Link href="/sources/">{texte("navigation.sources")}</Link>
             <Link href="/hypotheses/">{texte("navigation.hypotheses")}</Link>
             <Link href="/validation/">{texte("navigation.validation")}</Link>

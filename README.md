@@ -39,4 +39,4 @@ Contrôles avant commit : `uv tool install pre-commit && pre-commit install`.
 ## Licences
 
 - Code : [AGPL-3.0](LICENSE), comme OpenFisca-France utilisé par le moteur.
-- Registres et données produites par le projet : [Licence Ouverte 2.0](LICENCE-DONNEES.md). Chaque source garde sa licence d'origine, indiquée dans le registre.
+- Registres et données produites par le projet : [Licence Ouverte 2.0](LICENCE-DONNEES.md), sauf les tables dérivées des données de l'Urssaf, sous [ODbL 1.0](LICENCE-ODBL.txt) comme leurs jeux d'origine (liste dans `LICENCE-DONNEES.md`). Chaque source garde sa licence d'origine, indiquée dans le registre.

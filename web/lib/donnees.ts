@@ -202,3 +202,31 @@ export type CatalogueCreditsMissions = {
   bornes: [number, number];
   missions: { identifiant: string; libelle: string; credits: number; rendement_pourcent: number }[];
 };
+export type FourchetteDonnee = { bas: number; central: number; haut: number };
+export type ClasseEntreprises = {
+  id: string;
+  libelle: string;
+  part: FourchetteDonnee;
+  effet: FourchetteDonnee;
+  effectifs: number | null;
+  entreprises: number | null;
+};
+export type Entreprises = {
+  unite: string;
+  annee_urssaf: number;
+  annees_is: number[];
+  leviers: {
+    id: string;
+    effet_national: FourchetteDonnee;
+    sources: string[];
+    nomenclatures: Record<"taille" | "secteur", ClasseEntreprises[]>;
+  }[];
+  controles: {
+    id: string;
+    annee: number;
+    urssaf: number;
+    reference: number;
+    source: string;
+    ecart: number;
+  }[];
+};

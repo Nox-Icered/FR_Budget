@@ -40,9 +40,12 @@ Avis n° HCFP-2025-5 du 9 octobre 2025 (fichier déposé par le mainteneur, sha2
 
 ## Autres documents lus le 27 octobre 2026 (ccomptes.fr de nouveau joignable)
 
+Bilan : aucun de ces documents ne fournit d'estimation indépendante comparable aux leviers ; l'impôt sur les sociétés et les accises restent en bêta.
+
+
 - **Impôt sur les sociétés.** Le fichier de la Cour des comptes à l'adresse indiquée ci-dessous (point 1) est un document de travail de l'Insee : O. Arnal, U. Di Nallo, J.-P. Martin, « La réforme du taux statutaire de l'impôt sur les sociétés », document de travail n° 2025-18, septembre 2025 (109 pages, sha256 72f3d866562fccaa98f5b1ab615e4eb5bbd268a5c4052943a2e5d5e877c833b2). Il mesure le taux implicite d'imposition (20,7 % en 2016, 17,5 % en 2022) ; il ne chiffre ni le coût de la baisse du taux, ni le rendement d'un point de taux. Rien d'utilisable pour le levier. Le rapport d'évaluation de la Cour lui-même reste à trouver.
 - **Accises (CPO, 2019).** Rapport « La fiscalité environnementale au défi de l'urgence climatique » (225 pages, sha256 d32d1883fff1af3a2e0f8d0f1be4374538adb56a253c596fe32ee9058b6803f8). Il reprend les chiffrages du PLF 2018 (convergence gazole-essence et trajectoire carbone, chiffrages de l'administration) et simule des trajectoires de la composante carbone jusqu'en 2030 avec le modèle ThreeME, comportements compris. Il ne donne pas de rendement statique d'un centime par litre : rien de comparable au levier, qui ne compte aucun changement de comportement.
-- **Accises (Cour des comptes, 2024).** L'adresse du rapport redirige vers une page inexistante, et la copie repérée sur connaissancedesenergies.org renvoie une erreur 404. Document toujours manquant.
+- **Accises (Cour des comptes, 2024).** Observations définitives S2024-0646, « La place de la fiscalité de l'énergie dans la politique énergétique et climatique française », 6 septembre 2024 (149 pages, adresse corrigée fournie par le mainteneur : https://www.ccomptes.fr/sites/default/files/2024-09/20240906-S2024-0646-Place-fiscalite-energie-dans-politique-energetique-et-climatique-francaise_0.pdf, sha256 d2765ebb4f6f9188b6ae31c8e93f04f03d4aef3afde18c47b4be376c223b69ad). Le rapport donne le rendement global des accises (tableau n° 2 : fraction « autres produits énergétiques », 32,0 Md€ en 2021 et 32,5 Md€ en 2022, brut, « d'après données budgétaires »), qui couvre tous les produits pétroliers et non les seuls gazole et essences du levier, et une revue de la littérature sur les élasticités-prix (annexe), utile pour la V3 (élasticités comportementales). Il ne chiffre pas le rendement d'un centime par litre : rien de comparable au levier.
 
 ## Leviers sans confrontation indépendante (recherche du 14 octobre 2026)
 
@@ -61,6 +64,6 @@ Pour ces leviers, la règle de publication ne peut pas être remplie avec les so
 ## Fichiers à déposer par le mainteneur (ccomptes.fr et hcfp.fr injoignables)
 
 1. Cour des comptes, « La réforme du taux statutaire de l'impôt sur les sociétés », 22 septembre 2025 (l'adresse ci-après donne le document de travail de l'Insee, lu, voir ci-dessus ; le rapport de la Cour reste à trouver) : https://www.ccomptes.fr/sites/default/files/2025-09/20250922-reforme-taux-statutaire-impot-sur-les-societes.pdf
-2. Cour des comptes, « La place de la fiscalité de l'énergie dans la politique énergétique et climatique française », septembre 2024 : https://www.ccomptes.fr/sites/default/files/2024-08/20240906-S2024-0646-Place-fiscalite-energie-dans-politique-energetique-et-climatique-francaise_0.pdf
+2. ~~Cour des comptes, « La place de la fiscalité de l'énergie dans la politique énergétique et climatique française », septembre 2024~~ (lu le 27 octobre 2026, voir ci-dessus) : https://www.ccomptes.fr/sites/default/files/2024-08/20240906-S2024-0646-Place-fiscalite-energie-dans-politique-energetique-et-climatique-francaise_0.pdf
 3. ~~CPO, « La fiscalité environnementale au défi de l'urgence climatique », septembre 2019~~ (lu le 27 octobre 2026, voir ci-dessus) : https://www.ccomptes.fr/system/files/2019-09/20190918-CPO-fiscalite-environnementale_0.pdf
 4. ~~HCFP, avis n° 2025-5 sur les PLF et PLFSS 2026~~ : déposé le 27 octobre 2026 (voir ci-dessus).

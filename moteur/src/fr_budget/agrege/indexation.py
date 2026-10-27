@@ -366,6 +366,20 @@ def taux_crds() -> float:
     return float(parametres.prelevements_sociaux.contributions_sociales.crds)
 
 
+@cache
+def prelevements_moyens_pension(foyer: str) -> Retour:
+    """Part moyenne de la pension brute reprise par les administrations publiques (taux moyen,
+    pas marginal) : CSG, CRDS et CASA, puis impôt sur le revenu compris. Même distribution que
+    ``retour_pension`` (EIR 2020, législation 2020), moyenne pondérée par la masse de pension."""
+    niveaux, parts = distribution_pensions()
+    brute, nette, impot = _revenus(foyer, 1.0)
+    poids = parts * niveaux
+    return Retour(
+        prelevements_sociaux=float(np.average(1 - nette / brute, weights=poids)),
+        total=float(np.average(1 - (nette - impot) / brute, weights=poids)),
+    )
+
+
 def _part_retour(bloc: str, lecture: str, foyer: str) -> float:
     if lecture == BRUT:
         return 0.0

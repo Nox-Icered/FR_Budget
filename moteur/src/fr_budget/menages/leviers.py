@@ -263,6 +263,7 @@ SANS_EFFET: dict[str, str] = {
     scenario.LEVIER_POINT_INDICE: "agents_publics",
     scenario.LEVIER_EFFECTIFS: "agents_publics",
     scenario.LEVIER_RETRAITES_AGE: "structurel",
+    scenario.LEVIER_RETRAITES_AGE_LEGAL: "structurel",
     scenario.LEVIER_DEPENSE_FISCALE_UNITE: "catalogue",
     scenario.LEVIER_CREDITS_UNITE: "administrations",
 }

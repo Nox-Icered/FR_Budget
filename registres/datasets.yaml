@@ -793,3 +793,60 @@ datasets:
     empreinte_sha256: cc52f4366f571d964b31e1d7acd6526b27f524c2016d9c3222cf39f1435fa34c
     methode_transformation: pipelines/accises/extraire_prix_sdes.py → data/processed/accises/prix_carburants_ttc.csv
     telecharge_le: 2026-10-14
+
+
+  - id: drees_retraites_2025_fiche15_xlsx
+    source: drees_retraites_2025_donnees
+    description: "Fiche 15, graphique 3 : taux de retraités par âge (50 à 70 ans), 2004-2023"
+    fichier: data/raw/retraites/drees/fiche15_age_depart.xlsx
+    empreinte_sha256: 7dfe32af8434a612a86a4567968972be0f70ea0d5c74fd458ccc009a47ea9823
+    methode_transformation: pipelines/retraites/extraire_cohortes.py → data/processed/retraites/cohortes_*.csv ; valeurs ponctuelles saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-14
+
+  - id: drees_retraites_2025_fiche17_xlsx
+    source: drees_retraites_2025_donnees
+    description: "Fiche 17, graphique 2 : répartition des retraités des régimes de base de la génération 1956 selon le type de départ, par régime"
+    fichier: data/raw/retraites/drees/fiche17_conditions_liquidation.xlsx
+    empreinte_sha256: b4fb849b2204838d2f8436f3813c944602898af0c111b3bd06f40d9a025f3d76
+    methode_transformation: pipelines/retraites/extraire_cohortes.py → data/processed/retraites/cohortes_*.csv ; valeurs ponctuelles saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-14
+
+  - id: drees_retraites_2025_fiche20_xlsx
+    source: drees_retraites_2025_donnees
+    description: "Fiche 20, tableau 1 : situation principale l'année précédant la liquidation (générations 1942, 1946, 1950)"
+    fichier: data/raw/retraites/drees/fiche20_situation_fin_carriere.xlsx
+    empreinte_sha256: d79d8750031372c2037461372c3a6f8825136e15c421502d1a49f9bfd6ae3331
+    methode_transformation: pipelines/retraites/extraire_cohortes.py → data/processed/retraites/cohortes_*.csv ; valeurs ponctuelles saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-14
+
+  - id: drees_retraites_2025_fiche07_xlsx
+    source: drees_retraites_2025_donnees
+    description: "Fiche 7, tableau 1 : pension brute mensuelle moyenne de droit direct des nouveaux retraités, fin 2023"
+    fichier: data/raw/retraites/drees/fiche07_pension_nouveaux_retraites.xlsx
+    empreinte_sha256: bb8ed6e94ed9b6c4e22f57fc5b65de4f4ceb09af5ef7e696c4fdc34221c6afd1
+    methode_transformation: pipelines/retraites/extraire_cohortes.py → data/processed/retraites/cohortes_*.csv ; valeurs ponctuelles saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-14
+
+  - id: drees_retraites_2025_fiche05_xlsx
+    source: drees_retraites_2025_donnees
+    description: "Fiche 5, tableau 3 : montants bruts mensuels moyens de la pension de droit direct, fin 2023"
+    fichier: data/raw/retraites/drees/fiche05_niveau_pensions.xlsx
+    empreinte_sha256: 1afa7997f30591f9191b0f75a4228478be97a20ff5ebbddfdb3456d74a0cb7ad
+    methode_transformation: pipelines/retraites/extraire_cohortes.py → data/processed/retraites/cohortes_*.csv ; valeurs ponctuelles saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-14
+
+  - id: insee_projections_population_2021_central_xlsx
+    source: insee_projections_population_2021
+    description: "Scénario central, feuille « population » : population au 1er janvier par âge révolu, France"
+    fichier: data/raw/retraites/insee/projections_population_2021_central.xlsx
+    empreinte_sha256: 5326cfd45bacf00e0d2599574a6a63a61c3b51a073009ebeed8c9fc65c59d47d
+    methode_transformation: pipelines/retraites/extraire_cohortes.py → data/processed/retraites/cohortes_population.csv
+    telecharge_le: 2026-10-14
+
+  - id: drees_retraites_2025_fiche14_xlsx
+    source: drees_retraites_2025_donnees
+    description: "Fiche 14, tableaux 1 et 3 : âge légal d'ouverture des droits et âge d'annulation de la décote, par génération"
+    fichier: data/raw/retraites/drees/fiche14_regles_liquidation.xlsx
+    empreinte_sha256: 6e5afffb43588c4ad84ce122a067513e314cd3057960f57234c0f50be3383871
+    methode_transformation: pipelines/retraites/extraire_cohortes.py → data/processed/retraites/cohortes_ages_legaux.csv
+    telecharge_le: 2026-10-14

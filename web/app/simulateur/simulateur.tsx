@@ -19,6 +19,7 @@ import { GraphiqueDette } from "../baseline/graphique";
 import {
   LEVIERS_PUBLICS,
   LEVIERS_REMUNERATIONS,
+  LEVIERS_RETRAITES,
   LEVIERS_SOLIDARITE,
   MISSION_SOLIDARITE,
   decoder,
@@ -140,7 +141,11 @@ function SimulateurCharge({
           const id = `${idBase}-${l.id}`;
           const bloqueRemunerations = missionsReglees && LEVIERS_REMUNERATIONS.includes(l.id);
           const bloqueIndexation = solidariteReglee && LEVIERS_SOLIDARITE.includes(l.id);
-          const bloque = bloqueRemunerations || bloqueIndexation;
+          // L'autre levier de départ à la retraite est déjà réglé.
+          const bloqueRetraites =
+            LEVIERS_RETRAITES.includes(l.id) &&
+            LEVIERS_RETRAITES.some((id) => id !== l.id && (valeurs[id] ?? 0) !== 0);
+          const bloque = bloqueRemunerations || bloqueIndexation || bloqueRetraites;
           return (
             <div key={l.id} className="reglage">
               <label htmlFor={id}>
@@ -172,6 +177,9 @@ function SimulateurCharge({
               )}
               {bloqueIndexation && (
                 <span className="source">{texte("simulateur.bloque_indexation")}</span>
+              )}
+              {bloqueRetraites && (
+                <span className="source">{texte("simulateur.bloque_retraites")}</span>
               )}
             </div>
           );

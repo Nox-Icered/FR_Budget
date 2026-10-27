@@ -128,6 +128,7 @@ export type Comparaison = {
   unite: string;
   levier?: string;
   independante: boolean;
+  variante?: string;
 };
 export type Version = { moteur: string; registres: string; donnees: string };
 export type FourchetteJson = { bas: number; central: number; haut: number };
@@ -166,6 +167,19 @@ export type ReponsesUnitaires = {
       effet_plein?: number;
       duree_montee?: number;
       bornes: [number, number];
+      // Levier non linéaire : réponse exacte (et non par unité) de chaque cran du curseur.
+      grille?: Record<
+        string,
+        Record<
+          string,
+          {
+            unite_dette: number[][];
+            unite_solde: number[][];
+            croissance_dette?: number[][];
+            croissance_solde?: number[][];
+          }
+        >
+      >;
       multiplicateur?: { bas: number; central: number; haut: number };
       // croissance_* : supplément d'une unité du levier pour un multiplicateur de 1.
       reponses: Record<

@@ -108,6 +108,12 @@ export default function PageSimulateur() {
           duree: donnees.leviers.retraites_age_depart.duree_montee ?? 0,
         })}
       </p>
+      <p>
+        {texte("simulateur.methode_retraites_age_legal", {
+          effet: deuxDecimales(donnees.leviers.retraites_age_legal.effet_plein ?? 0),
+          duree: donnees.leviers.retraites_age_legal.duree_montee ?? 0,
+        })}
+      </p>
       {donnees.croissance && (
         <p>
           {texte("simulateur.methode_croissance", {

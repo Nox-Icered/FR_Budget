@@ -36,7 +36,16 @@ export function calculer(
 ): LigneScenario[] {
   const reponses = mesures.map((m) => {
     const levier = donnees.leviers[m.levier];
-    return { valeur: m.valeur, r: levier.reponses[String(annee)], mult: levier.multiplicateur };
+    // Levier non linéaire : réponse exacte du cran choisi, déjà ordonnée par borne ; elle compte
+    // une fois (valeur 1) et ses bornes ne s'échangent pas.
+    const cran = levier.grille?.[String(m.valeur)]?.[String(annee)];
+    if (cran) return { valeur: 1, r: cran, mult: levier.multiplicateur, grille: true };
+    return {
+      valeur: m.valeur,
+      r: levier.reponses[String(annee)],
+      mult: levier.multiplicateur,
+      grille: false,
+    };
   });
   // Trajectoires des bornes de l'effet (indices_effet[1] : effet bas, [2] : effet haut). Comme
   // dans le moteur, la borne basse additionne la réponse basse des mesures positives et la
@@ -50,8 +59,8 @@ export function calculer(
   };
   type Borne = "bas" | "central" | "haut";
   const somme = (k: number, i: number, cle: "dette" | "solde", borne: Borne | null) =>
-    reponses.reduce((total, { valeur, r, mult }) => {
-      const kk = indice(k, valeur);
+    reponses.reduce((total, { valeur, r, mult, grille }) => {
+      const kk = grille ? k : indice(k, valeur);
       const unite = r[`unite_${cle}`][kk][i];
       const supplement = borne && mult ? mult[borne] * (r[`croissance_${cle}`]?.[kk][i] ?? 0) : 0;
       return total + valeur * (unite + supplement);

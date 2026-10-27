@@ -51,7 +51,10 @@ export const LEVIERS_PUBLICS: { id: string; pas: number }[] = [
   { id: "ir_seuils_bareme", pas: 0.1 },
   { id: "prime_activite_pente", pas: 0.1 },
   { id: "retraites_age_depart", pas: 0.25 },
+  { id: "retraites_age_legal", pas: 0.25 },
 ];
+// Âge effectif et âge légal de départ : le moteur refuse de les cumuler (double compte).
+export const LEVIERS_RETRAITES = ["retraites_age_depart", "retraites_age_legal"];
 const PUBLICS = new Set(LEVIERS_PUBLICS.map((l) => l.id));
 
 // Les identifiants viennent de l'adresse : seules les propriétés propres comptent (pas
@@ -160,6 +163,8 @@ export function problemes(
   for (const [id, v] of Object.entries(etat.leviers)) {
     if (!PUBLICS.has(id) || !possede(donnees.leviers, id)) liste.push("levier_inconnu");
     else if (!dans(v, donnees.leviers[id].bornes)) liste.push("hors_bornes");
+    else if (donnees.leviers[id].grille && v !== 0 && !possede(donnees.leviers[id].grille ?? {}, String(v)))
+      liste.push("hors_bornes");
   }
   for (const [impot, v] of Object.entries(etat.parImpot)) {
     if (!possede(catalogue.impots, impot)) liste.push("impot_inconnu");
@@ -182,6 +187,7 @@ export function problemes(
   );
   if (
     (regle(LEVIERS_REMUNERATIONS) && missionsReglees) ||
+    LEVIERS_RETRAITES.filter((id) => (etat.leviers[id] ?? 0) !== 0).length > 1 ||
     (regle(LEVIERS_SOLIDARITE) && (etat.parMission[MISSION_SOLIDARITE] ?? 0) !== 0) ||
     depenseChoisieDansImpot
   ) {

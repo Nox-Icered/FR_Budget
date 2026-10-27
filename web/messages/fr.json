@@ -94,7 +94,10 @@
     "independante": "Confrontation à une source indépendante",
     "independante_aucune": "Aucune pour l'instant",
     "independante_resultat": "{dans} sur {total} dans la tolérance",
-    "source_independante": "source indépendante de l'administration"
+    "source_independante": "source indépendante de l'administration",
+    "variantes": {
+      "cohortes": "modèle par cohortes (âge légal)"
+    }
   },
   "version": {
     "texte": "Version du moteur {moteur} ; registres {registres} ; données {donnees}"
@@ -212,6 +215,10 @@
       },
       "retraites_age_depart": {
         "libelle": "Âge effectif moyen de départ à la retraite, en écart à la projection du COR ({reference} ans en {annee})",
+        "valeur": "{valeur} an(s)"
+      },
+      "retraites_age_legal": {
+        "libelle": "Âge légal d'ouverture des droits à la retraite, en écart à la législation ({reference} ans pour les générations nées à partir de 1968)",
         "valeur": "{valeur} an(s)"
       }
     },
@@ -343,7 +350,9 @@
       "methode": "Dépenses de l'enquête Budget de famille {annee_enquete} de l'Insee, portées à {annee} comme la consommation des ménages des comptes nationaux. Les prix suivent entièrement la mesure et les achats ne changent pas : c'est la dépense à consommation inchangée, pas un effet sur le pouvoir d'achat après adaptation. La fourchette vient des postes de dépense dont seule une partie relève du taux normal de TVA. Les mesures d'accise ne portent que sur les carburants ; la part du gazole est la moyenne nationale.",
       "controle": "Contrôle : part de la consommation au taux normal de TVA dans l'enquête, {modele}, contre {reference} dans les comptes nationaux de {annee_controle} (écart {ecart}).",
       "detail": "Méthode, sources et limites : fiche « dépense des ménages » du dépôt."
-    }
+    },
+    "bloque_retraites": "Réglage impossible tant que l'autre levier de départ à la retraite est modifié : les deux mesurent le même effet.",
+    "methode_retraites_age_legal": "Âge légal de départ (modèle par cohortes) : avec la population projetée par l'Insee et les taux de retraités par âge de la DREES, un an de plus sur l'âge légal améliore le solde des administrations publiques d'environ {effet} point de PIB une fois la mesure en place (moindres pensions et prélèvements sur ceux qui restent en emploi). L'écart est atteint génération par génération, en {duree} ans pour un an. Les prestations versées à ceux qui restent sans emploi ne sont pas comptées."
   },
   "partage": {
     "scenario": "Scénario",

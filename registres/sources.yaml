@@ -810,3 +810,22 @@ sources:
     millesime: juillet 2026
     acces: direct
     consulte_le: 2026-10-14
+
+
+  - id: drees_retraites_2025_donnees
+    nom: "Les retraités et les retraites, édition 2025, fichiers de données des fiches (Excel) : fiches 5, 7, 14, 15, 17 et 20"
+    editeur: DREES
+    url: "https://drees.solidarites-sante.gouv.fr (fichiers Excel de l'édition 2025 déposés par le mainteneur le 14 octobre 2026 ; le site n'était pas joignable depuis l'environnement de travail)"
+    licence: réutilisation libre des publications de la DREES (mention de la source)
+    millesime: juillet 2025 (données de 2023 et générations 1950 à 1956)
+    acces: direct
+    consulte_le: 2026-10-14
+
+  - id: insee_projections_population_2021
+    nom: "Insee, projections de population 2021-2070 pour la France, résultats détaillés, scénario central (prolongé jusqu'en 2121)"
+    editeur: INSEE
+    url: https://www.insee.fr/fr/statistiques/fichier/5894093/00_central.xlsx
+    licence: Licence Ouverte 2.0
+    millesime: projections 2021 (population au 1er janvier par âge, 2021-2121)
+    acces: direct
+    consulte_le: 2026-10-14

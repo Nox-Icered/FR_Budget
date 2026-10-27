@@ -82,7 +82,7 @@ from functools import cache
 
 from fr_budget import baseline as module_baseline
 from fr_budget import croissance as module_croissance
-from fr_budget import retraites
+from fr_budget import retraites, retraites_cohortes
 from fr_budget.agrege import (
     accises,
     cotisations,
@@ -172,6 +172,16 @@ LEVIER_RETRAITES_AGE = "retraites_age_depart"
 # à relire) : jusqu'au relèvement qui équilibre le système en 2070 selon le COR (3,0 ans,
 # figure 2.24), et un an de baisse.
 BORNES_RETRAITES_AGE = (-1.0, 3.0)
+LEVIER_RETRAITES_AGE_LEGAL = "retraites_age_legal"
+# Relèvement de l'âge légal d'ouverture des droits, modèle par cohortes (deuxième étape du
+# module retraites) : mêmes bornes que le levier sur l'âge effectif. Les deux leviers ne se
+# cumulent pas (double compte).
+LEVIERS_RETRAITES = (LEVIER_RETRAITES_AGE, LEVIER_RETRAITES_AGE_LEGAL)
+# Leviers dont l'effet n'est pas proportionnel à la valeur (montée en charge au rythme de la
+# réforme de 2023 quelle que soit l'ampleur) : le site lit la réponse exacte de chaque cran.
+LEVIERS_NON_LINEAIRES = (LEVIER_RETRAITES_AGE_LEGAL,)
+PAS_RETRAITES_AGE_LEGAL = 0.25
+"""Cran du curseur, en années (trois mois, le rythme de relèvement par génération)."""
 BORNES = ("bas", "central", "haut")
 MILLIONS_PAR_MILLIARD = 1000.0
 EUROS_PAR_MILLIARD = 1e9
@@ -287,6 +297,12 @@ def rendement_unitaire(levier: str) -> Fourchette:
     volumiques. Dépenses fiscales : 1 % du coût 2026, plage de l'écart de prévision. Crédits
     d'une mission : moins 1 % des crédits 2026, plage de l'écart d'exécution.
     """
+    if levier == LEVIER_RETRAITES_AGE_LEGAL:
+        # Même convention que l'âge effectif : effet d'un an une fois la montée en charge
+        # achevée pour une entrée la première année possible, en Md€ de l'année de référence.
+        f = retraites_cohortes.effet(1.0, _annee_pleine_retraites(), ANNEE_PREMIERE_MESURE)
+        k = comptes_apu().valeur(ANNEE_REFERENCE, "S1", "pib") / POURCENT
+        return encadrer(f.central * k, [f.bas * k, f.haut * k])
     if levier == LEVIER_RETRAITES_AGE:
         # Effet d'un an, une fois la montée en charge achevée pour une mesure entrée la
         # première année possible, converti en Md€ de l'année de référence (affichage).
@@ -361,6 +377,12 @@ def _annee_pleine_retraites() -> int:
     return ANNEE_PREMIERE_MESURE + math.ceil(retraites.duree_montee_en_charge()) - 1
 
 
+def effet_plein_retraites_age_legal() -> float:
+    """Effet central d'un an d'âge légal (modèle par cohortes), en points de PIB, une fois la
+    montée en charge achevée pour une mesure entrée la première année possible."""
+    return retraites_cohortes.effet(1.0, _annee_pleine_retraites(), ANNEE_PREMIERE_MESURE).central
+
+
 def effet_plein_retraites() -> float:
     """Effet central d'un an d'âge effectif, en points de PIB, une fois la montée en charge
     achevée pour une mesure entrée la première année possible (affichage)."""
@@ -378,6 +400,10 @@ def taux_reference(levier: str) -> float:
     mission = mission_du_levier(levier)
     if mission is not None:
         return mission.credits / EUROS_PAR_MILLIARD
+    if levier == LEVIER_RETRAITES_AGE_LEGAL:
+        # Âge légal d'ouverture des droits de la dernière génération publiée (DREES, fiche 14).
+        ages = retraites_cohortes.ages_legaux()
+        return ages[max(ages)][0]
     if levier == LEVIER_RETRAITES_AGE:
         # Âge effectif moyen de départ de l'année de référence selon le COR, en années.
         return retraites.reference()[ANNEE_REFERENCE].age_ref
@@ -428,6 +454,15 @@ def taux_reference(levier: str) -> float:
     raise ValueError(msg)
 
 
+def grille_levier(levier: str) -> list[float]:
+    """Valeurs admises d'un levier non linéaire : crans de ``PAS_RETRAITES_AGE_LEGAL`` entre ses
+    bornes, zéro exclu."""
+    basse, haute = bornes_levier(levier)
+    pas = PAS_RETRAITES_AGE_LEGAL
+    crans = range(math.ceil(basse / pas), math.floor(haute / pas) + 1)
+    return [k * pas for k in crans if k != 0]
+
+
 def bornes_levier(levier: str) -> tuple[float, float]:
     """Valeurs admises pour le levier.
 
@@ -437,7 +472,7 @@ def bornes_levier(levier: str) -> tuple[float, float]:
     """
     if mission_du_levier(levier) is not None:
         return -BORNE_CREDITS, BORNE_CREDITS
-    if levier == LEVIER_RETRAITES_AGE:
+    if levier in LEVIERS_RETRAITES:
         return BORNES_RETRAITES_AGE
     if levier in LEVIERS_DOTATIONS:
         return -BORNE_DOTATIONS, BORNE_DOTATIONS
@@ -500,6 +535,9 @@ def effet_solde(mesure: Mesure) -> Fourchette:
     if not basse <= mesure.valeur <= haute:
         msg = f"valeur hors des bornes {basse:g} à {haute:g} : {mesure.valeur}"
         raise ValueError(msg)
+    if mesure.levier == LEVIER_RETRAITES_AGE_LEGAL:
+        f = retraites_cohortes.effet(mesure.valeur, mesure.annee, mesure.annee)
+        return encadrer(f.central, [f.bas, f.haut])
     if mesure.levier == LEVIER_RETRAITES_AGE:
         # Effet de l'année d'entrée (début de la montée en charge), en points de PIB.
         valeurs = [retraites.effet(mesure.valeur, mesure.annee, mesure.annee, b) for b in BORNES]
@@ -553,6 +591,13 @@ def _effets_par_annee(mesures: Iterable[Mesure], borne: str) -> dict[int, float]
                 effets[annee] = effets.get(annee, 0.0) + retraites.effet(
                     m.valeur, annee, m.annee, borne
                 )
+            continue
+        if m.levier == LEVIER_RETRAITES_AGE_LEGAL:
+            # Modèle par cohortes : effet propre à chaque année (fr_budget.retraites_cohortes).
+            effet_solde(m)  # contrôle de l'année et des bornes
+            for annee in range(m.annee, ANNEE_FIN + 1):
+                f = retraites_cohortes.effet(m.valeur, annee, m.annee)
+                effets[annee] = effets.get(annee, 0.0) + getattr(f, borne)
             continue
         valeur = getattr(effet_solde(m), borne)
         for annee in range(m.annee, ANNEE_FIN + 1):
@@ -608,6 +653,9 @@ def verifier_double_compte(mesures: Sequence[Mesure]) -> None:
         raise ValueError(msg)
     indexation_reglee = any(m.levier in (LEVIER_INDEXATION, LEVIER_PA_PENTE) for m in reglees)
     solidarite_reglee = any(m.levier == levier_credits_mission(MISSION_SOLIDARITE) for m in reglees)
+    if sum(m.levier in LEVIERS_RETRAITES for m in reglees) > 1:
+        msg = "double compte : l'âge effectif et l'âge légal de départ ne se cumulent pas"
+        raise ValueError(msg)
     if indexation_reglee and solidarite_reglee:
         msg = (
             "double compte : la mission « Solidarité, insertion et égalité des chances » "
@@ -666,6 +714,7 @@ def categorie_croissance(levier: str) -> str:
         # Le relèvement de l'âge agit sur l'offre de travail, pas sur la demande : le
         # multiplicateur de demande ne s'applique pas (fiche retraites, § 5).
         LEVIER_RETRAITES_AGE: module_croissance.AUCUN,
+        LEVIER_RETRAITES_AGE_LEGAL: module_croissance.AUCUN,
     }
     if levier in categories:
         return categories[levier]
@@ -782,6 +831,7 @@ LEVIERS_REGISTRE = {
     LEVIER_IR_SEUILS: "impot_revenu",
     LEVIER_PA_PENTE: "minima_prime_activite",
     LEVIER_RETRAITES_AGE: "retraites",
+    LEVIER_RETRAITES_AGE_LEGAL: "retraites",
 }
 
 
@@ -909,6 +959,21 @@ PROVENANCE_RETRAITES = (
     ("cor_rapport_annuel_2026", "insee_comptes_nationaux_2025"),
     (retraites.HYPOTHESE_MONTEE,),
 )
+PROVENANCE_RETRAITES_COHORTES = (
+    (
+        "cor_rapport_annuel_2026",
+        "insee_comptes_nationaux_2025",
+        "insee_projections_population_2021",
+        "drees_retraites_2025_donnees",
+        "openfisca_france_176_1_2",
+    ),
+    (
+        retraites.HYPOTHESE_MONTEE,
+        retraites_cohortes.HYPOTHESE_NON_DECALES,
+        retraites_cohortes.HYPOTHESE_EMPLOI,
+        retraites_cohortes.HYPOTHESE_PENSION,
+    ),
+)
 PROVENANCE_LEVIERS = {
     LEVIER_IS_TAUX_NORMAL: PROVENANCE_IS,
     LEVIER_IS_SURTAXE: PROVENANCE_IS,
@@ -939,6 +1004,7 @@ PROVENANCE_LEVIERS = {
     LEVIER_IR_SEUILS: PROVENANCE_IR,
     LEVIER_PA_PENTE: PROVENANCE_PA,
     LEVIER_RETRAITES_AGE: PROVENANCE_RETRAITES,
+    LEVIER_RETRAITES_AGE_LEGAL: PROVENANCE_RETRAITES_COHORTES,
 }
 
 
@@ -992,9 +1058,11 @@ class ReponseLineaire:
     calcul est linéaire dans m)."""
 
 
-def reponse_lineaire(levier: str, annee: int) -> ReponseLineaire:
+def reponse_lineaire(levier: str, annee: int, valeur: float = 1.0) -> ReponseLineaire:
+    """Réponse d'une unité du levier (``valeur`` = 1) ; pour un levier non linéaire
+    (``LEVIERS_NON_LINEAIRES``), réponse exacte à ``valeur`` (cran de ``grille_levier``)."""
     centrale, variantes = trajectoires()
-    mesures = [Mesure(levier, 1.0, annee)]
+    mesures = [Mesure(levier, valeur, annee)]
     m_central = module_croissance.multiplicateur(categorie_croissance(levier)).central
     sans_croissance = m_central == 0
     paires = [

@@ -636,3 +636,51 @@ hypotheses:
       baisse du revenu moyen des non-salariés classiques en euros constants (-4,4 %), sans
       donnée sur 2024 et 2025 : l'écart est pris nul, sans plage.
     instruments: [menages_types]
+
+  - id: retraites_part_departs_non_decales
+    libelle: Part des départs à la retraite qui ne sont pas décalés par un relèvement de l'âge légal (ex-invalidité, handicap, inaptitude au travail)
+    unite: fraction
+    valeur_centrale: 0.151
+    plage:
+      basse: 0.058
+      haute: 0.151
+    sources: [drees_retraites_2025_donnees]
+    justification: >-
+      DREES, fiche 17, graphique 2 (génération 1956, régimes de base) : départs pour
+      ex-invalidité ou handicap et pour inaptitude au travail, qui gardaient l'âge de 62 ans dans
+      la réforme de 2023. Valeur centrale : régime général (7,8 % + 7,3 %), le premier régime ;
+      borne basse : fonction publique de l'État (5,8 % + 0 %), la plus faible des cinq régimes
+      publiés. Les autres types de départ (carrière longue, durée, décote, surcote) sont supposés
+      décalés du même écart.
+    instruments: [retraites]
+
+  - id: retraites_part_emploi_avant_liquidation
+    libelle: Part en emploi, l'année précédant la liquidation, des personnes dont le départ est décalé
+    unite: fraction
+    valeur_centrale: 0.6772
+    plage:
+      basse: 0.5585
+      haute: 0.7997
+    sources: [drees_retraites_2025_donnees]
+    justification: >-
+      DREES, fiche 20, tableau 1 (génération 1950) : situation principale l'année précédant la
+      liquidation. Valeur centrale : ensemble de la génération (67,72 %) ; bornes : départs à
+      60 ans (55,85 %) et départs entre 61 et 64 ans (79,97 %). Les autres (chômage, maladie ou
+      invalidité, sans activité) ne versent pas de prélèvements supplémentaires dans le modèle,
+      et leurs prestations supplémentaires ne sont pas comptées.
+    instruments: [retraites]
+
+  - id: retraites_ecart_pension_liquidants
+    libelle: Écart entre la pension de droit direct des nouveaux retraités et celle de l'ensemble des retraités
+    unite: fraction
+    valeur_centrale: -0.048
+    plage:
+      basse: -0.065
+      haute: -0.048
+    sources: [drees_retraites_2025_donnees]
+    justification: >-
+      DREES, fiche 7, tableau 1 (fin 2023), colonne « Écart entre la pension des liquidants et
+      celle de l'ensemble des retraités » : -4,8 % pour les primo-liquidants de tous régimes,
+      -6,5 % pour ceux qui résident en France. La pension économisée par un départ décalé est
+      la pension moyenne de l'année multipliée par 1 + écart.
+    instruments: [retraites]

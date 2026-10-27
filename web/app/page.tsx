@@ -1,6 +1,7 @@
 import { texte, nombre } from "../lib/textes";
 import { lire, type ComptesApu, type Cofog } from "../lib/donnees";
 import { region } from "../lib/region";
+import { chemin } from "../lib/chemin";
 
 
 export default function Accueil() {
@@ -38,7 +39,7 @@ export default function Accueil() {
             })}
           </dl>
           <p className="source">
-            <a href={`/sources/#${series[secteur].dette_maastricht.source}`}>
+            <a href={chemin(`/sources/#${series[secteur].dette_maastricht.source}`)}>
               {texte("accueil.source", { source: series[secteur].dette_maastricht.source })}
             </a>
           </p>
@@ -65,7 +66,7 @@ export default function Accueil() {
         </table>
         </div>
         <p className="source">
-          <a href={`/sources/#${cofog.source}`}>{texte("accueil.source", { source: cofog.source })}</a>
+          <a href={chemin(`/sources/#${cofog.source}`)}>{texte("accueil.source", { source: cofog.source })}</a>
         </p>
         <p className="source">{texte("accueil.mention_eurostat")}</p>
       </section>

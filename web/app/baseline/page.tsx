@@ -2,6 +2,7 @@ import { texte, nombre } from "../../lib/textes";
 import { lire, type Baseline } from "../../lib/donnees";
 import { GraphiqueDette } from "./graphique";
 import { region } from "../../lib/region";
+import { chemin } from "../../lib/chemin";
 
 export default function PageBaseline() {
   const b = lire<Baseline>("baseline.json");
@@ -74,7 +75,7 @@ export default function PageBaseline() {
       <ul>
         {b.hypotheses.map((h) => (
           <li key={h}>
-            <a href={`/hypotheses/#${h}`}>{h}</a>
+            <a href={chemin(`/hypotheses/#${h}`)}>{h}</a>
           </li>
         ))}
       </ul>
@@ -82,7 +83,7 @@ export default function PageBaseline() {
         {b.sources.map((s, i) => (
           <span key={s}>
             {i > 0 && " ; "}
-            <a href={`/sources/#${s}`}>{texte("accueil.source", { source: s })}</a>
+            <a href={chemin(`/sources/#${s}`)}>{texte("accueil.source", { source: s })}</a>
           </span>
         ))}
       </p>

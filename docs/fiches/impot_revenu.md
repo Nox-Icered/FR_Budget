@@ -44,7 +44,7 @@ Les 34 valeurs saisies dans `registres/references/chiffrages.yaml` sont à relir
 ## 5. Choix faits en autonomie, et leurs limites
 
 1. **Un seul curseur, sur les seuils.** Les taux, la décote seule et le plafond du quotient familial ne sont pas proposés séparément : aucun chiffrage officiel récent ne permettrait de les valider.
-2. **Valeur centrale calée sur un chiffrage officiel.** Elle reprend la sensibilité du PLF 2025 plutôt que le calcul structurel, qui sous-estime de 42 %. Ce chiffrage officiel sert donc de calage, pas de validation : il reste une seule référence hors calage (§ 6).
+2. **Valeur centrale calée sur un chiffrage officiel.** Elle reprend la sensibilité du PLF 2025 plutôt que le calcul structurel, qui sous-estime de 42 %. Ce choix a été confirmé par le mainteneur le 27 octobre 2026, après la confrontation à l'IPP et à l'OFCE (§ 6), parmi trois options : chiffrage officiel, calcul par décile (environ 1,1 Md€), ou milieu de la fourchette. Ce chiffrage officiel sert donc de calage, pas de validation : il reste une seule référence hors calage (§ 6).
 3. **Linéarité.** Un écart de x % rapporte x fois l'effet d'1 %. Un relèvement important ferait sortir plus de foyers de l'impôt que ne le dit cette règle.
 4. **Calendrier.** L'effet est compté en année pleine dès l'année d'entrée, comme dans le chiffrage du PLF 2025, qui additionne l'avis d'imposition et le prélèvement à la source.
 5. **Seuils non fiscaux.** De nombreux seuils (CSG des retraités, impôts locaux) suivent le barème : leur effet n'est pas compté.
@@ -64,13 +64,14 @@ Lecture :
 - Le chiffrage du PLF 2025 sert au calage ; il n'est pas compté en validation.
 - Le PLF 2024 (indexation de 4,8 %) donnerait un deuxième millésime hors calage, mais son évaluation préalable n'a pas été trouvée sur les sites accessibles (Assemblée nationale : adresse introuvable ; budget.gouv : bloqué). **À déposer** pour compléter la validation.
 - Comparaison structurelle : le calcul par décile donne 1,09 Md€ pour 1 %, contre 1,85 Md€ dans le chiffrage officiel. L'écart (-41 %) est publié ici et tient aux limites du § 3.
-- Sources indépendantes (`docs/validation/confrontations_independantes.md`) : gel du barème de 2026, IPP 1,1 Md€ pour une inflation de 1 % et 1,4 Md€ pour 1,3 %, OFCE 1,2 Md€ pour 1,1 %. Le modèle, qui reprend le chiffrage officiel, est au-dessus de 71,5 %, 75,2 % et 73,0 %. Le calcul par décile du § 3 (1,09 Md€ pour 1 %) est, lui, proche de l'IPP et de l'OFCE : l'écart porte sur le chiffrage officiel plutôt que sur la méthode. Le levier reste en bêta ; le choix entre le chiffrage officiel et le calcul par décile revient au mainteneur.
+- Sources indépendantes (`docs/validation/confrontations_independantes.md`) : gel du barème de 2026, IPP 1,1 Md€ pour une inflation de 1 % et 1,4 Md€ pour 1,3 %, OFCE 1,2 Md€ pour 1,1 %. Le modèle, qui reprend le chiffrage officiel, est au-dessus de 71,5 %, 75,2 % et 73,0 %. Le calcul par décile du § 3 (1,09 Md€ pour 1 %) est, lui, proche de l'IPP et de l'OFCE : l'écart porte sur le chiffrage officiel plutôt que sur la méthode. Le levier reste en bêta. Décision du mainteneur (27 octobre 2026) : la valeur centrale reste le chiffrage officiel ; l'écart avec l'IPP et l'OFCE reste publié.
 
 ## 7. Journal
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
 | 2026-10-27 | Appréciation du HCFP sur le gel de 2026 (« vraisemblable ») notée au § 6 | aucun |
+| 2026-10-27 | Décision du mainteneur : valeur centrale maintenue sur le chiffrage officiel (1,85 Md€ pour 1 %) | aucun |
 | 2026-10-14 | Confrontation à l'IPP et à l'OFCE (gel du barème 2026), `docs/validation/confrontations_independantes.md` | 3 nouvelles références indépendantes, hors tolérance (+71,5 %, +75,2 %, +73,0 %) |
 | 2026-10-12 | Revue de la PR : le chiffrage du PLF 2025, déjà en euros de 2025, n'est plus converti une seconde fois | gel de 2026 : -0,8 % → -0,7 % |
 | 2026-10-12 | Création du levier | 1 nouvelle référence de validation, dans la tolérance ; tableau : 49 sur 64 |

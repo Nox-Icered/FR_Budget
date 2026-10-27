@@ -1,6 +1,7 @@
 import { texte, nombre } from "../../lib/textes";
 import { lire, type Chiffrage, type Comparaison, type Levier } from "../../lib/donnees";
 import { region } from "../../lib/region";
+import { chemin } from "../../lib/chemin";
 
 
 // Confrontations d'un levier à des sources indépendantes de l'administration (règle de
@@ -92,7 +93,7 @@ export default function Validation() {
           {chiffrages.map((c) => (
             <tr key={c.id}>
               <td>
-                {c.mesure} ({c.millesime}) — <a href={`/sources/#${c.source}`}>{c.source}</a>, {c.localisation}
+                {c.mesure} ({c.millesime}) — <a href={chemin(`/sources/#${c.source}`)}>{c.source}</a>, {c.localisation}
               </td>
               <td className="nombre">
                 {c.valeur} {c.unite}

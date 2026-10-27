@@ -3,10 +3,11 @@
 // requête par visite : la promesse est partagée par le simulateur et la comparaison, reliés par
 // une navigation interne ; en cas d'échec, la tentative suivante relance la requête.
 import { useEffect, useState } from "react";
+import { chemin } from "./chemin.ts";
 import type { MenagesScenario, ReponsesUnitaires } from "./donnees";
 
 export function adresseReponses(empreinte: string): string {
-  return `/donnees/scenario-unitaire.${empreinte}.json`;
+  return chemin(`/donnees/scenario-unitaire.${empreinte}.json`);
 }
 
 const promesses = new Map<string, Promise<ReponsesUnitaires>>();
@@ -48,7 +49,7 @@ export function useReponses(empreinte: string): EtatChargement {
 // Effet des scénarios sur les ménages types : même principe, fichier copié par
 // outils/copier-donnees.mjs.
 export function adresseMenagesScenario(empreinte: string): string {
-  return `/donnees/menages-scenario.${empreinte}.json`;
+  return chemin(`/donnees/menages-scenario.${empreinte}.json`);
 }
 
 const promessesMenages = new Map<string, Promise<MenagesScenario>>();

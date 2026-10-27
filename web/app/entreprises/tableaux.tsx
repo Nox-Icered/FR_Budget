@@ -4,6 +4,7 @@ import { useId, useState } from "react";
 import { texte } from "../../lib/textes";
 import { region } from "../../lib/region";
 import type { ClasseEntreprises, Entreprises, FourchetteDonnee } from "../../lib/donnees";
+import { chemin } from "../../lib/chemin";
 
 const MILLIONS_PAR_MILLIARD = 1000;
 const EUROS_PAR_MILLIARD = 1e9;
@@ -99,7 +100,7 @@ export function TableauxEntreprises({ donnees }: { donnees: Entreprises }) {
         {levier.sources.map((s, i) => (
           <span key={s}>
             {i > 0 && ", "}
-            <a href={`/sources/#${s}`}>{s}</a>
+            <a href={chemin(`/sources/#${s}`)}>{s}</a>
           </span>
         ))}
       </p>

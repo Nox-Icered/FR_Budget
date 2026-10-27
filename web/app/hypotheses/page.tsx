@@ -1,5 +1,6 @@
 import { texte } from "../../lib/textes";
 import { lire, type Hypothese } from "../../lib/donnees";
+import { chemin } from "../../lib/chemin";
 
 export default function Hypotheses() {
   const hypotheses = lire<Hypothese[]>("registre-hypotheses.json");
@@ -23,7 +24,7 @@ export default function Hypotheses() {
               {h.sources.map((s, i) => (
                 <span key={s}>
                   {i > 0 && ", "}
-                  <a href={`/sources/#${s}`}>{s}</a>
+                  <a href={chemin(`/sources/#${s}`)}>{s}</a>
                 </span>
               ))}
             </p>

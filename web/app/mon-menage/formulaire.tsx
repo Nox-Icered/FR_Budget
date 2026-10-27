@@ -18,6 +18,7 @@ import {
   type ResultatMonMenage,
   type ScenarioMenage,
 } from "../../lib/mon-menage";
+import { chemin } from "../../lib/chemin";
 
 const MOIS_PAR_AN = 12;
 const euros = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
@@ -123,7 +124,7 @@ export function Formulaire({
           </ul>
           {scenario.incidence === "salaire" && <p>{texte("mon_menage.scenario.incidence_salaire")}</p>}
           <p>
-            <a href="/mon-menage/">{texte("mon_menage.scenario.retirer")}</a>
+            <a href={chemin("/mon-menage/")}>{texte("mon_menage.scenario.retirer")}</a>
           </p>
         </section>
       )}
@@ -301,7 +302,7 @@ function Resultat({ r }: { r: ResultatMonMenage }) {
         {r.sources.map((s, i) => (
           <span key={s}>
             {i > 0 && ", "}
-            <a href={`/sources/#${s}`}>{s}</a>
+            <a href={chemin(`/sources/#${s}`)}>{s}</a>
           </span>
         ))}
       </p>

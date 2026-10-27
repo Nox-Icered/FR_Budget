@@ -3,6 +3,7 @@ import { lire, type EffetsMenages, type MenagesTypes } from "../../lib/donnees";
 import { EffetsLeviers } from "./effets";
 import { region } from "../../lib/region";
 import { lignesCascade } from "../../lib/cascade";
+import { chemin } from "../../lib/chemin";
 
 const MOIS_PAR_AN = 12;
 const euros = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
@@ -52,7 +53,7 @@ export default function Menages() {
         {sources.map((s, i) => (
           <span key={s}>
             {i > 0 && ", "}
-            <a href={`/sources/#${s}`}>{s}</a>
+            <a href={chemin(`/sources/#${s}`)}>{s}</a>
           </span>
         ))}
       </p>

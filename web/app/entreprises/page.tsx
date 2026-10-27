@@ -2,6 +2,7 @@ import { texte } from "../../lib/textes";
 import { lire, type Entreprises } from "../../lib/donnees";
 import { region } from "../../lib/region";
 import { TableauxEntreprises } from "./tableaux";
+import { chemin } from "../../lib/chemin";
 
 const pourcent = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1, signDisplay: "exceptZero" });
 const deux = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
@@ -43,7 +44,7 @@ export default function PageEntreprises() {
                   {texte(`entreprises.controles.${c.id.startsWith("point") ? "point" : c.id}`, {
                     annee: c.annee,
                   })}{" "}
-                  (<a href={`/sources/#${c.source}`}>{c.source}</a>)
+                  (<a href={chemin(`/sources/#${c.source}`)}>{c.source}</a>)
                 </th>
                 <td className="nombre">{deux.format(c.urssaf)}</td>
                 <td className="nombre">{deux.format(c.reference)}</td>

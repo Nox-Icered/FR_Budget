@@ -6,6 +6,7 @@ import { texte } from "../../lib/textes";
 import { lignesComparees } from "../../lib/cascade";
 import { region } from "../../lib/region";
 import type { EffetsMenages, Incidence, MenageType } from "../../lib/donnees";
+import { chemin } from "../../lib/chemin";
 
 const euros = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
 const ecartSigne = new Intl.NumberFormat("fr-FR", {
@@ -137,7 +138,7 @@ export function EffetsLeviers({
         ].map((s, i) => (
           <span key={s}>
             {i > 0 && ", "}
-            <a href={`/sources/#${s}`}>{s}</a>
+            <a href={chemin(`/sources/#${s}`)}>{s}</a>
           </span>
         ))}
       </p>

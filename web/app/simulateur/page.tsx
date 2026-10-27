@@ -10,6 +10,7 @@ import {
   type Version,
 } from "../../lib/donnees";
 import { Simulateur } from "./simulateur";
+import { chemin } from "../../lib/chemin";
 
 const deuxDecimales = (v: number) =>
   new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(v);
@@ -145,7 +146,7 @@ export default function PageSimulateur() {
         <li>{texte("simulateur.limite_retraites")}</li>
       </ul>
       <p>
-        <a href="/validation/">{texte("simulateur.lien_validation")}</a>
+        <a href={chemin("/validation/")}>{texte("simulateur.lien_validation")}</a>
       </p>
     </>
   );

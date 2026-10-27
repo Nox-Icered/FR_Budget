@@ -1,0 +1,63 @@
+name: Publication (GitHub Pages)
+
+# Publie le site statique à chaque fusion sur main, à l'adresse
+# https://nox-icered.github.io/FR_Budget/ (préfixe des adresses : NEXT_PUBLIC_BASE_PATH, voir
+# web/lib/chemin.ts). Le service de calcul de « Mon ménage » n'est pas hébergé :
+# NEXT_PUBLIC_API_URL reste vide et la page l'indique.
+# Réglage du dépôt nécessaire une fois : Settings → Pages → Source : « GitHub Actions ».
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Une seule publication à la fois ; une publication en cours n'est pas interrompue.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construction:
+    name: Construction du site
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    env:
+      NEXT_PUBLIC_BASE_PATH: /FR_Budget
+      NEXT_PUBLIC_API_URL: ""
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: web/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - name: Données exportées par l'API
+        run: pnpm donnees
+      - run: pnpm test
+      - run: pnpm build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/out
+
+  publication:
+    name: Publication
+    needs: construction
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publication.outputs.page_url }}
+    steps:
+      - id: publication
+        uses: actions/deploy-pages@v4

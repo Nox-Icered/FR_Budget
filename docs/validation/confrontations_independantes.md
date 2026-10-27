@@ -30,6 +30,14 @@ Tests : `moteur/tests/validation/test_confrontations_independantes.py` (toléran
 - **TVA.** L'IPP chiffre la hausse des quatre taux, pas du seul taux normal (levier du simulateur) ; la comparaison porte sur la ligne « ensemble » du modèle. La part payée par chaque type de contribuable vient chez l'IPP d'un document de travail de la DG Trésor.
 - **Point d'indice.** La Cour des comptes ne précise pas si les cotisations des employeurs sont comprises ; le chiffre renvoie à des données de la direction du budget. Fipeco exclut les cotisations des employeurs.
 
+## Avis du HCFP sur les PLF et PLFSS 2026 (déposé le 27 octobre 2026)
+
+Avis n° HCFP-2025-5 du 9 octobre 2025 (fichier déposé par le mainteneur, sha256 130ae291dcad2c898327892305f1c8af79efaa836fd7e371d8fbfe3cd67b04ae, non reproduit). Le HCFP juge les prévisions du Gouvernement ; il ne produit pas ses propres chiffrages de mesures. Ce qu'il apporte :
+
+- **Impôt sur le revenu** (page 17, § 67) : « À l'exception du gel du barème de l'impôt sur le revenu, qui doit rapporter 1,9 Md€, dont le chiffrage semble vraisemblable, les mesures nouvelles sont très peu documentées. » C'est une appréciation, pas une estimation : elle ne compte pas comme confrontation indépendante, mais elle est notée dans la fiche du levier.
+- **Pensions** (page 21, note 10) : le gel de 2026 (3,6 Md€) se décompose en 2,9 Md€ sur les retraites (CAS pensions compris), 1,1 Md€ sur les autres prestations et −0,4 Md€ d'IR et de CSG. Ces montants viennent du scénario du Gouvernement ; ils sont ajoutés comme référence officielle (`indexation_pensions_gel_2026_hcfp`, non indépendante). Le modèle donne 2,89 Md€ (-0,5 %) : l'écart avec l'IPP (2,4 Md€) oppose donc l'IPP au chiffrage du Gouvernement.
+- **Impôt sur les sociétés, accises** : seulement les montants du Gouvernement (surtaxe prolongée : 4 Md€ ; fiscalité énergétique : 1,6 Md€ de mesures nouvelles, tableau 5), sans estimation propre ni rendement unitaire. Rien d'utilisable pour ces leviers.
+
 ## Leviers sans confrontation indépendante (recherche du 14 octobre 2026)
 
 | Levier | Ce qui a été trouvé |
@@ -49,4 +57,4 @@ Pour ces leviers, la règle de publication ne peut pas être remplie avec les so
 1. Cour des comptes, « La réforme du taux statutaire de l'impôt sur les sociétés », 22 septembre 2025 : https://www.ccomptes.fr/sites/default/files/2025-09/20250922-reforme-taux-statutaire-impot-sur-les-societes.pdf
 2. Cour des comptes, « La place de la fiscalité de l'énergie dans la politique énergétique et climatique française », septembre 2024 : https://www.ccomptes.fr/sites/default/files/2024-08/20240906-S2024-0646-Place-fiscalite-energie-dans-politique-energetique-et-climatique-francaise_0.pdf
 3. CPO, « La fiscalité environnementale au défi de l'urgence climatique », septembre 2019 : https://www.ccomptes.fr/system/files/2019-09/20190918-CPO-fiscalite-environnementale_0.pdf
-4. HCFP, avis n° 2025-5 sur les PLF et PLFSS 2026 : https://www.hcfp.fr/sites/default/files/2025-10/Avis%20HCFP%202025%20%E2%80%93%205%20PLF-PLFSS%202026_0.pdf
+4. ~~HCFP, avis n° 2025-5 sur les PLF et PLFSS 2026~~ : déposé le 27 octobre 2026 (voir ci-dessus).

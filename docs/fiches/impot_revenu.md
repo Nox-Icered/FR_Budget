@@ -1,7 +1,7 @@
 ---
 levier: impot_revenu
 statut: beta
-mise_a_jour: 2026-10-12
+mise_a_jour: 2026-10-27
 ---
 
 # Fiche : impôt sur le revenu (revalorisation des seuils du barème)
@@ -58,6 +58,8 @@ Test : `moteur/tests/validation/test_levier_impot_revenu.py`. Tolérance : ±10 
 |-----------|-----------|----------:|-------:|------:|-------------------|
 | Gel du barème de 2026 (1,0 %) | PLF 2026 (rapport général du Sénat) | 1,90 Md€ | 1,89 Md€ | -0,7 % | oui |
 
+Le HCFP (avis n° 2025-5, page 17, § 67) juge ce chiffrage de 1,9 Md€ « vraisemblable ». C'est une appréciation, pas une estimation indépendante (`docs/validation/confrontations_independantes.md`).
+
 Lecture :
 - Le chiffrage du PLF 2025 sert au calage ; il n'est pas compté en validation.
 - Le PLF 2024 (indexation de 4,8 %) donnerait un deuxième millésime hors calage, mais son évaluation préalable n'a pas été trouvée sur les sites accessibles (Assemblée nationale : adresse introuvable ; budget.gouv : bloqué). **À déposer** pour compléter la validation.
@@ -68,6 +70,7 @@ Lecture :
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-27 | Appréciation du HCFP sur le gel de 2026 (« vraisemblable ») notée au § 6 | aucun |
 | 2026-10-14 | Confrontation à l'IPP et à l'OFCE (gel du barème 2026), `docs/validation/confrontations_independantes.md` | 3 nouvelles références indépendantes, hors tolérance (+71,5 %, +75,2 %, +73,0 %) |
 | 2026-10-12 | Revue de la PR : le chiffrage du PLF 2025, déjà en euros de 2025, n'est plus converti une seconde fois | gel de 2026 : -0,8 % → -0,7 % |
 | 2026-10-12 | Création du levier | 1 nouvelle référence de validation, dans la tolérance ; tableau : 49 sur 64 |

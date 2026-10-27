@@ -3312,6 +3312,17 @@ chiffrages:
     relecture: a_relire
     independante: true
 
+  - id: indexation_pensions_gel_2026_hcfp
+    levier: indexation_pensions_prestations
+    source: hcfp_avis_2025_5_plf_plfss_2026
+    millesime: "PLF et PLFSS 2026 (octobre 2025, inflation hors tabac de 1,0 %)"
+    mesure: Économie brute en 2026 de l'absence d'indexation des retraites sur l'inflation, CAS pensions compris (scénario du Gouvernement cité par le HCFP)
+    valeur: 2.9
+    unite: "Md€"
+    localisation: "Page 21, note 10 : « Ces 3,6 Md€ […] se décomposeraient en 2,9 Md€ de l'absence d'indexation des retraites sur l'inflation (dont 0,8 Md€ sur le CAS pensions), 1,1 Md€ sur l'absence d'indexation des autres prestations sociales, −0,4 Md€ de moindres recettes d'IR et CSG découlant de ces mesures » (sha256 130ae291dcad2c898327892305f1c8af79efaa836fd7e371d8fbfe3cd67b04ae)"
+    saisi_le: 2026-10-27
+    relecture: a_relire
+
   - id: remunerations_point_1_ccomptes_2017_total
     levier: remunerations_publiques
     source: ccomptes_situation_perspectives_finances_publiques_2017

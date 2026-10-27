@@ -14,7 +14,10 @@ Références (``registres/references/chiffrages.yaml``) :
   0,5 Md€ en 2027 ; revalorisation évitée : inflation hors tabac prévue pour 2026 (2,1 %,
   page 127) ;
 - rapport spécial du Sénat sur la mission « Solidarité, insertion et égalité des chances » du
-  PLF 2026, page 27 : « année blanche » de 2026 sur l'AAH, 122,4 M€ (référence en M€, convertie).
+  PLF 2026, page 27 : « année blanche » de 2026 sur l'AAH, 122,4 M€ (référence en M€, convertie) ;
+- avis du HCFP n° 2025-5 sur les PLF et PLFSS 2026, page 21, note 10 : dans les 3,6 Md€, 2,9 Md€
+  d'économie brute sur les retraites (CAS pensions compris), avant les effets sur l'IR et la CSG ;
+  comparé à la baisse brute des dépenses du bloc « pensions » (test séparé).
 
 Convention commune (celle des PLFSS : « nets des effets CSG et CASA ») : le modèle est comparé
 net des prélèvements sociaux (CSG, CRDS, CASA), avant impôt sur le revenu, pour la première
@@ -29,6 +32,7 @@ import pytest
 from fr_budget.agrege.indexation import (
     AAH,
     BLOCS,
+    BRUT,
     FAMILLE,
     NET_PRELEVEMENTS_SOCIAUX,
     PENSIONS,
@@ -66,5 +70,18 @@ def test_rendement_premiere_annee(reference: str) -> None:
     ecart = (modele - valeur) / valeur
     assert abs(ecart) <= TOLERANCE, (
         f"{reference} : modèle {modele:.2f} Md€, référence {valeur:.2f} Md€, "
+        f"écart {ecart:+.1%} (tolérance ±{TOLERANCE:.0%})"
+    )
+
+
+@pytest.mark.validation
+def test_gel_des_pensions_2026_brut_hcfp() -> None:
+    """Avis du HCFP n° 2025-5 (octobre 2025), page 21, note 10 : 2,9 Md€ d'économie brute sur
+    les retraites en 2026 (scénario du Gouvernement, inflation hors tabac de 1,0 %)."""
+    modele = cout_mesure(taux_mesure(INFLATION_2025), 2026, (PENSIONS,), BRUT)
+    valeur = chiffrage("indexation_pensions_gel_2026_hcfp")
+    ecart = (modele - valeur) / valeur
+    assert abs(ecart) <= TOLERANCE, (
+        f"indexation_pensions_gel_2026_hcfp : modèle {modele:.2f} Md€, référence {valeur:.2f} Md€, "
         f"écart {ecart:+.1%} (tolérance ±{TOLERANCE:.0%})"
     )

@@ -209,6 +209,10 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         ("indexation_sous_indexation_0_5_2027", partial(_indexation, 0.005, 2027, (PENSIONS,))),
         ("indexation_gel_familiales_2027", partial(_indexation, inflation_2026, 2027, (FAMILLE,))),
         ("indexation_gel_aah_2026", partial(_indexation_millions, inflation_2025, 2026, (AAH,))),
+        (
+            "indexation_pensions_gel_2026_hcfp",
+            lambda: _gel_pensions_brut(chiffrage(inflation_2025), 2026),
+        ),
     ]
     definitions += [
         ("csg_hausse_1_7_2018_activite", partial(_csg_millions, ACTIVITE, 1.7, 2018)),

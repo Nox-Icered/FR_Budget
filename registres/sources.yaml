@@ -793,6 +793,16 @@ sources:
     acces: direct
     consulte_le: 2026-10-14
 
+  - id: hcfp_avis_2025_5_plf_plfss_2026
+    nom: "Haut Conseil des finances publiques, avis n° HCFP-2025-5 relatif aux projets de lois de finances et de financement de la sécurité sociale pour l'année 2026, 9 octobre 2025"
+    editeur: Haut Conseil des finances publiques (HCFP)
+    url: https://www.hcfp.fr/sites/default/files/2025-10/Avis%20HCFP%202025%20%E2%80%93%205%20PLF-PLFSS%202026_0.pdf
+    licence: non précisée (citation seulement, document non reproduit ; fichier déposé par le mainteneur le 27 octobre 2026, hcfp.fr n'étant pas joignable depuis l'environnement de travail)
+    date_publication: 2025-10-09
+    millesime: octobre 2025 (scénario du Gouvernement soumis au HCFP le 2 octobre 2025)
+    acces: direct
+    consulte_le: 2026-10-27
+
   - id: ccomptes_situation_perspectives_finances_publiques_2017
     nom: "Cour des comptes, « La situation et les perspectives des finances publiques », juin 2017 (copie de la DILA sur vie-publique.fr)"
     editeur: Cour des comptes

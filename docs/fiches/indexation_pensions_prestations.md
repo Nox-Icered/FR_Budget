@@ -1,7 +1,7 @@
 ---
 levier: indexation_pensions_prestations
 statut: beta
-mise_a_jour: 2026-10-12
+mise_a_jour: 2026-10-27
 ---
 
 # Fiche : revalorisation des pensions et prestations
@@ -99,6 +99,7 @@ Convention des PLFSS (« nets des effets CSG et CASA ») : le modèle est compar
 | Gel de 2026, prestations familiales (1,0 point) | PLFSS 2026, étude d'impact | 0,30 | 0,20 | -32,6 % | non |
 | Gel des prestations familiales au 1er avril 2027 (2,1 points) | PLFSS 2027 | 0,50 | 0,44 | -12,7 % | non |
 | Gel de l'AAH en 2026 (1,0 point) | PLFSS 2026 (rapport spécial du Sénat, page 27) | 122,4 M€ | 107,6 M€ | -12,1 % | non |
+| Gel de 2026, retraites seules, en brut (1,0 point) | PLF et PLFSS 2026 (avis du HCFP n° 2025-5, page 21, note 10) | 2,90 Md€ | 2,89 Md€ | -0,5 % | oui |
 
 En brut, le gel de 2026 vaut 3,57 Md€ dans le modèle, contre 3,8 Md€ dans la référence (3,6 + 0,2 de CSG).
 
@@ -108,7 +109,9 @@ Le modèle est toujours en dessous des références. Explications possibles, non
 - le complément de libre choix du mode de garde est exclu : le compter ajouterait environ 0,06 Md€ au gel familial de 2026 et 0,12 Md€ à celui de 2027 ;
 - l'inflation prévue n'est qu'une approximation du coefficient légal de revalorisation.
 
-Source indépendante (`docs/validation/confrontations_independantes.md`) : IPP, gel des pensions de retraite de base en 2026, 2,4 Md€ pour une inflation de 1 % et 3,0 Md€ pour 1,3 %. Le modèle (baisse de dépenses brute du bloc « pensions ») est au-dessus de 20,2 % et 25,1 %, alors qu'il est en dessous des références du Gouvernement ; le périmètre des pensions de l'IPP n'est pas détaillé. Le levier reste en bêta.
+La décomposition du gel de 2026 citée par le HCFP (2,9 Md€ sur les retraites, CAS pensions compris, 1,1 Md€ sur les autres prestations, −0,4 Md€ d'IR et de CSG) est celle du scénario du Gouvernement : ce n'est pas une estimation indépendante. Elle montre que le bloc « pensions » du modèle reproduit la part des retraites du chiffrage officiel ; l'écart du gel complet (-6,9 %) vient donc des autres prestations.
+
+Source indépendante (`docs/validation/confrontations_independantes.md`) : IPP, gel des pensions de retraite de base en 2026, 2,4 Md€ pour une inflation de 1 % et 3,0 Md€ pour 1,3 %. Le modèle (baisse de dépenses brute du bloc « pensions ») est au-dessus de 20,2 % et 25,1 %, alors qu'il reproduit le chiffrage du Gouvernement sur les retraites (2,9 Md€, ci-dessus) ; l'écart porte donc entre l'IPP et le Gouvernement, et le périmètre des pensions de l'IPP n'est pas détaillé. Le levier reste en bêta.
 
 ## 7. Limites connues
 
@@ -121,6 +124,7 @@ Source indépendante (`docs/validation/confrontations_independantes.md`) : IPP, 
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-27 | Référence du gel des retraites de 2026 en brut (2,9 Md€, scénario du Gouvernement cité par l'avis du HCFP n° 2025-5) | 1 nouvelle référence, dans la tolérance (-0,5 %) |
 | 2026-10-14 | Confrontation à l'IPP (gel des pensions de base 2026), `docs/validation/confrontations_independantes.md` | 2 nouvelles références indépendantes, hors tolérance (+20,2 % et +25,1 %) |
 | 2026-10-12 | Ajout de la référence du gel de l'AAH en 2026 (demande du mainteneur) | 1 nouvelle référence, hors tolérance (-12,1 %) |
 | 2026-10-12 | Revue de la PR : effet de la première année réduit aux mois qui suivent la revalorisation ; une mesure à zéro ne bloque plus de combinaison | aucun test de validation (ils portaient déjà sur la première année) |

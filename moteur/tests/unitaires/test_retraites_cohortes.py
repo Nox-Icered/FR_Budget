@@ -6,8 +6,8 @@ import itertools
 
 import pytest
 
+from fr_budget import retraites, scenario
 from fr_budget import retraites_cohortes as rc
-from fr_budget import scenario
 from fr_budget.agrege import indexation
 
 ENTREE = 2027
@@ -32,7 +32,7 @@ def test_decalage_au_rythme_de_la_montee_en_charge() -> None:
     """Trois mois par génération (un an en quatre générations) quelle que soit l'ampleur,
     plafonné au relèvement choisi."""
     g = rc.premiere_generation(ENTREE)
-    d = rc.duree_montee_en_charge()
+    d = retraites.duree_montee_en_charge()
     assert rc.decalage(1.0, g - 1, ENTREE) == 0
     assert rc.decalage(1.0, g, ENTREE) == pytest.approx(1 / d)
     assert rc.decalage(3.0, g, ENTREE) == pytest.approx(1 / d)

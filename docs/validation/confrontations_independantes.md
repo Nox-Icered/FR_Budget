@@ -38,6 +38,12 @@ Avis n° HCFP-2025-5 du 9 octobre 2025 (fichier déposé par le mainteneur, sha2
 - **Pensions** (page 21, note 10) : le gel de 2026 (3,6 Md€) se décompose en 2,9 Md€ sur les retraites (CAS pensions compris), 1,1 Md€ sur les autres prestations et −0,4 Md€ d'IR et de CSG. Ces montants viennent du scénario du Gouvernement ; ils sont ajoutés comme référence officielle (`indexation_pensions_gel_2026_hcfp`, non indépendante). Le modèle donne 2,89 Md€ (-0,5 %) : l'écart avec l'IPP (2,4 Md€) oppose donc l'IPP au chiffrage du Gouvernement.
 - **Impôt sur les sociétés, accises** : seulement les montants du Gouvernement (surtaxe prolongée : 4 Md€ ; fiscalité énergétique : 1,6 Md€ de mesures nouvelles, tableau 5), sans estimation propre ni rendement unitaire. Rien d'utilisable pour ces leviers.
 
+## Autres documents lus le 27 octobre 2026 (ccomptes.fr de nouveau joignable)
+
+- **Impôt sur les sociétés.** Le fichier de la Cour des comptes à l'adresse indiquée ci-dessous (point 1) est un document de travail de l'Insee : O. Arnal, U. Di Nallo, J.-P. Martin, « La réforme du taux statutaire de l'impôt sur les sociétés », document de travail n° 2025-18, septembre 2025 (109 pages, sha256 72f3d866562fccaa98f5b1ab615e4eb5bbd268a5c4052943a2e5d5e877c833b2). Il mesure le taux implicite d'imposition (20,7 % en 2016, 17,5 % en 2022) ; il ne chiffre ni le coût de la baisse du taux, ni le rendement d'un point de taux. Rien d'utilisable pour le levier. Le rapport d'évaluation de la Cour lui-même reste à trouver.
+- **Accises (CPO, 2019).** Rapport « La fiscalité environnementale au défi de l'urgence climatique » (225 pages, sha256 d32d1883fff1af3a2e0f8d0f1be4374538adb56a253c596fe32ee9058b6803f8). Il reprend les chiffrages du PLF 2018 (convergence gazole-essence et trajectoire carbone, chiffrages de l'administration) et simule des trajectoires de la composante carbone jusqu'en 2030 avec le modèle ThreeME, comportements compris. Il ne donne pas de rendement statique d'un centime par litre : rien de comparable au levier, qui ne compte aucun changement de comportement.
+- **Accises (Cour des comptes, 2024).** L'adresse du rapport redirige vers une page inexistante, et la copie repérée sur connaissancedesenergies.org renvoie une erreur 404. Document toujours manquant.
+
 ## Leviers sans confrontation indépendante (recherche du 14 octobre 2026)
 
 | Levier | Ce qui a été trouvé |
@@ -54,7 +60,7 @@ Pour ces leviers, la règle de publication ne peut pas être remplie avec les so
 
 ## Fichiers à déposer par le mainteneur (ccomptes.fr et hcfp.fr injoignables)
 
-1. Cour des comptes, « La réforme du taux statutaire de l'impôt sur les sociétés », 22 septembre 2025 : https://www.ccomptes.fr/sites/default/files/2025-09/20250922-reforme-taux-statutaire-impot-sur-les-societes.pdf
+1. Cour des comptes, « La réforme du taux statutaire de l'impôt sur les sociétés », 22 septembre 2025 (l'adresse ci-après donne le document de travail de l'Insee, lu, voir ci-dessus ; le rapport de la Cour reste à trouver) : https://www.ccomptes.fr/sites/default/files/2025-09/20250922-reforme-taux-statutaire-impot-sur-les-societes.pdf
 2. Cour des comptes, « La place de la fiscalité de l'énergie dans la politique énergétique et climatique française », septembre 2024 : https://www.ccomptes.fr/sites/default/files/2024-08/20240906-S2024-0646-Place-fiscalite-energie-dans-politique-energetique-et-climatique-francaise_0.pdf
-3. CPO, « La fiscalité environnementale au défi de l'urgence climatique », septembre 2019 : https://www.ccomptes.fr/system/files/2019-09/20190918-CPO-fiscalite-environnementale_0.pdf
+3. ~~CPO, « La fiscalité environnementale au défi de l'urgence climatique », septembre 2019~~ (lu le 27 octobre 2026, voir ci-dessus) : https://www.ccomptes.fr/system/files/2019-09/20190918-CPO-fiscalite-environnementale_0.pdf
 4. ~~HCFP, avis n° 2025-5 sur les PLF et PLFSS 2026~~ : déposé le 27 octobre 2026 (voir ci-dessus).

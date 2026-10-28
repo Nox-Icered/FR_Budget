@@ -441,9 +441,11 @@
       "cf": "Complément familial",
       "asf": "Allocation de soutien familial",
       "rsa": "RSA",
+      "aspa": "Minimum vieillesse (ASPA)",
+      "paje_base": "Allocation de base de la PAJE",
       "ars": "Allocation de rentrée scolaire"
     },
-    "limites": "Non comptés : aides au logement (elles dépendent du loyer), minimum vieillesse, allocation de base de la PAJE, taxe foncière, revenus du patrimoine. Les effets des mesures sont calculés sans changement de comportement ; pour les cotisations patronales, seules les deux lectures extrêmes de l'incidence (aucune ou complète répercussion sur le salaire) sont proposées. Une revalorisation ne porte que sur la part de base d'une pension, prise égale à la moyenne nationale.",
+    "limites": "Non comptés : aides au logement (elles dépendent du loyer), allocations liées au handicap ou à l'invalidité, taxe foncière, revenus du patrimoine. Les effets des mesures sont calculés sans changement de comportement ; pour les cotisations patronales, seules les deux lectures extrêmes de l'incidence (aucune ou complète répercussion sur le salaire) sont proposées. Une revalorisation ne porte que sur la part de base d'une pension, prise égale à la moyenne nationale.",
     "lien_fiche": "Méthode, sources et validation : fiche « ménages types » du dépôt.",
     "sources": "Sources :",
     "effets": {

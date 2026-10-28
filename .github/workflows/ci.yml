@@ -51,7 +51,9 @@ jobs:
 
   site:
     name: Site (types, tests, construction)
-    runs-on: ubuntu-latest
+    # Version fixée : Playwright 1.55 ne prend pas en charge Ubuntu 26.04, que désigne désormais
+    # ubuntu-latest (installation de Chromium refusée le 28 octobre 2026).
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: web

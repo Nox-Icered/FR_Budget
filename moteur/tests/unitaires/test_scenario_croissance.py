@@ -7,6 +7,7 @@ import pytest
 from fr_budget import croissance as cr
 from fr_budget import scenario as sc
 from fr_budget.agrege import depenses_fiscales
+from fr_budget.baseline import trajectoires
 
 ANNEE = 2027
 
@@ -83,3 +84,38 @@ def test_depense_choisie_comme_le_levier_generique_du_site() -> None:
     generique = sc.categorie_croissance(sc.LEVIER_DEPENSE_FISCALE_UNITE)
     for depense in depenses_fiscales.catalogue():
         assert sc.categorie_croissance(sc.levier_depense_fiscale(depense.code)) == generique
+
+
+def test_fourchette_avec_mesures_de_signes_opposes_couvre_chaque_multiplicateur() -> None:
+    """Quand des mesures ont des effets de signes opposés, chaque multiplicateur varie dans sa
+    plage indépendamment des autres : l'écart à la baseline couvre les quatre combinaisons des
+    bornes (revue de code du 28 octobre 2026 ; un multiplicateur commun la rétrécissait)."""
+    mesures = [
+        sc.Mesure(sc.LEVIER_TVA_NORMAL, 2.0, ANNEE),
+        sc.Mesure(sc.LEVIER_DOTATIONS_DGF, 5.0, ANNEE),
+    ]
+    centrale, _ = trajectoires()
+    resultat = sc.scenario(mesures, croissance=True)
+    for effet in sc.BORNES_EFFET:
+        for b1 in sc.BORNES_EFFET:
+            for b2 in sc.BORNES_EFFET:
+                t = sc._trajectoire_mesures(centrale, mesures, effet, [b1, b2])
+                for ligne, a, ref in zip(resultat, t, centrale, strict=True):
+                    ecart = a.dette - ref.dette
+                    assert ligne.ecart_dette.bas - 1e-9 <= ecart <= ligne.ecart_dette.haut + 1e-9
+
+
+def test_fourchette_d_une_mesure_seule_inchangee() -> None:
+    """Une mesure seule : les extrêmes de l'écart sont ceux des bornes de son multiplicateur."""
+    mesure = [sc.Mesure(sc.LEVIER_TVA_NORMAL, 2.0, ANNEE)]
+    centrale, _ = trajectoires()
+    resultat = sc.scenario(mesure, croissance=True)
+    traj = [
+        sc._trajectoire_mesures(centrale, mesure, e, b)
+        for e in sc.BORNES_EFFET
+        for b in (*sc.BORNES_EFFET, sc.CENTRAL)
+    ]
+    for i, (ligne, ref) in enumerate(zip(resultat, centrale, strict=True)):
+        ecarts = [t[i].dette - ref.dette for t in traj]
+        assert ligne.ecart_dette.bas == pytest.approx(min(*ecarts, ligne.ecart_dette.central))
+        assert ligne.ecart_dette.haut == pytest.approx(max(*ecarts, ligne.ecart_dette.central))

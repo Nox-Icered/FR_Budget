@@ -32,7 +32,7 @@ Le calcul reprend le modèle simple de l'OFCE (Policy brief n° 146, juillet 202
   Dans le terme en OG, la dette de l'année précédente est celle de la baseline. Le calcul reste ainsi linéaire dans la valeur des leviers, ce dont le site statique a besoin. L'erreur est de l'ordre du produit de l'écart de dette par l'écart de production : environ 0,01 point pour une mesure de 1 point de PIB.
 - **Fourchette.**
   - Valeur centrale : multiplicateur central.
-  - Bornes : effet bas ou haut de la mesure, croisé avec le multiplicateur bas ou haut (un même bout de la plage pour toutes les mesures).
+  - Bornes : effet bas ou haut de la mesure, croisé avec le multiplicateur de chaque mesure, qui varie dans sa plage indépendamment des autres. La dette et le solde étant linéaires dans chaque multiplicateur, l'extrême de chaque année est la trajectoire au multiplicateur central plus, pour chaque mesure, l'écart le plus bas (ou le plus haut) de ses deux bornes. Jusqu'au 28 octobre 2026, un même bout de la plage valait pour toutes les mesures, ce qui rétrécissait la fourchette quand des mesures avaient des effets de signes opposés (revue de code).
   - Les variantes de la baseline encadrent les niveaux, comme sans l'effet de croissance.
 - **Site.** Pour chaque levier, l'export donne le supplément d'une unité du levier pour un multiplicateur de 1. Le site ajoute m fois ce supplément.
   - Test de concordance : `api/tests/test_api_croissance.py`.
@@ -86,5 +86,6 @@ Le module reste en bêta.
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-28 | Revue de code : multiplicateur de chaque mesure indépendant dans les bornes (au lieu d'un bout commun) ; moteur et site | aucun test de validation (interrupteur désactivé par défaut) ; une mesure seule : inchangé ; TVA +2 points et défense +20 % en 2027, écart de dette 2030 : [−0,915 ; −0,670] → [−1,032 ; −0,521] ; 2 tests unitaires et 1 test du site ajoutés |
 | 2026-10-12 | Revue de la PR : dépenses fiscales choisies une à une rattachées aux « autres prélèvements » | aucun test de validation ; 1 test unitaire ajouté |
 | 2026-10-12 | Création du module | aucun test de validation (interrupteur désactivé par défaut) ; 59 nouveaux tests unitaires et d'API, tous passent |

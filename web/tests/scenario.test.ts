@@ -127,3 +127,25 @@ test("croissance : unité + m * supplément, coins du multiplicateur dans la fou
   // Niveaux : la variante de baseline (103) avec l'effet central.
   assert.ok(Math.abs(l.dette.haut - 102.2) < 1e-12);
 });
+
+test("croissance, mesures de signes opposés : chaque multiplicateur varie indépendamment", () => {
+  // Deux leviers identiques réglés à +1 et -1 : effets nuls au multiplicateur central, mais
+  // l'un peut prendre le multiplicateur bas et l'autre le haut. Écart de dette, effet central :
+  // +1 x (−1 + m1 x 0,5) − 1 x (−1 + m2 x 0,5) = 0,5 (m1 − m2), de −0,2 à +0,2.
+  const deux: ReponsesUnitaires = {
+    ...avecCroissance,
+    leviers: { a: avecCroissance.leviers.l, b: avecCroissance.leviers.l },
+  };
+  const [, l] = calculer(
+    deux,
+    [
+      { levier: "a", valeur: 1 },
+      { levier: "b", valeur: -1 },
+    ],
+    2027,
+    true,
+  );
+  assert.ok(Math.abs(l.ecart_dette.central) < 1e-12);
+  assert.ok(l.ecart_dette.bas <= -0.2 + 1e-12);
+  assert.ok(l.ecart_dette.haut >= 0.2 - 1e-12);
+});

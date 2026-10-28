@@ -17,11 +17,11 @@ Tests : `moteur/tests/validation/test_confrontations_independantes.py` (toléran
 | Impôt sur le revenu | Gel total du barème, revalorisation évitée de 1,1 % (OFCE, juin 2025) | 2,08 Md€ | 1,2 | **+73,0 %** |
 | Indexation | Gel des pensions de base 2026, inflation de 1 % (IPP) | 2,89 Md€ | 2,4 | **+20,2 %** |
 | Indexation | Même mesure, inflation de 1,3 % (IPP) | 3,75 Md€ | 3,0 | **+25,1 %** |
-| Rémunérations publiques | Point d'indice +1 %, trois fonctions publiques (Cour des comptes, juin 2017) | 1,88 Md€ | 2,07 | −9,2 % |
-| Rémunérations publiques | Même mesure, État y compris opérateurs | 0,80 Md€ | 0,88 | −9,0 % |
-| Rémunérations publiques | Même mesure, territoriale | 0,58 Md€ | 0,64 | −9,6 % |
-| Rémunérations publiques | Même mesure, hospitalière | 0,50 Md€ | 0,55 | −9,3 % |
-| Rémunérations publiques | Point d'indice +1 %, hors cotisations des employeurs (Fipeco, juillet 2026, source de second rang) | 2,37 Md€ | 2,5 | −5,1 % |
+| Rémunérations publiques | Point d'indice +1 %, trois fonctions publiques (Cour des comptes, juin 2017) | 2,01 Md€ | 2,07 | −2,9 % |
+| Rémunérations publiques | Même mesure, État y compris opérateurs | 0,83 Md€ | 0,88 | −5,4 % |
+| Rémunérations publiques | Même mesure, territoriale | 0,63 Md€ | 0,64 | −1,1 % |
+| Rémunérations publiques | Même mesure, hospitalière | 0,54 Md€ | 0,55 | −1,2 % |
+| Rémunérations publiques | Point d'indice +1 %, hors cotisations des employeurs (Fipeco, juillet 2026, source de second rang) | 2,54 Md€ | 2,5 | +1,5 % |
 
 ## Lecture des écarts
 

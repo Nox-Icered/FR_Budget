@@ -34,12 +34,13 @@ La borne de ±5 % vaut pour les deux curseurs ; elle a été confirmée par le m
   - hospitalière ↔ sécurité sociale (S1314).
 
   Les cotisations imputées sont surtout la contribution de l'État au compte des pensions, un flux interne à l'État.
-- **Coût brut d'un point de 1 %** : 1 % × assiette × part du traitement indiciaire dans le salaire brut des fonctionnaires. Cette part vient de la DGAFP (rapport annuel 2025, figure 9) : 75,3 % dans la FPE, 74,7 % dans la FPT, 76,5 % dans la FPH. On obtient 2,40 Md€ pour 2025.
+- **Coût brut d'un point de 1 %** : 1 % × assiette × part du coût employeur qui suit le traitement indiciaire (`part_cout_indiciaire`). Elle est calculée avec OpenFisca pour un fonctionnaire moyen du versant, au traitement et aux primes de la DGAFP (rapport annuel 2025, figure 9) : hausse de son coût employeur (hors contribution au compte des pensions de l'État) pour 1 % de traitement, rapportée à 1 % de ce coût. Résultat : 78,2 % dans la FPE, 81,8 % dans la FPT, 83,3 % dans la FPH. On obtient 2,56 Md€ pour 2025.
+  - Jusqu'au 28 octobre 2026, la part était celle du traitement dans le salaire brut (75,3 %, 74,7 % et 76,5 %, `part_indiciaire`), soit 2,40 Md€. Or l'assiette D1 − D122 comprend les cotisations des employeurs, qui pèsent plus sur le traitement (CNRACL, pension de l'État) que sur les primes (RAFP) : le coût était sous-estimé d'environ 6,5 % (revue de code ; décision du mainteneur, option a).
 - **Coût net pour les administrations publiques.** Les cotisations patronales et salariales, la CSG, la CRDS et l'impôt sur le revenu reviennent aux administrations publiques. Seule la hausse du revenu après impôt des agents est une dépense nette.
   - La part qui reste à l'agent est calculée avec OpenFisca (législation 2025) pour un fonctionnaire célibataire sans enfant, avec le traitement et les primes moyens de la DGAFP.
   - Pour l'État, la contribution au compte des pensions est retirée du coût, comme dans l'assiette.
   - Valeur centrale : ensemble des fonctionnaires ; fourchette : catégories A, B et C.
-  - Résultat : 1,06 Md€ (1,01 à 1,20) pour 1 % de point.
+  - Résultat : 1,14 Md€ (1,08 à 1,28) pour 1 % de point.
 - **Effectifs** : 1 % × assiette, soit 3,18 Md€ brut. Le net se calcule de la même façon, sur l'agent entier (traitement et primes) : 1,90 Md€ (1,84 à 1,96).
 - **Effet dans le scénario** : coût net, en Md€ de 2025, rapporté au PIB 2025 et tenu constant en points de PIB. L'effet brut est exporté (`effet_brut_unitaire`) et affiché à part.
 
@@ -65,20 +66,20 @@ Références : Sénat, avis n° 134 (2023-2024), tableau page 8, à partir des r
 
 | Mesure | Versant | Référence | Modèle | Écart | Dans la tolérance |
 |--------|---------|-----------|--------|-------|-------------------|
-| +3,5 % (coût 2023) | total | 7,60 Md€ | 7,61 Md€ | +0,1 % | oui |
-| | FPE | 3,60 | 3,19 | -11,4 % | non |
-| | FPT | 2,40 | 2,31 | -3,8 % | oui |
-| | FPH | 1,60 | 2,11 | +31,8 % | non |
-| +1,5 % (coût 2024) | total | 3,20 Md€ | 3,48 Md€ | +8,6 % | oui |
-| | FPE | 1,50 | 1,49 | -1,0 % | oui |
-| | FPT | 0,90 | 1,04 | +15,8 % | non |
-| | FPH | 0,71 | 0,95 | +33,6 % | non |
+| +3,5 % (coût 2023) | total | 7,60 Md€ | 8,14 Md€ | +7,1 % | oui |
+| | FPE | 3,60 | 3,32 | -7,9 % | oui |
+| | FPT | 2,40 | 2,53 | +5,3 % | oui |
+| | FPH | 1,60 | 2,30 | +43,5 % | non |
+| +1,5 % (coût 2024) | total | 3,20 Md€ | 3,72 Md€ | +16,2 % | non |
+| | FPE | 1,50 | 1,54 | +2,9 % | oui |
+| | FPT | 0,90 | 1,14 | +26,7 % | non |
+| | FPH | 0,71 | 1,03 | +45,4 % | non |
 
-Les totaux passent, sur deux millésimes, mais quatre comparaisons par versant sont hors tolérance.
+Quatre comparaisons sur huit sont dans la tolérance, comme avant la correction du 28 octobre 2026, mais pas les mêmes : le total de 2024 en sort, la FPE et la FPT de 2023 y entrent. Le total de 2023 reste dans la tolérance, celui de 2024 non (+16,2 %).
 - **FPH** : le modèle surestime. Le sous-secteur S1314 contient aussi le personnel des caisses de sécurité sociale et les médecins hospitaliers, qui ne sont pas rémunérés au point.
 - **FPE 2022** : le modèle sous-estime. La référence de 3,6 Md€ est en outre peu cohérente avec celle de 1,5 Md€ pour une hausse de 1,5 %.
 
-Sources indépendantes (`docs/validation/confrontations_independantes.md`) : Cour des comptes, « La situation et les perspectives des finances publiques », juin 2017, hausse de 1 % du point : 2,07 Md€ (modèle 2017 : 1,88, −9,2 %), dont État 0,88 (−9,0 %), territoriale 0,64 (−9,6 %), hôpitaux 0,55 (−9,3 %) ; Fipeco, juillet 2026, 2,5 Md€ hors cotisations des employeurs (modèle 2025 : 2,37, −5,1 %). Toutes dans la tolérance. Le levier reste en bêta (comparaisons par versant aux références officielles hors tolérance).
+Sources indépendantes (`docs/validation/confrontations_independantes.md`) : Cour des comptes, « La situation et les perspectives des finances publiques », juin 2017, hausse de 1 % du point : 2,07 Md€ (modèle 2017 : 2,01, −2,9 %), dont État 0,88 (−5,4 %), territoriale 0,64 (−1,1 %), hôpitaux 0,55 (−1,2 %) ; Fipeco, juillet 2026, 2,5 Md€ hors cotisations des employeurs (modèle 2025 : 2,54, +1,5 %). Toutes dans la tolérance. Limite : Fipeco exclut les cotisations des employeurs, que le modèle compte ; la comparaison n'est pas à périmètre identique. Le levier reste en bêta (comparaisons par versant aux références officielles hors tolérance).
 
 ## 7. Limites connues
 
@@ -91,5 +92,6 @@ Sources indépendantes (`docs/validation/confrontations_independantes.md`) : Cou
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-28 | Revue de code (option a du mainteneur) : coût brut du point calculé avec la part du coût employeur qui suit le traitement (OpenFisca), au lieu de la part du traitement dans le salaire brut ; 2,40 → 2,56 Md€ pour 1 %, net 1,06 → 1,14 Md€ | 2023 : total +0,1 → +7,1 %, FPE −11,4 → −7,9 % (entre dans la tolérance), FPT −3,8 → +5,3 %, FPH +31,8 → +43,5 % ; 2024 : total +8,6 → +16,2 % (sort de la tolérance), FPE −1,0 → +2,9 %, FPT +15,8 → +26,7 %, FPH +33,6 → +45,4 % ; Cour des comptes 2017 : −9,2 → −2,9 % (versants −5,4 / −1,1 / −1,2 %) ; Fipeco : −5,1 → +1,5 % |
 | 2026-10-14 | Confrontation à la Cour des comptes (2017) et à Fipeco (2026) sur le point d'indice, `docs/validation/confrontations_independantes.md` | 5 nouvelles références indépendantes, dans la tolérance (de −9,6 % à −5,1 %) |
 | 2026-10-12 | Création du levier ; extraction de D1 et D122 ajoutée aux comptes des APU (indicateurs existants inchangés) | 8 nouvelles références de validation, 4 dans la tolérance (dont les 2 totaux) ; tableau : 34 sur 46 |

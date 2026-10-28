@@ -72,8 +72,12 @@ function ComparaisonChargee({
   });
   const scenarios = lectures.flatMap((l) => (l.scenario ? [l.scenario] : []));
 
+  // Un lien refusé reste dans l'adresse tel qu'il a été reçu (copiable, signalable).
   const adresse = new URLSearchParams(
-    lectures.flatMap((l, k) => (l.scenario ? [[`s${k + 1}`, encoder(l.scenario.etat)]] : [])),
+    lectures.flatMap((l, k) => {
+      if (l.scenario) return [[`s${k + 1}`, encoder(l.scenario.etat)]];
+      return liens[k].trim() ? [[`s${k + 1}`, liens[k].trim()]] : [];
+    }),
   ).toString();
   useEffect(() => {
     if (lu) window.history.replaceState(null, "", adresse ? `?${adresse}` : "?");

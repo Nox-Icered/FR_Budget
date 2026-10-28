@@ -1,6 +1,6 @@
 "use client";
 // Simulateur : le calcul se fait dans le navigateur ; rien n'est envoyé ni enregistré.
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { texte, nombre } from "../../lib/textes";
 import type {
   CatalogueCreditsMissions,
@@ -56,7 +56,10 @@ function SimulateurCharge({
   entreprises: Entreprises;
   depense: DepenseMenages;
 }) {
-  const leviers = LEVIERS_PUBLICS.filter((l) => l.id in donnees.leviers);
+  // Un levier « non publié » reste hors du site (règle de publication, CLAUDE.md).
+  const leviers = LEVIERS_PUBLICS.filter(
+    (l) => l.id in donnees.leviers && donnees.leviers[l.id].statut !== "non_publie",
+  );
   const annees = Object.keys(donnees.leviers[leviers[0].id].reponses).map(Number);
   const [valeurs, setValeurs] = useState<Record<string, number>>(
     Object.fromEntries(leviers.map((l) => [l.id, 0])),
@@ -70,6 +73,9 @@ function SimulateurCharge({
   // Lecture du lien partagé au chargement, puis l'adresse suit les réglages (sans historique).
   const [lu, setLu] = useState(false);
   const [alerte, setAlerte] = useState("");
+  // Lien refusé ou d'une autre version : l'adresse reçue est gardée telle quelle (copiable,
+  // signalable) tant que l'utilisateur n'a rien réglé.
+  const garderAdresse = useRef(false);
   const empreinte = empreinteVersion(version);
   const etat: EtatScenario = {
     annee,
@@ -84,27 +90,45 @@ function SimulateurCharge({
     const recherche = window.location.search;
     if (recherche) {
       const lien = decoder(recherche);
-      if (!lien) setAlerte(texte("partage.lien_illisible"));
-      else if (problemes(lien, donnees, catalogue, missions).length > 0)
+      if (!lien) {
+        setAlerte(texte("partage.lien_illisible"));
+        garderAdresse.current = true;
+      } else if (problemes(lien, donnees, catalogue, missions).length > 0) {
         setAlerte(texte("partage.lien_invalide"));
-      else {
+        garderAdresse.current = true;
+      } else {
         setValeurs((v) => ({ ...Object.fromEntries(Object.keys(v).map((k) => [k, 0])), ...lien.leviers }));
         setParImpot(lien.parImpot);
         setParDepense(lien.parDepense);
         setParMission(lien.parMission);
         setAnnee(lien.annee);
         setCroissance(lien.croissance === true);
-        if (lien.version && lien.version !== empreinte) setAlerte(texte("partage.autre_version"));
+        if (lien.version && lien.version !== empreinte) {
+          setAlerte(texte("partage.autre_version"));
+          garderAdresse.current = true;
+        }
       }
     }
     setLu(true);
   }, [donnees, catalogue, missions, empreinte]);
   const adresse = encoder(etat);
   useEffect(() => {
-    if (lu) window.history.replaceState(null, "", `?${adresse}`);
+    if (!lu) return;
+    // Premier passage après la lecture du lien : rien n'a encore été réglé par l'utilisateur.
+    if (garderAdresse.current) {
+      garderAdresse.current = false;
+      return;
+    }
+    window.history.replaceState(null, "", `?${adresse}`);
   }, [lu, adresse]);
   const remunerationsReglees = LEVIERS_REMUNERATIONS.some((id) => (valeurs[id] ?? 0) !== 0);
   const missionsReglees = Object.values(parMission).some((v) => v !== 0);
+  // Dépenses fiscales et crédits des missions : sans effet calculé sur les ménages types et par
+  // taille d'entreprise ; les blocs correspondants le disent au lieu de « aucune mesure ».
+  const autresReglees =
+    missionsReglees ||
+    Object.values(parImpot).some((v) => v !== 0) ||
+    Object.values(parDepense).some((v) => v !== 0);
   const indexationReglee = LEVIERS_SOLIDARITE.some((id) => (valeurs[id] ?? 0) !== 0);
   const solidariteReglee = (parMission[MISSION_SOLIDARITE] ?? 0) !== 0;
   const lignes = calculer(
@@ -117,7 +141,12 @@ function SimulateurCharge({
     annee,
     croissance,
   );
-  const signe = (v: number) => (v > 0 ? `+${nombre(v)}` : nombre(v));
+  // Valeur d'un levier avec autant de décimales que son pas (0,25 an pour l'âge légal).
+  const signe = (v: number, pas: number) =>
+    new Intl.NumberFormat("fr-FR", {
+      maximumFractionDigits: (String(pas).split(".")[1] ?? "").length,
+      signDisplay: "exceptZero",
+    }).format(v);
   // Écarts au centième de point : les effets des accises sont de l'ordre de 0,01 point de PIB.
   const centieme = new Intl.NumberFormat("fr-FR", {
     minimumFractionDigits: 2,
@@ -155,7 +184,7 @@ function SimulateurCharge({
                 })}
                 {" : "}
                 <strong>
-                  {texte(`simulateur.leviers.${l.id}.valeur`, { valeur: signe(valeurs[l.id]) })}
+                  {texte(`simulateur.leviers.${l.id}.valeur`, { valeur: signe(valeurs[l.id], l.pas) })}
                 </strong>
                 {levier.statut !== "valide" && (
                   <span className="etiquette">{texte(`validation.statuts.${levier.statut}`)}</span>
@@ -293,9 +322,9 @@ function SimulateurCharge({
         <Link href="/comparaison/">{texte("partage.lien_comparaison")}</Link>
       </div>
       <p className="source">{texte("partage.explication")}</p>
-      <EffetsMenagesScenario valeurs={valeurs} empreinte={empreinte} />
+      <EffetsMenagesScenario valeurs={valeurs} empreinte={empreinte} autresReglees={autresReglees} />
       <DepenseMenagesScenario donnees={depense} valeurs={valeurs} />
-      <EffetsEntreprisesScenario donnees={entreprises} valeurs={valeurs} />
+      <EffetsEntreprisesScenario donnees={entreprises} valeurs={valeurs} autresReglees={autresReglees} />
     </>
   );
 }

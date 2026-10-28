@@ -169,3 +169,14 @@ test("levier non linéaire : seule une valeur de sa grille est admise", () => {
   assert.deepEqual(problemes(sur, avecGrille, catalogue, missions), []);
   assert.deepEqual(problemes(hors, avecGrille, catalogue, missions), ["hors_bornes"]);
 });
+
+test("un lien vers un levier au statut « non publié » est refusé (règle de publication)", () => {
+  const avecNonPublie = {
+    ...donnees,
+    leviers: { ...donnees.leviers, tva_taux_normal: { ...levier([-10, 10]), statut: "non_publie" as const } },
+  } as unknown as ReponsesUnitaires;
+  assert.deepEqual(
+    problemes(base({ leviers: { tva_taux_normal: 1 } }), avecNonPublie, catalogue, missions),
+    ["levier_inconnu"],
+  );
+});

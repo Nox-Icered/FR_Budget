@@ -34,6 +34,7 @@ Celles de la baseline (`docs/fiches/baseline.md`) et du levier TVA (`docs/fiches
 - Aucun effet de comportement des consommateurs (élasticités prévues en V3).
 - Aucun effet sur la croissance : le multiplicateur budgétaire viendra comme un interrupteur désactivé par défaut.
 - Plusieurs mesures s'additionnent, sans interaction.
+- Un même levier ne peut être visé que par une mesure (sauf le levier générique des crédits des missions, qui porte une hausse et une baisse de missions différentes) : deux mesures additionneraient leurs effets au-delà des bornes du levier.
 
 ## 6. Validation
 
@@ -49,6 +50,7 @@ Tests unitaires `moteur/tests/unitaires/test_scenario.py` : zéro point redonne 
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-28 | Revue de code : deux mesures sur un même levier sont refusées (« double compte ») | 1 test unitaire créé ; aucun résultat existant changé |
 | 2026-10-09 | Scénario et levier « taux normal de TVA » | 10 tests unitaires créés ; baseline inchangée (14 tests réussis) |
 | 2026-10-09 | Bornes du levier, réponse linéaire pour le site, `POST /scenario`, page Simulateur | 2 tests unitaires du moteur, 7 tests de l'API et 2 tests du site créés |
 | 2026-10-09 | Leviers « accise sur le gazole » et « accise sur les essences » ; simulateur à plusieurs leviers | 2 tests unitaires du scénario et 1 test du site créés ; aucun résultat existant changé |

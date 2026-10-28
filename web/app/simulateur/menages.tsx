@@ -16,9 +16,12 @@ const entier = (v: number) => euros.format(Math.round(v));
 export function EffetsMenagesScenario({
   valeurs,
   empreinte,
+  autresReglees,
 }: {
   valeurs: Record<string, number>;
   empreinte: string;
+  /** Dépenses fiscales ou crédits des missions réglés : effet non calculé pour les ménages. */
+  autresReglees: boolean;
 }) {
   const id = useId();
   const [incidence, setIncidence] = useState<Incidence>("comptable");
@@ -33,6 +36,7 @@ export function EffetsMenagesScenario({
   const ecartees = Object.entries(valeurs)
     .filter(([k, v]) => v !== 0 && k in d.sans_effet)
     .map(([k]) => texte(`menages.effets.raisons.${d.sans_effet[k]}`));
+  if (autresReglees) ecartees.push(texte("simulateur.menages.autres_non_chiffrees"));
   const avecIncidence = mesures.some(([k]) => d.leviers_incidence.includes(k));
   const lecture = avecIncidence ? incidence : "comptable";
   const titre = texte("simulateur.menages.titre");
@@ -43,7 +47,7 @@ export function EffetsMenagesScenario({
       <h2>{titre}</h2>
       <p>{texte("simulateur.menages.intro", { annee: d.annee_revenus })}</p>
       {mesures.length === 0 ? (
-        <p>{texte("simulateur.menages.aucune")}</p>
+        <p>{texte(autresReglees ? "simulateur.menages.aucune_chiffree" : "simulateur.menages.aucune")}</p>
       ) : (
         <>
           {avecIncidence && (

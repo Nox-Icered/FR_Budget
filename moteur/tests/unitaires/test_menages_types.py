@@ -108,3 +108,27 @@ def test_csg_du_retraite_independante_de_l_ordre_des_calculs() -> None:
         t.pension_brute_mensuelle(2025) + r["csg_deductible_retraite2025-06"]
     )
     assert r["csg_deductible_retraite2025-06"] < 0
+
+
+def test_variantes_de_revenu_aux_bornes_des_hypotheses() -> None:
+    """Revenu bas et haut : bornes des trois hypothèses d'évolution des revenus (plages
+    appliquées le 28 octobre 2026, docs/validation/plages_nulles.md, § 4 à 6). Le revenu
+    central est celui des valeurs centrales ; le SMIC ne dépend d'aucune hypothèse."""
+    m = t
+    assert m.cascade_annuelle("celibataire_median") == m.cascade_annuelle(
+        "celibataire_median", m.ANNEE, m.CENTRAL
+    )
+    for niveau in (m.MEDIAN, m.P95):
+        bas, centre, haut = (m.brut_mensuel(niveau, m.ANNEE, False, v) for v in m.VARIANTES)
+        assert bas <= centre <= haut
+    assert m.brut_mensuel(m.SMIC, m.ANNEE, False, m.BAS) == m.brut_mensuel(m.SMIC, m.ANNEE)
+    pensions = [m.pension_brute_mensuelle(m.ANNEE, v) for v in m.VARIANTES]
+    assert pensions == sorted(pensions)
+    revenus = [m.resultat_fiscal_independant(m.ANNEE, v) for v in m.VARIANTES]
+    assert revenus == sorted(revenus)
+    h = m.ecart_evolution
+    assert h(m.HYPOTHESE_PENSION, m.HAUT) == pytest.approx(0.01)
+    assert h(m.HYPOTHESE_EVOLUTION, m.BAS) == pytest.approx(-0.002)
+    assert h(m.HYPOTHESE_INDEPENDANT, m.BAS) == pytest.approx(-0.006)
+    with pytest.raises(ValueError, match="variante"):
+        m.profil_type("celibataire_median", "inconnue")

@@ -323,6 +323,13 @@ def menages_types() -> dict[str, Any]:
                 "libelle": profil.libelle,
                 "annee": module_menages.ANNEE,
                 **_lignes_cascade(c),
+                # Revenu bas et haut : bornes des hypothèses d'évolution des revenus.
+                "variantes": {
+                    v: _lignes_cascade(
+                        module_menages.cascade_annuelle(identifiant, module_menages.ANNEE, v)
+                    )
+                    for v in VARIANTES_BORNES
+                },
             }
         )
     return {
@@ -369,12 +376,12 @@ def _cle_valeur(valeur: float) -> str:
     return f"{valeur:g}"
 
 
-def effets_leviers_menages(processus: int | None = None) -> dict[str, Any]:
-    """Cascades exactes des ménages types sur la grille de chaque levier qui change
-    directement leur législation (``fr_budget.menages.leviers``), ``null`` quand l'effet n'est
-    pas chiffré ; hausse et baisse d'une unité pour la page des ménages types ; contrôle de
-    l'approximation du simulateur."""
-    effets = module_leviers_menages.effets_grille(processus)
+VARIANTES_BORNES = (module_menages.BAS, module_menages.HAUT)
+"""Variantes de revenu exportées à côté du revenu central (fourchette des ménages types)."""
+
+
+def _lectures_effets(effets: module_leviers_menages.Effets) -> dict[str, Any]:
+    """Hausse et baisse d'une unité (lecture comptable et répercutée) et grille exacte."""
     sens = module_leviers_menages.SENS
 
     def lecture(incidence: str) -> dict[str, Any]:
@@ -399,6 +406,22 @@ def effets_leviers_menages(processus: int | None = None) -> dict[str, Any]:
         }
         for levier, par_incidence in effets.items()
     }
+    comptable, salaire = module_leviers_menages.COMPTABLE, module_leviers_menages.SALAIRE
+    return {
+        "effets": lecture(comptable),
+        # Cotisations patronales : même mesure, salaire brut ajusté pour garder le coût employeur.
+        "effets_salaire": lecture(salaire),
+        "grille": grille,
+    }
+
+
+def effets_leviers_menages(processus: int | None = None) -> dict[str, Any]:
+    """Cascades exactes des ménages types sur la grille de chaque levier qui change
+    directement leur législation (``fr_budget.menages.leviers``), ``null`` quand l'effet n'est
+    pas chiffré ; hausse et baisse d'une unité pour la page des ménages types ; mêmes données
+    au revenu bas et haut (``variantes``) ; contrôle de l'approximation du simulateur (revenu
+    central)."""
+    par_variante = module_leviers_menages.effets_grille_variantes(processus)
     controle = module_leviers_menages.controle_approximation(processus)
 
     def ecart_max(un_levier: bool, incidence: str) -> float:
@@ -417,10 +440,8 @@ def effets_leviers_menages(processus: int | None = None) -> dict[str, Any]:
     comptable, salaire = module_leviers_menages.COMPTABLE, module_leviers_menages.SALAIRE
     return {
         **_description_leviers_menages(),
-        "effets": lecture(comptable),
-        # Cotisations patronales : même mesure, salaire brut ajusté pour garder le coût employeur.
-        "effets_salaire": lecture(salaire),
-        "grille": grille,
+        **_lectures_effets(par_variante[module_menages.CENTRAL]),
+        "variantes": {v: _lectures_effets(par_variante[v]) for v in VARIANTES_BORNES},
         "controle": {
             "scenarios": [
                 {
@@ -481,6 +502,18 @@ def scenario_menages(entree: MesuresEntree) -> dict[str, Any]:
                 )
             )
             for i in module_menages.PROFILS
+        },
+        # Revenu bas et haut : bornes des hypothèses d'évolution des revenus.
+        "variantes": {
+            v: {
+                i: _lignes_ou_rien(
+                    module_leviers_menages.cascade_scenario(
+                        i, mesures, module_menages.ANNEE, entree.incidence, v
+                    )
+                )
+                for i in module_menages.PROFILS
+            }
+            for v in VARIANTES_BORNES
         },
     }
 

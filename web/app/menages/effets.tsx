@@ -3,9 +3,9 @@
 // Données exportées par l'API (menages-effets.json) ; rien n'est saisi ni envoyé.
 import { useId, useState } from "react";
 import { texte } from "../../lib/textes";
-import { lignesComparees } from "../../lib/cascade";
+import { comparaisonsEnFourchette, type LignesCascade } from "../../lib/cascade";
 import { region } from "../../lib/region";
-import type { EffetsMenages, Incidence, MenageType } from "../../lib/donnees";
+import type { EffetsMenages, Incidence, MenageType, VarianteRevenu } from "../../lib/donnees";
 import { chemin } from "../../lib/chemin";
 
 const euros = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
@@ -42,7 +42,18 @@ export function EffetsLeviers({
   const ecarts = (cle: "net_apres_impot" | "cout_employeur") =>
     lectures.map((c) => Math.round(c[cle] - menage[cle]));
   const mesure = texte(`menages.effets.leviers.${levier}.${sens}`);
-  const lignes = apres ? lignesComparees(menage, apres) : [];
+  // Fourchette de l'écart selon le revenu : même mesure et même lecture au revenu bas et haut.
+  const lectureRetenue: Incidence = avecIncidence ? incidence : "comptable";
+  const paires: [LignesCascade, LignesCascade][] = [];
+  if (apres) {
+    paires.push([menage, apres]);
+    for (const v of ["bas", "haut"] as VarianteRevenu[]) {
+      const e = effets.variantes[v];
+      const c = (lectureRetenue === "salaire" ? e.effets_salaire : e.effets)[levier][sens][menage.id];
+      if (c) paires.push([menage.variantes[v], c]);
+    }
+  }
+  const lignes = apres ? comparaisonsEnFourchette(paires) : [];
   const aucun = apres !== null && lignes.every((l) => Math.round(l.ecart) === 0);
   const legende = texte("menages.effets.legende", { menage: menage.libelle, mesure });
 
@@ -111,6 +122,7 @@ export function EffetsLeviers({
                     <th scope="col">{texte("menages.effets.avant")}</th>
                     <th scope="col">{texte("menages.effets.apres")}</th>
                     <th scope="col">{texte("menages.effets.ecart")}</th>
+                    <th scope="col">{texte("menages.effets.ecart_fourchette")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -120,6 +132,12 @@ export function EffetsLeviers({
                       <td className="nombre">{euros.format(l.avant)}</td>
                       <td className="nombre">{euros.format(l.apres)}</td>
                       <td className="nombre">{ecartSigne.format(Math.round(l.ecart))}</td>
+                      <td className="nombre">
+                        {texte("menages.de_a", {
+                          bas: ecartSigne.format(Math.round(l.ecart_bas)),
+                          haut: ecartSigne.format(Math.round(l.ecart_haut)),
+                        })}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

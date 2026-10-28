@@ -75,6 +75,7 @@ export function EffetsMenagesScenario({
                   <th scope="col">{texte("simulateur.menages.net")}</th>
                   <th scope="col">{texte("simulateur.menages.cout")}</th>
                   {avecIncidence && <th scope="col">{texte("simulateur.menages.fourchette")}</th>}
+                  <th scope="col">{texte("simulateur.menages.revenu")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -86,11 +87,17 @@ export function EffetsMenagesScenario({
                     ? (["comptable", "salaire"] as Incidence[]).map(calcul)
                     : [];
                   const nets = lectures.flatMap((c) => (c ? [c.net_apres_impot - m.net_apres_impot] : []));
+                  // Fourchette selon le revenu : même calcul au revenu bas et haut.
+                  const parRevenu = (["bas", "haut"] as const).flatMap((v) => {
+                    const ref = m.variantes[v];
+                    const c = approcher(ref, m.id, mesures, d.grille_variantes[v], d.leviers_incidence, lecture);
+                    return c ? [c.net_apres_impot - ref.net_apres_impot] : [];
+                  });
                   return (
                     <tr key={m.id}>
                       <th scope="row">{m.libelle}</th>
                       {r === null ? (
-                        <td colSpan={avecIncidence ? 3 : 2}>{texte("simulateur.menages.non_chiffre")}</td>
+                        <td colSpan={avecIncidence ? 4 : 3}>{texte("simulateur.menages.non_chiffre")}</td>
                       ) : (
                         <>
                           <td className="nombre">{entier(r.net_apres_impot - m.net_apres_impot)}</td>
@@ -103,6 +110,12 @@ export function EffetsMenagesScenario({
                               })}
                             </td>
                           )}
+                          <td className="nombre">
+                            {texte("simulateur.menages.de_a", {
+                              bas: entier(Math.min(r.net_apres_impot - m.net_apres_impot, ...parRevenu)),
+                              haut: entier(Math.max(r.net_apres_impot - m.net_apres_impot, ...parRevenu)),
+                            })}
+                          </td>
                         </>
                       )}
                     </tr>

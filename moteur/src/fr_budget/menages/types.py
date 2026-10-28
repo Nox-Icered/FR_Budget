@@ -22,12 +22,18 @@ selon l'assiette réformée de 2025 (``fr_budget.menages.independants``), impôt
 
 Non comptés : aides au logement (le loyer n'est pas fixé), taxe d'habitation, revenus du
 patrimoine.
+
+Variantes de revenu (fourchette, plages appliquées le 28 octobre 2026,
+``docs/validation/plages_nulles.md``, § 4 à 6) : chaque ménage type est calculé au revenu
+central (valeurs centrales des trois hypothèses d'évolution), bas (leurs bornes basses) et haut
+(leurs bornes hautes). Les bornes basses donnent toutes un revenu plus bas, les bornes hautes un
+revenu plus haut : les trois hypothèses varient donc ensemble.
 """
 
 from __future__ import annotations
 
 import warnings
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from functools import cache
 from typing import Any
 
@@ -78,6 +84,22 @@ PRECISION_EUROS = 0.005
 ITERATIONS_MAX = 60
 PRESTATIONS_MENSUELLES = ("ppa", "af", "cf", "asf", "rsa", "aspa", "paje_base")
 PRESTATIONS_ANNUELLES = ("ars",)
+BAS = "bas"
+CENTRAL = "central"
+HAUT = "haut"
+VARIANTES = (BAS, CENTRAL, HAUT)
+"""Variantes de revenu des ménages types (bornes des hypothèses d'évolution des revenus)."""
+
+
+def ecart_evolution(identifiant: str, variante: str = CENTRAL) -> float:
+    """Valeur d'une hypothèse d'évolution des revenus dans la ``variante`` : valeur centrale,
+    borne basse ou borne haute de sa plage."""
+    h = hypothese(identifiant)
+    valeurs = {BAS: h.plage.basse, CENTRAL: h.valeur_centrale, HAUT: h.plage.haute}
+    if variante not in valeurs:
+        msg = f"variante de revenu inconnue : {variante}"
+        raise ValueError(msg)
+    return valeurs[variante]
 
 
 @dataclass(frozen=True)
@@ -120,6 +142,9 @@ class Profil:
     """Dates de naissance des enfants à charge."""
     parent_isole: bool = False
     """Case T de la déclaration (parent qui vit seul avec ses enfants)."""
+    variante: str = CENTRAL
+    """Variante de revenu des niveaux statistiques (``VARIANTES``) ; sans effet sur un montant
+    saisi."""
 
 
 PROFILS: dict[str, Profil] = {
@@ -282,12 +307,23 @@ def brut_pour_net(net: float, mois: str, cadre: bool = False) -> float:
 
 
 @cache
-def brut_mensuel(niveau: str, annee: int = ANNEE, cadre: bool = False) -> float:
+def profil_type(identifiant: str, variante: str = CENTRAL) -> Profil:
+    """Profil du ménage type dans la variante de revenu ``variante``."""
+    if variante not in VARIANTES:
+        msg = f"variante de revenu inconnue : {variante}"
+        raise ValueError(msg)
+    return replace(PROFILS[identifiant], variante=variante)
+
+
+@cache
+def brut_mensuel(
+    niveau: str, annee: int = ANNEE, cadre: bool = False, variante: str = CENTRAL
+) -> float:
     """Salaire brut mensuel d'un niveau, pour l'année simulée.
 
     SMIC : SMIC brut à temps plein du mois repère. Médiane et 95e centile : salaire net de
     l'Insee (2024) multiplié par le rapport du SMIC net de l'année à celui de 2024, puis
-    converti en brut avec la législation de l'année.
+    converti en brut avec la législation de l'année ; ``variante`` : variante de revenu.
     """
     mois = _mois_repere(annee)
     if niveau == SMIC:
@@ -295,7 +331,7 @@ def brut_mensuel(niveau: str, annee: int = ANNEE, cadre: bool = False) -> float:
     smic_net = _salaire_net_mensuel(smic_mensuel_brut(mois), mois)
     mois_insee = _mois_repere(ANNEE_INSEE)
     smic_net_insee = _salaire_net_mensuel(smic_mensuel_brut(mois_insee), mois_insee)
-    ecart = hypothese(HYPOTHESE_EVOLUTION).valeur_centrale
+    ecart = ecart_evolution(HYPOTHESE_EVOLUTION, variante)
     net = chiffrage(NIVEAUX_INSEE[niveau]) * smic_net / smic_net_insee * (1 + ecart)
     return brut_pour_net(net, mois, cadre)
 
@@ -317,7 +353,7 @@ def salaire_apprenti(apprentissage: Apprentissage, mois: str) -> float:
     return part * smic_mensuel_brut(mois)
 
 
-def pension_brute_mensuelle(annee: int) -> float:
+def pension_brute_mensuelle(annee: int, variante: str = CENTRAL) -> float:
     """Pension brute mensuelle du retraité type pour ``annee`` : pension moyenne de droit
     direct de fin 2023 (DREES), revalorisée au 1er janvier de chaque année suivante comme les
     pensions de base. Pas de valeur avant 2023 ni sans coefficient de revalorisation sourcé."""
@@ -331,38 +367,42 @@ def pension_brute_mensuelle(annee: int) -> float:
             raise ValueError(msg)
         pension *= chiffrage(REVALORISATIONS[a])
     if annee > ANNEE_DREES:
-        pension *= 1 + hypothese(HYPOTHESE_PENSION).valeur_centrale
+        pension *= 1 + ecart_evolution(HYPOTHESE_PENSION, variante)
     return pension
 
 
-def resultat_fiscal_independant(annee: int) -> float:
+def resultat_fiscal_independant(annee: int, variante: str = CENTRAL) -> float:
     """Résultat fiscal annuel de l'artisan type : revenu d'activité médian des non-salariés
     classiques de 2023 (Insee, net de cotisations sociales), porté à ``annee`` comme le SMIC
     horaire brut au 1er janvier (hypothèse ``menages_ecart_evolution_revenu_independant``)."""
     rapport = independants.smic_horaire(annee) / independants.smic_horaire(ANNEE_INSEE_INDEPENDANT)
-    ecart = hypothese(HYPOTHESE_INDEPENDANT).valeur_centrale
+    ecart = ecart_evolution(HYPOTHESE_INDEPENDANT, variante)
     return chiffrage(REVENU_INSEE_INDEPENDANT) * MOIS_PAR_AN * rapport * (1 + ecart)
 
 
-def _resultat_fiscal_reference(adulte: Adulte, annee: int) -> float:
+def _resultat_fiscal_reference(adulte: Adulte, annee: int, variante: str = CENTRAL) -> float:
     if adulte.montant_mensuel is not None:
         return adulte.montant_mensuel * MOIS_PAR_AN
-    return resultat_fiscal_independant(annee)
+    return resultat_fiscal_independant(annee, variante)
 
 
 def _cotisations_independant(
-    adulte: Adulte, annee: int, ecart_csg: float
+    adulte: Adulte, annee: int, ecart_csg: float, variante: str = CENTRAL
 ) -> independants.CotisationsIndependant:
     """Cotisations de l'indépendant ; sous un écart de CSG, le revenu brut (avant cotisations)
     reste celui de la législation de référence et le résultat fiscal change."""
-    brut = independants.revenu_brut_pour_resultat(_resultat_fiscal_reference(adulte, annee), annee)
+    brut = independants.revenu_brut_pour_resultat(
+        _resultat_fiscal_reference(adulte, annee, variante), annee
+    )
     return independants.cotisations_artisan(brut, annee, ecart_csg)
 
 
-def _resultat_fiscal(adulte: Adulte, annee: int, ecart_csg: float = 0.0) -> float:
+def _resultat_fiscal(
+    adulte: Adulte, annee: int, ecart_csg: float = 0.0, variante: str = CENTRAL
+) -> float:
     if ecart_csg == 0:
-        return _resultat_fiscal_reference(adulte, annee)
-    return _cotisations_independant(adulte, annee, ecart_csg).resultat_fiscal
+        return _resultat_fiscal_reference(adulte, annee, variante)
+    return _cotisations_independant(adulte, annee, ecart_csg, variante).resultat_fiscal
 
 
 def _salaires(
@@ -371,14 +411,16 @@ def _salaires(
     mois: list[str],
     ecart_csg: float = 0.0,
     ecart_pension: float = 0.0,
+    variante: str = CENTRAL,
 ) -> dict[str, Any]:
     """Salaire de base des ``mois``, pour un apprenti son contrat, pour un retraité sa
-    pension (sans salaire), changée de ``ecart_pension`` sur l'année simulée seulement."""
+    pension (sans salaire), changée de ``ecart_pension`` sur l'année simulée seulement ;
+    ``variante`` : variante de revenu des niveaux statistiques."""
     montant = adulte.montant_mensuel
     if adulte.retraite:
 
         def pension(m: str) -> float:
-            p = montant if montant is not None else pension_brute_mensuelle(int(m[:4]))
+            p = montant if montant is not None else pension_brute_mensuelle(int(m[:4]), variante)
             return p * (1 + ecart_pension) if int(m[:4]) == annee else p
 
         return {"retraite_brute": {m: pension(m) for m in mois}}
@@ -388,7 +430,7 @@ def _salaires(
         annees = sorted({int(m[:4]) for m in mois})
         # L'écart de CSG d'un levier ne s'applique qu'à l'année simulée.
         revenu = {
-            str(a): _resultat_fiscal(adulte, annee, ecart_csg if a == annee else 0.0)
+            str(a): _resultat_fiscal(adulte, annee, ecart_csg if a == annee else 0.0, variante)
             for a in annees
         }
         # rpns_imposables pour l'impôt ; rpns_autres_revenus pour les ressources du RSA et de
@@ -398,7 +440,9 @@ def _salaires(
         return {"salaire_de_base": dict.fromkeys(mois, montant)}
     if adulte.apprentissage is None:
         return {
-            "salaire_de_base": dict.fromkeys(mois, brut_mensuel(adulte.niveau, annee, adulte.cadre))
+            "salaire_de_base": dict.fromkeys(
+                mois, brut_mensuel(adulte.niveau, annee, adulte.cadre, variante)
+            )
         }
     contrat = adulte.apprentissage
     sous_contrat = [m for m in mois if m >= contrat.contrat_debut[:7]]
@@ -440,7 +484,7 @@ def situation(
         adultes.append(nom)
         individus[nom] = {
             "date_naissance": {"ETERNITY": a.naissance},
-            **_salaires(a, annee, mois, ecart_csg_independant, ecart_pension),
+            **_salaires(a, annee, mois, ecart_csg_independant, ecart_pension, profil.variante),
             **_emploi_sur(mois),
             **_categorie(a.cadre, mois),
         }
@@ -495,8 +539,8 @@ def _construire(
 
 
 @cache
-def _rfr_point_fixe(identifiant: str, annee: int) -> float | None:
-    return rfr_point_fixe(PROFILS[identifiant], annee)
+def _rfr_point_fixe(identifiant: str, annee: int, variante: str = CENTRAL) -> float | None:
+    return rfr_point_fixe(profil_type(identifiant, variante), annee)
 
 
 def rfr_point_fixe(profil: Profil, annee: int) -> float | None:
@@ -516,14 +560,21 @@ def rfr_point_fixe(profil: Profil, annee: int) -> float | None:
     raise RuntimeError(msg)
 
 
-def _simulation(identifiant: str, annee: int) -> Simulation:
-    return _construire(PROFILS[identifiant], annee, _rfr_point_fixe(identifiant, annee))
+def _simulation(identifiant: str, annee: int, variante: str = CENTRAL) -> Simulation:
+    return _construire(
+        profil_type(identifiant, variante), annee, _rfr_point_fixe(identifiant, annee, variante)
+    )
 
 
 @cache
-def cascade_annuelle(identifiant: str, annee: int = ANNEE) -> CascadeMenage:
-    """Cascade annuelle d'un ménage type, en euros (revenus de ``annee``)."""
-    return _cascade(PROFILS[identifiant], annee, _simulation(identifiant, annee))
+def cascade_annuelle(
+    identifiant: str, annee: int = ANNEE, variante: str = CENTRAL
+) -> CascadeMenage:
+    """Cascade annuelle d'un ménage type, en euros (revenus de ``annee``), dans la variante de
+    revenu ``variante``."""
+    return _cascade(
+        profil_type(identifiant, variante), annee, _simulation(identifiant, annee, variante)
+    )
 
 
 def cascade_profil(
@@ -540,11 +591,14 @@ def cascade_profil(
 
 
 def cascade_type_reformee(
-    identifiant: str, legislation: Legislation, annee: int = ANNEE
+    identifiant: str, legislation: Legislation, annee: int = ANNEE, variante: str = CENTRAL
 ) -> CascadeMenage:
-    """Cascade annuelle d'un ménage type sous une législation réformée."""
-    profil = PROFILS[identifiant]
-    simulation = _construire(profil, annee, _rfr_point_fixe(identifiant, annee), legislation)
+    """Cascade annuelle d'un ménage type sous une législation réformée, dans la variante de
+    revenu ``variante``."""
+    profil = profil_type(identifiant, variante)
+    simulation = _construire(
+        profil, annee, _rfr_point_fixe(identifiant, annee, variante), legislation
+    )
     return _cascade(profil, annee, simulation, legislation)
 
 
@@ -587,7 +641,7 @@ def _independant(profil: Profil, annee: int, ecart_csg: float = 0.0) -> dict[str
     for adulte in profil.adultes:
         if not adulte.independant:
             continue
-        c = _cotisations_independant(adulte, annee, ecart_csg)
+        c = _cotisations_independant(adulte, annee, ecart_csg, profil.variante)
         lignes["revenu_independant_brut"] += c.revenu_brut
         lignes["cotisations_independant"] += c.cotisations
         lignes["csg_crds_independant"] += c.csg_crds

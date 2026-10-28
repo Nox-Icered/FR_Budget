@@ -54,21 +54,61 @@ export function lignesCascade(m: LignesCascade): [string, number][] {
   ];
 }
 
-// Avant et après une réforme, ligne par ligne : les prestations des deux cascades sont réunies
-// (une prestation peut apparaître ou disparaître), à zéro quand elles manquent d'un côté.
+// Lignes de plusieurs cascades alignées : les prestations de toutes sont réunies (une
+// prestation peut apparaître ou disparaître), à zéro quand elles manquent d'une cascade.
+function lignesAlignees(cascades: LignesCascade[]): [string, number][][] {
+  const cles = [...new Set(cascades.flatMap((m) => Object.keys(m.prestations)))];
+  const lignes = cascades.map((m) =>
+    lignesCascade({
+      ...m,
+      prestations: Object.fromEntries(cles.map((c) => [c, m.prestations[c] ?? 0])),
+    }),
+  );
+  const [premiere] = lignes;
+  if (lignes.some((l) => l.length !== premiere.length || l.some(([x], i) => x !== premiere[i][0]))) {
+    throw new Error("cascades non comparables");
+  }
+  return lignes;
+}
+
+// Avant et après une réforme, ligne par ligne.
 export function lignesComparees(
   avant: LignesCascade,
   apres: LignesCascade,
 ): { libelle: string; avant: number; apres: number; ecart: number }[] {
-  const cles = [...new Set([...Object.keys(avant.prestations), ...Object.keys(apres.prestations)])];
-  const completer = (m: LignesCascade): LignesCascade => ({
-    ...m,
-    prestations: Object.fromEntries(cles.map((c) => [c, m.prestations[c] ?? 0])),
-  });
-  const a = lignesCascade(completer(avant));
-  const b = lignesCascade(completer(apres));
-  if (a.length !== b.length || a.some(([l], i) => l !== b[i][0])) {
-    throw new Error("cascades non comparables");
-  }
+  const [a, b] = lignesAlignees([avant, apres]);
   return a.map(([libelle, v], i) => ({ libelle, avant: v, apres: b[i][1], ecart: b[i][1] - v }));
+}
+
+// Cascade au revenu central et sa fourchette sur les variantes de revenu (revenu bas et haut :
+// bornes des hypothèses d'évolution des revenus), ligne par ligne.
+export function lignesEnFourchette(
+  central: LignesCascade,
+  variantes: LignesCascade[],
+): { libelle: string; valeur: number; bas: number; haut: number }[] {
+  const [c, ...autres] = lignesAlignees([central, ...variantes]);
+  return c.map(([libelle, v], i) => {
+    const valeurs = [v, ...autres.map((l) => l[i][1])];
+    return { libelle, valeur: v, bas: Math.min(...valeurs), haut: Math.max(...valeurs) };
+  });
+}
+
+// Avant et après une réforme au revenu central (première paire), avec la fourchette de l'écart
+// sur les variantes de revenu (paires suivantes, avant et après dans la même variante).
+export function comparaisonsEnFourchette(
+  paires: [LignesCascade, LignesCascade][],
+): { libelle: string; avant: number; apres: number; ecart: number; ecart_bas: number; ecart_haut: number }[] {
+  const lignes = lignesAlignees(paires.flat());
+  const [avant, apres] = lignes;
+  return avant.map(([libelle, v], i) => {
+    const ecarts = paires.map((_, k) => lignes[2 * k + 1][i][1] - lignes[2 * k][i][1]);
+    return {
+      libelle,
+      avant: v,
+      apres: apres[i][1],
+      ecart: ecarts[0],
+      ecart_bas: Math.min(...ecarts),
+      ecart_haut: Math.max(...ecarts),
+    };
+  });
 }

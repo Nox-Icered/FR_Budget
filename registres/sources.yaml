@@ -546,6 +546,24 @@ sources:
     acces: direct
     consulte_le: 2026-10-13
 
+  - id: insee_premiere_2114
+    nom: "Insee Première n° 2114, « Les revenus d'activité des non-salariés en 2024 » (juin 2026)"
+    editeur: Insee
+    url: https://www.insee.fr/fr/statistiques/9013403
+    licence: réutilisation libre des publications de l'Insee (mention de la source)
+    millesime: juin 2026 (revenus de 2024)
+    acces: direct
+    consulte_le: 2026-10-28
+
+  - id: insee_note_conjoncture_2026_03_salaires
+    nom: "Insee, Note de conjoncture de mars 2026, fiche « Salaires »"
+    editeur: Insee
+    url: https://www.insee.fr/fr/statistiques/fichier/8907437/ndc-mars-2026-salaires.pdf
+    licence: réutilisation libre des publications de l'Insee (mention de la source)
+    millesime: mars 2026 (salaires de 2025)
+    acces: direct
+    consulte_le: 2026-10-28
+
   - id: impots_gouv_simulateur_ir_2026
     nom: Simulateur de calcul de l'impôt 2026 sur les revenus 2025, modèle simplifié
     editeur: Direction générale des Finances publiques

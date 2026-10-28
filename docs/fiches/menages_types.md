@@ -86,7 +86,7 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
 ## 5. Choix faits en autonomie, et leurs limites
 
 1. **Cadre au 95e centile.** La spécification demande « 2 à 3 fois le médian ». Le 9e décile (4 334 €) n'en vaut que 1,98 fois ; le 95e centile est publié et en vaut 2,55 fois. Il dépasse le plafond de la Sécurité sociale, comme voulu.
-2. **Rapport au SMIC constant** de 2024 à 2025 (hypothèse `menages_ecart_evolution_salaire_smic`, sans plage). Limite : en 2025, le SMIC et les salaires n'ont pas forcément évolué au même rythme.
+2. **Rapport au SMIC constant** de 2024 à 2025 (hypothèse `menages_ecart_evolution_salaire_smic`). Limite : en 2025, le SMIC et les salaires n'ont pas forcément évolué au même rythme. Plage de −0,2 % à 0 % depuis le 28 octobre 2026 (salaire mensuel de base et salaire moyen par tête de 2025, note de conjoncture de l'Insee de mars 2026) : voir « Fourchette selon le revenu » ci-dessous.
 3. **Couple** : un salaire médian et un SMIC, marié (déclaration commune), deux enfants de 6 et 9 ans au 1er janvier 2025. La spécification ne fixe pas ces valeurs.
 4. **Parent seul** : l'allocation de soutien familial est comptée (2 392 € par an). Cela suppose que l'autre parent ne verse pas de pension alimentaire, ce qui est la situation par défaut d'OpenFisca. Avec une pension versée, le revenu serait différent.
 5. **Aides au logement non comptées** : elles dépendent du loyer et de la zone, que la spécification ne fixe pas. Le net après impôt des ménages modestes est donc sous-estimé. Les prestations calculées sont la prime d'activité, les allocations familiales, le complément familial, l'allocation de soutien familial, le RSA, l'allocation de rentrée scolaire, le minimum vieillesse (`aspa`) et l'allocation de base de la PAJE (`paje_base`) (`PRESTATIONS_MENSUELLES` et `PRESTATIONS_ANNUELLES`, `fr_budget/menages/types.py`). Les deux dernières, ajoutées le 28 octobre 2026 (revue de code), ne concernent aucun ménage type mais des ménages saisis dans « Mon ménage » (retraité à faible pension, enfant de moins de trois ans). L'allocation supplémentaire d'invalidité (`asi`) ne l'est pas : la page ne demande pas de situation d'invalidité. Limite : le levier de revalorisation des prestations ne porte pas sur le montant du minimum vieillesse (seuls la base des allocations familiales, le RSA et la prime d'activité sont revalorisés).
@@ -106,16 +106,29 @@ Moteur : `moteur/src/fr_budget/menages/types.py`, avec OpenFisca-France 176.1.2 
 
 14. **Pension moyenne et non médiane.** La spécification demande la pension médiane. La fiche 5 de la DREES (édition 2025) ne publie que la moyenne de fin 2023 et une distribution de fin 2020. La moyenne est retenue, et le libellé le dit.
     - Limite : la moyenne dépasse sans doute la médiane, car les pensions élevées la tirent vers le haut.
-15. **Pension revalorisée comme les pensions de base** (hypothèse `menages_ecart_evolution_pension_moyenne`, nulle, sans plage). Les pensions complémentaires suivent d'autres règles, et la pension moyenne évolue aussi avec le renouvellement des générations.
+15. **Pension revalorisée comme les pensions de base** (hypothèse `menages_ecart_evolution_pension_moyenne`, nulle au centre). Les pensions complémentaires suivent d'autres règles, et la pension moyenne évolue aussi avec le renouvellement des générations. Plage de 0 % à +1,0 % depuis le 28 octobre 2026 (pension moyenne réelle du COR, tableau 2.1).
 16. **Retraité** né en 1955, seul, sans pension de réversion ni autre revenu. OpenFisca lui applique en 2025 le taux réduit de CSG (3,8 %), sans CASA. Son revenu fiscal de référence de 2023 (15 864 €) est sous le plafond du taux réduit de 2025 d'OpenFisca, une valeur que la page consultée ne publie pas.
     - Limite : la règle des deux années consécutives de dépassement n'est pas en jeu pour ce profil, et n'est pas testée.
 17. **Pension stable avant 2023** pour le calcul du taux de CSG de 2023 (point fixe, § 3).
 
 18. **Artisan, revenu médian de l'Insee.** Le profil est un artisan, ce qui détermine la formation professionnelle (0,29 % du plafond de la Sécurité sociale). Le revenu de l'Insee couvre tous les non-salariés classiques hors agriculture : artisans, commerçants et professions libérales.
 19. **Revenu de l'Insee pris comme résultat fiscal.** L'Insee le définit comme le revenu professionnel imposable, avec certaines exonérations et cotisations facultatives réintégrées. Le profil n'a ni exonération ni cotisation facultative.
-20. **Revenu porté en 2025 comme le SMIC horaire** (hypothèse `menages_ecart_evolution_revenu_independant`, nulle, sans plage). L'Insee constate une baisse du revenu moyen des non-salariés en 2023, en euros constants.
+20. **Revenu porté en 2025 comme le SMIC horaire** (hypothèse `menages_ecart_evolution_revenu_independant`, nulle au centre). L'Insee constate une baisse du revenu moyen des non-salariés en 2023, en euros constants. Plage de −0,6 % à 0 % depuis le 28 octobre 2026 (revenus de 2024, Insee Première n° 2114).
 21. **Partage de la CSG-CRDS** (9,7 %, Urssaf) en 6,8 % déductible, 2,4 % non déductible et 0,5 % de CRDS. Ces taux viennent de la ligne « revenus d'activité salariée » de service-public.gouv.fr, faute de source propre aux indépendants.
 22. **Non représentés** : début d'activité (ACRE, assiettes forfaitaires), conjoint collaborateur, cotisations facultatives, régime micro-entreprise.
+
+### Fourchette selon le revenu
+
+Depuis le 28 octobre 2026 (`docs/validation/plages_nulles.md`, § 4 à 6), chaque ménage type est aussi calculé au **revenu bas** (bornes basses des trois hypothèses d'évolution des revenus) et au **revenu haut** (bornes hautes). Les bornes basses donnent toutes un revenu plus bas, les bornes hautes un revenu plus haut : les trois hypothèses varient donc ensemble (`fr_budget.menages.types.VARIANTES`, `profil_type`).
+
+- Page Ménages types : chaque ligne de la cascade est donnée au revenu central, avec sa fourchette (extrêmes des trois variantes).
+- Effet d'une mesure : l'écart de chaque ligne est donné au revenu central, avec sa fourchette (même mesure et même lecture de l'incidence dans chaque variante).
+- Simulateur : l'écart du net après impôt est donné avec sa fourchette selon le revenu (même approximation par la grille, dans chaque variante). Le contrôle de l'approximation reste mesuré au revenu central.
+- Non concernés : SMIC, parent seul au SMIC, apprenti (aucune hypothèse d'évolution), ménage saisi (montant saisi).
+
+Net après impôt, en euros par an (revenu bas à revenu haut ; central) : célibataire médian 25 511 à 25 557 (25 557) ; cadre au 95e centile 56 099 à 56 198 (56 198) ; couple avec deux enfants 47 555 à 47 587 (47 587) ; artisan 28 956 à 29 088 (29 088) ; retraité seul 20 590 à 20 795 (20 590).
+
+Coût : trois fois plus de calculs des ménages à l'export des données (grille des effets).
 
 ### Profil saisi par l'utilisateur (page « Mon ménage »)
 
@@ -261,6 +274,7 @@ Le module reste en bêta.
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-28 | Plages des trois hypothèses d'évolution des revenus (salaires −0,2 % à 0 %, pension 0 % à +1 %, indépendants −0,6 % à 0 %), à la demande du mainteneur ; ménages types calculés au revenu bas, central et haut ; fourchettes publiées (page Ménages types, effet d'une mesure, simulateur) | Valeurs centrales inchangées : aucun test de validation ne bouge. Nouvelles fourchettes du net après impôt : voir « Fourchette selon le revenu ». 1 test du moteur, 2 tests de l'API et 2 tests du site ajoutés |
 | 2026-10-28 | Minimum vieillesse et allocation de base de la PAJE comptés dans les prestations (`PRESTATIONS_MENSUELLES`) | aucun ménage type ne change (aucun n'y a droit) ; aucun test de validation ne bouge ; ménage saisi « retraité à 500 € par mois » : +6 411 € par an ; « parent au salaire de 2 000 €, enfant né en 2024 » : +2 361 € par an ; 1 test unitaire ajouté |
 | 2026-10-28 | Revue de code : prestations non comptées (minimum vieillesse, ASI, allocation de base de la PAJE) signalées au choix 5 ; test de validation qui échoue tant qu'aucun cas du simulateur officiel n'est relevé | 1 nouveau test de validation, en échec (aucun cas relevé) |
 | 2026-10-14 | Levier d'indexation : la pension du retraité est revalorisée de sa part de base (comptes de la protection sociale), au lieu de « non chiffré » | Aucun test de validation ne bouge ; test « pension non chiffrée » remplacé par deux tests (identité sur la pension brute, pension saisie égale au type) ; test du scénario non chiffré réécrit avec un levier simulé ; nouveau test de la part de base |

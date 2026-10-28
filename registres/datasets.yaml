@@ -714,6 +714,22 @@ datasets:
     methode_transformation: aucune ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-13
 
+  - id: insee_premiere_2114_pdf
+    source: insee_premiere_2114
+    description: "Insee Première n° 2114 (PDF, 4 pages, fichier IP2114.pdf)"
+    fichier: data/raw/menages/insee_premiere_2114.pdf
+    empreinte_sha256: 02fefb0fd008b606e00644c8ae6fb5f26e084288a8f6a3e4312c8bca5a0444a1
+    methode_transformation: aucune ; valeurs lues dans le document (figure 1 et texte), reprises dans la justification de l'hypothèse menages_ecart_evolution_revenu_independant
+    telecharge_le: 2026-10-28
+
+  - id: insee_note_conjoncture_2026_03_salaires_pdf
+    source: insee_note_conjoncture_2026_03_salaires
+    description: "Note de conjoncture de mars 2026, fiche « Salaires » (PDF, 3 pages, fichier ndc-mars-2026-salaires.pdf)"
+    fichier: data/raw/menages/insee_note_conjoncture_2026_03_salaires.pdf
+    empreinte_sha256: cc69f155bf796d68567f5055f35ca5f087399929c0f6c43aa8ebda0ac5f095d2
+    methode_transformation: aucune ; valeurs lues dans la figure 1, reprises dans la justification de l'hypothèse menages_ecart_evolution_salaire_smic
+    telecharge_le: 2026-10-28
+
   - id: urssaf_exonerations_taille_csv
     source: urssaf_open_data_exonerations_taille
     description: "Export CSV complet du jeu (séparateur point-virgule), montants annuels d'exonérations par tranche de taille d'entreprise et catégorie de mesures"

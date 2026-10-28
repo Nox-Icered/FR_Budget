@@ -144,14 +144,17 @@ hypotheses:
     plage:
       basse: 0.0
       haute: 0.0
-    sources: [insee_comptes_nationaux_2025]
+    sources: [insee_comptes_nationaux_2025, plf2027_resf]
     justification: >-
       Le rendement d'une mesure est chiffré pour 2025 (en Md€), rapporté au PIB de 2025
       (INSEE, comptes nationaux, édition 2025 : 2 991,1 Md€), puis tenu constant en points de
       PIB : il croît comme le PIB en valeur. C'est la convention de la baseline, exprimée en
-      points de PIB. Aucune source ne fournit encore l'élasticité de chaque recette au PIB : la
-      plage est nulle et cette limite est affichée. Une plage sourcée remplacera cette
-      convention quand l'élasticité sera saisie.
+      points de PIB. Le RESF du PLF 2027 (page 169 du PDF) retient la même élasticité de 1
+      comme « valeur de référence à moyen terme, qui correspond à la moyenne de l'élasticité
+      sur longue période » ; les élasticités annuelles s'en écartent (0,7 à 0,8 pour les
+      prélèvements obligatoires en 2025-2027, pages 93 et 113). Aucune source ne fournit
+      l'élasticité de chaque recette au PIB : la plage reste nulle (décision du mainteneur du
+      28 octobre 2026, docs/validation/plages_nulles.md, § 7) et cette limite est affichée.
     instruments: [tva, accises_energie, impot_societes]
 
   - id: accises_masses_volumiques

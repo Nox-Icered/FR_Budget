@@ -68,12 +68,12 @@ Seconde source : **COR, rapport annuel de juin 2026, figure 2.5** (page 78 du PD
 
 Le COR attribue le début de cette hausse à la réforme de 2010 : page 78, « report de l'âge minimal de 60 à 62 ans et report de l'âge d'annulation de la décote de 65 à 67 ans » ; page 217, cette réforme « décale progressivement l'âge d'ouverture des droits de 60 à 62 ans ».
 
-Proposition : plage de **4 à 4,9 ans**, valeur centrale 4 inchangée.
+Proposition : plage de **4 à 4,9 ans**, valeur centrale 4 inchangée. **Appliquée** (branche `plages/retraites`) au levier sur l'âge effectif : les bornes de l'effet croisent celles de l'effet d'un an et celles de la durée (`docs/fiches/retraites.md`, journal).
 
 Limites :
 - La hausse observée mêle d'autres causes : durée d'assurance requise, départs anticipés, entrée plus tardive dans la vie active (COR, pages 78 et 217).
 - Le choix de la fenêtre (2017 ou 2019) est le mien.
-- Le modèle par cohortes (`retraites_cohortes`) applique directement le rythme de trois mois par génération : il n'est pas concerné.
+- Le modèle par cohortes (`retraites_cohortes`) lit la même hypothèse, mais seulement sa valeur centrale : c'est le rythme légal de trois mois par génération, sans incertitude. Il n'est donc pas concerné par la plage (correction : la première version de ce document disait qu'il n'utilisait pas l'hypothèse).
 
 ## 4. Salaires médian et du 95e centile face au SMIC net (`menages_ecart_evolution_salaire_smic`)
 
@@ -142,5 +142,6 @@ Options présentées :
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
 | 2026-10-28 | § 4 à 6 appliqués : ménages types au revenu bas, central et haut (sources `insee_premiere_2114` et `insee_note_conjoncture_2026_03_salaires` versées au dépôt) | Valeurs centrales inchangées ; fourchettes du net après impôt publiées (détail : `docs/fiches/menages_types.md`) |
+| 2026-10-28 | § 3 appliqué : durée de montée en charge de 4 à 4,9 ans (levier sur l'âge effectif) | Validation inchangée (valeur centrale) ; bornes basses de l'écart de solde plus basses pendant la montée en charge (détail : `docs/fiches/retraites.md`) ; 1 test unitaire ajouté |
 | 2026-10-28 | Option (a) retenue pour `scenario_rendement_constant_pib` : RESF ajouté aux sources, plage nulle gardée | Aucun (valeur non lue par le calcul) |
 | 2026-10-28 | Propositions de plages pour 5 hypothèses sur 7. Signalement des plages nulles sur la page Hypothèses du site. | Aucun (registre et moteur inchangés). Tests web : un test ajouté. |

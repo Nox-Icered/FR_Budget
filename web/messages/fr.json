@@ -62,6 +62,7 @@
     "intro": "Chaque hypothèse a une valeur centrale et une plage. Les résultats sont donnés en fourchette à partir de ces plages.",
     "valeur_centrale": "Valeur centrale",
     "plage": "Plage : de {basse} à {haute}",
+    "plage_nulle": "Plage nulle : aucune plage d'incertitude n'est encore retenue pour cette hypothèse. Son incertitude n'entre donc pas dans les fourchettes publiées.",
     "justification": "Justification",
     "sources": "Sources"
   },

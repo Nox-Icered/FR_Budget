@@ -31,7 +31,7 @@ Moteur : `moteur/src/fr_budget/retraites.py`. Données : `pipelines/retraites/ex
   Les dépenses et les ressources viennent des figures 2.2 et 2.8, en part du PIB. La valeur centrale est la moyenne des deux voies, et les bornes sont les deux voies.
 
   Résultat : environ 0,82 point de PIB pour un an en 2030, 0,84 en 2036 et 0,78 en 2046. Avant 2032, l'écart d'âge qui équilibre le système est petit (moins de 0,4 an) et les deux voies s'écartent : jusqu'à 0,90 et 1,55 point en 2026.
-- **Montée en charge.** L'écart choisi est atteint de façon linéaire en 4 ans, ce qui correspond au rythme de la réforme de 2023 pour un an : trois mois par génération (COR, page 206).
+- **Montée en charge.** L'écart choisi est atteint de façon linéaire en 4 ans, ce qui correspond au rythme de la réforme de 2023 pour un an : trois mois par génération (COR, page 206). Plage de 4 à 4,9 ans depuis le 28 octobre 2026 : après la réforme de 2010, l'âge conjoncturel de départ observé a gagné 1,63 an de 2010 à 2017 et 1,82 an de 2010 à 2019 (COR, figure 2.5), soit 4,3 à 4,9 ans par an d'âge effectif (`docs/validation/plages_nulles.md`, § 3). Les bornes de l'effet croisent celles de l'effet d'un an et celles de cette durée.
 - **Effet dans le scénario.** L'écart de solde primaire s'ajoute chaque année à la baseline, comme pour les autres leviers. La baseline (RESF puis projection du projet) n'est pas celle du COR : le module ne reprend du COR que l'effet d'un an d'âge.
 
 ## 4. Données
@@ -108,6 +108,7 @@ Comparé au tableau 2.10 du COR (mêmes références que la première étape, te
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-28 | Plage de la durée de montée en charge (levier sur l'âge effectif) : 4 à 4,9 ans, à la demande du mainteneur ; le modèle par cohortes garde la valeur centrale (rythme légal) | Validation inchangée (valeur centrale). Un an d'âge effectif en 2027, borne basse de l'écart de solde : 2027 0,230 → 0,187 ; 2028 0,460 → 0,375 ; 2030 0,737 → 0,602 ; 2046 inchangée (0,768). Borne haute de l'écart de dette : 2030 −1,949 → −1,591 ; 2046 −14,891 → −14,508. Centrales et autres bornes inchangées. 1 test unitaire ajouté |
 | 2026-10-28 | Règle de validation : modèle dans [0,9 × borne basse ; 1,1 × borne haute] du tableau 2.10 du COR, au lieu de ±10 % à chaque borne (décision du mainteneur, lot C de la revue de code) | Les 12 comparaisons (6 par modèle) deviennent 6 (3 par modèle). Âge effectif : 0 sur 6 → 0 sur 3 (écarts inchangés : +20,0 %, +39,9 %, +20,6 %). Cohortes : 2 sur 6 → 2 sur 3 (2 ans +16,4 %, hors ; 10 ans +9,4 % ; 20 ans −4,9 % → 0,0 %). Tableau : 59 sur 91 → 59 sur 85 |
 | 2026-10-14 | Revue de la PR : rythme de trois mois par génération, pensions nettes des prélèvements, réponses exactes par cran sur le site | Variante « cohortes » : 2 sur 6 dans la tolérance (10 ans : +18,5 % → +9,4 % ; 20 ans : +2,8 % → −4,9 % ; 2 ans : +26,6 % → +16,4 %) |
 | 2026-10-14 | Deuxième étape : levier sur l'âge légal, modèle par cohortes (§ 8) | 6 comparaisons de la variante « cohortes » au tableau 2.10 du COR, 1 dans la tolérance ; références et première étape inchangées |

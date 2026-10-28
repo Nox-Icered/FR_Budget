@@ -50,3 +50,18 @@ def test_effet_lineaire_et_borne(valeur: float) -> None:
 
 def test_relevement_ameliore_le_solde() -> None:
     assert rt.effet(1.0, 2035, ENTREE, "central") > 0
+
+
+def test_bornes_croisent_la_duree_de_montee_en_charge() -> None:
+    """Plage de la durée de montée en charge (4 à 4,9 ans, COR 2026, figure 2.5) : pendant la
+    montée, la borne basse prend la durée la plus longue ; une fois en place, la durée ne
+    joue plus (plage appliquée le 28 octobre 2026)."""
+    duree = rt.duree_montee_en_charge_plage()
+    assert duree.bas == rt.duree_montee_en_charge() < duree.haut
+    f = rt.effet_un_an(ENTREE)
+    assert rt.effet(1.0, ENTREE, ENTREE, "bas") == pytest.approx(f.bas / duree.haut)
+    assert rt.effet(1.0, ENTREE, ENTREE, "haut") == pytest.approx(f.haut / duree.bas)
+    en_place = ENTREE + 10
+    g = rt.effet_un_an(en_place)
+    assert rt.effet(1.0, en_place, ENTREE, "bas") == pytest.approx(g.bas)
+    assert rt.effet(1.0, en_place, ENTREE, "haut") == pytest.approx(g.haut)

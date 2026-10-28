@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import pytest
 
-from fr_budget.baseline import dette_resf_reproduite, resf
+from fr_budget.baseline import dette_resf_reproduite, resf, trajectoire_resf
 
 TOLERANCE_POINTS = 0.35
 
@@ -32,4 +32,25 @@ def test_formule_reproduit_la_dette_du_resf(annee: int) -> None:
     assert abs(ecart) <= TOLERANCE_POINTS, (
         f"baseline_resf_dette_{annee} : modèle {modele:.2f} % du PIB, référence "
         f"{reference:.1f} % du PIB, écart {ecart:+.2f} point (tolérance ±{TOLERANCE_POINTS})"
+    )
+
+
+TOLERANCE_TAUX = 0.1
+"""Point de taux. Le taux reconstitué part de la charge d'intérêts et de la dette publiées,
+arrondies au dixième (erreur maximale d'environ 0,045 point de taux pour une charge de 2,6 % et
+une dette de 116 % du PIB), et la référence est elle-même arrondie au dixième (0,05)."""
+
+
+@pytest.mark.validation
+@pytest.mark.parametrize("annee", [2026, 2027])
+def test_taux_apparent_reconstitue_egal_au_resf(annee: int) -> None:
+    """RESF 2027, annexe finances publiques, tableau 14 : taux apparent publié pour 2026 et 2027,
+    comparé au taux que la baseline reconstitue à partir de la charge d'intérêts (tableau 13),
+    comme elle le fait pour 2028-2030 où il n'est pas publié."""
+    reference = resf()[(annee, "taux_apparent")]
+    modele = next(a.taux_apparent for a in trajectoire_resf() if a.annee == annee)
+    ecart = modele - reference
+    assert abs(ecart) <= TOLERANCE_TAUX, (
+        f"baseline_resf_taux_apparent_{annee} : modèle {modele:.3f} %, référence "
+        f"{reference:.1f} %, écart {ecart:+.3f} point (tolérance ±{TOLERANCE_TAUX})"
     )

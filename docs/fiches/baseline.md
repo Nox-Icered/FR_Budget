@@ -20,7 +20,7 @@ Rien pour l'instant. Les hypothèses ci-dessous sont affichées avec leur plage.
 
 Deux segments raccordés en 2030 (décision du mainteneur du 8 octobre 2026, option B) :
 
-- **2025-2030 : RESF du PLF 2027**, repris tel que publié (tableaux 4, 13, 14 et 21 et fiche 7). La charge d'intérêts n'est publiée que jusqu'en 2027 ; pour 2028-2030, elle est déduite du tableau 21 (ajustement structurel primaire moins ajustement structurel).
+- **2025-2030 : RESF du PLF 2027**, repris tel que publié (tableaux 4, 13, 14 et 21 et fiche 7). La charge d'intérêts n'est publiée que jusqu'en 2027 ; pour 2028-2030, elle est déduite du tableau 21 (ajustement structurel primaire moins ajustement structurel). Le taux apparent de 2026-2030 est la charge d'intérêts rapportée à la dette de l'année précédente, en euros : les deux étant publiées en % du PIB de leur année, le rapport est multiplié par (1 + croissance nominale). Il redonne le taux publié pour 2026 et 2027 (2,29 % et 2,50 %, contre 2,3 et 2,5 %).
 - **2031-2046 : projection** par la formule `d(t+1) = d(t) * (1 + r) / (1 + g) - pb + sfa` (fiche `dynamique_dette`) :
 
 | Entrée | Valeur | Source |
@@ -28,7 +28,7 @@ Deux segments raccordés en 2030 (décision du mainteneur du 8 octobre 2026, opt
 | Croissance en volume | croissance potentielle | Ageing Report 2024, onglet FRa |
 | Prix (déflateur du PIB) | IPCH, 2 % par an | Ageing Report 2024, onglet FRa ; la fiche France précise que le déflateur suit l'IPC à partir de 2027 |
 | Taux de marché | taux d'intérêt nominal (3,6 % en 2031, 3,9 % en 2046) | Ageing Report 2024, onglet FRa |
-| Taux apparent | refinancement progressif à partir du taux apparent 2030 du RESF (3,0 %) | hypothèse `baseline_part_refinancee` |
+| Taux apparent | refinancement progressif à partir du taux apparent 2030 reconstitué du RESF (3,1 % : charge d'intérêts de 2030 rapportée à la dette de 2029, en euros) | hypothèse `baseline_part_refinancee` |
 | Solde primaire | méthode (a) : solde primaire 2030 du RESF (1,3 point de PIB), moins la variation du coût du vieillissement depuis 2030 | Ageing Report 2024, onglet FRc ; décision du mainteneur du 8 octobre 2026 |
 | Ajustement stock-flux | 0 | hypothèse `baseline_ajustement_stock_flux` |
 
@@ -63,3 +63,4 @@ Deux segments raccordés en 2030 (décision du mainteneur du 8 octobre 2026, opt
 |------|------------|---------------------|
 | 2026-10-08 | Baseline RESF 2027 et Ageing Report 2024, méthode (a) | 2 tests de validation et 11 tests unitaires créés |
 | 2026-10-09 | Variantes de croissance (1,0 %) et de taux (4,3 %) tirées du RESF | 3 tests unitaires créés ; dette 2046 : bas 103,6 %, central 108,3 %, haut 116,4 % (inchangés, la borne haute reste le scénario de risque santé et dépendance) ; 2031 : bas 119,7 % (contre 120,1 %) |
+| 2026-10-28 | Revue de code : taux apparent 2026-2030 reconstitué en euros (le rapport des deux % du PIB est multiplié par 1 + g) ; taux de départ de la projection 3,035 → 3,121 % | dette 2046 centrale 108,25 → 108,67 % du PIB (bas 103,60 → 104,02 ; haut 116,45 → 116,87) ; 2 nouveaux tests de validation (taux apparent 2026 et 2027 contre le RESF), réussis ; aucun autre test ne bouge |

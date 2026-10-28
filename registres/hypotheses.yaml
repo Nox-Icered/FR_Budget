@@ -82,7 +82,8 @@ hypotheses:
     justification: >-
       Le RESF 2027 publie des flux de créances de 0,1 point de PIB en 2025 et de 0,5 point en
       2026 et 2027 (annexe finances publiques, tableau 14). Pour 2028-2030, l'écart qui referme
-      la formule de la dette vaut 0,10, 0,03 et 0,04 point. La valeur centrale suppose
+      la formule de la dette vaut 0,02, -0,06 et -0,06 point (taux apparent reconstitué en
+      euros, correction du 28 octobre 2026 ; avant : 0,10, 0,03 et 0,04). La valeur centrale suppose
       qu'aucun flux de créances ne s'ajoute au déficit après 2030 ; la borne haute reprend le
       niveau de 2026-2027.
     instruments: [baseline]

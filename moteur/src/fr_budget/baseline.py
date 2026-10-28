@@ -149,7 +149,11 @@ def trajectoire_resf() -> list[AnneeBaseline]:
         )
         if lignes:
             precedente = lignes[-1].dette
-            r = POURCENT * charge / precedente
+            # Charge de l'année et dette de l'année précédente, chacune en % de son propre PIB :
+            # le rapport donne r / (1 + g) ; le taux apparent (intérêts / dette de l'année
+            # précédente, en euros) le multiplie par (1 + g). Vérifié sur 2026-2027, où le RESF
+            # publie les deux : 2,6 / 115,7 * 1,020 = 2,29 % contre 2,3 % publié.
+            r = POURCENT * charge / precedente * (1 + g / POURCENT)
             sfa = dette - precedente * (1 + r / POURCENT) / (1 + g / POURCENT) + solde_primaire
         else:
             r = donnees[(annee, "taux_apparent")]

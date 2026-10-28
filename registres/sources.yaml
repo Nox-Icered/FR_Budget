@@ -191,7 +191,7 @@ sources:
     nom: « Impact des dotations de l'État sur l'investissement des collectivités locales », Éclairages, étude n° 8
     editeur: Caisse des Dépôts (publié par la Banque des Territoires)
     url: https://www.banquedesterritoires.fr/sites/default/files/2018-11/eclairages_8.pdf
-    licence: non précisée (document public ; reprise de chiffres avec citation)
+    licence: contenus propriété de la Caisse des Dépôts (conditions générales d'utilisation du site) ; citation seulement, document non reproduit (retiré du dépôt le 28 octobre 2026)
     millesime: septembre 2015 (données 2001-2013)
     acces: direct
     consulte_le: 2026-10-09
@@ -308,7 +308,7 @@ sources:
     nom: Base Carbone, documentation « PCI et masse volumique »
     editeur: ADEME
     url: https://prod-basecarbonesolo.ademe-dri.fr/documentation/UPLOAD_DOC_FR/pci_et_masse_volumique.htm
-    licence: non précisée (à vérifier)
+    licence: Licence Ouverte selon la documentation de l'ADEME, non vérifiée sur la page officielle (inaccessible le 28 octobre 2026) ; citation seulement en attendant (LICENCE-DONNEES.md)
     acces: direct
     consulte_le: 2026-10-09
 

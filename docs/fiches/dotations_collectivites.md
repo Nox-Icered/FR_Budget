@@ -58,7 +58,7 @@ Repère pour la borne de ±10 % : la baisse de la DGF de 2014 à 2017 a été d'
 |--------------------------------------------|------------------|-----------|
 | `plf2026_voies_et_moyens_tome1_pdf`, `plf2025_…`, `plf2024_voies_et_moyens_tome1_pdf` | prélèvements par ligne : exécution N-2, LFI et révisé N-1, PLF N | PLF 2024 à 2026 |
 | `ofgl_communes_agregats_json`, `ofgl_gfp_…`, `ofgl_departements_…`, `ofgl_regions_…` | investissement hors remboursements, concours de l'État, DGF, péréquations et compensations, par niveau | exercices 2023 à 2025 |
-| `cdc_eclairages_8_pdf` | élasticités de l'investissement aux dotations | 2015 (données 2001-2013) |
+| `cdc_eclairages_8_pdf` | élasticités de l'investissement aux dotations (document cité, non reproduit dans le dépôt depuis le 28 octobre 2026) | 2015 (données 2001-2013) |
 
 ## 5. Hypothèses
 

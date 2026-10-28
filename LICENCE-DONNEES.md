@@ -16,6 +16,16 @@ Le code du projet est sous AGPL-3.0 (voir `LICENSE`).
 
 Les tables `data/processed/entreprises/is_taille.csv` et `is_secteur.csv`, dérivées de données de la DGFiP (Licence Etalab 2.0), restent sous la Licence Ouverte 2.0.
 
+**Exception : documents de la DG Trésor, réutilisation non commerciale** (décision du mainteneur du 28 octobre 2026). Les mentions légales du site de la DG Trésor n'autorisent que la « réutilisation non commerciale », en respectant l'intégrité des informations et en citant la source (`registres/sources.yaml`, identifiants `plf2027_resf`, `dgtresor_tresor_eco_371` et `dgtresor_cahier_2016_02`). Les fichiers et données suivants restent donc sous ces conditions, et non sous la Licence Ouverte 2.0 :
+
+- les fichiers bruts `data/raw/baseline/tresor/PLF_2027_RESF.pdf` et `Tableaux_RESF_2027.xlsx` (rapport économique, social et financier du PLF 2027), `data/raw/tva/dgtresor_tresor_eco_371_2025-09.pdf` et `data/raw/tva/dgtresor_cahier_2016-02_tva_theorique.pdf` ;
+- la table dérivée `data/processed/baseline/resf_2027.csv`, et la trajectoire 2025-2030 de la baseline qui en reprend les valeurs (fichiers de l'export de l'API publiés par le site, route `GET /baseline`) ;
+- les valeurs tirées de ces documents dans `registres/references/chiffrages.yaml` (chiffrages dont la `source` est l'un des identifiants ci-dessus), reprises comme citations avec leur source.
+
+Le rapport économique, social et financier est une annexe du projet de loi de finances ; si la DG Trésor confirme qu'il relève de la libre réutilisation, cette exception sera levée.
+
+**Exception : conditions non vérifiées.** La documentation « PCI et masse volumique » de la Base Carbone de l'ADEME (`data/raw/accises/ademe/base_carbone_pci_et_masse_volumique.htm`, identifiant `ademe_base_carbone_pci_masse_volumique`) est publiée sous la Licence Ouverte selon la documentation de l'ADEME, ce qui n'a pas pu être vérifié sur la page officielle de la Base Empreinte (inaccessible depuis l'environnement de travail le 28 octobre 2026). D'ici là, ce fichier et les masses volumiques qui en sont tirées sont repris comme citations, avec leur source.
+
 Le texte de la licence ci-dessous est repris sans modification de https://github.com/etalab/licence-ouverte (fichier `LO.md`).
 
 ---

@@ -103,7 +103,7 @@ datasets:
     description: Étude n° 8 de la série Éclairages (PDF, 16 pages)
     fichier: data/raw/dotations_collectivites/cdc_eclairages_8_dotations_investissement.pdf
     empreinte_sha256: 64f35183aa94a3cbc45ade6adcb8f1608a11bb78b430877e2fbb581f41b97323
-    methode_transformation: aucune ; élasticités lues dans le document et saisies dans registres/hypotheses.yaml
+    methode_transformation: aucune ; élasticités lues dans le document et saisies dans registres/hypotheses.yaml. Fichier retiré du dépôt le 28 octobre 2026 (contenus propriété de la Caisse des Dépôts) ; à retélécharger depuis l'URL de la source, l'empreinte permet de vérifier qu'il s'agit du même document
     telecharge_le: 2026-10-09
 
   - id: ofgl_communes_agregats_json

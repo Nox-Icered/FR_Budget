@@ -15,7 +15,9 @@ Paramètres (registre d'hypothèses, choix du lot 3.2 à relire, ``docs/fiches/c
 - multiplicateur à un an m par instrument : valeur centrale = variante de Mésange 2017 (Insee
   et DG Trésor) la plus proche ; plage = Mésange et multiplicateurs de l'OFCE (0,5 pour les
   recettes, 1 pour les dépenses) ;
-- rho = 0,7 et alpha = 0,5 : valeurs usuelles citées par l'OFCE, sans plage.
+- rho = 0,7 : valeur usuelle citée par l'OFCE, sans plage (aucune seconde source trouvée) ;
+- alpha = 0,5 (OFCE), plage de 0,5 à 0,63 (semi-élasticités de la Commission européenne, plage
+  appliquée le 28 octobre 2026, ``docs/validation/plages_nulles.md``).
 """
 
 from __future__ import annotations
@@ -71,6 +73,12 @@ def persistance() -> float:
 def effet_sur_le_solde() -> float:
     """alpha : effet d'un point d'écart de production sur le solde, en point de PIB (OFCE)."""
     return hypothese(HYPOTHESE_EFFET_SOLDE).valeur_centrale
+
+
+def effet_sur_le_solde_plage() -> Fourchette:
+    """alpha en fourchette (registre d'hypothèses : OFCE et Commission européenne)."""
+    h = hypothese(HYPOTHESE_EFFET_SOLDE)
+    return encadrer(h.valeur_centrale, [h.plage.basse, h.plage.haute])
 
 
 def impulsions(effets: Mapping[int, float], annees: Sequence[int]) -> list[float]:

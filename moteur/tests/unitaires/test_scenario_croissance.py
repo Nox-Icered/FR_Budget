@@ -106,16 +106,57 @@ def test_fourchette_avec_mesures_de_signes_opposes_couvre_chaque_multiplicateur(
 
 
 def test_fourchette_d_une_mesure_seule_inchangee() -> None:
-    """Une mesure seule : les extrêmes de l'écart sont ceux des bornes de son multiplicateur."""
+    """Une mesure seule : les extrêmes de l'écart sont ceux des bornes de son multiplicateur et
+    de alpha (plage de alpha appliquée le 28 octobre 2026, docs/validation/plages_nulles.md)."""
     mesure = [sc.Mesure(sc.LEVIER_TVA_NORMAL, 2.0, ANNEE)]
     centrale, _ = trajectoires()
     resultat = sc.scenario(mesure, croissance=True)
+    alpha = cr.effet_sur_le_solde_plage()
     traj = [
-        sc._trajectoire_mesures(centrale, mesure, e, b)
+        sc._trajectoire_mesures(centrale, mesure, e, b, a)
         for e in sc.BORNES_EFFET
         for b in (*sc.BORNES_EFFET, sc.CENTRAL)
+        for a in (alpha.bas, alpha.central, alpha.haut)
     ]
     for i, (ligne, ref) in enumerate(zip(resultat, centrale, strict=True)):
         ecarts = [t[i].dette - ref.dette for t in traj]
         assert ligne.ecart_dette.bas == pytest.approx(min(*ecarts, ligne.ecart_dette.central))
         assert ligne.ecart_dette.haut == pytest.approx(max(*ecarts, ligne.ecart_dette.central))
+
+
+def test_alpha_haut_elargit_la_fourchette() -> None:
+    """alpha haut (0,63, Commission européenne) : la hausse de TVA perd plus de solde par
+    l'écart de production, la dette baisse moins (borne haute de l'écart de dette plus haute
+    qu'avec alpha central seul)."""
+    mesure = [sc.Mesure(sc.LEVIER_TVA_NORMAL, 1.0, ANNEE)]
+    centrale, _ = trajectoires()
+    alpha = cr.effet_sur_le_solde_plage()
+    assert alpha.haut > alpha.central
+    resultat = {a.annee: a for a in sc.scenario(mesure, croissance=True)}
+    seul_central = [
+        sc._trajectoire_mesures(centrale, mesure, e, b, alpha.central)
+        for e in sc.BORNES_EFFET
+        for b in sc.BORNES_EFFET
+    ]
+    i = [a.annee for a in centrale].index(ANNEE + 1)
+    ref = centrale[i]
+    assert resultat[ANNEE + 1].ecart_dette.haut > max(t[i].dette - ref.dette for t in seul_central)
+
+
+def test_reponse_lineaire_avec_alpha() -> None:
+    """supplément + (alpha - alpha central) * variation redonne la trajectoire à alpha haut."""
+    x = 1.0
+    r = sc.reponse_lineaire(sc.LEVIER_TVA_NORMAL, ANNEE)
+    m = cr.multiplicateur(cr.TVA).central
+    alpha = cr.effet_sur_le_solde_plage()
+    centrale, _ = trajectoires()
+    mesure = [sc.Mesure(sc.LEVIER_TVA_NORMAL, x, ANNEE)]
+    t = sc._trajectoire_mesures(centrale, mesure, sc.CENTRAL, sc.CENTRAL, alpha.haut)
+    for i, (a, ref) in enumerate(zip(t, centrale, strict=True)):
+        supplement = (
+            r.croissance_dette[0][i]
+            + (alpha.haut - alpha.central) * (r.croissance_alpha_dette[0][i])
+        )
+        assert x * (r.unite_dette[0][i] + m * supplement) == pytest.approx(
+            a.dette - ref.dette, abs=1e-9
+        )

@@ -28,6 +28,8 @@ export type MesureSite = { levier: string; valeur: number };
 // supplément de croissance ; le multiplicateur m est central sur toutes les trajectoires, et
 // les extrêmes du multiplicateur de chaque mesure, choisis année par année indépendamment des
 // autres mesures (effet bas ou haut), élargissent la fourchette, comme dans fr_budget.scenario.
+// Les extrêmes sont pris aux deux bornes de alpha (effet de l'écart de production sur le solde) :
+// le supplément vaut alors supplément central + (alpha - alpha central) * variation par point.
 export function calculer(
   donnees: ReponsesUnitaires,
   mesures: MesureSite[],
@@ -58,24 +60,47 @@ export function calculer(
     return k;
   };
   type Borne = "bas" | "central" | "haut";
-  const somme = (k: number, i: number, cle: "dette" | "solde", borne: Borne | null) =>
+  type Reponse = (typeof reponses)[number]["r"];
+  const alphaCentral = donnees.croissance?.effet_solde ?? 0;
+  const plageAlpha = donnees.croissance?.effet_solde_plage;
+  const alphas = plageAlpha ? [...new Set([plageAlpha.bas, plageAlpha.haut])] : [alphaCentral];
+  const supplement = (r: Reponse, kk: number, i: number, cle: "dette" | "solde", alpha: number) =>
+    (r[`croissance_${cle}`]?.[kk][i] ?? 0) +
+    (alpha - alphaCentral) * (r[`croissance_alpha_${cle}`]?.[kk][i] ?? 0);
+  const somme = (
+    k: number,
+    i: number,
+    cle: "dette" | "solde",
+    borne: Borne | null,
+    alpha = alphaCentral,
+  ) =>
     reponses.reduce((total, { valeur, r, mult, grille }) => {
       const kk = grille ? k : indice(k, valeur);
       const unite = r[`unite_${cle}`][kk][i];
-      const supplement = borne && mult ? mult[borne] * (r[`croissance_${cle}`]?.[kk][i] ?? 0) : 0;
-      return total + valeur * (unite + supplement);
+      const plus = borne && mult ? mult[borne] * supplement(r, kk, i, cle, alpha) : 0;
+      return total + valeur * (unite + plus);
     }, 0);
   const central: Borne | null = croissance ? "central" : null;
   // Écart à la trajectoire au multiplicateur central quand le multiplicateur de chaque mesure
   // prend, pour l'année, la borne qui donne l'écart le plus bas (ou le plus haut) : la réponse
   // est linéaire dans chaque multiplicateur.
-  const extreme = (k: number, i: number, cle: "dette" | "solde", choisir: (...v: number[]) => number) =>
+  const extreme = (
+    k: number,
+    i: number,
+    cle: "dette" | "solde",
+    choisir: (...v: number[]) => number,
+    alpha: number,
+  ) =>
     reponses.reduce((total, { valeur, r, mult, grille }) => {
       if (!mult) return total;
       const kk = grille ? k : indice(k, valeur);
-      const c = r[`croissance_${cle}`]?.[kk][i] ?? 0;
+      const c = supplement(r, kk, i, cle, alpha);
       return total + choisir(0, valeur * (mult.bas - mult.central) * c, valeur * (mult.haut - mult.central) * c);
     }, 0);
+  // Extrême d'un coin : le plus extrême, sur les bornes de alpha, de la trajectoire au
+  // multiplicateur central plus les extrêmes des multiplicateurs.
+  const coin = (k: number, i: number, cle: "dette" | "solde", choisir: (...v: number[]) => number) =>
+    choisir(...alphas.map((a) => somme(k, i, cle, central, a) + extreme(k, i, cle, choisir, a)));
   const coins: [number, (...v: number[]) => number][] = croissance
     ? [
         [kBas, Math.min],
@@ -89,12 +114,12 @@ export function calculer(
       const base = cle === "dette" ? donnees.base_dette : donnees.base_solde;
       return [
         ...base.map((b, k) => b[i] + somme(k, i, cle, central)),
-        ...coins.map(([k, choisir]) => base[k][i] + somme(k, i, cle, central) + extreme(k, i, cle, choisir)),
+        ...coins.map(([k, choisir]) => base[k][i] + coin(k, i, cle, choisir)),
       ];
     };
     const ecarts = (cle: "dette" | "solde") => [
       ...donnees.indices_effet.map((k) => somme(k, i, cle, central)),
-      ...coins.map(([k, choisir]) => somme(k, i, cle, central) + extreme(k, i, cle, choisir)),
+      ...coins.map(([k, choisir]) => coin(k, i, cle, choisir)),
     ];
     const [dette, solde, ecartsDette, ecartsSolde] = [
       niveaux("dette"),

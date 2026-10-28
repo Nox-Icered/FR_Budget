@@ -735,9 +735,11 @@ def _trajectoire_mesures(
     mesures: Sequence[Mesure],
     borne_effet: str,
     multiplicateurs: str | Sequence[str] | None,
+    alpha: float | None = None,
 ) -> list[AnneeBaseline]:
     """Trajectoire avec les mesures ; avec l'effet de croissance si ``multiplicateurs`` désigne
-    la borne du multiplicateur, commune à toutes les mesures ou propre à chacune (même ordre)."""
+    la borne du multiplicateur, commune à toutes les mesures ou propre à chacune (même ordre).
+    ``alpha`` : effet de l'écart de production sur le solde (valeur centrale par défaut)."""
     effets = _effets_par_annee(mesures, borne_effet)
     if multiplicateurs is None:
         return trajectoire_avec_effet(trajectoire, effets)
@@ -756,50 +758,74 @@ def _trajectoire_mesures(
             rho,
         )
         ecart = [x + y for x, y in zip(ecart, og, strict=True)]
-    return module_croissance.trajectoire_avec_croissance(
-        trajectoire, effets, ecart, module_croissance.effet_sur_le_solde()
-    )
+    if alpha is None:
+        alpha = module_croissance.effet_sur_le_solde()
+    return module_croissance.trajectoire_avec_croissance(trajectoire, effets, ecart, alpha)
 
 
 CENTRAL = "central"
 BORNES_EFFET = ("bas", "haut")
 
 
+def _alphas() -> list[float]:
+    """Bornes distinctes de alpha (effet de l'écart de production sur le solde)."""
+    plage = module_croissance.effet_sur_le_solde_plage()
+    return sorted({plage.bas, plage.haut})
+
+
 def _extremes_croissance(
     trajectoire: Sequence[AnneeBaseline], mesures: Sequence[Mesure], borne_effet: str
 ) -> list[list[AnneeBaseline]]:
     """Trajectoires basse et haute, année par année, quand le multiplicateur de chaque mesure
-    varie dans sa plage indépendamment des autres.
+    varie dans sa plage indépendamment des autres, et alpha dans la sienne.
 
-    La dette et le solde sont linéaires dans chaque multiplicateur (écart de production
-    additif, ``fr_budget.croissance``) : l'extrême de chaque année est la trajectoire au
-    multiplicateur central plus, pour chaque mesure, l'écart le plus bas (ou le plus haut) de
-    ses deux bornes. Un multiplicateur commun à toutes les mesures sous-estimerait la fourchette
-    quand des mesures ont des effets de signes opposés (revue de code du 28 octobre 2026).
+    À alpha donné, la dette et le solde sont linéaires dans chaque multiplicateur (écart de
+    production additif, ``fr_budget.croissance``) : l'extrême de chaque année est la
+    trajectoire au multiplicateur central plus, pour chaque mesure, l'écart le plus bas (ou le
+    plus haut) de ses deux bornes. Un multiplicateur commun à toutes les mesures sous-estimerait
+    la fourchette quand des mesures ont des effets de signes opposés (revue de code du 28
+    octobre 2026). À multiplicateurs donnés, le résultat est linéaire dans alpha : l'extrême
+    est atteint à une borne de alpha, et on garde le plus extrême des deux.
     """
-    centre = _trajectoire_mesures(trajectoire, mesures, borne_effet, CENTRAL)
-    # ecarts[j][b] : écarts (dette, solde) de chaque année quand seule la mesure j prend la
-    # borne b de son multiplicateur.
-    ecarts: list[list[list[tuple[float, float]]]] = []
-    for j in range(len(mesures)):
-        ecarts_j = []
-        for borne in BORNES_EFFET:
-            choix = [borne if k == j else CENTRAL for k in range(len(mesures))]
-            t = _trajectoire_mesures(trajectoire, mesures, borne_effet, choix)
-            ecarts_j.append(
-                [
-                    (a.dette - c.dette, a.solde_primaire - c.solde_primaire)
-                    for a, c in zip(t, centre, strict=True)
-                ]
-            )
-        ecarts.append(ecarts_j)
+    par_alpha = []
+    for alpha in _alphas():
+        centre = _trajectoire_mesures(trajectoire, mesures, borne_effet, CENTRAL, alpha)
+        # ecarts[j][b] : écarts (dette, solde) de chaque année quand seule la mesure j prend
+        # la borne b de son multiplicateur.
+        ecarts: list[list[list[tuple[float, float]]]] = []
+        for j in range(len(mesures)):
+            ecarts_j = []
+            for borne in BORNES_EFFET:
+                choix = [borne if k == j else CENTRAL for k in range(len(mesures))]
+                t = _trajectoire_mesures(trajectoire, mesures, borne_effet, choix, alpha)
+                ecarts_j.append(
+                    [
+                        (a.dette - c.dette, a.solde_primaire - c.solde_primaire)
+                        for a, c in zip(t, centre, strict=True)
+                    ]
+                )
+            ecarts.append(ecarts_j)
+        extremes = []
+        for choisir in (min, max):
+            lignes = []
+            for i, c in enumerate(centre):
+                dette = c.dette + sum(choisir(0.0, *(b[i][0] for b in e)) for e in ecarts)
+                solde = c.solde_primaire + sum(choisir(0.0, *(b[i][1] for b in e)) for e in ecarts)
+                lignes.append(replace(c, dette=dette, solde_primaire=solde))
+            extremes.append(lignes)
+        par_alpha.append(extremes)
     resultat = []
-    for choisir in (min, max):
+    for k, choisir in enumerate((min, max)):
         lignes = []
-        for i, c in enumerate(centre):
-            dette = c.dette + sum(choisir(0.0, *(b[i][0] for b in e)) for e in ecarts)
-            solde = c.solde_primaire + sum(choisir(0.0, *(b[i][1] for b in e)) for e in ecarts)
-            lignes.append(replace(c, dette=dette, solde_primaire=solde))
+        for i in range(len(trajectoire)):
+            candidates = [e[k][i] for e in par_alpha]
+            lignes.append(
+                replace(
+                    candidates[0],
+                    dette=choisir(a.dette for a in candidates),
+                    solde_primaire=choisir(a.solde_primaire for a in candidates),
+                )
+            )
         resultat.append(lignes)
     return resultat
 
@@ -1108,6 +1134,11 @@ class ReponseLineaire:
     """Supplément dû à l'effet de croissance pour une unité du levier et un multiplicateur de 1,
     mêmes trajectoires : avec le multiplicateur m, l'écart vaut unité + m * supplément (le
     calcul est linéaire dans m)."""
+    croissance_alpha_dette: list[list[float]]
+    croissance_alpha_solde: list[list[float]]
+    """Variation du supplément pour un point de alpha (effet de l'écart de production sur le
+    solde) : avec alpha, le supplément vaut supplément + (alpha - alpha central) * variation
+    (le calcul est linéaire dans alpha). Nulle quand alpha n'a pas de plage."""
 
 
 def reponse_lineaire(levier: str, annee: int, valeur: float = 1.0) -> ReponseLineaire:
@@ -1123,13 +1154,33 @@ def reponse_lineaire(levier: str, annee: int, valeur: float = 1.0) -> ReponseLin
         (centrale, "bas"),
         (centrale, "haut"),
     ]
+    alpha = module_croissance.effet_sur_le_solde_plage()
+    pas_alpha = alpha.haut - alpha.central
     base_dette, base_solde, unite_dette, unite_solde = [], [], [], []
     croissance_dette, croissance_solde = [], []
+    alpha_dette, alpha_solde = [], []
     for trajectoire, borne in paires:
         avec = _trajectoire_mesures(trajectoire, mesures, borne, None)
         avec_croissance = _trajectoire_mesures(
             trajectoire, mesures, borne, None if sans_croissance else CENTRAL
         )
+        if sans_croissance or pas_alpha == 0:
+            alpha_dette.append([0.0] * len(trajectoire))
+            alpha_solde.append([0.0] * len(trajectoire))
+        else:
+            avec_alpha = _trajectoire_mesures(trajectoire, mesures, borne, CENTRAL, alpha.haut)
+            alpha_dette.append(
+                [
+                    (h.dette - c.dette) / (m_central * pas_alpha)
+                    for c, h in zip(avec_croissance, avec_alpha, strict=True)
+                ]
+            )
+            alpha_solde.append(
+                [
+                    (h.solde_primaire - c.solde_primaire) / (m_central * pas_alpha)
+                    for c, h in zip(avec_croissance, avec_alpha, strict=True)
+                ]
+            )
         base_dette.append([a.dette for a in trajectoire])
         base_solde.append([a.solde_primaire for a in trajectoire])
         unite_dette.append([b.dette - a.dette for a, b in zip(trajectoire, avec, strict=True)])
@@ -1158,4 +1209,6 @@ def reponse_lineaire(levier: str, annee: int, valeur: float = 1.0) -> ReponseLin
         indices_effet=[0, n - 2, n - 1],
         croissance_dette=croissance_dette,
         croissance_solde=croissance_solde,
+        croissance_alpha_dette=alpha_dette,
+        croissance_alpha_solde=alpha_solde,
     )

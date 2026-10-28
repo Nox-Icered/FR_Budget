@@ -149,3 +149,40 @@ test("croissance, mesures de signes opposés : chaque multiplicateur varie indé
   assert.ok(l.ecart_dette.bas <= -0.2 + 1e-12);
   assert.ok(l.ecart_dette.haut >= 0.2 - 1e-12);
 });
+
+test("croissance : les bornes de alpha élargissent la fourchette, le central est inchangé", () => {
+  // alpha de 0,5 (central) à 0,6 ; supplément +1 point de dette par point de alpha : à alpha
+  // 0,6, le supplément vaut 0,5 + 0,1 x 1 = 0,6. Coin haut : -0,9 + 0,6 x 0,6 = -0,54 ; coin
+  // bas : -1,1 + 0,2 x 0,5 = -1,0 (à alpha 0,6 : -0,98, moins extrême).
+  const r = avecCroissance.leviers.l.reponses["2027"];
+  const avecAlpha: ReponsesUnitaires = {
+    ...avecCroissance,
+    croissance: {
+      sources: [],
+      hypotheses: [],
+      persistance: 0.7,
+      effet_solde: 0.5,
+      effet_solde_plage: { bas: 0.5, central: 0.5, haut: 0.6 },
+    },
+    leviers: {
+      l: {
+        ...avecCroissance.leviers.l,
+        reponses: {
+          "2027": {
+            ...r,
+            croissance_alpha_dette: [
+              [0, 1],
+              [0, 1],
+              [0, 1],
+              [0, 1],
+            ],
+          },
+        },
+      },
+    },
+  };
+  const [, l] = calculer(avecAlpha, [{ levier: "l", valeur: 1 }], 2027, true);
+  assert.ok(Math.abs(l.ecart_dette.central + 0.8) < 1e-12);
+  assert.ok(Math.abs(l.ecart_dette.haut + 0.54) < 1e-12);
+  assert.ok(Math.abs(l.ecart_dette.bas + 1.0) < 1e-12);
+});

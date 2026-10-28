@@ -285,3 +285,24 @@ def test_relecture_nomme_au_moins_un_objet() -> None:
     assert Relecture.model_validate(base).objet == ["tva"]
     with pytest.raises(ValidationError):
         Relecture.model_validate({**base, "objet": []})
+
+
+def test_statut_valide_exige_confrontation_independante_et_relecture(tmp_path: Path) -> None:
+    """Règle de publication : un levier « valide » a au moins une confrontation à une source
+    indépendante, et toutes ses valeurs de référence sont relues."""
+    valide = {**LEVIER, "statut": "valide"}
+    officiel = {**CHIFFRAGE, "relecture": "relu"}
+    independant = {**CHIFFRAGE, "id": "chiffrage_b", "relecture": "relu", "independante": True}
+    sans_independant = erreurs(
+        ecrire_registres(tmp_path / "a", leviers=[valide], chiffrages=[officiel])
+    )
+    assert any("confrontation indépendante" in e for e in sans_independant)
+    a_relire = {**independant, "relecture": "a_relire"}
+    non_relu = erreurs(
+        ecrire_registres(tmp_path / "b", leviers=[valide], chiffrages=[officiel, a_relire])
+    )
+    assert any("à relire" in e for e in non_relu)
+    conforme = erreurs(
+        ecrire_registres(tmp_path / "c", leviers=[valide], chiffrages=[officiel, independant])
+    )
+    assert not any("statut" in e for e in conforme)

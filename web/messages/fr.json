@@ -291,6 +291,8 @@
       "chargement": "Chargement des effets sur les ménages…",
       "erreur": "Les effets sur les ménages n'ont pas pu être chargés. Rechargez la page pour réessayer.",
       "aucune": "Aucune mesure réglée ne change directement la cascade de ces ménages.",
+      "aucune_chiffree": "Les mesures réglées ne sont pas chiffrées pour ces ménages (voir ci-dessous).",
+      "autres_non_chiffrees": "Dépenses fiscales et crédits des missions : leur effet sur ces ménages n'est pas calculé.",
       "menage": "Ménage",
       "net": "Net après impôt, prestations comprises",
       "cout": "Coût pour l'employeur",
@@ -306,6 +308,8 @@
     "entreprises": {
       "titre": "Effet sur les entreprises",
       "aucune": "Aucune mesure réglée ne change directement les cotisations patronales ou l'impôt sur les sociétés.",
+      "aucune_chiffree": "Les mesures réglées (dépenses fiscales, crédits des missions) ne sont pas chiffrées par taille d'entreprise.",
+      "autres_non_chiffrees": "Les dépenses fiscales et les crédits des missions réglés ne sont pas chiffrés par taille d'entreprise.",
       "groupes": {
         "cotisations": "Cotisations patronales, par taille d'entreprise (nombre de salariés, Urssaf)",
         "impot_societes": "Impôt sur les sociétés, par catégorie d'entreprise (DGFiP)"
@@ -364,7 +368,7 @@
     "lien_comparaison": "Comparer avec d'autres scénarios",
     "lien_illisible": "Ce lien est illisible : le scénario n'a pas été chargé.",
     "lien_invalide": "Ce lien contient un réglage inconnu, hors des bornes ou une combinaison refusée (double compte) : le scénario n'a pas été chargé.",
-    "autre_version": "Ce lien a été créé avec une autre version du modèle ou des données : le résultat peut différer de celui vu à l'origine.",
+    "autre_version": "Ce lien a été créé avec une autre version du modèle ou des données. Le résultat affiché est calculé avec la version actuelle et peut différer de celui vu à l'origine, qui n'est plus disponible sur le site.",
     "explication": "Le lien contient les réglages du scénario et la version du modèle. Il n'est enregistré nulle part : le calcul se refait dans votre navigateur. Les exports donnent toutes les années, en points de PIB, avec la fourchette basse et haute."
   },
   "comparaison": {
@@ -439,7 +443,7 @@
       "rsa": "RSA",
       "ars": "Allocation de rentrée scolaire"
     },
-    "limites": "Non comptés : aides au logement (elles dépendent du loyer), taxe foncière, revenus du patrimoine. Les effets des mesures sont calculés sans changement de comportement ; pour les cotisations patronales, seules les deux lectures extrêmes de l'incidence (aucune ou complète répercussion sur le salaire) sont proposées. Une revalorisation ne porte que sur la part de base d'une pension, prise égale à la moyenne nationale.",
+    "limites": "Non comptés : aides au logement (elles dépendent du loyer), minimum vieillesse, allocation de base de la PAJE, taxe foncière, revenus du patrimoine. Les effets des mesures sont calculés sans changement de comportement ; pour les cotisations patronales, seules les deux lectures extrêmes de l'incidence (aucune ou complète répercussion sur le salaire) sont proposées. Une revalorisation ne porte que sur la part de base d'une pension, prise égale à la moyenne nationale.",
     "lien_fiche": "Méthode, sources et validation : fiche « ménages types » du dépôt.",
     "sources": "Sources :",
     "effets": {

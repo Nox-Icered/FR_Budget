@@ -26,6 +26,8 @@ from fr_budget.registres.schemas import (
     RegistreCorrections,
     Relecture,
     Source,
+    Statut,
+    StatutRelecture,
 )
 
 RACINE_DEPOT = Path(__file__).parents[4]
@@ -226,12 +228,33 @@ def verifier(registres: Registres, racine: Path, rapport: Rapport) -> None:
             for s in corr.sources:
                 _renvoi(f"corrections_openfisca.yaml / {corr.id}", s, sources, "source", rapport)
 
+    _verifier_statuts(registres, rapport)
     for lv in registres.leviers:
         for terme in registres.libelles_interdits:
             if re.search(rf"\b{re.escape(terme)}\b", lv.libelle, re.IGNORECASE):
                 rapport.erreurs.append(
                     f"leviers.yaml / {lv.id} : libellé orienté (« {terme} ») : {lv.libelle}"
                 )
+
+
+def _verifier_statuts(registres: Registres, rapport: Rapport) -> None:
+    """Règle de publication (CLAUDE.md) pour un levier au statut « valide » : au moins une
+    confrontation à une source indépendante, et toutes ses valeurs de référence relues. Les
+    écarts aux références (±10 %) sont contrôlés par les tests de validation."""
+    for lv in registres.leviers:
+        if lv.statut != Statut.VALIDE:
+            continue
+        siens = [c for c in registres.chiffrages if c.levier == lv.id]
+        if not any(c.independante for c in siens):
+            rapport.erreurs.append(
+                f"leviers.yaml / {lv.id} : statut « valide » sans confrontation indépendante"
+            )
+        a_relire = [c.id for c in siens if c.relecture != StatutRelecture.RELU]
+        if a_relire:
+            rapport.erreurs.append(
+                f"leviers.yaml / {lv.id} : statut « valide » avec des chiffrages à relire "
+                f"({', '.join(a_relire)})"
+            )
 
 
 def verifier_fiches(dossier_fiches: Path, leviers: set[str], rapport: Rapport) -> None:

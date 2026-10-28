@@ -119,6 +119,16 @@ def test_cas_saisis_dans_le_simulateur_a_jour() -> None:
 
 
 @pytest.mark.validation
+def test_simulateur_officiel_a_au_moins_un_cas() -> None:
+    """Sans cas relevé, la comparaison au simulateur officiel ne vérifie rien : l'absence de
+    référence est signalée comme un échec (page Validation et résumé de la CI), pas ignorée."""
+    assert CAS, (
+        "aucun cas relevé dans mesdroitssociaux_pa_2026.json : la prime d'activité n'est pas "
+        "comparée au simulateur officiel (relevé à refaire : outils/references_prestations)"
+    )
+
+
+@pytest.mark.validation
 @pytest.mark.parametrize("cas", CAS, ids=[c["id"] for c in CAS])
 def test_prime_activite_egale_au_simulateur(cas: dict[str, Any]) -> None:
     reference = cas["resultats"]["prime_activite"]

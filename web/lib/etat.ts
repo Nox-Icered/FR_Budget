@@ -161,7 +161,8 @@ export function problemes(
   const premier = Object.values(donnees.leviers)[0];
   if (!premier || !possede(premier.reponses, String(etat.annee))) liste.push("annee");
   for (const [id, v] of Object.entries(etat.leviers)) {
-    if (!PUBLICS.has(id) || !possede(donnees.leviers, id)) liste.push("levier_inconnu");
+    if (!PUBLICS.has(id) || !possede(donnees.leviers, id) || donnees.leviers[id].statut === "non_publie")
+      liste.push("levier_inconnu");
     else if (!dans(v, donnees.leviers[id].bornes)) liste.push("hors_bornes");
     else if (donnees.leviers[id].grille && v !== 0 && !possede(donnees.leviers[id].grille ?? {}, String(v)))
       liste.push("hors_bornes");

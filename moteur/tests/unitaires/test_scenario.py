@@ -94,6 +94,15 @@ def test_levier_inconnu_refuse() -> None:
         scenario([Mesure("inexistant", 1.0, 2027)])
 
 
+def test_meme_levier_deux_fois_refuse() -> None:
+    """Deux mesures sur un même levier additionneraient leurs effets au-delà de ses bornes
+    (dix mesures de +10 points de TVA donneraient +100 points)."""
+    with pytest.raises(ValueError, match="même levier"):
+        scenario([Mesure(LEVIER_TVA_NORMAL, 10.0, 2027), Mesure(LEVIER_TVA_NORMAL, 10.0, 2027)])
+    with pytest.raises(ValueError, match="même levier"):
+        scenario([Mesure(LEVIER_TVA_NORMAL, 1.0, 2027), Mesure(LEVIER_TVA_NORMAL, 1.0, 2030)])
+
+
 def test_annee_hors_horizon_refusee() -> None:
     with pytest.raises(ValueError, match="année"):
         scenario([Mesure(LEVIER_TVA_NORMAL, 1.0, 2025)])

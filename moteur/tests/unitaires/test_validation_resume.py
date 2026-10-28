@@ -3,7 +3,14 @@ import re
 import pytest
 
 from fr_budget.registres.verification import RACINE_DEPOT
-from fr_budget.validation import Comparaison, _definitions, comparer, tableau_markdown
+from fr_budget.validation import (
+    Comparaison,
+    _definitions,
+    comparer,
+    comparer_fourchette,
+    definitions_fourchettes,
+    tableau_markdown,
+)
 
 
 def test_ecart_et_tolerance() -> None:
@@ -37,7 +44,6 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
             "test_levier_cotisations.py",
             "test_levier_impot_revenu.py",
             "test_levier_prime_activite.py",
-            "test_levier_retraites.py",
         )
     )
     attendues = set(re.findall(r'"((?:tva|dette)_[a-z0-9_]+)"', textes))
@@ -86,9 +92,6 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
     attendues |= {"indexation_gel_aah_2026", "pa_pente_moindre_depense_2025"}
     attendues.add("indexation_pensions_gel_2026_hcfp")
     attendues |= {
-        f"cor_aod_un_an_solde_apu_{h}ans_{b}" for h in (2, 10, 20) for b in ("bas", "haut")
-    }
-    attendues |= {
         "tva_point_brut_ipp_2025_quatre_taux",
         "tva_point_net_ipp_2025_quatre_taux",
         "ir_gel_ipp_inflation_1_0_2026",
@@ -111,3 +114,24 @@ def test_tableau_markdown() -> None:
     )
     assert "1 sur 2 dans la tolérance" in tableau
     assert "| b | 1.500 | 1.000 | +50.0% (±10%) | **hors tolérance** |" in tableau
+
+
+def test_fourchette_ecart_a_la_borne_la_plus_proche() -> None:
+    """COR, tableau 2.10, à 2 ans : fourchette 0,05 à 0,4 point de PIB."""
+    basse, haute = "cor_aod_un_an_solde_apu_2ans_bas", "cor_aod_un_an_solde_apu_2ans_haut"
+    dedans = comparer_fourchette(basse, haute, 0.2)
+    assert (dedans.ecart, dedans.valeur_reference, dedans.valeur_haute) == (0.0, 0.05, 0.4)
+    assert comparer_fourchette(basse, haute, 0.44).dans_la_tolerance
+    assert not comparer_fourchette(basse, haute, 0.45).dans_la_tolerance
+    assert comparer_fourchette(basse, haute, 0.046).dans_la_tolerance
+    assert not comparer_fourchette(basse, haute, 0.044).dans_la_tolerance
+    assert comparer_fourchette(basse, haute, 0.5).ecart == pytest.approx(0.25)
+
+
+def test_fourchettes_du_cor_pour_les_deux_modeles_de_retraites() -> None:
+    attendues = {
+        (f"cor_aod_un_an_solde_apu_{h}ans_bas", f"cor_aod_un_an_solde_apu_{h}ans_haut", var)
+        for h in (2, 10, 20)
+        for var in ("", "cohortes")
+    }
+    assert {(b, h, var) for b, h, _, var in definitions_fourchettes()} == attendues

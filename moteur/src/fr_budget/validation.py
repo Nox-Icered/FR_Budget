@@ -67,6 +67,10 @@ class Comparaison:
     variante: str = ""
     """Modèle comparé quand plusieurs modèles répondent à la même référence (``cohortes`` :
     retraites, modèle par cohortes) ; vide sinon."""
+    reference_haute: str = ""
+    """Borne haute quand la référence est une fourchette publiée (``reference`` est alors la
+    borne basse) ; vide sinon."""
+    valeur_haute: float | None = None
 
     @property
     def dans_la_tolerance(self) -> bool:
@@ -78,6 +82,29 @@ def comparer(
 ) -> Comparaison:
     valeur = chiffrage(reference)
     return Comparaison(reference, modele, valeur, (modele - valeur) / valeur, tolerance, variante)
+
+
+def comparer_fourchette(
+    reference_basse: str,
+    reference_haute: str,
+    modele: float,
+    tolerance: float = TOLERANCE_PUBLICATION,
+    variante: str = "",
+) -> Comparaison:
+    """Comparaison à une fourchette publiée [bas, haut] (décision du mainteneur du 28 octobre
+    2026, retraites) : écart nul dans la fourchette, sinon écart relatif à la borne la plus
+    proche ; dans la tolérance si le modèle est dans [bas * (1 - tolérance), haut * (1 +
+    tolérance)]."""
+    bas, haut = chiffrage(reference_basse), chiffrage(reference_haute)
+    if modele > haut:
+        ecart = (modele - haut) / haut
+    elif modele < bas:
+        ecart = (modele - bas) / bas
+    else:
+        ecart = 0.0
+    return Comparaison(
+        reference_basse, modele, bas, ecart, tolerance, variante, reference_haute, haut
+    )
 
 
 def _point_tva(annee_comptes: int, annee_cible: int, nature: str, taux: str) -> float:
@@ -236,11 +263,6 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
     ]
     definitions += [("ir_gel_bareme_2026", partial(_ir_gel, inflation_2025, 2026))]
     definitions += [("pa_pente_moindre_depense_2025", _pa_pente_millions)]
-    definitions += [
-        (f"cor_aod_un_an_solde_apu_{horizon}ans_{borne}", partial(effet_a_horizon, horizon, 2027))
-        for horizon in (2, 10, 20)
-        for borne in ("bas", "haut")
-    ]
     definitions += _confrontations_independantes()
     return definitions
 
@@ -254,17 +276,23 @@ def _retraites_cohortes(horizon: int) -> float:
     return retraites_cohortes.effet(1.0, ENTREE_RETRAITES + horizon - 1, ENTREE_RETRAITES).central
 
 
-def definitions_variantes() -> list[tuple[str, Callable[[], float], str]]:
-    """Références déjà comparées à un modèle, comparées aussi à une variante : le tableau 2.10
-    du COR (âge d'ouverture des droits) au modèle de retraites par cohortes."""
-    return [
-        (
-            f"cor_aod_un_an_solde_apu_{horizon}ans_{borne}",
-            partial(_retraites_cohortes, horizon),
-            COHORTES,
-        )
-        for horizon in (2, 10, 20)
-        for borne in ("bas", "haut")
+HORIZONS_RETRAITES = (2, 10, 20)
+
+
+def definitions_fourchettes() -> list[tuple[str, str, Callable[[], float], str]]:
+    """Références publiées en fourchette, comparées à la fourchette entière (borne basse, borne
+    haute, calcul, variante) : le tableau 2.10 du COR (un an de plus sur l'âge d'ouverture des
+    droits, solde primaire des APU à 2, 10 et 20 ans), comparé au levier sur l'âge effectif et
+    au modèle par cohortes (variante ``cohortes``)."""
+    bornes = [
+        (f"cor_aod_un_an_solde_apu_{h}ans_bas", f"cor_aod_un_an_solde_apu_{h}ans_haut", h)
+        for h in HORIZONS_RETRAITES
+    ]
+    definitions: list[tuple[str, str, Callable[[], float], str]] = [
+        (bas, haut, partial(effet_a_horizon, h, ENTREE_RETRAITES), "") for bas, haut, h in bornes
+    ]
+    return definitions + [
+        (bas, haut, partial(_retraites_cohortes, h), COHORTES) for bas, haut, h in bornes
     ]
 
 
@@ -301,8 +329,8 @@ def _confrontations_independantes() -> list[tuple[str, Callable[[], float]]]:
 def comparaisons() -> list[Comparaison]:
     """Toutes les comparaisons modèle-référence, dans l'ordre des tests de validation."""
     return [comparer(reference, calcul()) for reference, calcul in _definitions()] + [
-        comparer(reference, calcul(), variante=variante)
-        for reference, calcul, variante in definitions_variantes()
+        comparer_fourchette(basse, haute, calcul(), variante=variante)
+        for basse, haute, calcul, variante in definitions_fourchettes()
     ]
 
 
@@ -317,9 +345,12 @@ def tableau_markdown(liste: list[Comparaison]) -> str:
     ]
     for c in liste:
         resultat = "dans la tolérance" if c.dans_la_tolerance else "**hors tolérance**"
+        valeur = f"{c.valeur_reference:.3f}"
+        if c.valeur_haute is not None:
+            valeur += f" à {c.valeur_haute:.3f}"
         lignes.append(
             f"| {c.reference}{f' ({c.variante})' if c.variante else ''} | {c.modele:.3f} "
-            f"| {c.valeur_reference:.3f} | {c.ecart:+.1%} "
+            f"| {valeur} | {c.ecart:+.1%} "
             f"(±{c.tolerance:.0%}) | {resultat} |"
         )
     return "\n".join(lignes) + "\n"

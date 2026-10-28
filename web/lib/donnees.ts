@@ -129,6 +129,8 @@ export type Comparaison = {
   levier?: string;
   independante: boolean;
   variante?: string;
+  reference_haute?: string;
+  valeur_haute?: number | null;
 };
 export type Version = { moteur: string; registres: string; donnees: string };
 export type FourchetteJson = { bas: number; central: number; haut: number };

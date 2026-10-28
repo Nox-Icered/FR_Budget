@@ -2,6 +2,7 @@ import { texte, nombre } from "../../lib/textes";
 import { lire, type Chiffrage, type Comparaison, type Levier } from "../../lib/donnees";
 import { region } from "../../lib/region";
 import { chemin } from "../../lib/chemin";
+import { libelleCommun } from "../../lib/validation";
 
 
 // Confrontations d'un levier à des sources indépendantes de l'administration (règle de
@@ -62,7 +63,14 @@ export default function Validation() {
             {comparaisons.map((c) => (
               <tr key={`${c.reference}-${c.variante ?? ""}`}>
                 <td>
-                  {mesures.get(c.reference)?.mesure ?? c.reference}
+                  {c.reference_haute
+                    ? texte("validation.fourchette_libelle", {
+                        mesure: libelleCommun(
+                          mesures.get(c.reference)?.mesure ?? c.reference,
+                          mesures.get(c.reference_haute)?.mesure ?? c.reference_haute,
+                        ),
+                      })
+                    : (mesures.get(c.reference)?.mesure ?? c.reference)}
                   {c.variante ? ` — ${texte(`validation.variantes.${c.variante}`)}` : ""}
                   {c.independante ? ` — ${texte("validation.source_independante")}` : ""}
                 </td>
@@ -70,7 +78,13 @@ export default function Validation() {
                   {nombre(c.modele)} {c.unite}
                 </td>
                 <td className="nombre">
-                  {nombre(c.valeur_reference)} {c.unite}
+                  {c.valeur_haute != null
+                    ? texte("validation.fourchette_valeur", {
+                        bas: nombre(c.valeur_reference),
+                        haut: nombre(c.valeur_haute),
+                      })
+                    : nombre(c.valeur_reference)}{" "}
+                  {c.unite}
                 </td>
                 <td className="nombre">{texte("validation.pourcent", { valeur: nombre(c.ecart * 100) })}</td>
                 <td>{texte(c.dans_la_tolerance ? "validation.dans_tolerance" : "validation.hors_tolerance")}</td>

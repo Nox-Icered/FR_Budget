@@ -59,3 +59,13 @@ def test_aucun_cache_sur_le_calcul_d_un_profil_saisi() -> None:
     assert not hasattr(t.cascade_profil, "cache_info")
     assert not hasattr(t.rfr_point_fixe, "cache_info")
     assert not hasattr(p.calculer, "cache_info")
+
+
+def test_minimum_vieillesse_et_allocation_de_base_de_la_paje_comptes() -> None:
+    """Revue de code du 28 octobre 2026 : un retraité à faible pension reçoit le minimum
+    vieillesse, un parent d'un enfant de moins de trois ans l'allocation de base de la PAJE ;
+    les deux étaient calculés par OpenFisca mais absents de la cascade."""
+    retraite = p.calculer(p.MenageSaisi((p.AdulteSaisi("retraite", 500.0, 1950),)))
+    assert retraite.prestations.get("aspa", 0.0) > 0
+    parent = p.calculer(p.MenageSaisi((p.AdulteSaisi("salarie", 2000.0, 1990),), (t.ANNEE - 1,)))
+    assert parent.prestations.get("paje_base", 0.0) > 0

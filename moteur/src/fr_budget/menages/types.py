@@ -76,7 +76,7 @@ CADRE = "prive_cadre"
 MOIS_REPERE = 6
 PRECISION_EUROS = 0.005
 ITERATIONS_MAX = 60
-PRESTATIONS_MENSUELLES = ("ppa", "af", "cf", "asf", "rsa")
+PRESTATIONS_MENSUELLES = ("ppa", "af", "cf", "asf", "rsa", "aspa", "paje_base")
 PRESTATIONS_ANNUELLES = ("ars",)
 
 

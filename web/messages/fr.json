@@ -410,7 +410,7 @@
     "hebergement_titre": "Hébergement",
     "hebergement": "Le site est hébergé par GitHub Pages, service de GitHub, Inc. (États-Unis), filiale de Microsoft : https://github.com/contact. Comme tout hébergeur, GitHub reçoit l'adresse IP des visiteurs pour leur envoyer les pages ; le projet n'y a pas accès.",
     "code_titre": "Code source et licences",
-    "code": "Le code est publié sous licence AGPL-3.0 et les données produites par le projet sous Licence Ouverte 2.0. Chaque source garde sa licence d'origine, indiquée sur la page Sources.",
+    "code": "Le code est publié sous licence AGPL-3.0 et les données produites par le projet sous Licence Ouverte 2.0, sauf exceptions : tables tirées de l'Urssaf (ODbL), données de la DG Trésor (réutilisation non commerciale, dont la trajectoire 2025-2030 de la baseline) et documents seulement cités (fichier LICENCE-DONNEES.md du dépôt). Chaque source garde sa licence d'origine, indiquée sur la page Sources.",
     "depot": "Dépôt du projet",
     "donnees_titre": "Données personnelles",
     "donnees": "Le site ne demande aucun compte, ne dépose aucun cookie et ne mesure pas l'audience. Les calculs se font dans votre navigateur. Un lien partagé contient seulement les réglages du scénario et la version du modèle ; il n'est enregistré nulle part.",

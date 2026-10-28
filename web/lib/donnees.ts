@@ -168,6 +168,7 @@ export type ReponsesUnitaires = {
       // Retraites : effet d'un an en points de PIB une fois en place, durée de montée en charge.
       effet_plein?: number;
       duree_montee?: number;
+      duree_montee_plage?: { bas: number; central: number; haut: number };
       bornes: [number, number];
       // Levier non linéaire : réponse exacte (et non par unité) de chaque cran du curseur.
       grille?: Record<

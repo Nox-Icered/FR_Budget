@@ -579,16 +579,23 @@ hypotheses:
     valeur_centrale: 4.0
     plage:
       basse: 4.0
-      haute: 4.0
+      haute: 4.9
     sources: [cor_rapport_annuel_2026]
     justification: >-
       La réforme de 2023 a reporté l'âge d'ouverture des droits « à raison de trois mois par
       génération » (rapport du COR de juin 2026, page 206) : un an de relèvement prend quatre
-      générations, soit quatre ans. Pour rester linéaire dans la valeur du levier (calcul du
-      site), la même durée est appliquée quel que soit l'écart choisi : un relèvement de trois
-      ans monte donc trois fois plus vite qu'à ce rythme. L'âge effectif suit l'âge légal avec
-      retard et partiellement ; aucune source saisie ne donne ce lien, d'où une plage nulle qui
-      sous-estime l'incertitude.
+      générations, soit quatre ans (valeur centrale). Pour rester linéaire dans la valeur du
+      levier (calcul du site), la même durée est appliquée quel que soit l'écart choisi : un
+      relèvement de trois ans monte donc trois fois plus vite qu'à ce rythme. L'âge effectif
+      suit l'âge légal avec retard et partiellement : après la réforme de 2010, l'âge
+      conjoncturel de départ observé passe de 60,49 ans en 2010 à 62,12 ans en 2017 (4,3 ans
+      par an d'âge effectif) et à 62,31 ans en 2019 (4,9 ans par an) (COR, rapport de juin
+      2026, figure 2.5, page 78 du PDF, et ses données, onglet « Fig 2.5 »). Plage de 4 à 4,9
+      ans, appliquée le 28 octobre 2026 à la demande du mainteneur
+      (docs/validation/plages_nulles.md, § 3) ; la hausse observée mêle d'autres causes
+      (durée d'assurance, départs anticipés). Le modèle par cohortes (âge légal) n'utilise que
+      la valeur centrale : c'est le rythme légal de trois mois par génération, sans
+      incertitude.
     instruments: [retraites]
 
   - id: menages_ecart_evolution_salaire_smic

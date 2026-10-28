@@ -18,7 +18,8 @@ pensions, un flux interne à l'État.
 
 Coût brut d'une hausse de x % du point d'indice, par versant :
 
-    x % * (D1 - D122) * traitement brut / salaire brut (fonctionnaires, DGAFP)
+    x % * (D1 - D122) * part du coût employeur qui suit le traitement (fonctionnaire moyen du
+    versant, traitement et primes de la DGAFP, cotisations d'OpenFisca)
 
 Coût net pour les administrations publiques (décision du mainteneur du 12 octobre 2026,
 option 2 (a)) : les cotisations patronales et salariales, la CSG et la CRDS reviennent aux
@@ -61,6 +62,7 @@ MOIS_PAR_AN = 12
 POURCENT = 100.0
 POINT = "point"
 EFFECTIFS = "effectifs"
+HAUSSE_TEST = 0.01
 
 
 def masse(versant: str, annee: int = ANNEE_MASSE) -> float:
@@ -86,9 +88,25 @@ def part_indiciaire(versant: str) -> float:
     return tib / (tib + primes)
 
 
+def part_cout_indiciaire(versant: str) -> float:
+    """Part du coût employeur (hors contribution au compte des pensions de l'État) qui suit le
+    traitement brut : hausse du coût d'un fonctionnaire moyen du versant (DGAFP, OpenFisca)
+    pour 1 % de traitement, rapportée à 1 % de son coût. Les cotisations des employeurs pèsent
+    plus sur le traitement (CNRACL, pension de l'État) que sur les primes (RAFP) : la part du
+    traitement dans le salaire brut (``part_indiciaire``) appliquée à la masse D1 - D122, qui
+    comprend ces cotisations, sous-estimait le coût (revue de code du 28 octobre 2026).
+    """
+    tib, primes = traitement_et_primes(versant)
+    base = agent(versant, tib, primes)
+    hausse = agent(versant, tib * (1 + HAUSSE_TEST), primes)
+    return (hausse.cout - base.cout) / (HAUSSE_TEST * base.cout)
+
+
 def cout_brut_point(versant: str, taux: float, annee: int = ANNEE_MASSE) -> float:
-    """Coût brut d'une hausse de ``taux`` (fraction) du point, sur la masse de ``annee``, Md€."""
-    return taux * masse(versant, annee) * part_indiciaire(versant)
+    """Coût brut d'une hausse de ``taux`` (fraction) du point, sur la masse de ``annee``, Md€ :
+    masse D1 - D122 (cotisations des employeurs comprises) fois la part du coût employeur qui
+    suit le traitement (``part_cout_indiciaire``)."""
+    return taux * masse(versant, annee) * part_cout_indiciaire(versant)
 
 
 def cout_brut_point_mesure(versant: str, taux: float, annee: int) -> float:
@@ -136,9 +154,6 @@ def agent(versant: str, tib: float, primes: float) -> Agent:
             simulation.calculate("impot_revenu_restant_a_payer", str(ANNEE_LEGISLATION))[0]
         )
     return Agent(cout=cout, revenu_apres_impot=net + impot)
-
-
-HAUSSE_TEST = 0.01
 
 
 def part_restant_a_l_agent(versant: str, categorie: str, assiette: str) -> float:

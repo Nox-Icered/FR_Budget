@@ -24,7 +24,7 @@ Le calcul reprend le modèle simple de l'OFCE (Policy brief n° 146, juillet 202
 
 - **Impulsion.** L'impulsion d'une année est l'opposé de la variation de l'effet de la mesure sur le solde primaire. Une hausse d'impôt permanente donne une impulsion négative l'année d'entrée, puis nulle.
 - **Écart de production.** OG(t) = ρ × OG(t−1) + m × impulsion(t). Le multiplicateur m dépend de l'instrument (§ 4) ; ρ = 0,7. Avec plusieurs mesures, les écarts s'additionnent.
-- **Solde.** Le solde primaire reçoit l'effet de la mesure, plus α × OG(t), avec α = 0,5.
+- **Solde.** Le solde primaire reçoit l'effet de la mesure, plus α × OG(t), avec α = 0,5 (OFCE), plage de 0,5 à 0,63 (semi-élasticités de la Commission européenne pour la France, 0,60 et 0,63, Mourre et Poissonnier, *Intereconomics* 2019, tableau 1 ; le RESF 2027 retient 0,57).
 - **Dette.** Le PIB effectif vaut le PIB de la baseline multiplié par (1 + OG). Au premier ordre :
 
   d(t) = d(t−1) × (1 + r) / (1 + g) × (1 + OG(t−1) − OG(t)) − pb(t) + sfa(t)
@@ -62,7 +62,7 @@ Pour chaque catégorie, la valeur centrale est la variante du modèle Mésange (
    - Lecture : le résultat central est plutôt favorable aux hausses d'impôts et aux baisses de dépenses. La borne haute de la fourchette montre l'autre lecture.
 3. **Prestations.** Mésange n'a pas de variante de prestations. La valeur centrale reprend le canal du revenu des ménages (CSG, impôt sur le revenu) ; la borne haute est le multiplicateur des dépenses de l'OFCE, qui range les prestations parmi les dépenses.
 4. **Impôt sur les sociétés.** Il n'existe pas de variante dans Mésange 2017 : le multiplicateur des recettes de l'OFCE est pris comme valeur centrale, avec une plage large.
-5. **ρ et α sans plage.** Une seule source a été saisie pour chacun (valeurs « usuelles » citées par l'OFCE). La fourchette sous-estime donc l'incertitude. Une seconde source (Commission européenne, OCDE) est à ajouter.
+5. **ρ sans plage, α en plage.** ρ = 0,7 reste sans plage : aucune seconde source n'a été trouvée (`docs/validation/plages_nulles.md`, § 2), la fourchette sous-estime donc l'incertitude. α a une plage de 0,5 à 0,63 depuis le 28 octobre 2026 (§ 1 du même document) : les bornes sont prises année par année aux deux bouts de α, croisées avec celles des multiplicateurs (à α donné, linéarité dans chaque multiplicateur ; à multiplicateurs donnés, linéarité dans α). La valeur centrale reste 0,5 : la plage est asymétrique, la croissance ne peut que coûter plus de solde que dans le cas central.
 6. **Pas de conjoncture ni de politique monétaire.** Le multiplicateur ne dépend ni de l'état de l'économie (plus élevé en récession selon l'OFCE, page 14), ni d'une réaction de la BCE. Les variantes de Mésange sont à taux d'intérêt réels inchangés.
 7. **Mésange 2017 date.** Le modèle a été réestimé en 2017 sur des données antérieures. Le document de l'Insee de 2024 (DT 2024-07) donne des intervalles de confiance seulement pour l'investissement public : il n'est pas repris.
 8. **Dépenses fiscales choisies une à une.** Le site les regroupe dans un levier générique, qui prend le multiplicateur des « autres prélèvements », même pour une dépense de l'impôt sur le revenu (correction après la revue de la PR, pour que le site et le moteur concordent).
@@ -86,6 +86,7 @@ Le module reste en bêta.
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-28 | Plage de α : 0,5 à 0,63 (Commission européenne, RESF), à la demande du mainteneur ; moteur et site (variation du supplément de croissance par point de α exportée) | aucun test de validation (interrupteur désactivé par défaut) ; valeurs centrales inchangées ; bornes hautes plus hautes. TVA +1 point en 2027, écart de dette : 2030 [−0,892 ; −0,816] → [−0,892 ; −0,773], 2046 [−5,161 ; −5,080] → [−5,161 ; −5,020] ; TVA +2 points et DGF +5 % en 2027 : 2030 [−1,761 ; −1,527] → [−1,761 ; −1,452], 2046 [−10,135 ; −9,418] → [−10,135 ; −9,314]. Test `test_fourchette_d_une_mesure_seule_inchangee` étendu aux bornes de α ; 2 tests du moteur et 1 du site ajoutés |
 | 2026-10-28 | Revue de code : multiplicateur de chaque mesure indépendant dans les bornes (au lieu d'un bout commun) ; moteur et site | aucun test de validation (interrupteur désactivé par défaut) ; une mesure seule : inchangé ; TVA +2 points et défense +20 % en 2027, écart de dette 2030 : [−0,915 ; −0,670] → [−1,032 ; −0,521] ; 2 tests unitaires et 1 test du site ajoutés |
 | 2026-10-12 | Revue de la PR : dépenses fiscales choisies une à une rattachées aux « autres prélèvements » | aucun test de validation ; 1 test unitaire ajouté |
 | 2026-10-12 | Création du module | aucun test de validation (interrupteur désactivé par défaut) ; 59 nouveaux tests unitaires et d'API, tous passent |

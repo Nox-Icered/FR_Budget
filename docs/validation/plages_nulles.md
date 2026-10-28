@@ -2,7 +2,7 @@
 
 Lot C de la revue de code (28 octobre 2026). Sept hypothèses du registre ont une plage nulle (valeur basse = valeur centrale = valeur haute). Leur incertitude n'entre donc pas dans les fourchettes publiées. Décision du mainteneur : chercher une seconde source publique pour chacune et **proposer** une plage, sans l'appliquer avant relecture. Quand rien n'est trouvé, le site le signale.
 
-**Rien n'est appliqué dans ce lot.** `registres/hypotheses.yaml` et le moteur sont inchangés, et aucun test ne bouge. Le site signale désormais toute hypothèse à plage nulle (page Hypothèses). Chaque proposition ci-dessous est à relire. Les plages retenues seront saisies dans un lot de calcul séparé, avec les tests qui bougent.
+**Décision du mainteneur du 28 octobre 2026 : les 5 plages proposées sont appliquées**, une branche par module (croissance, retraites, ménages types) ; l'état de chacune est indiqué dans sa section et dans le journal. Texte d'origine du lot de propositions : **rien n'est appliqué dans ce lot.** `registres/hypotheses.yaml` et le moteur sont inchangés, et aucun test ne bouge. Le site signale désormais toute hypothèse à plage nulle (page Hypothèses). Chaque proposition ci-dessous est à relire. Les plages retenues seront saisies dans un lot de calcul séparé, avec les tests qui bougent.
 
 Documents téléchargés le 28 octobre 2026 et lus pour ce lot. Ils ne sont pas encore versés au dépôt : ils le seront avec le lot qui applique les plages.
 
@@ -39,7 +39,7 @@ Secondes sources :
 - **Commission européenne.** Mourre et Poissonnier (2019), tableau 1, « Robustness analysis of budget balance semi-elasticities ». Pour la France, la semi-élasticité du solde est de **0,60** (estimation de 2014) et de **0,63** (estimation de 2018), contre 0,5 en moyenne dans l'UE (texte et figure 1). Les auteurs sont économistes de la DG ECFIN : c'est la méthode commune de l'UE. La publication de la Commission elle-même (*Discussion Paper* 098, economy-finance.ec.europa.eu) est **inaccessible depuis l'environnement** ; les valeurs sont lues dans l'article d'*Intereconomics*.
 - **RESF du PLF 2027** (DG Trésor), page 104 du PDF, note du tableau du solde structurel. La composante conjoncturelle est « le produit de l'écart de production et de la semi-élasticité du solde à l'écart de production (soit **0,57**) ».
 
-Proposition : plage de **0,5 à 0,63**, valeur centrale 0,5 inchangée.
+Proposition : plage de **0,5 à 0,63**, valeur centrale 0,5 inchangée. **Appliquée** (branche `plages/croissance`) : les bornes de la fourchette avec croissance sont prises aux deux bouts de alpha, au moteur et sur le site (`docs/fiches/croissance.md`, journal).
 
 Limites :
 - La semi-élasticité mesure l'effet immédiat de l'écart de production sur le solde, rapporté au PIB potentiel. Le paramètre alpha de l'OFCE a le même sens, mais son modèle est plus simple.
@@ -142,6 +142,7 @@ Options présentées :
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
 | 2026-10-28 | § 4 à 6 appliqués : ménages types au revenu bas, central et haut (sources `insee_premiere_2114` et `insee_note_conjoncture_2026_03_salaires` versées au dépôt) | Valeurs centrales inchangées ; fourchettes du net après impôt publiées (détail : `docs/fiches/menages_types.md`) |
+| 2026-10-28 | § 1 appliqué : alpha de 0,5 à 0,63 (source `intereconomics_2019_mourre_poissonnier` ajoutée au registre) | Valeurs centrales inchangées ; bornes hautes de l'écart de dette plus hautes avec la croissance (détail : `docs/fiches/croissance.md`) ; `test_fourchette_d_une_mesure_seule_inchangee` et `test_calcul_du_site_avec_croissance` (API) étendus aux bornes de alpha |
 | 2026-10-28 | § 3 appliqué : durée de montée en charge de 4 à 4,9 ans (levier sur l'âge effectif) | Validation inchangée (valeur centrale) ; bornes basses de l'écart de solde plus basses pendant la montée en charge (détail : `docs/fiches/retraites.md`) ; 1 test unitaire ajouté |
 | 2026-10-28 | Option (a) retenue pour `scenario_rendement_constant_pib` : RESF ajouté aux sources, plage nulle gardée | Aucun (valeur non lue par le calcul) |
 | 2026-10-28 | Propositions de plages pour 5 hypothèses sur 7. Signalement des plages nulles sur la page Hypothèses du site. | Aucun (registre et moteur inchangés). Tests web : un test ajouté. |

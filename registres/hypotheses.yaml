@@ -568,12 +568,16 @@ hypotheses:
     valeur_centrale: 0.5
     plage:
       basse: 0.5
-      haute: 0.5
-    sources: [ofce_policy_brief_146]
+      haute: 0.63
+    sources: [ofce_policy_brief_146, intereconomics_2019_mourre_poissonnier, plf2027_resf]
     justification: >-
       Paramètre alpha du modèle simple de l'OFCE (encadré 3, page 15), « valeur usuelle » en
-      France. Aucune seconde source n'a été saisie : la plage est nulle, ce qui sous-estime
-      l'incertitude.
+      France (valeur centrale). Plage : semi-élasticité du solde à l'écart de production de la
+      France selon la méthode de la Commission européenne, 0,60 (estimation de 2014) et 0,63
+      (estimation de 2018) (Mourre et Poissonnier, Intereconomics 2019, tableau 1) ; le RESF
+      du PLF 2027 retient 0,57 (page 104 du PDF). Borne haute : 0,63 ; borne basse : 0,5
+      (OFCE). Plage appliquée le 28 octobre 2026 à la demande du mainteneur
+      (docs/validation/plages_nulles.md, § 1).
     instruments: [croissance]
 
   - id: retraites_duree_montee_en_charge

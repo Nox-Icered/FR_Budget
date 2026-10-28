@@ -163,7 +163,14 @@ export type ReponsesUnitaires = {
   base_solde: number[][];
   indices_effet: number[];
   // Sources et hypothèses de l'effet de croissance (interrupteur, désactivé par défaut).
-  croissance?: { sources: string[]; hypotheses: string[]; persistance: number; effet_solde: number };
+  // effet_solde_plage : plage de alpha (effet de l'écart de production sur le solde).
+  croissance?: {
+    sources: string[];
+    hypotheses: string[];
+    persistance: number;
+    effet_solde: number;
+    effet_solde_plage?: { bas: number; central: number; haut: number };
+  };
   leviers: Record<
     string,
     {
@@ -188,11 +195,14 @@ export type ReponsesUnitaires = {
             unite_solde: number[][];
             croissance_dette?: number[][];
             croissance_solde?: number[][];
+            croissance_alpha_dette?: number[][];
+            croissance_alpha_solde?: number[][];
           }
         >
       >;
       multiplicateur?: { bas: number; central: number; haut: number };
-      // croissance_* : supplément d'une unité du levier pour un multiplicateur de 1.
+      // croissance_* : supplément d'une unité du levier pour un multiplicateur de 1 ;
+      // croissance_alpha_* : variation de ce supplément pour un point de alpha.
       reponses: Record<
         string,
         {
@@ -200,6 +210,8 @@ export type ReponsesUnitaires = {
           unite_solde: number[][];
           croissance_dette?: number[][];
           croissance_solde?: number[][];
+          croissance_alpha_dette?: number[][];
+          croissance_alpha_solde?: number[][];
         }
       >;
     }

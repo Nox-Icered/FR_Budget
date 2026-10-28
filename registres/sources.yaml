@@ -811,6 +811,15 @@ sources:
     acces: direct
     consulte_le: 2026-10-14
 
+  - id: intereconomics_2019_mourre_poissonnier
+    nom: "G. Mourre et A. Poissonnier, « What Drives the Responsiveness of the Budget Balance to the Business Cycle in EU Countries? », Intereconomics, vol. 54, 2019, n° 4 (DOI 10.1007/s10272-019-0831-2)"
+    editeur: ZBW – Leibniz Information Centre for Economics et CEPS (Intereconomics)
+    url: https://www.intereconomics.eu/contents/year/2019/number/4/article/what-drives-the-responsiveness-of-the-budget-balance-to-the-business-cycle-in-eu-countries.html
+    licence: non précisée sur la page (citation seulement, document non reproduit)
+    millesime: "2019 (semi-élasticités de la Commission européenne, estimations de 2014 et de 2018)"
+    acces: direct
+    consulte_le: 2026-10-28
+
   - id: hcfp_avis_2025_5_plf_plfss_2026
     nom: "Haut Conseil des finances publiques, avis n° HCFP-2025-5 relatif aux projets de lois de finances et de financement de la sécurité sociale pour l'année 2026, 9 octobre 2025"
     editeur: Haut Conseil des finances publiques (HCFP)

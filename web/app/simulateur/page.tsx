@@ -122,6 +122,8 @@ export default function PageSimulateur() {
           {texte("simulateur.methode_croissance", {
             persistance: Math.round(donnees.croissance.persistance * 100),
             alpha: deuxDecimales(donnees.croissance.effet_solde),
+            alpha_bas: deuxDecimales(donnees.croissance.effet_solde_plage?.bas ?? donnees.croissance.effet_solde),
+            alpha_haut: deuxDecimales(donnees.croissance.effet_solde_plage?.haut ?? donnees.croissance.effet_solde),
             tva_bas: deuxDecimales(donnees.leviers.tva_taux_normal.multiplicateur?.bas ?? 0),
             tva_haut: deuxDecimales(donnees.leviers.tva_taux_normal.multiplicateur?.haut ?? 0),
             depenses_bas: deuxDecimales(donnees.leviers.credits_missions.multiplicateur?.bas ?? 0),

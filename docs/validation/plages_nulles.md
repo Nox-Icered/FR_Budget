@@ -27,7 +27,7 @@ Documents déjà au dépôt :
 | `menages_ecart_evolution_salaire_smic` | 0 | Insee, note de conjoncture de mars 2026 (SMB, SMPT 2025) | −0,2 % à 0 % |
 | `menages_ecart_evolution_pension_moyenne` | 0 | COR 2026, tableau 2.1 (pension moyenne réelle) | 0 % à +1,0 % |
 | `menages_ecart_evolution_revenu_independant` | 0 | Insee Première n° 2114 (revenus 2024) | −0,6 % à 0 % |
-| `scenario_rendement_constant_pib` | 0 | RESF 2027 et Voies et Moyens 2026 (élasticités des recettes) | convention confirmée à long terme ; plage seulement avec un changement de calcul (à décider) |
+| `scenario_rendement_constant_pib` | 0 | RESF 2027 et Voies et Moyens 2026 (élasticités des recettes) | plage nulle gardée, RESF cité (option (a), décidée) |
 
 Les valeurs centrales actuelles sont gardées dans toutes les propositions. Le choix d'une autre valeur centrale (par exemple 0,57 au lieu de 0,5) est laissé au mainteneur.
 
@@ -131,7 +131,9 @@ Sources trouvées :
 
 Ces sources confirment la convention à long terme. Elles montrent aussi des écarts annuels importants, de 0,5 à 1,2. Elles portent sur l'ensemble des prélèvements, pas sur la TVA, les accises ou l'IS une à une.
 
-Proposition : deux options, **à décider**.
+**Décision du mainteneur (28 octobre 2026) : option (a), appliquée.** Le RESF est ajouté aux sources de l'hypothèse et la justification est mise à jour. La plage reste nulle et le site la signale.
+
+Options présentées :
 - **(a)** Garder la plage nulle, signalée sur le site, en citant le RESF comme seconde source de la convention.
 - **(b)** Ajouter une plage d'élasticité (par exemple 0,7 à 1,2) sur les premières années. C'est un changement de calcul : le moteur devrait appliquer l'élasticité année par année. Il serait fait dans un lot séparé, avec les tests qui bougent.
 
@@ -139,4 +141,5 @@ Proposition : deux options, **à décider**.
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-28 | Option (a) retenue pour `scenario_rendement_constant_pib` : RESF ajouté aux sources, plage nulle gardée | Aucun (valeur non lue par le calcul) |
 | 2026-10-28 | Propositions de plages pour 5 hypothèses sur 7. Signalement des plages nulles sur la page Hypothèses du site. | Aucun (registre et moteur inchangés). Tests web : un test ajouté. |

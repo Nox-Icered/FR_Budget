@@ -28,9 +28,6 @@ jobs:
     defaults:
       run:
         working-directory: web
-    env:
-      NEXT_PUBLIC_BASE_PATH: /FR_Budget
-      NEXT_PUBLIC_API_URL: ""
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
@@ -45,8 +42,13 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Données exportées par l'API
         run: pnpm donnees
+      # Tests sans préfixe, comme en CI : ils vérifient les adresses d'un site à la racine.
       - run: pnpm test
-      - run: pnpm build
+      - name: Construction avec le préfixe de GitHub Pages
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /FR_Budget
+          NEXT_PUBLIC_API_URL: ""
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web/out

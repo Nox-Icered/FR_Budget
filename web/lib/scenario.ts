@@ -26,8 +26,8 @@ export type MesureSite = { levier: string; valeur: number };
 // Plusieurs leviers s'additionnent (même année d'entrée), comme dans le moteur. Avec
 // ``croissance`` (interrupteur, désactivé par défaut), chaque réponse reçoit m fois son
 // supplément de croissance ; le multiplicateur m est central sur toutes les trajectoires, et
-// les coins (effet bas ou haut, multiplicateur bas ou haut, commun à toutes les mesures)
-// élargissent la fourchette, comme dans fr_budget.scenario.
+// les extrêmes du multiplicateur de chaque mesure, choisis année par année indépendamment des
+// autres mesures (effet bas ou haut), élargissent la fourchette, comme dans fr_budget.scenario.
 export function calculer(
   donnees: ReponsesUnitaires,
   mesures: MesureSite[],
@@ -66,12 +66,22 @@ export function calculer(
       return total + valeur * (unite + supplement);
     }, 0);
   const central: Borne | null = croissance ? "central" : null;
-  const coins: [number, Borne][] = croissance
+  // Écart à la trajectoire au multiplicateur central quand le multiplicateur de chaque mesure
+  // prend, pour l'année, la borne qui donne l'écart le plus bas (ou le plus haut) : la réponse
+  // est linéaire dans chaque multiplicateur.
+  const extreme = (k: number, i: number, cle: "dette" | "solde", choisir: (...v: number[]) => number) =>
+    reponses.reduce((total, { valeur, r, mult, grille }) => {
+      if (!mult) return total;
+      const kk = grille ? k : indice(k, valeur);
+      const c = r[`croissance_${cle}`]?.[kk][i] ?? 0;
+      return total + choisir(0, valeur * (mult.bas - mult.central) * c, valeur * (mult.haut - mult.central) * c);
+    }, 0);
+  const coins: [number, (...v: number[]) => number][] = croissance
     ? [
-        [kBas, "bas"],
-        [kHaut, "bas"],
-        [kBas, "haut"],
-        [kHaut, "haut"],
+        [kBas, Math.min],
+        [kBas, Math.max],
+        [kHaut, Math.min],
+        [kHaut, Math.max],
       ]
     : [];
   return donnees.annees.map((a, i) => {
@@ -79,12 +89,12 @@ export function calculer(
       const base = cle === "dette" ? donnees.base_dette : donnees.base_solde;
       return [
         ...base.map((b, k) => b[i] + somme(k, i, cle, central)),
-        ...coins.map(([k, j]) => base[k][i] + somme(k, i, cle, j)),
+        ...coins.map(([k, choisir]) => base[k][i] + somme(k, i, cle, central) + extreme(k, i, cle, choisir)),
       ];
     };
     const ecarts = (cle: "dette" | "solde") => [
       ...donnees.indices_effet.map((k) => somme(k, i, cle, central)),
-      ...coins.map(([k, j]) => somme(k, i, cle, j)),
+      ...coins.map(([k, choisir]) => somme(k, i, cle, central) + extreme(k, i, cle, choisir)),
     ];
     const [dette, solde, ecartsDette, ecartsSolde] = [
       niveaux("dette"),

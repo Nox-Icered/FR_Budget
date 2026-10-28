@@ -734,23 +734,25 @@ def _trajectoire_mesures(
     trajectoire: Sequence[AnneeBaseline],
     mesures: Sequence[Mesure],
     borne_effet: str,
-    borne_multiplicateur: str | None,
+    multiplicateurs: str | Sequence[str] | None,
 ) -> list[AnneeBaseline]:
-    """Trajectoire avec les mesures ; avec l'effet de croissance si ``borne_multiplicateur``
-    désigne la borne du multiplicateur retenue pour toutes les mesures."""
+    """Trajectoire avec les mesures ; avec l'effet de croissance si ``multiplicateurs`` désigne
+    la borne du multiplicateur, commune à toutes les mesures ou propre à chacune (même ordre)."""
     effets = _effets_par_annee(mesures, borne_effet)
-    if borne_multiplicateur is None:
+    if multiplicateurs is None:
         return trajectoire_avec_effet(trajectoire, effets)
+    if isinstance(multiplicateurs, str):
+        multiplicateurs = [multiplicateurs] * len(mesures)
     annees = [a.annee for a in trajectoire]
     rho = module_croissance.persistance()
     ecart = [0.0] * len(annees)
     # L'écart de production est la somme de ceux de chaque mesure (multiplicateur propre).
-    for m in mesures:
+    for m, borne in zip(mesures, multiplicateurs, strict=True):
         multiplicateur = module_croissance.multiplicateur(categorie_croissance(m.levier))
         og = module_croissance.ecart_production(
             _effets_par_annee([m], borne_effet),
             annees,
-            getattr(multiplicateur, borne_multiplicateur),
+            getattr(multiplicateur, borne),
             rho,
         )
         ecart = [x + y for x, y in zip(ecart, og, strict=True)]
@@ -763,15 +765,57 @@ CENTRAL = "central"
 BORNES_EFFET = ("bas", "haut")
 
 
-def _bornes(croissance: bool) -> list[tuple[str, str | None]]:
-    """Couples (borne de l'effet, borne du multiplicateur) des trajectoires qui encadrent le
-    scénario, hors centrale : effet bas et haut ; avec la croissance, s'y ajoutent les coins
-    (effet bas ou haut, multiplicateur bas ou haut), le multiplicateur étant commun à toutes
-    les mesures."""
+def _extremes_croissance(
+    trajectoire: Sequence[AnneeBaseline], mesures: Sequence[Mesure], borne_effet: str
+) -> list[list[AnneeBaseline]]:
+    """Trajectoires basse et haute, année par année, quand le multiplicateur de chaque mesure
+    varie dans sa plage indépendamment des autres.
+
+    La dette et le solde sont linéaires dans chaque multiplicateur (écart de production
+    additif, ``fr_budget.croissance``) : l'extrême de chaque année est la trajectoire au
+    multiplicateur central plus, pour chaque mesure, l'écart le plus bas (ou le plus haut) de
+    ses deux bornes. Un multiplicateur commun à toutes les mesures sous-estimerait la fourchette
+    quand des mesures ont des effets de signes opposés (revue de code du 28 octobre 2026).
+    """
+    centre = _trajectoire_mesures(trajectoire, mesures, borne_effet, CENTRAL)
+    # ecarts[j][b] : écarts (dette, solde) de chaque année quand seule la mesure j prend la
+    # borne b de son multiplicateur.
+    ecarts: list[list[list[tuple[float, float]]]] = []
+    for j in range(len(mesures)):
+        ecarts_j = []
+        for borne in BORNES_EFFET:
+            choix = [borne if k == j else CENTRAL for k in range(len(mesures))]
+            t = _trajectoire_mesures(trajectoire, mesures, borne_effet, choix)
+            ecarts_j.append(
+                [
+                    (a.dette - c.dette, a.solde_primaire - c.solde_primaire)
+                    for a, c in zip(t, centre, strict=True)
+                ]
+            )
+        ecarts.append(ecarts_j)
+    resultat = []
+    for choisir in (min, max):
+        lignes = []
+        for i, c in enumerate(centre):
+            dette = c.dette + sum(choisir(0.0, *(b[i][0] for b in e)) for e in ecarts)
+            solde = c.solde_primaire + sum(choisir(0.0, *(b[i][1] for b in e)) for e in ecarts)
+            lignes.append(replace(c, dette=dette, solde_primaire=solde))
+        resultat.append(lignes)
+    return resultat
+
+
+def _autres_trajectoires(
+    trajectoire: Sequence[AnneeBaseline], mesures: Sequence[Mesure], croissance: bool
+) -> list[list[AnneeBaseline]]:
+    """Trajectoires qui encadrent le scénario, hors centrale : effet bas et haut ; avec la
+    croissance, effet bas ou haut avec le multiplicateur central, et les extrêmes du
+    multiplicateur de chaque mesure (``_extremes_croissance``)."""
     if not croissance:
-        return [(b, None) for b in BORNES_EFFET]
-    bornes: list[tuple[str, str | None]] = [(b, CENTRAL) for b in BORNES_EFFET]
-    return bornes + [(b, j) for j in BORNES_EFFET for b in BORNES_EFFET]
+        return [_trajectoire_mesures(trajectoire, mesures, b, None) for b in BORNES_EFFET]
+    autres = [_trajectoire_mesures(trajectoire, mesures, b, CENTRAL) for b in BORNES_EFFET]
+    for b in BORNES_EFFET:
+        autres += _extremes_croissance(trajectoire, mesures, b)
+    return autres
 
 
 def scenario(mesures: Sequence[Mesure], *, croissance: bool = False) -> list[AnneeScenario]:
@@ -786,7 +830,7 @@ def scenario(mesures: Sequence[Mesure], *, croissance: bool = False) -> list[Ann
     centrale, variantes = trajectoires()
     m_central = CENTRAL if croissance else None
     c_traj = _trajectoire_mesures(centrale, mesures, CENTRAL, m_central)
-    autres_traj = [_trajectoire_mesures(centrale, mesures, b, j) for b, j in _bornes(croissance)]
+    autres_traj = _autres_trajectoires(centrale, mesures, croissance)
     variantes_avec = [_trajectoire_mesures(v, mesures, CENTRAL, m_central) for v in variantes]
     resultat = []
     for i, ref in enumerate(centrale):

@@ -792,6 +792,8 @@ def reponses_unitaires() -> dict[str, Any]:
                 "unite_solde": _arrondir(r.unite_solde),
                 "croissance_dette": _arrondir(r.croissance_dette),
                 "croissance_solde": _arrondir(r.croissance_solde),
+                "croissance_alpha_dette": _arrondir(r.croissance_alpha_dette),
+                "croissance_alpha_solde": _arrondir(r.croissance_alpha_solde),
             }
         effet = module_scenario.effet_solde(
             module_scenario.Mesure(levier, 1.0, module_scenario.ANNEE_PREMIERE_MESURE)
@@ -866,6 +868,7 @@ def reponses_unitaires() -> dict[str, Any]:
             ),
             "persistance": module_croissance.persistance(),
             "effet_solde": module_croissance.effet_sur_le_solde(),
+            "effet_solde_plage": _fourchette(module_croissance.effet_sur_le_solde_plage()),
         },
         "leviers": leviers,
     }

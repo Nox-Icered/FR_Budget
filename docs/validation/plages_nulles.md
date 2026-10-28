@@ -85,7 +85,7 @@ Seconde source : **Insee, note de conjoncture de mars 2026, fiche « Salaires »
 
 Comparaison : le modèle fait évoluer le SMIC net (OpenFisca, juin 2024 → juin 2025, mois repère des ménages types) de +1,97 %. L'écart vaut +0,03 % avec le SMB et −0,17 % avec le SMPT.
 
-Proposition : plage de **−0,2 % à 0 %**, valeur centrale 0 inchangée. La borne haute de +0,03 % est arrondie à 0.
+Proposition : plage de **−0,2 % à 0 %**, valeur centrale 0 inchangée. La borne haute de +0,03 % est arrondie à 0. **Appliquée** (branche `plages/menages`) : voir « Fourchette selon le revenu » dans `docs/fiches/menages_types.md`.
 
 Limites :
 - Ce sont des moyennes, et non la médiane ou le 95e centile.
@@ -99,7 +99,7 @@ La meilleure seconde source serait l'édition 2026 de « Les retraités et les r
 
 En attendant : **COR, rapport annuel de juin 2026, tableau 2.1** (page 73 du PDF). La pension moyenne réelle progresse de **0,4 %** par an en moyenne de 2002 à 2025, et de **0,5 %** par an de 2025 à 2030 (scénario de référence). Les pensions étant indexées sur les prix, cette hausse réelle mesure surtout l'effet du renouvellement des générations (« effet noria », défini par le COR page 76, note 66).
 
-Proposition : plage de **0 % à +1,0 %** sur les deux années (fin 2023 → 2025, deux fois 0,5 %), valeur centrale 0 inchangée.
+Proposition : plage de **0 % à +1,0 %** sur les deux années (fin 2023 → 2025, deux fois 0,5 %), valeur centrale 0 inchangée. **Appliquée** (branche `plages/menages`).
 
 Limites :
 - Ce sont des moyennes sur longue période et des projections, pas l'observé de 2024 et 2025.
@@ -115,7 +115,7 @@ Seconde source : **Insee Première n° 2114** (juin 2026) :
 
 En euros courants, cela donne environ +2,7 % (1,007 × 1,020). Le SMIC horaire brut au 1er janvier (OpenFisca, comme le modèle) passe de 11,27 € en 2023 à 11,65 € en 2024, soit +3,4 %. L'écart en 2024 vaut donc **−0,6 %**.
 
-Proposition : plage de **−0,6 % à 0 %**, valeur centrale 0 inchangée.
+Proposition : plage de **−0,6 % à 0 %**, valeur centrale 0 inchangée. **Appliquée** (branche `plages/menages`).
 
 Limites :
 - C'est une moyenne, et non la médiane utilisée par le modèle.
@@ -141,6 +141,7 @@ Options présentées :
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-28 | § 4 à 6 appliqués : ménages types au revenu bas, central et haut (sources `insee_premiere_2114` et `insee_note_conjoncture_2026_03_salaires` versées au dépôt) | Valeurs centrales inchangées ; fourchettes du net après impôt publiées (détail : `docs/fiches/menages_types.md`) |
 | 2026-10-28 | § 1 appliqué : alpha de 0,5 à 0,63 (source `intereconomics_2019_mourre_poissonnier` ajoutée au registre) | Valeurs centrales inchangées ; bornes hautes de l'écart de dette plus hautes avec la croissance (détail : `docs/fiches/croissance.md`) ; `test_fourchette_d_une_mesure_seule_inchangee` et `test_calcul_du_site_avec_croissance` (API) étendus aux bornes de alpha |
 | 2026-10-28 | § 3 appliqué : durée de montée en charge de 4 à 4,9 ans (levier sur l'âge effectif) | Validation inchangée (valeur centrale) ; bornes basses de l'écart de solde plus basses pendant la montée en charge (détail : `docs/fiches/retraites.md`) ; 1 test unitaire ajouté |
 | 2026-10-28 | Option (a) retenue pour `scenario_rendement_constant_pib` : RESF ajouté aux sources, plage nulle gardée | Aucun (valeur non lue par le calcul) |

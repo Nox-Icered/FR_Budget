@@ -196,6 +196,33 @@ def test_export_des_effets_des_leviers(tmp_path: Path) -> None:
     assert median["cout_employeur"] == pytest.approx(
         base["celibataire_median"]["cout_employeur"], abs=2
     )
+    # Revenu bas et haut (plages des hypothèses d'évolution des revenus) : mêmes clés que le
+    # revenu central ; l'effet de l'indexation sur le retraité est plus fort au revenu haut.
+    assert set(effets["variantes"]) == {"bas", "haut"}
+    for v in effets["variantes"].values():
+        assert set(v) == {"effets", "effets_salaire", "grille"}
+        assert set(v["grille"]) == set(effets["grille"])
+    haut = effets["variantes"]["haut"]["effets"]["indexation_pensions_prestations"]["hausse"]
+    retraite_haut = {m["id"]: m for m in menages_types()["menages"]}["retraite_seul"]["variantes"]
+    assert haut["retraite_seul"]["pension_brute"] - retraite_haut["haut"]["pension_brute"] > (
+        retraite["pension_brute"] - avant["pension_brute"]
+    )
+
+
+def test_menages_types_en_fourchette_selon_le_revenu() -> None:
+    """Chaque ménage type est aussi publié au revenu bas et haut ; le SMIC ne bouge pas, le
+    retraité gagne plus au revenu haut (pension moyenne, plage de 0 à +1 %)."""
+    menages = {m["id"]: m for m in menages_types()["menages"]}
+    for m in menages.values():
+        assert set(m["variantes"]) == {"bas", "haut"}
+    smic = menages["celibataire_smic"]
+    assert smic["variantes"]["bas"]["salaire_brut"] == smic["salaire_brut"]
+    retraite = menages["retraite_seul"]
+    assert retraite["variantes"]["haut"]["pension_brute"] == pytest.approx(
+        retraite["pension_brute"] * 1.01, abs=0.05
+    )
+    median = menages["celibataire_median"]
+    assert median["variantes"]["bas"]["salaire_brut"] < median["salaire_brut"]
 
 
 def test_sources_des_effets_au_registre() -> None:

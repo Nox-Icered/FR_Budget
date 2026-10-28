@@ -73,11 +73,15 @@ export type Relecture = {
   reponse: string;
   lien?: string;
 };
+// Variantes de revenu des ménages types : bornes des hypothèses d'évolution des revenus.
+export type VarianteRevenu = "bas" | "haut";
 export type MenageType = LignesCascade & {
   id: string;
   libelle: string;
   annee: number;
+  variantes: Record<VarianteRevenu, LignesCascade>;
 };
+type EffetsUnite = Record<string, Record<"hausse" | "baisse", Record<string, LignesCascade | null>>>;
 export type MenagesTypes = {
   unite: string;
   annee_revenus: number;
@@ -92,10 +96,12 @@ export type EffetsMenages = {
   sources: string[];
   leviers: { id: string; unite: string; sources: string[]; bornes: [number, number] }[];
   sans_effet: Record<string, string>;
-  effets: Record<string, Record<"hausse" | "baisse", Record<string, LignesCascade | null>>>;
-  effets_salaire: Record<string, Record<"hausse" | "baisse", Record<string, LignesCascade | null>>>;
+  effets: EffetsUnite;
+  effets_salaire: EffetsUnite;
   leviers_incidence: string[];
   incidence_par_defaut: Incidence;
+  // Mêmes effets au revenu bas et haut (fourchette).
+  variantes: Record<VarianteRevenu, { effets: EffetsUnite; effets_salaire: EffetsUnite }>;
 };
 export type Incidence = "comptable" | "salaire";
 export type MenagesScenario = {
@@ -106,6 +112,8 @@ export type MenagesScenario = {
   leviers_incidence: string[];
   sans_effet: Record<string, string>;
   grille: Grille;
+  // Grille au revenu bas et haut (fourchette).
+  grille_variantes: Record<VarianteRevenu, Grille>;
   ecart_max_un_levier: number;
   ecart_max_combinaison: number;
   ecart_max_salaire_un_levier: number;

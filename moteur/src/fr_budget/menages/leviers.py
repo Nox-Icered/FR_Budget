@@ -363,10 +363,10 @@ def _ajustable(adulte: types.Adulte) -> bool:
     return not (adulte.retraite or adulte.independant or adulte.apprentissage is not None)
 
 
-def _brut_initial(adulte: types.Adulte, annee: int) -> float:
+def _brut_initial(adulte: types.Adulte, annee: int, variante: str = types.CENTRAL) -> float:
     if adulte.montant_mensuel is not None:
         return adulte.montant_mensuel
-    return types.brut_mensuel(adulte.niveau, annee, adulte.cadre)
+    return types.brut_mensuel(adulte.niveau, annee, adulte.cadre, variante)
 
 
 def _couts(profil: types.Profil, legislation_: types.Legislation, annee: int) -> list[float]:
@@ -391,7 +391,9 @@ def profil_repercute(
     """
     reference = _couts(profil, types.REFERENCE, annee)
     smic = types.brut_mensuel(types.SMIC, annee)
-    bruts = [_brut_initial(a, annee) if _ajustable(a) else 0.0 for a in profil.adultes]
+    bruts = [
+        _brut_initial(a, annee, profil.variante) if _ajustable(a) else 0.0 for a in profil.adultes
+    ]
     planchers = [min(b, smic) for b in bruts]
     precedents: list[tuple[float, float] | None] = [None] * len(bruts)
     ajuste = profil
@@ -471,16 +473,17 @@ def cascade_scenario(
     mesures_: Mesures,
     annee: int = types.ANNEE,
     incidence: str = COMPTABLE,
+    variante: str = types.CENTRAL,
 ) -> types.CascadeMenage | None:
-    """Cascade du ménage type sous toutes les mesures du scénario ; ``None`` si l'effet d'une
-    des mesures n'est pas chiffré pour ce ménage."""
+    """Cascade du ménage type sous toutes les mesures du scénario, dans la variante de revenu
+    ``variante`` ; ``None`` si l'effet d'une des mesures n'est pas chiffré pour ce ménage."""
     verifier_incidence_scenario(mesures_, incidence)
-    profil = types.PROFILS[identifiant]
+    profil = types.profil_type(identifiant, variante)
     if not _chiffre_scenario(mesures_, profil):
         return None
     if incidence == COMPTABLE:
         return types.cascade_type_reformee(
-            identifiant, legislation_scenario(mesures_, annee), annee
+            identifiant, legislation_scenario(mesures_, annee), annee, variante
         )
     return _cascade(profil, mesures_, annee, incidence)
 
@@ -504,10 +507,11 @@ def cascade_reformee(
     valeur: float,
     annee: int = types.ANNEE,
     incidence: str = COMPTABLE,
+    variante: str = types.CENTRAL,
 ) -> types.CascadeMenage | None:
     """Cascade du ménage type sous un seul levier ; ``None`` si l'effet n'est pas chiffré."""
     _verifier_incidence(levier, incidence)
-    return cascade_scenario(identifiant, ((levier, valeur),), annee, incidence)
+    return cascade_scenario(identifiant, ((levier, valeur),), annee, incidence, variante)
 
 
 def cascade_profil_reformee(
@@ -543,9 +547,12 @@ def grille(levier: str) -> tuple[float, ...]:
 
 
 def _cascades_levier(
-    levier: str, valeur: float, incidence: str
+    levier: str, valeur: float, incidence: str, variante: str = types.CENTRAL
 ) -> dict[str, types.CascadeMenage | None]:
-    return {i: cascade_reformee(i, levier, valeur, types.ANNEE, incidence) for i in types.PROFILS}
+    return {
+        i: cascade_reformee(i, levier, valeur, types.ANNEE, incidence, variante)
+        for i in types.PROFILS
+    }
 
 
 Effets = dict[str, dict[str, dict[float, dict[str, types.CascadeMenage | None]]]]
@@ -553,16 +560,18 @@ Effets = dict[str, dict[str, dict[float, dict[str, types.CascadeMenage | None]]]
 
 
 @cache
-def effets_grille(processus: int | None = None) -> Effets:
+def effets_grille_variantes(processus: int | None = None) -> dict[str, Effets]:
     """Cascades des ménages types pour chaque valeur de la grille de chaque levier, en lecture
-    comptable, et aussi répercutée sur le salaire pour les cotisations patronales.
+    comptable, et aussi répercutée sur le salaire pour les cotisations patronales, dans chaque
+    variante de revenu (``types.VARIANTES``).
 
-    Calcul réparti entre ``processus`` processus (un par levier, incidence et valeur), car
-    chaque législation réformée reconstruit ses paramètres (quelques secondes par ménage). Mis
-    en cache : ne dépend d'aucune donnée saisie.
+    Calcul réparti entre ``processus`` processus (un par levier, incidence, valeur et
+    variante), car chaque législation réformée reconstruit ses paramètres (quelques secondes
+    par ménage). Mis en cache : ne dépend d'aucune donnée saisie.
     """
-    triplets = [
-        (levier, valeur, incidence)
+    cas = [
+        (levier, valeur, incidence, variante)
+        for variante in types.VARIANTES
         for levier in LEVIERS
         for incidence in (INCIDENCES if levier in LEVIERS_INCIDENCE else (COMPTABLE,))
         for valeur in grille(levier)
@@ -571,11 +580,17 @@ def effets_grille(processus: int | None = None) -> Effets:
     # fils d'exécution, et un fork les copierait dans un état incohérent.
     contexte = multiprocessing.get_context("spawn")
     with ProcessPoolExecutor(max_workers=processus, mp_context=contexte) as executeur:
-        resultats = executeur.map(_cascades_levier, *zip(*triplets, strict=True))
-        effets: Effets = {}
-        for (levier, valeur, incidence), cascades in zip(triplets, resultats, strict=True):
-            effets.setdefault(levier, {}).setdefault(incidence, {})[valeur] = cascades
+        resultats = executeur.map(_cascades_levier, *zip(*cas, strict=True))
+        effets: dict[str, Effets] = {}
+        for (levier, valeur, incidence, variante), cascades in zip(cas, resultats, strict=True):
+            par_levier = effets.setdefault(variante, {}).setdefault(levier, {})
+            par_levier.setdefault(incidence, {})[valeur] = cascades
     return effets
+
+
+def effets_grille(processus: int | None = None) -> Effets:
+    """Cascades de la grille au revenu central (``effets_grille_variantes``)."""
+    return effets_grille_variantes(processus)[types.CENTRAL]
 
 
 # Approximation du simulateur : le site ne peut pas lancer OpenFisca. Pour chaque mesure, il
@@ -634,11 +649,15 @@ def _interpoler(
 
 
 def approximation(
-    identifiant: str, mesures_: Mesures, effets: Effets, incidence: str = COMPTABLE
+    identifiant: str,
+    mesures_: Mesures,
+    effets: Effets,
+    incidence: str = COMPTABLE,
+    variante: str = types.CENTRAL,
 ) -> types.CascadeMenage | None:
     """Cascade approchée du ménage type sous le scénario ; ``None`` si une mesure n'est pas
-    chiffrée pour ce ménage."""
-    reference = _vecteur(types.cascade_annuelle(identifiant))
+    chiffrée pour ce ménage. ``effets`` : grille de la même variante de revenu."""
+    reference = _vecteur(types.cascade_annuelle(identifiant, types.ANNEE, variante))
     total = dict(reference)
     for levier, valeur in mesures_:
         lecture = incidence if levier in LEVIERS_INCIDENCE else COMPTABLE

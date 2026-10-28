@@ -610,15 +610,21 @@ hypotheses:
     unite: écart relatif
     valeur_centrale: 0.0
     plage:
-      basse: 0.0
+      basse: -0.002
       haute: 0.0
-    sources: [insee_premiere_2079]
+    sources: [insee_premiere_2079, insee_note_conjoncture_2026_03_salaires]
     justification: >-
       Les salaires de l'Insee portent sur 2024 ; les ménages types sont simulés sur les revenus
       de 2025. Les niveaux médian et du 95e centile sont portés en 2025 en gardant leur
       rapport au SMIC net. En 2024, l'Insee constate une hausse du pouvoir d'achat proche dans
       tout le haut de la distribution (+0,8 % pour la médiane, +0,5 % pour le 95e centile,
-      page 2, figure 3), sans donnée sur 2025 : l'écart est pris nul, sans plage.
+      page 2, figure 3). Pour 2025, la note de conjoncture de mars 2026 (fiche « Salaires »,
+      figure 1, page 1) donne en moyenne annuelle +2,0 % pour le salaire mensuel de base et
+      +1,8 % pour le salaire moyen par tête des branches marchandes non agricoles, contre
+      +1,97 % pour le SMIC net du modèle (OpenFisca, juin 2024 à juin 2025) : écart de +0,03 %
+      et de -0,17 %. Plage de -0,2 % à 0 % (borne haute arrondie à 0), appliquée le 28 octobre
+      2026 à la demande du mainteneur (docs/validation/plages_nulles.md, § 4) ; limite : ce
+      sont des moyennes, pas la médiane ni le 95e centile.
     instruments: [menages_types]
 
   - id: menages_ecart_evolution_pension_moyenne
@@ -627,14 +633,24 @@ hypotheses:
     valeur_centrale: 0.0
     plage:
       basse: 0.0
-      haute: 0.0
-    sources: [drees_retraites_2025_fiche05, dss_instruction_2023_189, dss_instruction_2024_176]
+      haute: 0.01
+    sources:
+      - drees_retraites_2025_fiche05
+      - dss_instruction_2023_189
+      - dss_instruction_2024_176
+      - cor_rapport_annuel_2026
     justification: >-
       La pension moyenne de la DREES porte sur fin 2023 ; le ménage type est simulé sur 2025.
       Elle est revalorisée comme les pensions de base (coefficients de 1,053 et 1,022). Les
       pensions complémentaires suivent d'autres règles, et la pension moyenne évolue aussi avec
-      le renouvellement des générations (la DREES décrit les deux effets) ; sans chiffrage pour
-      2024 et 2025, l'écart est pris nul, sans plage.
+      le renouvellement des générations (la DREES décrit les deux effets). Le COR (rapport de
+      juin 2026, tableau 2.1, page 73 du PDF) donne une pension moyenne réelle en hausse de
+      0,4 % par an de 2002 à 2025 et de 0,5 % par an de 2025 à 2030, surtout par ce
+      renouvellement (« effet noria », page 76, note 66). Plage de 0 % à +1,0 % sur les deux
+      années (deux fois 0,5 %), appliquée le 28 octobre 2026 à la demande du mainteneur
+      (docs/validation/plages_nulles.md, § 5) ; limite : moyennes sur longue période et
+      projections, pas l'observé de 2024 et 2025 (édition 2026 de la DREES non accessible
+      depuis l'environnement de travail).
     instruments: [menages_types]
 
   - id: menages_ecart_evolution_revenu_independant
@@ -642,14 +658,20 @@ hypotheses:
     unite: écart relatif
     valeur_centrale: 0.0
     plage:
-      basse: 0.0
+      basse: -0.006
       haute: 0.0
-    sources: [insee_premiere_2060]
+    sources: [insee_premiere_2060, insee_premiere_2114]
     justification: >-
       Le revenu médian de l'Insee porte sur 2023 ; le ménage type est simulé sur 2025. Il est
       porté en 2025 en gardant son rapport au SMIC horaire brut. L'Insee constate en 2023 une
-      baisse du revenu moyen des non-salariés classiques en euros constants (-4,4 %), sans
-      donnée sur 2024 et 2025 : l'écart est pris nul, sans plage.
+      baisse du revenu moyen des non-salariés classiques en euros constants (-4,4 %). En 2024
+      (Insee Première n° 2114, figure 1, page 2), le revenu moyen des non-salariés hors
+      micro-entrepreneurs augmente de 0,7 % en euros constants, l'inflation étant de 2,0 %
+      (page 3), soit environ +2,7 % en euros courants, contre +3,4 % pour le SMIC horaire brut
+      au 1er janvier (OpenFisca, 11,27 € en 2023, 11,65 € en 2024) : écart de -0,6 %. Plage de
+      -0,6 % à 0 %, appliquée le 28 octobre 2026 à la demande du mainteneur
+      (docs/validation/plages_nulles.md, § 6) ; limites : moyenne et non médiane, rien encore
+      sur 2025.
     instruments: [menages_types]
 
   - id: retraites_part_departs_non_decales

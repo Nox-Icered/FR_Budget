@@ -31,6 +31,9 @@ const scenarioMenages = {
   leviers_incidence: effets.leviers_incidence,
   sans_effet: effets.sans_effet,
   grille: effets.grille,
+  grille_variantes: Object.fromEntries(
+    Object.entries(effets.variantes).map(([v, e]) => [v, e.grille]),
+  ),
   ecart_max_un_levier: effets.controle.ecart_max_un_levier,
   ecart_max_combinaison: effets.controle.ecart_max_combinaison,
   ecart_max_salaire_un_levier: effets.controle.ecart_max_salaire_un_levier,

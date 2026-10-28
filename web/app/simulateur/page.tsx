@@ -107,6 +107,8 @@ export default function PageSimulateur() {
         {texte("simulateur.methode_retraites", {
           effet: deuxDecimales(donnees.leviers.retraites_age_depart.effet_plein ?? 0),
           duree: donnees.leviers.retraites_age_depart.duree_montee ?? 0,
+          duree_bas: donnees.leviers.retraites_age_depart.duree_montee_plage?.bas ?? 0,
+          duree_haut: donnees.leviers.retraites_age_depart.duree_montee_plage?.haut ?? 0,
         })}
       </p>
       <p>

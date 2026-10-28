@@ -16,7 +16,8 @@ est leur moyenne. Choix du lot 3.1, à relire (``docs/fiches/retraites.md``) : c
 du COR, sans interaction entre leviers ni bouclage macroéconomique.
 
 Montée en charge : linéaire sur ``duree_montee_en_charge()`` ans (rythme de trois mois par
-génération de la réforme de 2023), quel que soit l'écart choisi.
+génération de la réforme de 2023), quel que soit l'écart choisi ; les bornes prennent aussi la
+plage de cette durée (4 à 4,9 ans, âge effectif observé après la réforme de 2010).
 """
 
 from __future__ import annotations
@@ -75,27 +76,41 @@ def effet_un_an(annee: int) -> Fourchette:
 
 
 def duree_montee_en_charge() -> float:
-    """Durée de la montée en charge, en années (registre d'hypothèses)."""
+    """Durée de la montée en charge, en années (registre d'hypothèses, valeur centrale)."""
     return hypothese(HYPOTHESE_MONTEE).valeur_centrale
 
 
-def part_montee(annee: int, entree: int) -> float:
-    """Part de l'écart d'âge atteinte en ``annee`` pour une mesure entrée en ``entree``."""
+def duree_montee_en_charge_plage() -> Fourchette:
+    """Durée de la montée en charge en fourchette (registre d'hypothèses)."""
+    h = hypothese(HYPOTHESE_MONTEE)
+    return encadrer(h.valeur_centrale, [h.plage.basse, h.plage.haute])
+
+
+def part_montee(annee: int, entree: int, duree: float | None = None) -> float:
+    """Part de l'écart d'âge atteinte en ``annee`` pour une mesure entrée en ``entree``, la
+    montée durant ``duree`` ans (valeur centrale du registre par défaut)."""
     if annee < entree:
         return 0.0
-    return min(1.0, (annee - entree + 1) / duree_montee_en_charge())
+    if duree is None:
+        duree = duree_montee_en_charge()
+    return min(1.0, (annee - entree + 1) / duree)
 
 
 def effet(valeur: float, annee: int, entree: int, borne: str) -> float:
     """Effet sur le solde primaire, en points de PIB, d'un écart d'âge effectif de ``valeur``
     années entré en ``entree`` ; ``borne`` : bas, central ou haut (bornes ordonnées quel que
-    soit le signe de ``valeur``)."""
+    soit le signe de ``valeur``). Les bornes croisent celles de l'effet d'un an et celles de
+    la durée de montée en charge."""
     f = effet_un_an(annee)
-    part = part_montee(annee, entree)
     if borne == "central":
-        return valeur * part * f.central
-    extremes = sorted(valeur * part * x for x in (f.bas, f.haut))
-    return extremes[0] if borne == "bas" else extremes[1]
+        return valeur * part_montee(annee, entree) * f.central
+    duree = duree_montee_en_charge_plage()
+    extremes = sorted(
+        valeur * part_montee(annee, entree, d) * x
+        for x in (f.bas, f.haut)
+        for d in (duree.bas, duree.haut)
+    )
+    return extremes[0] if borne == "bas" else extremes[-1]
 
 
 def effet_a_horizon(horizon: int, entree: int) -> float:

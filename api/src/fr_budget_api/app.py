@@ -821,6 +821,9 @@ def reponses_unitaires() -> dict[str, Any]:
                 {
                     "effet_plein": module_scenario.effet_plein_retraites(),
                     "duree_montee": module_retraites.duree_montee_en_charge(),
+                    "duree_montee_plage": _fourchette(
+                        module_retraites.duree_montee_en_charge_plage()
+                    ),
                 }
                 if levier == module_scenario.LEVIER_RETRAITES_AGE
                 else {}

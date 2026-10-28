@@ -84,7 +84,9 @@
       "relu": "Relu"
     },
     "comparaisons_titre": "Comparaison du modèle aux références",
-    "comparaisons_intro": "Écart relatif entre la valeur du modèle et la référence officielle, tolérance de ±{tolerance} %. Les écarts hors tolérance sont publiés tels quels.",
+    "comparaisons_intro": "Écart relatif entre la valeur du modèle et la référence officielle, tolérance de ±{tolerance} %. Quand la référence est une fourchette de plusieurs modèles, l'écart est nul dans la fourchette et mesuré à la borne la plus proche en dehors. Les écarts hors tolérance sont publiés tels quels.",
+    "fourchette_libelle": "{mesure}, fourchette des simulations publiées",
+    "fourchette_valeur": "{bas} à {haut}",
     "modele": "Modèle",
     "ecart": "Écart",
     "resultat": "Résultat",

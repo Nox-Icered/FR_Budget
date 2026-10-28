@@ -56,18 +56,17 @@ Les 6 valeurs du tableau 2.10 saisies dans `registres/references/chiffrages.yaml
 
 ## 6. Validation
 
-Test : `moteur/tests/validation/test_levier_retraites.py`. Tolérance : ±10 %.
+Test : `moteur/tests/validation/test_levier_retraites.py`.
 
-La référence est le tableau 2.10 du COR (page 123) : l'effet d'un an de plus sur l'âge d'ouverture des droits sur le solde primaire des APU, selon les simulations de la DG Trésor, d'I-MIP et de l'OFCE. Le modèle est comparé à chaque borne de la fourchette publiée (court terme à 2 ans, moyen terme à 10 ans, long terme à 20 ans).
+La référence est le tableau 2.10 du COR (page 123) : l'effet d'un an de plus sur l'âge d'ouverture des droits sur le solde primaire des APU, selon les simulations de la DG Trésor, d'I-MIP et de l'OFCE (court terme à 2 ans, moyen terme à 10 ans, long terme à 20 ans). C'est une fourchette de trois modèles, pas un chiffrage unique.
 
-| Référence | Référence | Modèle | Écart | Dans la tolérance |
-|-----------|----------:|-------:|------:|-------------------|
-| À 2 ans, borne basse | 0,05 | 0,48 | +860,3 % | non |
-| À 2 ans, borne haute | 0,40 | 0,48 | +20,0 % | non |
-| À 10 ans, borne basse | 0,30 | 0,84 | +179,7 % | non |
-| À 10 ans, borne haute | 0,60 | 0,84 | +39,9 % | non |
-| À 20 ans, borne basse | 0,30 | 0,78 | +161,3 % | non |
-| À 20 ans, borne haute | 0,65 | 0,78 | +20,6 % | non |
+**Règle** (décision du mainteneur du 28 octobre 2026) : le modèle passe s'il est dans [0,9 × borne basse ; 1,1 × borne haute]. L'écart affiché est nul dans la fourchette, et mesuré à la borne la plus proche en dehors (`fr_budget.validation.comparer_fourchette`). Elle remplace la comparaison à chaque borne à ±10 %, qu'aucun modèle ne pouvait satisfaire aux deux bornes à la fois (les bornes basse et haute sont éloignées de bien plus de 20 %). Limite : la règle est moins exigeante qu'un chiffrage unique ; une fourchette large (0,05 à 0,4 à 2 ans) laisse passer des modèles très différents.
+
+| Horizon | Fourchette du COR | Modèle | Écart à la fourchette | Dans la tolérance |
+|---------|------------------:|-------:|----------------------:|-------------------|
+| 2 ans | 0,05 à 0,40 | 0,48 | +20,0 % | non |
+| 10 ans | 0,30 à 0,60 | 0,84 | +39,9 % | non |
+| 20 ans | 0,30 à 0,65 | 0,78 | +20,6 % | non |
 
 Lecture : le modèle donne un effet plus fort que les trois modèles cités par le COR, même à leur borne haute. Les raisons probables sont celles du § 5 :
 - l'âge effectif monte moins que l'âge légal ;
@@ -94,7 +93,7 @@ Pour chaque année t et chaque âge a, la génération g = t − a part plus tar
 
 Un an de plus sur l'âge légal, entrée en 2027 : environ 418 000 retraités de moins la deuxième année, 627 000 la dixième. Effet sur le solde primaire, en points de PIB (central, fourchette) : 0,47 (0,42 à 0,56) à 2 ans, 0,66 (0,59 à 0,79) à 10 ans, 0,62 (0,56 à 0,75) à 20 ans. Une fois la montée en charge achevée : 18,9 Md€ de 2025 (17,2 à 22,8).
 
-Comparé au tableau 2.10 du COR (mêmes références que la première étape, test `moteur/tests/validation/test_levier_retraites_cohortes.py`), écart à la borne haute publiée : +16,4 % à 2 ans (première étape : +20,0 %), +9,4 % à 10 ans (+39,9 %), −4,9 % à 20 ans (+20,6 %). Écart aux bornes basses : de +106 % à +831 %. Deux comparaisons sur six sont dans la tolérance (10 et 20 ans, borne haute). Les deux modèles sont publiés sur la page Validation.
+Comparé au tableau 2.10 du COR (mêmes références que la première étape, test `moteur/tests/validation/test_levier_retraites_cohortes.py`), même règle (fourchette, § 6) : +16,4 % au-dessus de la borne haute à 2 ans (première étape : +20,0 %), +9,4 % à 10 ans (+39,9 %), dans la fourchette à 20 ans (0,62 pour 0,30 à 0,65 ; première étape : +20,6 %). Deux comparaisons sur trois sont dans la tolérance (10 et 20 ans). Les deux modèles sont publiés sur la page Validation.
 
 ### Choix et limites
 
@@ -109,6 +108,7 @@ Comparé au tableau 2.10 du COR (mêmes références que la première étape, te
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-28 | Règle de validation : modèle dans [0,9 × borne basse ; 1,1 × borne haute] du tableau 2.10 du COR, au lieu de ±10 % à chaque borne (décision du mainteneur, lot C de la revue de code) | Les 12 comparaisons (6 par modèle) deviennent 6 (3 par modèle). Âge effectif : 0 sur 6 → 0 sur 3 (écarts inchangés : +20,0 %, +39,9 %, +20,6 %). Cohortes : 2 sur 6 → 2 sur 3 (2 ans +16,4 %, hors ; 10 ans +9,4 % ; 20 ans −4,9 % → 0,0 %). Tableau : 59 sur 91 → 59 sur 85 |
 | 2026-10-14 | Revue de la PR : rythme de trois mois par génération, pensions nettes des prélèvements, réponses exactes par cran sur le site | Variante « cohortes » : 2 sur 6 dans la tolérance (10 ans : +18,5 % → +9,4 % ; 20 ans : +2,8 % → −4,9 % ; 2 ans : +26,6 % → +16,4 %) |
 | 2026-10-14 | Deuxième étape : levier sur l'âge légal, modèle par cohortes (§ 8) | 6 comparaisons de la variante « cohortes » au tableau 2.10 du COR, 1 dans la tolérance ; références et première étape inchangées |
 | 2026-10-12 | Revue de la PR : références à 2 ans ajoutées à la validation | 2 nouvelles références, hors tolérance ; tableau : 49 sur 72 |

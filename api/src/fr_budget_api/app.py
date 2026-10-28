@@ -517,6 +517,8 @@ def resume_validation() -> list[dict[str, Any]]:
             "variante": c.variante,
             "modele": c.modele,
             "valeur_reference": c.valeur_reference,
+            "reference_haute": c.reference_haute,
+            "valeur_haute": c.valeur_haute,
             "ecart": c.ecart,
             "tolerance": c.tolerance,
             "dans_la_tolerance": c.dans_la_tolerance,

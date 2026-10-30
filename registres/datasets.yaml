@@ -866,3 +866,91 @@ datasets:
     empreinte_sha256: 6e5afffb43588c4ad84ce122a067513e314cd3057960f57234c0f50be3383871
     methode_transformation: pipelines/retraites/extraire_cohortes.py → data/processed/retraites/cohortes_ages_legaux.csv
     telecharge_le: 2026-10-14
+
+  - id: unedic_previsions_octobre_2026_pdf
+    source: unedic_previsions_octobre_2026
+    description: Prévisions financières de l'Unédic d'octobre 2026 (PDF, 16 pages)
+    fichier: data/raw/assurance_chomage/unedic_previsions_octobre_2026.pdf
+    empreinte_sha256: ee7a9e7051f81ba2c7d94805726a06810f80970824af16d042c7226c0ddcc4b2
+    methode_transformation: aucune ; contributions principales avant prélèvements de l'État et allocations brutes de 2026 (tableau 4, page 13), effets de l'avenant sur les ruptures conventionnelles (tableau A, page 8) saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-30
+
+  - id: unedic_previsions_juin_2024_pdf
+    source: unedic_previsions_juin_2024
+    description: Prévisions financières de l'Unédic de juin 2024 (PDF)
+    fichier: data/raw/assurance_chomage/unedic_previsions_juin_2024.pdf
+    empreinte_sha256: ebccab7f2d5842f0b7be4b54564ce4542474de216510d1f408980e0f668c56a1
+    methode_transformation: aucune ; allocations brutes et aides de 2023 (tableau 4, page 14) saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-30
+
+  - id: unedic_previsions_mars_2019_pdf
+    source: unedic_previsions_mars_2019
+    description: Prévisions financières de l'Unédic de mars 2019 (PDF)
+    fichier: data/raw/assurance_chomage/unedic_previsions_mars_2019.pdf
+    empreinte_sha256: 20ef6bf6429d503917c46ef0283bab8f9f1e3f09d2bb37d937360218c2c89152
+    methode_transformation: aucune ; contributions principales de 2019 et allocations brutes de 2018 (tableau page 13) saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-30
+
+  - id: unedic_parametres_utiles_juillet_2026_pdf
+    source: unedic_parametres_utiles_juillet_2026
+    description: Paramètres utiles de l'Assurance chômage, juillet 2026 (PDF)
+    fichier: data/raw/assurance_chomage/unedic_parametres_utiles_juillet_2026.pdf
+    empreinte_sha256: 9e42f786835515746f93a7159a6c7c0f91a5e0211fd1df1e88ad6b6f450551ff
+    methode_transformation: aucune ; taux de la contribution patronale (page 3) et coefficient appliqué à la durée d'indemnisation (page 5) saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-30
+
+  - id: unedic_etude_impact_convention_2024_pdf
+    source: unedic_etude_impact_convention_2024
+    description: Étude d'impact de la convention d'assurance chômage du 15 novembre 2024 (PDF)
+    fichier: data/raw/assurance_chomage/unedic_etude_impact_convention_2024.pdf
+    empreinte_sha256: 38eeae6eef49dd507fe511cc3252c42b1956b5bfe622e6c6bb02d6d7e93f3edf
+    methode_transformation: aucune ; effet de la suppression de la contribution exceptionnelle de 0,05 point et taux de 4,05 % (page 55) saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-30
+
+  - id: unedic_etude_impact_convention_2017_pdf
+    source: unedic_etude_impact_convention_2017
+    description: Étude d'impact de la convention d'assurance chômage 2017 (PDF)
+    fichier: data/raw/assurance_chomage/unedic_etude_impact_convention_2017.pdf
+    empreinte_sha256: eda44b7b5f64c7fa5ab6fa33bf420e20f3172b3a91f27af28cc7da5de58b71a6
+    methode_transformation: aucune ; effet de la contribution exceptionnelle de 0,05 point (tableau 2, page 30) saisi dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-30
+
+  - id: unedic_revalorisation_mode_emploi_2023_pdf
+    source: unedic_revalorisation_mode_emploi_2023
+    description: « Revalorisation des allocations d'assurance chômage, mode d'emploi », juin 2023 (PDF, 7 pages)
+    fichier: data/raw/assurance_chomage/unedic_revalorisation_mode_emploi_2023.pdf
+    empreinte_sha256: e6c72555ab68861236c723ccd4c23e1b38487fa6176c0dbbcc335a3333fb5d06
+    methode_transformation: aucune ; effet de la revalorisation de 1,9 % au 1er juillet 2023 par élément revalorisé (tableau 2, page 5) saisi dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-30
+
+  - id: unedic_effets_adaptation_conjoncture_2023_pdf
+    source: unedic_effets_adaptation_conjoncture_2023
+    description: « Effets de l'adaptation des règles d'assurance chômage à la conjoncture », version actualisée (PDF)
+    fichier: data/raw/assurance_chomage/unedic_effets_adaptation_conjoncture_2023.pdf
+    empreinte_sha256: 692e49b0a870443e9113acdb9d9e4dee176fb3f797c349621873637f5705be0e
+    methode_transformation: aucune ; moindres dépenses de la réforme de 2023 par année et en régime de croisière (page 22) saisies dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-30
+
+  - id: unedic_etude_impact_avenant_rci_2026_pdf
+    source: unedic_etude_impact_avenant_rci_2026
+    description: Étude d'impact ex ante de l'avenant 2026 sur les ruptures conventionnelles (PDF)
+    fichier: data/raw/assurance_chomage/unedic_etude_impact_avenant_rci_2026.pdf
+    empreinte_sha256: 17994b674e0238555b718c2ec1c5477225fcb5f65c9780fbb7bbaf9b3d8c40e1
+    methode_transformation: aucune ; document de contexte (les bornes du régime de croisière sont lues dans les prévisions d'octobre 2026, tableau A)
+    telecharge_le: 2026-10-30
+
+  - id: unedic_communique_revalorisation_avril_2023_html
+    source: unedic_communique_revalorisation_avril_2023
+    description: Actualité de l'Unédic sur la revalorisation de 1,9 % au 1er avril 2023 (HTML tel que téléchargé)
+    fichier: data/raw/assurance_chomage/unedic_communique_revalorisation_avril_2023.html
+    empreinte_sha256: 67e2ac9bb5ac426d40c00cbc45a37b3ab049bf5e69280b309ab3b1a51b17d969
+    methode_transformation: aucune ; coût cumulé 2023-2024 (590 M€) saisi dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-30
+
+  - id: unedic_communique_revalorisation_juillet_2018_html
+    source: unedic_communique_revalorisation_juillet_2018
+    description: Actualité de l'Unédic sur la revalorisation de 0,70 % au 1er juillet 2018 (HTML tel que téléchargé)
+    fichier: data/raw/assurance_chomage/unedic_communique_revalorisation_juillet_2018.html
+    empreinte_sha256: 9158366f29e0466de7842eacebb2661e469335f30b7afcca8727f7050abb658d
+    methode_transformation: aucune ; coût pour le second semestre 2018 et l'année 2019 (« de l'ordre de 200 millions d'€ ») saisi dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-10-30

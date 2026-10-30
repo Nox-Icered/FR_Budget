@@ -721,3 +721,56 @@ hypotheses:
       -6,5 % pour ceux qui résident en France. La pension économisée par un départ décalé est
       la pension moyenne de l'année multipliée par 1 + écart.
     instruments: [retraites]
+
+  - id: chomage_retour_prelevements
+    libelle: Part du taux plein de CSG et de CRDS sur les allocations chômage qui revient aux administrations publiques quand les allocations varient
+    unite: part du taux plein
+    valeur_centrale: 0.5
+    plage:
+      basse: 0.0
+      haute: 1.0
+    sources: [openfisca_france_176_1_2, unedic_parametres_utiles_juillet_2026]
+    justification: >-
+      Les allocations chômage supportent la CSG (taux global d'OpenFisca, assiette après
+      abattement pour frais professionnels) et la CRDS, mais ces prélèvements ne sont pas dus
+      quand ils feraient passer l'allocation sous le SMIC journalier (exonération, paramètre
+      min_exo d'OpenFisca). Aucune source publiée ne donne la part des allocations qui les
+      supporte. Borne basse : aucun allocataire concerné ne les paie ; borne haute : tous les
+      paient au taux plein ; valeur centrale à mi-chemin, comme pour les retraites de
+      l'indexation. Choix du lot assurance chômage, à relire.
+    instruments: [assurance_chomage]
+
+  - id: chomage_duree_rapport_hypotheses_unedic
+    libelle: Rapport à la valeur centrale de l'économie d'une réduction de la durée d'indemnisation, selon les hypothèses de l'Unédic sur le prolongement des droits des seniors
+    unite: rapport
+    valeur_centrale: 1.0
+    plage:
+      basse: 0.896
+      haute: 1.104
+    sources: [unedic_previsions_octobre_2026]
+    justification: >-
+      L'Unédic chiffre l'avenant de 2026 sur les ruptures conventionnelles (réduction de la
+      durée d'indemnisation) selon deux hypothèses : aucun recours au prolongement des droits
+      des seniors (-900 M€ en régime de croisière) ou recours total (-730 M€) (prévisions
+      d'octobre 2026, tableau A, page 8). Rapportées à leur milieu (815 M€), elles donnent
+      0,896 et 1,104. La même incertitude relative est appliquée à l'effet d'un changement du
+      coefficient appliqué à la durée, faute d'autre chiffrage publié (plan du lot assurance
+      chômage, choix 3, validé par le mainteneur le 30 octobre 2026).
+    instruments: [assurance_chomage]
+
+  - id: chomage_duree_rang_croisiere
+    libelle: Rang de l'année où un changement du coefficient appliqué à la durée d'indemnisation produit son plein effet (1 = année d'entrée en vigueur)
+    unite: rang d'année
+    valeur_centrale: 4.0
+    plage:
+      basse: 4.0
+      haute: 5.0
+    sources: [unedic_effets_adaptation_conjoncture_2023]
+    justification: >-
+      L'Unédic publie les moindres dépenses de la réforme de 2023 pour 2023 (0), 2024 (0,7 Md€),
+      2025 (3,0 Md€) et en régime de croisière (4,5 Md€), atteint « à horizon 2027 » (page 22) :
+      le plein effet est au plus tard la cinquième année. La quatrième année (2026) n'est pas
+      publiée. Valeur centrale : plein effet dès la quatrième année ; borne haute : la
+      quatrième année reste au niveau de la troisième, plein effet la cinquième. Choix du lot
+      assurance chômage, à relire.
+    instruments: [assurance_chomage]

@@ -866,3 +866,103 @@ sources:
     millesime: projections 2021 (population au 1er janvier par âge, 2021-2121)
     acces: direct
     consulte_le: 2026-10-14
+
+  - id: unedic_previsions_octobre_2026
+    nom: Unédic, « Situation financière de l'Assurance chômage à horizon 2028 », prévisions financières d'octobre 2026
+    editeur: Unédic
+    url: https://www.unedic.org/publications/previsions-financieres-de-lunedic-octobre-2026
+    licence: publication en accès libre (réutilisation avec mention de la source)
+    date_publication: 2026-10-21
+    millesime: octobre 2026 (prévision 2026-2028)
+    acces: direct
+    consulte_le: 2026-10-30
+
+  - id: unedic_previsions_juin_2024
+    nom: Unédic, « Situation financière de l'Assurance chômage pour 2024-2027 », prévisions financières de juin 2024
+    editeur: Unédic
+    url: https://www.unedic.org/publications/previsions-financieres-de-l-unedic-juin-2024
+    licence: publication en accès libre (réutilisation avec mention de la source)
+    millesime: juin 2024 (réalisé 2022 et 2023, prévision 2024-2027)
+    acces: direct
+    consulte_le: 2026-10-30
+
+  - id: unedic_previsions_mars_2019
+    nom: Unédic, prévisions financières de mars 2019
+    editeur: Unédic
+    url: https://www.unedic.org/publications/previsions-financieres-de-lunedic-mars-2019
+    licence: publication en accès libre (réutilisation avec mention de la source)
+    millesime: mars 2019 (estimation 2018, prévision 2019-2021)
+    acces: direct
+    consulte_le: 2026-10-30
+
+  - id: unedic_parametres_utiles_juillet_2026
+    nom: Unédic, « Paramètres utiles de l'Assurance chômage », juillet 2026
+    editeur: Unédic
+    url: https://www.unedic.org/publications/parametres-utiles
+    licence: publication en accès libre (réutilisation avec mention de la source)
+    millesime: juillet 2026
+    acces: direct
+    consulte_le: 2026-10-30
+
+  - id: unedic_etude_impact_convention_2024
+    nom: Unédic, « Étude d'impact de la convention d'assurance chômage du 15 novembre 2024 »
+    editeur: Unédic
+    url: https://www.unedic.org/publications/etude-d-impact-de-la-convention-d-assurance-chomage-du-15-novembre-2024
+    licence: publication en accès libre (réutilisation avec mention de la source)
+    millesime: 2025 (trajectoire financière de février 2025)
+    acces: direct
+    consulte_le: 2026-10-30
+
+  - id: unedic_etude_impact_convention_2017
+    nom: Unédic, « Étude d'impact de la convention d'assurance chômage 2017 »
+    editeur: Unédic
+    url: https://www.unedic.org/publications/etude-dimpact-de-la-convention-dassurance-chomage-2017
+    licence: publication en accès libre (réutilisation avec mention de la source)
+    millesime: "2017"
+    acces: direct
+    consulte_le: 2026-10-30
+
+  - id: unedic_revalorisation_mode_emploi_2023
+    nom: Unédic, « Revalorisation des allocations d'assurance chômage, mode d'emploi », juin 2023
+    editeur: Unédic
+    url: https://www.unedic.org/publications/revalorisation-des-allocations-dassurance-chomage-mode-demploi
+    licence: publication en accès libre (réutilisation avec mention de la source)
+    millesime: juin 2023 (prévisions financières de juin 2023)
+    acces: direct
+    consulte_le: 2026-10-30
+
+  - id: unedic_effets_adaptation_conjoncture_2023
+    nom: Unédic, « Effets de l'adaptation des règles d'assurance chômage à la conjoncture », version actualisée
+    editeur: Unédic
+    url: https://www.unedic.org/publications/effets-de-ladaptation-des-regles-dassurance-chomage-la-conjoncture
+    licence: publication en accès libre (réutilisation avec mention de la source)
+    millesime: 2023 (prévisions de février 2023)
+    acces: direct
+    consulte_le: 2026-10-30
+
+  - id: unedic_etude_impact_avenant_rci_2026
+    nom: Unédic, « Réduction de la durée de droit post rupture conventionnelle (avenant 2026), étude d'impact ex ante », octobre 2026
+    editeur: Unédic
+    url: https://www.unedic.org/publications/etude-dimpact-de-la-reduction-de-la-duree-de-droit-post-rupture-conventionnelle
+    licence: publication en accès libre (réutilisation avec mention de la source)
+    millesime: octobre 2026
+    acces: direct
+    consulte_le: 2026-10-30
+
+  - id: unedic_communique_revalorisation_avril_2023
+    nom: Unédic, « Revalorisation des allocations d'assurance chômage de 1,9 % dès le 1er avril », actualité
+    editeur: Unédic
+    url: https://www.unedic.org/actualites/revalorisation-des-allocations-dassurance-chomage-de-19-des-le-1er-avril
+    licence: publication en accès libre (réutilisation avec mention de la source)
+    millesime: mars 2023
+    acces: direct
+    consulte_le: 2026-10-30
+
+  - id: unedic_communique_revalorisation_juillet_2018
+    nom: Unédic, « Les allocations d'assurance chômage sont revalorisées de 0,70 % à partir du 1er juillet », actualité
+    editeur: Unédic
+    url: https://www.unedic.org/actualites/les-allocations-dassurance-chomage-sont-revalorisees-de-070-partir-du-1er
+    licence: publication en accès libre (réutilisation avec mention de la source)
+    millesime: juin 2018
+    acces: direct
+    consulte_le: 2026-10-30

@@ -117,6 +117,14 @@ export default function PageSimulateur() {
           duree: donnees.leviers.retraites_age_legal.duree_montee ?? 0,
         })}
       </p>
+      <p>
+        {texte("simulateur.methode_assurance_chomage", {
+          point: deuxDecimales(donnees.leviers.chomage_contribution_patronale.rendement_unitaire),
+          revalorisation: deuxDecimales(-donnees.leviers.chomage_revalorisation.rendement_unitaire),
+          // Rendement d'un point de pourcentage ; un cran du curseur vaut 5 points.
+          duree: deuxDecimales(-5 * donnees.leviers.chomage_duree_indemnisation.rendement_unitaire),
+        })}
+      </p>
       {donnees.croissance && (
         <p>
           {texte("simulateur.methode_croissance", {

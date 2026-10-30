@@ -100,6 +100,7 @@ La valeur centrale du levier ne corrige pas ce biais (décision du mainteneur du
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-10-30 | Fiche descriptive de chaque dépense (finalité, bénéficiaires, création, dernière modification, mission et programme, texte de loi), extraite du tome II du PLF 2026 et affichée dans le simulateur ; recherche aussi sur la finalité | Aucun calcul ne change ; `depenses_fiscales.csv` inchangé ; 465 fiches lues, 434 avec finalité (les 31 autres n'en indiquent pas) ; 1 test du moteur et 1 du site ajoutés |
 | 2026-10-09 | Création du levier (catalogue et impôts), extraction des trois tomes II | 6 nouvelles références de validation, toutes dans la tolérance ; tableau : 21 sur 29 |
 | 2026-10-09 | Confrontation à la Cour des comptes (NEB 2024) : 2 références ajoutées, dans la tolérance ; tableau : 23 sur 31 | aucun calcul modifié |
 | 2026-10-09 | Accises : remboursements des transporteurs, du transport collectif et des taxis repris du PLF 2026 (1 178, 183 et 59 M€ au lieu de 1 272, 183 et 50 M€) | aucun test de validation ; rendement d'un centime de gazole 0,225 → 0,232 Md€ |

@@ -98,3 +98,8 @@ th.groupe {
 .reglage input[type="url"] { min-height: 44px; width: 100%; }
 .interrupteur { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
 .interrupteur input { width: 24px; height: 24px; }
+.explication { margin: 4px 0 8px; font-size: 0.9em; }
+.explication summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; }
+.explication p, .explication dl { margin: 4px 0 0; }
+.explication dt { font-weight: 600; }
+.explication dd { margin: 0 0 4px; }

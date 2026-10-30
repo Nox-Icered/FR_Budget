@@ -47,7 +47,7 @@ datasets:
     description: Voies et Moyens tome II du PLF 2026 (PDF, 252 pages)
     fichier: data/raw/niches_fiscales/plf2026_voies_et_moyens_tome2.pdf
     empreinte_sha256: f8fdf8072037fbc0cff1839c880718f184ea0c011572ae43bf58a12b20142214
-    methode_transformation: pipelines/niches_fiscales/extraire_tome2.py → data/processed/niches_fiscales/depenses_fiscales.csv ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
+    methode_transformation: pipelines/niches_fiscales/extraire_tome2.py → data/processed/niches_fiscales/depenses_fiscales.csv et fiches_descriptives.csv (finalité, bénéficiaires, création, mission, référence, telles que publiées) ; valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-09
 
   - id: ccomptes_neb_2024_depenses_fiscales_pdf

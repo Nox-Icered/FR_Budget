@@ -92,3 +92,19 @@ def test_plages_par_impot_egales_aux_hypotheses() -> None:
         assert h.valeur_centrale == 0.0
         assert h.plage.basse == pytest.approx(min(0.0, *ecarts), abs=PRECISION_PLAGE)
         assert h.plage.haute == pytest.approx(max(0.0, *ecarts), abs=PRECISION_PLAGE)
+
+
+def test_fiche_descriptive_telle_que_publiee() -> None:
+    """Fiche 120113 du tome II du PLF 2026 (page de la « Liste des dépenses fiscales ») :
+    finalité, bénéficiaires, création et mission reprises telles que publiées."""
+    from fr_budget.agrege.depenses_fiscales import catalogue, fiches_descriptives
+
+    fiches = fiches_descriptives()
+    f = fiches["120113"]
+    assert f.finalite == (
+        "Inciter les salariés à utiliser les transports en commun pour le trajet domicile-travail"
+    )
+    assert f.beneficiaires == "6 100 000 Ménages"
+    assert (f.creation, f.modification) == ("1948", "2025")
+    assert f.mission.startswith("Travail, emploi et administration des ministères sociaux")
+    assert all(d.code in fiches for d in catalogue())

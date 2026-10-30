@@ -29,6 +29,7 @@ from functools import cache
 from fr_budget.registres.verification import RACINE_DEPOT
 
 FICHIER = RACINE_DEPOT / "data" / "processed" / "niches_fiscales" / "depenses_fiscales.csv"
+FICHIER_FICHES = RACINE_DEPOT / "data" / "processed" / "niches_fiscales" / "fiches_descriptives.csv"
 PLF_LEVIER = 2026
 ANNEE_COUT_LEVIER = 2026
 IMPOTS_EXCLUS = ("tva", "accise_energies")
@@ -165,6 +166,38 @@ def catalogue() -> list[DepenseFiscale]:
             )
         )
     return resultat
+
+
+@dataclass(frozen=True)
+class FicheDescriptive:
+    """Fiche descriptive d'une dépense fiscale, telle que publiée dans le tome II de Voies et
+    moyens (PLF 2026) ; un champ absent de la fiche est vide."""
+
+    finalite: str
+    beneficiaires: str
+    creation: str
+    modification: str
+    reference: str
+    mission: str
+
+
+@cache
+def fiches_descriptives() -> dict[str, FicheDescriptive]:
+    """Fiches descriptives du tome II, par numéro de dépense
+    (``data/processed/niches_fiscales/fiches_descriptives.csv``)."""
+    with FICHIER_FICHES.open(encoding="utf-8") as f:
+        return {
+            r["code"]: FicheDescriptive(
+                finalite=r["finalite"],
+                beneficiaires=r["beneficiaires"],
+                creation=r["creation"],
+                modification=r["modification"],
+                reference=r["reference"],
+                mission=r["mission"],
+            )
+            for r in csv.DictReader(f)
+            if int(r["plf"]) == PLF_LEVIER
+        }
 
 
 def depense(code: str) -> DepenseFiscale:

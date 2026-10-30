@@ -6,12 +6,33 @@
 import { useId, useState } from "react";
 import { texte } from "../../lib/textes";
 import type { CatalogueDepensesFiscales, ReponsesUnitaires } from "../../lib/donnees";
-import { rechercher } from "../../lib/depenses-fiscales";
+import { lignesFiche, rechercher } from "../../lib/depenses-fiscales";
+import type { FicheDepense } from "../../lib/donnees";
 
 const PAS = 5;
 const RESULTATS_MAX = 20;
 const milliards = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
 const millions = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
+
+// Fiche descriptive d'une dépense fiscale (tome II de Voies et moyens), dépliable.
+function Fiche({ fiche }: { fiche: FicheDepense | null | undefined }) {
+  const lignes = lignesFiche(fiche);
+  if (lignes.length === 0) return null;
+  return (
+    <details className="explication">
+      <summary>{texte("simulateur.depenses_fiscales.fiche.titre")}</summary>
+      <dl>
+        {lignes.map(([cle, v]) => (
+          <div key={cle}>
+            <dt>{texte(`simulateur.depenses_fiscales.fiche.${cle}`)}</dt>
+            <dd>{v || texte("simulateur.depenses_fiscales.fiche.finalite_absente")}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className="source">{texte("simulateur.depenses_fiscales.fiche.source")}</p>
+    </details>
+  );
+}
 
 export function ReglagesDepensesFiscales({
   catalogue,
@@ -58,6 +79,10 @@ export function ReglagesDepensesFiscales({
           <span className="etiquette">{texte(`validation.statuts.${statut}`)}</span>
         )}
       </legend>
+      <details className="explication">
+        <summary>{texte("simulateur.depenses_fiscales.qu_est_ce")}</summary>
+        <p>{texte("simulateur.depenses_fiscales.explication")}</p>
+      </details>
       <p>{texte("simulateur.depenses_fiscales.intro", { annee })}</p>
       <h3>{texte("simulateur.depenses_fiscales.par_impot")}</h3>
       {catalogue.ordre_impots.map((impot) => {
@@ -110,6 +135,12 @@ export function ReglagesDepensesFiscales({
               </strong>
             </label>
             <span className="source">{cout(d)}</span>
+            {d.fiche?.finalite && (
+              <span className="source">
+                {texte("simulateur.depenses_fiscales.fiche.finalite")} : {d.fiche.finalite}
+              </span>
+            )}
+            <Fiche fiche={d.fiche} />
             <input
               id={id}
               type="range"
@@ -161,6 +192,12 @@ export function ReglagesDepensesFiscales({
                   {texte("simulateur.depenses_fiscales.ajouter")}
                 </button>{" "}
                 {d.code} : {d.libelle} <span className="source">({cout(d)})</span>
+                {d.fiche?.finalite && (
+                  <span className="source">
+                    {" "}
+                    {texte("simulateur.depenses_fiscales.fiche.finalite")} : {d.fiche.finalite}
+                  </span>
+                )}
                 {couverte && (
                   <span className="source">
                     {" "}

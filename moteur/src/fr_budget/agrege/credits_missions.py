@@ -96,6 +96,29 @@ def missions() -> list[Mission]:
     return sorted(liste, key=lambda m: -m.credits)
 
 
+@dataclass(frozen=True)
+class Programme:
+    """Programme d'une mission du levier : crédits de paiement demandés au PLF 2026, en euros."""
+
+    numero: str
+    libelle: str
+    credits: float
+
+
+def programmes(ident: str) -> list[Programme]:
+    """Programmes d'une mission du levier (mêmes lignes que ``missions``), par crédits
+    décroissants ; leur somme redonne les crédits de la mission."""
+    liste = [
+        Programme(r["programme"], r["libelle"], float(r["plf_2026"]))
+        for r in _plf()
+        if identifiant(r["mission"]) == ident
+        and r["programme"] in programmes_budget_general()
+        and r["mission"] not in MISSIONS_EXCLUES
+        and float(r["plf_2026"]) > 0
+    ]
+    return sorted(liste, key=lambda p: -p.credits)
+
+
 def mission(ident: str) -> Mission:
     for m in missions():
         if m.identifiant == ident:

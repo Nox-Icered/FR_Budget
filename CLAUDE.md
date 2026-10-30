@@ -47,7 +47,7 @@ Phases : 0 cadrage (prototype TVA validé), 1 socle (dashboard, baseline, dette)
 - **Moteur socio-fiscal** : Python, OpenFisca-France, utilisé comme bibliothèque (pas via `openfisca serve`). Le système socio-fiscal est chargé une seule fois au démarrage du serveur.
 - **Modèle agrégé APU et modules structurels** : Python (pandas, NumPy), testés avec pytest.
 - **API** : FastAPI, sans état.
-- **Données** : fichiers Parquet versionnés, scripts d'extraction et de transformation rejouables ; PostgreSQL pour les scénarios partagés.
+- **Données** : fichiers CSV versionnés (lisibles en revue de code ; décision du 30 octobre 2026), scripts d'extraction et de transformation rejouables ; PostgreSQL pour les scénarios partagés.
 - **Front** : TypeScript, React (Next.js), mobile first, textes externalisés pour préparer l'anglais.
 - **CI** : GitHub Actions, les tests de validation tournent à chaque modification.
 

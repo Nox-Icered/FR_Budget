@@ -32,6 +32,7 @@ revenu plus haut : les trois hypothèses varient donc ensemble.
 
 from __future__ import annotations
 
+import json
 import warnings
 from dataclasses import dataclass, field, replace
 from functools import cache
@@ -43,6 +44,7 @@ from openfisca_core.simulations import Simulation
 from fr_budget.menages import independants
 from fr_budget.menages.openfisca import HypothesesEmploi, smic_mensuel_brut, systeme_socio_fiscal
 from fr_budget.registres.acces import chiffrage, hypothese
+from fr_budget.registres.verification import RACINE_DEPOT
 
 ANNEE = 2025
 ANNEE_INSEE = 2024
@@ -70,14 +72,20 @@ PRECISION_RFR = 1.0
 ITERATIONS_RFR = 10
 HYPOTHESE_EVOLUTION = "menages_ecart_evolution_salaire_smic"
 NIVEAUX_INSEE = {MEDIAN: "insee_salaire_net_median_2024", P95: "insee_salaire_net_p95_2024"}
-# Hypothèses d'emploi du cas validé contre le modèle Urssaf (valeurs par défaut du modèle,
-# registres/references/menages/urssaf_modele_social.json), sans mutuelle d'entreprise.
-EMPLOI = HypothesesEmploi(
-    effectif_entreprise=4,
-    taux_accident_travail=0.0208,
-    mutuelle_montant_mensuel=0.0,
-    mutuelle_part_employeur=0.5,
+# Hypothèses d'emploi du cas validé contre le modèle Urssaf (valeurs par défaut du modèle),
+# sans mutuelle d'entreprise, lues dans la référence plutôt que recopiées.
+REFERENCE_URSSAF = (
+    RACINE_DEPOT / "registres" / "references" / "menages" / "urssaf_modele_social.json"
 )
+CAS_EMPLOI = "celibataire_smic_2026_01_sans_mutuelle"
+
+
+def _hypotheses_emploi() -> HypothesesEmploi:
+    cas = json.loads(REFERENCE_URSSAF.read_text(encoding="utf-8"))["cas"]
+    return HypothesesEmploi(**next(c["hypotheses"] for c in cas if c["id"] == CAS_EMPLOI))
+
+
+EMPLOI = _hypotheses_emploi()
 CADRE = "prive_cadre"
 MOIS_REPERE = 6
 PRECISION_EUROS = 0.005

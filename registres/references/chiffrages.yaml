@@ -2499,6 +2499,39 @@ chiffrages:
     saisi_le: 2026-10-12
     relecture: a_relire
 
+  - id: ademe_masse_volumique_gazole
+    levier: accises_energie
+    source: ademe_base_carbone_pci_masse_volumique
+    millesime: Base Carbone (page consultée le 9 octobre 2026)
+    mesure: Masse volumique du gazole (« Gasoil »)
+    valeur: 832
+    unite: kg/m³
+    localisation: Tableau des masses volumiques, ligne « Gasoil » (fichier data/raw/accises/ademe/base_carbone_pci_et_masse_volumique.htm)
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: ademe_masse_volumique_essence
+    levier: accises_energie
+    source: ademe_base_carbone_pci_masse_volumique
+    millesime: Base Carbone (page consultée le 9 octobre 2026)
+    mesure: Masse volumique de l'essence
+    valeur: 747
+    unite: kg/m³
+    localisation: Tableau des masses volumiques, ligne « Essence » (fichier data/raw/accises/ademe/base_carbone_pci_et_masse_volumique.htm)
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: ademe_masse_volumique_fioul_domestique
+    levier: accises_energie
+    source: ademe_base_carbone_pci_masse_volumique
+    millesime: Base Carbone (page consultée le 9 octobre 2026)
+    mesure: Masse volumique du fioul domestique
+    valeur: 845
+    unite: kg/m³
+    localisation: Tableau des masses volumiques, ligne « Fioul domestique » (fichier data/raw/accises/ademe/base_carbone_pci_et_masse_volumique.htm)
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
   - id: insee_salaire_net_median_2024
     module: menages_types
     source: insee_premiere_2079

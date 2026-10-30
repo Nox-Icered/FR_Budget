@@ -3415,3 +3415,300 @@ chiffrages:
     saisi_le: 2026-10-14
     relecture: a_relire
     independante: true
+
+  - id: chomage_taux_contribution_2026
+    levier: assurance_chomage
+    source: unedic_parametres_utiles_juillet_2026
+    millesime: "2026"
+    mesure: "Taux de la contribution patronale d'assurance chômage (hors modulation), « ramené à 4 % depuis le 1er mai 2025 »"
+    valeur: 4.0
+    unite: "%"
+    localisation: "Tableau des contributions, page 3"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_contributions_principales_2026
+    levier: assurance_chomage
+    source: unedic_previsions_octobre_2026
+    millesime: "2026 (prévision d'octobre 2026)"
+    mesure: "Contributions principales d'assurance chômage avant prélèvements de l'État"
+    valeur: 30.3
+    unite: "Md€"
+    localisation: "Tableau 4, ligne « Contributions principales », page 13"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_allocations_brutes_2026
+    levier: assurance_chomage
+    source: unedic_previsions_octobre_2026
+    millesime: "2026 (prévision d'octobre 2026)"
+    mesure: "Allocations brutes et aides versées par l'Unédic"
+    valeur: 38.1
+    unite: "Md€"
+    localisation: "Tableau 4, ligne « Allocations brutes et aides », page 13"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_taux_contribution_2019
+    levier: assurance_chomage
+    source: unedic_etude_impact_convention_2024
+    millesime: "2017-2025"
+    mesure: "Taux de la contribution patronale d'assurance chômage jusqu'au 30 avril 2025, « 4,05 %, dont 0,05 point correspondant à une contribution exceptionnelle temporaire mise en place au 1er octobre 2017 »"
+    valeur: 4.05
+    unite: "%"
+    localisation: "Fiche « Suppression de la contribution exceptionnelle de 0,05 point », page 55"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_contributions_principales_2019
+    levier: assurance_chomage
+    source: unedic_previsions_mars_2019
+    millesime: "2019 (prévision de mars 2019)"
+    mesure: "Contributions principales d'assurance chômage (contributions patronales, après la bascule des contributions salariales sur la CSG)"
+    valeur: 23918
+    unite: "M€"
+    localisation: "Tableau des recettes et dépenses, ligne « Contributions principales », colonne 2019, page 13"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_contribution_points_0_05
+    levier: assurance_chomage
+    source: unedic_etude_impact_convention_2024
+    millesime: "2025"
+    mesure: "Montant de la contribution exceptionnelle temporaire créée en 2017 et supprimée au 1er mai 2025"
+    valeur: 0.05
+    unite: "point"
+    localisation: "Fiche « Suppression de la contribution exceptionnelle de 0,05 point », page 55"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_contribution_baisse_0_05_2026
+    levier: assurance_chomage
+    source: unedic_etude_impact_convention_2024
+    millesime: "2026 (trajectoire financière de février 2025)"
+    mesure: "Moindres contributions en 2026 dues à la suppression de la contribution exceptionnelle de 0,05 point au 1er mai 2025, avant l'effet sur le financement de France Travail"
+    valeur: 385
+    unite: "M€"
+    localisation: "Tableau « Impact financier », colonne 2026, page 55"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_contribution_hausse_0_05_2019
+    levier: assurance_chomage
+    source: unedic_etude_impact_convention_2017
+    millesime: "2019"
+    mesure: "Recettes supplémentaires en 2019 de la contribution exceptionnelle de 0,05 point créée au 1er octobre 2017, avant l'effet sur la dotation à Pôle emploi (ligne (a))"
+    valeur: 288
+    unite: "M€"
+    localisation: "Tableau 2 « Impact financier », ligne « Contribution exceptionnelle (a) », colonne 2019, page 30"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_revalorisation_juillet_2023_taux
+    levier: assurance_chomage
+    source: unedic_revalorisation_mode_emploi_2023
+    millesime: "2023"
+    mesure: "Revalorisation des allocations au 1er juillet 2023"
+    valeur: 1.9
+    unite: "%"
+    localisation: "Page 1"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_revalorisation_juillet_2023_total_2023
+    levier: assurance_chomage
+    source: unedic_revalorisation_mode_emploi_2023
+    millesime: "2023"
+    mesure: "Effet de la revalorisation de 1,9 % au 1er juillet 2023 sur les dépenses d'allocations de 2023, total (somme des éléments revalorisés, montant maximal)"
+    valeur: 222
+    unite: "M€"
+    localisation: "Tableau 2, ligne « Total », 2023, page 5"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_revalorisation_juillet_2023_total_2024
+    levier: assurance_chomage
+    source: unedic_revalorisation_mode_emploi_2023
+    millesime: "2024"
+    mesure: "Effet de la revalorisation de 1,9 % au 1er juillet 2023 sur les dépenses d'allocations de 2024, total (somme des éléments revalorisés, montant maximal)"
+    valeur: 293
+    unite: "M€"
+    localisation: "Tableau 2, ligne « Total », 2024, page 5"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_revalorisation_juillet_2023_partie_fixe_2024
+    levier: assurance_chomage
+    source: unedic_revalorisation_mode_emploi_2023
+    millesime: "2024"
+    mesure: "Effet en 2024 de la revalorisation de la partie fixe au 1er juillet 2023"
+    valeur: 89
+    unite: "M€"
+    localisation: "Tableau 2, ligne « Partie fixe », 2024, page 5"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_revalorisation_juillet_2023_minimale_2024
+    levier: assurance_chomage
+    source: unedic_revalorisation_mode_emploi_2023
+    millesime: "2024"
+    mesure: "Effet en 2024 de la revalorisation de l'ARE minimale au 1er juillet 2023"
+    valeur: 13
+    unite: "M€"
+    localisation: "Tableau 2, ligne « ARE minimale », 2024, page 5"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_revalorisation_juillet_2023_plancher_aref_2024
+    levier: assurance_chomage
+    source: unedic_revalorisation_mode_emploi_2023
+    millesime: "2024"
+    mesure: "Effet en 2024 de la revalorisation du plancher de l'AREF au 1er juillet 2023"
+    valeur: 2
+    unite: "M€"
+    localisation: "Tableau 2, ligne « AREF plancher », 2024, page 5"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_allocations_brutes_2023
+    levier: assurance_chomage
+    source: unedic_previsions_juin_2024
+    millesime: "2023 (réalisé)"
+    mesure: "Allocations brutes et aides versées par l'Unédic"
+    valeur: 35.0
+    unite: "Md€"
+    localisation: "Tableau 4, ligne « Allocations brutes et aides », colonne 2023, page 14"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_allocations_brutes_2018
+    levier: assurance_chomage
+    source: unedic_previsions_mars_2019
+    millesime: "2018 (estimation de mars 2019)"
+    mesure: "Allocations brutes versées par l'Unédic"
+    valeur: 33499
+    unite: "M€"
+    localisation: "Tableau des recettes et dépenses, ligne « Allocations brutes », colonne 2018, page 13"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_revalorisation_avril_2023_taux
+    levier: assurance_chomage
+    source: unedic_communique_revalorisation_avril_2023
+    millesime: "2023"
+    mesure: "Revalorisation des allocations au 1er avril 2023"
+    valeur: 1.9
+    unite: "%"
+    localisation: "Titre et premier paragraphe"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_revalorisation_avril_2023_cumul
+    levier: assurance_chomage
+    source: unedic_communique_revalorisation_avril_2023
+    millesime: "2023-2024"
+    mesure: "Coût de la revalorisation de 1,9 % au 1er avril 2023 « au cumul pour 2023 et 2024 », hors dégressivité"
+    valeur: 590
+    unite: "M€"
+    localisation: "Avant-dernier paragraphe"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_revalorisation_juillet_2018_taux
+    levier: assurance_chomage
+    source: unedic_communique_revalorisation_juillet_2018
+    millesime: "2018"
+    mesure: "Revalorisation des allocations au 1er juillet 2018"
+    valeur: 0.7
+    unite: "%"
+    localisation: "Titre"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_revalorisation_juillet_2018_cout
+    levier: assurance_chomage
+    source: unedic_communique_revalorisation_juillet_2018
+    millesime: "2018-2019"
+    mesure: "Coût de la revalorisation de 0,70 % au 1er juillet 2018 pour le second semestre 2018 et l'année 2019, hors Mayotte (« de l'ordre de 200 millions d'€ »)"
+    valeur: 200
+    unite: "M€"
+    localisation: "Dernier paragraphe"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_coefficient_duree_2026
+    levier: assurance_chomage
+    source: unedic_parametres_utiles_juillet_2026
+    millesime: "2026"
+    mesure: "Coefficient appliqué à la durée d'indemnisation (réforme de 2023, conjoncture « favorable »)"
+    valeur: 0.75
+    unite: "coefficient"
+    localisation: "Fiche « Durée d'indemnisation », page 5"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_reforme_2023_moindres_depenses_2024
+    levier: assurance_chomage
+    source: unedic_effets_adaptation_conjoncture_2023
+    millesime: "2024 (prévisions de février 2023)"
+    mesure: "Moindres dépenses (allocations et retraites complémentaires) de la réforme de 2023 (coefficient de 0,75 sur la durée d'indemnisation), deuxième année"
+    valeur: 0.7
+    unite: "Md€"
+    localisation: "Tableau « Synthèse des estimations des moindres dépenses », ligne 2024, page 22"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_reforme_2023_moindres_depenses_2025
+    levier: assurance_chomage
+    source: unedic_effets_adaptation_conjoncture_2023
+    millesime: "2025 (prévisions de février 2023)"
+    mesure: "Moindres dépenses (allocations et retraites complémentaires) de la réforme de 2023, troisième année"
+    valeur: 3.0
+    unite: "Md€"
+    localisation: "Tableau « Synthèse des estimations des moindres dépenses », ligne 2025, page 22"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_reforme_2023_moindres_depenses_croisiere
+    levier: assurance_chomage
+    source: unedic_effets_adaptation_conjoncture_2023
+    millesime: "régime de croisière (horizon 2027)"
+    mesure: "Moindres dépenses (allocations et retraites complémentaires) de la réforme de 2023 en régime de croisière"
+    valeur: 4.5
+    unite: "Md€"
+    localisation: "Tableau « Synthèse des estimations des moindres dépenses », ligne « En régime de croisière », page 22"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_reforme_2023_allocations_croisiere
+    levier: assurance_chomage
+    source: unedic_effets_adaptation_conjoncture_2023
+    millesime: "régime de croisière (horizon 2027)"
+    mesure: "Moindres dépenses d'allocations de la réforme de 2023 en régime de croisière, hors versements aux caisses de retraite complémentaire (0,3 Md€)"
+    valeur: 4.2
+    unite: "Md€"
+    localisation: "Page 22, texte « En régime de croisière, à horizon 2027 »"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_avenant_rci_croisiere_sans_prolongement
+    levier: assurance_chomage
+    source: unedic_previsions_octobre_2026
+    millesime: "régime de croisière"
+    mesure: "Effet de l'avenant 2026 sur les ruptures conventionnelles en régime de croisière, hypothèse d'aucun prolongement seniors (borne haute de l'économie)"
+    valeur: 900
+    unite: "M€"
+    localisation: "Encadré 1, tableau A, page 8"
+    saisi_le: 2026-10-30
+    relecture: a_relire
+
+  - id: chomage_avenant_rci_croisiere_prolongement_total
+    levier: assurance_chomage
+    source: unedic_previsions_octobre_2026
+    millesime: "régime de croisière"
+    mesure: "Effet de l'avenant 2026 sur les ruptures conventionnelles en régime de croisière, hypothèse de recours total au prolongement seniors (borne basse de l'économie)"
+    valeur: 730
+    unite: "M€"
+    localisation: "Encadré 1, tableau A, page 8"
+    saisi_le: 2026-10-30
+    relecture: a_relire

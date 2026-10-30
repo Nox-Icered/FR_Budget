@@ -92,6 +92,12 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
     attendues |= {"indexation_gel_aah_2026", "pa_pente_moindre_depense_2025"}
     attendues.add("indexation_pensions_gel_2026_hcfp")
     attendues |= {
+        "chomage_contribution_hausse_0_05_2019",
+        "chomage_contribution_baisse_0_05_2026",
+        "chomage_revalorisation_avril_2023_cumul",
+        "chomage_revalorisation_juillet_2018_cout",
+    }
+    attendues |= {
         "tva_point_brut_ipp_2025_quatre_taux",
         "tva_point_net_ipp_2025_quatre_taux",
         "ir_gel_ipp_inflation_1_0_2026",

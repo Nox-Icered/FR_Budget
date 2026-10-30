@@ -68,6 +68,12 @@ Leviers disponibles :
   (ou inférieure) de x %, de -3 à +3, à l'indexation sur l'inflation
   (``fr_budget.agrege.impot_revenu``) ; effet d'un pour cent : moins la sensibilité de
   l'évaluation préalable du PLF 2025 (borne basse : calcul par décile).
+- ``chomage_contribution_patronale``, ``chomage_revalorisation`` et
+  ``chomage_duree_indemnisation`` : taux de la contribution patronale d'assurance chômage (x
+  points, de -1 à +1), revalorisation des allocations au 1er juillet (x points, de -2 à +2) et
+  coefficient appliqué à la durée d'indemnisation (écart de x, de -0,25 à +0,25), calés sur les
+  chiffrages de l'Unédic (``fr_budget.agrege.assurance_chomage``). Les deux derniers ont un
+  effet propre à chaque année (``effet_chomage``).
 
 Fourchettes : écart au scénario de référence, avec la plage du rendement du levier ; niveau
 de dette et de solde, avec la plage du levier et celle de la baseline, chacune seule.
@@ -85,6 +91,7 @@ from fr_budget import croissance as module_croissance
 from fr_budget import retraites, retraites_cohortes
 from fr_budget.agrege import (
     accises,
+    assurance_chomage,
     cotisations,
     credits_missions,
     csg,
@@ -182,6 +189,24 @@ LEVIERS_RETRAITES = (LEVIER_RETRAITES_AGE, LEVIER_RETRAITES_AGE_LEGAL)
 LEVIERS_NON_LINEAIRES = (LEVIER_RETRAITES_AGE_LEGAL,)
 PAS_RETRAITES_AGE_LEGAL = 0.25
 """Cran du curseur, en années (trois mois, le rythme de relèvement par génération)."""
+LEVIER_CHOMAGE_CONTRIBUTION = "chomage_contribution_patronale"
+LEVIER_CHOMAGE_REVALORISATION = "chomage_revalorisation"
+LEVIER_CHOMAGE_DUREE = "chomage_duree_indemnisation"
+# Leviers dont l'effet varie d'une année à l'autre (profil de l'Unédic), linéaires dans la valeur.
+LEVIERS_CHOMAGE_PROFIL = (LEVIER_CHOMAGE_REVALORISATION, LEVIER_CHOMAGE_DUREE)
+LEVIERS_CHOMAGE = (LEVIER_CHOMAGE_CONTRIBUTION, *LEVIERS_CHOMAGE_PROFIL)
+# Bornes choisies au lot assurance chômage (à relire). Contribution : ±1 point (repères : la
+# contribution exceptionnelle de 0,05 point de 2017 à 2025 ; la modulation des taux par
+# entreprise, de 2,95 % à 5,00 %). Revalorisation : ±2 points (repère : 1,9 % au 1er avril et
+# au 1er juillet 2023). Durée : ±0,25 du coefficient (repère : la réforme de 2023, de 1 à 0,75).
+BORNE_CHOMAGE_CONTRIBUTION = 1.0
+BORNE_CHOMAGE_REVALORISATION = 2.0
+BORNE_CHOMAGE_DUREE = 0.25
+RANG_PLEIN_EFFET_CHOMAGE = 6
+"""Rang d'année où le levier sur la durée a son plein effet quelles que soient les hypothèses
+(au plus la cinquième année), et où la revalorisation n'a plus que l'effet des paramètres fixes."""
+RANG_ANNEE_PLEINE_REVALORISATION = 2
+"""Première année civile pleine d'une revalorisation au 1er juillet (affichage)."""
 BORNES = ("bas", "central", "haut")
 MILLIONS_PAR_MILLIARD = 1000.0
 EUROS_PAR_MILLIARD = 1e9
@@ -309,6 +334,16 @@ def rendement_unitaire(levier: str) -> Fourchette:
         f = retraites.effet_un_an(_annee_pleine_retraites())
         k = comptes_apu().valeur(ANNEE_REFERENCE, "S1", "pib") / POURCENT
         return encadrer(f.central * k, [f.bas * k, f.haut * k])
+    if levier == LEVIER_CHOMAGE_CONTRIBUTION:
+        return assurance_chomage.rendement_point_contribution()
+    if levier in LEVIERS_CHOMAGE_PROFIL:
+        # Affichage : première année civile pleine (revalorisation), plein effet (durée).
+        rang = (
+            RANG_ANNEE_PLEINE_REVALORISATION
+            if levier == LEVIER_CHOMAGE_REVALORISATION
+            else RANG_PLEIN_EFFET_CHOMAGE
+        )
+        return _effet_chomage_rang(levier, rang)
     if levier in LEVIERS_REMUNERATIONS:
         net = remunerations.cout_net_un_pourcent(LEVIERS_REMUNERATIONS[levier])
         return encadrer(-net.central, [-net.bas, -net.haut])
@@ -372,6 +407,25 @@ def rendement_unitaire(levier: str) -> Fourchette:
     raise ValueError(msg)
 
 
+def _effet_chomage_rang(levier: str, rang: int) -> Fourchette:
+    """Effet d'une unité d'un levier d'assurance chômage à profil, l'année de rang ``rang`` (1 =
+    année d'entrée), en Md€ de 2025."""
+    if levier == LEVIER_CHOMAGE_REVALORISATION:
+        return assurance_chomage.effet_revalorisation(rang)
+    return assurance_chomage.effet_duree(rang)
+
+
+def effet_chomage(levier: str, valeur: float, annee: int, entree: int) -> Fourchette:
+    """Effet de ``valeur`` unités d'un levier d'assurance chômage à profil entré en vigueur en
+    ``entree``, l'année ``annee``, en points de PIB (positif : solde amélioré)."""
+    if annee < entree:
+        return Fourchette(0.0, 0.0, 0.0)
+    f = _effet_chomage_rang(levier, annee - entree + 1)
+    pib = comptes_apu().valeur(ANNEE_REFERENCE, "S1", "pib")
+    valeurs = [ratio_pib(valeur * v, pib) for v in (f.bas, f.central, f.haut)]
+    return encadrer(valeurs[1], [valeurs[0], valeurs[2]])
+
+
 def _annee_pleine_retraites() -> int:
     """Première année où l'écart d'âge est entièrement atteint, pour une entrée en 2027."""
     return ANNEE_PREMIERE_MESURE + math.ceil(retraites.duree_montee_en_charge()) - 1
@@ -409,6 +463,15 @@ def taux_reference(levier: str) -> float:
         return retraites.reference()[ANNEE_REFERENCE].age_ref
     if levier == LEVIER_CREDITS_UNITE:
         return 0.0
+    if levier == LEVIER_CHOMAGE_CONTRIBUTION:
+        # Taux de la contribution patronale en 2026, en %.
+        return chiffrage("chomage_taux_contribution_2026")
+    if levier == LEVIER_CHOMAGE_REVALORISATION:
+        # Allocations brutes et aides de 2026 (prévision de l'Unédic), Md€ courants.
+        return chiffrage("chomage_allocations_brutes_2026")
+    if levier == LEVIER_CHOMAGE_DUREE:
+        # Coefficient appliqué à la durée d'indemnisation en 2026.
+        return chiffrage("chomage_coefficient_duree_2026")
     if levier in LEVIERS_DOTATIONS:
         return dotations.montant_levier(LEVIERS_DOTATIONS[levier])
     if levier in LEVIERS_REMUNERATIONS:
@@ -474,6 +537,12 @@ def bornes_levier(levier: str) -> tuple[float, float]:
         return -BORNE_CREDITS, BORNE_CREDITS
     if levier in LEVIERS_RETRAITES:
         return BORNES_RETRAITES_AGE
+    if levier == LEVIER_CHOMAGE_CONTRIBUTION:
+        return -BORNE_CHOMAGE_CONTRIBUTION, BORNE_CHOMAGE_CONTRIBUTION
+    if levier == LEVIER_CHOMAGE_REVALORISATION:
+        return -BORNE_CHOMAGE_REVALORISATION, BORNE_CHOMAGE_REVALORISATION
+    if levier == LEVIER_CHOMAGE_DUREE:
+        return -BORNE_CHOMAGE_DUREE, BORNE_CHOMAGE_DUREE
     if levier in LEVIERS_DOTATIONS:
         return -BORNE_DOTATIONS, BORNE_DOTATIONS
     if levier in LEVIERS_REMUNERATIONS:
@@ -538,6 +607,9 @@ def effet_solde(mesure: Mesure) -> Fourchette:
     if mesure.levier == LEVIER_RETRAITES_AGE_LEGAL:
         f = retraites_cohortes.effet(mesure.valeur, mesure.annee, mesure.annee)
         return encadrer(f.central, [f.bas, f.haut])
+    if mesure.levier in LEVIERS_CHOMAGE_PROFIL:
+        # Effet de l'année d'entrée (début du profil de l'Unédic), en points de PIB.
+        return effet_chomage(mesure.levier, mesure.valeur, mesure.annee, mesure.annee)
     if mesure.levier == LEVIER_RETRAITES_AGE:
         # Effet de l'année d'entrée (début de la montée en charge), en points de PIB.
         valeurs = [retraites.effet(mesure.valeur, mesure.annee, mesure.annee, b) for b in BORNES]
@@ -591,6 +663,13 @@ def _effets_par_annee(mesures: Iterable[Mesure], borne: str) -> dict[int, float]
                 effets[annee] = effets.get(annee, 0.0) + retraites.effet(
                     m.valeur, annee, m.annee, borne
                 )
+            continue
+        if m.levier in LEVIERS_CHOMAGE_PROFIL:
+            # Profil de l'Unédic : effet propre à chaque année (fr_budget.agrege.assurance_chomage).
+            effet_solde(m)  # contrôle de l'année et des bornes
+            for annee in range(m.annee, ANNEE_FIN + 1):
+                f = effet_chomage(m.levier, m.valeur, annee, m.annee)
+                effets[annee] = effets.get(annee, 0.0) + getattr(f, borne)
             continue
         if m.levier == LEVIER_RETRAITES_AGE_LEGAL:
             # Modèle par cohortes : effet propre à chaque année (fr_budget.retraites_cohortes).
@@ -723,6 +802,9 @@ def categorie_croissance(levier: str) -> str:
         # multiplicateur de demande ne s'applique pas (fiche retraites, § 5).
         LEVIER_RETRAITES_AGE: module_croissance.AUCUN,
         LEVIER_RETRAITES_AGE_LEGAL: module_croissance.AUCUN,
+        LEVIER_CHOMAGE_CONTRIBUTION: module_croissance.COTISATIONS_EMPLOYEURS,
+        LEVIER_CHOMAGE_REVALORISATION: module_croissance.PRESTATIONS,
+        LEVIER_CHOMAGE_DUREE: module_croissance.PRESTATIONS,
     }
     if levier in categories:
         return categories[levier]
@@ -910,6 +992,7 @@ LEVIERS_REGISTRE = {
     LEVIER_PA_PENTE: "minima_prime_activite",
     LEVIER_RETRAITES_AGE: "retraites",
     LEVIER_RETRAITES_AGE_LEGAL: "retraites",
+    **dict.fromkeys(LEVIERS_CHOMAGE, "assurance_chomage"),
 }
 
 
@@ -1052,6 +1135,47 @@ PROVENANCE_RETRAITES_COHORTES = (
         retraites_cohortes.HYPOTHESE_PENSION,
     ),
 )
+PROVENANCE_CHOMAGE = (
+    (
+        "unedic_previsions_octobre_2026",
+        "unedic_parametres_utiles_juillet_2026",
+        "unedic_etude_impact_convention_2024",
+        "unedic_etude_impact_convention_2017",
+        "unedic_previsions_mars_2019",
+        "insee_comptes_nationaux_2025",
+        "plf2027_resf",
+    ),
+    (),
+)
+PROVENANCE_CHOMAGE_REVALORISATION = (
+    (
+        "unedic_revalorisation_mode_emploi_2023",
+        "unedic_previsions_juin_2024",
+        "unedic_previsions_octobre_2026",
+        "unedic_communique_revalorisation_avril_2023",
+        "unedic_communique_revalorisation_juillet_2018",
+        "unedic_previsions_mars_2019",
+        "openfisca_france_176_1_2",
+        "insee_comptes_nationaux_2025",
+        "plf2027_resf",
+    ),
+    (assurance_chomage.HYPOTHESE_RETOUR,),
+)
+PROVENANCE_CHOMAGE_DUREE = (
+    (
+        "unedic_effets_adaptation_conjoncture_2023",
+        "unedic_parametres_utiles_juillet_2026",
+        "unedic_previsions_octobre_2026",
+        "openfisca_france_176_1_2",
+        "insee_comptes_nationaux_2025",
+        "plf2027_resf",
+    ),
+    (
+        assurance_chomage.HYPOTHESE_RETOUR,
+        assurance_chomage.HYPOTHESE_RAPPORT_DUREE,
+        assurance_chomage.HYPOTHESE_RANG_CROISIERE,
+    ),
+)
 PROVENANCE_LEVIERS = {
     LEVIER_IS_TAUX_NORMAL: PROVENANCE_IS,
     LEVIER_IS_SURTAXE: PROVENANCE_IS,
@@ -1083,6 +1207,9 @@ PROVENANCE_LEVIERS = {
     LEVIER_PA_PENTE: PROVENANCE_PA,
     LEVIER_RETRAITES_AGE: PROVENANCE_RETRAITES,
     LEVIER_RETRAITES_AGE_LEGAL: PROVENANCE_RETRAITES_COHORTES,
+    LEVIER_CHOMAGE_CONTRIBUTION: PROVENANCE_CHOMAGE,
+    LEVIER_CHOMAGE_REVALORISATION: PROVENANCE_CHOMAGE_REVALORISATION,
+    LEVIER_CHOMAGE_DUREE: PROVENANCE_CHOMAGE_DUREE,
 }
 
 

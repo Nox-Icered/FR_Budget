@@ -16,7 +16,7 @@ Que deviennent le solde et la dette des administrations publiques si l'on change
 
 - le taux de la contribution patronale d'assurance chômage (« hausse de 0,1 point du taux ») ;
 - la revalorisation des allocations au 1er juillet (« revalorisation supérieure de 1 point à celle décidée ») ;
-- le coefficient appliqué à la durée d'indemnisation (« coefficient porté de 0,75 à 0,80 ») ?
+- le coefficient appliqué à la durée d'indemnisation (« coefficient porté de 75 % à 80 % ») ?
 
 ## 2. Ce que l'utilisateur règle
 
@@ -24,9 +24,9 @@ Que deviennent le solde et la dette des administrations publiques si l'on change
 |-----------|-----------------|----------------------------|------------------------------|
 | Taux de la contribution patronale | `chomage_taux_contribution_2026` (4,00 %) | -1 à +1 point, pas de 0,05 | `unedic_parametres_utiles_juillet_2026`, page 3 |
 | Revalorisation au 1er juillet, en écart à celle décidée | aucune revalorisation au 1er juillet 2026 | -2 à +2 points, pas de 0,1 | `unedic_previsions_octobre_2026` |
-| Coefficient appliqué à la durée d'indemnisation | `chomage_coefficient_duree_2026` (0,75) | -0,25 à +0,25, pas de 0,05 | `unedic_parametres_utiles_juillet_2026`, page 5 |
+| Coefficient appliqué à la durée d'indemnisation | `chomage_coefficient_duree_2026` (0,75, affiché 75 %) | -25 à +25 points de pourcentage, pas de 5 | `unedic_parametres_utiles_juillet_2026`, page 5 |
 
-Bornes choisies au lot (à relire) : la contribution exceptionnelle de 0,05 point de 2017 à 2025 et la modulation des taux par entreprise (2,95 % à 5,00 %) ; les deux revalorisations de 1,9 % de 2023 ; la réforme de 2023 (coefficient de 1 à 0,75).
+Bornes choisies au lot (à relire) : la contribution exceptionnelle de 0,05 point de 2017 à 2025 et la modulation des taux par entreprise (2,95 % à 5,00 %) ; les deux revalorisations de 1,9 % de 2023 ; la réforme de 2023 (coefficient de 1 à 0,75). Le coefficient est exprimé en pourcentage sur le site : le calcul sans serveur multiplie la réponse à une unité du levier, qui doit rester dans ses bornes.
 
 ## 3. Méthode de calcul
 

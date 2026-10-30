@@ -10,7 +10,7 @@ from fr_budget_api.app import creer_application, reponses_unitaires
 LEVIERS = {
     "chomage_contribution_patronale": ([-1.0, 1.0], "unedic_etude_impact_convention_2024", 1),
     "chomage_revalorisation": ([-2.0, 2.0], "unedic_revalorisation_mode_emploi_2023", -1),
-    "chomage_duree_indemnisation": ([-0.25, 0.25], "unedic_effets_adaptation_conjoncture_2023", -1),
+    "chomage_duree_indemnisation": ([-25.0, 25.0], "unedic_effets_adaptation_conjoncture_2023", -1),
 }
 
 

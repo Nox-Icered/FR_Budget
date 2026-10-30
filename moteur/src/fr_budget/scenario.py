@@ -71,7 +71,8 @@ Leviers disponibles :
 - ``chomage_contribution_patronale``, ``chomage_revalorisation`` et
   ``chomage_duree_indemnisation`` : taux de la contribution patronale d'assurance chômage (x
   points, de -1 à +1), revalorisation des allocations au 1er juillet (x points, de -2 à +2) et
-  coefficient appliqué à la durée d'indemnisation (écart de x, de -0,25 à +0,25), calés sur les
+  coefficient appliqué à la durée d'indemnisation (x points de pourcentage, de -25 à +25 ; 75 %
+  depuis 2023), calés sur les
   chiffrages de l'Unédic (``fr_budget.agrege.assurance_chomage``). Les deux derniers ont un
   effet propre à chaque année (``effet_chomage``).
 
@@ -198,10 +199,11 @@ LEVIERS_CHOMAGE = (LEVIER_CHOMAGE_CONTRIBUTION, *LEVIERS_CHOMAGE_PROFIL)
 # Bornes choisies au lot assurance chômage (à relire). Contribution : ±1 point (repères : la
 # contribution exceptionnelle de 0,05 point de 2017 à 2025 ; la modulation des taux par
 # entreprise, de 2,95 % à 5,00 %). Revalorisation : ±2 points (repère : 1,9 % au 1er avril et
-# au 1er juillet 2023). Durée : ±0,25 du coefficient (repère : la réforme de 2023, de 1 à 0,75).
+# au 1er juillet 2023). Durée : ±25 points de pourcentage du coefficient, exprimé en % (repère :
+# la réforme de 2023, de 100 % à 75 % de la durée de référence).
 BORNE_CHOMAGE_CONTRIBUTION = 1.0
 BORNE_CHOMAGE_REVALORISATION = 2.0
-BORNE_CHOMAGE_DUREE = 0.25
+BORNE_CHOMAGE_DUREE = 25.0
 RANG_PLEIN_EFFET_CHOMAGE = 6
 """Rang d'année où le levier sur la durée a son plein effet quelles que soient les hypothèses
 (au plus la cinquième année), et où la revalorisation n'a plus que l'effet des paramètres fixes."""
@@ -412,7 +414,9 @@ def _effet_chomage_rang(levier: str, rang: int) -> Fourchette:
     année d'entrée), en Md€ de 2025."""
     if levier == LEVIER_CHOMAGE_REVALORISATION:
         return assurance_chomage.effet_revalorisation(rang)
-    return assurance_chomage.effet_duree(rang)
+    # Une unité du levier : un point de pourcentage du coefficient (0,01).
+    f = assurance_chomage.effet_duree(rang)
+    return Fourchette(f.bas / POURCENT, f.central / POURCENT, f.haut / POURCENT)
 
 
 def effet_chomage(levier: str, valeur: float, annee: int, entree: int) -> Fourchette:
@@ -470,8 +474,8 @@ def taux_reference(levier: str) -> float:
         # Allocations brutes et aides de 2026 (prévision de l'Unédic), Md€ courants.
         return chiffrage("chomage_allocations_brutes_2026")
     if levier == LEVIER_CHOMAGE_DUREE:
-        # Coefficient appliqué à la durée d'indemnisation en 2026.
-        return chiffrage("chomage_coefficient_duree_2026")
+        # Coefficient appliqué à la durée d'indemnisation en 2026, en %.
+        return chiffrage("chomage_coefficient_duree_2026") * POURCENT
     if levier in LEVIERS_DOTATIONS:
         return dotations.montant_levier(LEVIERS_DOTATIONS[levier])
     if levier in LEVIERS_REMUNERATIONS:

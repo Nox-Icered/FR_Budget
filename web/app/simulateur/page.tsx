@@ -121,8 +121,8 @@ export default function PageSimulateur() {
         {texte("simulateur.methode_assurance_chomage", {
           point: deuxDecimales(donnees.leviers.chomage_contribution_patronale.rendement_unitaire),
           revalorisation: deuxDecimales(-donnees.leviers.chomage_revalorisation.rendement_unitaire),
-          // Le rendement est donné pour une unité de coefficient : 0,05 est un cran du curseur.
-          duree: deuxDecimales(-0.05 * donnees.leviers.chomage_duree_indemnisation.rendement_unitaire),
+          // Rendement d'un point de pourcentage ; un cran du curseur vaut 5 points.
+          duree: deuxDecimales(-5 * donnees.leviers.chomage_duree_indemnisation.rendement_unitaire),
         })}
       </p>
       {donnees.croissance && (

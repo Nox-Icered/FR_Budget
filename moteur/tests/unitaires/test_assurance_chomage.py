@@ -73,11 +73,20 @@ def test_reforme_2023_reproduite_avant_retours() -> None:
 @pytest.mark.parametrize("levier", sc.LEVIERS_CHOMAGE)
 def test_lineaire_dans_la_valeur(levier: str) -> None:
     """Le site multiplie la réponse d'une unité : l'écart doit être linéaire."""
-    basse, haute = sc.bornes_levier(levier)
+    _, haute = sc.bornes_levier(levier)
     un = sc.scenario([sc.Mesure(levier, haute / 2, ANNEE)])
     deux = sc.scenario([sc.Mesure(levier, haute, ANNEE)])
     for a, b in zip(un, deux, strict=True):
         assert 2 * a.ecart_dette.central == pytest.approx(b.ecart_dette.central, abs=1e-12)
+
+
+@pytest.mark.parametrize("levier", sc.LEVIERS_CHOMAGE)
+def test_une_unite_est_dans_les_bornes(levier: str) -> None:
+    """Le site lit la réponse à une unité du levier (``reponse_lineaire``) : elle doit être
+    admise par ses bornes."""
+    basse, haute = sc.bornes_levier(levier)
+    assert basse <= -1 and haute >= 1
+    sc.reponse_lineaire(levier, ANNEE)
 
 
 def test_sens_des_effets() -> None:

@@ -254,9 +254,9 @@
         "explication": "Chaque année, les partenaires sociaux qui gèrent l'assurance chômage peuvent revaloriser les allocations au 1er juillet. Ce curseur ajoute ou retire des points à cette revalorisation, une fois. Elle touche surtout les personnes déjà indemnisées : son coût est le plus fort les deux premières années, puis il ne reste que la partie fixe de l'allocation, qui profite aussi aux nouveaux inscrits."
       },
       "chomage_duree_indemnisation": {
-        "libelle": "Durée d'indemnisation du chômage : coefficient appliqué à la durée des droits ({reference} depuis la réforme de 2023)",
-        "valeur": "{valeur}",
-        "explication": "La durée pendant laquelle un demandeur d'emploi est indemnisé dépend de la durée de son emploi passé, multipliée par un coefficient : 0,75 depuis 2023 (1 avant). Ce curseur change ce coefficient. Vers la droite, les droits sont plus longs et la dépense augmente ; vers la gauche, ils sont plus courts. L'effet monte en charge sur trois à quatre ans, comme après la réforme de 2023."
+        "libelle": "Durée d'indemnisation du chômage, en pourcentage de la durée de référence ({reference} % depuis la réforme de 2023)",
+        "valeur": "{valeur} pt",
+        "explication": "La durée pendant laquelle un demandeur d'emploi est indemnisé dépend de la durée de son emploi passé, multipliée par un coefficient : 75 % depuis 2023 (100 % avant). Ce curseur change ce pourcentage. Vers la droite, les droits sont plus longs et la dépense augmente ; vers la gauche, ils sont plus courts. L'effet monte en charge sur trois à quatre ans, comme après la réforme de 2023."
       }
     },
     "limite_tva_accise": "La hausse de l'accise augmente aussi la TVA payée sur le carburant : cet effet n'est pas compté.",
@@ -419,7 +419,7 @@
     },
     "bloque_retraites": "Réglage impossible tant que l'autre levier de départ à la retraite est modifié : les deux mesurent le même effet.",
     "methode_retraites_age_legal": "Âge légal de départ (modèle par cohortes) : avec la population projetée par l'Insee et les taux de retraités par âge de la DREES, un an de plus sur l'âge légal améliore le solde des administrations publiques d'environ {effet} point de PIB une fois la mesure en place (moindres pensions et prélèvements sur ceux qui restent en emploi). L'écart est atteint génération par génération, en {duree} ans pour un an. Les prestations versées à ceux qui restent sans emploi ne sont pas comptées.",
-    "methode_assurance_chomage": "Assurance chômage (première étape, chiffrages de l'Unédic) : un point de contribution patronale rapporte {point} milliards d'euros par an ; un point de revalorisation des allocations coûte {revalorisation} milliard d'euros la première année pleine ; passer de 0,75 à 0,80 le coefficient appliqué à la durée coûte {duree} milliard d'euros par an une fois l'effet atteint. Les versements de l'assurance chômage à France Travail et aux retraites complémentaires restent entre administrations publiques et ne changent pas leur solde.",
+    "methode_assurance_chomage": "Assurance chômage (première étape, chiffrages de l'Unédic) : un point de contribution patronale rapporte {point} milliards d'euros par an ; un point de revalorisation des allocations coûte {revalorisation} milliard d'euros la première année pleine ; passer de 75 % à 80 % le coefficient appliqué à la durée coûte {duree} milliard d'euros par an une fois l'effet atteint. Les versements de l'assurance chômage à France Travail et aux retraites complémentaires restent entre administrations publiques et ne changent pas leur solde.",
     "en_savoir_plus": "À quoi sert ce curseur ?"
   },
   "partage": {

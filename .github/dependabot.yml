@@ -1,0 +1,8 @@
+# Mises à jour des actions GitHub épinglées par empreinte (.github/workflows) : une PR par
+# semaine au plus, relue comme toute modification.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

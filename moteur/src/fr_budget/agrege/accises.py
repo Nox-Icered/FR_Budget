@@ -39,9 +39,17 @@ HYPOTHESE_GPL = "accises_gpl_part_carburant"
 HYPOTHESE_GNR_2024 = "accises_tarif_moyen_gnr_2024"
 ANNEE_GNR_CHIFFREE = 2024
 
-# Base Carbone de l'ADEME, « PCI et masse volumique » (kg/m³) : gazole (« gasoil »), essence,
-# fioul domestique. Le gazole non routier prend la valeur du gazole, l'E85 celle de l'essence.
-MASSES_VOLUMIQUES = {"gazole": 832.0, "essence": 747.0, "fod": 845.0}
+# Base Carbone de l'ADEME, « PCI et masse volumique » (kg/m³), saisies au registre des chiffrages
+# (registres/references/chiffrages.yaml) : gazole (« gasoil »), essence, fioul domestique. Le
+# gazole non routier prend la valeur du gazole, l'E85 celle de l'essence.
+CHIFFRAGES_MASSES = {
+    "gazole": "ademe_masse_volumique_gazole",
+    "essence": "ademe_masse_volumique_essence",
+    "fod": "ademe_masse_volumique_fioul_domestique",
+}
+MASSES_VOLUMIQUES = {famille: chiffrage(cle) for famille, cle in CHIFFRAGES_MASSES.items()}
+
+
 HECTOLITRES_PAR_M3 = 10.0
 TONNES_PAR_100KG = 0.1
 EUROS_PAR_MILLIARD = 1e9

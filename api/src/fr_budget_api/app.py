@@ -54,10 +54,23 @@ REGISTRES = {
 }
 
 
+CACHES_IGNORES = ("__pycache__",)
+"""Dossiers de fichiers produits à l'exécution (bytecode Python), hors de l'empreinte : elle ne
+doit dépendre que du contenu publié, pas de la machine qui a exécuté le code."""
+
+
 def empreinte_dossier(dossier: Path) -> str:
-    """Empreinte SHA-256 du contenu d'un dossier (chemins relatifs et octets, ordre trié)."""
+    """Empreinte SHA-256 du contenu d'un dossier (chemins relatifs et octets, ordre trié), sans
+    les caches d'exécution (``CACHES_IGNORES``, fichiers ``.pyc``)."""
     h = hashlib.sha256()
-    for fichier in sorted(p for p in dossier.rglob("*") if p.is_file()):
+    fichiers = (
+        p
+        for p in dossier.rglob("*")
+        if p.is_file()
+        and p.suffix != ".pyc"
+        and not set(p.relative_to(dossier).parts) & set(CACHES_IGNORES)
+    )
+    for fichier in sorted(fichiers):
         h.update(fichier.relative_to(dossier).as_posix().encode())
         h.update(fichier.read_bytes())
     return h.hexdigest()

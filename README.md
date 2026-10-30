@@ -24,7 +24,11 @@ Phase 0 (cadrage). Aucun levier n'est encore validé. Voir le [plan](docs/plan.m
 
 ## Développer
 
-Prérequis : [uv](https://docs.astral.sh/uv/).
+Prérequis :
+
+- moteur et API : [uv](https://docs.astral.sh/uv/) ;
+- site : Node.js (version de la CI : `.github/workflows/ci.yml`) et pnpm (version fixée par `packageManager` dans `web/package.json`) ;
+- scripts d'extraction de `pipelines/` qui lisent des PDF (tome II de Voies et Moyens, dotations) : `pdftotext` (paquet poppler-utils). Ni les tests ni la CI n'en ont besoin : les tables extraites sont versionnées dans `data/processed/`.
 
 ```sh
 cd moteur

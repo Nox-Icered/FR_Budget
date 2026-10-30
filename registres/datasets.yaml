@@ -335,7 +335,7 @@ datasets:
     description: Page de documentation « PCI et masse volumique » de la Base Carbone, HTML
     fichier: data/raw/accises/ademe/base_carbone_pci_et_masse_volumique.htm
     empreinte_sha256: b7d689c9d770ffec1e0f70e59d7b4ac8116d37344f65281a8ff5a92130cf5826
-    methode_transformation: aucune ; masses volumiques saisies dans registres/hypotheses.yaml
+    methode_transformation: aucune ; masses volumiques saisies dans registres/references/chiffrages.yaml (ademe_masse_volumique_*), écart dans registres/hypotheses.yaml
     telecharge_le: 2026-10-09
 
   - id: dgfip_stat_51_is_2025_xlsx

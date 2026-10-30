@@ -244,7 +244,7 @@
         "explication": "L'âge légal d'ouverture des droits est le plus jeune âge auquel on peut partir à la retraite (hors départs anticipés). Vers la droite, il recule, génération par génération : moins de retraités, donc moins de pensions, et des cotisations en plus pour ceux qui restent en emploi. Les prestations versées à ceux qui restent sans emploi ne sont pas comptées."
       },
       "chomage_contribution_patronale": {
-        "libelle": "Taux de la contribution patronale d'assurance chômage ({reference} % en {annee})",
+        "libelle": "Taux de la contribution patronale d'assurance chômage ({reference} % depuis le 1er mai 2025)",
         "valeur": "{valeur} pt",
         "explication": "L'employeur paie une contribution d'assurance chômage sur les salaires, en plus du salaire brut. Elle finance les allocations versées aux demandeurs d'emploi. Ce curseur change son taux. Vers la droite, les recettes de l'assurance chômage augmentent, et le coût du travail aussi."
       },

@@ -191,6 +191,17 @@ Décision du 12 octobre 2026 : la phase 3 commence avant le franchissement de la
    - Fait au lot 3.6 (deuxième partie) : les réponses unitaires du simulateur ne sont plus incluses dans le HTML. Elles sont copiées en fichier statique nommé d'après l'empreinte de la version (`/donnees/scenario-unitaire.<empreinte>.json`, aucun cache ne peut servir une version précédente) et chargées une fois par visite, partagées entre le simulateur et la comparaison, reliés par une navigation interne. La page du simulateur passe de 5,7 Mo à 123 ko (27 ko compressés) ; le fichier de données fait environ 600 ko compressés, mis en cache par le navigateur selon l'hébergement.
      - Conséquence : sans JavaScript, le simulateur affiche seulement un message de chargement (c'était déjà le cas pour le calcul).
 
+## 6 bis. V2
+
+Décision du 30 octobre 2026 : la V2 commence avant le franchissement de la porte 3 (exception décidée par le mainteneur). Points de la porte 3 restés ouverts :
+
+1. mentions légales : éditeur et hébergeur à fournir par le mainteneur ;
+2. hébergement définitif : hébergeur, nom de domaine, archives par version pour que les anciens liens restent reproductibles ;
+3. relectures externes : registre vide ; baseline et leviers restent « bêta, non validé » ;
+4. audit RGAA manuel (lecteur d'écran, clavier, contrastes) : seul le contrôle automatique est fait.
+
+Les lots de V2 sont conduits un par un, chacun sur sa branche, avec un plan court soumis au mainteneur avant tout calcul. Premier lot : assurance chômage (module structurel, `docs/specification.md`, tableau des modules).
+
 ## 7. Tests et CI
 
 - `tests/unitaires/` : chaque fonction de calcul, sur des cas construits à la main.

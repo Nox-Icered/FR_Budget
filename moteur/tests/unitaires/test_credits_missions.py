@@ -53,3 +53,13 @@ def test_plage_egale_a_l_hypothese() -> None:
     h = hypothese("credits_missions_ecart_execution")
     assert h.plage.basse == pytest.approx(basse, abs=PRECISION)
     assert h.plage.haute == pytest.approx(haute, abs=PRECISION)
+
+
+def test_les_programmes_redonnent_les_credits_de_la_mission() -> None:
+    """Aide au chiffrage du site : chaque mission se décompose en ses programmes (PLF 2026)."""
+    from fr_budget.agrege.credits_missions import missions, programmes
+
+    for m in missions():
+        liste = programmes(m.identifiant)
+        assert liste
+        assert sum(p.credits for p in liste) == pytest.approx(m.credits)

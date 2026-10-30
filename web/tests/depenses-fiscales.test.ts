@@ -1,6 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mesuresDepensesFiscales, rechercher, LEVIER_GENERIQUE } from "../lib/depenses-fiscales.ts";
+import {
+  lignesFiche,
+  mesuresDepensesFiscales,
+  rechercher,
+  LEVIER_GENERIQUE,
+} from "../lib/depenses-fiscales.ts";
 import type { CatalogueDepensesFiscales } from "../lib/donnees.ts";
 
 const catalogue: CatalogueDepensesFiscales = {
@@ -51,4 +56,22 @@ test("recherche sans accents, par numéro ou par mots", () => {
   );
   assert.deepEqual(rechercher(catalogue.depenses, "1202", 10).map((d) => d.code), ["120202"]);
   assert.deepEqual(rechercher(catalogue.depenses, "  ", 10), []);
+});
+
+test("fiche descriptive : champs vides retirés, finalité toujours présente", () => {
+  const fiche = {
+    finalite: "",
+    beneficiaires: "131 000 Ménages",
+    creation: "1941",
+    modification: "1941",
+    reference: "code général des impôts 156-II-5°",
+    mission: "",
+  };
+  assert.deepEqual(lignesFiche(fiche), [
+    ["finalite", ""],
+    ["beneficiaires", "131 000 Ménages"],
+    ["creation", "1941"],
+    ["reference", "code général des impôts 156-II-5°"],
+  ]);
+  assert.deepEqual(lignesFiche(null), []);
 });

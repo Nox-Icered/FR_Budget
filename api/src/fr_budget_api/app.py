@@ -12,6 +12,7 @@ Points d'entrée : ``/sante``, ``/version``, ``/journal``, ``/menages-types``,
 
 from __future__ import annotations
 
+import dataclasses
 import hashlib
 import logging
 import os
@@ -920,6 +921,11 @@ def reponses_unitaires() -> dict[str, Any]:
     }
 
 
+def _fiche_depense(code: str) -> dict[str, str] | None:
+    fiche = module_depenses_fiscales.fiches_descriptives().get(code)
+    return None if fiche is None else dataclasses.asdict(fiche)
+
+
 def catalogue_depenses_fiscales() -> dict[str, Any]:
     """Dépenses fiscales proposées au levier, avec leur coût et le rendement d'un pour cent.
 
@@ -949,6 +955,8 @@ def catalogue_depenses_fiscales() -> dict[str, Any]:
                 "cout": d.cout / module_scenario.MILLIONS_PAR_MILLIARD,
                 "annee_chiffrage": d.annee_chiffrage,
                 "fiabilite": d.fiabilite,
+                # Fiche descriptive du tome II (finalité, bénéficiaires, création, mission).
+                "fiche": _fiche_depense(d.code),
                 "rendement_pourcent": module_scenario.rendement_unitaire(
                     module_scenario.levier_depense_fiscale(d.code)
                 ).central,
@@ -978,6 +986,15 @@ def catalogue_credits_missions() -> dict[str, Any]:
                 "rendement_pourcent": module_scenario.rendement_unitaire(
                     module_scenario.levier_credits_mission(m.identifiant)
                 ).central,
+                # Programmes de la mission (aide au chiffrage : part de chacun dans la mission).
+                "programmes": [
+                    {
+                        "numero": p.numero,
+                        "libelle": p.libelle,
+                        "credits": p.credits / module_scenario.EUROS_PAR_MILLIARD,
+                    }
+                    for p in module_credits_missions.programmes(m.identifiant)
+                ],
             }
             for m in module_credits_missions.missions()
         ],

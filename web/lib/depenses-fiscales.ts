@@ -2,7 +2,7 @@
 // dépenses d'un impôt (un levier par impôt) ou d'une dépense choisie dans le catalogue. Une
 // dépense choisie devient une mesure sur le levier générique « depense_fiscale » (1 Md€ de
 // 2025) de valeur x * rendement d'un pour cent : le modèle est linéaire.
-import type { CatalogueDepensesFiscales, DepenseFiscale } from "./donnees";
+import type { CatalogueDepensesFiscales, DepenseFiscale, FicheDepense } from "./donnees";
 import type { MesureSite } from "./scenario";
 
 export const LEVIER_GENERIQUE = "depense_fiscale";
@@ -23,7 +23,7 @@ export function mesuresDepensesFiscales(
   return mesures;
 }
 
-// Recherche sans accents ni casse, sur le numéro ou les mots du libellé.
+// Recherche sans accents ni casse, sur le numéro ou les mots du libellé et de la finalité.
 const normaliser = (s: string) =>
   s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
@@ -36,8 +36,23 @@ export function rechercher(
   if (mots.length === 0) return [];
   return depenses
     .filter((d) => {
-      const cible = `${d.code} ${normaliser(d.libelle)}`;
+      const cible = `${d.code} ${normaliser(d.libelle)} ${normaliser(d.fiche?.finalite ?? "")}`;
       return mots.every((m) => cible.includes(m));
     })
     .slice(0, maximum);
+}
+
+// Lignes de la fiche descriptive à afficher (clé du texte, valeur), sans les champs vides ;
+// la finalité est toujours présente, « non indiquée » si la fiche n'en donne pas.
+export function lignesFiche(fiche: FicheDepense | null | undefined): [string, string][] {
+  if (!fiche) return [];
+  const lignes: [string, string][] = [
+    ["finalite", fiche.finalite],
+    ["beneficiaires", fiche.beneficiaires],
+    ["creation", fiche.creation],
+    ["modification", fiche.modification === fiche.creation ? "" : fiche.modification],
+    ["mission", fiche.mission],
+    ["reference", fiche.reference],
+  ];
+  return lignes.filter(([cle, v]) => cle === "finalite" || v !== "");
 }

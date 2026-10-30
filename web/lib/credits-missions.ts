@@ -24,3 +24,20 @@ export function mesuresCreditsMissions(
     .filter((v) => v !== 0)
     .map((valeur) => ({ levier: LEVIER_GENERIQUE_CREDITS, valeur }));
 }
+
+// Aide au chiffrage : une variation de x % des crédits d'un programme équivaut à une variation
+// de x * (crédits du programme / crédits de la mission) % de la mission, les autres programmes
+// ne changeant pas.
+export function equivalentMission(
+  creditsProgramme: number,
+  creditsMission: number,
+  pourcentProgramme: number,
+): number {
+  return (pourcentProgramme * creditsProgramme) / creditsMission;
+}
+
+// Valeur du curseur de la mission la plus proche (pas du curseur), dans ses bornes.
+export function auPas(valeur: number, pas: number, bornes: [number, number]): number {
+  const v = Math.round(valeur / pas) * pas;
+  return Math.min(Math.max(v, Math.ceil(bornes[0] / pas) * pas), Math.floor(bornes[1] / pas) * pas) + 0;
+}

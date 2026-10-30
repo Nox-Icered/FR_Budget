@@ -201,6 +201,10 @@ function SimulateurCharge({
                 disabled={bloque}
                 onChange={(e) => setValeurs({ ...valeurs, [l.id]: Number(e.target.value) })}
               />
+              <details className="explication">
+                <summary>{texte("simulateur.en_savoir_plus")}</summary>
+                <p>{texte(`simulateur.leviers.${l.id}.explication`)}</p>
+              </details>
               {bloqueRemunerations && (
                 <span className="source">{texte("simulateur.bloque_remunerations")}</span>
               )}

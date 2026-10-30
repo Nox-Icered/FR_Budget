@@ -1,6 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mesuresCreditsMissions, LEVIER_GENERIQUE_CREDITS } from "../lib/credits-missions.ts";
+import {
+  auPas,
+  equivalentMission,
+  mesuresCreditsMissions,
+  LEVIER_GENERIQUE_CREDITS,
+} from "../lib/credits-missions.ts";
 import type { CatalogueCreditsMissions } from "../lib/donnees.ts";
 
 const catalogue: CatalogueCreditsMissions = {
@@ -25,4 +30,11 @@ test("hausses et baisses forment deux mesures génériques", () => {
 
 test("aucune mesure sans réglage", () => {
   assert.deepEqual(mesuresCreditsMissions(catalogue, { a: 0 }), []);
+});
+
+test("aide au chiffrage : un programme de 25 % de la mission, +10 %, donne +2,5 % de la mission", () => {
+  assert.equal(equivalentMission(25, 100, 10), 2.5);
+  assert.equal(auPas(2.5, 1, [-20, 20]), 3);
+  assert.equal(auPas(-0.4, 1, [-20, 20]), 0);
+  assert.equal(auPas(35, 1, [-20, 20]), 20);
 });

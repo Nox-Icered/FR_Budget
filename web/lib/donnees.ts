@@ -225,6 +225,16 @@ export type DepenseFiscale = {
   annee_chiffrage: number;
   fiabilite: string;
   rendement_pourcent: number;
+  // Fiche descriptive du tome II de Voies et moyens, telle que publiée (champ vide si absent).
+  fiche?: FicheDepense | null;
+};
+export type FicheDepense = {
+  finalite: string;
+  beneficiaires: string;
+  creation: string;
+  modification: string;
+  reference: string;
+  mission: string;
 };
 export type CatalogueDepensesFiscales = {
   source: string;
@@ -240,7 +250,14 @@ export type CatalogueCreditsMissions = {
   annee_credits: number;
   unite_credits: string;
   bornes: [number, number];
-  missions: { identifiant: string; libelle: string; credits: number; rendement_pourcent: number }[];
+  missions: {
+    identifiant: string;
+    libelle: string;
+    credits: number;
+    rendement_pourcent: number;
+    // Programmes de la mission (PLF), pour l'aide au chiffrage.
+    programmes?: { numero: string; libelle: string; credits: number }[];
+  }[];
 };
 export type FourchetteDonnee = { bas: number; central: number; haut: number };
 export type ClasseEntreprises = {

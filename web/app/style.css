@@ -98,3 +98,13 @@ th.groupe {
 .reglage input[type="url"] { min-height: 44px; width: 100%; }
 .interrupteur { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
 .interrupteur input { width: 24px; height: 24px; }
+.explication { margin: 4px 0 8px; font-size: 0.9em; }
+.explication summary { cursor: pointer; padding: 10px 0; text-decoration: underline; }
+.explication label, .explication select, .explication input[type="number"] { display: block; margin-top: 6px; }
+.explication select, .explication input[type="number"] { min-height: 44px; width: 100%; max-width: 100%; box-sizing: border-box; }
+.explication select { text-overflow: ellipsis; }
+.reglage, .reglage > * { min-width: 0; }
+.explication button { min-height: 44px; margin-top: 6px; }
+.explication p, .explication dl { margin: 4px 0 0; }
+.explication dt { font-weight: 600; }
+.explication dd { margin: 0 0 4px; }

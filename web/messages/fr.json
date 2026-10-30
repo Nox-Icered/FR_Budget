@@ -150,79 +150,98 @@
     "leviers": {
       "tva_taux_normal": {
         "libelle": "Taux normal de TVA ({reference} % en {annee})",
-        "valeur": "{valeur} point(s)"
+        "valeur": "{valeur} point(s)",
+        "explication": "La TVA est un impôt sur la consommation : les entreprises la facturent sur leurs ventes et la reversent à l'État, et c'est l'acheteur final qui la paie dans le prix. Le taux normal s'applique à la plupart des biens et services ; les taux réduits (alimentation, livres, restauration…) ne bougent pas. Vers la droite, le taux monte : les recettes de l'État augmentent. Le simulateur suppose que les achats ne changent pas."
       },
       "accise_gazole": {
         "libelle": "Accise sur le gazole ({reference} centimes par litre au 1er janvier {annee})",
-        "valeur": "{valeur} centime(s) par litre"
+        "valeur": "{valeur} centime(s) par litre",
+        "explication": "L'accise sur les énergies (ancienne TICPE) est un impôt fixe par litre de carburant, payé à la pompe et reversé à l'État, en plus de la TVA. Vers la droite, chaque litre de gazole est plus taxé : les recettes augmentent. Les transporteurs routiers, le transport collectif et les taxis, qui se font rembourser une partie de l'accise, ne paient pas la hausse dans le calcul."
       },
       "accise_essences": {
         "libelle": "Accise sur les essences SP95, SP95-E10 et SP98 (SP95-E10 : {reference} centimes par litre au 1er janvier {annee})",
-        "valeur": "{valeur} centime(s) par litre"
+        "valeur": "{valeur} centime(s) par litre",
+        "explication": "Même impôt que pour le gazole, sur les essences sans plomb (SP95, SP95-E10, SP98). Vers la droite, chaque litre est plus taxé : les recettes augmentent. Le simulateur suppose que les volumes vendus ne changent pas."
       },
       "is_taux_normal": {
         "libelle": "Taux normal de l'impôt sur les sociétés ({reference} % en {annee})",
-        "valeur": "{valeur} point(s)"
+        "valeur": "{valeur} point(s)",
+        "explication": "L'impôt sur les sociétés est payé par les entreprises sur leurs bénéfices. Le taux normal s'applique au-delà de la part des bénéfices des PME taxée au taux réduit, qui ne bouge pas. Vers la droite, le taux monte : les entreprises bénéficiaires paient plus, les recettes de l'État augmentent."
       },
       "is_surtaxe_grandes_entreprises": {
         "libelle": "Surtaxe sur l'impôt sur les sociétés des entreprises dont le chiffre d'affaires dépasse 1 milliard d'euros, en % de l'impôt dû, en plus des contributions déjà votées",
-        "valeur": "{valeur} %"
+        "valeur": "{valeur} %",
+        "explication": "Une surtaxe s'ajoute à l'impôt sur les sociétés des très grandes entreprises (chiffre d'affaires de plus d'un milliard d'euros). Ce curseur ajoute un pourcentage de leur impôt dû, en plus des contributions déjà votées. Vers la droite, ces entreprises paient plus ; les autres ne sont pas concernées."
       },
       "dotations_dgf": {
         "libelle": "Dotation globale de fonctionnement versée aux collectivités ({reference} milliards d'euros dans le projet de loi de finances pour 2026)",
-        "valeur": "{valeur} %"
+        "valeur": "{valeur} %",
+        "explication": "La dotation globale de fonctionnement est une somme que l'État verse chaque année aux collectivités locales pour leur fonctionnement, et qu'elles utilisent librement. Vers la droite, l'État verse plus : son déficit augmente, et les collectivités reçoivent autant de plus. Vers la gauche, c'est l'inverse."
       },
       "dotations_compensations": {
         "libelle": "Compensations fiscales versées aux collectivités ({reference} milliards d'euros dans le projet de loi de finances pour 2026)",
-        "valeur": "{valeur} %"
+        "valeur": "{valeur} %",
+        "explication": "Quand l'État supprime ou réduit un impôt local, il verse en général une compensation aux collectivités qui le percevaient. Ce curseur change le montant de ces compensations. Vers la droite, l'État verse plus ; vers la gauche, les collectivités perdent une partie de ces recettes."
       },
       "remunerations_point_indice": {
         "libelle": "Valeur du point d'indice des trois fonctions publiques (masse salariale de {reference} milliards d'euros en {annee})",
-        "valeur": "{valeur} %"
+        "valeur": "{valeur} %",
+        "explication": "Le point d'indice sert de base au calcul du traitement des fonctionnaires des trois fonctions publiques (État, collectivités, hôpitaux). Vers la droite, le point augmente : la rémunération des agents publics et la dépense publique augmentent. Une partie revient aux administrations sous forme de cotisations et d'impôts, ce que le calcul compte."
       },
       "remunerations_effectifs": {
         "libelle": "Effectifs des trois fonctions publiques (masse salariale de {reference} milliards d'euros en {annee})",
-        "valeur": "{valeur} %"
+        "valeur": "{valeur} %",
+        "explication": "Ce curseur change le nombre d'agents des trois fonctions publiques, en pourcentage de leur masse salariale. Vers la droite, il y a plus d'agents et la dépense augmente ; vers la gauche, moins d'agents et la dépense baisse. Le calcul ne dit pas quels services sont concernés."
       },
       "csg_activite": {
         "libelle": "Taux de CSG sur les revenus d'activité ({reference} % en {annee})",
-        "valeur": "{valeur} pt"
+        "valeur": "{valeur} pt",
+        "explication": "La CSG (contribution sociale généralisée) est prélevée directement sur les salaires et les revenus des indépendants ; elle finance la Sécurité sociale. Vers la droite, le taux monte : le salaire net baisse et les recettes de la Sécurité sociale augmentent."
       },
       "csg_retraites": {
         "libelle": "Taux plein de CSG sur les pensions de retraite ({reference} % en {annee} ; les taux réduit et médian ne changent pas)",
-        "valeur": "{valeur} pt"
+        "valeur": "{valeur} pt",
+        "explication": "La CSG est aussi prélevée sur les pensions de retraite, à un taux qui dépend du revenu du foyer. Ce curseur ne change que le taux plein ; les retraités modestes, au taux réduit, médian ou exonérés, ne sont pas concernés. Vers la droite, la pension nette des retraités concernés baisse."
       },
       "csg_capital": {
         "libelle": "Taux de CSG sur les revenus du capital ({reference} % en {annee}, porté à 10,6 % pour la plupart de ces revenus à partir de 2026)",
-        "valeur": "{valeur} pt"
+        "valeur": "{valeur} pt",
+        "explication": "La CSG est aussi prélevée sur les revenus du patrimoine et des placements (loyers, dividendes, intérêts, plus-values). Vers la droite, le taux monte : les détenteurs de ces revenus paient plus."
       },
       "cotisations_patronales_taux": {
         "libelle": "Taux de cotisation patronale du secteur privé, hors allègements (un point rapporte {reference} milliards d'euros en 2026 selon la Commission des comptes de la sécurité sociale)",
-        "valeur": "{valeur} pt"
+        "valeur": "{valeur} pt",
+        "explication": "Les cotisations patronales sont payées par l'employeur, en plus du salaire brut, et financent la Sécurité sociale. Ce curseur change leur taux dans le secteur privé. Vers la droite, le coût du travail augmente. Qui paie au final (l'employeur, ou le salarié si son salaire progresse moins) est un réglage visible sur la page des ménages types."
       },
       "allegements_generaux": {
         "libelle": "Allègements généraux de cotisations patronales ({reference} milliards d'euros en {annee})",
-        "valeur": "{valeur} %"
+        "valeur": "{valeur} %",
+        "explication": "Les allègements généraux réduisent les cotisations patronales sur les salaires bas et moyens, surtout près du SMIC. Vers la gauche, les allègements baissent : les employeurs concernés paient plus de cotisations, et les recettes de la Sécurité sociale augmentent. Vers la droite, c'est l'inverse."
       },
       "prime_activite_pente": {
         "libelle": "Part des revenus d'activité prise en compte dans le calcul de la prime d'activité ({reference} % en {annee})",
-        "valeur": "{valeur} pt"
+        "valeur": "{valeur} pt",
+        "explication": "La prime d'activité complète les revenus des travailleurs modestes. Elle tient compte d'une partie de leurs revenus d'activité : c'est cette part que règle le curseur. Vers la droite, la prime augmente pour les bénéficiaires et la dépense aussi ; vers la gauche, elle baisse."
       },
       "ir_seuils_bareme": {
         "libelle": "Revalorisation des seuils du barème de l'impôt sur le revenu, par rapport à l'inflation (impôt au barème de {reference} milliards d'euros sur les revenus de 2024)",
-        "valeur": "{valeur} %"
+        "valeur": "{valeur} %",
+        "explication": "L'impôt sur le revenu est calculé par tranches, dont les seuils sont en général relevés chaque année comme l'inflation. Ce curseur relève les seuils plus ou moins que l'inflation. Vers la gauche (relèvement plus faible, ou gel), les revenus passent plus vite dans les tranches supérieures et l'impôt augmente ; vers la droite, il baisse."
       },
       "indexation_pensions_prestations": {
         "libelle": "Revalorisation des pensions de base et des prestations sociales, par rapport à la revalorisation prévue par la loi ({reference} milliards d'euros versés par an, montants de {annee})",
-        "valeur": "{valeur} pt"
+        "valeur": "{valeur} pt",
+        "explication": "Chaque année, les pensions de retraite de base et la plupart des prestations sociales (allocations familiales, minima sociaux…) sont revalorisées selon une règle fixée par la loi, en général l'inflation. Ce curseur ajoute ou retire des points à cette revalorisation. Vers la gauche, les montants versés progressent moins vite que prévu : la dépense baisse et le pouvoir d'achat des bénéficiaires aussi. Les retraites complémentaires (Agirc-Arrco) ne sont pas concernées."
       },
       "retraites_age_depart": {
         "libelle": "Âge effectif moyen de départ à la retraite, en écart à la projection du COR ({reference} ans en {annee})",
-        "valeur": "{valeur} an(s)"
+        "valeur": "{valeur} an(s)",
+        "explication": "L'âge effectif de départ est l'âge moyen auquel les personnes partent réellement à la retraite. Vers la droite, on part plus tard : moins de pensions sont versées et plus de cotisations entrent, selon les projections du Conseil d'orientation des retraites. Les autres effets (chômage, invalidité, emploi) ne sont pas comptés."
       },
       "retraites_age_legal": {
         "libelle": "Âge légal d'ouverture des droits à la retraite, en écart à la législation ({reference} ans pour les générations nées à partir de 1968)",
-        "valeur": "{valeur} an(s)"
+        "valeur": "{valeur} an(s)",
+        "explication": "L'âge légal d'ouverture des droits est le plus jeune âge auquel on peut partir à la retraite (hors départs anticipés). Vers la droite, il recule, génération par génération : moins de retraités, donc moins de pensions, et des cotisations en plus pour ceux qui restent en emploi. Les prestations versées à ceux qui restent sans emploi ne sont pas comptées."
       }
     },
     "limite_tva_accise": "La hausse de l'accise augmente aussi la TVA payée sur le carburant : cet effet n'est pas compté.",
@@ -251,7 +270,20 @@
       "cout_repris": "{cout} millions d'euros (non chiffrée pour {annee} : montant de {annee_chiffrage} repris, convention de l'administration) ; fiabilité : {fiabilite}",
       "fiabilite_inconnue": "non indiquée",
       "deja_par_impot": "déjà couverte par le curseur de son impôt",
-      "impot_bloque": "Retirez d'abord les dépenses de cet impôt choisies une à une."
+      "impot_bloque": "Retirez d'abord les dépenses de cet impôt choisies une à une.",
+      "qu_est_ce": "Qu'est-ce qu'une dépense fiscale ?",
+      "explication": "Une dépense fiscale, souvent appelée niche fiscale, est une règle qui réduit l'impôt de certains contribuables par rapport à la règle générale : réduction ou crédit d'impôt, exonération, déduction, taux réduit. Chacune a un objectif annoncé, par exemple aider une catégorie de personnes ou d'entreprises, ou encourager un comportement. L'administration en publie chaque année la liste, avec pour chacune son objectif (« finalité »), son coût et le nombre de bénéficiaires, dans l'annexe « Voies et moyens » (tome II) du projet de loi de finances. Ici, réduire une dépense fiscale, c'est réduire cet avantage : ses bénéficiaires paient plus d'impôt et les recettes de l'État augmentent.",
+      "fiche": {
+        "titre": "Fiche de l'administration",
+        "finalite": "Finalité",
+        "finalite_absente": "non indiquée dans la fiche",
+        "beneficiaires": "Bénéficiaires",
+        "creation": "Créée en",
+        "modification": "Dernière modification",
+        "mission": "Politique publique concernée (mission et programme du budget)",
+        "reference": "Texte de loi",
+        "source": "Source : annexe « Voies et moyens », tome II, du projet de loi de finances pour 2026."
+      }
     },
     "limite_depenses_fiscales": "Le coût d'une dépense fiscale n'est pas le gain de sa suppression : l'administration précise qu'il ne tient compte ni des changements de comportement ni des interactions entre dépenses, et que la somme de ces coûts n'a pas de réelle signification. Le rendement affiché est le coût officiel, sans correction : pour un impôt entier ou plusieurs dépenses, c'est un ordre de grandeur.",
     "methode_depenses_fiscales": "Dépenses fiscales : le rendement d'une réduction de x % est x % du coût prévu pour {annee} dans le projet de loi de finances pour {annee}, rapporté au PIB de la même année. La fourchette reprend les écarts constatés par le passé entre le coût prévu et le coût réalisé.",
@@ -262,7 +294,18 @@
       "mission": "{mission} ({credits} milliards d'euros demandés pour {annee})",
       "valeur": "{valeur} %",
       "bloque": "Réglage impossible tant que le point d'indice ou les effectifs sont modifiés : les crédits des missions contiennent déjà les rémunérations de l'État.",
-      "bloque_indexation": "Réglage impossible tant que la revalorisation des pensions et prestations ou la prime d'activité sont modifiées : cette mission finance l'allocation aux adultes handicapés et la prime d'activité."
+      "bloque_indexation": "Réglage impossible tant que la revalorisation des pensions et prestations ou la prime d'activité sont modifiées : cette mission finance l'allocation aux adultes handicapés et la prime d'activité.",
+      "qu_est_ce": "Qu'est-ce qu'une mission ?",
+      "explication": "Le budget de l'État est découpé en missions, une par grande politique publique (enseignement scolaire, défense, justice…). Chaque mission est divisée en programmes, et ses crédits paient à la fois les agents (dépenses de personnel), le fonctionnement, les investissements et des aides versées à d'autres (ménages, entreprises, associations, organismes publics). Vers la droite, la mission dispose de plus de crédits et le déficit de l'État augmente ; vers la gauche, c'est l'inverse. Le simulateur ne dit pas sur quoi porterait la hausse ou la baisse.",
+      "aide_titre": "Aide au chiffrage : programmes de la mission",
+      "aide_intro": "Crédits demandés pour {annee}, par programme. Pour faire varier un seul programme, choisissez-le : l'équivalent pour la mission entière est calculé, les autres programmes ne changeant pas.",
+      "aide_programme": "{numero} – {libelle} : {credits} milliards d'euros ({part} % de la mission)",
+      "aide_choix": "Programme",
+      "aide_pourcent": "Variation des crédits du programme, en %",
+      "aide_resultat": "Équivaut à {equivalent} % des crédits de la mission ({montant} milliards d'euros).",
+      "aide_arrondi": "Le curseur avance par pas de {pas} % : la valeur appliquée sera {applique} %.",
+      "aide_appliquer": "Appliquer au curseur de la mission",
+      "aide_limite": "Pour un chiffrage plus fin (par exemple une revalorisation des salaires d'une catégorie d'agents), il faudrait connaître la part des rémunérations dans chaque programme : elle n'est pas encore dans les données du site."
     },
     "methode_credits_missions": "Crédits des missions : le changement de solde d'une variation de x % est x % des crédits de paiement demandés pour {annee} dans le projet de loi de finances, rapporté au PIB de la même année. La fourchette reprend les écarts constatés de 2023 à 2025 entre les crédits votés et les dépenses réellement faites.",
     "limite_credits_missions": "Un euro de crédit en moins compte pour un euro de solde en plus, même quand il finance un autre organisme public (université, opérateur, Sécurité sociale) qui pourrait ne pas réduire sa dépense. Les crédits de personnel restent dans chaque mission.",
@@ -360,7 +403,8 @@
       "detail": "Méthode, sources et limites : fiche « dépense des ménages » du dépôt."
     },
     "bloque_retraites": "Réglage impossible tant que l'autre levier de départ à la retraite est modifié : les deux mesurent le même effet.",
-    "methode_retraites_age_legal": "Âge légal de départ (modèle par cohortes) : avec la population projetée par l'Insee et les taux de retraités par âge de la DREES, un an de plus sur l'âge légal améliore le solde des administrations publiques d'environ {effet} point de PIB une fois la mesure en place (moindres pensions et prélèvements sur ceux qui restent en emploi). L'écart est atteint génération par génération, en {duree} ans pour un an. Les prestations versées à ceux qui restent sans emploi ne sont pas comptées."
+    "methode_retraites_age_legal": "Âge légal de départ (modèle par cohortes) : avec la population projetée par l'Insee et les taux de retraités par âge de la DREES, un an de plus sur l'âge légal améliore le solde des administrations publiques d'environ {effet} point de PIB une fois la mesure en place (moindres pensions et prélèvements sur ceux qui restent en emploi). L'écart est atteint génération par génération, en {duree} ans pour un an. Les prestations versées à ceux qui restent sans emploi ne sont pas comptées.",
+    "en_savoir_plus": "À quoi sert ce curseur ?"
   },
   "partage": {
     "scenario": "Scénario",

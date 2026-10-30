@@ -21,7 +21,7 @@ Validées le 7 octobre 2026, sauf D7 (en attente).
 | D3 | Version de Python | 3.12 | Plus éprouvée avec l'écosystème scientifique ; passage en 3.13 quand la CI le confirme. |
 | D4 | Gestionnaire de paquets Python | `uv` avec `pyproject.toml` et fichier de verrouillage | Rapide, reproductible, un seul outil. |
 | D5 | Gestionnaire de paquets front | `pnpm` | Monorepo léger, verrouillage strict. |
-| D6 | Format des registres | YAML relu à la main, compilé en Parquet par script | Lisible dans une revue de code, validé par schéma (pydantic). |
+| D6 | Format des registres et des tables | Registres en YAML relu à la main, validé par schéma (pydantic) ; tables produites par les scripts en CSV (décision du 30 octobre 2026, à la place du Parquet prévu) | Lisibles dans une revue de code (différences ligne à ligne). |
 | D7 | Nom du projet et domaine | à choisir | Point ouvert de la spécification. |
 
 ## 2. Structure du dépôt
@@ -46,7 +46,7 @@ FR_Budget/
 │   └── references/              # chiffrages officiels saisis, par levier et millésime
 ├── data/
 │   ├── raw/                     # fichiers tels que téléchargés (gitignorés si lourds, hash au registre)
-│   └── processed/               # Parquet produits par les scripts
+│   └── processed/               # tables CSV produites par les scripts
 ├── pipelines/                   # extraction et transformation rejouables
 ├── moteur/                      # paquet Python `fr_budget`
 │   ├── pyproject.toml

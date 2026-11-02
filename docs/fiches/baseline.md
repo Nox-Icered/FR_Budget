@@ -57,6 +57,15 @@ Deux segments raccordés en 2030 (décision du mainteneur du 8 octobre 2026, opt
 - Le coût du vieillissement de l'Ageing Report intègre la réforme des retraites de 2023 ; les mesures postérieures ne sont pas prises en compte.
 - Le RESF 2025-2030 est une prévision du Gouvernement qui intègre ses mesures de redressement : ce n'est pas une trajectoire à politique inchangée.
 
+## 7 bis. Projection de comparaison : Commission européenne, à politique inchangée
+
+Ajoutée le 2 novembre 2026 à la demande du mainteneur (`moteur/src/fr_budget/baseline_commission.py`). La trajectoire ci-dessus suppose le redressement annoncé par le Gouvernement ; la Commission européenne (Debt Sustainability Monitor 2025, février 2026, fiche France, `ce_dsm_2025`) projette la dette à politique inchangée, en ne retenant que les mesures votées.
+
+- 2025-2036 : dette publiée, reprise telle quelle (`pipelines/baseline/extraire_dsm.py` → `data/processed/baseline/ce_dsm_2025_france.csv`), en trait plein.
+- Après 2036 : la Commission ne publie rien. La courbe est prolongée linéairement, en pointillés, avec la mention qu'il ne s'agit pas d'un chiffre publié (hypothèse `baseline_commission_prolongement_pente` : hausse moyenne 2033-2036, plage de la moyenne 2030-2036 à la plus forte hausse annuelle).
+- Fourchette : de la projection centrale au plus élevé des quatre scénarios déterministes de la Commission (155,6 % du PIB en 2036, écart à taux-croissance défavorable), écart croissant linéairement depuis 2026 (hypothèse `baseline_commission_ecart_scenarios`). Les trajectoires annuelles de ces scénarios ne sont publiées qu'en graphique ; le fichier de données de la Commission n'a pas pu être téléchargé depuis l'environnement de travail.
+- Limites : point de départ différent (prévision d'automne 2025, avant le PLF 2027 : 116,3 % en 2025 contre 115,7 %) ; les leviers du simulateur ne s'appliquent pas à cette projection.
+
 ## 8. Journal
 
 | Date | Changement | Tests qui ont bougé |
@@ -64,3 +73,4 @@ Deux segments raccordés en 2030 (décision du mainteneur du 8 octobre 2026, opt
 | 2026-10-08 | Baseline RESF 2027 et Ageing Report 2024, méthode (a) | 2 tests de validation et 11 tests unitaires créés |
 | 2026-10-09 | Variantes de croissance (1,0 %) et de taux (4,3 %) tirées du RESF | 3 tests unitaires créés ; dette 2046 : bas 103,6 %, central 108,3 %, haut 116,4 % (inchangés, la borne haute reste le scénario de risque santé et dépendance) ; 2031 : bas 119,7 % (contre 120,1 %) |
 | 2026-10-28 | Revue de code : taux apparent 2026-2030 reconstitué en euros (le rapport des deux % du PIB est multiplié par 1 + g) ; taux de départ de la projection 3,035 → 3,121 % | dette 2046 centrale 108,25 → 108,67 % du PIB (bas 103,60 → 104,02 ; haut 116,45 → 116,87) ; 2 nouveaux tests de validation (taux apparent 2026 et 2027 contre le RESF), réussis ; aucun autre test ne bouge |
+| 2026-11-02 | Projection de la Commission européenne à politique inchangée affichée à côté (comparaison, sans effet sur les calculs) ; titre « Trajectoire sans réforme » remplacé | `test_baseline_commission.py` créé (5 tests) ; aucun autre test ne bouge |

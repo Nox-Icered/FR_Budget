@@ -966,3 +966,12 @@ sources:
     millesime: juin 2018
     acces: direct
     consulte_le: 2026-10-30
+
+  - id: ce_dsm_2025
+    nom: Commission européenne, « Debt Sustainability Monitor 2025 », Institutional Paper 332, fiche France (partie II)
+    editeur: Commission européenne, direction générale des affaires économiques et financières
+    url: https://economy-finance.ec.europa.eu/publications/debt-sustainability-monitor-2025_en
+    licence: "CC BY 4.0, décision de la Commission du 12 décembre 2011 sur la réutilisation (https://commission.europa.eu/legal-notice_en) ; mention de la source et signalement des modifications"
+    millesime: février 2026 (prévision d'automne 2025 de la Commission, projection à politique inchangée 2026-2036)
+    acces: direct
+    consulte_le: 2026-11-02

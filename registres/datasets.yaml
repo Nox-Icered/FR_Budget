@@ -954,3 +954,11 @@ datasets:
     empreinte_sha256: 9158366f29e0466de7842eacebb2661e469335f30b7afcca8727f7050abb658d
     methode_transformation: aucune ; coût pour le second semestre 2018 et l'année 2019 (« de l'ordre de 200 millions d'€ ») saisi dans registres/references/chiffrages.yaml
     telecharge_le: 2026-10-30
+
+  - id: ce_dsm_2025_pdf
+    source: ce_dsm_2025
+    description: Debt Sustainability Monitor 2025, Institutional Paper 332 (PDF, 304 pages, fichier ip332_en.pdf)
+    fichier: data/raw/baseline/commission_europeenne/dsm_2025_ip332_en.pdf
+    empreinte_sha256: 84f9872aeaa46436e23fdf0e8fbc15a7f82ee683add5136e7337aa74dce335dc
+    methode_transformation: pipelines/baseline/extraire_dsm.py → data/processed/baseline/ce_dsm_2025_france.csv (fiche France, tableau « France - baseline scenario », dette et solde primaire 2024-2036) et data/processed/baseline/ce_dsm_2025_france_scenarios_2036.csv (dette en 2036 des cinq scénarios déterministes)
+    telecharge_le: 2026-11-02

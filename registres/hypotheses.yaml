@@ -774,3 +774,42 @@ hypotheses:
       quatrième année reste au niveau de la troisième, plein effet la cinquième. Choix du lot
       assurance chômage, à relire.
     instruments: [assurance_chomage]
+
+  - id: baseline_commission_prolongement_pente
+    libelle: Hausse annuelle de la dette, en points de PIB, retenue pour prolonger après 2036 la projection de la Commission européenne à politique inchangée
+    unite: points de PIB par an
+    valeur_centrale: 3.167
+    plage:
+      basse: 2.917
+      haute: 3.2
+    sources: [ce_dsm_2025]
+    justification: >-
+      La Commission ne publie pas de projection au-delà de 2036. Sur demande du mainteneur (2
+      novembre 2026), la courbe est prolongée en pointillés jusqu'en 2046 en gardant son
+      évolution de façon linéaire. Valeur centrale : hausse moyenne des trois dernières années
+      publiées (2033-2036, de 134,5 à 144,0 % du PIB) ; borne basse : hausse moyenne 2030-2036
+      (de 126,5 à 144,0) ; borne haute : plus forte hausse annuelle publiée de 2031 à 2036 (3,2
+      points). Les valeurs sont recalculées depuis la série publiée et un test vérifie qu'elles
+      concordent avec ce registre. Ce prolongement n'est pas une projection de la Commission.
+    instruments: [baseline]
+
+  - id: baseline_commission_ecart_scenarios
+    libelle: Écart à la projection centrale de la Commission européenne retenu pour la borne haute, en points de PIB en 2036
+    unite: points de PIB
+    valeur_centrale: 0.0
+    plage:
+      basse: 0.0
+      haute: 11.6
+    sources: [ce_dsm_2025]
+    justification: >-
+      La Commission publie la dette de 2036 de quatre scénarios déterministes autour de sa
+      projection centrale (144,0 % du PIB) : solde primaire structurel à sa moyenne historique
+      (146,1), solde primaire plus bas (148,9), écart taux-croissance défavorable (155,6) et
+      tension financière (146,7) (fiche France, tableau « Overview of key fiscal sustainability
+      risks »). Tous sont au-dessus de la projection centrale : la borne basse est la projection
+      centrale, la borne haute le scénario le plus élevé (11,6 points de plus en 2036). Les
+      trajectoires année par année de ces scénarios ne sont publiées qu'en graphique (le fichier
+      de données de la Commission n'a pas pu être téléchargé depuis l'environnement de travail) :
+      l'écart est supposé croître linéairement de 0 en 2026 à 11,6 points en 2036, puis au même
+      rythme après 2036. Choix à relire.
+    instruments: [baseline]

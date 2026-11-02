@@ -154,6 +154,12 @@ export type Baseline = {
     dette: FourchetteJson;
     solde_primaire: FourchetteJson;
   }[];
+  commission: {
+    source: string;
+    hypotheses: string[];
+    derniere_annee_publiee: number;
+    valeurs: { annee: number; publiee: boolean; dette: FourchetteJson }[];
+  };
 };
 export type ReponsesUnitaires = {
   unite: string;

@@ -1,11 +1,17 @@
 "use client";
 // Graphique de la dette en fourchette : bande bas-haut, ligne centrale, repère du raccord.
-// Une seule série : pas de légende (le titre la nomme) ; le tableau sous le graphique
-// donne toutes les valeurs. Survol : ligne verticale et valeurs bas, centrale et haute.
+// Une courbe de comparaison facultative (Commission européenne) a sa propre bande, en trait
+// plein pour les années publiées et en pointillés pour le prolongement ; une légende nomme
+// alors chaque courbe. Survol : ligne verticale et valeurs de chaque courbe.
 import { useState } from "react";
 import { nombre } from "../../lib/textes";
 
 type Point = { annee: number; bas: number; central: number; haut: number };
+type Comparaison = {
+  libelle: string;
+  prolongement: string;
+  points: (Point & { publiee: boolean })[];
+};
 type Libelles = {
   titre: string;
   bas: string;
@@ -24,15 +30,23 @@ export function GraphiqueDette({
   raccord,
   libelles,
   reference,
+  comparaison,
+  legende,
 }: {
   points: Point[];
   raccord: number;
   libelles: Libelles;
   reference?: { libelle: string; valeurs: number[] };
+  comparaison?: Comparaison;
+  legende?: string;
 }) {
   const [survol, setSurvol] = useState<number | null>(null);
   const annees = points.map((p) => p.annee);
-  const extremes = [...points.flatMap((p) => [p.bas, p.haut]), ...(reference?.valeurs ?? [])];
+  const extremes = [
+    ...points.flatMap((p) => [p.bas, p.haut]),
+    ...(reference?.valeurs ?? []),
+    ...(comparaison?.points.flatMap((p) => [p.bas, p.haut]) ?? []),
+  ];
   const min = Math.floor(Math.min(...extremes) / 10) * 10;
   const max = Math.ceil(Math.max(...extremes) / 10) * 10;
   const x = (a: number) =>
@@ -47,6 +61,18 @@ export function GraphiqueDette({
     "Z";
   const ligne = points.map((p, i) => `${i ? "L" : "M"}${x(p.annee)},${y(p.central)}`).join("");
   const actif = survol === null ? null : points[survol];
+  const comp = comparaison?.points;
+  const compActif = actif && comp ? comp.find((p) => p.annee === actif.annee) : undefined;
+  // Trait plein jusqu'à la dernière année publiée, pointillés ensuite (raccordés à elle).
+  const publiees = comp?.filter((p) => p.publiee) ?? [];
+  const prolongees = comp ? [...publiees.slice(-1), ...comp.filter((p) => !p.publiee)] : [];
+  const trace = (ps: Point[]) =>
+    ps.map((p, i) => `${i ? "L" : "M"}${x(p.annee)},${y(p.central)}`).join("");
+  const bandeComp = comp
+    ? comp.map((p, i) => `${i ? "L" : "M"}${x(p.annee)},${y(p.haut)}`).join("") +
+      [...comp].reverse().map((p) => `L${x(p.annee)},${y(p.bas)}`).join("") +
+      "Z"
+    : "";
 
   function deplacer(e: React.PointerEvent<SVGRectElement>) {
     const boite = e.currentTarget.ownerSVGElement!.getBoundingClientRect();
@@ -82,7 +108,12 @@ export function GraphiqueDette({
           <text x={x(raccord) + 4} y={MARGE.haut - 10} className="axe">
             {libelles.raccord}
           </text>
+          {comp && <path d={bandeComp} className="bande-comparaison" />}
           <path d={bande} className="bande" />
+          {comp && <path d={trace(publiees)} className="comparaison" />}
+          {comp && prolongees.length > 1 && (
+            <path d={trace(prolongees)} className="comparaison prolongee" />
+          )}
           {reference && (
             <path
               d={reference.valeurs.map((v, i) => `${i ? "L" : "M"}${x(annees[i])},${y(v)}`).join("")}
@@ -127,9 +158,37 @@ export function GraphiqueDette({
                 {reference.libelle} : {nombre(reference.valeurs[survol!])}
               </span>
             )}
+            {comparaison && compActif && (
+              <span>
+                {comparaison.libelle} : {nombre(compActif.central)} ({nombre(compActif.bas)} –{" "}
+                {nombre(compActif.haut)})
+              </span>
+            )}
           </div>
         )}
       </div>
+      {comparaison && (
+        <ul className="legende">
+          <li>
+            <span className="cle cle-serie" aria-hidden="true" />
+            {legende ?? libelles.titre}
+          </li>
+          {reference && (
+            <li>
+              <span className="cle cle-reference" aria-hidden="true" />
+              {reference.libelle}
+            </li>
+          )}
+          <li>
+            <span className="cle cle-comparaison" aria-hidden="true" />
+            {comparaison.libelle}
+          </li>
+          <li>
+            <span className="cle cle-prolongee" aria-hidden="true" />
+            {comparaison.prolongement}
+          </li>
+        </ul>
+      )}
       <p className="source">{libelles.unite}</p>
     </figure>
   );

@@ -13,7 +13,7 @@
     "sources": "Sources",
     "hypotheses": "Hypothèses",
     "validation": "Validation",
-    "baseline": "Trajectoire sans réforme",
+    "baseline": "Trajectoires de la dette",
     "simulateur": "Simulateur",
     "comparaison": "Comparer",
     "journal": "Journal",
@@ -109,9 +109,9 @@
     "texte": "Version du moteur {moteur} ; registres {registres} ; données {donnees}"
   },
   "baseline": {
-    "titre": "Dette et solde primaire sans réforme, 2025-2046",
+    "titre": "Dette publique : prévision du Gouvernement et projection de la Commission européenne, 2025-2046",
     "bandeau": "Bêta, non validé : cette trajectoire n'a pas encore été relue par des relecteurs indépendants.",
-    "intro": "Jusqu'en {raccord}, les chiffres sont ceux de la prévision du Gouvernement (rapport économique, social et financier du projet de loi de finances pour 2027). Ensuite, ils sont projetés avec les hypothèses de long terme de la Commission européenne (Ageing Report 2024).",
+    "intro": "Deux trajectoires de la dette, sans mesure nouvelle choisie dans le simulateur. La première est la prévision du Gouvernement (rapport économique, social et financier du projet de loi de finances pour 2027) jusqu'en {raccord}, prolongée ensuite avec les hypothèses de long terme de la Commission européenne (Ageing Report 2024) : elle suppose le redressement des comptes annoncé par le Gouvernement. La seconde est la projection de la Commission européenne à politique inchangée.",
     "annee": "Année",
     "dette": "Dette publique",
     "solde_primaire": "Solde primaire",
@@ -126,16 +126,25 @@
     "methode_titre": "Méthode",
     "methode": "Après 2030, la dette suit la formule dette de l'année suivante = dette × (1 + taux d'intérêt) / (1 + croissance) - solde primaire + ajustement stock-flux. Le solde primaire de 2030 est maintenu, puis corrigé de l'évolution des dépenses de retraite, de santé, de dépendance et d'éducation projetée par la Commission européenne. La fourchette fait varier une hypothèse à la fois dans sa plage.",
     "hypotheses_titre": "Hypothèses utilisées",
-    "graphique_titre": "Dette publique, en % du PIB : valeur centrale et fourchette",
-    "graphique_raccord": "Début de la projection",
-    "graphique_lecture": "La ligne donne la valeur centrale, la zone colorée la fourchette basse-haute. Toutes les valeurs figurent dans le tableau ci-dessous."
+    "graphique_titre": "Dette publique, en % du PIB",
+    "graphique_raccord": "Fin de la prévision du Gouvernement",
+    "graphique_lecture": "Lignes : valeur centrale ; zones colorées : fourchette basse-haute. Toutes les valeurs figurent dans les tableaux ci-dessous.",
+    "legende_gouvernement": "Prévision du Gouvernement (PLF 2027), prolongée après {raccord}",
+    "commission": "Commission européenne, à politique inchangée",
+    "commission_prolongement": "Commission : prolongement de sa tendance après {annee}, pas un chiffre publié",
+    "commission_titre": "Projection de la Commission européenne à politique inchangée",
+    "commission_texte": "La Commission européenne (Debt Sustainability Monitor 2025, février 2026) ne retient que les mesures déjà votées : le redressement que le Gouvernement annonce après 2026 n'y figure pas. Ses chiffres partent de sa prévision d'automne 2025, avant le projet de loi de finances pour 2027. Elle ne publie rien après {annee} : la courbe en pointillés prolonge sa tendance au-delà, à raison de {pente} point de PIB de dette en plus par an ; ce n'est pas un chiffre de la Commission. La fourchette va de sa projection centrale au plus élevé de ses quatre scénarios de risque ({haut} % du PIB en {annee}), tous au-dessus de la projection centrale. Les leviers du simulateur s'appliquent à la prévision du Gouvernement, pas à cette projection.",
+    "commission_publiee": "Publiée",
+    "commission_prolongee": "Prolongée",
+    "commission_statut": "Origine",
+    "gouvernement_titre": "Prévision du Gouvernement, puis prolongement"
   },
   "simulateur": {
     "titre": "Simulateur : effet d'une mesure sur le solde et la dette",
-    "bandeau": "Bêta, non validé : ces leviers n'ont pas encore franchi la règle de publication, et la trajectoire sans réforme n'a pas encore été relue.",
+    "bandeau": "Bêta, non validé : ces leviers n'ont pas encore franchi la règle de publication, et la trajectoire de référence (prévision du Gouvernement) n'a pas encore été relue.",
     "intro": "Choisissez une ou plusieurs mesures et leur année d'entrée en vigueur. Le calcul se fait sur votre appareil : rien n'est envoyé ni enregistré.",
     "annee_entree": "Année d'entrée en vigueur",
-    "sans_mesure": "Sans mesure",
+    "sans_mesure": "Sans mesure (prévision du Gouvernement)",
     "graphique_titre": "Dette publique avec la mesure, en % du PIB",
     "graphique_lecture": "La ligne pleine et la zone colorée donnent la dette avec la mesure (valeur centrale et fourchette), la ligne en pointillés la dette sans mesure.",
     "ecart_solde": "Écart de solde primaire",
@@ -144,7 +153,7 @@
     "fourchette": "{central} ({bas} à {haut})",
     "unite": "En points de PIB. Valeur centrale, puis fourchette basse et haute entre parenthèses. Un écart de solde positif est une amélioration du solde.",
     "methode_titre": "Méthode",
-    "methode": "Un point de taux normal de TVA rapporte {rendement_tva} milliards d'euros en 2025, une fois retirée la TVA payée par les administrations elles-mêmes. Un centime par litre rapporte {rendement_gazole} milliard d'euros sur le gazole, une fois retirés les volumes remboursés aux transporteurs routiers, au transport collectif et aux taxis, et {rendement_essences} milliard d'euros sur les essences. Un point de taux normal de l'impôt sur les sociétés rapporte {rendement_is} milliards d'euros, et un point de surtaxe sur l'impôt des grandes entreprises {rendement_surtaxe} milliard d'euros (bénéfices 2025). Ces montants sont tenus constants en part du PIB. La dette est recalculée chaque année avec les mêmes hypothèses que la trajectoire sans réforme ; une dette plus faible porte moins d'intérêts.",
+    "methode": "Un point de taux normal de TVA rapporte {rendement_tva} milliards d'euros en 2025, une fois retirée la TVA payée par les administrations elles-mêmes. Un centime par litre rapporte {rendement_gazole} milliard d'euros sur le gazole, une fois retirés les volumes remboursés aux transporteurs routiers, au transport collectif et aux taxis, et {rendement_essences} milliard d'euros sur les essences. Un point de taux normal de l'impôt sur les sociétés rapporte {rendement_is} milliards d'euros, et un point de surtaxe sur l'impôt des grandes entreprises {rendement_surtaxe} milliard d'euros (bénéfices 2025). Ces montants sont tenus constants en part du PIB. La dette est recalculée chaque année avec les mêmes hypothèses que la prévision du Gouvernement ; une dette plus faible porte moins d'intérêts.",
     "limite_comportement": "Les achats ne changent pas avec les prix : aucun effet de comportement n'est pris en compte.",
     "limite_croissance": "Sans la case « effet sur l'activité », la mesure n'a pas d'effet sur la croissance. Elle n'en a jamais sur les prix.",
     "limite_fourchette": "Les fourchettes des chiffrages sont étroites : elles ne couvrent pas toute l'erreur des modèles, publiée sur la page Validation.",
@@ -478,7 +487,8 @@
       }
     },
     "resume_mobile_solde": "{central} pt de PIB ({bas} à {haut})",
-    "resume_mobile_dette": "{central} % du PIB ({bas} à {haut})"
+    "resume_mobile_dette": "{central} % du PIB ({bas} à {haut})",
+    "legende_avec": "Avec les mesures choisies (sur la prévision du Gouvernement)"
   },
   "partage": {
     "scenario": "Scénario",

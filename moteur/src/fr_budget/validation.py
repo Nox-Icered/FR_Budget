@@ -15,6 +15,7 @@ from functools import partial
 
 from fr_budget import retraites_cohortes
 from fr_budget.agrege.accises import recette_brute
+from fr_budget.agrege.assurance_chomage import cout_revalorisation_cumule, effet_contribution
 from fr_budget.agrege.cotisations import cout_allegements, valeur_point_modele
 from fr_budget.agrege.credits_missions import total_execution
 from fr_budget.agrege.csg import (
@@ -52,6 +53,8 @@ MILLIONS_PAR_MILLIARD = 1000.0
 EUROS_PAR_MILLIARD = 1e9
 IMPOTS_DEPENSES_FISCALES = ("impot_revenu", "impot_revenu_et_societes", "impot_societes")
 POURCENT = 100.0
+AVRIL = 4
+JUILLET = 7
 TAUX_TVA = ("ensemble", "taux_2_1", "taux_5_5", "taux_10", "taux_20")
 
 
@@ -181,6 +184,40 @@ def _csg_taux_plein_millions(annee: int) -> float:
     return rendement_taux_plein(annee) * MILLIONS_PAR_MILLIARD
 
 
+def _chomage_contribution_millions(annee: int) -> float:
+    return effet_contribution(chiffrage("chomage_contribution_points_0_05"), annee) * (
+        MILLIONS_PAR_MILLIARD
+    )
+
+
+def _chomage_revalorisation_millions(taux: str, mois: int, allocations: float) -> float:
+    return cout_revalorisation_cumule(chiffrage(taux), mois, allocations) * MILLIONS_PAR_MILLIARD
+
+
+def _definitions_chomage() -> list[tuple[str, Callable[[], float]]]:
+    """Assurance chômage : mêmes calculs que les tests de validation du levier."""
+    return [
+        ("chomage_contribution_hausse_0_05_2019", partial(_chomage_contribution_millions, 2019)),
+        ("chomage_contribution_baisse_0_05_2026", partial(_chomage_contribution_millions, 2026)),
+        (
+            "chomage_revalorisation_avril_2023_cumul",
+            lambda: _chomage_revalorisation_millions(
+                "chomage_revalorisation_avril_2023_taux",
+                AVRIL,
+                chiffrage("chomage_allocations_brutes_2023"),
+            ),
+        ),
+        (
+            "chomage_revalorisation_juillet_2018_cout",
+            lambda: _chomage_revalorisation_millions(
+                "chomage_revalorisation_juillet_2018_taux",
+                JUILLET,
+                chiffrage("chomage_allocations_brutes_2018") / MILLIONS_PAR_MILLIARD,
+            ),
+        ),
+    ]
+
+
 def _definitions() -> list[tuple[str, Callable[[], float]]]:
     definitions: list[tuple[str, Callable[[], float]]] = []
     for taux in TAUX_TVA:
@@ -263,6 +300,7 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
     ]
     definitions += [("ir_gel_bareme_2026", partial(_ir_gel, inflation_2025, 2026))]
     definitions += [("pa_pente_moindre_depense_2025", _pa_pente_millions)]
+    definitions += _definitions_chomage()
     definitions += _confrontations_independantes()
     return definitions
 

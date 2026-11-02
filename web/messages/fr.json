@@ -242,6 +242,21 @@
         "libelle": "Âge légal d'ouverture des droits à la retraite, en écart à la législation ({reference} ans pour les générations nées à partir de 1968)",
         "valeur": "{valeur} an(s)",
         "explication": "L'âge légal d'ouverture des droits est le plus jeune âge auquel on peut partir à la retraite (hors départs anticipés). Vers la droite, il recule, génération par génération : moins de retraités, donc moins de pensions, et des cotisations en plus pour ceux qui restent en emploi. Les prestations versées à ceux qui restent sans emploi ne sont pas comptées."
+      },
+      "chomage_contribution_patronale": {
+        "libelle": "Taux de la contribution patronale d'assurance chômage ({reference} % depuis le 1er mai 2025)",
+        "valeur": "{valeur} pt",
+        "explication": "L'employeur paie une contribution d'assurance chômage sur les salaires, en plus du salaire brut. Elle finance les allocations versées aux demandeurs d'emploi. Ce curseur change son taux. Vers la droite, les recettes de l'assurance chômage augmentent, et le coût du travail aussi."
+      },
+      "chomage_revalorisation": {
+        "libelle": "Revalorisation des allocations chômage au 1er juillet, par rapport à celle décidée ({reference} milliards d'euros d'allocations prévus pour 2026)",
+        "valeur": "{valeur} pt",
+        "explication": "Chaque année, les partenaires sociaux qui gèrent l'assurance chômage peuvent revaloriser les allocations au 1er juillet. Ce curseur ajoute ou retire des points à cette revalorisation, une fois. Elle touche surtout les personnes déjà indemnisées : son coût est le plus fort les deux premières années, puis il ne reste que la partie fixe de l'allocation, qui profite aussi aux nouveaux inscrits."
+      },
+      "chomage_duree_indemnisation": {
+        "libelle": "Durée d'indemnisation du chômage, en pourcentage de la durée de référence ({reference} % depuis la réforme de 2023)",
+        "valeur": "{valeur} pt",
+        "explication": "La durée pendant laquelle un demandeur d'emploi est indemnisé dépend de la durée de son emploi passé, multipliée par un coefficient : 75 % depuis 2023 (100 % avant). Ce curseur change ce pourcentage. Vers la droite, les droits sont plus longs et la dépense augmente ; vers la gauche, ils sont plus courts. L'effet monte en charge sur trois à quatre ans, comme après la réforme de 2023."
       }
     },
     "limite_tva_accise": "La hausse de l'accise augmente aussi la TVA payée sur le carburant : cet effet n'est pas compté.",
@@ -404,6 +419,7 @@
     },
     "bloque_retraites": "Réglage impossible tant que l'autre levier de départ à la retraite est modifié : les deux mesurent le même effet.",
     "methode_retraites_age_legal": "Âge légal de départ (modèle par cohortes) : avec la population projetée par l'Insee et les taux de retraités par âge de la DREES, un an de plus sur l'âge légal améliore le solde des administrations publiques d'environ {effet} point de PIB une fois la mesure en place (moindres pensions et prélèvements sur ceux qui restent en emploi). L'écart est atteint génération par génération, en {duree} ans pour un an. Les prestations versées à ceux qui restent sans emploi ne sont pas comptées.",
+    "methode_assurance_chomage": "Assurance chômage (première étape, chiffrages de l'Unédic) : un point de contribution patronale rapporte {point} milliards d'euros par an ; un point de revalorisation des allocations coûte {revalorisation} milliard d'euros la première année pleine ; passer de 75 % à 80 % le coefficient appliqué à la durée coûte {duree} milliard d'euros par an une fois l'effet atteint. Les versements de l'assurance chômage à France Travail et aux retraites complémentaires restent entre administrations publiques et ne changent pas leur solde.",
     "en_savoir_plus": "À quoi sert ce curseur ?"
   },
   "partage": {

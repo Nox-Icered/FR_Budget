@@ -93,3 +93,10 @@ leviers:
     moteur: structurel
     references_visees: [Rapport annuel du COR de juin 2026 (figure 2.24 et tableau 2.10), Cour des comptes]
     statut: beta
+
+  - id: assurance_chomage
+    libelle: Assurance chômage (première étape, leviers agrégés)
+    parametres_reglables: [Taux de la contribution patronale d'assurance chômage, Revalorisation des allocations, Coefficient appliqué à la durée d'indemnisation]
+    moteur: agrege
+    references_visees: [Prévisions financières et études d'impact de l'Unédic, Cour des comptes, DARES]
+    statut: beta

@@ -201,7 +201,7 @@ th.groupe {
   display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px;
 }
 .resume-mobile span { display: block; font-size: 0.8rem; color: var(--discret); }
-.resume-mobile strong { font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.resume-mobile strong { font-size: 0.95rem; font-variant-numeric: tabular-nums; }
 .resume-mobile a {
   grid-column: 1 / -1; text-align: center; padding: 10px; border-radius: 10px;
   background: var(--accent); color: var(--fond); font-weight: 600; text-decoration: none;

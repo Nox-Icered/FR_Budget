@@ -432,8 +432,8 @@
     "nombre_mesures": "{nombre} mesure(s)",
     "remise_a_zero": "Tout remettre à zéro",
     "resultat": "Résultat",
-    "resume_solde": "Solde public en {annee}",
-    "resume_solde_detail": "écart en points de PIB ({bas} à {haut})",
+    "resume_solde": "Écart de solde primaire en {annee}",
+    "resume_solde_detail": "point de PIB, par rapport à la trajectoire sans mesure ({bas} à {haut})",
     "resume_dette": "Dette en {annee}",
     "resume_dette_detail": "% du PIB ({bas} à {haut}) ; sans mesure : {sans} %",
     "voir_resultat": "Voir le graphique et le détail",
@@ -476,7 +476,9 @@
         "titre": "Budget des missions de l'État",
         "description": "éducation, défense, santé…, avec une aide au chiffrage"
       }
-    }
+    },
+    "resume_mobile_solde": "{central} pt de PIB ({bas} à {haut})",
+    "resume_mobile_dette": "{central} % du PIB ({bas} à {haut})"
   },
   "partage": {
     "scenario": "Scénario",

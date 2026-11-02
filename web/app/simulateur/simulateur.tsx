@@ -423,11 +423,23 @@ function SimulateurCharge({
       <div className="resume-mobile" aria-hidden="true">
         <div>
           <span>{texte("simulateur.resume_solde", { annee: derniere.annee })}</span>
-          <strong>{ecart(derniere.ecart_solde_primaire.central)}</strong>
+          <strong>
+            {texte("simulateur.resume_mobile_solde", {
+              central: ecart(derniere.ecart_solde_primaire.central),
+              bas: ecart(derniere.ecart_solde_primaire.bas),
+              haut: ecart(derniere.ecart_solde_primaire.haut),
+            })}
+          </strong>
         </div>
         <div>
           <span>{texte("simulateur.resume_dette", { annee: derniere.annee })}</span>
-          <strong>{nombre(derniere.dette.central)} %</strong>
+          <strong>
+            {texte("simulateur.resume_mobile_dette", {
+              central: nombre(derniere.dette.central),
+              bas: nombre(derniere.dette.bas),
+              haut: nombre(derniere.dette.haut),
+            })}
+          </strong>
         </div>
         <a href="#resultat" tabIndex={-1}>
           {texte("simulateur.voir_resultat")}

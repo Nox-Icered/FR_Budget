@@ -15,7 +15,7 @@ salarié). Aucun chiffre nouveau : tous les montants sont des variables d'OpenFi
 (176.1.2) calculées pour la cascade des ménages types (``fr_budget.menages.types``). Les
 regroupements par risque suivent la formule de ``cotisations_employeur`` d'OpenFisca-France
 (``openfisca_france/model/prelevements_obligatoires/prelevements_sociaux/cotisations_sociales/
-travail_prive.py``) ; « autres » reçoit le reste (APEC, prévoyance des cadres, dialogue
+travail_prive.py``) ; « autres_cotisations » reçoit le reste (APEC, prévoyance des cadres, dialogue
 social…), qui est vérifié positif.
 
 Allègements : la différence entre les cotisations patronales au taux plein (``mmid_employeur``,
@@ -117,7 +117,7 @@ def _employeur(total, c: types.CascadeMenage) -> Etape:  # type: ignore[no-untyp
     brutes = {k: -sum(total(v) for v in vs) for k, vs in PATRONALES.items()}
     nettes_taux = sum(total(net) - total(plein) for plein, net in ALLEGEMENTS_TAUX)
     toutes = -total("cotisations_employeur") + nettes_taux
-    brutes["autres"] = _reste(toutes, brutes, "cotisations patronales")
+    brutes["autres_cotisations"] = _reste(toutes, brutes, "cotisations patronales")
     allegements = nettes_taux + total("allegement_general") + total("exonerations")
     return Etape(
         "employeur",
@@ -130,7 +130,7 @@ def _salarie(total, c: types.CascadeMenage) -> Etape:  # type: ignore[no-untyped
     exonerations = sum(total(v) for v in EXONERATIONS_SALARIALES)
     brutes = {k: -sum(total(v) for v in vs) for k, vs in SALARIALES.items()}
     toutes = -total("cotisations_salariales") + exonerations
-    brutes["autres"] = _reste(toutes, brutes, "cotisations salariales")
+    brutes["autres_cotisations"] = _reste(toutes, brutes, "cotisations salariales")
     return Etape(
         "salarie",
         _positifs({"salaire_brut": c.salaire_brut, "exonerations_salariales": exonerations}),

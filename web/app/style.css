@@ -236,4 +236,6 @@ th.groupe {
 .sankey .flux-emploi { fill: var(--serie-2); }
 .sankey .noeud { fill-opacity: 1; }
 .sankey .noeud-centre { fill: var(--texte); }
+.etape-flux { margin: 1rem 0; }
+.etape-flux figcaption { font-weight: 600; margin-bottom: 0.25rem; }
 .etiquette-sankey { font-size: 13px; fill: var(--texte); }

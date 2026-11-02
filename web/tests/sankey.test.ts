@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { miseEnPage, regrouper } from "../lib/sankey.ts";
+import { espacer, miseEnPage, regrouper } from "../lib/sankey.ts";
 
 const ressources = [
   { id: "a", libelle: "A", montant: 60 },
@@ -31,4 +31,9 @@ test("chaque côté du diagramme a la hauteur de la barre centrale, sans recouvr
   // Les liens remplissent la barre centrale de haut en bas, sans trou.
   const fin = m.liensDroite.at(-1)!;
   assert.ok(Math.abs(fin.y0 + fin.epaisseur - (m.centre.y + m.centre.hauteur)) < 1e-9);
+});
+
+test("espacer : étiquettes trop proches repoussées vers le bas, les autres inchangées", () => {
+  assert.deepEqual(espacer([10, 100, 105, 108], 15), [10, 100, 115, 130]);
+  assert.deepEqual(espacer([0, 50], 15), [0, 50]);
 });

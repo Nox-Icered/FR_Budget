@@ -80,12 +80,19 @@ function AideNiches({
         {niches.slice(0, NICHES_LISTEES).map((d) => (
           <li key={d.code}>
             <strong>
-              {texte("simulateur.depenses_fiscales.aide_niche", {
-                code: d.code,
-                libelle: d.libelle,
-                cout: millions.format(d.cout * 1000),
-                part: pourcent.format((100 * d.cout) / total),
-              })}
+              {texte(
+                d.annee_chiffrage === annee
+                  ? "simulateur.depenses_fiscales.aide_niche"
+                  : "simulateur.depenses_fiscales.aide_niche_reprise",
+                {
+                  code: d.code,
+                  libelle: d.libelle,
+                  cout: millions.format(d.cout * 1000),
+                  part: pourcent.format((100 * d.cout) / total),
+                  annee,
+                  annee_chiffrage: d.annee_chiffrage,
+                },
+              )}
             </strong>
             {d.fiche?.finalite && (
               <span className="source">
@@ -117,11 +124,17 @@ function AideNiches({
         onChange={(e) => setReduction(Math.min(100, Math.max(0, Number(e.target.value) || 0)))}
       />
       <p aria-live="polite">
-        {texte("simulateur.depenses_fiscales.aide_resultat", {
-          montant: millions.format((niche.cout * 1000 * reduction) / 100),
-          annee,
-          equivalent: pourcent.format(equivalent),
-        })}
+        {texte(
+          niche.annee_chiffrage === annee
+            ? "simulateur.depenses_fiscales.aide_resultat"
+            : "simulateur.depenses_fiscales.aide_resultat_repris",
+          {
+            montant: millions.format((niche.cout * 1000 * reduction) / 100),
+            annee,
+            annee_chiffrage: niche.annee_chiffrage,
+            equivalent: pourcent.format(equivalent),
+          },
+        )}
       </p>
       <div className="actions">
         <button
@@ -337,6 +350,8 @@ export function ReglagesDepensesFiscales({
                   disabled={couverte}
                   onClick={() => {
                     setParDepense({ ...parDepense, [d.code]: 0 });
+                    // Rouvre le bloc de l'impôt, même refermé plus tôt, pour montrer le curseur.
+                    setOuverts((o) => ({ ...o, [d.impot]: true }));
                     setRequete("");
                   }}
                 >

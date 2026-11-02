@@ -316,9 +316,11 @@
       "aide_titre": "Aide au chiffrage : les niches de cet impôt",
       "aide_intro": "Coût prévu pour {annee} par l'administration : les {nombre} niches les plus coûteuses de cet impôt sur {total}, avec leur part du total. Choisissez ensuite une niche et une réduction : vous obtenez ce qu'elle coûte et l'équivalent pour toutes les niches de l'impôt.",
       "aide_niche": "{code} – {libelle} : {cout} millions d'euros ({part} % des niches de l'impôt)",
+      "aide_niche_reprise": "{code} – {libelle} : {cout} millions d'euros, montant de {annee_chiffrage} repris faute de chiffrage pour {annee} ({part} % des niches de l'impôt)",
       "aide_choix": "Niche",
       "aide_reduction": "Réduction de cette niche, en %",
       "aide_resultat": "Coût prévu pour {annee} de cette part de la niche : {montant} millions d'euros. Équivaut à réduire de {equivalent} % toutes les niches de l'impôt.",
+      "aide_resultat_repris": "Coût de cette part de la niche, sur le montant de {annee_chiffrage} repris faute de chiffrage pour {annee} : {montant} millions d'euros. Équivaut à réduire de {equivalent} % toutes les niches de l'impôt.",
       "aide_regler_niche": "Régler cette niche seule à {valeur} %",
       "aide_regler_impot": "Régler toutes les niches de l'impôt à {valeur} %",
       "aide_limite": "Le coût d'une niche n'est pas exactement ce que rapporterait sa suppression : l'administration ne tient compte ni des changements de comportement ni des interactions entre niches."

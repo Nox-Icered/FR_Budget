@@ -32,3 +32,5 @@ cd moteur && uv run python -m fr_budget.registres.verification
 - `direct` : document primaire consulté.
 - `recherche_web` : cité d'après des résultats de recherche, à confirmer sur le document primaire.
 - `paquet` : logiciel installé (OpenFisca, modèle Urssaf).
+
+Liste de relecture : `python outils/liste_relecture.py` produit `docs/validation/liste_relecture.md`, la liste à cocher des chiffrages encore « à relire » (par levier, entrées du calcul d'abord) et des hypothèses.

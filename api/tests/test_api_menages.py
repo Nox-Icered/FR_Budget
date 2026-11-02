@@ -285,3 +285,14 @@ def test_mon_menage_avec_scenario(client: TestClient, caplog: pytest.LogCaptureF
 def test_mon_menage_scenario_refuse(client: TestClient, scenario: dict[str, object]) -> None:
     corps = {**MENAGE_SAISI, "scenario": scenario}
     assert client.post("/mon-menage", json=corps).status_code == 422
+
+
+def test_flux_des_menages_types(client: TestClient) -> None:
+    """Chaque ménage type porte ses étapes équilibrées, la dernière menant au revenu après
+    impôt de la cascade."""
+    for m in client.get("/menages-types").json()["menages"]:
+        etapes = m["flux"]
+        for e in etapes:
+            assert sum(e["entrees"].values()) == pytest.approx(sum(e["sorties"].values()), abs=0.05)
+        assert etapes[-1]["id"] == "impot"
+        assert etapes[-1]["sorties"]["net_apres_impot"] == pytest.approx(m["net_apres_impot"])

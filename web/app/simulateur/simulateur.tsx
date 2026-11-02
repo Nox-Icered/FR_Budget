@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState, type SyntheticEvent } from "react";
 import { texte, nombre } from "../../lib/textes";
 import type {
+  Baseline,
   CatalogueCreditsMissions,
   CatalogueDepensesFiscales,
   DepenseMenages,
@@ -45,11 +46,13 @@ function SimulateurCharge({
   catalogue,
   missions,
   raccord,
+  commission,
   version,
   entreprises,
   depense,
 }: {
   donnees: ReponsesUnitaires;
+  commission: Baseline["commission"];
   catalogue: CatalogueDepensesFiscales;
   missions: CatalogueCreditsMissions;
   raccord: number;
@@ -387,6 +390,18 @@ function SimulateurCharge({
               libelle: texte("simulateur.sans_mesure"),
               valeurs: donnees.base_dette[0],
             }}
+            legende={texte("simulateur.legende_avec")}
+            comparaison={{
+              libelle: texte("baseline.commission"),
+              prolongement: texte("baseline.commission_prolongement", {
+                annee: commission.derniere_annee_publiee,
+              }),
+              points: commission.valeurs.map((v) => ({
+                annee: v.annee,
+                publiee: v.publiee,
+                ...v.dette,
+              })),
+            }}
             libelles={{
               titre: texte("simulateur.graphique_titre"),
               bas: texte("baseline.bas"),
@@ -504,6 +519,7 @@ export function Simulateur(props: {
   catalogue: CatalogueDepensesFiscales;
   missions: CatalogueCreditsMissions;
   raccord: number;
+  commission: Baseline["commission"];
   version: Version;
   entreprises: Entreprises;
   depense: DepenseMenages;

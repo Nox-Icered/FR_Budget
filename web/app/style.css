@@ -211,3 +211,17 @@ th.groupe {
   .simulateur-resultat { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto; }
   .resume-mobile { display: none; }
 }
+
+/* Courbe de comparaison (Commission européenne) : deuxième série, orange (bleu et orange se
+   distinguent aussi en clarté). Pointillés pour le prolongement non publié. */
+:root { --serie-2: #c25e00; }
+@media (prefers-color-scheme: dark) { :root { --serie-2: #f0a050; } }
+.graphique .comparaison { fill: none; stroke: var(--serie-2); stroke-width: 2.5; }
+.graphique .comparaison.prolongee { stroke-dasharray: 3 4; }
+.graphique .bande-comparaison { fill: var(--serie-2); fill-opacity: 0.14; }
+.legende { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 0.85rem; color: var(--discret); }
+.legende li { display: flex; align-items: center; gap: 6px; }
+.cle { display: inline-block; width: 24px; height: 0; border-top: 3px solid var(--serie-1); }
+.cle-reference { border-top: 2px dashed var(--discret); }
+.cle-comparaison { border-top-color: var(--serie-2); }
+.cle-prolongee { border-top: 3px dotted var(--serie-2); }

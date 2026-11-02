@@ -25,6 +25,7 @@ from typing import Any, Literal
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fr_budget import baseline as module_baseline
+from fr_budget import baseline_commission as module_baseline_commission
 from fr_budget import croissance as module_croissance
 from fr_budget import retraites as module_retraites
 from fr_budget import scenario as module_scenario
@@ -733,6 +734,20 @@ def serie_baseline() -> dict[str, Any]:
             }
             for ligne in module_baseline.baseline()
         ],
+        # Seconde trajectoire de référence : Commission européenne, à politique inchangée
+        # (publiée jusqu'en 2036, prolongée ensuite ; les leviers ne s'y appliquent pas).
+        "commission": {
+            "source": module_baseline_commission.SOURCE,
+            "hypotheses": [
+                module_baseline_commission.HYPOTHESE_PENTE,
+                module_baseline_commission.HYPOTHESE_ECART,
+            ],
+            "derniere_annee_publiee": module_baseline_commission.annee_derniere_publiee(),
+            "valeurs": [
+                {"annee": a.annee, "publiee": a.publiee, "dette": _fourchette(a.dette)}
+                for a in module_baseline_commission.trajectoire(module_baseline.ANNEE_FIN)
+            ],
+        },
     }
 
 

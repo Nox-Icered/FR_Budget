@@ -34,6 +34,7 @@ export default function PageSimulateur() {
         catalogue={catalogue}
         missions={missions}
         raccord={baseline.annee_raccord}
+        commission={baseline.commission}
         version={version}
         entreprises={entreprises}
         depense={depense}

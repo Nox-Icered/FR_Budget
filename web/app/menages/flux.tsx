@@ -8,13 +8,12 @@ import { region } from "../../lib/region";
 
 const L = 1140;
 const H_MAX = 420;
-const H_MIN = 90;
 const MARGE = 20;
 const ECART = 8;
 const LARGEUR_NOEUD = 14;
-const X_GAUCHE = 330;
-const X_CENTRE = 560;
-const X_DROITE = 790;
+const X_GAUCHE = 320;
+const X_CENTRE = 535;
+const X_DROITE = 750;
 const ESPACE_ETIQUETTES = 16;
 const SEUIL_AUTRES = 0.02;
 // Montants qui passent d'une étape à la suivante (revenus du ménage), mis en avant.
@@ -43,7 +42,7 @@ function flux(montants: Record<string, number>): Flux[] {
 }
 
 function classe(id: string): string {
-  if (PASSAGES.has(id)) return "flux-recette";
+  if (PASSAGES.has(id) || id.startsWith("prestation_")) return "flux-recette";
   if (ALLEGEMENTS.has(id)) return "flux-deficit";
   return "flux-emploi";
 }
@@ -52,7 +51,9 @@ function Etape({ etape, echelle }: { etape: EtapeFlux; echelle: number }) {
   const entrees = flux(etape.entrees);
   const sorties = regrouper(flux(etape.sorties), SEUIL_AUTRES, (n) => texte("menages.flux.autres", { nombre: n }));
   const total = entrees.reduce((s, f) => s + f.montant, 0);
-  const h = Math.max(H_MIN, total * echelle);
+  // Hauteur = bandes à l'échelle commune + écarts entre nœuds : `miseEnPage` retrouve alors
+  // exactement `echelle` euros par pixel, quel que soit le nombre de nœuds de l'étape.
+  const h = total * echelle + ECART * (Math.max(entrees.length, sorties.length) - 1);
   const m = miseEnPage(entrees, sorties, h, ECART);
   const yGauche = espacer(m.gauche.map((n) => n.y + n.hauteur / 2), ESPACE_ETIQUETTES);
   const yDroite = espacer(m.droite.map((n) => n.y + n.hauteur / 2), ESPACE_ETIQUETTES);

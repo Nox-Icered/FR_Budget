@@ -10,6 +10,17 @@ on:
 permissions:
   contents: read
 
+# Un nouveau commit sur la même PR (ou branche) annule l'exécution précédente, devenue inutile.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+# Effets sur les ménages types (une vingtaine de minutes de calcul OpenFisca) : mis en cache
+# entre exécutions. Le fichier porte l'empreinte du code, des registres, des données et des
+# dépendances verrouillées (api/src/fr_budget_api/export.py) ; un cache périmé n'est jamais relu.
+env:
+  FR_BUDGET_CACHE: /home/runner/.cache/fr-budget
+
 jobs:
   donnees-interdites:
     name: Micro-données d'enquête interdites
@@ -49,6 +60,12 @@ jobs:
       - run: uv run ruff check
       - run: uv run ruff format --check
       - run: uv run mypy
+      - name: Cache des effets sur les ménages types
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: /home/runner/.cache/fr-budget
+          key: menages-effets-${{ hashFiles('moteur/src/**', 'api/src/**', 'registres/**', 'data/processed/**', 'moteur/uv.lock', 'api/uv.lock') }}
+          restore-keys: menages-effets-
       - run: uv run pytest
 
   site:
@@ -71,6 +88,12 @@ jobs:
           cache: pnpm
           cache-dependency-path: web/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
+      - name: Cache des effets sur les ménages types
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: /home/runner/.cache/fr-budget
+          key: menages-effets-${{ hashFiles('moteur/src/**', 'api/src/**', 'registres/**', 'data/processed/**', 'moteur/uv.lock', 'api/uv.lock') }}
+          restore-keys: menages-effets-
       - name: Données exportées par l'API
         run: pnpm donnees
       - run: pnpm test

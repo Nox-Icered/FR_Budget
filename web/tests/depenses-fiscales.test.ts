@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
+  equivalentImpot,
   lignesFiche,
   mesuresDepensesFiscales,
   rechercher,
@@ -74,4 +75,11 @@ test("fiche descriptive : champs vides retirés, finalité toujours présente", 
     ["reference", "code général des impôts 156-II-5°"],
   ]);
   assert.deepEqual(lignesFiche(null), []);
+});
+
+test("équivalent pour l'impôt d'une réduction d'une seule niche", () => {
+  // Une niche de 0,5 Md€ dans un impôt de 10 Md€ : la supprimer (100 %) vaut 5 % de l'impôt.
+  assert.equal(equivalentImpot(0.5, 10, 100), 5);
+  assert.equal(equivalentImpot(0.5, 10, 50), 2.5);
+  assert.equal(equivalentImpot(1, 0, 50), 0);
 });

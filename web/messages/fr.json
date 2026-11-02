@@ -310,7 +310,7 @@
         "autres_droits": "Autres droits",
         "impots_locaux": "Impôts locaux"
       },
-      "une_depense": "Une dépense fiscale du catalogue ({nombre} dépenses chiffrées)",
+      "une_depense": "Chercher une dépense fiscale dans tout le catalogue ({nombre} dépenses chiffrées)",
       "recherche": "Chercher par numéro ou par mots du libellé",
       "aucun_resultat": "Aucune dépense fiscale ne correspond.",
       "ajouter": "Ajouter",
@@ -332,7 +332,20 @@
         "mission": "Politique publique concernée (mission et programme du budget)",
         "reference": "Texte de loi",
         "source": "Source : annexe « Voies et moyens », tome II, du projet de loi de finances pour 2026."
-      }
+      },
+      "resume_impot": "{cout} milliards d'euros prévus en {annee} · {nombre} niche(s)",
+      "toutes_niches": "Réduire toutes les niches de cet impôt",
+      "aide_titre": "Aide au chiffrage : les niches de cet impôt",
+      "aide_intro": "Coût prévu pour {annee} par l'administration : les {nombre} niches les plus coûteuses de cet impôt sur {total}, avec leur part du total. Choisissez ensuite une niche et une réduction : vous obtenez ce qu'elle coûte et l'équivalent pour toutes les niches de l'impôt.",
+      "aide_niche": "{code} – {libelle} : {cout} millions d'euros ({part} % des niches de l'impôt)",
+      "aide_niche_reprise": "{code} – {libelle} : {cout} millions d'euros, montant de {annee_chiffrage} repris faute de chiffrage pour {annee} ({part} % des niches de l'impôt)",
+      "aide_choix": "Niche",
+      "aide_reduction": "Réduction de cette niche, en %",
+      "aide_resultat": "Coût prévu pour {annee} de cette part de la niche : {montant} millions d'euros. Équivaut à réduire de {equivalent} % toutes les niches de l'impôt.",
+      "aide_resultat_repris": "Coût de cette part de la niche, sur le montant de {annee_chiffrage} repris faute de chiffrage pour {annee} : {montant} millions d'euros. Équivaut à réduire de {equivalent} % toutes les niches de l'impôt.",
+      "aide_regler_niche": "Régler cette niche seule à {valeur} %",
+      "aide_regler_impot": "Régler toutes les niches de l'impôt à {valeur} %",
+      "aide_limite": "Le coût d'une niche n'est pas exactement ce que rapporterait sa suppression : l'administration ne tient compte ni des changements de comportement ni des interactions entre niches."
     },
     "limite_depenses_fiscales": "Le coût d'une dépense fiscale n'est pas le gain de sa suppression : l'administration précise qu'il ne tient compte ni des changements de comportement ni des interactions entre dépenses, et que la somme de ces coûts n'a pas de réelle signification. Le rendement affiché est le coût officiel, sans correction : pour un impôt entier ou plusieurs dépenses, c'est un ordre de grandeur.",
     "methode_depenses_fiscales": "Dépenses fiscales : le rendement d'une réduction de x % est x % du coût prévu pour {annee} dans le projet de loi de finances pour {annee}, rapporté au PIB de la même année. La fourchette reprend les écarts constatés par le passé entre le coût prévu et le coût réalisé.",

@@ -48,8 +48,18 @@ jobs:
           cache: pnpm
           cache-dependency-path: web/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
+      # Effets sur les ménages types : cache écrit par la CI de main sur le même commit (voir
+      # ci.yml) ; recalculés s'il manque.
+      - name: Cache des effets sur les ménages types
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: /home/runner/.cache/fr-budget
+          key: menages-effets-${{ hashFiles('moteur/src/**', 'api/src/**', 'registres/**', 'data/processed/**', 'moteur/uv.lock', 'api/uv.lock') }}
+          restore-keys: menages-effets-
       - name: Données exportées par l'API
         run: pnpm donnees
+        env:
+          FR_BUDGET_CACHE: /home/runner/.cache/fr-budget
       # Tests sans préfixe, comme en CI : ils vérifient les adresses d'un site à la racine.
       - run: pnpm test
       - name: Construction avec le préfixe de GitHub Pages

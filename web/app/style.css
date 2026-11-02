@@ -226,6 +226,17 @@ th.groupe {
 .cle-comparaison { border-top-color: var(--serie-2); }
 .cle-prolongee { border-top: 3px dotted var(--serie-2); }
 
+/* Diagramme de Sankey du budget de l'État : recettes en bleu, déficit en gris, emplois en
+   orange (couleurs neutres, aucun code « bien / mal »). */
+.sankey svg { display: block; width: 100%; min-width: 820px; height: auto; }
+.sankey .lien { fill-opacity: 0.35; }
+.sankey .lien:hover { fill-opacity: 0.6; }
+.sankey .flux-recette { fill: var(--serie-1); }
+.sankey .flux-deficit { fill: var(--discret); }
+.sankey .flux-emploi { fill: var(--serie-2); }
+.sankey .noeud { fill-opacity: 1; }
+.sankey .noeud-centre { fill: var(--texte); }
+.etiquette-sankey { font-size: 13px; fill: var(--texte); }
 /* Niches fiscales : un bloc dépliable par impôt, comme la liste des missions. */
 .groupe-impot { border-top: 1px solid var(--trait); padding: 4px 0; }
 .groupe-impot > summary {

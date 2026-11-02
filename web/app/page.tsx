@@ -1,5 +1,6 @@
 import { texte, nombre } from "../lib/textes";
-import { lire, type ComptesApu, type Cofog } from "../lib/donnees";
+import { lire, type BudgetEtat, type ComptesApu, type Cofog } from "../lib/donnees";
+import { BudgetEtatSankey } from "./budget-etat";
 import { region } from "../lib/region";
 import { chemin } from "../lib/chemin";
 
@@ -7,6 +8,7 @@ import { chemin } from "../lib/chemin";
 export default function Accueil() {
   const comptes = lire<ComptesApu>("comptes-apu.json");
   const cofog = lire<Cofog>("cofog.json");
+  const budget = lire<BudgetEtat>("budget-etat.json");
   const { sous_secteurs, indicateurs, series } = comptes;
   const derniere = Math.max(...series.S13.dette_maastricht.valeurs.map((p) => p.annee));
   const divisions = cofog.valeurs.filter((v) => /^GF\d{2}$/.test(v.cofog));
@@ -15,6 +17,7 @@ export default function Accueil() {
     <>
       <h1>{texte("accueil.titre")}</h1>
       <p>{texte("accueil.intro")}</p>
+      <BudgetEtatSankey budget={budget} />
       <h2>{texte("accueil.annee", { annee: derniere })}</h2>
       {sous_secteurs.map((secteur) => (
         <section key={secteur}>

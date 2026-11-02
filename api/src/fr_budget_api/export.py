@@ -26,6 +26,7 @@ from fr_budget.registres.verification import RACINE_DEPOT
 
 from fr_budget_api.app import (
     REGISTRES,
+    budget_etat,
     catalogue_credits_missions,
     catalogue_depenses_fiscales,
     depense_menages,
@@ -122,6 +123,7 @@ def exporter(dossier: Path) -> None:
     )
     derniere_annee = max(a for a, s, _ in depenses_par_fonction() if s == "S13")
     _ecrire(dossier, "cofog.json", depenses_fonctions(derniere_annee, "S13"))
+    _ecrire(dossier, "budget-etat.json", budget_etat())
     _ecrire(dossier, "validation.json", resume_validation())
     _ecrire(dossier, "baseline.json", serie_baseline())
     _ecrire(dossier, "depenses-fiscales.json", catalogue_depenses_fiscales())

@@ -225,3 +225,16 @@ th.groupe {
 .cle-reference { border-top: 2px dashed var(--discret); }
 .cle-comparaison { border-top-color: var(--serie-2); }
 .cle-prolongee { border-top: 3px dotted var(--serie-2); }
+
+/* Niches fiscales : un bloc dépliable par impôt, comme la liste des missions. */
+.groupe-impot { border-top: 1px solid var(--trait); padding: 4px 0; }
+.groupe-impot > summary {
+  list-style: none; cursor: pointer; display: flex; flex-wrap: wrap; align-items: center;
+  gap: 4px 12px; padding: 10px 0; min-height: 44px;
+}
+.groupe-impot > summary::-webkit-details-marker { display: none; }
+.groupe-impot > summary::after { content: "▾"; color: var(--discret); margin-left: auto; }
+.groupe-impot[open] > summary::after { content: "▴"; }
+.groupe-impot > .reglage, .groupe-impot > .explication { margin-left: 4px; }
+.liste-niches { padding-left: 18px; display: grid; gap: 6px; }
+.liste-niches .source { display: block; }

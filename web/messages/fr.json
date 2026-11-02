@@ -49,7 +49,29 @@
     "fonctions_titre": "Dépenses par fonction en {annee}",
     "fonction": "Fonction",
     "montant": "Montant",
-    "mention_eurostat": "Données Eurostat converties en milliards d'euros par ce site. L'usage qui en est fait n'engage pas Eurostat."
+    "mention_eurostat": "Données Eurostat converties en milliards d'euros par ce site. L'usage qui en est fait n'engage pas Eurostat.",
+    "budget_etat": {
+      "titre": "Le budget de l'État en {annee} : d'où vient l'argent, où il va",
+      "intro": "Projet de loi de finances : {total} milliards d'euros. À gauche, les ressources : impôts (nets des remboursements), autres recettes et, pour le reste, l'emprunt qui couvre le déficit. À droite, l'argent reversé aux collectivités et à l'Union européenne, puis les dépenses de chaque mission du budget de l'État.",
+      "aria": "Diagramme des ressources et des dépenses du budget de l'État ; les montants figurent dans le tableau qui suit.",
+      "lecture": "Montants en milliards d'euros. La largeur de chaque bande est proportionnelle au montant. Budget général de l'État seulement : sans la Sécurité sociale, les collectivités elles-mêmes, ni les comptes spéciaux (dont les pensions des fonctionnaires, payées par les missions). « Engagements financiers de l'État » comprend la charge de la dette.",
+      "tableau": "Voir tous les montants",
+      "poste": "Poste",
+      "ressources": "Ressources",
+      "emplois": "Emplois",
+      "autres_missions": "Autres missions ({nombre})",
+      "postes": {
+        "impot_revenu": "Impôt sur le revenu",
+        "tva": "TVA",
+        "impot_societes": "Impôt sur les sociétés",
+        "accises_energies": "Accises sur les énergies",
+        "autres_impots": "Autres impôts",
+        "recettes_non_fiscales": "Recettes non fiscales",
+        "deficit": "Déficit couvert par l'emprunt",
+        "prelevement_collectivites": "Reversé aux collectivités",
+        "prelevement_union_europeenne": "Reversé à l'Union européenne"
+      }
+    }
   },
   "sources": {
     "titre": "Sources",

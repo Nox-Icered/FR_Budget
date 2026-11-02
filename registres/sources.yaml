@@ -975,3 +975,12 @@ sources:
     millesime: février 2026 (prévision d'automne 2025 de la Commission, projection à politique inchangée 2026-2036)
     acces: direct
     consulte_le: 2026-11-02
+
+  - id: plf2026_projet_loi
+    nom: Projet de loi de finances pour 2026, n° 1906, déposé à l'Assemblée nationale le 14 octobre 2025 (article 48 « Équilibre général du budget » et état B)
+    editeur: Gouvernement (document publié par l'Assemblée nationale)
+    url: https://www.assemblee-nationale.fr/dyn/17/textes/l17b1906_projet-loi.pdf
+    licence: Licence Ouverte 2.0
+    millesime: PLF 2026
+    acces: direct
+    consulte_le: 2026-11-02

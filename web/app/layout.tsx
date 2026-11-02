@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { texte } from "../lib/textes";
 import { lire, type Version } from "../lib/donnees";
+import { Navigation } from "./navigation";
 import "./style.css";
 
 export const metadata = {
@@ -19,20 +20,17 @@ export default function Gabarit({ children }: { children: ReactNode }) {
           <p className="avertissement" role="note">
             {texte("site.avertissement")}
           </p>
-          <nav aria-label={texte("site.titre")}>
-            <Link href="/">{texte("navigation.accueil")}</Link>
-            <Link href="/baseline/">{texte("navigation.baseline")}</Link>
-            <Link href="/simulateur/">{texte("navigation.simulateur")}</Link>
-            <Link href="/comparaison/">{texte("navigation.comparaison")}</Link>
-            <Link href="/menages/">{texte("navigation.menages")}</Link>
-            <Link href="/mon-menage/">{texte("navigation.mon_menage")}</Link>
-            <Link href="/entreprises/">{texte("navigation.entreprises")}</Link>
-            <Link href="/sources/">{texte("navigation.sources")}</Link>
-            <Link href="/hypotheses/">{texte("navigation.hypotheses")}</Link>
-            <Link href="/validation/">{texte("navigation.validation")}</Link>
-            <Link href="/journal/">{texte("navigation.journal")}</Link>
-            <Link href="/relectures/">{texte("navigation.relectures")}</Link>
-          </nav>
+          <div className="entete">
+            <Link href="/" className="marque">
+              <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+                <rect x="2" y="14" width="5" height="12" rx="1" className="marque-1" />
+                <rect x="11" y="8" width="5" height="18" rx="1" className="marque-2" />
+                <rect x="20" y="3" width="5" height="23" rx="1" className="marque-3" />
+              </svg>
+              <span>{texte("site.titre")}</span>
+            </Link>
+            <Navigation />
+          </div>
         </header>
         <main>{children}</main>
         <footer>

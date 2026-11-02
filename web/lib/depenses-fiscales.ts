@@ -56,3 +56,9 @@ export function lignesFiche(fiche: FicheDepense | null | undefined): [string, st
   ];
   return lignes.filter(([cle, v]) => cle === "finalite" || v !== "");
 }
+
+// Aide au chiffrage : réduire de x % une dépense fiscale de coût c équivaut à réduire de
+// x * c / total % toutes les dépenses de son impôt (coût total), les autres ne changeant pas.
+export function equivalentImpot(coutNiche: number, coutImpot: number, reduction: number): number {
+  return coutImpot > 0 ? (reduction * coutNiche) / coutImpot : 0;
+}

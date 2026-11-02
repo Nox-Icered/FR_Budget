@@ -15,7 +15,7 @@ datasets:
     description: Voies et Moyens tome I du PLF 2026 (PDF, 102 pages)
     fichier: data/raw/tva/plf2026_voies_et_moyens_tome1.pdf
     empreinte_sha256: 4703605df8bfd1b4a20b1889839ebc1ea5a9b434eb4460eb2b40749e107371a0
-    methode_transformation: valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml ; pipelines/dotations_collectivites/extraire_psr.py → data/processed/dotations_collectivites/psr_collectivites.csv
+    methode_transformation: valeurs lues dans le document et saisies dans registres/references/chiffrages.yaml ; pipelines/dotations_collectivites/extraire_psr.py → data/processed/dotations_collectivites/psr_collectivites.csv ; pipelines/budget_etat/extraire_plf2026.py → data/processed/budget_etat/recettes_2026.csv (recettes par impôt et prélèvements sur recettes, PLF 2026)
     telecharge_le: 2026-10-07
 
   - id: plf2025_voies_et_moyens_tome1_pdf
@@ -969,4 +969,12 @@ datasets:
     fichier: data/raw/baseline/commission_europeenne/dsm_2025_country_fiches_tables_and_graphs.xlsx
     empreinte_sha256: 2b0486b13dd7c779faf5b117dc04f15dfae74689cb19fec4276ffd7e36b8aafb
     methode_transformation: pipelines/baseline/extraire_dsm.py → data/processed/baseline/ce_dsm_2025_france_scenarios.csv (onglet FR, dette des quatre scénarios déterministes 2024-2036, arrondie au dixième ; le scénario central doit redonner le tableau du rapport)
+    telecharge_le: 2026-11-02
+
+  - id: plf2026_projet_loi_pdf
+    source: plf2026_projet_loi
+    description: Projet de loi de finances pour 2026, n° 1906 (PDF, 336 pages)
+    fichier: data/raw/budget_etat/plf2026_projet_loi_1906.pdf
+    empreinte_sha256: 962968a48461631f0c4fa8cd2761946a26cde37efc23922e1f5242eb41b861aa
+    methode_transformation: pipelines/budget_etat/extraire_plf2026.py → data/processed/budget_etat/equilibre_2026.csv (article 48) et missions_2026.csv (état B, crédits de paiement par mission, remboursements et dégrèvements d'impôts d'État retirés) ; avec le tome I des Voies et moyens → recettes_2026.csv
     telecharge_le: 2026-11-02

@@ -313,3 +313,11 @@ export type DepenseMenages = {
     source: string;
   }[];
 };
+
+export type BudgetEtat = {
+  annee: number;
+  sources: string[];
+  unite: string;
+  ressources: { id: string; libelle: string | null; montant: number }[];
+  emplois: { id: string; libelle: string | null; montant: number }[];
+};

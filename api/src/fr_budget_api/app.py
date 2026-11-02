@@ -26,6 +26,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fr_budget import baseline as module_baseline
 from fr_budget import baseline_commission as module_baseline_commission
+from fr_budget import budget_etat as module_budget_etat
 from fr_budget import croissance as module_croissance
 from fr_budget import retraites as module_retraites
 from fr_budget import scenario as module_scenario
@@ -126,6 +127,26 @@ def serie_comptes(sous_secteur: str, indicateur: str) -> dict[str, Any] | None:
         "sous_secteur": sous_secteur,
         "indicateur": indicateur,
         "valeurs": valeurs,
+    }
+
+
+def budget_etat() -> dict[str, Any]:
+    """Ressources et emplois du budget de l'État (projet de loi de finances), pour le
+    diagramme de la page d'accueil (``fr_budget.budget_etat``)."""
+    b = module_budget_etat.budget()
+
+    def flux(liste: list[Any]) -> list[dict[str, Any]]:
+        return [
+            {"id": f.identifiant, "libelle": f.libelle, "montant": round(f.montant, 3)}
+            for f in liste
+        ]
+
+    return {
+        "annee": b.annee,
+        "sources": list(module_budget_etat.SOURCES),
+        "unite": "Md€",
+        "ressources": flux(b.ressources),
+        "emplois": flux(b.emplois),
     }
 
 

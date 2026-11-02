@@ -11,22 +11,22 @@ Pour chaque ligne : ouvrir le document à la page indiquée, vérifier la valeur
 | Levier ou module | À relire | Entrées du calcul |
 |---|---|---|
 | [tva](#tva) | 28 | 2 |
-| [impot_revenu](#impot-revenu) | 37 | 37 |
-| [impot_societes](#impot-societes) | 6 | 1 |
+| [impot_revenu](#impot_revenu) | 37 | 37 |
+| [impot_societes](#impot_societes) | 6 | 1 |
 | [csg](#csg) | 34 | 26 |
-| [cotisations_patronales](#cotisations-patronales) | 14 | 12 |
-| [accises_energie](#accises-energie) | 14 | 9 |
-| [depenses_fiscales](#depenses-fiscales) | 19 | 0 |
-| [credits_missions](#credits-missions) | 3 | 0 |
-| [remunerations_publiques](#remunerations-publiques) | 37 | 24 |
-| [indexation_pensions_prestations](#indexation-pensions-prestations) | 12 | 1 |
-| [minima_prime_activite](#minima-prime-activite) | 5 | 4 |
-| [dotations_collectivites](#dotations-collectivites) | 5 | 1 |
+| [cotisations_patronales](#cotisations_patronales) | 14 | 12 |
+| [accises_energie](#accises_energie) | 14 | 9 |
+| [depenses_fiscales](#depenses_fiscales) | 19 | 0 |
+| [credits_missions](#credits_missions) | 3 | 0 |
+| [remunerations_publiques](#remunerations_publiques) | 37 | 24 |
+| [indexation_pensions_prestations](#indexation_pensions_prestations) | 12 | 1 |
+| [minima_prime_activite](#minima_prime_activite) | 5 | 4 |
+| [dotations_collectivites](#dotations_collectivites) | 5 | 1 |
 | [retraites](#retraites) | 6 | 0 |
-| [assurance_chomage](#assurance-chomage) | 27 | 20 |
+| [assurance_chomage](#assurance_chomage) | 27 | 20 |
 | [croissance](#croissance) | 11 | 0 |
-| [dynamique_dette](#dynamique-dette) | 12 | 7 |
-| [menages_types](#menages-types) | 66 | 42 |
+| [dynamique_dette](#dynamique_dette) | 12 | 7 |
+| [menages_types](#menages_types) | 66 | 42 |
 
 ## tva
 

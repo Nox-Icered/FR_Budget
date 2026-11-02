@@ -126,7 +126,7 @@ def main() -> int:
     ]
     for lv in ordre:
         n_entree = sum(usages[c["id"]] == ENTREE for c in par_levier[lv])
-        lignes.append(f"| [{lv}](#{lv.replace('_', '-')}) | {len(par_levier[lv])} | {n_entree} |")
+        lignes.append(f"| [{lv}](#{lv}) | {len(par_levier[lv])} | {n_entree} |")
     lignes.append("")
 
     for lv in ordre:

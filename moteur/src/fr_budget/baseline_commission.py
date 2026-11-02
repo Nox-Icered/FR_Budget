@@ -10,8 +10,9 @@ la prévision du Gouvernement (``fr_budget.baseline``) ; les leviers ne s'y appl
 - après 2036 : prolongement linéaire, qui n'est pas une projection de la Commission (hypothèse
   ``baseline_commission_prolongement_pente``) ;
 - fourchette : de la projection centrale au plus élevé des quatre scénarios déterministes de la
-  Commission, écart croissant linéairement de 0 en 2026 à sa valeur publiée de 2036 (hypothèse
-  ``baseline_commission_ecart_scenarios``).
+  Commission, année par année jusqu'en 2036 (fichier de données de la fiche France,
+  ``ce_dsm_2025_france_scenarios.csv``) ; après 2036, l'écart publié en 2036 continue de croître au
+  même rythme moyen (hypothèse ``baseline_commission_ecart_scenarios``).
 """
 
 from __future__ import annotations
@@ -27,13 +28,14 @@ from fr_budget.registres.verification import RACINE_DEPOT
 DOSSIER = RACINE_DEPOT / "data" / "processed" / "baseline"
 FICHIER = DOSSIER / "ce_dsm_2025_france.csv"
 FICHIER_SCENARIOS = DOSSIER / "ce_dsm_2025_france_scenarios_2036.csv"
+FICHIER_SCENARIOS_ANNUELS = DOSSIER / "ce_dsm_2025_france_scenarios.csv"
 HYPOTHESE_PENTE = "baseline_commission_prolongement_pente"
 HYPOTHESE_ECART = "baseline_commission_ecart_scenarios"
 SOURCE = "ce_dsm_2025"
 ANNEE_DEBUT = 2025
-ANNEE_SANS_ECART = 2026
-"""Les scénarios déterministes de la Commission s'écartent de la projection centrale à partir
-de 2027 : l'écart est nul en 2026."""
+ANNEE_SANS_ECART = 2025
+"""Dernière année observée : les scénarios déterministes de la Commission s'écartent de la
+projection centrale à partir de 2026 (fichier de données de la fiche France)."""
 
 
 @dataclass(frozen=True)
@@ -56,6 +58,13 @@ def scenarios_2036() -> dict[str, float]:
     """Dette en 2036 des cinq scénarios déterministes publiés, en % du PIB."""
     with FICHIER_SCENARIOS.open(encoding="utf-8") as f:
         return {r["scenario"]: float(r["dette_2036"]) for r in csv.DictReader(f)}
+
+
+@cache
+def plus_haut_publie() -> dict[int, float]:
+    """Dette la plus élevée des quatre scénarios déterministes publiés, par année."""
+    with FICHIER_SCENARIOS_ANNUELS.open(encoding="utf-8") as f:
+        return {int(r.pop("annee")): max(float(v) for v in r.values()) for r in csv.DictReader(f)}
 
 
 def annee_derniere_publiee() -> int:
@@ -89,7 +98,7 @@ def trajectoire(annee_fin: int) -> list[AnneeCommission]:
         ecart = rythme_ecart * max(0, annee - ANNEE_SANS_ECART)
         if annee <= fin:
             central = s[annee]
-            bas, haut = central, central + ecart
+            bas, haut = central, max(central, plus_haut_publie()[annee])
         else:
             n = annee - fin
             central = s[fin] + n * pente.valeur_centrale

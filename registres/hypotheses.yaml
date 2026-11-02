@@ -802,14 +802,13 @@ hypotheses:
       haute: 11.6
     sources: [ce_dsm_2025]
     justification: >-
-      La Commission publie la dette de 2036 de quatre scénarios déterministes autour de sa
-      projection centrale (144,0 % du PIB) : solde primaire structurel à sa moyenne historique
-      (146,1), solde primaire plus bas (148,9), écart taux-croissance défavorable (155,6) et
-      tension financière (146,7) (fiche France, tableau « Overview of key fiscal sustainability
-      risks »). Tous sont au-dessus de la projection centrale : la borne basse est la projection
-      centrale, la borne haute le scénario le plus élevé (11,6 points de plus en 2036). Les
-      trajectoires année par année de ces scénarios ne sont publiées qu'en graphique (le fichier
-      de données de la Commission n'a pas pu être téléchargé depuis l'environnement de travail) :
-      l'écart est supposé croître linéairement de 0 en 2026 à 11,6 points en 2036, puis au même
-      rythme après 2036. Choix à relire.
+      La Commission publie la dette de quatre scénarios déterministes autour de sa projection
+      centrale : solde primaire structurel à sa moyenne historique, solde primaire plus bas,
+      écart taux-croissance défavorable et tension financière (fichier de données de la fiche
+      France, onglet FR, déposé par le mainteneur le 2 novembre 2026). Tous sont au-dessus de la
+      projection centrale à partir de 2026 (à 0,2 point près en 2027) : la borne basse est la
+      projection centrale, la borne haute le plus élevé des quatre scénarios, année par année
+      jusqu'en 2036, où il dépasse la projection centrale de 11,6 points (écart taux-croissance
+      défavorable, 155,6 % du PIB). Après 2036, faute de chiffre publié, l'écart continue de
+      croître au même rythme moyen qu'entre 2025 et 2036 (11,6 points en 11 ans). Choix à relire.
     instruments: [baseline]

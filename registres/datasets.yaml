@@ -962,3 +962,11 @@ datasets:
     empreinte_sha256: 84f9872aeaa46436e23fdf0e8fbc15a7f82ee683add5136e7337aa74dce335dc
     methode_transformation: pipelines/baseline/extraire_dsm.py → data/processed/baseline/ce_dsm_2025_france.csv (fiche France, tableau « France - baseline scenario », dette et solde primaire 2024-2036) et data/processed/baseline/ce_dsm_2025_france_scenarios_2036.csv (dette en 2036 des cinq scénarios déterministes)
     telecharge_le: 2026-11-02
+
+  - id: ce_dsm_2025_fiches_xlsx
+    source: ce_dsm_2025
+    description: Fichier de données des fiches pays du Debt Sustainability Monitor 2025 (« DSM 2025 country fiches tables and graphs.xlsx »), déposé par le mainteneur le 2 novembre 2026 (le site de la Commission refuse le téléchargement automatique)
+    fichier: data/raw/baseline/commission_europeenne/dsm_2025_country_fiches_tables_and_graphs.xlsx
+    empreinte_sha256: 2b0486b13dd7c779faf5b117dc04f15dfae74689cb19fec4276ffd7e36b8aafb
+    methode_transformation: pipelines/baseline/extraire_dsm.py → data/processed/baseline/ce_dsm_2025_france_scenarios.csv (onglet FR, dette des quatre scénarios déterministes 2024-2036, arrondie au dixième ; le scénario central doit redonner le tableau du rapport)
+    telecharge_le: 2026-11-02

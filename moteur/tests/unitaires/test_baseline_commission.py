@@ -46,7 +46,9 @@ def test_prolongement_lineaire_apres_2036() -> None:
 
 def test_fourchette_jusqu_au_scenario_le_plus_eleve() -> None:
     lignes = {lg.annee: lg for lg in bc.trajectoire(ANNEE_FIN)}
-    assert lignes[2026].dette.haut == lignes[2026].dette.central
+    for annee, haut in bc.plus_haut_publie().items():
+        if annee in lignes:
+            assert lignes[annee].dette.haut == max(haut, lignes[annee].dette.central)
     assert lignes[2036].dette.haut == pytest.approx(max(bc.scenarios_2036().values()))
     for lg in lignes.values():
         assert lg.dette.bas <= lg.dette.central <= lg.dette.haut

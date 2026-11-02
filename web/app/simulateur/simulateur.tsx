@@ -1,6 +1,6 @@
 "use client";
 // Simulateur : le calcul se fait dans le navigateur ; rien n'est envoyé ni enregistré.
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type SyntheticEvent } from "react";
 import { texte, nombre } from "../../lib/textes";
 import type {
   CatalogueCreditsMissions,
@@ -33,6 +33,7 @@ import { EffetsMenagesScenario } from "./menages";
 import { EffetsEntreprisesScenario } from "./entreprises";
 import { DepenseMenagesScenario } from "./depense";
 import { region } from "../../lib/region";
+import { correspond, reglees, SECTIONS } from "../../lib/sections";
 import { useReponses } from "../../lib/chargement";
 import Link from "next/link";
 
@@ -69,6 +70,8 @@ function SimulateurCharge({
   const [parMission, setParMission] = useState<Record<string, number>>({});
   const [annee, setAnnee] = useState(annees[0]);
   const [croissance, setCroissance] = useState(false);
+  const [recherche, setRecherche] = useState("");
+  const [ouvertes, setOuvertes] = useState<Record<string, boolean>>({});
   const idBase = useId();
   // Lecture du lien partagé au chargement, puis l'adresse suit les réglages (sans historique).
   const [lu, setLu] = useState(false);
@@ -156,6 +159,100 @@ function SimulateurCharge({
   const ecart = (v: number) => centieme.format(Math.abs(v) < 0.005 ? 0 : v);
   const format = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 });
 
+  const leviersParId = new Map(leviers.map((l) => [l.id, l]));
+  const libelle = (id: string) =>
+    texte(`simulateur.leviers.${id}.libelle`, {
+      reference: format.format(donnees.leviers[id].taux_reference),
+      annee: donnees.annee_reference,
+    });
+  const sections = SECTIONS.map((section) => ({
+    ...section,
+    leviers: section.leviers
+      .map((id) => leviersParId.get(id))
+      .filter((l): l is (typeof leviers)[number] => l !== undefined)
+      .filter((l) => correspond(libelle(l.id), recherche)),
+  })).filter((section) => section.leviers.length > 0);
+  const nombreReglees =
+    reglees(Object.keys(valeurs), valeurs) +
+    Object.values(parImpot).filter((v) => v !== 0).length +
+    Object.values(parDepense).filter((v) => v !== 0).length +
+    Object.values(parMission).filter((v) => v !== 0).length;
+  const reglagesDepenses =
+    Object.values(parImpot).filter((v) => v !== 0).length +
+    Object.values(parDepense).filter((v) => v !== 0).length;
+  const reglagesMissions = Object.values(parMission).filter((v) => v !== 0).length;
+  const remettreAZero = () => {
+    setValeurs(Object.fromEntries(Object.keys(valeurs).map((k) => [k, 0])));
+    setParImpot({});
+    setParDepense({});
+    setParMission({});
+  };
+  // Section ouverte : choix de l'utilisateur, sinon ouverte si une mesure y est réglée (la
+  // première l'est par défaut) ; toutes ouvertes pendant une recherche.
+  const ouverte = (id: string, rang: number, nReglees: number) =>
+    recherche.trim() !== "" || (ouvertes[id] ?? (nReglees > 0 || rang === 0));
+  const basculer = (id: string) => (e: SyntheticEvent<HTMLDetailsElement>) => {
+    const ouvert = e.currentTarget.open;
+    if (recherche.trim() === "") setOuvertes((o) => ({ ...o, [id]: ouvert }));
+  };
+  const derniere = lignes[lignes.length - 1];
+  const sansMesure = donnees.base_dette[0][donnees.base_dette[0].length - 1];
+
+  const reglage = (l: (typeof leviers)[number]) => {
+    const levier = donnees.leviers[l.id];
+    const id = `${idBase}-${l.id}`;
+    const bloqueRemunerations = missionsReglees && LEVIERS_REMUNERATIONS.includes(l.id);
+    const bloqueIndexation = solidariteReglee && LEVIERS_SOLIDARITE.includes(l.id);
+    // L'autre levier de départ à la retraite est déjà réglé.
+    const bloqueRetraites =
+      LEVIERS_RETRAITES.includes(l.id) &&
+      LEVIERS_RETRAITES.some((id) => id !== l.id && (valeurs[id] ?? 0) !== 0);
+    const bloque = bloqueRemunerations || bloqueIndexation || bloqueRetraites;
+    return (
+      <div key={l.id} className="reglage">
+        <div className="reglage-tete">
+          <label htmlFor={id}>{libelle(l.id)}</label>
+          <strong className={valeurs[l.id] !== 0 ? "valeur valeur-reglee" : "valeur"}>
+            {texte(`simulateur.leviers.${l.id}.valeur`, { valeur: signe(valeurs[l.id], l.pas) })}
+          </strong>
+        </div>
+        {/* Bornes arrondies vers l'intérieur au pas, pour que 0 reste sur la grille. */}
+        <input
+          id={id}
+          type="range"
+          min={Math.ceil(levier.bornes[0] / l.pas) * l.pas}
+          max={Math.floor(levier.bornes[1] / l.pas) * l.pas}
+          step={l.pas}
+          value={valeurs[l.id]}
+          disabled={bloque}
+          onChange={(e) => setValeurs({ ...valeurs, [l.id]: Number(e.target.value) })}
+        />
+        <details className="explication">
+          <summary>{texte("simulateur.en_savoir_plus")}</summary>
+          <p>{texte(`simulateur.leviers.${l.id}.explication`)}</p>
+        </details>
+        {bloqueRemunerations && (
+          <span className="source">{texte("simulateur.bloque_remunerations")}</span>
+        )}
+        {bloqueIndexation && <span className="source">{texte("simulateur.bloque_indexation")}</span>}
+        {bloqueRetraites && <span className="source">{texte("simulateur.bloque_retraites")}</span>}
+      </div>
+    );
+  };
+
+  const titreSection = (id: string, nReglees: number, total?: number) => (
+    <summary>
+      <span className="section-titre">{texte(`simulateur.sections.${id}.titre`)}</span>
+      <span className="section-description">
+        {texte(`simulateur.sections.${id}.description`)}
+        {total !== undefined && ` · ${texte("simulateur.nombre_mesures", { nombre: total })}`}
+      </span>
+      {nReglees > 0 && (
+        <span className="pastille">{texte("simulateur.reglees", { nombre: nReglees })}</span>
+      )}
+    </summary>
+  );
+
   return (
     <>
       {alerte && (
@@ -163,116 +260,193 @@ function SimulateurCharge({
           {alerte}
         </p>
       )}
-      <fieldset className="reglages">
-        <legend>{texte("simulateur.mesures")}</legend>
-        {leviers.map((l) => {
-          const levier = donnees.leviers[l.id];
-          const id = `${idBase}-${l.id}`;
-          const bloqueRemunerations = missionsReglees && LEVIERS_REMUNERATIONS.includes(l.id);
-          const bloqueIndexation = solidariteReglee && LEVIERS_SOLIDARITE.includes(l.id);
-          // L'autre levier de départ à la retraite est déjà réglé.
-          const bloqueRetraites =
-            LEVIERS_RETRAITES.includes(l.id) &&
-            LEVIERS_RETRAITES.some((id) => id !== l.id && (valeurs[id] ?? 0) !== 0);
-          const bloque = bloqueRemunerations || bloqueIndexation || bloqueRetraites;
-          return (
-            <div key={l.id} className="reglage">
-              <label htmlFor={id}>
-                {texte(`simulateur.leviers.${l.id}.libelle`, {
-                  reference: format.format(levier.taux_reference),
-                  annee: donnees.annee_reference,
-                })}
-                {" : "}
-                <strong>
-                  {texte(`simulateur.leviers.${l.id}.valeur`, { valeur: signe(valeurs[l.id], l.pas) })}
-                </strong>
-                {levier.statut !== "valide" && (
-                  <span className="etiquette">{texte(`validation.statuts.${levier.statut}`)}</span>
-                )}
-              </label>
-              {/* Bornes arrondies vers l'intérieur au pas, pour que 0 reste sur la grille. */}
+      <div className="simulateur">
+        <div className="simulateur-reglages">
+          <div className="barre-outils">
+            <label className="recherche">
+              <span className="visuellement-cache">{texte("simulateur.recherche_libelle")}</span>
               <input
-                id={id}
-                type="range"
-                min={Math.ceil(levier.bornes[0] / l.pas) * l.pas}
-                max={Math.floor(levier.bornes[1] / l.pas) * l.pas}
-                step={l.pas}
-                value={valeurs[l.id]}
-                disabled={bloque}
-                onChange={(e) => setValeurs({ ...valeurs, [l.id]: Number(e.target.value) })}
+                type="search"
+                placeholder={texte("simulateur.recherche")}
+                value={recherche}
+                onChange={(e) => setRecherche(e.target.value)}
               />
-              <details className="explication">
-                <summary>{texte("simulateur.en_savoir_plus")}</summary>
-                <p>{texte(`simulateur.leviers.${l.id}.explication`)}</p>
+            </label>
+            <span className="source">
+              {texte("simulateur.mesures_reglees", { nombre: nombreReglees })}
+            </span>
+            <button
+              type="button"
+              onClick={remettreAZero}
+              disabled={nombreReglees === 0 && Object.keys(parDepense).length === 0}
+            >
+              {texte("simulateur.remise_a_zero")}
+            </button>
+          </div>
+          {sections.length === 0 && <p>{texte("simulateur.recherche_vide")}</p>}
+          {sections.map((section, rang) => {
+            const nReglees = reglees(
+              section.leviers.map((l) => l.id),
+              valeurs,
+            );
+            return (
+              <details
+                key={section.id}
+                className="section"
+                open={ouverte(section.id, rang, nReglees)}
+                onToggle={basculer(section.id)}
+              >
+                {titreSection(section.id, nReglees, section.leviers.length)}
+                <div className="section-contenu">{section.leviers.map(reglage)}</div>
               </details>
-              {bloqueRemunerations && (
-                <span className="source">{texte("simulateur.bloque_remunerations")}</span>
-              )}
-              {bloqueIndexation && (
-                <span className="source">{texte("simulateur.bloque_indexation")}</span>
-              )}
-              {bloqueRetraites && (
-                <span className="source">{texte("simulateur.bloque_retraites")}</span>
-              )}
-            </div>
-          );
-        })}
-        <label htmlFor={`${idBase}-annee`}>{texte("simulateur.annee_entree")}</label>
-        <select
-          id={`${idBase}-annee`}
-          value={annee}
-          onChange={(e) => setAnnee(Number(e.target.value))}
-        >
-          {annees.map((a) => (
-            <option key={a} value={a}>
-              {a}
-            </option>
-          ))}
-        </select>
-        <div className="interrupteur">
-          <input
-            id={`${idBase}-croissance`}
-            type="checkbox"
-            checked={croissance}
-            onChange={(e) => setCroissance(e.target.checked)}
-          />
-          <label htmlFor={`${idBase}-croissance`}>{texte("simulateur.croissance")}</label>
-          <span className="etiquette">{texte("validation.statuts.beta")}</span>
+            );
+          })}
+          {recherche.trim() === "" && (
+            <>
+              <details
+                className="section"
+                open={ouvertes.depenses_fiscales ?? reglagesDepenses > 0}
+                onToggle={basculer("depenses_fiscales")}
+              >
+                {titreSection("depenses_fiscales", reglagesDepenses)}
+                <div className="section-contenu">
+                  <ReglagesDepensesFiscales
+                    catalogue={catalogue}
+                    leviers={donnees.leviers}
+                    parImpot={parImpot}
+                    setParImpot={setParImpot}
+                    parDepense={parDepense}
+                    setParDepense={setParDepense}
+                  />
+                </div>
+              </details>
+              <details
+                className="section"
+                open={ouvertes.credits_missions ?? reglagesMissions > 0}
+                onToggle={basculer("credits_missions")}
+              >
+                {titreSection("credits_missions", reglagesMissions)}
+                <div className="section-contenu">
+                  <ReglagesCreditsMissions
+                    catalogue={missions}
+                    leviers={donnees.leviers}
+                    reglages={parMission}
+                    bloque={remunerationsReglees}
+                    missionsBloquees={indexationReglee ? [MISSION_SOLIDARITE] : []}
+                    setReglages={setParMission}
+                  />
+                </div>
+              </details>
+            </>
+          )}
         </div>
-        <span className="source">{texte("simulateur.croissance_aide")}</span>
-      </fieldset>
-      <ReglagesDepensesFiscales
-        catalogue={catalogue}
-        leviers={donnees.leviers}
-        parImpot={parImpot}
-        setParImpot={setParImpot}
-        parDepense={parDepense}
-        setParDepense={setParDepense}
-      />
-      <ReglagesCreditsMissions
-        catalogue={missions}
-        leviers={donnees.leviers}
-        reglages={parMission}
-        bloque={remunerationsReglees}
-        missionsBloquees={indexationReglee ? [MISSION_SOLIDARITE] : []}
-        setReglages={setParMission}
-      />
-      <GraphiqueDette
-        points={lignes.map((l) => ({ annee: l.annee, ...l.dette }))}
-        raccord={raccord}
-        reference={{
-          libelle: texte("simulateur.sans_mesure"),
-          valeurs: donnees.base_dette[0],
-        }}
-        libelles={{
-          titre: texte("simulateur.graphique_titre"),
-          bas: texte("baseline.bas"),
-          central: texte("baseline.central"),
-          haut: texte("baseline.haut"),
-          raccord: texte("baseline.graphique_raccord"),
-          unite: texte("simulateur.graphique_lecture"),
-        }}
-      />
+
+        <aside id="resultat" className="simulateur-resultat" aria-labelledby={`${idBase}-resultat`}>
+          <div className="resultat-tete">
+            <h2 id={`${idBase}-resultat`}>{texte("simulateur.resultat")}</h2>
+            <label htmlFor={`${idBase}-annee`}>{texte("simulateur.annee_entree")}</label>
+            <select
+              id={`${idBase}-annee`}
+              value={annee}
+              onChange={(e) => setAnnee(Number(e.target.value))}
+            >
+              {annees.map((a) => (
+                <option key={a} value={a}>
+                  {a}
+                </option>
+              ))}
+            </select>
+          </div>
+          <dl className="chiffres-cles">
+            <div>
+              <dt>{texte("simulateur.resume_solde", { annee: derniere.annee })}</dt>
+              <dd>{ecart(derniere.ecart_solde_primaire.central)}</dd>
+              <dd className="secondaire">
+                {texte("simulateur.resume_solde_detail", {
+                  bas: ecart(derniere.ecart_solde_primaire.bas),
+                  haut: ecart(derniere.ecart_solde_primaire.haut),
+                })}
+              </dd>
+            </div>
+            <div>
+              <dt>{texte("simulateur.resume_dette", { annee: derniere.annee })}</dt>
+              <dd>{nombre(derniere.dette.central)}</dd>
+              <dd className="secondaire">
+                {texte("simulateur.resume_dette_detail", {
+                  bas: nombre(derniere.dette.bas),
+                  haut: nombre(derniere.dette.haut),
+                  sans: nombre(sansMesure),
+                })}
+              </dd>
+            </div>
+          </dl>
+          <GraphiqueDette
+            points={lignes.map((l) => ({ annee: l.annee, ...l.dette }))}
+            raccord={raccord}
+            reference={{
+              libelle: texte("simulateur.sans_mesure"),
+              valeurs: donnees.base_dette[0],
+            }}
+            libelles={{
+              titre: texte("simulateur.graphique_titre"),
+              bas: texte("baseline.bas"),
+              central: texte("baseline.central"),
+              haut: texte("baseline.haut"),
+              raccord: texte("baseline.graphique_raccord"),
+              unite: texte("simulateur.graphique_lecture"),
+            }}
+          />
+          <div className="interrupteur">
+            <input
+              id={`${idBase}-croissance`}
+              type="checkbox"
+              checked={croissance}
+              onChange={(e) => setCroissance(e.target.checked)}
+            />
+            <label htmlFor={`${idBase}-croissance`}>{texte("simulateur.croissance")}</label>
+            <span className="etiquette">{texte("validation.statuts.beta")}</span>
+          </div>
+          <span className="source">{texte("simulateur.croissance_aide")}</span>
+          <div className="actions">
+            <CopierLien />
+            <Exports
+              scenarios={[{ nom: texte("partage.scenario"), etat, lignes }]}
+              version={version}
+              nomFichier="scenario"
+            />
+            <Link href="/comparaison/">{texte("partage.lien_comparaison")}</Link>
+          </div>
+          <a href="#detail">{texte("simulateur.lien_detail")}</a>
+        </aside>
+      </div>
+
+      <div className="resume-mobile" aria-hidden="true">
+        <div>
+          <span>{texte("simulateur.resume_solde", { annee: derniere.annee })}</span>
+          <strong>
+            {texte("simulateur.resume_mobile_solde", {
+              central: ecart(derniere.ecart_solde_primaire.central),
+              bas: ecart(derniere.ecart_solde_primaire.bas),
+              haut: ecart(derniere.ecart_solde_primaire.haut),
+            })}
+          </strong>
+        </div>
+        <div>
+          <span>{texte("simulateur.resume_dette", { annee: derniere.annee })}</span>
+          <strong>
+            {texte("simulateur.resume_mobile_dette", {
+              central: nombre(derniere.dette.central),
+              bas: nombre(derniere.dette.bas),
+              haut: nombre(derniere.dette.haut),
+            })}
+          </strong>
+        </div>
+        <a href="#resultat" tabIndex={-1}>
+          {texte("simulateur.voir_resultat")}
+        </a>
+      </div>
+
+      <h2 id="detail">{texte("simulateur.detail_titre")}</h2>
       <div className="defilement" {...region(texte("simulateur.titre"))}>
         <table>
           <thead>
@@ -316,15 +490,6 @@ function SimulateurCharge({
         </table>
       </div>
       <p className="source">{texte("simulateur.unite")}</p>
-      <div className="actions">
-        <CopierLien />
-        <Exports
-          scenarios={[{ nom: texte("partage.scenario"), etat, lignes }]}
-          version={version}
-          nomFichier="scenario"
-        />
-        <Link href="/comparaison/">{texte("partage.lien_comparaison")}</Link>
-      </div>
       <p className="source">{texte("partage.explication")}</p>
       <EffetsMenagesScenario valeurs={valeurs} empreinte={empreinte} autresReglees={autresReglees} />
       <DepenseMenagesScenario donnees={depense} valeurs={valeurs} />

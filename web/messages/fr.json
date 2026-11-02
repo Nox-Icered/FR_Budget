@@ -21,7 +21,10 @@
     "mentions": "Mentions légales",
     "menages": "Ménages types",
     "mon_menage": "Mon ménage",
-    "entreprises": "Entreprises"
+    "entreprises": "Entreprises",
+    "groupe_simuler": "Simuler",
+    "groupe_effets": "Effets sur les ménages et les entreprises",
+    "groupe_transparence": "Transparence"
   },
   "accueil": {
     "titre": "Les comptes des administrations publiques",
@@ -420,7 +423,62 @@
     "bloque_retraites": "Réglage impossible tant que l'autre levier de départ à la retraite est modifié : les deux mesurent le même effet.",
     "methode_retraites_age_legal": "Âge légal de départ (modèle par cohortes) : avec la population projetée par l'Insee et les taux de retraités par âge de la DREES, un an de plus sur l'âge légal améliore le solde des administrations publiques d'environ {effet} point de PIB une fois la mesure en place (moindres pensions et prélèvements sur ceux qui restent en emploi). L'écart est atteint génération par génération, en {duree} ans pour un an. Les prestations versées à ceux qui restent sans emploi ne sont pas comptées.",
     "methode_assurance_chomage": "Assurance chômage (première étape, chiffrages de l'Unédic) : un point de contribution patronale rapporte {point} milliards d'euros par an ; un point de revalorisation des allocations coûte {revalorisation} milliard d'euros la première année pleine ; passer de 75 % à 80 % le coefficient appliqué à la durée coûte {duree} milliard d'euros par an une fois l'effet atteint. Les versements de l'assurance chômage à France Travail et aux retraites complémentaires restent entre administrations publiques et ne changent pas leur solde.",
-    "en_savoir_plus": "À quoi sert ce curseur ?"
+    "en_savoir_plus": "À quoi sert ce curseur ?",
+    "recherche": "Chercher une mesure (TVA, retraite, chômage…)",
+    "recherche_libelle": "Chercher une mesure",
+    "recherche_vide": "Aucun curseur ne correspond. Les niches fiscales et les missions de l'État ont leur propre recherche, plus bas.",
+    "mesures_reglees": "{nombre} mesure(s) réglée(s)",
+    "reglees": "{nombre} réglée(s)",
+    "nombre_mesures": "{nombre} mesure(s)",
+    "remise_a_zero": "Tout remettre à zéro",
+    "resultat": "Résultat",
+    "resume_solde": "Écart de solde primaire en {annee}",
+    "resume_solde_detail": "point de PIB, par rapport à la trajectoire sans mesure ({bas} à {haut})",
+    "resume_dette": "Dette en {annee}",
+    "resume_dette_detail": "% du PIB ({bas} à {haut}) ; sans mesure : {sans} %",
+    "voir_resultat": "Voir le graphique et le détail",
+    "detail_titre": "Détail année par année",
+    "lien_detail": "Détail année par année, effets sur les ménages et les entreprises",
+    "sections": {
+      "consommation": {
+        "titre": "Consommation",
+        "description": "TVA, carburants"
+      },
+      "entreprises": {
+        "titre": "Entreprises",
+        "description": "impôt sur les sociétés, cotisations, allègements"
+      },
+      "prelevements_menages": {
+        "titre": "Prélèvements des ménages",
+        "description": "CSG, barème de l'impôt sur le revenu"
+      },
+      "prestations": {
+        "titre": "Prestations sociales",
+        "description": "revalorisation, prime d'activité"
+      },
+      "retraites": {
+        "titre": "Retraites",
+        "description": "âge de départ, une seule mesure à la fois"
+      },
+      "assurance_chomage": {
+        "titre": "Assurance chômage",
+        "description": "contribution, revalorisation, durée"
+      },
+      "fonction_publique_collectivites": {
+        "titre": "Fonction publique et collectivités",
+        "description": "point d'indice, effectifs, dotations"
+      },
+      "depenses_fiscales": {
+        "titre": "Niches fiscales",
+        "description": "par impôt ou une par une"
+      },
+      "credits_missions": {
+        "titre": "Budget des missions de l'État",
+        "description": "éducation, défense, santé…, avec une aide au chiffrage"
+      }
+    },
+    "resume_mobile_solde": "{central} pt de PIB ({bas} à {haut})",
+    "resume_mobile_dette": "{central} % du PIB ({bas} à {haut})"
   },
   "partage": {
     "scenario": "Scénario",

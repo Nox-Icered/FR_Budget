@@ -75,11 +75,14 @@ export type Relecture = {
 };
 // Variantes de revenu des ménages types : bornes des hypothèses d'évolution des revenus.
 export type VarianteRevenu = "bas" | "haut";
+// Étape de la décomposition d'un ménage type : ce qui entre et ce qui sort, en euros par an.
+export type EtapeFlux = { id: string; entrees: Record<string, number>; sorties: Record<string, number> };
 export type MenageType = LignesCascade & {
   id: string;
   libelle: string;
   annee: number;
   variantes: Record<VarianteRevenu, LignesCascade>;
+  flux?: EtapeFlux[];
 };
 type EffetsUnite = Record<string, Record<"hausse" | "baisse", Record<string, LignesCascade | null>>>;
 export type MenagesTypes = {

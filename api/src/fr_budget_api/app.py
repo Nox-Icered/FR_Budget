@@ -36,6 +36,7 @@ from fr_budget.agrege.cotisations import cout_allegements
 from fr_budget.apu import comptes_apu, depenses_par_fonction, libelles_cofog, ratio_pib
 from fr_budget.entreprises import repartition as module_entreprises
 from fr_budget.menages import depense as module_depense
+from fr_budget.menages import flux as module_flux
 from fr_budget.menages import leviers as module_leviers_menages
 from fr_budget.menages import personnalise as module_personnalise
 from fr_budget.menages import types as module_menages
@@ -359,6 +360,8 @@ def menages_types() -> dict[str, Any]:
                 "libelle": profil.libelle,
                 "annee": module_menages.ANNEE,
                 **_lignes_cascade(c),
+                # Où va l'écart entre coût employeur et revenu après impôt (revenu central).
+                "flux": _etapes_flux(identifiant),
                 # Revenu bas et haut : bornes des hypothèses d'évolution des revenus.
                 "variantes": {
                     v: _lignes_cascade(
@@ -380,6 +383,17 @@ def menages_types() -> dict[str, Any]:
         "menages": resultat,
         "saisie": bornes_saisie(),
     }
+
+
+def _etapes_flux(identifiant: str) -> list[dict[str, Any]]:
+    return [
+        {
+            "id": e.id,
+            "entrees": {k: round(v, 2) for k, v in e.entrees.items()},
+            "sorties": {k: round(v, 2) for k, v in e.sorties.items()},
+        }
+        for e in module_flux.flux_type(identifiant)
+    ]
 
 
 def _lignes_ou_rien(c: module_menages.CascadeMenage | None) -> dict[str, Any] | None:

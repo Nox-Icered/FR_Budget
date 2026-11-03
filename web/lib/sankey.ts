@@ -64,3 +64,14 @@ export function bande(x0: number, x1: number, y0: number, y1: number, epaisseur:
     `L${x1},${y1 + epaisseur}C${m},${y1 + epaisseur} ${m},${y0 + epaisseur} ${x0},${y0 + epaisseur}Z`
   );
 }
+
+// Centres d'étiquettes espacés d'au moins `min` (dans l'ordre, sans changer le premier ni
+// l'ordre) : les petits flux voisins ne se chevauchent plus.
+export function espacer(centres: number[], min: number): number[] {
+  const sortie: number[] = [];
+  for (const c of centres) {
+    const precedent = sortie.at(-1);
+    sortie.push(precedent === undefined ? c : Math.max(c, precedent + min));
+  }
+  return sortie;
+}

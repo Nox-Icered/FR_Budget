@@ -1,6 +1,7 @@
 import { texte } from "../../lib/textes";
 import { lire, type EffetsMenages, type MenagesTypes } from "../../lib/donnees";
 import { EffetsLeviers } from "./effets";
+import { FluxMenage } from "./flux";
 import { region } from "../../lib/region";
 import { lignesEnFourchette } from "../../lib/cascade";
 import { chemin } from "../../lib/chemin";
@@ -60,6 +61,7 @@ export default function Menages() {
                 </tbody>
               </table>
             </div>
+            {m.flux && <FluxMenage etapes={m.flux} libelle={m.libelle} />}
           </section>
         );
       })}

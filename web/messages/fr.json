@@ -678,6 +678,55 @@
         "aide": "Qui supporte la mesure, l'employeur ou le salarié, n'est pas établi : les deux lectures bornent le résultat. Le salaire ne descend pas sous le SMIC ; le salaire d'un apprenti, fixé par la loi, ne s'ajuste pas.",
         "fourchette": "Écart du net après impôt selon la lecture : de {bas} à {haut} euros par an ; écart du coût employeur : de {cout_bas} à {cout_haut} euros par an."
       }
+    },
+    "flux": {
+      "titre": "Où va la différence entre le coût employeur et le revenu après impôt",
+      "intro": "Chaque diagramme suit une étape : à gauche ce qui entre, à droite ce qui sort. Les cotisations sont rangées par risque financé (retraite, maladie, famille…). Lecture comptable : chaque prélèvement est attribué à celui qui le verse, employeur ou salarié.",
+      "aria": "Diagramme de l'étape « {etape} » ; les montants figurent dans le tableau qui suit.",
+      "lecture": "Montants en euros par an, revenu central, calculés avec OpenFisca-France. La largeur de chaque bande est proportionnelle au montant, à la même échelle pour toutes les étapes du ménage. Les allègements et exonérations sont des cotisations dues mais non payées ; l'État en compense l'essentiel à la Sécurité sociale.",
+      "tableau": "Tous les montants, étape par étape",
+      "poste": "Poste",
+      "entree": "Entre :",
+      "sortie": "Sort :",
+      "autres": "Autres prélèvements ({nombre})",
+      "etapes": {
+        "employeur": "1. De ce que paie l'employeur au salaire brut",
+        "salarie": "2. Du salaire brut au salaire net",
+        "retraite": "Pension : de la pension brute à la pension nette",
+        "independant": "Indépendant : du revenu brut au revenu net",
+        "impot": "Dernière étape : de ce qui est perçu au revenu après impôt"
+      },
+      "postes": {
+        "cout_employeur": "Coût pour l'employeur",
+        "allegements": "Allègements de cotisations patronales",
+        "exonerations_salariales": "Exonération salariale (apprenti)",
+        "salaire_brut": "Salaire brut",
+        "retraite_base": "Retraite de base",
+        "retraite_complementaire": "Retraite complémentaire",
+        "maladie": "Assurance maladie",
+        "famille": "Allocations familiales",
+        "accidents_travail": "Accidents du travail",
+        "chomage": "Chômage et garantie des salaires",
+        "autonomie": "Autonomie (contribution de solidarité)",
+        "formation": "Formation professionnelle et apprentissage",
+        "logement": "Logement (aides et construction)",
+        "transport": "Transports en commun (versement mobilité)",
+        "autres_cotisations": "Autres cotisations",
+        "net_avant_impot": "Salaire net avant impôt",
+        "csg_deductible": "CSG déductible",
+        "csg_non_deductible": "CSG non déductible",
+        "crds": "CRDS (remboursement de la dette sociale)",
+        "casa": "Contribution pour l'autonomie (CASA)",
+        "pension_brute": "Pension brute",
+        "pension_nette": "Pension nette",
+        "revenu_independant_brut": "Revenu brut de l'indépendant",
+        "revenu_independant_net": "Revenu net de l'indépendant",
+        "cotisations_independant": "Cotisations sociales de l'indépendant",
+        "csg_crds_independant": "CSG et CRDS de l'indépendant",
+        "restitution_impot": "Crédit d'impôt restitué",
+        "impot_revenu": "Impôt sur le revenu",
+        "net_apres_impot": "Revenu après impôt, prestations comprises"
+      }
     }
   },
   "mon_menage": {

@@ -68,6 +68,10 @@ Leviers disponibles :
   (ou inférieure) de x %, de -3 à +3, à l'indexation sur l'inflation
   (``fr_budget.agrege.impot_revenu``) ; effet d'un pour cent : moins la sensibilité de
   l'évaluation préalable du PLF 2025 (borne basse : calcul par décile).
+- ``ir_plafond_quotient_familial`` : variation de x %, de -25 à +25, des plafonds de l'avantage
+  procuré par le quotient familial (``fr_budget.agrege.quotient_familial``) ; effet d'un pour
+  cent : moins le chiffrage de l'IGF et de l'IGAS de 2026 rapporté au point (plage : baisses
+  des PLF 2013 et 2014).
 - ``chomage_contribution_patronale``, ``chomage_revalorisation`` et
   ``chomage_duree_indemnisation`` : taux de la contribution patronale d'assurance chômage (x
   points, de -1 à +1), revalorisation des allocations au 1er juillet (x points, de -2 à +2) et
@@ -102,6 +106,7 @@ from fr_budget.agrege import (
     impot_societes,
     indexation,
     prime_activite,
+    quotient_familial,
     remunerations,
 )
 from fr_budget.agrege.tva import HYPOTHESE_REPARTITION, fourchette_point_tva, taux_tva
@@ -167,6 +172,7 @@ LEVIER_IR_SEUILS = "ir_seuils_bareme"
 # Écart admis à l'indexation des seuils, en % (choix du lot 2.11, à relire) ; repères : gel de
 # 2026 (-1,0 %), indexation de 4,8 % de la LFI 2024.
 BORNE_IR_SEUILS = 3.0
+LEVIER_IR_QF = "ir_plafond_quotient_familial"
 LEVIER_INDEXATION = "indexation_pensions_prestations"
 # Écart admis à la revalorisation légale, en points (décision du mainteneur du 12 octobre 2026) ;
 # repère : le gel de 2026 proposé au PLFSS 2026 correspondait à -1,0 point.
@@ -362,6 +368,10 @@ def rendement_unitaire(levier: str) -> Fourchette:
     if levier == LEVIER_IR_SEUILS:
         r = impot_revenu.rendement_un_pourcent()
         return encadrer(-r.central, [-r.bas, -r.haut])
+    if levier == LEVIER_IR_QF:
+        # Unité : hausse de 1 % des plafonds, qui coûte le rendement d'une baisse de 1 %.
+        r = quotient_familial.rendement_un_pourcent()
+        return encadrer(-r.central, [-r.bas, -r.haut])
     if levier == LEVIER_ALLEGEMENTS:
         cout = cotisations.cout_un_pourcent_allegements()
         return encadrer(-cout.central, [-cout.bas, -cout.haut])
@@ -487,6 +497,9 @@ def taux_reference(levier: str) -> float:
     if levier == LEVIER_IR_SEUILS:
         # Impôt au barème des revenus de 2024, Md€.
         return chiffrage("ir_impot_total_total_2024")
+    if levier == LEVIER_IR_QF:
+        # Plafond général par demi-part pour les revenus de 2025, en € (OpenFisca).
+        return quotient_familial.plafond_general(quotient_familial.ANNEE_REFERENCE)
     if levier == LEVIER_COTISATIONS_TAUX:
         # Valeur d'un point en 2026 publiée par la CCSS, Md€ courants.
         return cotisations.valeur_point_prive(cotisations.ANNEE_POINT)
@@ -561,6 +574,8 @@ def bornes_levier(levier: str) -> tuple[float, float]:
         return -BORNE_PA_PENTE, BORNE_PA_PENTE
     if levier == LEVIER_IR_SEUILS:
         return -BORNE_IR_SEUILS, BORNE_IR_SEUILS
+    if levier == LEVIER_IR_QF:
+        return -quotient_familial.BORNE, quotient_familial.BORNE
     if levier == LEVIER_ALLEGEMENTS:
         return -BORNE_ALLEGEMENTS, BORNE_ALLEGEMENTS
     if levier == LEVIER_CREDITS_UNITE:
@@ -790,6 +805,7 @@ def categorie_croissance(levier: str) -> str:
         LEVIER_COTISATIONS_TAUX: module_croissance.COTISATIONS_EMPLOYEURS,
         LEVIER_ALLEGEMENTS: module_croissance.COTISATIONS_EMPLOYEURS,
         LEVIER_IR_SEUILS: module_croissance.IMPOT_REVENU,
+        LEVIER_IR_QF: module_croissance.IMPOT_REVENU,
         levier_depenses_fiscales_impot(
             IMPOT_REVENU_DEPENSES_FISCALES
         ): module_croissance.IMPOT_REVENU,
@@ -993,6 +1009,7 @@ LEVIERS_REGISTRE = {
     LEVIER_COTISATIONS_TAUX: "cotisations_patronales",
     LEVIER_ALLEGEMENTS: "cotisations_patronales",
     LEVIER_IR_SEUILS: "impot_revenu",
+    LEVIER_IR_QF: "impot_revenu_structure",
     LEVIER_PA_PENTE: "minima_prime_activite",
     LEVIER_RETRAITES_AGE: "retraites",
     LEVIER_RETRAITES_AGE_LEGAL: "retraites",
@@ -1111,6 +1128,18 @@ PROVENANCE_IR = (
     ),
     (),
 )
+PROVENANCE_IR_QF = (
+    (
+        "igf_igas_politiques_familiales_2026",
+        "plf2013_projet_loi",
+        "plf2014_projet_loi",
+        "ccomptes_famille_fiscalite_2023",
+        "openfisca_france_176_1_2",
+        "insee_comptes_nationaux_2025",
+        "plf2027_resf",
+    ),
+    (),
+)
 PROVENANCE_PA = (
     (
         "senat_note_presentation_siec_plf2026",
@@ -1208,6 +1237,7 @@ PROVENANCE_LEVIERS = {
     LEVIER_COTISATIONS_TAUX: PROVENANCE_COTISATIONS,
     LEVIER_ALLEGEMENTS: PROVENANCE_COTISATIONS,
     LEVIER_IR_SEUILS: PROVENANCE_IR,
+    LEVIER_IR_QF: PROVENANCE_IR_QF,
     LEVIER_PA_PENTE: PROVENANCE_PA,
     LEVIER_RETRAITES_AGE: PROVENANCE_RETRAITES,
     LEVIER_RETRAITES_AGE_LEGAL: PROVENANCE_RETRAITES_COHORTES,

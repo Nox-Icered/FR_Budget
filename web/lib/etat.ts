@@ -49,6 +49,7 @@ export const LEVIERS_PUBLICS: { id: string; pas: number }[] = [
   { id: "cotisations_patronales_taux", pas: 0.1 },
   { id: "allegements_generaux", pas: 1 },
   { id: "ir_seuils_bareme", pas: 0.1 },
+  { id: "ir_plafond_quotient_familial", pas: 1 },
   { id: "prime_activite_pente", pas: 0.1 },
   { id: "retraites_age_depart", pas: 0.25 },
   { id: "retraites_age_legal", pas: 0.25 },

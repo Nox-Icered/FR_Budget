@@ -1,10 +1,10 @@
 # Liste de relecture
 
-Générée le 2026-11-02 par `outils/liste_relecture.py` à partir des registres ; ne pas modifier à la main, relancer le script.
+Générée le 2026-11-05 par `outils/liste_relecture.py` à partir des registres ; ne pas modifier à la main, relancer le script.
 
 Pour chaque ligne : ouvrir le document à la page indiquée, vérifier la valeur, l'unité et ce qu'elle mesure. Cocher la case quand la valeur est conforme, ou noter l'écart. Les lignes cochées passent ensuite à `relecture: relu` dans `registres/references/chiffrages.yaml`. Le classement entre entrées du calcul et références de validation est repéré automatiquement dans le code : il est indicatif.
 
-**336 chiffrages à relire** sur 336, dont 186 entrées du calcul (à relire en premier : elles changent les résultats affichés), 107 références de validation et 43 non repérés automatiquement. Puis **45 hypothèses** (valeur centrale et plage).
+**349 chiffrages à relire** sur 349, dont 193 entrées du calcul (à relire en premier : elles changent les résultats affichés), 107 références de validation et 49 non repérés automatiquement. Puis **47 hypothèses** (valeur centrale et plage).
 
 ## Sommaire
 
@@ -24,6 +24,7 @@ Pour chaque ligne : ouvrir le document à la page indiquée, vérifier la valeur
 | [dotations_collectivites](#dotations_collectivites) | 5 | 1 |
 | [retraites](#retraites) | 6 | 0 |
 | [assurance_chomage](#assurance_chomage) | 27 | 20 |
+| [impot_revenu_structure](#impot_revenu_structure) | 13 | 7 |
 | [croissance](#croissance) | 11 | 0 |
 | [dynamique_dette](#dynamique_dette) | 12 | 7 |
 | [menages_types](#menages_types) | 66 | 42 |
@@ -1134,6 +1135,66 @@ Pour chaque ligne : ouvrir le document à la page indiquée, vérifier la valeur
   - Où : Unédic, « Situation financière de l'Assurance chômage à horizon 2028 », prévisions financières d'octobre 2026, Encadré 1, tableau A, page 8
   - Document : https://www.unedic.org/publications/previsions-financieres-de-lunedic-octobre-2026 ; fichier : `data/raw/assurance_chomage/unedic_previsions_octobre_2026.pdf`
 
+## impot_revenu_structure
+
+### Entrée du calcul (7)
+
+- [ ] `qf_plafond_2012` : **2 336 €** (PLF 2013)
+  - Mesure : Plafond de l'avantage procuré par chaque demi-part pour charges de famille avant le PLF 2013 (revenus 2011)
+  - Où : Projet de loi de finances pour 2013, n° 235, déposé à l'Assemblée nationale le 28 septembre 2012 (exposé général des motifs et articles), Exposé des motifs de l'article 4, page 42 du PDF
+  - Document : https://www.assemblee-nationale.fr/14/pdf/projets/pl0235.pdf ; fichier : `data/raw/impot_revenu/plf2013_projet_loi_235.pdf`
+- [ ] `qf_plafond_2013` : **2 000 €** (PLF 2013)
+  - Mesure : Plafond par demi-part pour charges de famille proposé par le PLF 2013 (revenus 2012)
+  - Où : Projet de loi de finances pour 2013, n° 235, déposé à l'Assemblée nationale le 28 septembre 2012 (exposé général des motifs et articles), Exposé des motifs de l'article 4, page 42 du PDF
+  - Document : https://www.assemblee-nationale.fr/14/pdf/projets/pl0235.pdf ; fichier : `data/raw/impot_revenu/plf2013_projet_loi_235.pdf`
+- [ ] `qf_baisse_plafond_rendement_2013` : **0,5 Md€** (PLF 2013)
+  - Mesure : Rendement en 2013 de la baisse du plafond du quotient familial de 2 336 € à 2 000 € (prévision du Gouvernement)
+  - Où : Projet de loi de finances pour 2013, n° 235, déposé à l'Assemblée nationale le 28 septembre 2012 (exposé général des motifs et articles), Exposé général des motifs, tableau « Rendement 2013 ; en Md€ », ligne « Baisse du plafond du quotient familial à 2 000 € », page 19 du PDF
+  - Document : https://www.assemblee-nationale.fr/14/pdf/projets/pl0235.pdf ; fichier : `data/raw/impot_revenu/plf2013_projet_loi_235.pdf`
+- [ ] `qf_plafond_2014` : **1 500 €** (PLF 2014)
+  - Mesure : Plafond par demi-part pour charges de famille proposé par le PLF 2014 (revenus 2013)
+  - Où : Projet de loi de finances pour 2014, n° 1395, déposé à l'Assemblée nationale le 25 septembre 2013 (exposé général des motifs et articles), Exposé des motifs de l'article 3, page 42 du PDF
+  - Document : https://www.assemblee-nationale.fr/14/pdf/projets/pl1395.pdf ; fichier : `data/raw/impot_revenu/plf2014_projet_loi_1395.pdf`
+- [ ] `qf_baisse_plafond_rendement_2014` : **1 Md€** (PLF 2014)
+  - Mesure : Contribution de la baisse du plafond du quotient familial de 2 000 € à 1 500 € (prévision du Gouvernement, arrondie au milliard)
+  - Où : Projet de loi de finances pour 2014, n° 1395, déposé à l'Assemblée nationale le 25 septembre 2013 (exposé général des motifs et articles), Exposé général des motifs : « L'abaissement du plafond du quotient familial contribuera à hauteur de 1 Md€ à l'équilibre de la branche famille », page 9 du PDF
+  - Document : https://www.assemblee-nationale.fr/14/pdf/projets/pl1395.pdf ; fichier : `data/raw/impot_revenu/plf2014_projet_loi_1395.pdf`
+- [ ] `qf_baisse_10_rendement_igf_2026` : **580 M€** (juin 2026)
+  - Mesure : Recettes annuelles d'une baisse de 10 % des plafonds de bénéfice du quotient familial pour chaque demi-part (législation 2026, modèle Ines 2024)
+  - Où : IGF et IGAS, « Revue de dépenses relative à l'efficacité des politiques familiales », juin 2026, Annexe IV, tableau 15 « Description des effets de la baisse du plafond des demi-parts de QF de 10 % », ligne « Montant annuel de l'économie attendu », page 184 du PDF (texte page 183)
+  - Document : https://www.igf.gouv.fr/files/igf/files/contributed/Rapports%20de%20mission/2026/Rapport-Politiques-familiales.pdf ; fichier : `data/raw/impot_revenu/igf_igas_politiques_familiales_2026.pdf`
+- [ ] `qf_baisse_10_taux_igf_2026` : **10 %** (juin 2026)
+  - Mesure : Baisse des plafonds du quotient familial chiffrée par la mission
+  - Où : IGF et IGAS, « Revue de dépenses relative à l'efficacité des politiques familiales », juin 2026, Annexe IV, tableau 15, ligne « Nature de la mesure », page 184 du PDF
+  - Document : https://www.igf.gouv.fr/files/igf/files/contributed/Rapports%20de%20mission/2026/Rapport-Politiques-familiales.pdf ; fichier : `data/raw/impot_revenu/igf_igas_politiques_familiales_2026.pdf`
+
+### Non repéré (6)
+
+- [ ] `qf_baisse_10_menages_igf_2026` : **1 892 447 ménages** (juin 2026)
+  - Mesure : Nombre de ménages affectés par une baisse de 10 % des plafonds du quotient familial
+  - Où : IGF et IGAS, « Revue de dépenses relative à l'efficacité des politiques familiales », juin 2026, Annexe IV, tableau 15, ligne « Nombre de ménages affectés », page 184 du PDF
+  - Document : https://www.igf.gouv.fr/files/igf/files/contributed/Rapports%20de%20mission/2026/Rapport-Politiques-familiales.pdf ; fichier : `data/raw/impot_revenu/igf_igas_politiques_familiales_2026.pdf`
+- [ ] `qf_deplafonnement_ccomptes_2020` : **4,9 Md€** (revenus 2020)
+  - Mesure : Perte de recettes de l'État d'une suppression du plafonnement du quotient familial
+  - Où : Cour des comptes, « La prise en compte de la famille dans la fiscalité », observations définitives S2023-0839, octobre 2023, Page 51, paragraphe sur la familialisation ; note 51 : « Chiffre évalué sur les revenus de 2020 »
+  - Document : https://www.ccomptes.fr/sites/default/files/2023-10/20231017-S2023-0839-Prise-en-compte-famille-dans-fiscalite_0.pdf ; fichier : `data/raw/impot_revenu/ccomptes_famille_fiscalite_2023.pdf`
+- [ ] `qf_cout_total_ccomptes_2020` : **11 730 M€** (revenus 2020)
+  - Mesure : Coût budgétaire du quotient familial (demi-parts pour enfants, périmètre de la note 73), fichier exhaustif des déclarations de la DGFiP
+  - Où : Cour des comptes, « La prise en compte de la famille dans la fiscalité », observations définitives S2023-0839, octobre 2023, Tableau 19 « Répartition du coût du QF par décile de RFR des foyers éligibles », ligne « Total », page 73
+  - Document : https://www.ccomptes.fr/sites/default/files/2023-10/20231017-S2023-0839-Prise-en-compte-famille-dans-fiscalite_0.pdf ; fichier : `data/raw/impot_revenu/ccomptes_famille_fiscalite_2023.pdf`
+- [ ] `qf_montant_igf_revenus_2011` : **12,4 Md€** (juillet 2021)
+  - Mesure : Montant du quotient familial correspondant à l'impôt sur le revenu versé en 2012 sur les revenus 2011
+  - Où : IGF et IGAS, « Revue des dépenses socio-fiscales en faveur de la politique familiale », juillet 2021, Note 24, page 22 du PDF
+  - Document : https://igas.gouv.fr/sites/igas/files/2024-04/Revue%20des%20d%C3%A9penses%20socio-fiscales%20en%20faveur%20de%20la%20politique%20familiale.pdf ; fichier : `data/raw/impot_revenu/igf_igas_depenses_socio_fiscales_famille_2021.pdf`
+- [ ] `qf_montant_igf_apres_baisse_2013` : **12,2 Md€** (juillet 2021)
+  - Mesure : Montant du quotient familial après la baisse du plafond à 2 000 € (loi de finances pour 2013)
+  - Où : IGF et IGAS, « Revue des dépenses socio-fiscales en faveur de la politique familiale », juillet 2021, Note 24, page 22 du PDF
+  - Document : https://igas.gouv.fr/sites/igas/files/2024-04/Revue%20des%20d%C3%A9penses%20socio-fiscales%20en%20faveur%20de%20la%20politique%20familiale.pdf ; fichier : `data/raw/impot_revenu/igf_igas_depenses_socio_fiscales_famille_2021.pdf`
+- [ ] `qf_montant_igf_apres_baisse_2014` : **11,6 Md€** (juillet 2021)
+  - Mesure : Montant du quotient familial après la baisse du plafond à 1 500 € (loi de finances pour 2014)
+  - Où : IGF et IGAS, « Revue des dépenses socio-fiscales en faveur de la politique familiale », juillet 2021, Note 24, page 22 du PDF
+  - Document : https://igas.gouv.fr/sites/igas/files/2024-04/Revue%20des%20d%C3%A9penses%20socio-fiscales%20en%20faveur%20de%20la%20politique%20familiale.pdf ; fichier : `data/raw/impot_revenu/igf_igas_depenses_socio_fiscales_famille_2021.pdf`
+
 ## croissance
 
 ### Non repéré (11)
@@ -1654,3 +1715,9 @@ Pour chaque ligne : ouvrir le document à la page indiquée, vérifier la valeur
 - [ ] `chomage_duree_rang_croisiere` : **4 rang d'année**, plage 4 à 5
   - Rang de l'année où un changement du coefficient appliqué à la durée d'indemnisation produit son plein effet (1 = année d'entrée en vigueur)
   - Sources : unedic_effets_adaptation_conjoncture_2023 ; instruments : assurance_chomage
+- [ ] `baseline_commission_prolongement_pente` : **3,167 points de PIB par an**, plage 2,917 à 3,2
+  - Hausse annuelle de la dette, en points de PIB, retenue pour prolonger après 2036 la projection de la Commission européenne à politique inchangée
+  - Sources : ce_dsm_2025 ; instruments : baseline
+- [ ] `baseline_commission_ecart_scenarios` : **0 points de PIB**, plage 0 à 11,6
+  - Écart à la projection centrale de la Commission européenne retenu pour la borne haute, en points de PIB en 2036
+  - Sources : ce_dsm_2025 ; instruments : baseline

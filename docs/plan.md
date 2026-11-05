@@ -203,6 +203,7 @@ Décision du 30 octobre 2026 : la V2 commence avant le franchissement de la port
 Les lots de V2 sont conduits un par un, chacun sur sa branche, avec un plan court soumis au mainteneur avant tout calcul. Premier lot : assurance chômage (module structurel, `docs/specification.md`, tableau des modules).
 
 - Fait le 30 octobre 2026 (plan validé tel quel par le mainteneur, `docs/fiches/assurance_chomage.md`) : première étape, trois leviers agrégés calés sur les chiffrages de l'Unédic (taux de la contribution patronale, revalorisation des allocations, coefficient appliqué à la durée d'indemnisation), en bêta. Transferts de l'Unédic à France Travail et aux retraites complémentaires comptés à zéro (internes aux APU). Reste à faire : confrontation indépendante, modèle de flux d'allocataires, effets sur les ménages types et les entreprises.
+- Fait le 5 novembre 2026 (plan B révisé validé par le mainteneur, `docs/fiches/quotient_familial.md`) : lot impôt sur le revenu (structure), premier levier, plafond de l'avantage procuré par le quotient familial (±25 %), calé sur le chiffrage de l'IGF et de l'IGAS de juin 2026, validé sur les baisses des PLF 2013 (+16,0 %, hors tolérance) et 2014 (+2,4 %), en bêta. Les micro-données nécessaires à un calcul structurel n'étant pas publiables, le levier est agrégé. Reste à faire : taux d'une tranche du barème (deuxième levier du lot).
 
 ## 7. Tests et CI
 

@@ -100,3 +100,10 @@ leviers:
     moteur: agrege
     references_visees: [Prévisions financières et études d'impact de l'Unédic, Cour des comptes, DARES]
     statut: beta
+
+  - id: impot_revenu_structure
+    libelle: Impôt sur le revenu, structure (plafond du quotient familial)
+    parametres_reglables: [Variation des plafonds de l'avantage procuré par le quotient familial]
+    moteur: agrege
+    references_visees: [Revue de dépenses IGF-IGAS de juin 2026, projets de loi de finances pour 2013 et 2014, Cour des comptes (2023)]
+    statut: beta

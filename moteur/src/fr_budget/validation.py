@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from functools import partial
 
 from fr_budget import retraites_cohortes
+from fr_budget.agrege import quotient_familial
 from fr_budget.agrege.accises import recette_brute
 from fr_budget.agrege.assurance_chomage import cout_revalorisation_cumule, effet_contribution
 from fr_budget.agrege.cotisations import cout_allegements, valeur_point_modele
@@ -168,6 +169,10 @@ def _pa_pente_millions() -> float:
     return economie_baisse_2025() * MILLIONS_PAR_MILLIARD
 
 
+def _qf_baisse(annee: int) -> float:
+    return quotient_familial.rendement_baisse(quotient_familial.baisse_historique(annee), annee)
+
+
 def _ir_gel(inflation: str, annee: int) -> float:
     return rendement_gel(chiffrage(inflation), annee)
 
@@ -300,6 +305,13 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
     ]
     definitions += [("ir_gel_bareme_2026", partial(_ir_gel, inflation_2025, 2026))]
     definitions += [("pa_pente_moindre_depense_2025", _pa_pente_millions)]
+    definitions += [
+        (
+            f"qf_baisse_plafond_rendement_{annee}",
+            partial(_qf_baisse, annee),
+        )
+        for annee in quotient_familial.ANNEES_HISTORIQUES
+    ]
     definitions += _definitions_chomage()
     definitions += _confrontations_independantes()
     return definitions

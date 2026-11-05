@@ -3712,3 +3712,148 @@ chiffrages:
     localisation: "Encadré 1, tableau A, page 8"
     saisi_le: 2026-10-30
     relecture: a_relire
+
+  - id: qf_plafond_2012
+    levier: impot_revenu_structure
+    source: plf2013_projet_loi
+    millesime: "PLF 2013"
+    mesure: "Plafond de l'avantage procuré par chaque demi-part pour charges de famille avant le PLF 2013 (revenus 2011)"
+    valeur: 2336
+    unite: "€"
+    localisation: "Exposé des motifs de l'article 4, page 42 du PDF"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: qf_plafond_2013
+    levier: impot_revenu_structure
+    source: plf2013_projet_loi
+    millesime: "PLF 2013"
+    mesure: "Plafond par demi-part pour charges de famille proposé par le PLF 2013 (revenus 2012)"
+    valeur: 2000
+    unite: "€"
+    localisation: "Exposé des motifs de l'article 4, page 42 du PDF"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: qf_baisse_plafond_rendement_2013
+    levier: impot_revenu_structure
+    source: plf2013_projet_loi
+    millesime: "PLF 2013"
+    mesure: "Rendement en 2013 de la baisse du plafond du quotient familial de 2 336 € à 2 000 € (prévision du Gouvernement)"
+    valeur: 0.5
+    unite: "Md€"
+    localisation: "Exposé général des motifs, tableau « Rendement 2013 ; en Md€ », ligne « Baisse du plafond du quotient familial à 2 000 € », page 19 du PDF"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: qf_plafond_2014
+    levier: impot_revenu_structure
+    source: plf2014_projet_loi
+    millesime: "PLF 2014"
+    mesure: "Plafond par demi-part pour charges de famille proposé par le PLF 2014 (revenus 2013)"
+    valeur: 1500
+    unite: "€"
+    localisation: "Exposé des motifs de l'article 3, page 42 du PDF"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: qf_baisse_plafond_rendement_2014
+    levier: impot_revenu_structure
+    source: plf2014_projet_loi
+    millesime: "PLF 2014"
+    mesure: "Contribution de la baisse du plafond du quotient familial de 2 000 € à 1 500 € (prévision du Gouvernement, arrondie au milliard)"
+    valeur: 1.0
+    unite: "Md€"
+    localisation: "Exposé général des motifs : « L'abaissement du plafond du quotient familial contribuera à hauteur de 1 Md€ à l'équilibre de la branche famille », page 9 du PDF"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: qf_baisse_10_rendement_igf_2026
+    levier: impot_revenu_structure
+    source: igf_igas_politiques_familiales_2026
+    millesime: "juin 2026"
+    mesure: "Recettes annuelles d'une baisse de 10 % des plafonds de bénéfice du quotient familial pour chaque demi-part (législation 2026, modèle Ines 2024)"
+    valeur: 580
+    unite: "M€"
+    localisation: "Annexe IV, tableau 15 « Description des effets de la baisse du plafond des demi-parts de QF de 10 % », ligne « Montant annuel de l'économie attendu », page 184 du PDF (texte page 183)"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: qf_baisse_10_taux_igf_2026
+    levier: impot_revenu_structure
+    source: igf_igas_politiques_familiales_2026
+    millesime: "juin 2026"
+    mesure: "Baisse des plafonds du quotient familial chiffrée par la mission"
+    valeur: 10
+    unite: "%"
+    localisation: "Annexe IV, tableau 15, ligne « Nature de la mesure », page 184 du PDF"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: qf_baisse_10_menages_igf_2026
+    levier: impot_revenu_structure
+    source: igf_igas_politiques_familiales_2026
+    millesime: "juin 2026"
+    mesure: "Nombre de ménages affectés par une baisse de 10 % des plafonds du quotient familial"
+    valeur: 1892447
+    unite: "ménages"
+    localisation: "Annexe IV, tableau 15, ligne « Nombre de ménages affectés », page 184 du PDF"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: qf_deplafonnement_ccomptes_2020
+    levier: impot_revenu_structure
+    source: ccomptes_famille_fiscalite_2023
+    millesime: "revenus 2020"
+    mesure: "Perte de recettes de l'État d'une suppression du plafonnement du quotient familial"
+    valeur: 4.9
+    unite: "Md€"
+    localisation: "Page 51, paragraphe sur la familialisation ; note 51 : « Chiffre évalué sur les revenus de 2020 »"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+    independante: true
+
+  - id: qf_cout_total_ccomptes_2020
+    levier: impot_revenu_structure
+    source: ccomptes_famille_fiscalite_2023
+    millesime: "revenus 2020"
+    mesure: "Coût budgétaire du quotient familial (demi-parts pour enfants, périmètre de la note 73), fichier exhaustif des déclarations de la DGFiP"
+    valeur: 11730
+    unite: "M€"
+    localisation: "Tableau 19 « Répartition du coût du QF par décile de RFR des foyers éligibles », ligne « Total », page 73"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+    independante: true
+
+  - id: qf_montant_igf_revenus_2011
+    levier: impot_revenu_structure
+    source: igf_igas_depenses_socio_fiscales_famille_2021
+    millesime: "juillet 2021"
+    mesure: "Montant du quotient familial correspondant à l'impôt sur le revenu versé en 2012 sur les revenus 2011"
+    valeur: 12.4
+    unite: "Md€"
+    localisation: "Note 24, page 22 du PDF"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: qf_montant_igf_apres_baisse_2013
+    levier: impot_revenu_structure
+    source: igf_igas_depenses_socio_fiscales_famille_2021
+    millesime: "juillet 2021"
+    mesure: "Montant du quotient familial après la baisse du plafond à 2 000 € (loi de finances pour 2013)"
+    valeur: 12.2
+    unite: "Md€"
+    localisation: "Note 24, page 22 du PDF"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: qf_montant_igf_apres_baisse_2014
+    levier: impot_revenu_structure
+    source: igf_igas_depenses_socio_fiscales_famille_2021
+    millesime: "juillet 2021"
+    mesure: "Montant du quotient familial après la baisse du plafond à 1 500 € (loi de finances pour 2014)"
+    valeur: 11.6
+    unite: "Md€"
+    localisation: "Note 24, page 22 du PDF"
+    saisi_le: 2026-11-05
+    relecture: a_relire

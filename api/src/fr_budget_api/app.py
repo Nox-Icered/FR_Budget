@@ -30,6 +30,7 @@ from fr_budget import budget_etat as module_budget_etat
 from fr_budget import croissance as module_croissance
 from fr_budget import retraites as module_retraites
 from fr_budget import scenario as module_scenario
+from fr_budget.agrege import bareme_ir as module_bareme_ir
 from fr_budget.agrege import credits_missions as module_credits_missions
 from fr_budget.agrege import depenses_fiscales as module_depenses_fiscales
 from fr_budget.agrege.cotisations import cout_allegements
@@ -127,6 +128,18 @@ def serie_comptes(sous_secteur: str, indicateur: str) -> dict[str, Any] | None:
         "sous_secteur": sous_secteur,
         "indicateur": indicateur,
         "valeurs": valeurs,
+    }
+
+
+def bareme_ir() -> dict[str, Any]:
+    """Données de l'éditeur de barème de l'impôt sur le revenu (calcul fait dans le navigateur,
+    ``fr_budget.agrege.bareme_ir.donnees_site``), avec ses sources et son hypothèse."""
+    return {
+        **module_bareme_ir.donnees_site(),
+        "levier": module_scenario.LEVIER_IR_BAREME,
+        "bornes": list(module_scenario.bornes_levier(module_scenario.LEVIER_IR_BAREME)),
+        "sources": list(module_scenario.PROVENANCE_IR_BAREME[0]),
+        "hypotheses": list(module_scenario.PROVENANCE_IR_BAREME[1]),
     }
 
 

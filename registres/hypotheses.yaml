@@ -812,3 +812,21 @@ hypotheses:
       défavorable, 155,6 % du PIB). Après 2036, faute de chiffre publié, l'écart continue de
       croître au même rythme moyen qu'entre 2025 et 2036 (11,6 points en 11 ans). Choix à relire.
     instruments: [baseline]
+
+  - id: ir_bareme_ecart
+    libelle: Écart entre le chiffrage officiel d'une réforme du barème de l'impôt sur le revenu et le moteur de barème
+    unite: écart relatif à l'effet calculé par le moteur
+    valeur_centrale: 0.0
+    plage:
+      basse: -0.012
+      haute: 0.547
+    sources: [plf2013_projet_loi, plf2015_projet_loi, plf2020_projet_loi, plf2025_evaluations_prealables, dgfip_ir_tableaux_statistiques]
+    justification: >-
+      L'effet d'un barème saisi sur le site est celui du moteur (fr_budget.agrege.bareme_ir,
+      valeur centrale : aucun écart). La plage reprend le plus petit et le plus grand rapport
+      entre le chiffrage officiel et le modèle, moins un, sur les quatre réformes de validation
+      (fiche bareme_ir, § 6) : PLF 2020 (-1,2 %) et PLF 2015 (+54,7 %). Calcul :
+      fr_budget.agrege.bareme_ir.plage_ecart_validation(), arrondi au millième. Le moteur sous-estime
+      la plupart des chiffrages officiels : la plage est surtout vers le haut.
+    instruments: [impot_revenu_structure]
+

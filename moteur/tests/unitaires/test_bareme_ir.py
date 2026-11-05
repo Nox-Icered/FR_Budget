@@ -84,3 +84,29 @@ def test_part_des_couples_par_rang() -> None:
     segs = {s.nom: s for s in b.segments(2024)}
     assert b.part_couples(segs["1"]) == pytest.approx(chiffrage("ir_couples_quartile_1_2022") / 100)
     assert b.part_couples(segs["5"], b.UNIFORME) == pytest.approx(0.32)
+
+
+def test_hypothese_ecart_concorde_avec_la_validation() -> None:
+    """Le registre recopie la plage tirée des quatre réformes de validation : elle doit rester
+    exacte au millième."""
+    from fr_budget.registres.acces import hypothese
+
+    basse, haute = b.plage_ecart_validation()
+    plage = hypothese("ir_bareme_ecart").plage
+    assert plage.basse == pytest.approx(basse, abs=5e-4)
+    assert plage.haute == pytest.approx(haute, abs=5e-4)
+
+
+def test_effet_site_nul_pour_le_bareme_de_2025() -> None:
+    f = b.effet_site(b.bareme_openfisca(b.ANNEE_SITE))
+    assert (f.bas, f.central, f.haut) == (0.0, 0.0, 0.0)
+
+
+def test_levier_generique_et_double_compte() -> None:
+    from fr_budget import scenario as sc
+
+    assert sc.rendement_unitaire(sc.LEVIER_IR_BAREME).central == 1.0
+    with pytest.raises(ValueError, match="double compte"):
+        sc.verifier_double_compte(
+            [sc.Mesure(sc.LEVIER_IR_BAREME, 2.0, 2027), sc.Mesure(sc.LEVIER_IR_SEUILS, 1.0, 2027)]
+        )

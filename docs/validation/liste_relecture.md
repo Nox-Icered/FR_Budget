@@ -4,7 +4,7 @@ Générée le 2026-11-05 par `outils/liste_relecture.py` à partir des registres
 
 Pour chaque ligne : ouvrir le document à la page indiquée, vérifier la valeur, l'unité et ce qu'elle mesure. Cocher la case quand la valeur est conforme, ou noter l'écart. Les lignes cochées passent ensuite à `relecture: relu` dans `registres/references/chiffrages.yaml`. Le classement entre entrées du calcul et références de validation est repéré automatiquement dans le code : il est indicatif.
 
-**361 chiffrages à relire** sur 361, dont 205 entrées du calcul (à relire en premier : elles changent les résultats affichés), 107 références de validation et 49 non repérés automatiquement. Puis **47 hypothèses** (valeur centrale et plage).
+**361 chiffrages à relire** sur 361, dont 205 entrées du calcul (à relire en premier : elles changent les résultats affichés), 107 références de validation et 49 non repérés automatiquement. Puis **48 hypothèses** (valeur centrale et plage).
 
 ## Sommaire
 
@@ -1769,3 +1769,6 @@ Pour chaque ligne : ouvrir le document à la page indiquée, vérifier la valeur
 - [ ] `baseline_commission_ecart_scenarios` : **0 points de PIB**, plage 0 à 11,6
   - Écart à la projection centrale de la Commission européenne retenu pour la borne haute, en points de PIB en 2036
   - Sources : ce_dsm_2025 ; instruments : baseline
+- [ ] `ir_bareme_ecart` : **0 écart relatif à l'effet calculé par le moteur**, plage -0,012 à 0,547
+  - Écart entre le chiffrage officiel d'une réforme du barème de l'impôt sur le revenu et le moteur de barème
+  - Sources : plf2013_projet_loi, plf2015_projet_loi, plf2020_projet_loi, plf2025_evaluations_prealables, dgfip_ir_tableaux_statistiques ; instruments : impot_revenu_structure

@@ -21,6 +21,7 @@ import {
   LEVIERS_PUBLICS,
   LEVIERS_REMUNERATIONS,
   LEVIERS_RETRAITES,
+  LEVIER_IR_SEUILS,
   LEVIERS_SOLIDARITE,
   MISSION_SOLIDARITE,
   decoder,
@@ -35,6 +36,8 @@ import { EffetsEntreprisesScenario } from "./entreprises";
 import { DepenseMenagesScenario } from "./depense";
 import { region } from "../../lib/region";
 import { correspond, reglees, SECTIONS } from "../../lib/sections";
+import { egal, mesureBareme, type Bareme, type DonneesBareme } from "../../lib/bareme-ir";
+import { EditeurBareme } from "./bareme-ir";
 import { useReponses } from "../../lib/chargement";
 import Link from "next/link";
 
@@ -50,8 +53,10 @@ function SimulateurCharge({
   version,
   entreprises,
   depense,
+  bareme: donneesBareme,
 }: {
   donnees: ReponsesUnitaires;
+  bareme: DonneesBareme;
   commission: Baseline["commission"];
   catalogue: CatalogueDepensesFiscales;
   missions: CatalogueCreditsMissions;
@@ -71,6 +76,8 @@ function SimulateurCharge({
   const [parImpot, setParImpot] = useState<Record<string, number>>({});
   const [parDepense, setParDepense] = useState<Record<string, number>>({});
   const [parMission, setParMission] = useState<Record<string, number>>({});
+  const [bareme, setBareme] = useState<Bareme>(donneesBareme.bareme_reference);
+  const baremeModifie = !egal(bareme, donneesBareme.bareme_reference);
   const [annee, setAnnee] = useState(annees[0]);
   const [croissance, setCroissance] = useState(false);
   const [recherche, setRecherche] = useState("");
@@ -90,6 +97,7 @@ function SimulateurCharge({
     parDepense,
     parMission,
     ...(croissance ? { croissance: true } : {}),
+    ...(baremeModifie ? { bareme } : {}),
     version: empreinte,
   };
   useEffect(() => {
@@ -99,7 +107,7 @@ function SimulateurCharge({
       if (!lien) {
         setAlerte(texte("partage.lien_illisible"));
         garderAdresse.current = true;
-      } else if (problemes(lien, donnees, catalogue, missions).length > 0) {
+      } else if (problemes(lien, donnees, catalogue, missions, donneesBareme).length > 0) {
         setAlerte(texte("partage.lien_invalide"));
         garderAdresse.current = true;
       } else {
@@ -107,6 +115,7 @@ function SimulateurCharge({
         setParImpot(lien.parImpot);
         setParDepense(lien.parDepense);
         setParMission(lien.parMission);
+        if (lien.bareme) setBareme(lien.bareme);
         setAnnee(lien.annee);
         setCroissance(lien.croissance === true);
         if (lien.version && lien.version !== empreinte) {
@@ -116,7 +125,7 @@ function SimulateurCharge({
       }
     }
     setLu(true);
-  }, [donnees, catalogue, missions, empreinte]);
+  }, [donnees, catalogue, missions, empreinte, donneesBareme]);
   const adresse = encoder(etat);
   useEffect(() => {
     if (!lu) return;
@@ -143,6 +152,7 @@ function SimulateurCharge({
       ...leviers.map((l) => ({ levier: l.id, valeur: valeurs[l.id] })),
       ...mesuresDepensesFiscales(catalogue, parImpot, parDepense),
       ...mesuresCreditsMissions(missions, parMission),
+      ...mesureBareme(donneesBareme, bareme),
     ],
     annee,
     croissance,
@@ -179,7 +189,8 @@ function SimulateurCharge({
     reglees(Object.keys(valeurs), valeurs) +
     Object.values(parImpot).filter((v) => v !== 0).length +
     Object.values(parDepense).filter((v) => v !== 0).length +
-    Object.values(parMission).filter((v) => v !== 0).length;
+    Object.values(parMission).filter((v) => v !== 0).length +
+    (baremeModifie ? 1 : 0);
   const reglagesDepenses =
     Object.values(parImpot).filter((v) => v !== 0).length +
     Object.values(parDepense).filter((v) => v !== 0).length;
@@ -189,6 +200,7 @@ function SimulateurCharge({
     setParImpot({});
     setParDepense({});
     setParMission({});
+    setBareme(donneesBareme.bareme_reference);
   };
   // Section ouverte : choix de l'utilisateur, sinon ouverte si une mesure y est réglée (la
   // première l'est par défaut) ; toutes ouvertes pendant une recherche.
@@ -210,7 +222,8 @@ function SimulateurCharge({
     const bloqueRetraites =
       LEVIERS_RETRAITES.includes(l.id) &&
       LEVIERS_RETRAITES.some((id) => id !== l.id && (valeurs[id] ?? 0) !== 0);
-    const bloque = bloqueRemunerations || bloqueIndexation || bloqueRetraites;
+    const bloqueBareme = l.id === LEVIER_IR_SEUILS && baremeModifie;
+    const bloque = bloqueRemunerations || bloqueIndexation || bloqueRetraites || bloqueBareme;
     return (
       <div key={l.id} className="reglage">
         <div className="reglage-tete">
@@ -239,6 +252,7 @@ function SimulateurCharge({
         )}
         {bloqueIndexation && <span className="source">{texte("simulateur.bloque_indexation")}</span>}
         {bloqueRetraites && <span className="source">{texte("simulateur.bloque_retraites")}</span>}
+        {bloqueBareme && <span className="source">{texte("simulateur.bloque_bareme")}</span>}
       </div>
     );
   };
@@ -320,6 +334,22 @@ function SimulateurCharge({
                     setParImpot={setParImpot}
                     parDepense={parDepense}
                     setParDepense={setParDepense}
+                  />
+                </div>
+              </details>
+              <details
+                className="section"
+                open={ouvertes.bareme_ir ?? baremeModifie}
+                onToggle={basculer("bareme_ir")}
+              >
+                {titreSection("bareme_ir", baremeModifie ? 1 : 0)}
+                <div className="section-contenu">
+                  <EditeurBareme
+                    donnees={donneesBareme}
+                    bareme={bareme}
+                    setBareme={setBareme}
+                    bloque={(valeurs[LEVIER_IR_SEUILS] ?? 0) !== 0}
+                    statut={donnees.leviers[donneesBareme.levier]?.statut}
                   />
                 </div>
               </details>
@@ -506,7 +536,13 @@ function SimulateurCharge({
       </div>
       <p className="source">{texte("simulateur.unite")}</p>
       <p className="source">{texte("partage.explication")}</p>
-      <EffetsMenagesScenario valeurs={valeurs} empreinte={empreinte} autresReglees={autresReglees} />
+      {/* Barème saisi : son effet sur les ménages types n'est pas encore calculé (raison
+          « bareme » du levier générique, listée par le bloc des ménages). */}
+      <EffetsMenagesScenario
+        valeurs={baremeModifie ? { ...valeurs, [donneesBareme.levier]: 1 } : valeurs}
+        empreinte={empreinte}
+        autresReglees={autresReglees}
+      />
       <DepenseMenagesScenario donnees={depense} valeurs={valeurs} />
       <EffetsEntreprisesScenario donnees={entreprises} valeurs={valeurs} autresReglees={autresReglees} />
     </>
@@ -523,6 +559,7 @@ export function Simulateur(props: {
   version: Version;
   entreprises: Entreprises;
   depense: DepenseMenages;
+  bareme: DonneesBareme;
 }) {
   const chargement = useReponses(empreinteVersion(props.version));
   if (chargement.etat === "en_cours") return <p role="status">{texte("site.chargement")}</p>;

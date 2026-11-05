@@ -6,6 +6,7 @@ import {
   type Version,
 } from "../../lib/donnees";
 import { Comparaison } from "./comparaison";
+import type { DonneesBareme } from "../../lib/bareme-ir";
 
 export default function PageComparaison() {
   return (
@@ -19,6 +20,7 @@ export default function PageComparaison() {
         catalogue={lire<CatalogueDepensesFiscales>("depenses-fiscales.json")}
         missions={lire<CatalogueCreditsMissions>("credits-missions.json")}
         version={lire<Version>("version.json")}
+        bareme={lire<DonneesBareme>("bareme-ir.json")}
       />
       <p className="source">{texte("partage.explication")}</p>
     </>

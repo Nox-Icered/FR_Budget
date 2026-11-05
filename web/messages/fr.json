@@ -296,6 +296,11 @@
         "libelle": "Durée d'indemnisation du chômage, en pourcentage de la durée de référence ({reference} % depuis la réforme de 2023)",
         "valeur": "{valeur} pt",
         "explication": "La durée pendant laquelle un demandeur d'emploi est indemnisé dépend de la durée de son emploi passé, multipliée par un coefficient : 75 % depuis 2023 (100 % avant). Ce curseur change ce pourcentage. Vers la droite, les droits sont plus longs et la dépense augmente ; vers la gauche, ils sont plus courts. L'effet monte en charge sur trois à quatre ans, comme après la réforme de 2023."
+      },
+      "ir_bareme": {
+        "libelle": "Barème de l'impôt sur le revenu",
+        "valeur": "{valeur} Md€",
+        "explication": ""
       }
     },
     "limite_tva_accise": "La hausse de l'accise augmente aussi la TVA payée sur le carburant : cet effet n'est pas compté.",
@@ -526,11 +531,42 @@
       "credits_missions": {
         "titre": "Budget des missions de l'État",
         "description": "éducation, défense, santé…, avec une aide au chiffrage"
+      },
+      "bareme_ir": {
+        "titre": "Barème de l'impôt sur le revenu",
+        "description": "Nombre de tranches, seuils, taux et décote"
       }
     },
     "resume_mobile_solde": "{central} pt de PIB ({bas} à {haut})",
     "resume_mobile_dette": "{central} % du PIB ({bas} à {haut})",
-    "legende_avec": "Avec les mesures choisies (sur la prévision du Gouvernement)"
+    "legende_avec": "Avec les mesures choisies (sur la prévision du Gouvernement)",
+    "bloque_bareme": "Le barème est réglé plus bas : il fixe déjà les seuils.",
+    "bareme_ir": {
+      "titre": "Barème de l'impôt sur le revenu (revenus de {annee})",
+      "qu_est_ce": "Comment se lit ce barème ?",
+      "explication": "Le revenu imposable d'un foyer est divisé par son nombre de parts (une par adulte, une demi-part par enfant pour les deux premiers). Chaque tranche de ce revenu par part est imposée à son taux : par exemple, 0 % jusqu'au premier seuil, puis 11 % jusqu'au suivant. La décote réduit l'impôt des foyers qui en paient peu. Vous pouvez changer les seuils et les taux, ajouter ou retirer des tranches et régler la décote : le simulateur calcule l'écart de recettes par rapport au barème actuel.",
+      "bloque": "Le curseur « Revalorisation des seuils du barème » est réglé : remettez-le à zéro pour modifier le barème.",
+      "tableau": "Tranches du barème",
+      "tranche": "Tranche",
+      "seuil": "À partir de (euros par part)",
+      "taux": "Taux (%)",
+      "seuil_tranche": "Seuil de la tranche {numero}, en euros par part",
+      "taux_tranche": "Taux de la tranche {numero}, en %",
+      "ajouter": "Ajouter une tranche",
+      "retirer": "Retirer la dernière tranche",
+      "revenir": "Revenir au barème de {annee}",
+      "decote": "Décote",
+      "decote_appliquer": "Appliquer une décote",
+      "decote_seuil_celibataire": "Seuil pour une personne seule (euros)",
+      "decote_seuil_couple": "Seuil pour un couple (euros)",
+      "decote_taux": "Taux (part de l'impôt retranchée, entre 0 et 1)",
+      "invalide": "Barème incomplet : chaque seuil doit être plus élevé que le précédent et chaque taux compris entre 0 et 100 %.",
+      "resultat": "Écart de recettes d'impôt sur le revenu : {central} milliards d'euros par an (de {bas} à {haut}), en euros de {annee}.",
+      "inchange": "Barème actuel : aucun écart de recettes.",
+      "signale": "Un taux supérieur à {taux} % s'éloigne des réformes déjà chiffrées par l'administration : le résultat est moins sûr, et il ne tient pas compte des changements de comportement.",
+      "limite": "Calcul à partir des statistiques publiées par la DGFiP, calé sur les revenus de 2024. Il ne tient compte ni des changements de comportement, ni des réductions et crédits d'impôt, ni du plafond du quotient familial. Il reproduit la baisse de 2020 à 1 % près, mais sous-estime d'autres réformes passées (page Validation).",
+      "hors_bornes": "Ce barème change les recettes de plus de {borne} milliards d'euros par an, au-delà de ce que le simulateur peut chiffrer : il n'est pas pris en compte."
+    }
   },
   "partage": {
     "scenario": "Scénario",
@@ -680,7 +716,8 @@
         "administrations": "Dotations aux collectivités et crédits des missions de l'État : versés entre administrations ou à leurs services.",
         "agents_publics": "Rémunérations publiques : aucun de ces ménages n'est agent public.",
         "structurel": "Âge de départ à la retraite : il change les carrières et les pensions futures, pas l'année simulée.",
-        "catalogue": "Dépenses fiscales : chacune vise une situation particulière, absente de ces ménages types."
+        "catalogue": "Dépenses fiscales : chacune vise une situation particulière, absente de ces ménages types.",
+        "bareme": "Barème de l'impôt sur le revenu saisi dans le simulateur : son effet sur les ménages types n'est pas encore calculé."
       },
       "incidence": {
         "legende": "Incidence des cotisations patronales",

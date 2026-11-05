@@ -10,6 +10,7 @@ import {
   type Version,
 } from "../../lib/donnees";
 import { Simulateur } from "./simulateur";
+import type { DonneesBareme } from "../../lib/bareme-ir";
 import { chemin } from "../../lib/chemin";
 
 const deuxDecimales = (v: number) =>
@@ -23,6 +24,7 @@ export default function PageSimulateur() {
   const version = lire<Version>("version.json");
   const entreprises = lire<Entreprises>("entreprises.json");
   const depense = lire<DepenseMenages>("depense-menages.json");
+  const bareme = lire<DonneesBareme>("bareme-ir.json");
   return (
     <>
       <h1>{texte("simulateur.titre")}</h1>
@@ -38,6 +40,7 @@ export default function PageSimulateur() {
         version={version}
         entreprises={entreprises}
         depense={depense}
+        bareme={bareme}
       />
       <h2>{texte("simulateur.methode_titre")}</h2>
       <p>

@@ -45,6 +45,7 @@ def test_tous_les_leviers_du_simulateur_sont_classes() -> None:
         scenario.LEVIER_PA_PENTE,
         scenario.LEVIER_IR_SEUILS,
         scenario.LEVIER_IR_QF,
+        scenario.LEVIER_IR_BAREME,
         scenario.LEVIER_INDEXATION,
         scenario.LEVIER_RETRAITES_AGE,
         scenario.LEVIER_RETRAITES_AGE_LEGAL,

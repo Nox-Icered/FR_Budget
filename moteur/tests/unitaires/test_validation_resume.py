@@ -90,6 +90,12 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
     attendues |= {f"allegements_generaux_prevision_{a}" for a in (2024, 2025)}
     attendues.add("ir_gel_bareme_2026")
     attendues |= {"qf_baisse_plafond_rendement_2013", "qf_baisse_plafond_rendement_2014"}
+    attendues |= {
+        "ir_bareme_tranche_45_plf2013",
+        "ir_bareme_bas_de_bareme_plf2015",
+        "ir_bareme_classes_moyennes_plf2020",
+        "ir_non_indexation_2025",
+    }
     attendues |= {"indexation_gel_aah_2026", "pa_pente_moindre_depense_2025"}
     attendues.add("indexation_pensions_gel_2026_hcfp")
     attendues |= {

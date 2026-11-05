@@ -1050,3 +1050,11 @@ datasets:
     empreinte_sha256: 94c19716abbebed856acaa973585edb4a434b2389306a84b53af34ee27ad4b16
     methode_transformation: aucune ; montant de la baisse de l'impôt sur le revenu (exposé des motifs de l'article 2, page 37 du PDF) saisi dans registres/references/chiffrages.yaml
     telecharge_le: 2026-11-05
+
+  - id: dgfip_analyses_08_2025_pdf
+    source: dgfip_analyses_08_2025
+    description: DGFiP Analyses n° 08 (PDF, 17 pages)
+    fichier: data/raw/impot_revenu/dgfip_analyses_08_2025.pdf
+    empreinte_sha256: eb7e381d5c68c6a94e26757a7882b78b8012c1497f297e388fbdf144a2b4b959
+    methode_transformation: aucune ; part des foyers mariés ou pacsés par quantile de revenu en 2022 (tableau 3, page 5) saisie dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-11-05

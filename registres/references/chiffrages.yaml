@@ -3890,3 +3890,102 @@ chiffrages:
     localisation: "Exposé des motifs de l'article 2 : « pour un montant global d'environ 5 milliards d'euros », page 37 du PDF"
     saisi_le: 2026-11-05
     relecture: a_relire
+
+  - id: ir_foyers_tranche_45_2024
+    levier: impot_revenu_structure
+    source: dgfip_ir_tableaux_statistiques
+    millesime: "revenus 2024"
+    mesure: "Nombre de foyers dont le quotient familial dépasse le seuil de la tranche à 45 % (180 294 €)"
+    valeur: 61.476
+    unite: "milliers de foyers"
+    localisation: "Fichier « nombre de foyers et montant de l'impôt net par taux marginal », onglet 2024, ligne « Supérieur à 180 294 € », colonne « Nombre de foyers »"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: ir_foyers_tranche_41_2024
+    levier: impot_revenu_structure
+    source: dgfip_ir_tableaux_statistiques
+    millesime: "revenus 2024"
+    mesure: "Nombre de foyers dont le taux marginal est de 41 % (quotient familial entre 83 823 € et 180 294 €)"
+    valeur: 434.112
+    unite: "milliers de foyers"
+    localisation: "Même fichier, onglet 2024, ligne « Supérieur à 83 823 € et inférieur ou égal à 180 294 € »"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: ir_couples_quartile_1_2022
+    levier: impot_revenu_structure
+    source: dgfip_analyses_08_2025
+    millesime: "2022"
+    mesure: "Part des foyers mariés ou pacsés, quart des foyers aux plus bas revenus"
+    valeur: 8.3
+    unite: "%"
+    localisation: "Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « min-1er quartile », page 5"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: ir_couples_quartile_2_2022
+    levier: impot_revenu_structure
+    source: dgfip_analyses_08_2025
+    millesime: "2022"
+    mesure: "Part des foyers mariés ou pacsés, deuxième quart des revenus"
+    valeur: 10.7
+    unite: "%"
+    localisation: "Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « 1er Qtle - 2e Qtle », page 5"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: ir_couples_quartile_3_2022
+    levier: impot_revenu_structure
+    source: dgfip_analyses_08_2025
+    millesime: "2022"
+    mesure: "Part des foyers mariés ou pacsés, troisième quart des revenus"
+    valeur: 33.0
+    unite: "%"
+    localisation: "Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « 2e Qtle - 3e Qtle », page 5"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: ir_couples_quartile_3_decile_9_2022
+    levier: impot_revenu_structure
+    source: dgfip_analyses_08_2025
+    millesime: "2022"
+    mesure: "Part des foyers mariés ou pacsés, du troisième quartile au neuvième décile"
+    valeur: 70.6
+    unite: "%"
+    localisation: "Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « 3e Qtle-9e décile », page 5"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: ir_couples_decile_9_centile_99_9_2022
+    levier: impot_revenu_structure
+    source: dgfip_analyses_08_2025
+    millesime: "2022"
+    mesure: "Part des foyers mariés ou pacsés, du neuvième décile au 99,9e centile"
+    valeur: 83.4
+    unite: "%"
+    localisation: "Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « 9e décile-centile 99,9 », page 5"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: ir_couples_tres_hauts_revenus_2022
+    levier: impot_revenu_structure
+    source: dgfip_analyses_08_2025
+    millesime: "2022"
+    mesure: "Part des foyers mariés ou pacsés, foyers aux très hauts revenus (0,1 % les plus élevés)"
+    valeur: 82.3
+    unite: "%"
+    localisation: "Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « THR », page 5"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: ir_couples_ensemble_2022
+    levier: impot_revenu_structure
+    source: dgfip_analyses_08_2025
+    millesime: "2022"
+    mesure: "Part des foyers mariés ou pacsés, ensemble des foyers"
+    valeur: 32.0
+    unite: "%"
+    localisation: "Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « Ensemble », page 5"
+    saisi_le: 2026-11-05
+    relecture: a_relire

@@ -4,7 +4,7 @@ Générée le 2026-11-05 par `outils/liste_relecture.py` à partir des registres
 
 Pour chaque ligne : ouvrir le document à la page indiquée, vérifier la valeur, l'unité et ce qu'elle mesure. Cocher la case quand la valeur est conforme, ou noter l'écart. Les lignes cochées passent ensuite à `relecture: relu` dans `registres/references/chiffrages.yaml`. Le classement entre entrées du calcul et références de validation est repéré automatiquement dans le code : il est indicatif.
 
-**349 chiffrages à relire** sur 349, dont 193 entrées du calcul (à relire en premier : elles changent les résultats affichés), 107 références de validation et 49 non repérés automatiquement. Puis **47 hypothèses** (valeur centrale et plage).
+**361 chiffrages à relire** sur 361, dont 205 entrées du calcul (à relire en premier : elles changent les résultats affichés), 107 références de validation et 49 non repérés automatiquement. Puis **47 hypothèses** (valeur centrale et plage).
 
 ## Sommaire
 
@@ -24,7 +24,7 @@ Pour chaque ligne : ouvrir le document à la page indiquée, vérifier la valeur
 | [dotations_collectivites](#dotations_collectivites) | 5 | 1 |
 | [retraites](#retraites) | 6 | 0 |
 | [assurance_chomage](#assurance_chomage) | 27 | 20 |
-| [impot_revenu_structure](#impot_revenu_structure) | 13 | 7 |
+| [impot_revenu_structure](#impot_revenu_structure) | 25 | 19 |
 | [croissance](#croissance) | 11 | 0 |
 | [dynamique_dette](#dynamique_dette) | 12 | 7 |
 | [menages_types](#menages_types) | 66 | 42 |
@@ -1137,7 +1137,7 @@ Pour chaque ligne : ouvrir le document à la page indiquée, vérifier la valeur
 
 ## impot_revenu_structure
 
-### Entrée du calcul (7)
+### Entrée du calcul (19)
 
 - [ ] `qf_plafond_2012` : **2 336 €** (PLF 2013)
   - Mesure : Plafond de l'avantage procuré par chaque demi-part pour charges de famille avant le PLF 2013 (revenus 2011)
@@ -1167,6 +1167,54 @@ Pour chaque ligne : ouvrir le document à la page indiquée, vérifier la valeur
   - Mesure : Baisse des plafonds du quotient familial chiffrée par la mission
   - Où : IGF et IGAS, « Revue de dépenses relative à l'efficacité des politiques familiales », juin 2026, Annexe IV, tableau 15, ligne « Nature de la mesure », page 184 du PDF
   - Document : https://www.igf.gouv.fr/files/igf/files/contributed/Rapports%20de%20mission/2026/Rapport-Politiques-familiales.pdf ; fichier : `data/raw/impot_revenu/igf_igas_politiques_familiales_2026.pdf`
+- [ ] `ir_bareme_tranche_45_plf2013` : **0,3 Md€** (PLF 2013)
+  - Mesure : Rendement en 2013 de la création d'une tranche d'impôt sur le revenu à 45 % (revenus 2012)
+  - Où : Projet de loi de finances pour 2013, n° 235, déposé à l'Assemblée nationale le 28 septembre 2012 (exposé général des motifs et articles), Exposé général des motifs, tableau « Rendement 2013 ; en Md€ », ligne « Création d'une tranche d'impôt sur le revenu à 45 % », page 19 du PDF
+  - Document : https://www.assemblee-nationale.fr/14/pdf/projets/pl0235.pdf ; fichier : `data/raw/impot_revenu/plf2013_projet_loi_235.pdf`
+- [ ] `ir_bareme_bas_de_bareme_plf2015` : **3,187 Md€** (PLF 2015)
+  - Mesure : Coût budgétaire de la réforme du bas du barème : suppression de la tranche à 5,5 %, seuil de la tranche à 14 % fixé à 9 690 €, décote renforcée (revenus 2014)
+  - Où : Projet de loi de finances pour 2015, n° 2234, déposé à l'Assemblée nationale le 1er octobre 2014 (exposé général des motifs et articles), Exposé des motifs de l'article 2 : « un coût budgétaire estimé à 3,187 milliards d'euros », page 53 du PDF
+  - Document : https://www.assemblee-nationale.fr/14/pdf/projets/pl2234.pdf ; fichier : `data/raw/impot_revenu/plf2015_projet_loi_2234.pdf`
+- [ ] `ir_bareme_classes_moyennes_plf2020` : **5 Md€** (PLF 2020)
+  - Mesure : Baisse de l'impôt sur le revenu des classes moyennes : taux de la première tranche imposable de 14 % à 11 %, décote atténuée, gain plafonné puis neutralisé par les seuils des tranches à 30, 41 et 45 % (revenus 2020)
+  - Où : Projet de loi de finances pour 2020, n° 2272, déposé à l'Assemblée nationale le 27 septembre 2019 (exposé général des motifs et articles), Exposé des motifs de l'article 2 : « pour un montant global d'environ 5 milliards d'euros », page 37 du PDF
+  - Document : https://www.assemblee-nationale.fr/dyn/15/textes/l15b2272_projet-loi.pdf ; fichier : `data/raw/impot_revenu/plf2020_projet_loi_2272.pdf`
+- [ ] `ir_foyers_tranche_45_2024` : **61,476 milliers de foyers** (revenus 2024)
+  - Mesure : Nombre de foyers dont le quotient familial dépasse le seuil de la tranche à 45 % (180 294 €)
+  - Où : DGFiP, tableaux statistiques de l'impôt sur le revenu : « répartition de l'impôt moyen par déciles de RFR par part » et « nombre de foyers et montant de l'impôt net par taux marginal de taxation du barème » (.xls), Fichier « nombre de foyers et montant de l'impôt net par taux marginal », onglet 2024, ligne « Supérieur à 180 294 € », colonne « Nombre de foyers »
+  - Document : https://www.impots.gouv.fr/node/28082 ; fichier : `data/raw/impot_revenu/dgfip_ir_deciles_rfr_part.xlsx`, `data/raw/impot_revenu/dgfip_ir_taux_marginal.xlsx`
+- [ ] `ir_foyers_tranche_41_2024` : **434,112 milliers de foyers** (revenus 2024)
+  - Mesure : Nombre de foyers dont le taux marginal est de 41 % (quotient familial entre 83 823 € et 180 294 €)
+  - Où : DGFiP, tableaux statistiques de l'impôt sur le revenu : « répartition de l'impôt moyen par déciles de RFR par part » et « nombre de foyers et montant de l'impôt net par taux marginal de taxation du barème » (.xls), Même fichier, onglet 2024, ligne « Supérieur à 83 823 € et inférieur ou égal à 180 294 € »
+  - Document : https://www.impots.gouv.fr/node/28082 ; fichier : `data/raw/impot_revenu/dgfip_ir_deciles_rfr_part.xlsx`, `data/raw/impot_revenu/dgfip_ir_taux_marginal.xlsx`
+- [ ] `ir_couples_quartile_1_2022` : **8,3 %** (2022)
+  - Mesure : Part des foyers mariés ou pacsés, quart des foyers aux plus bas revenus
+  - Où : DGFiP Analyses n° 08, « Revenus et patrimoine des foyers les plus aisés en France », janvier 2025, Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « min-1er quartile », page 5
+  - Document : https://www.impots.gouv.fr/sites/default/files/media/9_statistiques/0_etudes_et_stats/0_publications/dgfip_analyses/2025/num08_01/dgfip_analyses_08_2025.pdf ; fichier : `data/raw/impot_revenu/dgfip_analyses_08_2025.pdf`
+- [ ] `ir_couples_quartile_2_2022` : **10,7 %** (2022)
+  - Mesure : Part des foyers mariés ou pacsés, deuxième quart des revenus
+  - Où : DGFiP Analyses n° 08, « Revenus et patrimoine des foyers les plus aisés en France », janvier 2025, Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « 1er Qtle - 2e Qtle », page 5
+  - Document : https://www.impots.gouv.fr/sites/default/files/media/9_statistiques/0_etudes_et_stats/0_publications/dgfip_analyses/2025/num08_01/dgfip_analyses_08_2025.pdf ; fichier : `data/raw/impot_revenu/dgfip_analyses_08_2025.pdf`
+- [ ] `ir_couples_quartile_3_2022` : **33 %** (2022)
+  - Mesure : Part des foyers mariés ou pacsés, troisième quart des revenus
+  - Où : DGFiP Analyses n° 08, « Revenus et patrimoine des foyers les plus aisés en France », janvier 2025, Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « 2e Qtle - 3e Qtle », page 5
+  - Document : https://www.impots.gouv.fr/sites/default/files/media/9_statistiques/0_etudes_et_stats/0_publications/dgfip_analyses/2025/num08_01/dgfip_analyses_08_2025.pdf ; fichier : `data/raw/impot_revenu/dgfip_analyses_08_2025.pdf`
+- [ ] `ir_couples_quartile_3_decile_9_2022` : **70,6 %** (2022)
+  - Mesure : Part des foyers mariés ou pacsés, du troisième quartile au neuvième décile
+  - Où : DGFiP Analyses n° 08, « Revenus et patrimoine des foyers les plus aisés en France », janvier 2025, Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « 3e Qtle-9e décile », page 5
+  - Document : https://www.impots.gouv.fr/sites/default/files/media/9_statistiques/0_etudes_et_stats/0_publications/dgfip_analyses/2025/num08_01/dgfip_analyses_08_2025.pdf ; fichier : `data/raw/impot_revenu/dgfip_analyses_08_2025.pdf`
+- [ ] `ir_couples_decile_9_centile_99_9_2022` : **83,4 %** (2022)
+  - Mesure : Part des foyers mariés ou pacsés, du neuvième décile au 99,9e centile
+  - Où : DGFiP Analyses n° 08, « Revenus et patrimoine des foyers les plus aisés en France », janvier 2025, Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « 9e décile-centile 99,9 », page 5
+  - Document : https://www.impots.gouv.fr/sites/default/files/media/9_statistiques/0_etudes_et_stats/0_publications/dgfip_analyses/2025/num08_01/dgfip_analyses_08_2025.pdf ; fichier : `data/raw/impot_revenu/dgfip_analyses_08_2025.pdf`
+- [ ] `ir_couples_tres_hauts_revenus_2022` : **82,3 %** (2022)
+  - Mesure : Part des foyers mariés ou pacsés, foyers aux très hauts revenus (0,1 % les plus élevés)
+  - Où : DGFiP Analyses n° 08, « Revenus et patrimoine des foyers les plus aisés en France », janvier 2025, Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « THR », page 5
+  - Document : https://www.impots.gouv.fr/sites/default/files/media/9_statistiques/0_etudes_et_stats/0_publications/dgfip_analyses/2025/num08_01/dgfip_analyses_08_2025.pdf ; fichier : `data/raw/impot_revenu/dgfip_analyses_08_2025.pdf`
+- [ ] `ir_couples_ensemble_2022` : **32 %** (2022)
+  - Mesure : Part des foyers mariés ou pacsés, ensemble des foyers
+  - Où : DGFiP Analyses n° 08, « Revenus et patrimoine des foyers les plus aisés en France », janvier 2025, Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « Ensemble », page 5
+  - Document : https://www.impots.gouv.fr/sites/default/files/media/9_statistiques/0_etudes_et_stats/0_publications/dgfip_analyses/2025/num08_01/dgfip_analyses_08_2025.pdf ; fichier : `data/raw/impot_revenu/dgfip_analyses_08_2025.pdf`
 
 ### Non repéré (6)
 

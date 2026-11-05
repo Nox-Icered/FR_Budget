@@ -14,7 +14,7 @@ from dataclasses import dataclass
 from functools import partial
 
 from fr_budget import retraites_cohortes
-from fr_budget.agrege import quotient_familial
+from fr_budget.agrege import bareme_ir, quotient_familial
 from fr_budget.agrege.accises import recette_brute
 from fr_budget.agrege.assurance_chomage import cout_revalorisation_cumule, effet_contribution
 from fr_budget.agrege.cotisations import cout_allegements, valeur_point_modele
@@ -305,6 +305,12 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
     ]
     definitions += [("ir_gel_bareme_2026", partial(_ir_gel, inflation_2025, 2026))]
     definitions += [("pa_pente_moindre_depense_2025", _pa_pente_millions)]
+    definitions += [
+        ("ir_bareme_tranche_45_plf2013", bareme_ir.validation_tranche_45_2012),
+        ("ir_bareme_bas_de_bareme_plf2015", bareme_ir.validation_bas_de_bareme_2014),
+        ("ir_bareme_classes_moyennes_plf2020", bareme_ir.validation_classes_moyennes_2020),
+        ("ir_non_indexation_2025", bareme_ir.validation_non_indexation_2024),
+    ]
     definitions += [
         (
             f"qf_baisse_plafond_rendement_{annee}",

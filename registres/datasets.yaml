@@ -1018,3 +1018,43 @@ datasets:
     empreinte_sha256: 152ab0571d74a02570f1e65c457be442311ca154f5df845a7ff2c21514e17763
     methode_transformation: aucune ; montant du quotient familial avant et après les baisses de 2013 et 2014 (note 24, page 22 du PDF) saisi dans registres/references/chiffrages.yaml
     telecharge_le: 2026-11-05
+
+  - id: dgfip_ir_deciles_rfr_part_xlsx
+    source: dgfip_ir_tableaux_statistiques
+    description: Répartition de l'impôt moyen par déciles de RFR par part, un onglet par année de revenus (2003 à 2024)
+    fichier: data/raw/impot_revenu/dgfip_ir_deciles_rfr_part.xlsx
+    empreinte_sha256: 59eebbdbfb0af568f6ab0ddd28cc30c76deaee95d62f5bf795c1cca130e1f307
+    methode_transformation: pipelines/impot_revenu/extraire_deciles_dgfip.py → data/processed/impot_revenu/deciles_rfr_part.csv (bornes, impôt moyen et nombre de foyers, en euros) et deciles_rfr_part_2024.csv (parts, RFR et impôt au barème moyens par part, dixièmes, dernier centième et dernier millième)
+    telecharge_le: 2026-11-05
+
+  - id: dgfip_ir_taux_marginal_xlsx
+    source: dgfip_ir_tableaux_statistiques
+    description: Nombre de foyers et montant de l'impôt net par taux marginal de taxation du barème, revenus 2019 à 2024
+    fichier: data/raw/impot_revenu/dgfip_ir_taux_marginal.xlsx
+    empreinte_sha256: 2fb279cf8d89e6737a0d1afe9b2dffd7719477944e09e69b442f50f653261f17
+    methode_transformation: aucune ; conservé pour le contrôle de la répartition par tranche (fiche bareme_ir, § 6)
+    telecharge_le: 2026-11-05
+
+  - id: plf2015_projet_loi_pdf
+    source: plf2015_projet_loi
+    description: Projet de loi de finances pour 2015, n° 2234 (PDF)
+    fichier: data/raw/impot_revenu/plf2015_projet_loi_2234.pdf
+    empreinte_sha256: cf2477f6c07cbff5e00dd3e452acf3adee11648b63f1c8402c072b787dd5f6c2
+    methode_transformation: aucune ; coût de la réforme du bas de barème (exposé des motifs de l'article 2, page 53 du PDF) saisi dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-11-05
+
+  - id: plf2020_projet_loi_pdf
+    source: plf2020_projet_loi
+    description: Projet de loi de finances pour 2020, n° 2272 (PDF)
+    fichier: data/raw/impot_revenu/plf2020_projet_loi_2272.pdf
+    empreinte_sha256: 94c19716abbebed856acaa973585edb4a434b2389306a84b53af34ee27ad4b16
+    methode_transformation: aucune ; montant de la baisse de l'impôt sur le revenu (exposé des motifs de l'article 2, page 37 du PDF) saisi dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-11-05
+
+  - id: dgfip_analyses_08_2025_pdf
+    source: dgfip_analyses_08_2025
+    description: DGFiP Analyses n° 08 (PDF, 17 pages)
+    fichier: data/raw/impot_revenu/dgfip_analyses_08_2025.pdf
+    empreinte_sha256: eb7e381d5c68c6a94e26757a7882b78b8012c1497f297e388fbdf144a2b4b959
+    methode_transformation: aucune ; part des foyers mariés ou pacsés par quantile de revenu en 2022 (tableau 3, page 5) saisie dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-11-05

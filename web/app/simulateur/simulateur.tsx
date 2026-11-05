@@ -107,7 +107,7 @@ function SimulateurCharge({
       if (!lien) {
         setAlerte(texte("partage.lien_illisible"));
         garderAdresse.current = true;
-      } else if (problemes(lien, donnees, catalogue, missions).length > 0) {
+      } else if (problemes(lien, donnees, catalogue, missions, donneesBareme).length > 0) {
         setAlerte(texte("partage.lien_invalide"));
         garderAdresse.current = true;
       } else {
@@ -125,7 +125,7 @@ function SimulateurCharge({
       }
     }
     setLu(true);
-  }, [donnees, catalogue, missions, empreinte]);
+  }, [donnees, catalogue, missions, empreinte, donneesBareme]);
   const adresse = encoder(etat);
   useEffect(() => {
     if (!lu) return;
@@ -536,7 +536,13 @@ function SimulateurCharge({
       </div>
       <p className="source">{texte("simulateur.unite")}</p>
       <p className="source">{texte("partage.explication")}</p>
-      <EffetsMenagesScenario valeurs={valeurs} empreinte={empreinte} autresReglees={autresReglees} />
+      {/* Barème saisi : son effet sur les ménages types n'est pas encore calculé (raison
+          « bareme » du levier générique, listée par le bloc des ménages). */}
+      <EffetsMenagesScenario
+        valeurs={baremeModifie ? { ...valeurs, [donneesBareme.levier]: 1 } : valeurs}
+        empreinte={empreinte}
+        autresReglees={autresReglees}
+      />
       <DepenseMenagesScenario donnees={depense} valeurs={valeurs} />
       <EffetsEntreprisesScenario donnees={entreprises} valeurs={valeurs} autresReglees={autresReglees} />
     </>

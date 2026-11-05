@@ -137,6 +137,7 @@ def bareme_ir() -> dict[str, Any]:
     return {
         **module_bareme_ir.donnees_site(),
         "levier": module_scenario.LEVIER_IR_BAREME,
+        "bornes": list(module_scenario.bornes_levier(module_scenario.LEVIER_IR_BAREME)),
         "sources": list(module_scenario.PROVENANCE_IR_BAREME[0]),
         "hypotheses": list(module_scenario.PROVENANCE_IR_BAREME[1]),
     }

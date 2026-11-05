@@ -64,3 +64,12 @@ test("état du simulateur : barème dans le lien, double compte avec la revalori
   assert.equal(m[0].levier, "ir_bareme");
   assert.ok(Math.abs(m[0].valeur - donnees.controles[0].effet.central) < 1e-3);
 });
+
+test("barème hors des bornes du levier générique : signalé, pas de mesure", async () => {
+  const { horsBornes } = await import("../lib/bareme-ir.ts");
+  const ref = donnees.bareme_reference;
+  const extreme = { ...ref, taux: ref.taux.map(() => 1) };
+  assert.ok(horsBornes(donnees, extreme));
+  assert.deepEqual(mesureBareme(donnees, extreme), []);
+  assert.ok(!horsBornes(donnees, donnees.controles[0].bareme));
+});

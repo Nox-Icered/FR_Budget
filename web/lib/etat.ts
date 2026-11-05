@@ -14,6 +14,7 @@ import { mesuresCreditsMissions } from "./credits-missions.ts";
 import {
   decoderBareme,
   encoderBareme,
+  horsBornes,
   mesureBareme,
   problemesBareme,
   type Bareme,
@@ -178,6 +179,7 @@ export function problemes(
   donnees: ReponsesUnitaires,
   catalogue: CatalogueDepensesFiscales,
   missions: CatalogueCreditsMissions,
+  bareme?: DonneesBareme,
 ): Probleme[] {
   const liste: Probleme[] = [];
   const premier = Object.values(donnees.leviers)[0];
@@ -204,6 +206,7 @@ export function problemes(
     else if (!dans(v, missions.bornes)) liste.push("hors_bornes");
   }
   if (etat.bareme && problemesBareme(etat.bareme).length > 0) liste.push("hors_bornes");
+  if (etat.bareme && bareme && horsBornes(bareme, etat.bareme)) liste.push("hors_bornes");
   const regle = (ids: string[]) => ids.some((id) => (etat.leviers[id] ?? 0) !== 0);
   const missionsReglees = Object.values(etat.parMission).some((v) => v !== 0);
   const depenseChoisieDansImpot = catalogue.depenses.some(

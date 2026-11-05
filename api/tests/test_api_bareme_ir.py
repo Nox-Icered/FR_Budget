@@ -8,6 +8,7 @@ from fr_budget_api.app import bareme_ir
 def test_donnees_editeur() -> None:
     d = bareme_ir()
     assert d["levier"] == "ir_bareme"
+    assert d["bornes"] == [-150.0, 150.0]
     assert d["annee_bareme"] == 2025
     assert "dgfip_ir_tableaux_statistiques" in d["sources"]
     assert d["hypotheses"] == ["ir_bareme_ecart"]

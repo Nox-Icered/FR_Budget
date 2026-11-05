@@ -7,6 +7,7 @@ import { texte } from "../../lib/textes";
 import {
   effetBareme,
   egal,
+  horsBornes,
   problemesBareme,
   signale,
   TAUX_SIGNALE,
@@ -156,6 +157,8 @@ export function EditeurBareme({
       <p aria-live="polite">
         {problemes.length > 0
           ? texte("simulateur.bareme_ir.invalide")
+          : horsBornes(donnees, bareme)
+            ? texte("simulateur.bareme_ir.hors_bornes", { borne: donnees.bornes[1] })
           : effet
             ? texte("simulateur.bareme_ir.resultat", {
                 central: milliards.format(effet.central),

@@ -58,7 +58,7 @@ function ComparaisonChargee({
     if (!lien.trim()) return {};
     const etat = decoder(lien.trim());
     if (!etat) return { alerte: texte("partage.lien_illisible") };
-    if (problemes(etat, donnees, catalogue, missions).length > 0)
+    if (problemes(etat, donnees, catalogue, missions, bareme).length > 0)
       return { alerte: texte("partage.lien_invalide") };
     const nom = texte("comparaison.nom", { numero: k + 1 });
     const lignes = calculer(

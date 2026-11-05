@@ -26,6 +26,7 @@ export type DonneesBareme = {
   segments: SegmentBareme[];
   controles: { nom: string; bareme: Bareme; effet: Fourchette }[];
   levier: string;
+  bornes: [number, number];
   sources: string[];
   hypotheses: string[];
 };
@@ -147,8 +148,17 @@ export function decoderBareme(texte: string): Bareme | null {
   return { seuils: paires.map((p) => p[0]), taux: paires.map((p) => p[1] / 100), decote };
 }
 
+// Écart hors des bornes du levier générique (le moteur refuserait la mesure) : le barème est
+// signalé et n'entre pas dans le calcul.
+export function horsBornes(d: DonneesBareme, b: Bareme): boolean {
+  if (problemesBareme(b).length > 0) return false;
+  const effet = effetBareme(d, b).central;
+  return effet < d.bornes[0] || effet > d.bornes[1];
+}
+
 export function mesureBareme(d: DonneesBareme, b: Bareme | undefined): MesureSite[] {
-  if (!b || egal(b, d.bareme_reference) || problemesBareme(b).length > 0) return [];
+  if (!b || egal(b, d.bareme_reference) || problemesBareme(b).length > 0 || horsBornes(d, b))
+    return [];
   const effet = effetBareme(d, b).central;
   return effet === 0 ? [] : [{ levier: d.levier, valeur: effet }];
 }

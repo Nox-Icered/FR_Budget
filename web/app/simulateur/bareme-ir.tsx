@@ -57,12 +57,12 @@ export function EditeurBareme({
 
   return (
     <fieldset className="reglages bareme-ir" disabled={bloque}>
-      <legend>
-        {texte("simulateur.bareme_ir.titre", { annee: donnees.annee_bareme })}
-        {statut && statut !== "valide" && (
+      <legend>{texte("simulateur.bareme_ir.titre", { annee: donnees.annee_bareme })}</legend>
+      {statut && statut !== "valide" && (
+        <p>
           <span className="etiquette">{texte(`validation.statuts.${statut}`)}</span>
-        )}
-      </legend>
+        </p>
+      )}
       <details className="explication">
         <summary>{texte("simulateur.bareme_ir.qu_est_ce")}</summary>
         <p>{texte("simulateur.bareme_ir.explication")}</p>

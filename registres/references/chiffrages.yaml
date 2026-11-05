@@ -3857,3 +3857,36 @@ chiffrages:
     localisation: "Note 24, page 22 du PDF"
     saisi_le: 2026-11-05
     relecture: a_relire
+
+  - id: ir_bareme_tranche_45_plf2013
+    levier: impot_revenu_structure
+    source: plf2013_projet_loi
+    millesime: "PLF 2013"
+    mesure: "Rendement en 2013 de la création d'une tranche d'impôt sur le revenu à 45 % (revenus 2012)"
+    valeur: 0.3
+    unite: "Md€"
+    localisation: "Exposé général des motifs, tableau « Rendement 2013 ; en Md€ », ligne « Création d'une tranche d'impôt sur le revenu à 45 % », page 19 du PDF"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: ir_bareme_bas_de_bareme_plf2015
+    levier: impot_revenu_structure
+    source: plf2015_projet_loi
+    millesime: "PLF 2015"
+    mesure: "Coût budgétaire de la réforme du bas du barème : suppression de la tranche à 5,5 %, seuil de la tranche à 14 % fixé à 9 690 €, décote renforcée (revenus 2014)"
+    valeur: 3.187
+    unite: "Md€"
+    localisation: "Exposé des motifs de l'article 2 : « un coût budgétaire estimé à 3,187 milliards d'euros », page 53 du PDF"
+    saisi_le: 2026-11-05
+    relecture: a_relire
+
+  - id: ir_bareme_classes_moyennes_plf2020
+    levier: impot_revenu_structure
+    source: plf2020_projet_loi
+    millesime: "PLF 2020"
+    mesure: "Baisse de l'impôt sur le revenu des classes moyennes : taux de la première tranche imposable de 14 % à 11 %, décote atténuée, gain plafonné puis neutralisé par les seuils des tranches à 30, 41 et 45 % (revenus 2020)"
+    valeur: 5.0
+    unite: "Md€"
+    localisation: "Exposé des motifs de l'article 2 : « pour un montant global d'environ 5 milliards d'euros », page 37 du PDF"
+    saisi_le: 2026-11-05
+    relecture: a_relire

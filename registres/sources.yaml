@@ -1029,3 +1029,30 @@ sources:
     millesime: juillet 2021
     acces: direct
     consulte_le: 2026-11-05
+
+  - id: dgfip_ir_tableaux_statistiques
+    nom: "DGFiP, tableaux statistiques de l'impôt sur le revenu : « répartition de l'impôt moyen par déciles de RFR par part » et « nombre de foyers et montant de l'impôt net par taux marginal de taxation du barème » (.xls)"
+    editeur: Direction générale des finances publiques
+    url: https://www.impots.gouv.fr/node/28082
+    licence: Licence Ouverte 2.0
+    millesime: revenus 2003 à 2024 (mise à jour du 7 avril 2026)
+    acces: direct
+    consulte_le: 2026-11-05
+
+  - id: plf2015_projet_loi
+    nom: Projet de loi de finances pour 2015, n° 2234, déposé à l'Assemblée nationale le 1er octobre 2014 (exposé général des motifs et articles)
+    editeur: Assemblée nationale (texte du Gouvernement)
+    url: https://www.assemblee-nationale.fr/14/pdf/projets/pl2234.pdf
+    licence: document parlementaire public
+    millesime: PLF 2015
+    acces: direct
+    consulte_le: 2026-11-05
+
+  - id: plf2020_projet_loi
+    nom: Projet de loi de finances pour 2020, n° 2272, déposé à l'Assemblée nationale le 27 septembre 2019 (exposé général des motifs et articles)
+    editeur: Assemblée nationale (texte du Gouvernement)
+    url: https://www.assemblee-nationale.fr/dyn/15/textes/l15b2272_projet-loi.pdf
+    licence: document parlementaire public
+    millesime: PLF 2020
+    acces: direct
+    consulte_le: 2026-11-05

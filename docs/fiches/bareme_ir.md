@@ -20,7 +20,8 @@ Dans le simulateur (section « Barème de l'impôt sur le revenu ») : un barèm
 - Le barème saisi et le barème de 2025 sont ramenés aux revenus de 2024 (rapport des seuils de la tranche à 45 %), l'écart est porté en euros de 2025 par le PIB nominal (`effet_site`).
 - L'écart devient une mesure sur le levier générique `ir_bareme` (1 Md€ de 2025 de recettes en plus). Sa fourchette est la plage de l'hypothèse `ir_bareme_ecart` : le plus petit et le plus grand rapport chiffrage officiel / moteur moins un sur les quatre réformes de validation (-1,2 % et +54,7 %).
 - Le barème saisi ne se cumule pas avec le curseur « revalorisation des seuils du barème » (double compte refusé par le moteur et par le site).
-- Un taux supérieur à 60 % est signalé. L'effet sur les ménages types n'est pas encore calculé (PR suivante).
+- Un taux supérieur à 60 % est signalé.
+- **Ménages types** (`moteur/src/fr_budget/menages/bareme.py`, `web/lib/bareme-ir.ts`) : l'impôt de chaque foyer est recalculé dans le navigateur avec les étapes d'OpenFisca qui dépendent du barème (impôt avec et sans quotient familial, plafonnement, décote arrondie, seuil de mise en recouvrement), à partir du revenu net imposable, des parts, des adultes et du plafond de l'avantage calculés par OpenFisca. Sur les quatre barèmes de contrôle, ce calcul redonne à 1 € près l'écart d'OpenFisca avec le barème réformé (`test_menages_bareme.py`). Les réductions et crédits du foyer sont supposés inchangés ; les réductions complémentaires après plafonnement ne sont pas recalculées (aucun ménage type concerné). L'écart s'ajoute à celui des autres mesures.
 
 ## 3. Méthode de calcul
 
@@ -80,6 +81,7 @@ Lecture :
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-11-05 | Effet du barème saisi sur les ménages types | 3 tests du moteur (contrôle contre OpenFisca), 1 test du site |
 | 2026-11-05 | Éditeur de barème du site, levier générique `ir_bareme`, hypothèse `ir_bareme_ecart` | aucun test de validation ; 6 tests du site, 3 tests du moteur |
 | 2026-11-05 | Décote, réduction sous condition de revenus, part des couples et correction du haut (option A) | 45 % : +30,5 → -12,5 % ; 2015 : -82,8 → -35,4 % ; 2020 : +9,0 → +1,2 % ; indexation : -48,7 → -30,1 % |
 | 2026-11-05 | Création du moteur | 4 nouvelles références de validation |

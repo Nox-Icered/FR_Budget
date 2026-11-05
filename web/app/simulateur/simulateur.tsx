@@ -536,12 +536,15 @@ function SimulateurCharge({
       </div>
       <p className="source">{texte("simulateur.unite")}</p>
       <p className="source">{texte("partage.explication")}</p>
-      {/* Barème saisi : son effet sur les ménages types n'est pas encore calculé (raison
-          « bareme » du levier générique, listée par le bloc des ménages). */}
       <EffetsMenagesScenario
-        valeurs={baremeModifie ? { ...valeurs, [donneesBareme.levier]: 1 } : valeurs}
+        valeurs={valeurs}
         empreinte={empreinte}
         autresReglees={autresReglees}
+        bareme={
+          mesureBareme(donneesBareme, bareme).length > 0
+            ? { donnees: donneesBareme, bareme }
+            : undefined
+        }
       />
       <DepenseMenagesScenario donnees={depense} valeurs={valeurs} />
       <EffetsEntreprisesScenario donnees={entreprises} valeurs={valeurs} autresReglees={autresReglees} />

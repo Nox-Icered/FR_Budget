@@ -27,6 +27,7 @@ export type DonneesBareme = {
   controles: { nom: string; bareme: Bareme; effet: Fourchette }[];
   levier: string;
   bornes: [number, number];
+  menages_types: MenagesBareme;
   sources: string[];
   hypotheses: string[];
 };
@@ -161,4 +162,58 @@ export function mesureBareme(d: DonneesBareme, b: Bareme | undefined): MesureSit
     return [];
   const effet = effetBareme(d, b).central;
   return effet === 0 ? [] : [{ levier: d.levier, valeur: effet }];
+}
+
+// Ménages types : écart d'impôt d'un foyer, mêmes étapes qu'OpenFisca qui dépendent du barème
+// (moteur/src/fr_budget/menages/bareme.py, ``impot_foyer``), contrôlées contre OpenFisca.
+export type FoyerBareme = {
+  rni: number;
+  parts: number;
+  adultes: number;
+  plafond_qf: number;
+  autres: number;
+  impot: number;
+};
+export type MenagesBareme = {
+  seuil_recouvrement: number;
+  menages: Record<string, Record<"central" | "bas" | "haut", FoyerBareme[]>>;
+  controles: Record<string, Record<string, number>>;
+};
+
+// Arrondi de NumPy (``around``) : les moitiés vont vers le nombre pair.
+function arrondi(x: number): number {
+  const r = Math.round(x);
+  return Math.abs(x - Math.trunc(x)) === 0.5 ? 2 * Math.round(x / 2) : r;
+}
+
+export function impotFoyerMenage(b: Bareme, f: FoyerBareme, seuil: number): number {
+  const brut = f.parts * impotParPart(b, f.rni / f.parts);
+  const sansQf = f.adultes * impotParPart(b, f.rni / f.adultes);
+  const plafonne = Math.max(brut, Math.max(0, sansQf - f.plafond_qf));
+  let dec = 0;
+  if (b.decote) {
+    dec = arrondi(decote(b.decote, plafonne, f.adultes >= 2));
+    dec = arrondi(Math.min(dec, plafonne));
+  }
+  const net = arrondi(plafonne - dec);
+  const avant = Math.max(0, net - f.autres);
+  return avant <= seuil ? 0 : avant;
+}
+
+// Écart d'impôt du ménage type entre le barème saisi et celui de référence, en euros par an
+// (positif : l'impôt augmente).
+export function ecartMenage(
+  d: DonneesBareme,
+  b: Bareme,
+  identifiant: string,
+  variante: "central" | "bas" | "haut" = "central",
+): number {
+  const m = d.menages_types;
+  return (m.menages[identifiant]?.[variante] ?? []).reduce(
+    (s, f) =>
+      s +
+      impotFoyerMenage(b, f, m.seuil_recouvrement) -
+      impotFoyerMenage(d.bareme_reference, f, m.seuil_recouvrement),
+    0,
+  );
 }

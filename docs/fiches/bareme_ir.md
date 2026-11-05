@@ -12,9 +12,15 @@ Lot V2 « impôt sur le revenu (structure) », deuxième étape. Plan validé pa
 
 Combien rapporte ou coûte un autre barème de l'impôt sur le revenu : autre nombre de tranches, autres seuils, autres taux, autre décote ? Exemple : « taux de la tranche à 30 % porté à 32 % ».
 
-## 2. Ce que l'utilisateur réglera (PR suivante)
+## 2. Ce que l'utilisateur règle
 
-Un barème de 1 à 8 tranches (seuils et taux libres) et la décote, à partir du barème des revenus de 2025 lu dans OpenFisca (`bareme_ir_depuis_1945.bareme`, `plaf_qf.decote`).
+Dans le simulateur (section « Barème de l'impôt sur le revenu ») : un barème de 2 à 8 tranches (seuils et taux libres) et la décote (seuils et taux, ou pas de décote), à partir du barème des revenus de 2025 lu dans OpenFisca (`bareme_ir_depuis_1945.bareme`, `plaf_qf.decote`).
+
+- Le calcul est fait dans le navigateur (`web/lib/bareme-ir.ts`), sur les données exportées par `fr_budget.agrege.bareme_ir.donnees_site` ; quatre barèmes de contrôle calculés par le moteur sont redonnés à 0,1 % près (test du site).
+- Le barème saisi et le barème de 2025 sont ramenés aux revenus de 2024 (rapport des seuils de la tranche à 45 %), l'écart est porté en euros de 2025 par le PIB nominal (`effet_site`).
+- L'écart devient une mesure sur le levier générique `ir_bareme` (1 Md€ de 2025 de recettes en plus). Sa fourchette est la plage de l'hypothèse `ir_bareme_ecart` : le plus petit et le plus grand rapport chiffrage officiel / moteur moins un sur les quatre réformes de validation (-1,2 % et +54,7 %).
+- Le barème saisi ne se cumule pas avec le curseur « revalorisation des seuils du barème » (double compte refusé par le moteur et par le site).
+- Un taux supérieur à 60 % est signalé. L'effet sur les ménages types n'est pas encore calculé (PR suivante).
 
 ## 3. Méthode de calcul
 
@@ -74,5 +80,6 @@ Lecture :
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-11-05 | Éditeur de barème du site, levier générique `ir_bareme`, hypothèse `ir_bareme_ecart` | aucun test de validation ; 6 tests du site, 3 tests du moteur |
 | 2026-11-05 | Décote, réduction sous condition de revenus, part des couples et correction du haut (option A) | 45 % : +30,5 → -12,5 % ; 2015 : -82,8 → -35,4 % ; 2020 : +9,0 → +1,2 % ; indexation : -48,7 → -30,1 % |
 | 2026-11-05 | Création du moteur | 4 nouvelles références de validation |

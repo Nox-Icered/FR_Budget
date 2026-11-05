@@ -34,6 +34,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from functools import cache
 
+from fr_budget.agrege.indexation import facteur_pib
 from fr_budget.fourchette import Fourchette, encadrer
 from fr_budget.menages.openfisca import systeme_socio_fiscal
 from fr_budget.registres.acces import chiffrage
@@ -534,3 +535,117 @@ def validation_non_indexation_2024() -> float:
     indexe = bareme_openfisca(2024)
     taux = chiffrage("ir_indexation_plf2025") / POURCENT
     return effet(indexe, _indexe(indexe, 1 / (1 + taux)), 2024).central
+
+
+VALIDATIONS: dict[str, Callable[[], float]] = {
+    "ir_bareme_tranche_45_plf2013": validation_tranche_45_2012,
+    "ir_bareme_bas_de_bareme_plf2015": validation_bas_de_bareme_2014,
+    "ir_bareme_classes_moyennes_plf2020": validation_classes_moyennes_2020,
+    "ir_non_indexation_2025": validation_non_indexation_2024,
+}
+"""Réformes de validation : identifiant du chiffrage officiel, calcul du moteur."""
+
+
+def plage_ecart_validation() -> tuple[float, float]:
+    """Plus petit et plus grand rapport chiffrage officiel / modèle, moins un (hypothèse
+    ``ir_bareme_ecart``)."""
+    ecarts = [chiffrage(ident) / calcul() - 1 for ident, calcul in VALIDATIONS.items()]
+    return min(ecarts), max(ecarts)
+
+
+ANNEE_SITE = 2025
+"""Barème de départ de l'éditeur du site : celui des revenus de 2025 (OpenFisca)."""
+
+
+def revalorisation_site() -> float:
+    """Rapport des seuils de la tranche à 45 % entre les barèmes de 2025 et de 2024 : un barème
+    saisi sur la base de 2025 est ramené aux revenus de 2024 (calage) en le divisant."""
+    return bareme_openfisca(ANNEE_SITE).seuils[-1] / bareme_openfisca(ANNEE_CALAGE).seuils[-1]
+
+
+def effet_site(reforme: Bareme) -> Fourchette:
+    """Effet d'un barème saisi à partir du barème de 2025, en Md€ de 2025 (positif : recettes
+    en hausse). Les deux barèmes sont ramenés aux revenus de 2024, l'écart est porté en 2025
+    par le PIB nominal."""
+    r = 1 / revalorisation_site()
+    vers_2025 = facteur_pib(ANNEE_SITE) / facteur_pib(ANNEE_CALAGE)
+    f = effet(_indexe(bareme_openfisca(ANNEE_SITE), r), _indexe(reforme, r), ANNEE_CALAGE)
+    return Fourchette(f.bas * vers_2025, f.central * vers_2025, f.haut * vers_2025)
+
+
+def _bareme_dict(b: Bareme) -> dict[str, object]:
+    d = b.decote
+    return {
+        "seuils": list(b.seuils),
+        "taux": list(b.taux),
+        "decote": None
+        if d is None
+        else {
+            "seuil_celibataire": d.seuil_celibataire,
+            "seuil_couple": d.seuil_couple,
+            "taux": d.taux,
+        },
+    }
+
+
+def _taux_30_plus_2(b: Bareme) -> Bareme:
+    return Bareme(b.seuils, (*b.taux[:2], b.taux[2] + 0.02, *b.taux[3:]), b.decote)
+
+
+def _tranche_60(b: Bareme) -> Bareme:
+    return Bareme((*b.seuils, 500_000.0), (*b.taux, 0.6), b.decote)
+
+
+def _sans_decote(b: Bareme) -> Bareme:
+    return Bareme(b.seuils, b.taux, None)
+
+
+def _trois_tranches(b: Bareme) -> Bareme:
+    return Bareme((0.0, 15_000.0, 60_000.0), (0.0, 0.2, 0.4), b.decote)
+
+
+BAREMES_CONTROLE: tuple[tuple[str, Callable[[Bareme], Bareme]], ...] = (
+    ("taux_30_plus_2", _taux_30_plus_2),
+    ("tranche_60_a_500000", _tranche_60),
+    ("sans_decote", _sans_decote),
+    ("trois_tranches", _trois_tranches),
+)
+"""Barèmes de contrôle : le calcul du site doit redonner ``effet_site`` (tests du site)."""
+
+
+def donnees_site() -> dict[str, object]:
+    """Données du calcul fait dans le navigateur (éditeur de barème du simulateur), et effets
+    de quelques barèmes de contrôle calculés ici."""
+    segs = segments(ANNEE_CALAGE)
+    n = nombre_foyers(ANNEE_CALAGE)
+    k_rep, k_uni = calage(REPARTITION), calage(UNIFORME)
+    reference = bareme_openfisca(ANNEE_SITE)
+    return {
+        "annee_bareme": ANNEE_SITE,
+        "annee_revenus": ANNEE_CALAGE,
+        "revalorisation": revalorisation_site(),
+        "vers_euros_reference": facteur_pib(ANNEE_SITE) / facteur_pib(ANNEE_CALAGE),
+        "bareme_reference": _bareme_dict(reference),
+        "calage_global": calage_global(REPARTITION),
+        "couples_uniforme": chiffrage(COUPLES_ENSEMBLE) / POURCENT,
+        "segments": [
+            {
+                "nom": s.nom,
+                "foyers": n * s.foyers,
+                "parts": s.parts,
+                "calage": k_rep[s.nom],
+                "calage_couples_uniforme": k_uni[s.nom],
+                "couples": part_couples(s),
+                "quotients": [round(q, 2) for q in s.quotients],
+            }
+            for s in segs
+        ],
+        "controles": [
+            {
+                "nom": nom,
+                "bareme": _bareme_dict(construire(reference)),
+                "effet": vars(effet_site(construire(reference))),
+            }
+            for nom, construire in BAREMES_CONTROLE
+        ],
+    }

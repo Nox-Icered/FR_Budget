@@ -11,6 +11,14 @@ import type {
 import type { LigneScenario, MesureSite } from "./scenario";
 import { mesuresDepensesFiscales } from "./depenses-fiscales.ts";
 import { mesuresCreditsMissions } from "./credits-missions.ts";
+import {
+  decoderBareme,
+  encoderBareme,
+  mesureBareme,
+  problemesBareme,
+  type Bareme,
+  type DonneesBareme,
+} from "./bareme-ir.ts";
 
 export type EtatScenario = {
   annee: number;
@@ -20,6 +28,8 @@ export type EtatScenario = {
   parMission: Record<string, number>;
   // Effet sur l'activité (multiplicateur), désactivé par défaut ; paramètre c=1 du lien.
   croissance?: boolean;
+  // Barème de l'impôt sur le revenu saisi, s'il diffère de celui de référence ; paramètre b.
+  bareme?: Bareme;
   version?: string;
 };
 
@@ -27,6 +37,8 @@ export type EtatScenario = {
 export const LEVIERS_REMUNERATIONS = ["remunerations_point_indice", "remunerations_effectifs"];
 export const LEVIERS_SOLIDARITE = ["indexation_pensions_prestations", "prime_activite_pente"];
 export const MISSION_SOLIDARITE = "solidarite_insertion_et_egalite_des_chances";
+// Le barème saisi fixe déjà les seuils : le moteur refuse de le cumuler avec ce levier.
+export const LEVIER_IR_SEUILS = "ir_seuils_bareme";
 
 // Leviers proposés sur le site, dans l'ordre d'affichage, avec le pas de leur curseur (en
 // points ou en centimes par litre). Les autres réponses exportées (leviers génériques des
@@ -98,7 +110,8 @@ function decoderListe(texte: string | null): Record<string, number> | null {
 
 // Paramètres : a (année d'entrée), v (version), c (effet sur l'activité, 1 s'il est inclus),
 // l (leviers), i (dépenses fiscales par impôt),
-// d (dépenses fiscales choisies), m (missions). Les réglages à zéro sont omis.
+// d (dépenses fiscales choisies), m (missions), b (barème de l'impôt sur le revenu). Les
+// réglages à zéro sont omis.
 export function encoder(etat: EtatScenario): string {
   const p = new URLSearchParams();
   p.set("a", String(etat.annee));
@@ -114,6 +127,7 @@ export function encoder(etat: EtatScenario): string {
     const texte = encoderListe(valeurs);
     if (texte) p.set(cle, texte);
   }
+  if (etat.bareme) p.set("b", encoderBareme(etat.bareme));
   return p.toString();
 }
 
@@ -131,6 +145,9 @@ export function decoder(texte: string): EtatScenario | null {
   if (!leviers || !parImpot || !parDepense || !parMission) return null;
   const c = p.get("c");
   if (c !== null && c !== "1") return null;
+  const b = p.get("b");
+  const bareme = b === null ? undefined : decoderBareme(b);
+  if (bareme === null) return null;
   return {
     annee,
     leviers,
@@ -138,6 +155,7 @@ export function decoder(texte: string): EtatScenario | null {
     parDepense,
     parMission,
     ...(c === "1" ? { croissance: true } : {}),
+    ...(bareme ? { bareme } : {}),
     version: p.get("v") ?? undefined,
   };
 }
@@ -185,6 +203,7 @@ export function problemes(
     if (!identifiants.has(id)) liste.push("mission_inconnue");
     else if (!dans(v, missions.bornes)) liste.push("hors_bornes");
   }
+  if (etat.bareme && problemesBareme(etat.bareme).length > 0) liste.push("hors_bornes");
   const regle = (ids: string[]) => ids.some((id) => (etat.leviers[id] ?? 0) !== 0);
   const missionsReglees = Object.values(etat.parMission).some((v) => v !== 0);
   const depenseChoisieDansImpot = catalogue.depenses.some(
@@ -194,7 +213,8 @@ export function problemes(
     (regle(LEVIERS_REMUNERATIONS) && missionsReglees) ||
     LEVIERS_RETRAITES.filter((id) => (etat.leviers[id] ?? 0) !== 0).length > 1 ||
     (regle(LEVIERS_SOLIDARITE) && (etat.parMission[MISSION_SOLIDARITE] ?? 0) !== 0) ||
-    depenseChoisieDansImpot
+    depenseChoisieDansImpot ||
+    (etat.bareme !== undefined && regle([LEVIER_IR_SEUILS]))
   ) {
     liste.push("double_compte");
   }
@@ -205,6 +225,7 @@ export function mesures(
   etat: EtatScenario,
   catalogue: CatalogueDepensesFiscales,
   missions: CatalogueCreditsMissions,
+  bareme: DonneesBareme,
 ): MesureSite[] {
   return [
     ...Object.entries(etat.leviers)
@@ -212,6 +233,7 @@ export function mesures(
       .map(([levier, valeur]) => ({ levier, valeur })),
     ...mesuresDepensesFiscales(catalogue, etat.parImpot, etat.parDepense),
     ...mesuresCreditsMissions(missions, etat.parMission),
+    ...mesureBareme(bareme, etat.bareme),
   ];
 }
 

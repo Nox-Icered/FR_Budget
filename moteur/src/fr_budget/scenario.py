@@ -173,6 +173,13 @@ LEVIER_IR_SEUILS = "ir_seuils_bareme"
 # 2026 (-1,0 %), indexation de 4,8 % de la LFI 2024.
 BORNE_IR_SEUILS = 3.0
 LEVIER_IR_QF = "ir_plafond_quotient_familial"
+LEVIER_IR_BAREME = "ir_bareme"
+"""Levier générique du barème saisi sur le site : une unité = 1 Md€ de 2025 de recettes d'impôt
+sur le revenu en plus (effet calculé par ``fr_budget.agrege.bareme_ir.effet_site``)."""
+HYPOTHESE_ECART_BAREME = "ir_bareme_ecart"
+BORNE_IR_BAREME = 150.0
+"""Borne du levier générique, en Md€ : l'impôt au barème des revenus de 2024 est d'environ
+100 Md€ (DGFiP), un barème qui le doublerait ou l'annulerait reste dans les bornes."""
 LEVIER_INDEXATION = "indexation_pensions_prestations"
 # Écart admis à la revalorisation légale, en points (décision du mainteneur du 12 octobre 2026) ;
 # repère : le gel de 2026 proposé au PLFSS 2026 correspondait à -1,0 point.
@@ -368,6 +375,8 @@ def rendement_unitaire(levier: str) -> Fourchette:
     if levier == LEVIER_IR_SEUILS:
         r = impot_revenu.rendement_un_pourcent()
         return encadrer(-r.central, [-r.bas, -r.haut])
+    if levier == LEVIER_IR_BAREME:
+        return _avec_plage(1.0, HYPOTHESE_ECART_BAREME)
     if levier == LEVIER_IR_QF:
         # Unité : hausse de 1 % des plafonds, qui coûte le rendement d'une baisse de 1 %.
         r = quotient_familial.rendement_un_pourcent()
@@ -497,6 +506,8 @@ def taux_reference(levier: str) -> float:
     if levier == LEVIER_IR_SEUILS:
         # Impôt au barème des revenus de 2024, Md€.
         return chiffrage("ir_impot_total_total_2024")
+    if levier == LEVIER_IR_BAREME:
+        return 0.0
     if levier == LEVIER_IR_QF:
         # Plafond général par demi-part pour les revenus de 2025, en € (OpenFisca).
         return quotient_familial.plafond_general(quotient_familial.ANNEE_REFERENCE)
@@ -576,6 +587,8 @@ def bornes_levier(levier: str) -> tuple[float, float]:
         return -BORNE_IR_SEUILS, BORNE_IR_SEUILS
     if levier == LEVIER_IR_QF:
         return -quotient_familial.BORNE, quotient_familial.BORNE
+    if levier == LEVIER_IR_BAREME:
+        return -BORNE_IR_BAREME, BORNE_IR_BAREME
     if levier == LEVIER_ALLEGEMENTS:
         return -BORNE_ALLEGEMENTS, BORNE_ALLEGEMENTS
     if levier == LEVIER_CREDITS_UNITE:
@@ -749,6 +762,9 @@ def verifier_double_compte(mesures: Sequence[Mesure]) -> None:
         raise ValueError(msg)
     # Une mesure à zéro ne change rien : elle ne bloque aucune combinaison.
     reglees = [m for m in mesures if m.valeur != 0]
+    if {LEVIER_IR_BAREME, LEVIER_IR_SEUILS} <= {m.levier for m in reglees}:
+        msg = "double compte : le barème saisi fixe déjà les seuils de l'impôt sur le revenu"
+        raise ValueError(msg)
     remunerations_reglees = any(m.levier in LEVIERS_REMUNERATIONS for m in reglees)
     credits_regles = any(
         m.levier == LEVIER_CREDITS_UNITE or mission_du_levier(m.levier) is not None for m in reglees
@@ -806,6 +822,7 @@ def categorie_croissance(levier: str) -> str:
         LEVIER_ALLEGEMENTS: module_croissance.COTISATIONS_EMPLOYEURS,
         LEVIER_IR_SEUILS: module_croissance.IMPOT_REVENU,
         LEVIER_IR_QF: module_croissance.IMPOT_REVENU,
+        LEVIER_IR_BAREME: module_croissance.IMPOT_REVENU,
         levier_depenses_fiscales_impot(
             IMPOT_REVENU_DEPENSES_FISCALES
         ): module_croissance.IMPOT_REVENU,
@@ -1010,6 +1027,7 @@ LEVIERS_REGISTRE = {
     LEVIER_ALLEGEMENTS: "cotisations_patronales",
     LEVIER_IR_SEUILS: "impot_revenu",
     LEVIER_IR_QF: "impot_revenu_structure",
+    LEVIER_IR_BAREME: "impot_revenu_structure",
     LEVIER_PA_PENTE: "minima_prime_activite",
     LEVIER_RETRAITES_AGE: "retraites",
     LEVIER_RETRAITES_AGE_LEGAL: "retraites",
@@ -1140,6 +1158,20 @@ PROVENANCE_IR_QF = (
     ),
     (),
 )
+PROVENANCE_IR_BAREME = (
+    (
+        "dgfip_ir_tableaux_statistiques",
+        "dgfip_analyses_08_2025",
+        "openfisca_france_176_1_2",
+        "plf2013_projet_loi",
+        "plf2015_projet_loi",
+        "plf2020_projet_loi",
+        "plf2025_evaluations_prealables",
+        "insee_comptes_nationaux_2025",
+        "plf2027_resf",
+    ),
+    (HYPOTHESE_ECART_BAREME,),
+)
 PROVENANCE_PA = (
     (
         "senat_note_presentation_siec_plf2026",
@@ -1238,6 +1270,7 @@ PROVENANCE_LEVIERS = {
     LEVIER_ALLEGEMENTS: PROVENANCE_COTISATIONS,
     LEVIER_IR_SEUILS: PROVENANCE_IR,
     LEVIER_IR_QF: PROVENANCE_IR_QF,
+    LEVIER_IR_BAREME: PROVENANCE_IR_BAREME,
     LEVIER_PA_PENTE: PROVENANCE_PA,
     LEVIER_RETRAITES_AGE: PROVENANCE_RETRAITES,
     LEVIER_RETRAITES_AGE_LEGAL: PROVENANCE_RETRAITES_COHORTES,

@@ -21,6 +21,7 @@ import {
 import { Exports } from "../partage/actions";
 import { region } from "../../lib/region";
 import { useReponses } from "../../lib/chargement";
+import type { DonneesBareme } from "../../lib/bareme-ir";
 import Link from "next/link";
 
 
@@ -34,11 +35,13 @@ function ComparaisonChargee({
   catalogue,
   missions,
   version,
+  bareme,
 }: {
   donnees: ReponsesUnitaires;
   catalogue: CatalogueDepensesFiscales;
   missions: CatalogueCreditsMissions;
   version: Version;
+  bareme: DonneesBareme;
 }) {
   const idBase = useId();
   const [liens, setLiens] = useState<string[]>(Array(NOMBRE_SCENARIOS).fill(""));
@@ -60,7 +63,7 @@ function ComparaisonChargee({
     const nom = texte("comparaison.nom", { numero: k + 1 });
     const lignes = calculer(
       donnees,
-      mesures(etat, catalogue, missions),
+      mesures(etat, catalogue, missions, bareme),
       etat.annee,
       etat.croissance === true,
     );
@@ -189,6 +192,7 @@ export function Comparaison(props: {
   catalogue: CatalogueDepensesFiscales;
   missions: CatalogueCreditsMissions;
   version: Version;
+  bareme: DonneesBareme;
 }) {
   const chargement = useReponses(empreinteVersion(props.version));
   if (chargement.etat === "en_cours") return <p role="status">{texte("site.chargement")}</p>;

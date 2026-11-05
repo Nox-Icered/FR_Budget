@@ -28,6 +28,9 @@ Leviers traduits (unité du simulateur) :
 - ``ir_seuils_bareme`` (%) : limites des tranches du barème, plafonds des effets du quotient
   familial et seuils de la décote multipliés par 1 + x (champ de l'évaluation préalable de
   l'article 2 du PLF 2025, ``docs/fiches/impot_revenu.md``) ;
+- ``ir_plafond_quotient_familial`` (%) : plafonds de l'avantage par demi-part pour charges de
+  famille (``plaf_qf.plafond_avantages_procures_par_demi_part.general`` et ``.celib_enf``, les
+  deux plafonds baissés par les lois de finances pour 2013 et 2014) multipliés par 1 + x ;
 - ``prime_activite_pente`` (points) : fraction des revenus professionnels prise en compte
   (``ppa.pa_m.majoration_ressources_revenus_activite``) ;
 - ``indexation_pensions_prestations`` (points) : base mensuelle des allocations familiales, montant
@@ -83,6 +86,9 @@ SEUILS_IR = tuple(
         "decote.seuil_celib",
         "decote.seuil_couple",
     )
+)
+PLAFONDS_QF = tuple(
+    _PLAF_QF + "plafond_avantages_procures_par_demi_part." + n for n in ("general", "celib_enf")
 )
 _MINIMA = "prestations_sociales.solidarite_insertion.minima_sociaux."
 MONTANTS_INDEXES = (
@@ -162,6 +168,11 @@ def _seuils_ir(reforme: Reform, valeur: float, debut: str) -> None:
     _modifier_parametres(reforme, SEUILS_IR, lambda v: v * facteur, debut)
 
 
+def _plafonds_qf(reforme: Reform, valeur: float, debut: str) -> None:
+    facteur = 1 + valeur / POURCENT
+    _modifier_parametres(reforme, PLAFONDS_QF, lambda v: v * facteur, debut)
+
+
 def _indexation(reforme: Reform, valeur: float, debut: str) -> None:
     facteur = 1 + valeur / POURCENT
     _modifier_parametres(reforme, MONTANTS_INDEXES, lambda v: v * facteur, debut)
@@ -236,6 +247,11 @@ LEVIERS: dict[str, LevierMenage] = {
     scenario.LEVIER_ALLEGEMENTS: LevierMenage(_allegements, "%", sources=(OPENFISCA, CCSS)),
     scenario.LEVIER_IR_SEUILS: LevierMenage(
         _seuils_ir, "%", sources=(OPENFISCA, "plf2025_evaluations_prealables")
+    ),
+    scenario.LEVIER_IR_QF: LevierMenage(
+        _plafonds_qf,
+        "%",
+        sources=(OPENFISCA, "igf_igas_politiques_familiales_2026", "plf2014_projet_loi"),
     ),
     scenario.LEVIER_PA_PENTE: LevierMenage(_points(PARAMETRE_PENTE, ppa=True), "points"),
     scenario.LEVIER_INDEXATION: LevierMenage(
@@ -528,9 +544,10 @@ def cascade_profil_reformee(
 
 SENS = (1.0, -1.0)
 """Hausse et baisse d'une unité du levier (point ou pourcent), publiées pour chaque ménage."""
-PAS_GRILLE: dict[str, float] = {scenario.LEVIER_ALLEGEMENTS: 10.0}
+PAS_GRILLE: dict[str, float] = {scenario.LEVIER_ALLEGEMENTS: 10.0, scenario.LEVIER_IR_QF: 5.0}
 """Pas de la grille des effets exportés (une unité par défaut). Allègements : 10 %, leur effet
-sur le coût employeur étant proportionnel (et nul sur le net en lecture comptable)."""
+sur le coût employeur étant proportionnel (et nul sur le net en lecture comptable). Plafond
+du quotient familial : 5 %, pour limiter le temps de calcul des 25 % de chaque côté."""
 
 
 def grille(levier: str) -> tuple[float, ...]:

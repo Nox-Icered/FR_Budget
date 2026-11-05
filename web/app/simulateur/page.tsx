@@ -99,6 +99,11 @@ export default function PageSimulateur() {
         })}
       </p>
       <p>
+        {texte("simulateur.methode_ir_quotient_familial", {
+          rendement: deuxDecimales(-donnees.leviers.ir_plafond_quotient_familial.rendement_unitaire),
+        })}
+      </p>
+      <p>
         {texte("simulateur.methode_prime_activite", {
           pente: deuxDecimales(donnees.leviers.prime_activite_pente.taux_reference),
           cout: deuxDecimales(-donnees.leviers.prime_activite_pente.rendement_unitaire),
@@ -155,6 +160,7 @@ export default function PageSimulateur() {
         <li>{texte("simulateur.limite_csg")}</li>
         <li>{texte("simulateur.limite_cotisations")}</li>
         <li>{texte("simulateur.limite_ir")}</li>
+        <li>{texte("simulateur.limite_ir_quotient_familial")}</li>
         <li>{texte("simulateur.limite_prime_activite")}</li>
         <li>{texte("simulateur.limite_retraites")}</li>
       </ul>

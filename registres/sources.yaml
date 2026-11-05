@@ -984,3 +984,48 @@ sources:
     millesime: PLF 2026
     acces: direct
     consulte_le: 2026-11-02
+
+  - id: plf2013_projet_loi
+    nom: Projet de loi de finances pour 2013, n° 235, déposé à l'Assemblée nationale le 28 septembre 2012 (exposé général des motifs et articles)
+    editeur: Assemblée nationale (texte du Gouvernement)
+    url: https://www.assemblee-nationale.fr/14/pdf/projets/pl0235.pdf
+    licence: document parlementaire public
+    millesime: PLF 2013
+    acces: direct
+    consulte_le: 2026-11-05
+
+  - id: plf2014_projet_loi
+    nom: Projet de loi de finances pour 2014, n° 1395, déposé à l'Assemblée nationale le 25 septembre 2013 (exposé général des motifs et articles)
+    editeur: Assemblée nationale (texte du Gouvernement)
+    url: https://www.assemblee-nationale.fr/14/pdf/projets/pl1395.pdf
+    licence: document parlementaire public
+    millesime: PLF 2014
+    acces: direct
+    consulte_le: 2026-11-05
+
+  - id: igf_igas_politiques_familiales_2026
+    nom: "IGF et IGAS, « Revue de dépenses relative à l'efficacité des politiques familiales », juin 2026"
+    editeur: Inspection générale des finances, Inspection générale des affaires sociales
+    url: https://www.igf.gouv.fr/files/igf/files/contributed/Rapports%20de%20mission/2026/Rapport-Politiques-familiales.pdf
+    licence: rapport administratif publié (citation avec mention de la source)
+    millesime: juin 2026 (législation 2026, modèle Ines 2024 sur l'ERFS 2022)
+    acces: direct
+    consulte_le: 2026-11-05
+
+  - id: ccomptes_famille_fiscalite_2023
+    nom: "Cour des comptes, « La prise en compte de la famille dans la fiscalité », observations définitives S2023-0839, octobre 2023"
+    editeur: Cour des comptes
+    url: https://www.ccomptes.fr/sites/default/files/2023-10/20231017-S2023-0839-Prise-en-compte-famille-dans-fiscalite_0.pdf
+    licence: rapport public (citation avec mention de la source)
+    millesime: octobre 2023 (revenus 2020)
+    acces: direct
+    consulte_le: 2026-11-05
+
+  - id: igf_igas_depenses_socio_fiscales_famille_2021
+    nom: "IGF et IGAS, « Revue des dépenses socio-fiscales en faveur de la politique familiale », juillet 2021"
+    editeur: Inspection générale des finances, Inspection générale des affaires sociales
+    url: https://igas.gouv.fr/sites/igas/files/2024-04/Revue%20des%20d%C3%A9penses%20socio-fiscales%20en%20faveur%20de%20la%20politique%20familiale.pdf
+    licence: rapport administratif publié (citation avec mention de la source)
+    millesime: juillet 2021
+    acces: direct
+    consulte_le: 2026-11-05

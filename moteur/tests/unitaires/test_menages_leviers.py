@@ -12,7 +12,7 @@ import warnings
 import pytest
 
 from fr_budget import scenario
-from fr_budget.agrege import indexation
+from fr_budget.agrege import indexation, quotient_familial
 from fr_budget.menages import leviers as lv
 from fr_budget.menages import types as t
 from fr_budget.menages.openfisca import systeme_socio_fiscal
@@ -44,6 +44,7 @@ def test_tous_les_leviers_du_simulateur_sont_classes() -> None:
         scenario.LEVIER_ALLEGEMENTS,
         scenario.LEVIER_PA_PENTE,
         scenario.LEVIER_IR_SEUILS,
+        scenario.LEVIER_IR_QF,
         scenario.LEVIER_INDEXATION,
         scenario.LEVIER_RETRAITES_AGE,
         scenario.LEVIER_RETRAITES_AGE_LEGAL,
@@ -432,3 +433,23 @@ def test_controle_salaire_sur_les_cotisations_patronales() -> None:
     assert scenarios
     for mesures_ in scenarios:
         assert any(k in lv.LEVIERS_INCIDENCE for k, _ in mesures_)
+
+
+def test_plafond_quotient_familial() -> None:
+    """Couple de cadres au 95e centile avec deux enfants : l'avantage des deux demi-parts est
+    plafonné ; baisser les plafonds de 25 % augmente l'impôt de 2 x 25 % du plafond général.
+    Aucun ménage type n'est concerné (avantage sous le plafond)."""
+    profil = t.Profil(
+        "Couple de cadres, deux enfants",
+        (t.Adulte("1980-01-01", t.P95, cadre=True), t.Adulte("1981-01-01", t.P95, cadre=True)),
+        ("2016-03-01", "2019-03-01"),
+    )
+    avant = t.cascade_profil(profil)
+    apres = lv.cascade_profil_reformee(profil, scenario.LEVIER_IR_QF, -25.0)
+    assert apres is not None
+    plafond = quotient_familial.plafond_general(ANNEE)
+    assert apres.impot_revenu - avant.impot_revenu == pytest.approx(2 * 0.25 * plafond, abs=1.0)
+    for identifiant in t.PROFILS:
+        assert lv.cascade_reformee(identifiant, scenario.LEVIER_IR_QF, -25.0) == (
+            t.cascade_annuelle(identifiant)
+        )

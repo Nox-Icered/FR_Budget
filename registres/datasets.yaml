@@ -978,3 +978,43 @@ datasets:
     empreinte_sha256: 962968a48461631f0c4fa8cd2761946a26cde37efc23922e1f5242eb41b861aa
     methode_transformation: pipelines/budget_etat/extraire_plf2026.py → data/processed/budget_etat/equilibre_2026.csv (article 48) et missions_2026.csv (état B, crédits de paiement par mission, remboursements et dégrèvements d'impôts d'État retirés) ; avec le tome I des Voies et moyens → recettes_2026.csv
     telecharge_le: 2026-11-02
+
+  - id: plf2013_projet_loi_pdf
+    source: plf2013_projet_loi
+    description: Projet de loi de finances pour 2013, n° 235 (PDF)
+    fichier: data/raw/impot_revenu/plf2013_projet_loi_235.pdf
+    empreinte_sha256: 74d9926bd38e4a9d4e1b2eb66e2b27af6a95105c9be2e55c0cbbc3a48f2379e9
+    methode_transformation: aucune ; rendement de la baisse du plafond du quotient familial (page 19 du PDF) et plafonds (page 42) saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-11-05
+
+  - id: plf2014_projet_loi_pdf
+    source: plf2014_projet_loi
+    description: Projet de loi de finances pour 2014, n° 1395 (PDF)
+    fichier: data/raw/impot_revenu/plf2014_projet_loi_1395.pdf
+    empreinte_sha256: a89e6b99ef40e06b3d182466cf8dc7d8d5395facdb6a015dcce8d842ebe3d757
+    methode_transformation: aucune ; rendement de la baisse du plafond du quotient familial (page 9 du PDF) et plafonds (page 42) saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-11-05
+
+  - id: igf_igas_politiques_familiales_2026_pdf
+    source: igf_igas_politiques_familiales_2026
+    description: Revue de dépenses IGF-IGAS sur les politiques familiales, juin 2026 (PDF, rapport et annexes)
+    fichier: data/raw/impot_revenu/igf_igas_politiques_familiales_2026.pdf
+    empreinte_sha256: 03c39c978c63f58b84107d6e5202abdb9a7dcb61feb613ec7f1b59362e40dbd4
+    methode_transformation: aucune ; chiffrage de la baisse de 10 % des plafonds du quotient familial (annexe IV, tableau 15, page 184 du PDF) saisi dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-11-05
+
+  - id: ccomptes_famille_fiscalite_2023_pdf
+    source: ccomptes_famille_fiscalite_2023
+    description: Observations définitives de la Cour des comptes sur la prise en compte de la famille dans la fiscalité, octobre 2023 (PDF)
+    fichier: data/raw/impot_revenu/ccomptes_famille_fiscalite_2023.pdf
+    empreinte_sha256: 120a8d4054b77caaee7627037df21cf21e2450807639b449458b5ec62d8a5388
+    methode_transformation: aucune ; coût d'un déplafonnement (page 51) et coût du quotient familial (tableau 19, page 73) saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-11-05
+
+  - id: igf_igas_depenses_socio_fiscales_famille_2021_pdf
+    source: igf_igas_depenses_socio_fiscales_famille_2021
+    description: Revue IGF-IGAS des dépenses socio-fiscales en faveur de la politique familiale, juillet 2021 (PDF)
+    fichier: data/raw/impot_revenu/igf_igas_depenses_socio_fiscales_famille_2021.pdf
+    empreinte_sha256: 152ab0571d74a02570f1e65c457be442311ca154f5df845a7ff2c21514e17763
+    methode_transformation: aucune ; montant du quotient familial avant et après les baisses de 2013 et 2014 (note 24, page 22 du PDF) saisi dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-11-05

@@ -424,7 +424,8 @@
       "mon_menage": "Voir l'effet de ces mesures sur mon ménage",
       "detail": "Détail ligne par ligne, mesure par mesure",
       "ecartees": "Mesures réglées sans effet direct sur ces ménages :",
-      "approximation_salaire": "En lecture répercutée sur le salaire, contrôlée avec toutes les mesures à leurs bornes : {combinaison} euros par an."
+      "approximation_salaire": "En lecture répercutée sur le salaire, contrôlée avec toutes les mesures à leurs bornes : {combinaison} euros par an.",
+      "bareme": "Barème de l'impôt sur le revenu saisi : l'impôt de chaque ménage est recalculé avec les mêmes étapes qu'OpenFisca (barème, plafond du quotient familial, décote, seuil de mise en recouvrement), ce calcul redonnant celui d'OpenFisca à l'euro près sur les barèmes de contrôle. Son écart s'ajoute à celui des autres mesures."
     },
     "entreprises": {
       "titre": "Effet sur les entreprises",

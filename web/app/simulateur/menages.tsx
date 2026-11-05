@@ -9,6 +9,8 @@ import { region } from "../../lib/region";
 import { useMenagesScenario } from "../../lib/chargement";
 import { approcher, type Incidence } from "../../lib/effets-menages";
 import { encoderScenarioMenage } from "../../lib/mon-menage";
+import { ecartMenage, type Bareme, type DonneesBareme } from "../../lib/bareme-ir";
+import type { LignesCascade } from "../../lib/cascade";
 
 const euros = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0, signDisplay: "exceptZero" });
 const entier = (v: number) => euros.format(Math.round(v));
@@ -17,9 +19,13 @@ export function EffetsMenagesScenario({
   valeurs,
   empreinte,
   autresReglees,
+  bareme,
 }: {
   valeurs: Record<string, number>;
   empreinte: string;
+  /** Barème de l'impôt sur le revenu saisi : écart d'impôt de chaque ménage (lib/bareme-ir.ts),
+   * ajouté à celui des autres mesures. */
+  bareme?: { donnees: DonneesBareme; bareme: Bareme };
   /** Dépenses fiscales ou crédits des missions réglés : effet non calculé pour les ménages. */
   autresReglees: boolean;
 }) {
@@ -46,7 +52,7 @@ export function EffetsMenagesScenario({
     <section>
       <h2>{titre}</h2>
       <p>{texte("simulateur.menages.intro", { annee: d.annee_revenus })}</p>
-      {mesures.length === 0 ? (
+      {mesures.length === 0 && !bareme ? (
         <p>{texte(autresReglees ? "simulateur.menages.aucune_chiffree" : "simulateur.menages.aucune")}</p>
       ) : (
         <>
@@ -80,8 +86,14 @@ export function EffetsMenagesScenario({
               </thead>
               <tbody>
                 {d.menages.map((m) => {
+                  // Écart d'impôt dû au barème saisi, pour la variante de revenu donnée.
+                  const avecBareme = (c: LignesCascade | null, v: "central" | "bas" | "haut") => {
+                    if (!c || !bareme) return c;
+                    const e = ecartMenage(bareme.donnees, bareme.bareme, m.id, v);
+                    return { ...c, impot_revenu: c.impot_revenu + e, net_apres_impot: c.net_apres_impot - e };
+                  };
                   const calcul = (i: Incidence) =>
-                    approcher(m, m.id, mesures, d.grille, d.leviers_incidence, i);
+                    avecBareme(approcher(m, m.id, mesures, d.grille, d.leviers_incidence, i), "central");
                   const r = calcul(lecture);
                   const lectures = avecIncidence
                     ? (["comptable", "salaire"] as Incidence[]).map(calcul)
@@ -90,7 +102,10 @@ export function EffetsMenagesScenario({
                   // Fourchette selon le revenu : même calcul au revenu bas et haut.
                   const parRevenu = (["bas", "haut"] as const).flatMap((v) => {
                     const ref = m.variantes[v];
-                    const c = approcher(ref, m.id, mesures, d.grille_variantes[v], d.leviers_incidence, lecture);
+                    const c = avecBareme(
+                      approcher(ref, m.id, mesures, d.grille_variantes[v], d.leviers_incidence, lecture),
+                      v,
+                    );
                     return c ? [c.net_apres_impot - ref.net_apres_impot] : [];
                   });
                   return (
@@ -124,6 +139,7 @@ export function EffetsMenagesScenario({
               </tbody>
             </table>
           </div>
+          {bareme && <p className="source">{texte("simulateur.menages.bareme")}</p>}
           <p className="source">
             {texte("simulateur.menages.approximation", {
               un_levier: entier(d.ecart_max_un_levier).replace("+", ""),

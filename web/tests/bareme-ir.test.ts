@@ -73,3 +73,13 @@ test("barème hors des bornes du levier générique : signalé, pas de mesure", 
   assert.deepEqual(mesureBareme(donnees, extreme), []);
   assert.ok(!horsBornes(donnees, donnees.controles[0].bareme));
 });
+
+test("ménages types : le calcul du site redonne celui du moteur (lui-même égal à OpenFisca)", async () => {
+  const { ecartMenage } = await import("../lib/bareme-ir.ts");
+  for (const c of donnees.controles) {
+    for (const [ident, attendu] of Object.entries(donnees.menages_types.controles[c.nom])) {
+      assert.ok(Math.abs(ecartMenage(donnees, c.bareme, ident) - attendu) < 0.5, `${c.nom} ${ident}`);
+    }
+  }
+  assert.equal(ecartMenage(donnees, donnees.bareme_reference, "cadre_p95"), 0);
+});

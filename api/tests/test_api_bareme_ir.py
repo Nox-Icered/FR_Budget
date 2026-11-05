@@ -13,6 +13,9 @@ def test_donnees_editeur() -> None:
     assert "dgfip_ir_tableaux_statistiques" in d["sources"]
     assert d["hypotheses"] == ["ir_bareme_ecart"]
     assert len(d["segments"]) == 12
+    menages = d["menages_types"]
+    assert set(menages["menages"]["cadre_p95"]) == {"central", "bas", "haut"}
+    assert menages["controles"]["taux_30_plus_2"]["cadre_p95"] > 0
     reference = d["bareme_reference"]
     assert reference["seuils"][0] == 0.0 and reference["decote"] is not None
 

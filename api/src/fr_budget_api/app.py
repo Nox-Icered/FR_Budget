@@ -36,6 +36,7 @@ from fr_budget.agrege import depenses_fiscales as module_depenses_fiscales
 from fr_budget.agrege.cotisations import cout_allegements
 from fr_budget.apu import comptes_apu, depenses_par_fonction, libelles_cofog, ratio_pib
 from fr_budget.entreprises import repartition as module_entreprises
+from fr_budget.menages import bareme as module_menages_bareme
 from fr_budget.menages import depense as module_depense
 from fr_budget.menages import flux as module_flux
 from fr_budget.menages import leviers as module_leviers_menages
@@ -138,6 +139,7 @@ def bareme_ir() -> dict[str, Any]:
         **module_bareme_ir.donnees_site(),
         "levier": module_scenario.LEVIER_IR_BAREME,
         "bornes": list(module_scenario.bornes_levier(module_scenario.LEVIER_IR_BAREME)),
+        "menages_types": module_menages_bareme.donnees_site(),
         "sources": list(module_scenario.PROVENANCE_IR_BAREME[0]),
         "hypotheses": list(module_scenario.PROVENANCE_IR_BAREME[1]),
     }

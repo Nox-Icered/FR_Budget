@@ -38,6 +38,7 @@ from fr_budget.agrege.cotisations import cout_allegements
 from fr_budget.apu import comptes_apu, depenses_par_fonction, libelles_cofog, ratio_pib
 from fr_budget.entreprises import repartition as module_entreprises
 from fr_budget.menages import bareme as module_menages_bareme
+from fr_budget.menages import deciles as module_deciles
 from fr_budget.menages import depense as module_depense
 from fr_budget.menages import flux as module_flux
 from fr_budget.menages import leviers as module_leviers_menages
@@ -720,6 +721,56 @@ SOURCES_DEPENSE = [
 
 
 @cache
+def deciles() -> dict[str, Any]:
+    """Répartition par décile de niveau de vie (``fr_budget.menages.deciles``) : pour chaque
+    levier réparti (termes croisés compris), rendement d'une unité, parts centrales et parts de
+    chaque variante ; unités de consommation et revenu disponible de chaque décile. Le site en
+    tire la même répartition que le moteur (web/lib/deciles.ts)."""
+    d = module_deciles
+    leviers = {}
+    for levier in [*d.CLES, *module_interactions.CHIFFREES]:
+        leviers[levier] = {
+            "rendement": _fourchette(module_scenario.rendement_unitaire(levier)),
+            "centrale": [float(x) for x in d.part_centrale(levier)],
+            "variantes": [[float(x) for x in p] for p in d.variantes_parts(levier)],
+            **(
+                {"interaction": list(module_interactions.CHIFFREES[levier])}
+                if module_interactions.est_interaction(levier)
+                else {}
+            ),
+        }
+    return {
+        "annee_comptes": d.ANNEE_CENTRALE,
+        "annees_variantes": list(d.ANNEES),
+        "annee_effets": d.ANNEE_EFFETS,
+        "sources": ["insee_cnd_2023", "insee_budget_de_famille_2017"],
+        "unites_consommation_millions": [float(x) for x in d.unites_consommation()],
+        "revenu_disponible_milliards": [float(x) for x in d.revenu_disponible()],
+        "leviers": leviers,
+        "non_repartis": sorted(d.NON_REPARTIS),
+        # Barème saisi : réparti dans le navigateur par le moteur du barème (bareme-ir.json),
+        # bornes multipliées par la plage du levier générique.
+        "bareme": {
+            "levier": d.BAREME,
+            "rendement": _fourchette(module_scenario.rendement_unitaire(d.BAREME)),
+        },
+        # Forme de la répartition face aux évaluations de l'Insee (page Validation).
+        "validation": [
+            {
+                "reference": c.reference,
+                "source": c.source,
+                "levier": c.levier,
+                "modele": c.modele,
+                "insee": c.insee,
+                "ecart_max_points": c.ecart_max_points,
+                "tolerance_points": c.tolerance_points,
+                "dans_la_tolerance": c.dans_la_tolerance,
+            }
+            for c in d.validation_insee()
+        ],
+    }
+
+
 def depense_menages() -> dict[str, Any]:
     """Dépense supplémentaire des ménages à consommation inchangée pour une unité de chaque
     levier de TVA et d'accises (``fr_budget.menages.depense``), en euros par ménage et par an,

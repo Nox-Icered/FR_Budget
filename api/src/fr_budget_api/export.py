@@ -30,6 +30,7 @@ from fr_budget_api.app import (
     budget_etat,
     catalogue_credits_missions,
     catalogue_depenses_fiscales,
+    deciles,
     depense_menages,
     depenses_fonctions,
     effets_leviers_menages,
@@ -106,6 +107,7 @@ def exporter(dossier: Path) -> None:
     _ecrire(dossier, "menages-types.json", menages_types())
     _ecrire(dossier, "entreprises.json", entreprises())
     _ecrire(dossier, "depense-menages.json", depense_menages())
+    _ecrire(dossier, "deciles.json", deciles())
     (dossier / "menages-effets.json").write_text(texte_effets_menages(), encoding="utf-8")
     for nom in REGISTRES:
         _ecrire(dossier, f"registre-{nom}.json", registre(nom))

@@ -1065,3 +1065,34 @@ sources:
     millesime: janvier 2025 (déclarations des revenus 2003 à 2022)
     acces: direct
     consulte_le: 2026-11-05
+
+  - id: insee_cnd_2023
+    nom: "Comptes par catégories de ménage, comptes nationaux annuels base 2020, Insee Résultats : tableau CND.101, comptes nationaux distribués selon les vingtièmes de niveau de vie usuel, 2020 à 2023"
+    editeur: INSEE
+    url: https://www.insee.fr/fr/statistiques/8574663
+    licence: Licence Ouverte 2.0
+    date_publication: 2026-04-16
+    millesime: comptes nationaux distribués 2023, compte semi-définitif sur 2023, base 2020 (statistiques expérimentales)
+    acces: direct
+    consulte_le: 2026-11-06
+
+  - id: insee_fps2019_reformes_2018
+    nom: "France, portrait social, édition 2019, dossier « Les personnes les plus aisées sont celles qui bénéficient le plus des mesures socio-fiscales mises en œuvre en 2018 » (données des figures)"
+    editeur: INSEE
+    url: https://www.insee.fr/fr/statistiques/4238451
+    licence: Licence Ouverte 2.0
+    date_publication: 2019-11-19
+    millesime: mesures de 2018, modèle Ines, législation contrefactuelle
+    acces: direct
+    consulte_le: 2026-11-06
+
+  - id: insee_fps2022_reformes_2020_2021
+    nom: "France, portrait social, édition 2022, dossier « Les réformes sociofiscales de 2020 et 2021 augmentent le revenu disponible des ménages, en particulier pour la moitié la plus aisée » (données des figures)"
+    editeur: INSEE
+    url: https://www.insee.fr/fr/statistiques/6535299
+    licence: Licence Ouverte 2.0
+    date_publication: 2022-11-24
+    millesime: mesures de 2020 et 2021, modèle Ines, législation contrefactuelle
+    acces: direct
+    consulte_le: 2026-11-06
+

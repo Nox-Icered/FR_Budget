@@ -83,3 +83,17 @@ test("ménages types : le calcul du site redonne celui du moteur (lui-même éga
   }
   assert.equal(ecartMenage(donnees, donnees.bareme_reference, "cadre_p95"), 0);
 });
+
+test("écart par dixième : le calcul du site redonne celui du moteur sur les barèmes de contrôle", async () => {
+  const { ecartParDixieme } = await import("../lib/bareme-ir.ts");
+  for (const c of donnees.controles) {
+    const v = ecartParDixieme(donnees, c.bareme);
+    v.forEach((variante, k) =>
+      variante.forEach((x, i) => {
+        const attendu = c.par_dixieme[k][i];
+        assert.ok(Math.abs(x - attendu) <= 1e-6 * Math.max(1, Math.abs(attendu)), `${c.nom} ${k} ${i}`);
+      }),
+    );
+    assert.ok(Math.abs(v[0].reduce((s, x) => s + x, 0) - c.effet.central) < 1e-6);
+  }
+});

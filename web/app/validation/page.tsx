@@ -1,5 +1,5 @@
 import { texte, nombre } from "../../lib/textes";
-import { lire, type Chiffrage, type Comparaison, type Levier } from "../../lib/donnees";
+import { lire, type Chiffrage, type Comparaison, type Deciles, type Levier } from "../../lib/donnees";
 import { region } from "../../lib/region";
 import { chemin } from "../../lib/chemin";
 import { libelleCommun } from "../../lib/validation";
@@ -20,6 +20,7 @@ export default function Validation() {
   const leviers = lire<Levier[]>("registre-leviers.json");
   const chiffrages = lire<Chiffrage[]>("registre-chiffrages.json");
   const comparaisons = lire<Comparaison[]>("validation.json");
+  const deciles = lire<Deciles>("deciles.json");
   const mesures = new Map(chiffrages.map((c) => [c.id, c]));
   const tolerance = comparaisons.length ? comparaisons[0].tolerance * 100 : 0;
   return (
@@ -93,6 +94,38 @@ export default function Validation() {
           </tbody>
         </table>
       </div>
+      <h2>{texte("validation.deciles.titre")}</h2>
+      <p>{texte("validation.deciles.intro", { tolerance: nombre(deciles.validation[0]?.tolerance_points ?? 0) })}</p>
+      {deciles.validation.map((v) => {
+        const legende = texte(`validation.deciles.references.${v.reference}`);
+        return (
+          <div key={v.reference} className="defilement" {...region(legende)}>
+            <table>
+              <caption>
+                {legende} — <a href={chemin(`/sources/#${v.source}`)}>{v.source}</a>.{" "}
+                {texte("validation.deciles.ecart", { ecart: nombre(v.ecart_max_points) })}{" "}
+                {texte(v.dans_la_tolerance ? "validation.dans_tolerance" : "validation.hors_tolerance")}
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">{texte("validation.deciles.dixieme")}</th>
+                  <th scope="col">{texte("validation.modele")}</th>
+                  <th scope="col">{texte("validation.deciles.insee")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {v.modele.map((m, i) => (
+                  <tr key={i}>
+                    <th scope="row">{texte(`simulateur.deciles.noms.${i + 1}`)}</th>
+                    <td className="nombre">{texte("validation.pourcent", { valeur: nombre(m) })}</td>
+                    <td className="nombre">{texte("validation.pourcent", { valeur: nombre(v.insee[i]) })}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      })}
       <h2>{texte("validation.references_titre")}</h2>
       <div className="defilement" {...region(texte("validation.references_titre"))}>
         <table>

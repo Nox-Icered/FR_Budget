@@ -475,6 +475,29 @@ def _ecart(
     return _total(annee, ecart, lambda s: k[s.nom] if par_segment else g) / EUROS_PAR_MILLIARD
 
 
+def dixieme(segment: Segment) -> int:
+    """Dixième de foyers (1 à 10) qui contient le segment, d'après son rang."""
+    return min(int(segment.rang[0] * DIXIEMES + 1e-9) + 1, DIXIEMES)
+
+
+def ecart_par_dixieme(reference: Bareme, reforme: Bareme, annee: int) -> list[list[float]]:
+    """Écart d'impôt par dixième de foyers (rang du revenu fiscal de référence par part), en
+    Md€ (positif : l'impôt augmente), pour chaque variante de ``effet`` : calage par segment et
+    part des couples par quantile (centrale), calage unique, part des couples uniforme."""
+    n = nombre_foyers(annee)
+    resultat = []
+    for couples, par_segment in ((REPARTITION, True), (REPARTITION, False), (UNIFORME, True)):
+        k, g = calage(couples), calage_global(couples)
+        par = [0.0] * DIXIEMES
+        for s in segments(annee):
+            c = part_couples(s, couples)
+            ecart = _impot_moyen(reforme, s, c) - _impot_moyen(reference, s, c)
+            calage_s = k[s.nom] if par_segment else g
+            par[dixieme(s) - 1] += n * s.foyers * s.parts * calage_s * ecart / EUROS_PAR_MILLIARD
+        resultat.append(par)
+    return resultat
+
+
 def effet(reference: Bareme, reforme: Bareme, annee: int) -> Fourchette:
     """Écart d'impôt entre ``reforme`` et ``reference`` sur les revenus de ``annee``, en Md€
     (positif : l'impôt augmente). Valeur centrale : calage par segment, part des couples par
@@ -573,6 +596,17 @@ def effet_site(reforme: Bareme) -> Fourchette:
     return Fourchette(f.bas * vers_2025, f.central * vers_2025, f.haut * vers_2025)
 
 
+def ecart_par_dixieme_site(reforme: Bareme) -> list[list[float]]:
+    """``ecart_par_dixieme`` d'un barème saisi à partir du barème de 2025, en Md€ de 2025 (même
+    passage que ``effet_site``)."""
+    r = 1 / revalorisation_site()
+    vers_2025 = facteur_pib(ANNEE_SITE) / facteur_pib(ANNEE_CALAGE)
+    variantes = ecart_par_dixieme(
+        _indexe(bareme_openfisca(ANNEE_SITE), r), _indexe(reforme, r), ANNEE_CALAGE
+    )
+    return [[v * vers_2025 for v in par] for par in variantes]
+
+
 def _bareme_dict(b: Bareme) -> dict[str, object]:
     d = b.decote
     return {
@@ -631,6 +665,7 @@ def donnees_site() -> dict[str, object]:
         "segments": [
             {
                 "nom": s.nom,
+                "dixieme": dixieme(s),
                 "foyers": n * s.foyers,
                 "parts": s.parts,
                 "calage": k_rep[s.nom],
@@ -645,6 +680,7 @@ def donnees_site() -> dict[str, object]:
                 "nom": nom,
                 "bareme": _bareme_dict(construire(reference)),
                 "effet": vars(effet_site(construire(reference))),
+                "par_dixieme": ecart_par_dixieme_site(construire(reference)),
             }
             for nom, construire in BAREMES_CONTROLE
         ],

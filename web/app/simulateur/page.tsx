@@ -4,6 +4,7 @@ import {
   type Baseline,
   type CatalogueCreditsMissions,
   type CatalogueDepensesFiscales,
+  type Deciles,
   type DepenseMenages,
   type Entreprises,
   type ReponsesUnitaires,
@@ -24,6 +25,7 @@ export default function PageSimulateur() {
   const version = lire<Version>("version.json");
   const entreprises = lire<Entreprises>("entreprises.json");
   const depense = lire<DepenseMenages>("depense-menages.json");
+  const deciles = lire<Deciles>("deciles.json");
   const bareme = lire<DonneesBareme>("bareme-ir.json");
   return (
     <>
@@ -40,6 +42,7 @@ export default function PageSimulateur() {
         version={version}
         entreprises={entreprises}
         depense={depense}
+        deciles={deciles}
         bareme={bareme}
       />
       <h2>{texte("simulateur.methode_titre")}</h2>

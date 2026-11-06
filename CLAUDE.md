@@ -18,6 +18,7 @@ Chaque chiffre, source, hypothèse et calcul doit être visible et vérifiable. 
 1. **Aucune valeur reprise de mémoire.** Tout chiffre (taux, barème, montant, chiffrage officiel, multiplicateur) vient d'une source citée dans le registre de données ou d'hypothèses. Si tu ne trouves pas la source, tu t'arrêtes et tu me le dis, tu n'inventes pas.
 2. **Aucun nom de variable OpenFisca supposé.** Vérifie-le dans le paquet installé ou dans le référentiel avant de l'utiliser.
 3. **Neutralité.** Aucun score, aucun classement, aucune « meilleure réforme ». Les intitulés sont descriptifs (« hausse de 1 point du taux normal de TVA », pas « effort fiscal »). Pas de formulation qui oriente.
+   Exception encadrée : la page Objectif peut construire un exemple de scénario à partir des mesures cochées par l'utilisateur et de la répartition recettes / dépenses qu'il fixe, selon une règle mécanique écrite sur la page. L'exemple n'est ni classé, ni qualifié, ni présenté comme optimal ou recommandé. Aucune mesure n'est cochée par défaut.
 4. **Fourchettes, jamais un chiffre unique.** Tout résultat est donné en valeur basse, centrale et haute, dérivées de plages d'hypothèses sourcées.
 5. **Aucun stockage de données personnelles.** Les profils de ménage saisis par un utilisateur ne sont ni enregistrés ni journalisés.
 6. **Pas de levier publié sans validation.** Voir la règle de publication ci-dessous.

@@ -262,3 +262,7 @@ th.groupe {
 .formulaire-objectif { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; max-width: 40rem; }
 .formulaire-objectif select, .formulaire-objectif input { width: 100%; min-width: 0; }
 .resultat-objectif { margin-top: 16px; padding: 12px 16px; border: 1px solid var(--trait); }
+.exemple-objectif { margin-top: 32px; max-width: 48rem; }
+.mesures-exemple { display: grid; gap: 4px; margin: 12px 0; }
+.mesures-exemple label { min-width: 0; }
+.exemple-objectif input[type="range"] { width: 100%; max-width: 30rem; display: block; }

@@ -8,6 +8,7 @@ import { texte } from "../../lib/textes";
 import type { ReponsesUnitaires, Version } from "../../lib/donnees";
 import { useReponses } from "../../lib/chargement";
 import { empreinteVersion, encoder, LEVIERS_PUBLICS } from "../../lib/etat";
+import { ExempleScenario } from "./exemple";
 import { fourchetteValeur, reglageAuPas, resoudre, type Indicateur } from "../../lib/objectif";
 
 const chiffre = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 });
@@ -142,6 +143,14 @@ function ObjectifCharge({ donnees, version }: { donnees: ReponsesUnitaires; vers
           </>
         )}
       </div>
+      <ExempleScenario
+        donnees={donnees}
+        version={version}
+        objectif={objectif}
+        entree={entree}
+        valide={valide}
+        libelle={libelle}
+      />
     </section>
   );
 }

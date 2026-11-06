@@ -875,7 +875,7 @@
   },
   "objectif": {
     "titre": "Atteindre un objectif",
-    "intro": "Choisissez un indicateur, une année, une valeur à atteindre et une mesure : la page calcule le réglage de cette mesure, prise seule, qui atteint la valeur choisie. Elle ne propose ni ne compare aucune mesure : c'est vous qui choisissez laquelle régler.",
+    "intro": "Choisissez un indicateur, une année et une valeur à atteindre. La page calcule le réglage d'une mesure, prise seule, qui atteint cette valeur ; plus bas, elle construit un exemple à plusieurs mesures, à partir des mesures que vous cochez. Elle ne propose ni ne compare aucune mesure.",
     "indicateur": "Indicateur",
     "dette": "Dette publique, en % du PIB",
     "solde_primaire": "Solde primaire, en % du PIB",
@@ -891,6 +891,36 @@
     "fourchette_partielle": "Pour au moins une de ces hypothèses, la valeur n'est pas atteignable dans les limites de la mesure.",
     "ouvrir": "Ouvrir ce réglage dans le simulateur ({valeur}, au pas du curseur)",
     "methode": "Calcul : le réglage est cherché par dichotomie sur le même calcul que le simulateur, sans effet sur l'activité (multiplicateur désactivé) ; appliqué dans le simulateur, il redonne la valeur choisie. Les limites et le statut de chaque mesure sont ceux du simulateur.",
-    "pas_de_reglage": "Aucun cran du curseur du simulateur n'atteint exactement cette valeur dans les limites de la mesure : ouvrez le simulateur pour régler la mesure au plus près."
+    "pas_de_reglage": "Aucun cran du curseur du simulateur n'atteint exactement cette valeur dans les limites de la mesure : ouvrez le simulateur pour régler la mesure au plus près.",
+    "exemple": {
+      "titre": "Exemple de scénario à plusieurs mesures",
+      "intro": "Cochez les mesures que vous acceptez de mobiliser et choisissez la part de l'écart portée par les recettes. La page construit un exemple avec la règle écrite plus bas, pour l'objectif saisi ci-dessus.",
+      "mention": "Exemple construit par une règle mécanique, à partir de vos choix : ce n'est ni une recommandation, ni la meilleure façon d'atteindre l'objectif. D'autres combinaisons l'atteignent aussi.",
+      "recettes": "Mesures sur les recettes (impôts et cotisations)",
+      "depenses": "Mesures sur les dépenses",
+      "part": "Part de l'écart portée par les recettes : {recettes} % (dépenses : {depenses} %)",
+      "part_defaut": "Au départ, le curseur est au milieu (50 %) ; aucune mesure n'est cochée.",
+      "cocher": "Cochez au moins une mesure.",
+      "tableau": "Mesures de l'exemple, l'année de l'objectif (points de PIB, calcul central)",
+      "mesure": "Mesure",
+      "part_attribuee": "Part attribuée par la règle",
+      "reglage": "Réglage au pas du curseur",
+      "contribution": "Effet du réglage, pris seul",
+      "a_la_limite": "(limite du curseur)",
+      "resultat": "Avec toutes ces mesures, valeur en {annee} : {central} % du PIB (de {bas} à {haut} % selon les hypothèses basses et hautes).",
+      "ouvrir": "Ouvrir cet exemple dans le simulateur, pour l'ajuster et voir l'effet sur les ménages types",
+      "regle_titre": "Règle de construction de l'exemple",
+      "regle": "L'écart est la différence entre la valeur à atteindre et la valeur sans mesure (calcul central). Le curseur le répartit entre recettes et dépenses. De chaque côté, chaque mesure cochée apporte une part égale de l'écart, mesurée en points de l'indicateur choisi l'année de l'objectif. Une mesure qui ne peut pas porter sa part dans les limites de son curseur y est réglée, et le reste se répartit à parts égales entre les autres mesures du même côté. Chaque réglage est ensuite arrondi au pas du curseur du simulateur (ou au cran suivant), ce qui peut dépasser la part attribuée. Le scénario complet est recalculé par le simulateur.",
+      "cotes": "Chaque mesure est rangée du côté des comptes publics que touche l'instrument modifié : impôts et cotisations en recettes ; rémunérations, prestations, pensions et dotations en dépenses. Les allègements généraux sont des cotisations en moins (recettes) ; la prime d'activité est une prestation et l'âge de départ modifie les pensions (dépenses).",
+      "limites": "Les effets des mesures sont additionnés, sans leurs interactions (par exemple entre la CSG et l'impôt sur le revenu). Sans effet sur l'activité (multiplicateur désactivé). Les statuts et les limites des mesures sont ceux du simulateur.",
+      "problemes": {
+        "double_compte": "L'âge effectif et l'âge légal de départ ne peuvent pas être cochés ensemble.",
+        "cote_vide_recettes": "Une part de l'écart revient aux recettes, mais aucune mesure sur les recettes n'est cochée.",
+        "cote_vide_depenses": "Une part de l'écart revient aux dépenses, mais aucune mesure sur les dépenses n'est cochée.",
+        "insuffisant_recettes": "Les mesures cochées sur les recettes ne portent pas leur part de l'écart dans les limites de leurs curseurs. La règle ne reporte rien sur les dépenses : cochez d'autres mesures ou déplacez le curseur.",
+        "insuffisant_depenses": "Les mesures cochées sur les dépenses ne portent pas leur part de l'écart dans les limites de leurs curseurs. La règle ne reporte rien sur les recettes : cochez d'autres mesures ou déplacez le curseur.",
+        "non_atteint": "Après arrondi au pas des curseurs, l'exemple n'atteint pas la valeur choisie."
+      }
+    }
   }
 }

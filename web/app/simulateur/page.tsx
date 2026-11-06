@@ -141,7 +141,8 @@ export default function PageSimulateur() {
         {texte("simulateur.methode_assurance_maladie", {
           point: deuxDecimales(-donnees.leviers.ondam_progression.rendement_unitaire),
           franchises: deuxDecimales(10 * donnees.leviers.franchises_participations.rendement_unitaire),
-          ij: deuxDecimales(-0.1 * donnees.leviers.ij_plafond_smic.rendement_unitaire),
+          // Rendement d'un point de Smic ; 10 points valent 0,1 Smic.
+          ij: deuxDecimales(-10 * donnees.leviers.ij_plafond_smic.rendement_unitaire),
         })}
       </p>
       {donnees.croissance && (

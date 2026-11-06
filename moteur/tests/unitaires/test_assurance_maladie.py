@@ -40,9 +40,10 @@ def test_franchises_un_pour_cent_du_rendement() -> None:
 
 
 def test_plafond_ij_cout_d_un_retour_vers_1_8_smic() -> None:
-    """Relever le plafond de 0,4 Smic (retour à 1,8) coûte l'économie de 2025 en année pleine."""
+    """Relever le plafond de 40 points de Smic (retour à 180 %) coûte l'économie de 2025 en année
+    pleine."""
     f = am.rendement_smic_plafond_ij()
-    total = -0.4 * f.central
+    total = -am.ECART_PLAFONDS_SMIC * f.central
     assert 0.9 - 1e-9 <= total <= 1.1 + 1e-9
     assert f.bas <= f.central <= f.haut < 0
     assert 0 < am.part_premiere_annee_ij() < 1
@@ -62,15 +63,15 @@ def test_ondam_ne_se_cumule_pas_avec_les_mesures_qu_il_contient() -> None:
     for autre in (am.LEVIER_FRANCHISES, am.LEVIER_IJ):
         with pytest.raises(ValueError, match="double compte"):
             sc.verifier_double_compte(
-                [sc.Mesure(am.LEVIER_ONDAM, -0.5, ENTREE), sc.Mesure(autre, 0.1, ENTREE)]
+                [sc.Mesure(am.LEVIER_ONDAM, -0.5, ENTREE), sc.Mesure(autre, 10.0, ENTREE)]
             )
     sc.verifier_double_compte(
-        [sc.Mesure(am.LEVIER_FRANCHISES, 10.0, ENTREE), sc.Mesure(am.LEVIER_IJ, 0.1, ENTREE)]
+        [sc.Mesure(am.LEVIER_FRANCHISES, 10.0, ENTREE), sc.Mesure(am.LEVIER_IJ, 10.0, ENTREE)]
     )
 
 
 def test_premiere_annee_du_plafond_ij() -> None:
     """La première année ne compte qu'une partie de l'économie en année pleine (arrêts en cours)."""
-    e = sc.scenario([sc.Mesure(am.LEVIER_IJ, 0.4, ENTREE)])
+    e = sc.scenario([sc.Mesure(am.LEVIER_IJ, 40.0, ENTREE)])
     par_annee = {a.annee: a.ecart_solde_primaire.central for a in e}
     assert 0 > par_annee[ENTREE] > par_annee[ENTREE + 1]

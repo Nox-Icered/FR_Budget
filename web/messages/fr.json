@@ -325,9 +325,9 @@
         "explication": "Le patient paie une petite somme non remboursée par boîte de médicament, acte paramédical, consultation ou transport (par exemple 1 € par boîte), dans la limite de plafonds par jour et par an. Ce curseur change ces montants et ces plafonds dans la même proportion. Vers la droite, l'assurance maladie rembourse moins et les patients paient plus."
       },
       "ij_plafond_smic": {
-        "libelle": "Plafond du salaire pris en compte pour les indemnités journalières maladie ({reference} Smic depuis avril 2025)",
-        "valeur": "+{valeur} Smic",
-        "explication": "Pendant un arrêt maladie, l'assurance maladie verse des indemnités calculées sur le salaire, dans la limite d'un plafond. Il est passé de 1,8 à 1,4 Smic en 2025. Ce curseur le relève, jusqu'à 1,8 Smic : les salariés les mieux payés reçoivent plus, et les dépenses augmentent."
+        "libelle": "Plafond du salaire pris en compte pour les indemnités journalières maladie ({reference} % du Smic depuis avril 2025)",
+        "valeur": "+{valeur} pt de Smic",
+        "explication": "Pendant un arrêt maladie, l'assurance maladie verse des indemnités calculées sur le salaire, dans la limite d'un plafond. Il est passé de 180 % à 140 % du Smic en 2025. Ce curseur le relève, jusqu'à 180 % : les salariés les mieux payés reçoivent plus, et les dépenses augmentent."
       }
     },
     "limite_tva_accise": "La hausse de l'accise augmente aussi la TVA payée sur le carburant : cet effet n'est pas compté.",
@@ -638,7 +638,7 @@
       "non_repartis": "{nombre} mesure(s) du scénario ne sont pas réparties : rémunérations publiques, dotations, crédits des missions, dépenses fiscales, plafond du quotient familial, âge de départ. Leur effet n'apparaît pas dans ce tableau.",
       "methode": "Méthode : l'effet national de chaque mesure est réparti selon la part de chaque dixième dans l'assiette qu'elle touche (par exemple, les pensions pour la CSG sur les retraites), d'après les comptes nationaux distribués {annee} de l'Insee. Pour le barème de l'impôt sur le revenu et ses seuils, l'écart d'impôt est calculé par dixième de foyers fiscaux (revenu par part), assimilé au dixième de niveau de vie de même rang. La fourchette prend les parts des années {premiere} à {annee}, une autre assiette quand elle existe (Budget de famille 2017 pour la TVA et les accises) et les bornes de l'effet national. Sans changement de comportement ; structure de {annee} appliquée aux années suivantes."
     },
-    "methode_assurance_maladie": "Assurance maladie (bêta) : un point de progression de l'ONDAM vaut {point} Md€ (1 % de l'ONDAM 2025), réduit ou augmenté selon la part des économies prévues effectivement réalisées en 2024 et 2025 ; 10 % de hausse des franchises et participations (montants et plafonds) rapportent {franchises} Md€ (rendement de 2025, Cour des comptes) ; relever de 0,1 Smic le plafond des indemnités journalières coûte {ij} Md€ en année pleine (économie de la baisse de 2025, annexes des PLFSS)."
+    "methode_assurance_maladie": "Assurance maladie (bêta) : un point de progression de l'ONDAM vaut {point} Md€ (1 % de l'ONDAM 2025), réduit ou augmenté selon la part des économies prévues effectivement réalisées en 2024 et 2025 ; 10 % de hausse des franchises et participations (montants et plafonds) rapportent {franchises} Md€ (rendement de 2025, Cour des comptes) ; relever de 10 points de Smic (0,1 Smic) le plafond des indemnités journalières coûte {ij} Md€ en année pleine (économie de la baisse de 2025, annexes des PLFSS)."
   },
   "partage": {
     "scenario": "Scénario",

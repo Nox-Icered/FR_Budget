@@ -16,7 +16,8 @@ en « bêta, non validé ».
   (2,3 Md€) ; borne haute : rendement en année pleine après la réforme de 2024 estimé par la
   CCSS (2 520 M€).
 - **Plafond des revenus pris en compte pour les indemnités journalières maladie**
-  (``ij_plafond_smic``, en Smic au-dessus de 1,4 Smic, de 0 à 0,4 ; positif : plafond relevé)
+  (``ij_plafond_smic``, en points de Smic au-dessus de 140 % du Smic, de 0 à 40 ; positif :
+  plafond relevé)
   : le relèvement à 1,8 Smic coûte l'économie de la baisse de 2025 en année pleine, économie de
   la première année (0,4 Md€ selon la Cour des comptes, 0,6 Md€ selon le PLFSS pour 2025) plus la
   montée en charge de 2026 (0,5 Md€, PLFSS pour 2026). Effet proportionnel à l'écart de
@@ -43,10 +44,11 @@ MILLIONS_PAR_MILLIARD = 1000.0
 BORNE_FRANCHISES = 100.0
 """Variation des montants et plafonds, en % : de la suppression au doublement (chiffré en
 2025)."""
-PLAFOND_ACTUEL_SMIC = 1.4
-ECART_PLAFONDS_SMIC = 0.4
-"""Écart entre le plafond antérieur (1,8 Smic) et le plafond actuel (1,4 Smic) : seul domaine
-chiffré."""
+PLAFOND_ACTUEL_SMIC = 140.0
+"""Plafond actuel, en % du Smic (1,4 Smic)."""
+ECART_PLAFONDS_SMIC = 40.0
+"""Écart entre le plafond antérieur (180 % du Smic) et le plafond actuel (140 %), en points de
+Smic : seul domaine chiffré."""
 
 
 def ondam_reference() -> float:
@@ -100,9 +102,10 @@ def _economies_ij() -> tuple[float, float]:
 
 
 def rendement_smic_plafond_ij() -> Fourchette:
-    """Effet sur le solde d'un relèvement du plafond d'un Smic (proportionnel, sur 0,4 Smic), en
-    Md€ (négatif : dépenses en plus). Économie en année pleine : économie de la première année
-    plus la montée en charge de 2026 ; bornes : les deux chiffrages de la première année."""
+    """Effet sur le solde d'un relèvement du plafond d'un point de Smic (proportionnel, sur 40
+    points), en Md€ (négatif : dépenses en plus). Économie en année pleine : économie de la
+    première année plus la montée en charge de 2026 ; bornes : les deux chiffrages de la première
+    année."""
     montee = chiffrage("ij_plafond_montee_charge_2026")
     totaux = [premiere + montee for premiere in _economies_ij()]
     central = sum(totaux) / len(totaux)

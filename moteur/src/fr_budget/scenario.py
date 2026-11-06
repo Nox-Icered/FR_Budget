@@ -519,7 +519,7 @@ def taux_reference(levier: str) -> float:
         # Rendement 2025 des franchises et participations forfaitaires, tous régimes, Md€.
         return chiffrage("franchises_pf_rendement_tous_regimes_2025")
     if levier == LEVIER_IJ_PLAFOND:
-        # Plafond actuel des revenus pris en compte, en Smic.
+        # Plafond actuel des revenus pris en compte, en % du Smic.
         return assurance_maladie.PLAFOND_ACTUEL_SMIC
     if levier in LEVIERS_DOTATIONS:
         return dotations.montant_levier(LEVIERS_DOTATIONS[levier])

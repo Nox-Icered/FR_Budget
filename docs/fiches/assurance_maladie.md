@@ -47,7 +47,7 @@ Code : `moteur/src/fr_budget/agrege/assurance_maladie.py`.
 - Curseur : de −100 % (suppression) à +100 % (doublement).
 - **Variante non retenue (ii)**, montants seuls avec plafonds annuels inchangés (forme de la réforme de 2024) : non linéaire. Doubler les montants n'a rapporté que +54 % (CCSS : +880 M€ sur 1 640 M€).
 
-**Plafond des indemnités journalières** (`ij_plafond_smic`, en Smic au-dessus de 1,4 Smic, de 0 à 0,4)
+**Plafond des indemnités journalières** (`ij_plafond_smic`, en points de Smic au-dessus de 140 % du Smic, de 0 à 40)
 - Relever le plafond à 1,8 Smic coûte l'économie de la baisse de 2025 en année pleine : économie de la première année plus montée en charge de 2026 (0,5 Md€).
 - L'économie de la première année est chiffrée à 0,6 Md€ par le PLFSS pour 2025 et à 0,4 Md€ dans la LFSS pour 2025 selon la Cour. Valeur centrale : la moyenne ; bornes : les deux.
 - L'effet est supposé proportionnel à l'écart de plafond, faute de répartition des salaires des personnes en arrêt entre 1,4 et 1,8 Smic.

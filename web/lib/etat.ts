@@ -75,7 +75,7 @@ export const LEVIERS_PUBLICS: { id: string; pas: number }[] = [
   { id: "chomage_duree_indemnisation", pas: 5 },
   { id: "ondam_progression", pas: 0.1 },
   { id: "franchises_participations", pas: 5 },
-  { id: "ij_plafond_smic", pas: 0.05 },
+  { id: "ij_plafond_smic", pas: 5 },
 ];
 // Âge effectif et âge légal de départ : le moteur refuse de les cumuler (double compte).
 export const LEVIERS_RETRAITES = ["retraites_age_depart", "retraites_age_legal"];

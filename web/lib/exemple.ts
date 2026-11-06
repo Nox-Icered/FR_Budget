@@ -38,6 +38,10 @@ export const COTES: Record<string, Cote> = {
   retraites_age_legal: "depenses",
   chomage_revalorisation: "depenses",
   chomage_duree_indemnisation: "depenses",
+  // Assurance maladie : les franchises et les indemnités journalières réduisent des prestations.
+  ondam_progression: "depenses",
+  franchises_participations: "depenses",
+  ij_plafond_smic: "depenses",
 };
 
 export const PAS_PART_RECETTES = 0.1;

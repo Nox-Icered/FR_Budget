@@ -830,3 +830,22 @@ hypotheses:
       la plupart des chiffrages officiels : la plage est surtout vers le haut.
     instruments: [impot_revenu_structure]
 
+  - id: ondam_realisation_economies
+    libelle: Part des économies prévues dans la construction de l'ONDAM effectivement réalisées
+    unite: part
+    valeur_centrale: 1.0
+    plage:
+      basse: 0.5714
+      haute: 1.1163
+    sources: [plfss2026_annexe5]
+    justification: >-
+      Valeur centrale : l'objectif est tenu. Bornes : un moins l'écart d'exécution à l'objectif
+      initial rapporté aux économies intégrées à la construction, en 2024 (dépassement de 1,5
+      Md€ pour 3,5 Md€ d'économies, soit 57 % réalisées) et en 2025 (sous-exécution prévue de 0,5
+      Md€ pour 4,3 Md€ d'économies, soit 112 %). Hypothèse : l'écart d'exécution tient
+      entièrement aux économies. Années de crise sanitaire et d'inflation exceptionnelle (2020 à
+      2023) écartées. Choix du lot assurance maladie, à relire (le plan prévoyait de rapporter
+      les dépassements à l'ONDAM ; ils dépassent un point de progression, d'où ce rapport aux
+      économies prévues).
+    instruments: [assurance_maladie]
+

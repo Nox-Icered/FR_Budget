@@ -14,7 +14,7 @@ from dataclasses import dataclass
 from functools import partial
 
 from fr_budget import retraites_cohortes
-from fr_budget.agrege import bareme_ir, quotient_familial
+from fr_budget.agrege import assurance_maladie, bareme_ir, quotient_familial
 from fr_budget.agrege.accises import recette_brute
 from fr_budget.agrege.assurance_chomage import cout_revalorisation_cumule, effet_contribution
 from fr_budget.agrege.cotisations import cout_allegements, valeur_point_modele
@@ -223,6 +223,32 @@ def _definitions_chomage() -> list[tuple[str, Callable[[], float]]]:
     ]
 
 
+def _franchises_doublement() -> float:
+    """Doublement des montants et des plafonds des franchises et participations, Md€."""
+    return (
+        assurance_maladie.BORNE_FRANCHISES
+        * assurance_maladie.rendement_pourcent_franchises().central
+    )
+
+
+def _ij_plafond_premiere_annee() -> float:
+    """Économie de la première année d'une baisse du plafond de 1,8 à 1,4 Smic, Md€."""
+    return (
+        assurance_maladie.ECART_PLAFONDS_SMIC
+        * -assurance_maladie.rendement_smic_plafond_ij().central
+        * assurance_maladie.part_premiere_annee_ij()
+    )
+
+
+def _definitions_assurance_maladie() -> list[tuple[str, Callable[[], float]]]:
+    """Assurance maladie : mêmes calculs que les tests de validation du levier."""
+    return [
+        ("franchises_pf_doublement_avec_plafonds_2026", _franchises_doublement),
+        ("ij_plafond_1_8_1_4_plfss2025", _ij_plafond_premiere_annee),
+        ("ij_plafond_lfss2025_ccomptes", _ij_plafond_premiere_annee),
+    ]
+
+
 def _definitions() -> list[tuple[str, Callable[[], float]]]:
     definitions: list[tuple[str, Callable[[], float]]] = []
     for taux in TAUX_TVA:
@@ -319,6 +345,7 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         for annee in quotient_familial.ANNEES_HISTORIQUES
     ]
     definitions += _definitions_chomage()
+    definitions += _definitions_assurance_maladie()
     definitions += _confrontations_independantes()
     return definitions
 

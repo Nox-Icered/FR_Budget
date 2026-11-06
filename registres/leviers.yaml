@@ -107,3 +107,10 @@ leviers:
     moteur: agrege
     references_visees: [Revue de dépenses IGF-IGAS de juin 2026, projets de loi de finances pour 2013 et 2014, Cour des comptes (2023)]
     statut: beta
+
+  - id: assurance_maladie
+    libelle: Assurance maladie (première étape, leviers agrégés)
+    parametres_reglables: [Taux de progression de l'ONDAM, Montants et plafonds des franchises et participations forfaitaires, Plafond des revenus pris en compte pour les indemnités journalières]
+    moteur: agrege
+    references_visees: [Annexes 5 des PLFSS (ONDAM et dépenses de santé), Commission des comptes de la sécurité sociale, Cour des comptes]
+    statut: beta

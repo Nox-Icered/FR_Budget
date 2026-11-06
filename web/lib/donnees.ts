@@ -194,6 +194,9 @@ export type ReponsesUnitaires = {
       duree_montee?: number;
       duree_montee_plage?: { bas: number; central: number; haut: number };
       bornes: [number, number];
+      // Terme croisé (moteur, fr_budget.agrege.interactions) : les deux leviers dont il prend
+      // le produit des réglages ; ajouté par le calcul, jamais proposé à l'utilisateur.
+      interaction?: [string, string];
       // Levier non linéaire : réponse exacte (et non par unité) de chaque cran du curseur.
       grille?: Record<
         string,
@@ -225,6 +228,8 @@ export type ReponsesUnitaires = {
       >;
     }
   >;
+  // Interactions connues mais non chiffrées : signalées quand un levier de chaque liste est réglé.
+  interactions_non_chiffrees?: { mecanisme: string; leviers_a: string[]; leviers_b: string[] }[];
 };
 export type DepenseFiscale = {
   code: string;

@@ -11,7 +11,7 @@ import type {
   ReponsesUnitaires,
   Version,
 } from "../../lib/donnees";
-import { calculer } from "../../lib/scenario";
+import { avecInteractions, calculer, interactionsNonChiffrees } from "../../lib/scenario";
 import { mesuresDepensesFiscales } from "../../lib/depenses-fiscales";
 import { ReglagesDepensesFiscales } from "./depenses-fiscales";
 import { mesuresCreditsMissions } from "../../lib/credits-missions";
@@ -146,17 +146,18 @@ function SimulateurCharge({
     Object.values(parDepense).some((v) => v !== 0);
   const indexationReglee = LEVIERS_SOLIDARITE.some((id) => (valeurs[id] ?? 0) !== 0);
   const solidariteReglee = (parMission[MISSION_SOLIDARITE] ?? 0) !== 0;
-  const lignes = calculer(
-    donnees,
-    [
-      ...leviers.map((l) => ({ levier: l.id, valeur: valeurs[l.id] })),
-      ...mesuresDepensesFiscales(catalogue, parImpot, parDepense),
-      ...mesuresCreditsMissions(missions, parMission),
-      ...mesureBareme(donneesBareme, bareme),
-    ],
-    annee,
-    croissance,
-  );
+  const mesuresSite = [
+    ...leviers.map((l) => ({ levier: l.id, valeur: valeurs[l.id] })),
+    ...mesuresDepensesFiscales(catalogue, parImpot, parDepense),
+    ...mesuresCreditsMissions(missions, parMission),
+    ...mesureBareme(donneesBareme, bareme),
+  ];
+  const lignes = calculer(donnees, mesuresSite, annee, croissance);
+  // Termes croisés ajoutés au calcul, et interactions connues mais non chiffrées.
+  const croises = avecInteractions(donnees, mesuresSite)
+    .slice(mesuresSite.length)
+    .map((m) => m.levier);
+  const nonChiffrees = interactionsNonChiffrees(donnees, mesuresSite);
   // Valeur d'un levier avec autant de décimales que son pas (0,25 an pour l'âge légal).
   const signe = (v: number, pas: number) =>
     new Intl.NumberFormat("fr-FR", {
@@ -390,6 +391,22 @@ function SimulateurCharge({
               ))}
             </select>
           </div>
+          {(croises.length > 0 || nonChiffrees.length > 0) && (
+            <div className="interactions" role="note">
+              {croises.map((id) => (
+                <p key={id} className="source">
+                  {texte(`simulateur.interactions.chiffrees.${id}`)}
+                </p>
+              ))}
+              {nonChiffrees.map((m) => (
+                <p key={m} className="avertissement">
+                  {texte("simulateur.interactions.non_chiffree", {
+                    mecanisme: texte(`simulateur.interactions.mecanismes.${m}`),
+                  })}
+                </p>
+              ))}
+            </div>
+          )}
           <dl className="chiffres-cles">
             <div>
               <dt>{texte("simulateur.resume_solde", { annee: derniere.annee })}</dt>

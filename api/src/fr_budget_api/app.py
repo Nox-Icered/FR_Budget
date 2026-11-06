@@ -33,6 +33,7 @@ from fr_budget import scenario as module_scenario
 from fr_budget.agrege import bareme_ir as module_bareme_ir
 from fr_budget.agrege import credits_missions as module_credits_missions
 from fr_budget.agrege import depenses_fiscales as module_depenses_fiscales
+from fr_budget.agrege import interactions as module_interactions
 from fr_budget.agrege.cotisations import cout_allegements
 from fr_budget.apu import comptes_apu, depenses_par_fonction, libelles_cofog, ratio_pib
 from fr_budget.entreprises import repartition as module_entreprises
@@ -854,6 +855,15 @@ def calcul_scenario(entree: ScenarioEntree) -> dict[str, Any] | None:
         "mesures": [m.model_dump() for m in entree.mesures],
         "croissance": entree.croissance,
         "statuts": {m.levier: _statut_levier(m.levier) for m in entree.mesures},
+        # Termes croisés ajoutés au calcul et interactions connues mais non chiffrées.
+        "interactions": [
+            m.levier
+            for m in module_scenario.avec_interactions(mesures)
+            if module_interactions.est_interaction(m.levier)
+        ],
+        "interactions_non_chiffrees": module_interactions.non_chiffrees(
+            {m.levier for m in mesures if m.valeur != 0}
+        ),
         "valeurs": [
             {
                 "annee": ligne.annee,
@@ -894,7 +904,7 @@ def _grille(levier: str) -> dict[str, dict[str, dict[str, Any]]]:
 def reponses_unitaires() -> dict[str, Any]:
     """Réponses linéaires de chaque levier, pour chaque année d'entrée (site statique)."""
     leviers: dict[str, Any] = {}
-    for levier in module_scenario.LEVIERS_REGISTRE:
+    for levier in [*module_scenario.LEVIERS_REGISTRE, *module_interactions.CHIFFREES]:
         basse, haute = module_scenario.bornes_levier(levier)
         reponses = {}
         for annee in range(module_scenario.ANNEE_PREMIERE_MESURE, module_baseline.ANNEE_FIN + 1):
@@ -951,6 +961,12 @@ def reponses_unitaires() -> dict[str, Any]:
                 else {}
             ),
             "bornes": [basse, haute],
+            # Terme croisé : les deux leviers dont le produit des réglages est la valeur.
+            **(
+                {"interaction": list(module_interactions.CHIFFREES[levier])}
+                if module_interactions.est_interaction(levier)
+                else {}
+            ),
             "multiplicateur": _fourchette(module_croissance.multiplicateur(categorie)),
             "reponses": reponses,
             # Levier non linéaire : réponse exacte de chaque cran du curseur (pas par unité).
@@ -983,6 +999,14 @@ def reponses_unitaires() -> dict[str, Any]:
             "effet_solde_plage": _fourchette(module_croissance.effet_sur_le_solde_plage()),
         },
         "leviers": leviers,
+        "interactions_non_chiffrees": [
+            {
+                "mecanisme": p.mecanisme,
+                "leviers_a": list(p.leviers_a),
+                "leviers_b": list(p.leviers_b),
+            }
+            for p in module_interactions.NON_CHIFFREES
+        ],
     }
 
 

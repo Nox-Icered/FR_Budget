@@ -123,6 +123,8 @@ class Agent:
     """Coût annuel pour l'employeur, hors contribution au compte des pensions de l'État."""
     revenu_apres_impot: float
     """Salaire net à payer moins l'impôt sur le revenu, sur l'année."""
+    csg: float
+    """CSG sur le traitement et les primes (déductible et imposable), sur l'année."""
 
 
 @cache
@@ -149,11 +151,17 @@ def agent(versant: str, tib: float, primes: float) -> Agent:
             # « pension_employeur » est négatif : l'ajouter retire la contribution au CAS.
             cout += sum(float(simulation.calculate("pension_employeur", m)[0]) for m in mois)
         net = sum(float(simulation.calculate("salaire_net_a_payer", m)[0]) for m in mois)
+        # Variables de CSG négatives dans OpenFisca.
+        csg = -sum(
+            float(simulation.calculate(v, m)[0])
+            for m in mois
+            for v in ("csg_deductible_salaire", "csg_imposable_salaire")
+        )
         # « impot_revenu_restant_a_payer » est négatif quand l'impôt est dû.
         impot = float(
             simulation.calculate("impot_revenu_restant_a_payer", str(ANNEE_LEGISLATION))[0]
         )
-    return Agent(cout=cout, revenu_apres_impot=net + impot)
+    return Agent(cout=cout, revenu_apres_impot=net + impot, csg=csg)
 
 
 def part_restant_a_l_agent(versant: str, categorie: str, assiette: str) -> float:

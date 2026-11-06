@@ -6,6 +6,7 @@ import numpy as np
 import pytest
 
 from fr_budget import scenario as sc
+from fr_budget.agrege import bareme_ir, interactions
 from fr_budget.menages import deciles as dc
 
 ANNEE = 2027
@@ -21,7 +22,8 @@ def test_parts_somment_a_un() -> None:
 def test_chaque_levier_est_reparti_ou_signale() -> None:
     """Aucun levier du simulateur n'est oublié : il a une clé ou figure parmi les non répartis."""
     for levier in sc.LEVIERS_REGISTRE:
-        assert (levier in dc.CLES) != (levier in dc.NON_REPARTIS), levier
+        repartis = levier in dc.CLES or levier == dc.BAREME
+        assert repartis != (levier in dc.NON_REPARTIS), levier
 
 
 def test_somme_des_deciles_egale_l_effet_national() -> None:
@@ -56,9 +58,28 @@ def test_euros_par_unite_de_consommation() -> None:
         )
 
 
-def test_impot_sur_le_revenu_porte_surtout_sur_le_dernier_decile() -> None:
+def test_revalorisation_des_seuils_sans_effet_sur_les_foyers_non_imposables() -> None:
+    """Moteur du barème : les premiers dixièmes fiscaux ne paient pas d'impôt au barème."""
     p = dc.part_centrale("ir_seuils_bareme")
-    assert int(np.argmax(p)) == dc.NOMBRE - 1
+    assert p.sum() == pytest.approx(1.0)
+    assert p[0] == pytest.approx(0.0, abs=1e-9)
+    assert int(np.argmax(p)) >= dc.NOMBRE // 2
+
+
+def test_bareme_saisi_reparti_par_le_moteur_du_bareme() -> None:
+    """Baisse du taux de la deuxième tranche : la somme des dixièmes redonne l'effet du barème,
+    le premier dixième n'est pas touché."""
+    reference = bareme_ir.bareme_openfisca(bareme_ir.ANNEE_SITE)
+    taux = list(reference.taux)
+    taux[1] -= 0.01
+    reforme = bareme_ir.Bareme(reference.seuils, tuple(taux), reference.decote)
+    effet = bareme_ir.effet_site(reforme).central
+    r = dc.repartition([sc.Mesure(dc.BAREME, effet, ANNEE)], bareme=reforme)
+    assert sum(f.central for f in r.milliards) == pytest.approx(-effet)
+    assert r.milliards[0].central == pytest.approx(0.0, abs=1e-9)
+    assert r.non_repartis == []
+    sans = dc.repartition([sc.Mesure(dc.BAREME, effet, ANNEE)])
+    assert sans.non_repartis == [dc.BAREME]
 
 
 def test_mesures_non_reparties_signalees() -> None:
@@ -83,7 +104,7 @@ def test_terme_croise_reparti_avec_la_cle_de_la_csg() -> None:
     )
     csg = dc.repartition([sc.Mesure("csg_retraites", 1.0, ANNEE)])
     croise = sc.rendement_unitaire(
-        next(i for i, p in sc.interactions.CHIFFREES.items() if "csg_retraites" in p)
+        next(i for i, p in interactions.CHIFFREES.items() if "csg_retraites" in p)
     ).central
     total = sum(f.central for f in deux.milliards)
     assert total == pytest.approx(

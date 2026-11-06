@@ -6,7 +6,7 @@ mise_a_jour: 2026-11-06
 
 # Fiche : effet des mesures par dixième de niveau de vie
 
-Lot V2 « agrégats par décile issus de publications officielles ». Plan validé par le responsable du projet le 6 novembre 2026. Statut : **bêta, non validé**. Les deux confrontations du § 6 sont hors tolérance, dont l'une très largement pour l'impôt sur le revenu.
+Lot V2 « agrégats par décile issus de publications officielles ». Plan validé par le responsable du projet le 6 novembre 2026. Statut : **bêta, non validé**. Pour l'impôt sur le revenu, le responsable du projet a retenu l'option C (§ 3 bis), qui ramène l'écart à l'Insee de 50,7 à 6,0 points. La prime d'activité reste hors tolérance (10,7 points).
 
 ## 1. Question posée
 
@@ -32,7 +32,7 @@ L'effet national d'une unité du levier (rendement en Md€ de 2025, année plei
 | CSG activité | salaires nets + revenus mixtes | CSG totale |
 | CSG retraites | pensions de retraite | CSG totale |
 | CSG capital | revenus nets de la propriété | CSG totale |
-| IR : seuils, barème, quotient familial, dépenses fiscales de l'IR | impôt sur le revenu | — |
+| IR : seuils du barème, barème saisi | moteur du barème, voir § 3 bis | variantes du moteur du barème |
 | IS : taux normal, surtaxe | impôt sur les sociétés (convention de l'Insee) | — |
 | Taux de cotisation patronale, allègements | cotisations sociales (quatre lignes) | — |
 | Contribution chômage | cotisations chômage | — |
@@ -45,8 +45,19 @@ L'effet national d'une unité du levier (rendement en Md€ de 2025, année plei
 - rémunérations publiques ;
 - dotations ;
 - crédits des missions ;
-- dépenses fiscales hors IR ;
+- dépenses fiscales, y compris celles de l'IR ;
+- plafond du quotient familial ;
 - âge de départ.
+
+## 3 bis. Impôt sur le revenu : moteur du barème (option C)
+
+Une clé au prorata de l'impôt payé ne vaut que pour un changement proportionnel de tout l'impôt. Sur la baisse de 2020, ciblée sur une tranche, elle donnait un écart de 50,7 points à l'Insee (64,3 % au dernier dixième contre 13,7 %).
+
+- **Calcul par dixième fiscal** : le moteur du barème (`fr_budget.agrege.bareme_ir`, `ecart_par_dixieme`) calcule l'écart d'impôt par dixième de foyers, classés selon le revenu fiscal de référence par part (déciles de la DGFiP, haut de la répartition en loi de Pareto, calage sur l'impôt publié).
+- **Hypothèse de correspondance** : le k-ième dixième fiscal est assimilé au k-ième dixième de niveau de vie. Les deux classements ne sont pas identiques : les foyers ne sont pas des ménages, les parts ne sont pas des unités de consommation et le revenu fiscal ne compte pas les prestations. Aucune source publiée ne donne le passage de l'un à l'autre ; l'hypothèse est éprouvée sur la baisse de 2020 (§ 6).
+- **Revalorisation des seuils** : l'effet national (chiffrage du levier) est réparti selon les parts d'une revalorisation de 1 % du barème de 2025, seuils et décote. Les variantes du moteur (calage unique, part des couples uniforme) donnent la fourchette.
+- **Barème saisi sur le site** : écart d'impôt par dixième de ce barème, calculé dans le navigateur (`web/lib/bareme-ir.ts`, `ecartParDixieme`) avec les mêmes segments que son effet total. Les bornes combinent les variantes du moteur et la plage de l'écart à la validation du levier générique.
+- **Plafond du quotient familial et dépenses fiscales de l'IR** : non répartis. Le moteur du barème ne traite pas le plafonnement, et aucune source ne répartit les dépenses fiscales par niveau de vie.
 
 **Fourchette**, décile par décile : extrêmes du produit des bornes de l'effet national par les parts des années 2020 à 2023 et de chaque variante. La valeur centrale prend l'effet central et la part de 2023 de la clé centrale. Avec plusieurs mesures, on additionne les valeurs centrales, les bornes basses et les bornes hautes.
 
@@ -68,6 +79,8 @@ L'effet national d'une unité du levier (rendement en Md€ de 2025, année plei
 - Le tableau des clés et des variantes (§ 3).
 - Les leviers non répartis.
 - La tolérance de validation : au plus 10 points de part sur chaque dixième. La règle de publication ne fixe de tolérance que pour le rendement.
+- La correspondance entre dixièmes fiscaux et dixièmes de niveau de vie (§ 3 bis).
+- Le plafond du quotient familial et les dépenses fiscales de l'IR non répartis.
 
 ## 6. Validation
 
@@ -76,6 +89,8 @@ Forme de la répartition (part de chaque dixième dans l'effet total) comparée 
 | Réforme (référence) | Clé | Écart maximal | Dernier dixième (modèle / Insee) |
 |---|---|---|---|
 | Réforme de la prime d'activité de 2018 (FPS 2019, dossier 3, figure 7) | exclusion sociale | 10,7 points | 1,2 % / 1,0 % |
-| Baisse de l'IR de 2020, première tranche de 14 % à 11 % (FPS 2022, dossier 2, figure 4) | impôt sur le revenu | 50,7 points | 64,3 % / 13,7 % |
+| Baisse de l'IR de 2020, première tranche de 14 % à 11 % (FPS 2022, dossier 2, figure 4) | moteur du barème (§ 3 bis) | 6,0 points | 14,5 % / 13,7 % |
 
-Les deux sont hors tolérance. Pour la prime d'activité, la forme est proche mais le premier dixième est trop chargé (29,6 % contre 20,2 %). Pour l'impôt sur le revenu, la clé ne convient pas à une mesure ciblée sur une tranche.
+Avec la clé au prorata de l'impôt payé, l'écart était de 50,7 points (64,3 % / 13,7 %).
+
+La prime d'activité est hors tolérance : la forme est proche, mais le premier dixième est trop chargé (29,6 % contre 20,2 %), car la ligne « exclusion sociale » inclut le RSA. Pour l'impôt sur le revenu, le moteur du barème concentre un peu plus la baisse sur les 7e et 8e dixièmes que l'Insee (24,7 % et 30,8 % contre 19,7 % et 24,8 %), et laisse à zéro les 3e et 4e (0,9 % et 1,7 % pour l'Insee). C'est l'effet attendu de la correspondance entre dixièmes fiscaux et dixièmes de niveau de vie.

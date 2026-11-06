@@ -5,6 +5,7 @@ import { texte } from "../../lib/textes";
 import { region } from "../../lib/region";
 import { repartitionDeciles } from "../../lib/deciles";
 import type { Deciles } from "../../lib/donnees";
+import type { Bareme, DonneesBareme } from "../../lib/bareme-ir";
 import type { Fourchette, MesureSite } from "../../lib/scenario";
 
 const entier = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0, signDisplay: "exceptZero" });
@@ -19,8 +20,16 @@ function fourchette(f: Fourchette, format: (v: number) => string): string {
   return b === h ? c : texte("entreprises.fourchette", { central: c, bas: b, haut: h });
 }
 
-export function DecilesScenario({ donnees, mesures }: { donnees: Deciles; mesures: MesureSite[] }) {
-  const r = repartitionDeciles(donnees, mesures);
+export function DecilesScenario({
+  donnees,
+  mesures,
+  bareme,
+}: {
+  donnees: Deciles;
+  mesures: MesureSite[];
+  bareme?: { donnees: DonneesBareme; bareme: Bareme };
+}) {
+  const r = repartitionDeciles(donnees, mesures, bareme);
   const legende = texte("simulateur.deciles.legende");
   return (
     <section>

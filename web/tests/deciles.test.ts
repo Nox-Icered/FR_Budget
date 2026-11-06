@@ -52,3 +52,18 @@ test("chaque dixième a son nom", () => {
   const textes = JSON.parse(readFileSync("messages/fr.json", "utf-8"));
   for (let i = 1; i <= 10; i++) assert.ok(textes.simulateur.deciles.noms[String(i)]);
 });
+
+test("barème saisi : réparti par le moteur du barème, somme égale à moins son effet", async () => {
+  const { effetBareme, mesureBareme } = await import("../lib/bareme-ir.ts");
+  const bareme = JSON.parse(readFileSync("donnees/bareme-ir.json", "utf-8"));
+  const c = bareme.controles[0].bareme;
+  const mesures = mesureBareme(bareme, c);
+  const r = repartitionDeciles(donnees, mesures, { donnees: bareme, bareme: c });
+  assert.ok(r);
+  assert.deepEqual(r.nonRepartis, []);
+  const total = r.milliards.reduce((s, f) => s + f.central, 0);
+  assert.ok(Math.abs(total + effetBareme(bareme, c).central) < 1e-6);
+  const sans = repartitionDeciles(donnees, mesures);
+  assert.ok(sans);
+  assert.deepEqual(sans.nonRepartis, [donnees.bareme.levier]);
+});

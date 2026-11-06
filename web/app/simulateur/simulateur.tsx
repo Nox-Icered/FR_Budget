@@ -567,7 +567,15 @@ function SimulateurCharge({
             : undefined
         }
       />
-      <DecilesScenario donnees={deciles} mesures={mesuresSite} />
+      <DecilesScenario
+        donnees={deciles}
+        mesures={mesuresSite}
+        bareme={
+          mesureBareme(donneesBareme, bareme).length > 0
+            ? { donnees: donneesBareme, bareme }
+            : undefined
+        }
+      />
       <DepenseMenagesScenario donnees={depense} valeurs={valeurs} />
       <EffetsEntreprisesScenario donnees={entreprises} valeurs={valeurs} autresReglees={autresReglees} />
     </>

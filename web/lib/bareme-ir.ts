@@ -8,6 +8,8 @@ export type Decote = { seuil_celibataire: number; seuil_couple: number; taux: nu
 export type Bareme = { seuils: number[]; taux: number[]; decote: Decote | null };
 export type SegmentBareme = {
   nom: string;
+  // Dixième de foyers (1 à 10, rang du revenu fiscal de référence par part).
+  dixieme: number;
   foyers: number;
   parts: number;
   calage: number;
@@ -24,7 +26,7 @@ export type DonneesBareme = {
   calage_global: number;
   couples_uniforme: number;
   segments: SegmentBareme[];
-  controles: { nom: string; bareme: Bareme; effet: Fourchette }[];
+  controles: { nom: string; bareme: Bareme; effet: Fourchette; par_dixieme: number[][] }[];
   levier: string;
   bornes: [number, number];
   menages_types: MenagesBareme;
@@ -103,6 +105,30 @@ export function effetBareme(d: DonneesBareme, reforme: Bareme): Fourchette {
     central,
     haut: Math.max(central, ...variantes),
   };
+}
+
+// Écart d'impôt par dixième de foyers, en Md€ de l'année de référence, pour chaque variante de
+// effetBareme (centrale, calage unique, part des couples uniforme) : moteur, bareme_ir,
+// ``ecart_par_dixieme_site``.
+export function ecartParDixieme(d: DonneesBareme, reforme: Bareme): number[][] {
+  const r = 1 / d.revalorisation;
+  const avant = indexe(d.bareme_reference, r);
+  const apres = indexe(reforme, r);
+  const variante = (couples: (s: SegmentBareme) => number, calage: (s: SegmentBareme) => number) => {
+    const par = new Array(10).fill(0);
+    for (const s of d.segments) {
+      const c = couples(s);
+      par[s.dixieme - 1] +=
+        ((s.foyers * s.parts * calage(s) * (impotMoyen(apres, s, c) - impotMoyen(avant, s, c))) / MILLIARD) *
+        d.vers_euros_reference;
+    }
+    return par;
+  };
+  return [
+    variante((s) => s.couples, (s) => s.calage),
+    variante((s) => s.couples, () => d.calage_global),
+    variante(() => d.couples_uniforme, (s) => s.calage_couples_uniforme),
+  ];
 }
 
 export type ProblemeBareme = "tranches" | "seuils" | "taux" | "decote";

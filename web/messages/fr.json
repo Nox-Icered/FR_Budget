@@ -605,8 +605,8 @@
         "9": "9e dixième",
         "10": "10 % les plus aisés"
       },
-      "non_repartis": "{nombre} mesure(s) du scénario ne sont pas réparties : rémunérations publiques, dotations, crédits des missions, dépenses fiscales hors impôt sur le revenu, âge de départ. Leur effet n'apparaît pas dans ce tableau.",
-      "methode": "Méthode : l'effet national de chaque mesure est réparti selon la part de chaque dixième dans l'assiette qu'elle touche (par exemple, les pensions pour la CSG sur les retraites), d'après les comptes nationaux distribués {annee} de l'Insee. La fourchette prend les parts des années {premiere} à {annee}, une autre assiette quand elle existe (Budget de famille 2017 pour la TVA et les accises) et les bornes de l'effet national. Sans changement de comportement ; structure de {annee} appliquée aux années suivantes."
+      "non_repartis": "{nombre} mesure(s) du scénario ne sont pas réparties : rémunérations publiques, dotations, crédits des missions, dépenses fiscales, plafond du quotient familial, âge de départ. Leur effet n'apparaît pas dans ce tableau.",
+      "methode": "Méthode : l'effet national de chaque mesure est réparti selon la part de chaque dixième dans l'assiette qu'elle touche (par exemple, les pensions pour la CSG sur les retraites), d'après les comptes nationaux distribués {annee} de l'Insee. Pour le barème de l'impôt sur le revenu et ses seuils, l'écart d'impôt est calculé par dixième de foyers fiscaux (revenu par part), assimilé au dixième de niveau de vie de même rang. La fourchette prend les parts des années {premiere} à {annee}, une autre assiette quand elle existe (Budget de famille 2017 pour la TVA et les accises) et les bornes de l'effet national. Sans changement de comportement ; structure de {annee} appliquée aux années suivantes."
     }
   },
   "partage": {

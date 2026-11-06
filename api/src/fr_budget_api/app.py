@@ -748,6 +748,12 @@ def deciles() -> dict[str, Any]:
         "revenu_disponible_milliards": [float(x) for x in d.revenu_disponible()],
         "leviers": leviers,
         "non_repartis": sorted(d.NON_REPARTIS),
+        # Barème saisi : réparti dans le navigateur par le moteur du barème (bareme-ir.json),
+        # bornes multipliées par la plage du levier générique.
+        "bareme": {
+            "levier": d.BAREME,
+            "rendement": _fourchette(module_scenario.rendement_unitaire(d.BAREME)),
+        },
     }
 
 

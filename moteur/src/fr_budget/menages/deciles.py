@@ -13,6 +13,16 @@ de niveau de vie usuel, regroupés en déciles ; ``data/processed/deciles/cnd_de
 éventuelle (autre ligne) ; TVA et accises : variante tirée du Budget de famille 2017
 (``fr_budget.menages.depense``).
 
+Impôt sur le revenu (option C, 6 novembre 2026) : une clé au prorata de l'impôt payé ne vaut pas
+pour une mesure ciblée sur une tranche (écart de 50,7 points à l'Insee sur la baisse de 2020).
+Le moteur du barème (``fr_budget.agrege.bareme_ir``) calcule l'écart d'impôt par dixième de
+foyers classés selon le revenu fiscal de référence par part (DGFiP) ; le k-ième dixième fiscal
+est assimilé au k-ième dixième de niveau de vie (hypothèse de correspondance, écart de 6,0
+points à l'Insee sur la même réforme). Revalorisation des seuils : parts d'une revalorisation de
+1 % du barème de 2025 ; barème saisi sur le site : écart par dixième de ce barème. Plafond du
+quotient familial et dépenses fiscales de l'impôt sur le revenu : non répartis (le moteur du
+barème ne traite pas le plafonnement, et aucune source ne répartit les dépenses fiscales).
+
 Fourchette, décile par décile : extrêmes du produit des bornes de l'effet national par les parts
 de chaque année 2020 à 2023 et de chaque variante de clé ; valeur centrale : effet central et
 part de 2023 de la clé centrale. Plusieurs mesures : sommes des valeurs centrales, des bornes
@@ -34,7 +44,7 @@ from functools import cache
 import numpy as np
 
 from fr_budget import scenario as sc
-from fr_budget.agrege import indexation, interactions
+from fr_budget.agrege import bareme_ir, indexation, interactions
 from fr_budget.fourchette import Fourchette
 from fr_budget.menages import depense
 from fr_budget.registres.verification import RACINE_DEPOT
@@ -65,7 +75,6 @@ _COTISATIONS = (
     "cotisations_famille",
     "cotisations_autres",
 )
-_IR = Cle(("impot_revenu",))
 _CSG = ("csg",)
 
 CLES: dict[str, Cle] = {
@@ -75,10 +84,8 @@ CLES: dict[str, Cle] = {
     "csg_activite": Cle(("salaires_nets", "revenus_mixtes"), _CSG),
     "csg_retraites": Cle(("pensions_retraite",), _CSG),
     "csg_capital": Cle(("revenus_propriete",), _CSG),
-    sc.LEVIER_IR_SEUILS: _IR,
-    sc.LEVIER_IR_QF: _IR,
-    sc.LEVIER_IR_BAREME: _IR,
-    sc.levier_depenses_fiscales_impot(sc.IMPOT_REVENU_DEPENSES_FISCALES): _IR,
+    # Parts tirées du moteur du barème (``parts_seuils``), pas des comptes distribués.
+    sc.LEVIER_IR_SEUILS: Cle(()),
     sc.LEVIER_IS_TAUX_NORMAL: Cle(("impot_societes",)),
     sc.LEVIER_IS_SURTAXE: Cle(("impot_societes",)),
     sc.LEVIER_COTISATIONS_TAUX: Cle(_COTISATIONS),
@@ -91,9 +98,12 @@ CLES: dict[str, Cle] = {
 }
 """Clé de répartition de chaque levier (plan validé, tableau de la fiche § 3)."""
 
-NON_REPARTIS = frozenset(set(sc.LEVIERS_REGISTRE) - set(CLES))
+BAREME = sc.LEVIER_IR_BAREME
+"""Barème saisi sur le site : réparti par le moteur du barème quand le barème est donné."""
+
+NON_REPARTIS = frozenset(set(sc.LEVIERS_REGISTRE) - set(CLES) - {BAREME})
 """Leviers du simulateur sans clé : rémunérations publiques, dotations, crédits des missions,
-dépenses fiscales hors impôt sur le revenu, âge de départ."""
+dépenses fiscales, plafond du quotient familial, âge de départ."""
 
 
 @cache
@@ -120,6 +130,19 @@ def parts_budget_de_famille(levier: str) -> np.ndarray:
     return np.asarray(v / v.sum())
 
 
+REVALORISATION_TEST = 0.01
+"""Revalorisation des seuils (et de la décote) dont on tire les parts du levier sur les seuils."""
+
+
+@cache
+def parts_seuils() -> list[np.ndarray]:
+    """Parts de chaque dixième dans l'effet d'une revalorisation de 1 % du barème de 2025
+    (seuils et décote), pour chaque variante du moteur du barème (centrale en premier)."""
+    reference = bareme_ir.bareme_openfisca(bareme_ir.ANNEE_SITE)
+    revalorise = bareme_ir._indexe(reference, 1 + REVALORISATION_TEST)
+    return [np.asarray(np.array(v) / sum(v)) for v in bareme_ir.ecart_par_dixieme_site(revalorise)]
+
+
 def _cle(levier: str) -> Cle:
     if interactions.est_interaction(levier):
         return CLES[sc.LEVIERS_CSG_PAR_INTERACTION[levier]]
@@ -127,13 +150,17 @@ def _cle(levier: str) -> Cle:
 
 
 def part_centrale(levier: str) -> np.ndarray:
-    """Parts de la clé centrale, en 2023."""
+    """Parts de la clé centrale, en 2023 (seuils de l'impôt sur le revenu : moteur du barème)."""
+    if levier == sc.LEVIER_IR_SEUILS:
+        return parts_seuils()[0]
     return _parts(_cle(levier).lignes, ANNEE_CENTRALE)
 
 
 def variantes_parts(levier: str) -> list[np.ndarray]:
     """Parts de chaque variante : clé centrale et variante, années 2020 à 2023, et Budget de
     famille pour la TVA et les accises."""
+    if levier == sc.LEVIER_IR_SEUILS:
+        return parts_seuils()
     cle = _cle(levier)
     cles = [cle.lignes] + ([cle.variante] if cle.variante else [])
     resultat = [_parts(c, a) for c in cles for a in ANNEES]
@@ -180,13 +207,37 @@ def repartition_mesure(levier: str, valeur: float) -> list[Fourchette]:
     return resultat
 
 
-def repartition(mesures: Sequence[sc.Mesure]) -> Repartition:
-    """Variation du revenu de chaque décile, mesures et termes croisés compris."""
+def repartition_bareme(reforme: bareme_ir.Bareme) -> list[Fourchette]:
+    """Variation du revenu de chaque décile due à un barème saisi, en Md€ de 2025 : moins l'écart
+    d'impôt par dixième (moteur du barème), bornes : variantes du moteur du barème, multipliées
+    par la plage de l'écart à la validation (rendement du levier générique)."""
+    unite = sc.rendement_unitaire(BAREME)
+    facteurs = (unite.bas, unite.central, unite.haut)
+    variantes = bareme_ir.ecart_par_dixieme_site(reforme)
+    resultat = []
+    for d in range(NOMBRE):
+        central = -variantes[0][d] * unite.central
+        candidats = [-v[d] * k for v in variantes for k in facteurs]
+        resultat.append(Fourchette(min(central, *candidats), central, max(central, *candidats)))
+    return resultat
+
+
+def repartition(
+    mesures: Sequence[sc.Mesure], bareme: bareme_ir.Bareme | None = None
+) -> Repartition:
+    """Variation du revenu de chaque décile, mesures et termes croisés compris. ``bareme`` :
+    barème saisi sur le site, dont la mesure ``ir_bareme`` porte l'effet national."""
     sc.verifier_double_compte(mesures)
     total = [[0.0, 0.0, 0.0] for _ in range(NOMBRE)]
     non_repartis: list[str] = []
     for m in sc.avec_interactions(mesures):
         if m.valeur == 0:
+            continue
+        if m.levier == BAREME and bareme is not None:
+            for d, f in enumerate(repartition_bareme(bareme)):
+                total[d][0] += f.bas
+                total[d][1] += f.central
+                total[d][2] += f.haut
             continue
         if not est_reparti(m.levier):
             if m.levier not in non_repartis:

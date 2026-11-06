@@ -346,4 +346,6 @@ export type Deciles = {
   revenu_disponible_milliards: number[];
   leviers: Record<string, LevierDeciles>;
   non_repartis: string[];
+  // Barème saisi : réparti par le moteur du barème (lib/bareme-ir.ts, ecartParDixieme).
+  bareme: { levier: string; rendement: { bas: number; central: number; haut: number } };
 };

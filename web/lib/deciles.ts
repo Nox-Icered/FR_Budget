@@ -4,6 +4,7 @@
 // Variation du revenu = moins l'effet sur le solde public. Bornes : extrêmes du produit des
 // bornes de l'effet national par les parts de chaque variante ; plusieurs mesures : sommes.
 import type { Deciles } from "./donnees.ts";
+import { ecartParDixieme, type Bareme, type DonneesBareme } from "./bareme-ir.ts";
 import type { Fourchette, MesureSite } from "./scenario.ts";
 
 export type RepartitionDeciles = {
@@ -30,14 +31,31 @@ function avecTermesCroises(d: Deciles, mesures: MesureSite[]): MesureSite[] {
   return [...mesures, ...croises];
 }
 
-// null si aucune mesure n'est réglée.
-export function repartitionDeciles(d: Deciles, mesures: MesureSite[]): RepartitionDeciles | null {
+// null si aucune mesure n'est réglée. ``bareme`` : barème saisi, réparti par le moteur du
+// barème (sans lui, la mesure du barème n'est pas répartie).
+export function repartitionDeciles(
+  d: Deciles,
+  mesures: MesureSite[],
+  bareme?: { donnees: DonneesBareme; bareme: Bareme },
+): RepartitionDeciles | null {
   const reglees = mesures.filter((m) => m.valeur !== 0);
   if (reglees.length === 0) return null;
   const n = d.unites_consommation_millions.length;
   const total = Array.from({ length: n }, () => ({ bas: 0, central: 0, haut: 0 }));
   const nonRepartis: string[] = [];
   for (const m of avecTermesCroises(d, reglees)) {
+    if (m.levier === d.bareme.levier && bareme) {
+      const r = d.bareme.rendement;
+      const variantes = ecartParDixieme(bareme.donnees, bareme.bareme);
+      for (let i = 0; i < n; i++) {
+        const central = -variantes[0][i] * r.central;
+        const candidats = variantes.flatMap((v) => [r.bas, r.central, r.haut].map((k) => -v[i] * k));
+        total[i].bas += Math.min(central, ...candidats);
+        total[i].central += central;
+        total[i].haut += Math.max(central, ...candidats);
+      }
+      continue;
+    }
     const l = d.leviers[m.levier];
     if (!l) {
       if (!nonRepartis.includes(m.levier)) nonRepartis.push(m.levier);

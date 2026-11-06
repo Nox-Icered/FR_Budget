@@ -3,7 +3,7 @@
 // et fixe la part de l'effort portée par les recettes ; chaque mesure cochée apporte une part
 // égale de l'effort de son côté. Aucune mesure n'est choisie, classée ni qualifiée par le site.
 import type { ReponsesUnitaires } from "./donnees";
-import { LEVIERS_RETRAITES } from "./etat.ts";
+import { LEVIERS_DANS_ONDAM, LEVIER_ONDAM, LEVIERS_RETRAITES } from "./etat.ts";
 import { niveau, type Objectif } from "./objectif.ts";
 import { calculer, type Fourchette } from "./scenario.ts";
 
@@ -43,6 +43,20 @@ export const COTES: Record<string, Cote> = {
   franchises_participations: "depenses",
   ij_plafond_smic: "depenses",
 };
+
+// Combinaisons refusées par le simulateur (double compte, lib/etat.ts) : âge effectif et âge
+// légal de départ ; progression de l'ONDAM avec une mesure qu'il contient.
+export function incompatibles(leviers: string[]): boolean {
+  const avec = (l: string) => leviers.includes(l);
+  return (
+    LEVIERS_RETRAITES.every(avec) || (avec(LEVIER_ONDAM) && LEVIERS_DANS_ONDAM.some(avec))
+  );
+}
+
+// Mesure qui ne peut pas être cochée avec celles déjà cochées.
+export function exclue(id: string, coches: string[]): boolean {
+  return !coches.includes(id) && incompatibles([...coches, id]);
+}
 
 export const PAS_PART_RECETTES = 0.1;
 export const PART_RECETTES_DEFAUT = 0.5;
@@ -189,7 +203,7 @@ export function construireExemple(donnees: ReponsesUnitaires, choix: ChoixExempl
   const reference = choix.leviers[0] ?? Object.keys(donnees.leviers)[0];
   const sansMesure = niveau(donnees, reference, 0, choix.entree, o, "central");
   const vide = (problemes: ProblemeExemple[]): Exemple => ({ mesures: [], atteint: null, sansMesure, problemes });
-  if (LEVIERS_RETRAITES.every((l) => choix.leviers.includes(l))) return vide(["double_compte"]);
+  if (incompatibles(choix.leviers)) return vide(["double_compte"]);
   const effort = o.cible - sansMesure;
   const parCote: Record<Cote, number> = {
     recettes: effort * choix.partRecettes,

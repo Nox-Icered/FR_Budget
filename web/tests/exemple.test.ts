@@ -116,3 +116,16 @@ test("fourchette du résultat : basse ≤ centrale ≤ haute", () => {
   const e = construireExemple(donnees, choix(["tva_taux_normal", "remunerations_point_indice"], 0.5, objectif(-1)));
   assert.ok(e.atteint && e.atteint.bas <= e.atteint.central && e.atteint.central <= e.atteint.haut);
 });
+
+test("progression de l'ONDAM et mesures qu'il contient : refusées ensemble, comme dans le simulateur", async () => {
+  const { exclue, incompatibles } = await import("../lib/exemple.ts");
+  const o = objectif(-1);
+  for (const autre of ["franchises_participations", "ij_plafond_smic"]) {
+    const e = construireExemple(donnees, choix(["ondam_progression", autre], 0, o));
+    assert.deepEqual(e.problemes, ["double_compte"]);
+    assert.ok(exclue(autre, ["ondam_progression"]));
+    assert.ok(exclue("ondam_progression", [autre]));
+  }
+  assert.ok(!incompatibles(["franchises_participations", "ij_plafond_smic"]));
+  assert.ok(!exclue("tva_taux_normal", ["ondam_progression"]));
+});

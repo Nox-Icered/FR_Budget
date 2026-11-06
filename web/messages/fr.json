@@ -985,7 +985,7 @@
       "cotes": "Chaque mesure est rangée du côté des comptes publics que touche l'instrument modifié : impôts et cotisations en recettes ; rémunérations, prestations, pensions et dotations en dépenses. Les allègements généraux sont des cotisations en moins (recettes) ; la prime d'activité est une prestation et l'âge de départ modifie les pensions (dépenses).",
       "limites": "Les effets des mesures sont additionnés, avec les interactions chiffrées par le simulateur ; les autres interactions (par exemple entre la CSG et l'impôt sur le revenu) ne sont pas comptées. Sans effet sur l'activité (multiplicateur désactivé). Les statuts et les limites des mesures sont ceux du simulateur.",
       "problemes": {
-        "double_compte": "L'âge effectif et l'âge légal de départ ne peuvent pas être cochés ensemble.",
+        "double_compte": "Ces mesures ne peuvent pas être cochées ensemble : âge effectif et âge légal de départ, ou progression de l'ONDAM avec les franchises ou les indemnités journalières, qu'elle contient.",
         "cote_vide_recettes": "Une part de l'écart revient aux recettes, mais aucune mesure sur les recettes n'est cochée.",
         "cote_vide_depenses": "Une part de l'écart revient aux dépenses, mais aucune mesure sur les dépenses n'est cochée.",
         "insuffisant_recettes": "Les mesures cochées sur les recettes ne portent pas leur part de l'écart dans les limites de leurs curseurs. La règle ne reporte rien sur les dépenses : cochez d'autres mesures ou déplacez le curseur.",

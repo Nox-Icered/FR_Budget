@@ -25,7 +25,7 @@ test("les termes croisés exportés nomment deux leviers exportés", () => {
 
 test("terme croisé proportionnel au produit des réglages, nul si l'un est à zéro", () => {
   for (const [, l] of croises) {
-    const [a, b] = l.interaction ?? [];
+    const [a, b] = l.interaction as [string, string];
     const un = croise(a, 1, b, 1);
     const autre = croise(a, -2, b, 1.5);
     assert.ok(un.some((v) => Math.abs(v) > 0), `${a} × ${b}`);
@@ -36,7 +36,7 @@ test("terme croisé proportionnel au produit des réglages, nul si l'un est à z
 
 test("avecInteractions n'ajoute un terme que pour deux leviers réglés", () => {
   const [id, l] = croises[0];
-  const [a, b] = l.interaction ?? [];
+  const [a, b] = l.interaction as [string, string];
   assert.deepEqual(avecInteractions(donnees, [{ levier: a, valeur: 2 }]).length, 1);
   const m = avecInteractions(donnees, [{ levier: a, valeur: 2 }, { levier: b, valeur: -1 }]);
   assert.deepEqual(m[2], { levier: id, valeur: -2 });

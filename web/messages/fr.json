@@ -16,6 +16,7 @@
     "baseline": "Trajectoires de la dette",
     "simulateur": "Simulateur",
     "comparaison": "Comparer",
+    "objectif": "Atteindre un objectif",
     "journal": "Journal",
     "relectures": "Relectures",
     "mentions": "Mentions légales",
@@ -871,5 +872,24 @@
     "limites": "Limites : chaque mesure garde la nomenclature de ses données (tranches de salariés et grands secteurs de l'Urssaf, catégories et secteurs de la DGFiP), sans correspondance entre elles. La surtaxe est attribuée aux grandes entreprises au sens de la DGFiP, proches mais pas identiques aux entreprises de plus d'un milliard d'euros de chiffre d'affaires. TVA et accises, payées par les consommateurs, ne sont pas réparties.",
     "licence": "Données de l'Urssaf sous licence ODbL : les tables dérivées publiées par ce site le sont sous la même licence.",
     "lien_fiche": "Méthode, sources et contrôles : fiche « entreprises » du dépôt."
+  },
+  "objectif": {
+    "titre": "Atteindre un objectif",
+    "intro": "Choisissez un indicateur, une année, une valeur à atteindre et une mesure : la page calcule le réglage de cette mesure, prise seule, qui atteint la valeur choisie. Elle ne propose ni ne compare aucune mesure : c'est vous qui choisissez laquelle régler.",
+    "indicateur": "Indicateur",
+    "dette": "Dette publique, en % du PIB",
+    "solde_primaire": "Solde primaire, en % du PIB",
+    "annee": "Année",
+    "cible": "Valeur à atteindre (en % du PIB)",
+    "sans_mesure": "Sans mesure, valeur centrale en {annee} : {valeur} % du PIB.",
+    "levier": "Mesure à régler",
+    "entree": "Année d'entrée en vigueur",
+    "saisir": "Indiquez la valeur à atteindre.",
+    "hors_portee": "Cette mesure, seule et dans les limites du simulateur, ne permet pas d'atteindre cette valeur.",
+    "resultat": "{levier} : {valeur} pour atteindre la valeur choisie (calcul central).",
+    "fourchette": "Selon les hypothèses basses et hautes du simulateur, le réglage qui atteint cette valeur va de {bas} à {haut}.",
+    "fourchette_partielle": "Pour au moins une de ces hypothèses, la valeur n'est pas atteignable dans les limites de la mesure.",
+    "ouvrir": "Ouvrir ce réglage dans le simulateur ({valeur}, au pas du curseur)",
+    "methode": "Calcul : le réglage est cherché par dichotomie sur le même calcul que le simulateur, sans effet sur l'activité (multiplicateur désactivé) ; appliqué dans le simulateur, il redonne la valeur choisie. Les limites et le statut de chaque mesure sont ceux du simulateur."
   }
 }

@@ -11,6 +11,7 @@ const GROUPES: { id: string; liens: [string, string][] }[] = [
     liens: [
       ["/simulateur/", "simulateur"],
       ["/comparaison/", "comparaison"],
+      ["/objectif/", "objectif"],
       ["/baseline/", "baseline"],
     ],
   },

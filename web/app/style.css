@@ -257,3 +257,8 @@ th.groupe {
 .bareme-ir .decote { border: 1px solid var(--trait); padding: 8px 12px; margin: 12px 0; }
 .bareme-ir .champs-decote { display: grid; gap: 8px; margin-top: 8px; }
 .bareme-ir .champs-decote label { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px; }
+
+/* Atteindre un objectif. */
+.formulaire-objectif { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; max-width: 40rem; }
+.formulaire-objectif select, .formulaire-objectif input { width: 100%; min-width: 0; }
+.resultat-objectif { margin-top: 16px; padding: 12px 16px; border: 1px solid var(--trait); }

@@ -1058,3 +1058,28 @@ datasets:
     empreinte_sha256: eb7e381d5c68c6a94e26757a7882b78b8012c1497f297e388fbdf144a2b4b959
     methode_transformation: aucune ; part des foyers mariés ou pacsés par quantile de revenu en 2022 (tableau 3, page 5) saisie dans registres/references/chiffrages.yaml
     telecharge_le: 2026-11-05
+
+  - id: insee_cnd_2023_t101
+    source: insee_cnd_2023
+    description: Tableau CND.101 (classeur, feuilles CND_2020 à CND_2023), comptes nationaux distribués par vingtième de niveau de vie usuel, en milliards d'euros
+    fichier: data/raw/deciles/insee_cnd_2023_T_CND_101.xlsx
+    empreinte_sha256: 8e4d2ec005e9351f7105c796ac2e0ae8afc1f53b70b165d04f9387ed8cf838ef
+    methode_transformation: pipelines/deciles/extraire_cnd.py → data/processed/deciles/cnd_deciles.csv
+    telecharge_le: 2026-11-06
+
+  - id: insee_fps2019_d3_figures
+    source: insee_fps2019_reformes_2018
+    description: "Classeur des figures du dossier (figure 7 : effet par dixième de niveau de vie des mesures sur les prestations, dont la réforme de la prime d'activité), en euros par an"
+    fichier: data/raw/deciles/insee_fps2019_D3.xls
+    empreinte_sha256: 75830cfbef55c4aa46ff6629e5bc534ef9bea8a97a17b61dad12e8627ac0e51c
+    methode_transformation: pipelines/deciles/extraire_cnd.py → data/processed/deciles/validation_insee.csv
+    telecharge_le: 2026-11-06
+
+  - id: insee_fps2022_d2_figures
+    source: insee_fps2022_reformes_2020_2021
+    description: "Classeur des figures du dossier (figure 4 : effet par dixième de niveau de vie des mesures sur les prélèvements, dont la baisse de l'impôt sur le revenu de 2020), en euros par an"
+    fichier: data/raw/deciles/insee_fps2022_D2.xlsx
+    empreinte_sha256: 60e7b5b8d2277569f1ecf10c68052d5d29013c718d7e23d6ab588316bdf881b5
+    methode_transformation: pipelines/deciles/extraire_cnd.py → data/processed/deciles/validation_insee.csv
+    telecharge_le: 2026-11-06
+

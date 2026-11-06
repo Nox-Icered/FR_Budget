@@ -583,6 +583,30 @@
         "bareme_quotient_familial": "le plafonnement du quotient familial dépend du barème de l'impôt sur le revenu.",
         "age_depart_pensions": "l'âge de départ change le nombre de pensions versées, de cotisants et d'allocataires du chômage."
       }
+    },
+    "deciles": {
+      "titre": "Effet sur le revenu des ménages, par niveau de vie",
+      "bandeau": "Bêta, non validé : répartition approchée de l'effet national, pas un calcul ménage par ménage.",
+      "aucune": "Aucune mesure n'est réglée.",
+      "intro": "Variation du revenu disponible en {annee}, année pleine, en euros par unité de consommation et par an, et en part du revenu disponible. Un montant négatif est une baisse de revenu.",
+      "legende": "Par dixième de niveau de vie, du plus modeste au plus aisé",
+      "dixieme": "Ménages",
+      "euros": "Euros par unité de consommation et par an",
+      "part": "Part du revenu disponible",
+      "noms": {
+        "1": "10 % les plus modestes",
+        "2": "2e dixième",
+        "3": "3e dixième",
+        "4": "4e dixième",
+        "5": "5e dixième",
+        "6": "6e dixième",
+        "7": "7e dixième",
+        "8": "8e dixième",
+        "9": "9e dixième",
+        "10": "10 % les plus aisés"
+      },
+      "non_repartis": "{nombre} mesure(s) du scénario ne sont pas réparties : rémunérations publiques, dotations, crédits des missions, dépenses fiscales hors impôt sur le revenu, âge de départ. Leur effet n'apparaît pas dans ce tableau.",
+      "methode": "Méthode : l'effet national de chaque mesure est réparti selon la part de chaque dixième dans l'assiette qu'elle touche (par exemple, les pensions pour la CSG sur les retraites), d'après les comptes nationaux distribués {annee} de l'Insee. La fourchette prend les parts des années {premiere} à {annee}, une autre assiette quand elle existe (Budget de famille 2017 pour la TVA et les accises) et les bornes de l'effet national. Sans changement de comportement ; structure de {annee} appliquée aux années suivantes."
     }
   },
   "partage": {

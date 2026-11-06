@@ -329,3 +329,21 @@ export type BudgetEtat = {
   ressources: { id: string; libelle: string | null; montant: number }[];
   emplois: { id: string; libelle: string | null; montant: number }[];
 };
+
+// Répartition par décile de niveau de vie (deciles.json, fr_budget.menages.deciles).
+export type LevierDeciles = {
+  rendement: { bas: number; central: number; haut: number };
+  centrale: number[];
+  variantes: number[][];
+  interaction?: [string, string];
+};
+export type Deciles = {
+  annee_comptes: number;
+  annees_variantes: number[];
+  annee_effets: number;
+  sources: string[];
+  unites_consommation_millions: number[];
+  revenu_disponible_milliards: number[];
+  leviers: Record<string, LevierDeciles>;
+  non_repartis: string[];
+};

@@ -6,6 +6,7 @@ import type {
   Baseline,
   CatalogueCreditsMissions,
   CatalogueDepensesFiscales,
+  Deciles,
   DepenseMenages,
   Entreprises,
   ReponsesUnitaires,
@@ -34,6 +35,7 @@ import { CopierLien, Exports } from "../partage/actions";
 import { EffetsMenagesScenario } from "./menages";
 import { EffetsEntreprisesScenario } from "./entreprises";
 import { DepenseMenagesScenario } from "./depense";
+import { DecilesScenario } from "./deciles";
 import { region } from "../../lib/region";
 import { correspond, reglees, SECTIONS } from "../../lib/sections";
 import { egal, mesureBareme, type Bareme, type DonneesBareme } from "../../lib/bareme-ir";
@@ -53,6 +55,7 @@ function SimulateurCharge({
   version,
   entreprises,
   depense,
+  deciles,
   bareme: donneesBareme,
 }: {
   donnees: ReponsesUnitaires;
@@ -64,6 +67,7 @@ function SimulateurCharge({
   version: Version;
   entreprises: Entreprises;
   depense: DepenseMenages;
+  deciles: Deciles;
 }) {
   // Un levier « non publié » reste hors du site (règle de publication, CLAUDE.md).
   const leviers = LEVIERS_PUBLICS.filter(
@@ -563,6 +567,7 @@ function SimulateurCharge({
             : undefined
         }
       />
+      <DecilesScenario donnees={deciles} mesures={mesuresSite} />
       <DepenseMenagesScenario donnees={depense} valeurs={valeurs} />
       <EffetsEntreprisesScenario donnees={entreprises} valeurs={valeurs} autresReglees={autresReglees} />
     </>
@@ -579,6 +584,7 @@ export function Simulateur(props: {
   version: Version;
   entreprises: Entreprises;
   depense: DepenseMenages;
+  deciles: Deciles;
   bareme: DonneesBareme;
 }) {
   const chargement = useReponses(empreinteVersion(props.version));

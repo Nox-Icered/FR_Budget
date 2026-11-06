@@ -754,6 +754,20 @@ def deciles() -> dict[str, Any]:
             "levier": d.BAREME,
             "rendement": _fourchette(module_scenario.rendement_unitaire(d.BAREME)),
         },
+        # Forme de la répartition face aux évaluations de l'Insee (page Validation).
+        "validation": [
+            {
+                "reference": c.reference,
+                "source": c.source,
+                "levier": c.levier,
+                "modele": c.modele,
+                "insee": c.insee,
+                "ecart_max_points": c.ecart_max_points,
+                "tolerance_points": c.tolerance_points,
+                "dans_la_tolerance": c.dans_la_tolerance,
+            }
+            for c in d.validation_insee()
+        ],
     }
 
 

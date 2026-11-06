@@ -126,6 +126,17 @@
     "source_independante": "source indépendante de l'administration",
     "variantes": {
       "cohortes": "modèle par cohortes (âge légal)"
+    },
+    "deciles": {
+      "titre": "Répartition par dixième de niveau de vie",
+      "intro": "Part de chaque dixième dans l'effet total d'une réforme passée, selon la méthode du simulateur et selon l'évaluation publiée par l'Insee. Tolérance : écart d'au plus {tolerance} points de part sur chaque dixième. Les écarts hors tolérance sont publiés tels quels.",
+      "references": {
+        "fps2019_prime_activite_2018": "Réforme de la prime d'activité de 2018 (Insee, France, portrait social 2019)",
+        "fps2022_baisse_impot_revenu_2020": "Baisse de l'impôt sur le revenu de 2020 (Insee, France, portrait social 2022)"
+      },
+      "ecart": "Écart maximal : {ecart} points.",
+      "dixieme": "Dixième",
+      "insee": "Insee"
     }
   },
   "version": {

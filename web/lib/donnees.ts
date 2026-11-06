@@ -348,4 +348,15 @@ export type Deciles = {
   non_repartis: string[];
   // Barème saisi : réparti par le moteur du barème (lib/bareme-ir.ts, ecartParDixieme).
   bareme: { levier: string; rendement: { bas: number; central: number; haut: number } };
+  // Forme de la répartition face aux évaluations de l'Insee (parts en %).
+  validation: {
+    reference: string;
+    source: string;
+    levier: string;
+    modele: number[];
+    insee: number[];
+    ecart_max_points: number;
+    tolerance_points: number;
+    dans_la_tolerance: boolean;
+  }[];
 };

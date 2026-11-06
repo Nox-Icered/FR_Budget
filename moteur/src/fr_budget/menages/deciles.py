@@ -37,7 +37,7 @@ par le PIB nominal (``fr_budget.agrege.indexation.facteur_pib``).
 from __future__ import annotations
 
 import csv
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from functools import cache
 
@@ -263,3 +263,81 @@ def repartition(
         pourcent_revenu=[echelle(f, POURCENT / rdn[d]) for d, f in enumerate(milliards)],
         non_repartis=non_repartis,
     )
+
+
+# Validation : forme de la répartition face aux évaluations de réformes par l'Insee (modèle Ines,
+# France, portrait social ; ``data/processed/deciles/validation_insee.csv``,
+# ``pipelines/deciles/extraire_cnd.py``). Part de chaque dixième dans l'effet total ; tolérance :
+# au plus 10 points de part sur chaque dixième (choix du lot, à relire).
+FICHIER_VALIDATION = RACINE_DEPOT / "data" / "processed" / "deciles" / "validation_insee.csv"
+TOLERANCE_VALIDATION_POINTS = 10.0
+
+
+def _baisse_impot_revenu_2020() -> np.ndarray:
+    """Baisse de l'impôt sur le revenu de 2020 (même réforme que
+    ``bareme_ir.validation_classes_moyennes_2020``) : parts par dixième fiscal."""
+    apres, avant = bareme_ir.bareme_openfisca(2020), bareme_ir.bareme_openfisca(2019)
+    revalorise = bareme_ir._indexe(avant, apres.seuils[-1] / avant.seuils[-1])
+    v = np.array(bareme_ir.ecart_par_dixieme(revalorise, apres, 2020)[0])
+    return np.asarray(v / v.sum())
+
+
+def _prime_activite() -> np.ndarray:
+    return part_centrale(sc.LEVIER_PA_PENTE)
+
+
+VALIDATIONS: dict[str, tuple[str, str, Callable[[], np.ndarray]]] = {
+    # référence : (source, levier, parts du modèle)
+    "fps2019_prime_activite_2018": (
+        "insee_fps2019_reformes_2018",
+        sc.LEVIER_PA_PENTE,
+        _prime_activite,
+    ),
+    "fps2022_baisse_impot_revenu_2020": (
+        "insee_fps2022_reformes_2020_2021",
+        sc.LEVIER_IR_BAREME,
+        _baisse_impot_revenu_2020,
+    ),
+}
+
+
+@dataclass(frozen=True)
+class ComparaisonForme:
+    reference: str
+    source: str
+    levier: str
+    modele: list[float]
+    """Part de chaque dixième dans l'effet total, en %."""
+    insee: list[float]
+    ecart_max_points: float
+    tolerance_points: float
+
+    @property
+    def dans_la_tolerance(self) -> bool:
+        return self.ecart_max_points <= self.tolerance_points
+
+
+def _parts_insee(reference: str) -> np.ndarray:
+    with FICHIER_VALIDATION.open(encoding="utf-8") as f:
+        ligne = next(r for r in csv.DictReader(f) if r["reference"] == reference)
+    v = np.array([float(ligne[f"d{i}"]) for i in range(1, NOMBRE + 1)])
+    return np.asarray(v / v.sum())
+
+
+def validation_insee() -> list[ComparaisonForme]:
+    """Comparaison de la forme de la répartition aux évaluations de l'Insee."""
+    resultat = []
+    for reference, (source, levier, parts) in VALIDATIONS.items():
+        m, r = parts(), _parts_insee(reference)
+        resultat.append(
+            ComparaisonForme(
+                reference=reference,
+                source=source,
+                levier=levier,
+                modele=[float(POURCENT * x) for x in m],
+                insee=[float(POURCENT * x) for x in r],
+                ecart_max_points=float(POURCENT * np.max(np.abs(m - r))),
+                tolerance_points=TOLERANCE_VALIDATION_POINTS,
+            )
+        )
+    return resultat

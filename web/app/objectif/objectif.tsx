@@ -8,7 +8,7 @@ import { texte } from "../../lib/textes";
 import type { ReponsesUnitaires, Version } from "../../lib/donnees";
 import { useReponses } from "../../lib/chargement";
 import { empreinteVersion, encoder, LEVIERS_PUBLICS } from "../../lib/etat";
-import { auPas, fourchetteValeur, resoudre, type Indicateur } from "../../lib/objectif";
+import { fourchetteValeur, reglageAuPas, resoudre, type Indicateur } from "../../lib/objectif";
 
 const chiffre = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 });
 const signe = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2, signDisplay: "exceptZero" });
@@ -36,11 +36,14 @@ function ObjectifCharge({ donnees, version }: { donnees: ReponsesUnitaires; vers
   const fourchette = solution ? fourchetteValeur(solution) : null;
   const pas = leviers.find((l) => l.id === levier)?.pas ?? 1;
   const unite = (v: number) => texte(`simulateur.leviers.${levier}.valeur`, { valeur: signe.format(v) });
+  const reglage = fourchette
+    ? reglageAuPas(donnees, levier, pas, entree, objectif, fourchette.central)
+    : null;
   const lien =
-    fourchette &&
+    reglage !== null &&
     encoder({
       annee: entree,
-      leviers: { [levier]: auPas(fourchette.central, pas) },
+      leviers: { [levier]: reglage },
       parImpot: {},
       parDepense: {},
       parMission: {},
@@ -92,7 +95,16 @@ function ObjectifCharge({ donnees, version }: { donnees: ReponsesUnitaires; vers
           ))}
         </select>
         <label htmlFor={`${idBase}-entree`}>{texte("objectif.entree")}</label>
-        <select id={`${idBase}-entree`} value={entree} onChange={(e) => setEntree(Number(e.target.value))}>
+        <select
+          id={`${idBase}-entree`}
+          value={entree}
+          onChange={(e) => {
+            const nouvelle = Number(e.target.value);
+            setEntree(nouvelle);
+            // L'année de l'objectif ne peut pas précéder l'entrée en vigueur.
+            if (annee < nouvelle) setAnnee(nouvelle);
+          }}
+        >
           {entrees.map((a) => (
             <option key={a} value={a}>
               {a}
@@ -119,9 +131,13 @@ function ObjectifCharge({ donnees, version }: { donnees: ReponsesUnitaires; vers
                 ` ${texte("objectif.fourchette_partielle")}`}
             </p>
             <p>
-              <Link href={`/simulateur/?${lien}`}>
-                {texte("objectif.ouvrir", { valeur: unite(auPas(fourchette.central, pas)) })}
-              </Link>
+              {lien && reglage !== null ? (
+                <Link href={`/simulateur/?${lien}`}>
+                  {texte("objectif.ouvrir", { valeur: unite(reglage) })}
+                </Link>
+              ) : (
+                texte("objectif.pas_de_reglage")
+              )}
             </p>
           </>
         )}

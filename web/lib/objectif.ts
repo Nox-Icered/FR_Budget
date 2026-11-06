@@ -104,6 +104,30 @@ export function fourchetteValeur(s: Solution): Fourchette | null {
   return { bas: Math.min(c, ...autres), central: c, haut: Math.max(c, ...autres) };
 }
 
+// Réglage au pas du curseur qui atteint la cible, dans les limites du curseur du simulateur
+// (bornes arrondies vers l'intérieur au pas, comme le curseur) ; null s'il n'y en a pas.
+export function reglageAuPas(
+  donnees: ReponsesUnitaires,
+  levier: string,
+  pas: number,
+  entree: number,
+  objectif: Objectif,
+  valeur: number,
+): number | null {
+  const l = donnees.leviers[levier];
+  if (l.grille) return valeur;
+  const [bas, haut] = l.bornes;
+  const min = Math.ceil(bas / pas - 1e-9) * pas;
+  const max = Math.floor(haut / pas + 1e-9) * pas;
+  const v = auPas(valeur, pas);
+  if (v < min - 1e-9 || v > max + 1e-9) return null;
+  // L'arrondi vers l'extérieur atteint la cible ou la dépasse, dans le même sens que la valeur.
+  const sansMesure = niveau(donnees, levier, 0, entree, objectif, "central");
+  const atteint = niveau(donnees, levier, v, entree, objectif, "central");
+  const sens = Math.sign(objectif.cible - sansMesure);
+  return sens * (atteint - objectif.cible) >= -1e-9 ? v : null;
+}
+
 // Valeur au pas du curseur du simulateur, arrondie dans le sens qui atteint la cible (vers
 // l'extérieur, en partant de zéro).
 export function auPas(valeur: number, pas: number): number {

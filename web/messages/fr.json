@@ -890,6 +890,7 @@
     "fourchette": "Selon les hypothèses basses et hautes du simulateur, le réglage qui atteint cette valeur va de {bas} à {haut}.",
     "fourchette_partielle": "Pour au moins une de ces hypothèses, la valeur n'est pas atteignable dans les limites de la mesure.",
     "ouvrir": "Ouvrir ce réglage dans le simulateur ({valeur}, au pas du curseur)",
-    "methode": "Calcul : le réglage est cherché par dichotomie sur le même calcul que le simulateur, sans effet sur l'activité (multiplicateur désactivé) ; appliqué dans le simulateur, il redonne la valeur choisie. Les limites et le statut de chaque mesure sont ceux du simulateur."
+    "methode": "Calcul : le réglage est cherché par dichotomie sur le même calcul que le simulateur, sans effet sur l'activité (multiplicateur désactivé) ; appliqué dans le simulateur, il redonne la valeur choisie. Les limites et le statut de chaque mesure sont ceux du simulateur.",
+    "pas_de_reglage": "Aucun cran du curseur du simulateur n'atteint exactement cette valeur dans les limites de la mesure : ouvrez le simulateur pour régler la mesure au plus près."
   }
 }

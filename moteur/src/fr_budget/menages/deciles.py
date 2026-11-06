@@ -14,10 +14,10 @@ de niveau de vie usuel, regroupés en déciles ; ``data/processed/deciles/cnd_de
 (``fr_budget.menages.depense``).
 
 Impôt sur le revenu (option C, 6 novembre 2026) : une clé au prorata de l'impôt payé ne vaut pas
-pour une mesure ciblée sur une tranche (écart de 50,7 points à l'Insee sur la baisse de 2020).
+pour une mesure ciblée sur une tranche (écart de 50,6 points à l'Insee sur la baisse de 2020).
 Le moteur du barème (``fr_budget.agrege.bareme_ir``) calcule l'écart d'impôt par dixième de
 foyers classés selon le revenu fiscal de référence par part (DGFiP) ; le k-ième dixième fiscal
-est assimilé au k-ième dixième de niveau de vie (hypothèse de correspondance, écart de 6,0
+est assimilé au k-ième dixième de niveau de vie (hypothèse de correspondance, écart de 5,6
 points à l'Insee sur la même réforme). Revalorisation des seuils : parts d'une revalorisation de
 1 % du barème de 2025 ; barème saisi sur le site : écart par dixième de ce barème. Plafond du
 quotient familial et dépenses fiscales de l'impôt sur le revenu : non répartis (le moteur du
@@ -267,8 +267,13 @@ def repartition(
 
 # Validation : forme de la répartition face aux évaluations de réformes par l'Insee (modèle Ines,
 # France, portrait social ; ``data/processed/deciles/validation_insee.csv``,
-# ``pipelines/deciles/extraire_cnd.py``). Part de chaque dixième dans l'effet total ; tolérance :
-# au plus 10 points de part sur chaque dixième (choix du lot, à relire).
+# ``pipelines/deciles/extraire_cnd.py``). L'Insee publie l'effet moyen sur le niveau de vie
+# (euros par unité de consommation, moyenne sur les personnes du dixième) : le montant du modèle
+# par dixième est ramené en euros par unité de consommation (unités de consommation des comptes
+# distribués de 2023), puis les deux profils sont normalisés (part de chaque dixième dans la
+# somme des dix moyennes). Approximation restante : la moyenne de l'Insee pondère les ménages par
+# leur nombre de personnes, le modèle par leurs unités de consommation. Tolérance : au plus 10
+# points de part sur chaque dixième (choix du lot, à relire).
 FICHIER_VALIDATION = RACINE_DEPOT / "data" / "processed" / "deciles" / "validation_insee.csv"
 TOLERANCE_VALIDATION_POINTS = 10.0
 
@@ -307,7 +312,7 @@ class ComparaisonForme:
     source: str
     levier: str
     modele: list[float]
-    """Part de chaque dixième dans l'effet total, en %."""
+    """Part de chaque dixième dans la somme des effets moyens par unité de consommation, en %."""
     insee: list[float]
     ecart_max_points: float
     tolerance_points: float
@@ -327,8 +332,10 @@ def _parts_insee(reference: str) -> np.ndarray:
 def validation_insee() -> list[ComparaisonForme]:
     """Comparaison de la forme de la répartition aux évaluations de l'Insee."""
     resultat = []
+    uc = unites_consommation()
     for reference, (source, levier, parts) in VALIDATIONS.items():
-        m, r = parts(), _parts_insee(reference)
+        par_uc = parts() / uc
+        m, r = np.asarray(par_uc / par_uc.sum()), _parts_insee(reference)
         resultat.append(
             ComparaisonForme(
                 reference=reference,

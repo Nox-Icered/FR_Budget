@@ -12,8 +12,8 @@ Références (``data/processed/deciles/validation_insee.csv``, voir
   méthode des leviers de l'impôt sur le revenu : écart d'impôt par dixième fiscal du moteur du
   barème, le k-ième dixième fiscal assimilé au k-ième dixième de niveau de vie.
 
-Comparaison : part de chaque dixième dans l'effet total (les dixièmes de l'Insee comptent le
-même nombre de personnes, comme les déciles des comptes distribués). Tolérance : écart d'au plus
+Comparaison dans la même unité : effet moyen par unité de consommation, puis part de chaque
+dixième dans la somme des dix moyennes (``deciles.validation_insee``). Tolérance : écart d'au plus
 10 points de part sur chaque dixième (choix du lot, à relire : la règle de publication ne fixe
 de tolérance que pour le rendement).
 """

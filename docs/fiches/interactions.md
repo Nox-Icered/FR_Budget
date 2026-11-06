@@ -1,4 +1,10 @@
-# Combinaison de mesures sans double compte
+---
+module: interactions
+statut: beta
+mise_a_jour: 2026-11-06
+---
+
+# Fiche : combinaison de mesures sans double compte
 
 Statut : bêta, non validé (pas de chiffrage officiel d'une combinaison à reproduire). Plan validé par le responsable du projet le 6 novembre 2026 : option A (termes croisés mécaniques chiffrés), avertissement seul pour les interactions non chiffrées.
 

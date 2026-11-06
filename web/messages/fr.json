@@ -313,6 +313,21 @@
         "libelle": "Barème de l'impôt sur le revenu",
         "valeur": "{valeur} Md€",
         "explication": ""
+      },
+      "ondam_progression": {
+        "libelle": "Progression de l'ONDAM, objectif des dépenses d'assurance maladie ({reference} milliards d'euros en {annee})",
+        "valeur": "{valeur} pt",
+        "explication": "Chaque année, la loi fixe un objectif de dépenses d'assurance maladie (ONDAM) : soins de ville, hôpitaux, établissements médico-sociaux. Ce curseur change sa progression, en points. Vers la gauche, les dépenses progressent moins vite ; la loi ne dit pas comment, et l'objectif n'a pas toujours été tenu (fourchette)."
+      },
+      "franchises_participations": {
+        "libelle": "Franchises médicales et participations forfaitaires, montants et plafonds ({reference} milliards d'euros en 2025)",
+        "valeur": "{valeur} %",
+        "explication": "Le patient paie une petite somme non remboursée par boîte de médicament, acte paramédical, consultation ou transport (par exemple 1 € par boîte), dans la limite de plafonds par jour et par an. Ce curseur change ces montants et ces plafonds dans la même proportion. Vers la droite, l'assurance maladie rembourse moins et les patients paient plus."
+      },
+      "ij_plafond_smic": {
+        "libelle": "Plafond du salaire pris en compte pour les indemnités journalières maladie ({reference} % du Smic depuis avril 2025)",
+        "valeur": "+{valeur} pt de Smic",
+        "explication": "Pendant un arrêt maladie, l'assurance maladie verse des indemnités calculées sur le salaire, dans la limite d'un plafond. Il est passé de 180 % à 140 % du Smic en 2025. Ce curseur le relève, jusqu'à 180 % : les salariés les mieux payés reçoivent plus, et les dépenses augmentent."
       }
     },
     "limite_tva_accise": "La hausse de l'accise augmente aussi la TVA payée sur le carburant : cet effet n'est pas compté.",
@@ -533,6 +548,10 @@
         "titre": "Assurance chômage",
         "description": "contribution, revalorisation, durée"
       },
+      "assurance_maladie": {
+        "titre": "Assurance maladie",
+        "description": "Progression des dépenses de santé (ONDAM), franchises et participations, indemnités journalières."
+      },
       "fonction_publique_collectivites": {
         "titre": "Fonction publique et collectivités",
         "description": "point d'indice, effectifs, dotations"
@@ -618,7 +637,8 @@
       },
       "non_repartis": "{nombre} mesure(s) du scénario ne sont pas réparties : rémunérations publiques, dotations, crédits des missions, dépenses fiscales, plafond du quotient familial, âge de départ. Leur effet n'apparaît pas dans ce tableau.",
       "methode": "Méthode : l'effet national de chaque mesure est réparti selon la part de chaque dixième dans l'assiette qu'elle touche (par exemple, les pensions pour la CSG sur les retraites), d'après les comptes nationaux distribués {annee} de l'Insee. Pour le barème de l'impôt sur le revenu et ses seuils, l'écart d'impôt est calculé par dixième de foyers fiscaux (revenu par part), assimilé au dixième de niveau de vie de même rang. La fourchette prend les parts des années {premiere} à {annee}, une autre assiette quand elle existe (Budget de famille 2017 pour la TVA et les accises) et les bornes de l'effet national. Sans changement de comportement ; structure de {annee} appliquée aux années suivantes."
-    }
+    },
+    "methode_assurance_maladie": "Assurance maladie (bêta) : un point de progression de l'ONDAM vaut {point} Md€ (1 % de l'ONDAM 2025), réduit ou augmenté selon la part des économies prévues effectivement réalisées en 2024 et 2025 ; 10 % de hausse des franchises et participations (montants et plafonds) rapportent {franchises} Md€ (rendement de 2025, Cour des comptes) ; relever de 10 points de Smic (0,1 Smic) le plafond des indemnités journalières coûte {ij} Md€ en année pleine (économie de la baisse de 2025, annexes des PLFSS)."
   },
   "partage": {
     "scenario": "Scénario",
@@ -769,7 +789,8 @@
         "agents_publics": "Rémunérations publiques : aucun de ces ménages n'est agent public.",
         "structurel": "Âge de départ à la retraite : il change les carrières et les pensions futures, pas l'année simulée.",
         "catalogue": "Dépenses fiscales : chacune vise une situation particulière, absente de ces ménages types.",
-        "bareme": "Barème de l'impôt sur le revenu saisi dans le simulateur : son effet sur les ménages types n'est pas encore calculé."
+        "bareme": "Barème de l'impôt sur le revenu saisi dans le simulateur : son effet sur les ménages types n'est pas encore calculé.",
+        "sante": "Assurance maladie : la cascade ne décrit ni les dépenses de santé ni les arrêts de travail."
       },
       "incidence": {
         "legende": "Incidence des cotisations patronales",
@@ -964,7 +985,7 @@
       "cotes": "Chaque mesure est rangée du côté des comptes publics que touche l'instrument modifié : impôts et cotisations en recettes ; rémunérations, prestations, pensions et dotations en dépenses. Les allègements généraux sont des cotisations en moins (recettes) ; la prime d'activité est une prestation et l'âge de départ modifie les pensions (dépenses).",
       "limites": "Les effets des mesures sont additionnés, avec les interactions chiffrées par le simulateur ; les autres interactions (par exemple entre la CSG et l'impôt sur le revenu) ne sont pas comptées. Sans effet sur l'activité (multiplicateur désactivé). Les statuts et les limites des mesures sont ceux du simulateur.",
       "problemes": {
-        "double_compte": "L'âge effectif et l'âge légal de départ ne peuvent pas être cochés ensemble.",
+        "double_compte": "Ces mesures ne peuvent pas être cochées ensemble : âge effectif et âge légal de départ, ou progression de l'ONDAM avec les franchises ou les indemnités journalières, qu'elle contient.",
         "cote_vide_recettes": "Une part de l'écart revient aux recettes, mais aucune mesure sur les recettes n'est cochée.",
         "cote_vide_depenses": "Une part de l'écart revient aux dépenses, mais aucune mesure sur les dépenses n'est cochée.",
         "insuffisant_recettes": "Les mesures cochées sur les recettes ne portent pas leur part de l'écart dans les limites de leurs curseurs. La règle ne reporte rien sur les dépenses : cochez d'autres mesures ou déplacez le curseur.",

@@ -97,6 +97,7 @@ from fr_budget import retraites, retraites_cohortes
 from fr_budget.agrege import (
     accises,
     assurance_chomage,
+    assurance_maladie,
     cotisations,
     credits_missions,
     csg,
@@ -210,6 +211,10 @@ LEVIER_CHOMAGE_DUREE = "chomage_duree_indemnisation"
 # Leviers dont l'effet varie d'une année à l'autre (profil de l'Unédic), linéaires dans la valeur.
 LEVIERS_CHOMAGE_PROFIL = (LEVIER_CHOMAGE_REVALORISATION, LEVIER_CHOMAGE_DUREE)
 LEVIERS_CHOMAGE = (LEVIER_CHOMAGE_CONTRIBUTION, *LEVIERS_CHOMAGE_PROFIL)
+LEVIER_ONDAM = assurance_maladie.LEVIER_ONDAM
+LEVIER_FRANCHISES = assurance_maladie.LEVIER_FRANCHISES
+LEVIER_IJ_PLAFOND = assurance_maladie.LEVIER_IJ
+LEVIERS_ASSURANCE_MALADIE = assurance_maladie.LEVIERS
 # Bornes choisies au lot assurance chômage (à relire). Contribution : ±1 point (repères : la
 # contribution exceptionnelle de 0,05 point de 2017 à 2025 ; la modulation des taux par
 # entreprise, de 2,95 % à 5,00 %). Revalorisation : ±2 points (repère : 1,9 % au 1er avril et
@@ -355,6 +360,12 @@ def rendement_unitaire(levier: str) -> Fourchette:
         return encadrer(f.central * k, [f.bas * k, f.haut * k])
     if levier == LEVIER_CHOMAGE_CONTRIBUTION:
         return assurance_chomage.rendement_point_contribution()
+    if levier == LEVIER_ONDAM:
+        return assurance_maladie.rendement_point_ondam()
+    if levier == LEVIER_FRANCHISES:
+        return assurance_maladie.rendement_pourcent_franchises()
+    if levier == LEVIER_IJ_PLAFOND:
+        return assurance_maladie.rendement_smic_plafond_ij()
     if levier in LEVIERS_CHOMAGE_PROFIL:
         # Affichage : première année civile pleine (revalorisation), plein effet (durée).
         rang = (
@@ -501,6 +512,15 @@ def taux_reference(levier: str) -> float:
     if levier == LEVIER_CHOMAGE_DUREE:
         # Coefficient appliqué à la durée d'indemnisation en 2026, en %.
         return chiffrage("chomage_coefficient_duree_2026") * POURCENT
+    if levier == LEVIER_ONDAM:
+        # ONDAM 2025 voté en LFSS pour 2025, Md€.
+        return assurance_maladie.ondam_reference()
+    if levier == LEVIER_FRANCHISES:
+        # Rendement 2025 des franchises et participations forfaitaires, tous régimes, Md€.
+        return chiffrage("franchises_pf_rendement_tous_regimes_2025")
+    if levier == LEVIER_IJ_PLAFOND:
+        # Plafond actuel des revenus pris en compte, en % du Smic.
+        return assurance_maladie.PLAFOND_ACTUEL_SMIC
     if levier in LEVIERS_DOTATIONS:
         return dotations.montant_levier(LEVIERS_DOTATIONS[levier])
     if levier in LEVIERS_REMUNERATIONS:
@@ -578,6 +598,13 @@ def bornes_levier(levier: str) -> tuple[float, float]:
         return BORNES_RETRAITES_AGE
     if levier == LEVIER_CHOMAGE_CONTRIBUTION:
         return -BORNE_CHOMAGE_CONTRIBUTION, BORNE_CHOMAGE_CONTRIBUTION
+    if levier == LEVIER_ONDAM:
+        borne = assurance_maladie.borne_ondam()
+        return -borne, borne
+    if levier == LEVIER_FRANCHISES:
+        return -assurance_maladie.BORNE_FRANCHISES, assurance_maladie.BORNE_FRANCHISES
+    if levier == LEVIER_IJ_PLAFOND:
+        return 0.0, assurance_maladie.ECART_PLAFONDS_SMIC
     if levier == LEVIER_CHOMAGE_REVALORISATION:
         return -BORNE_CHOMAGE_REVALORISATION, BORNE_CHOMAGE_REVALORISATION
     if levier == LEVIER_CHOMAGE_DUREE:
@@ -693,6 +720,8 @@ def facteur_premiere_annee(levier: str) -> float:
     """
     if levier == LEVIER_INDEXATION:
         return indexation.part_effet_premiere_annee()
+    if levier == LEVIER_IJ_PLAFOND:
+        return assurance_maladie.part_premiere_annee_ij()
     if interactions.est_interaction(levier):
         return interactions.part_premiere_annee(levier)
     return 1.0
@@ -778,6 +807,10 @@ def verifier_double_compte(mesures: Sequence[Mesure]) -> None:
         raise ValueError(msg)
     # Une mesure à zéro ne change rien : elle ne bloque aucune combinaison.
     reglees = [m for m in mesures if m.valeur != 0]
+    leviers_regles = {m.levier for m in reglees}
+    if LEVIER_ONDAM in leviers_regles and leviers_regles & {LEVIER_FRANCHISES, LEVIER_IJ_PLAFOND}:
+        msg = "double compte : les franchises et les indemnités journalières font partie de l'ONDAM"
+        raise ValueError(msg)
     if {LEVIER_IR_BAREME, LEVIER_IR_SEUILS} <= {m.levier for m in reglees}:
         msg = "double compte : le barème saisi fixe déjà les seuils de l'impôt sur le revenu"
         raise ValueError(msg)
@@ -861,6 +894,8 @@ def categorie_croissance(levier: str) -> str:
         LEVIER_CHOMAGE_CONTRIBUTION: module_croissance.COTISATIONS_EMPLOYEURS,
         LEVIER_CHOMAGE_REVALORISATION: module_croissance.PRESTATIONS,
         LEVIER_CHOMAGE_DUREE: module_croissance.PRESTATIONS,
+        # Assurance maladie : prestations (soins remboursés, indemnités journalières).
+        **dict.fromkeys(LEVIERS_ASSURANCE_MALADIE, module_croissance.PRESTATIONS),
     }
     if levier in categories:
         return categories[levier]
@@ -1068,6 +1103,7 @@ LEVIERS_REGISTRE = {
     LEVIER_RETRAITES_AGE: "retraites",
     LEVIER_RETRAITES_AGE_LEGAL: "retraites",
     **dict.fromkeys(LEVIERS_CHOMAGE, "assurance_chomage"),
+    **dict.fromkeys(LEVIERS_ASSURANCE_MALADIE, "assurance_maladie"),
 }
 
 
@@ -1322,6 +1358,12 @@ PROVENANCE_LEVIERS = {
     LEVIER_CHOMAGE_CONTRIBUTION: PROVENANCE_CHOMAGE,
     LEVIER_CHOMAGE_REVALORISATION: PROVENANCE_CHOMAGE_REVALORISATION,
     LEVIER_CHOMAGE_DUREE: PROVENANCE_CHOMAGE_DUREE,
+    LEVIER_ONDAM: (("plfss2026_annexe5",), (assurance_maladie.HYPOTHESE_REALISATION,)),
+    LEVIER_FRANCHISES: (("ccomptes_ralfss_mai2026", "ccss_mai2024_franchises"), ()),
+    LEVIER_IJ_PLAFOND: (
+        ("plfss2025_annexe5", "plfss2026_annexe5", "ccomptes_ralfss_mai2026"),
+        (),
+    ),
 }
 
 

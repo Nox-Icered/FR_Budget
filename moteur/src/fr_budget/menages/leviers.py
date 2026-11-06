@@ -283,6 +283,7 @@ SANS_EFFET: dict[str, str] = {
     scenario.LEVIER_DEPENSE_FISCALE_UNITE: "catalogue",
     scenario.LEVIER_CREDITS_UNITE: "administrations",
     scenario.LEVIER_IR_BAREME: "bareme",
+    **dict.fromkeys(scenario.LEVIERS_ASSURANCE_MALADIE, "sante"),
 }
 
 

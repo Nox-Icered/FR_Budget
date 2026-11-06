@@ -137,6 +137,14 @@ export default function PageSimulateur() {
           duree: deuxDecimales(-5 * donnees.leviers.chomage_duree_indemnisation.rendement_unitaire),
         })}
       </p>
+      <p>
+        {texte("simulateur.methode_assurance_maladie", {
+          point: deuxDecimales(-donnees.leviers.ondam_progression.rendement_unitaire),
+          franchises: deuxDecimales(10 * donnees.leviers.franchises_participations.rendement_unitaire),
+          // Rendement d'un point de Smic ; 10 points valent 0,1 Smic.
+          ij: deuxDecimales(-10 * donnees.leviers.ij_plafond_smic.rendement_unitaire),
+        })}
+      </p>
       {donnees.croissance && (
         <p>
           {texte("simulateur.methode_croissance", {

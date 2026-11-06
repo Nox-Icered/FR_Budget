@@ -105,6 +105,7 @@ from fr_budget.agrege import (
     impot_revenu,
     impot_societes,
     indexation,
+    interactions,
     prime_activite,
     quotient_familial,
     remunerations,
@@ -335,8 +336,11 @@ def rendement_unitaire(levier: str) -> Fourchette:
     TVA : point net au taux normal. Accises : un centime par litre (1 €/hl) sur l'assiette du
     levier (``fr_budget.agrege.accises.assiette_levier``), bornes de l'hypothèse des masses
     volumiques. Dépenses fiscales : 1 % du coût 2026, plage de l'écart de prévision. Crédits
-    d'une mission : moins 1 % des crédits 2026, plage de l'écart d'exécution.
+    d'une mission : moins 1 % des crédits 2026, plage de l'écart d'exécution. Terme croisé de
+    deux leviers (``fr_budget.agrege.interactions``) : pour une unité de chacun.
     """
+    if interactions.est_interaction(levier):
+        return interactions.rendement_unitaire(levier)
     if levier == LEVIER_RETRAITES_AGE_LEGAL:
         # Même convention que l'âge effectif : effet d'un an une fois la montée en charge
         # achevée pour une entrée la première année possible, en Md€ de l'année de référence.
@@ -474,6 +478,8 @@ def taux_reference(levier: str) -> float:
     prévu pour 2026, en Md€ courants (unité générique : 0). Crédits d'une mission : crédits
     demandés au PLF 2026, en Md€ courants (unité générique : 0).
     """
+    if interactions.est_interaction(levier):
+        return 0.0
     mission = mission_du_levier(levier)
     if mission is not None:
         return mission.credits / EUROS_PAR_MILLIARD
@@ -563,6 +569,11 @@ def bornes_levier(levier: str) -> tuple[float, float]:
     """
     if mission_du_levier(levier) is not None:
         return -BORNE_CREDITS, BORNE_CREDITS
+    if interactions.est_interaction(levier):
+        # Terme croisé : produit des réglages des deux leviers.
+        a, b = (bornes_levier(x) for x in interactions.CHIFFREES[levier])
+        produits = [x * y for x in a for y in b]
+        return min(produits), max(produits)
     if levier in LEVIERS_RETRAITES:
         return BORNES_RETRAITES_AGE
     if levier == LEVIER_CHOMAGE_CONTRIBUTION:
@@ -682,6 +693,8 @@ def facteur_premiere_annee(levier: str) -> float:
     """
     if levier == LEVIER_INDEXATION:
         return indexation.part_effet_premiere_annee()
+    if interactions.est_interaction(levier):
+        return interactions.part_premiere_annee(levier)
     return 1.0
 
 
@@ -734,6 +747,9 @@ def verifier_double_compte(mesures: Sequence[Mesure]) -> None:
     jamais avec une dépense désignée par son numéro. Le site empêche lui-même de choisir une
     dépense d'un impôt dont le curseur n'est pas à zéro.
     """
+    if any(interactions.est_interaction(m.levier) for m in mesures):
+        msg = "mesure interne : un terme croisé est ajouté par le calcul, pas par l'utilisateur"
+        raise ValueError(msg)
     depenses = [d for d in (depense_du_levier(m.levier) for m in mesures) if d is not None]
     impots = {
         LEVIERS_DEPENSES_FISCALES_IMPOT[m.levier]
@@ -814,6 +830,9 @@ def categorie_croissance(levier: str) -> str:
         return module_croissance.AUTRES_PRELEVEMENTS
     if mission_du_levier(levier) is not None:
         return module_croissance.DEPENSES
+    if interactions.est_interaction(levier):
+        # Terme croisé : catégorie du prélèvement modifié (la CSG).
+        return module_croissance.CSG
     categories = {
         LEVIER_TVA_NORMAL: module_croissance.TVA,
         **dict.fromkeys(LEVIERS_ACCISES, module_croissance.ACCISES),
@@ -963,15 +982,32 @@ def _autres_trajectoires(
     return autres
 
 
+def avec_interactions(mesures: Sequence[Mesure]) -> list[Mesure]:
+    """Mesures, plus le terme croisé de chaque paire de leviers réglés qui interagissent
+    (``fr_budget.agrege.interactions``) : valeur égale au produit des deux réglages, à partir
+    de la plus tardive des deux années d'entrée."""
+    reglees = {m.levier: m for m in mesures if m.valeur != 0}
+    croises = [
+        Mesure(
+            ident, reglees[a].valeur * reglees[b].valeur, max(reglees[a].annee, reglees[b].annee)
+        )
+        for ident, (a, b) in interactions.CHIFFREES.items()
+        if a in reglees and b in reglees
+    ]
+    return [*mesures, *croises]
+
+
 def scenario(mesures: Sequence[Mesure], *, croissance: bool = False) -> list[AnneeScenario]:
     """Scénario 2025-2046 : niveaux et écarts à la baseline, en points de PIB, en fourchette.
 
-    Plusieurs mesures s'additionnent (pas d'interaction entre leviers à ce stade). Deux
+    Plusieurs mesures s'additionnent, plus le terme croisé des paires de leviers dont l'un
+    change l'assiette de l'autre (``avec_interactions``). Deux
     mesures sur la même dépense fiscale sont refusées (``verifier_double_compte``). Avec
     ``croissance``, l'effet sur l'activité (``fr_budget.croissance``) s'ajoute ; il est
     désactivé par défaut.
     """
     verifier_double_compte(mesures)
+    mesures = avec_interactions(mesures)
     centrale, variantes = trajectoires()
     m_central = CENTRAL if croissance else None
     c_traj = _trajectoire_mesures(centrale, mesures, CENTRAL, m_central)
@@ -1035,8 +1071,17 @@ LEVIERS_REGISTRE = {
 }
 
 
+LEVIERS_CSG_PAR_INTERACTION = {
+    ident: next(x for x in paire if x in LEVIERS_CSG)
+    for ident, paire in interactions.CHIFFREES.items()
+}
+"""Levier de CSG de chaque terme croisé : son statut et son registre sont ceux du terme."""
+
+
 def levier_registre(levier: str) -> str | None:
     """Levier du registre dont dépend un levier de scénario ; ``None`` s'il est inconnu."""
+    if interactions.est_interaction(levier):
+        return LEVIERS_REGISTRE[LEVIERS_CSG_PAR_INTERACTION[levier]]
     if depense_du_levier(levier) is not None:
         return "depenses_fiscales"
     if mission_du_levier(levier) is not None:
@@ -1281,6 +1326,14 @@ PROVENANCE_LEVIERS = {
 
 
 def _provenance_levier(levier: str) -> tuple[tuple[str, ...], tuple[str, ...]]:
+    if interactions.est_interaction(levier):
+        sources: list[str] = []
+        hypotheses: list[str] = []
+        for x in interactions.CHIFFREES[levier]:
+            s, h = _provenance_levier(x)
+            sources += [v for v in s if v not in sources]
+            hypotheses += [v for v in h if v not in hypotheses]
+        return tuple(sources), tuple(hypotheses)
     if depense_du_levier(levier) is not None:
         return PROVENANCE_LEVIERS[LEVIER_DEPENSE_FISCALE_UNITE]
     if mission_du_levier(levier) is not None:

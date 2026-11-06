@@ -23,7 +23,30 @@ function encadrer(central: number, valeurs: number[]): Fourchette {
 
 export type MesureSite = { levier: string; valeur: number };
 
-// Plusieurs leviers s'additionnent (même année d'entrée), comme dans le moteur. Avec
+// Mesures, plus le terme croisé de chaque paire de leviers réglés dont l'un change l'assiette
+// de l'autre (moteur : scenario.avec_interactions) ; valeur : produit des deux réglages.
+export function avecInteractions(donnees: ReponsesUnitaires, mesures: MesureSite[]): MesureSite[] {
+  const reglees = new Map(mesures.filter((m) => m.valeur !== 0).map((m) => [m.levier, m.valeur]));
+  const croises: MesureSite[] = [];
+  for (const [levier, l] of Object.entries(donnees.leviers)) {
+    if (!l.interaction) continue;
+    const [a, b] = l.interaction;
+    const va = reglees.get(a);
+    const vb = reglees.get(b);
+    if (va !== undefined && vb !== undefined) croises.push({ levier, valeur: va * vb });
+  }
+  return [...mesures, ...croises];
+}
+
+// Mécanismes des interactions non chiffrées entre les leviers réglés (avertissement).
+export function interactionsNonChiffrees(donnees: ReponsesUnitaires, mesures: MesureSite[]): string[] {
+  const reglees = new Set(mesures.filter((m) => m.valeur !== 0).map((m) => m.levier));
+  return (donnees.interactions_non_chiffrees ?? [])
+    .filter((p) => p.leviers_a.some((l) => reglees.has(l)) && p.leviers_b.some((l) => reglees.has(l)))
+    .map((p) => p.mecanisme);
+}
+
+// Plusieurs leviers s'additionnent (même année d'entrée), plus les termes croisés, comme dans le moteur. Avec
 // ``croissance`` (interrupteur, désactivé par défaut), chaque réponse reçoit m fois son
 // supplément de croissance ; le multiplicateur m est central sur toutes les trajectoires, et
 // les extrêmes du multiplicateur de chaque mesure, choisis année par année indépendamment des
@@ -36,7 +59,7 @@ export function calculer(
   annee: number,
   croissance = false,
 ): LigneScenario[] {
-  const reponses = mesures.map((m) => {
+  const reponses = avecInteractions(donnees, mesures).map((m) => {
     const levier = donnees.leviers[m.levier];
     // Levier non linéaire : réponse exacte du cran choisi, déjà ordonnée par borne ; elle compte
     // une fois (valeur 1) et ses bornes ne s'échangent pas.

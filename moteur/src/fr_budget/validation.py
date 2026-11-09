@@ -14,7 +14,7 @@ from dataclasses import dataclass
 from functools import partial
 
 from fr_budget import retraites_cohortes
-from fr_budget.agrege import assurance_maladie, bareme_ir, quotient_familial
+from fr_budget.agrege import assurance_chomage, assurance_maladie, bareme_ir, quotient_familial
 from fr_budget.agrege.accises import recette_brute
 from fr_budget.agrege.assurance_chomage import cout_revalorisation_cumule, effet_contribution
 from fr_budget.agrege.cotisations import cout_allegements, valeur_point_modele
@@ -44,6 +44,7 @@ from fr_budget.agrege.prime_activite import economie_baisse_2025
 from fr_budget.agrege.remunerations import VERSANTS, cout_brut_point_mesure
 from fr_budget.agrege.tva import estimer_point_tva, estimer_recette_totale
 from fr_budget.dette import surcout_choc_taux_etat
+from fr_budget.fourchette import Fourchette
 from fr_budget.registres.acces import chiffrage
 from fr_budget.retraites import effet_a_horizon
 
@@ -199,6 +200,52 @@ def _chomage_revalorisation_millions(taux: str, mois: int, allocations: float) -
     return cout_revalorisation_cumule(chiffrage(taux), mois, allocations) * MILLIONS_PAR_MILLIARD
 
 
+def _chomage_regle_millions(brut: Callable[[], Fourchette], unites: float, annee: int) -> float:
+    """Moindres allocations brutes d'un passage de ``unites`` (mois ou points), en M€ de
+    ``annee`` (montant du modèle en euros de 2025 ramené par le PIB nominal)."""
+    milliards = brut().central * unites
+    return milliards / assurance_chomage.vers_euros_2025_depuis(1.0, annee) * MILLIONS_PAR_MILLIARD
+
+
+def _definitions_chomage_regles() -> list[tuple[str, Callable[[], float]]]:
+    """Assurance chômage, deuxième étape : condition d'affiliation et dégressivité."""
+    ac = assurance_chomage
+    mois = ac.ecart_affiliation_mois()
+    taux = chiffrage("chomage_degressivite_taux")
+    return [
+        (
+            "chomage_affiliation_croisiere_2019",
+            partial(
+                _chomage_regle_millions, ac.economie_affiliation_brute, mois, ac.ANNEE_MONTANTS_2019
+            ),
+        ),
+        (
+            "chomage_affiliation_croisiere_2021",
+            partial(
+                _chomage_regle_millions, ac.economie_affiliation_brute, mois, ac.ANNEE_MONTANTS_2021
+            ),
+        ),
+        (
+            "chomage_degressivite_croisiere_2021",
+            partial(
+                _chomage_regle_millions,
+                ac.economie_degressivite_brute,
+                taux,
+                ac.ANNEE_MONTANTS_2021,
+            ),
+        ),
+        (
+            "chomage_degressivite_croisiere_2025",
+            lambda: (
+                -_chomage_regle_millions(
+                    ac.economie_degressivite_brute, taux, ac.ANNEE_MONTANTS_2021
+                )
+                / MILLIONS_PAR_MILLIARD
+            ),
+        ),
+    ]
+
+
 def _definitions_chomage() -> list[tuple[str, Callable[[], float]]]:
     """Assurance chômage : mêmes calculs que les tests de validation du levier."""
     return [
@@ -345,6 +392,7 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
         for annee in quotient_familial.ANNEES_HISTORIQUES
     ]
     definitions += _definitions_chomage()
+    definitions += _definitions_chomage_regles()
     definitions += _definitions_assurance_maladie()
     definitions += _confrontations_independantes()
     return definitions

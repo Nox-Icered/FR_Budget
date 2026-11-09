@@ -73,6 +73,8 @@ export const LEVIERS_PUBLICS: { id: string; pas: number }[] = [
   { id: "chomage_contribution_patronale", pas: 0.05 },
   { id: "chomage_revalorisation", pas: 0.1 },
   { id: "chomage_duree_indemnisation", pas: 5 },
+  { id: "chomage_affiliation_mois", pas: 0.5 },
+  { id: "chomage_degressivite_points", pas: 5 },
   { id: "ondam_progression", pas: 0.1 },
   { id: "franchises_participations", pas: 5 },
   { id: "ij_plafond_smic", pas: 5 },

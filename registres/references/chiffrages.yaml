@@ -4210,3 +4210,70 @@ chiffrages:
     saisi_le: 2026-11-06
     relecture: a_relire
 
+
+  - id: ir_insee_impot_individuel_2017
+    levier: impot_revenu_structure
+    source: insee_economie_statistique_526_527
+    millesime: "2017"
+    mesure: "Impôt sur le revenu simulé dans une imposition fictive individualisée, sans dispositif conjugal ni familial (Ines, France métropolitaine, ménages ordinaires)"
+    valeur: 93.7
+    unite: "Md€"
+    localisation: "André et Sireyjol, tableau 2 « Ménages imposables et impôt payé, par scénario », ligne « Individuel », page 29"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: ir_insee_impot_conjugal_2017
+    levier: impot_revenu_structure
+    source: insee_economie_statistique_526_527
+    millesime: "2017"
+    mesure: "Impôt sur le revenu simulé avec les dispositifs conjugaux, sans les dispositifs familiaux"
+    valeur: 82.6
+    unite: "Md€"
+    localisation: "André et Sireyjol, tableau 2, ligne « Conjugal », page 29"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: ir_insee_impot_reel_2017
+    levier: impot_revenu_structure
+    source: insee_economie_statistique_526_527
+    millesime: "2017"
+    mesure: "Impôt sur le revenu simulé avec la législation de 2017 (dispositifs conjugaux et familiaux)"
+    valeur: 66.0
+    unite: "Md€"
+    localisation: "André et Sireyjol, tableau 2, ligne « Réel », page 29"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: ir_insee_familialisation_2018
+    levier: impot_revenu_structure
+    source: insee_analyses_53_2020
+    millesime: "2018"
+    mesure: "Baisse de l'impôt sur le revenu due à la composante familiale (après la composante conjugale)"
+    valeur: 19.0
+    unite: "Md€"
+    localisation: "Texte et figure 1 « Effets des dispositifs de conjugalisation et de familialisation de l'impôt sur le revenu en 2018 », ligne « Familialisation »"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: ir_insee_conjugalisation_2018
+    levier: impot_revenu_structure
+    source: insee_analyses_53_2020
+    millesime: "2018"
+    mesure: "Baisse de l'impôt sur le revenu due à la composante conjugale (par rapport à une imposition individualisée)"
+    valeur: 10.8
+    unite: "Md€"
+    localisation: "Texte et figure 1, ligne « Conjugalisation »"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: ir_ofce_individualisation_optimisation_2016
+    levier: impot_revenu_structure
+    source: insee_economie_statistique_526_527
+    millesime: "2016"
+    mesure: "Hausse des recettes de l'impôt sur le revenu d'une individualisation de l'impôt des couples mariés ou pacsés, parts des enfants réparties au mieux entre les deux parents (Allègre, Périvier et Pucci)"
+    valeur: 7.2
+    unite: "Md€"
+    localisation: "Allègre, Périvier et Pucci, tableau 2 « Récapitulatif des effets des trois scénarios simulés », scénario 1, page 13"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+    independante: true

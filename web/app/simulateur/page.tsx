@@ -110,6 +110,12 @@ export default function PageSimulateur() {
         })}
       </p>
       <p>
+        {texte("simulateur.methode_ir_quotients", {
+          qf: deuxDecimales(10 * donnees.leviers.ir_quotient_familial_effet.rendement_unitaire),
+          qc: deuxDecimales(10 * donnees.leviers.ir_quotient_conjugal_effet.rendement_unitaire),
+        })}
+      </p>
+      <p>
         {texte("simulateur.methode_prime_activite", {
           pente: deuxDecimales(donnees.leviers.prime_activite_pente.taux_reference),
           cout: deuxDecimales(-donnees.leviers.prime_activite_pente.rendement_unitaire),

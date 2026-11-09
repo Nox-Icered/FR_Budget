@@ -3,7 +3,7 @@
 // et fixe la part de l'effort portée par les recettes ; chaque mesure cochée apporte une part
 // égale de l'effort de son côté. Aucune mesure n'est choisie, classée ni qualifiée par le site.
 import type { ReponsesUnitaires } from "./donnees";
-import { LEVIERS_DANS_ONDAM, LEVIER_ONDAM, LEVIERS_RETRAITES } from "./etat.ts";
+import { LEVIERS_DANS_ONDAM, LEVIER_ONDAM, LEVIERS_QUOTIENT_FAMILIAL, LEVIERS_RETRAITES } from "./etat.ts";
 import { niveau, type Objectif } from "./objectif.ts";
 import { calculer, type Fourchette } from "./scenario.ts";
 
@@ -27,6 +27,8 @@ export const COTES: Record<string, Cote> = {
   allegements_generaux: "recettes",
   ir_seuils_bareme: "recettes",
   ir_plafond_quotient_familial: "recettes",
+  ir_quotient_familial_effet: "recettes",
+  ir_quotient_conjugal_effet: "recettes",
   chomage_contribution_patronale: "recettes",
   dotations_dgf: "depenses",
   dotations_compensations: "depenses",
@@ -45,11 +47,14 @@ export const COTES: Record<string, Cote> = {
 };
 
 // Combinaisons refusées par le simulateur (double compte, lib/etat.ts) : âge effectif et âge
-// légal de départ ; progression de l'ONDAM avec une mesure qu'il contient.
+// légal de départ ; progression de l'ONDAM avec une mesure qu'il contient ; plafond et effet du
+// quotient familial.
 export function incompatibles(leviers: string[]): boolean {
   const avec = (l: string) => leviers.includes(l);
   return (
-    LEVIERS_RETRAITES.every(avec) || (avec(LEVIER_ONDAM) && LEVIERS_DANS_ONDAM.some(avec))
+    LEVIERS_RETRAITES.every(avec) ||
+    (avec(LEVIER_ONDAM) && LEVIERS_DANS_ONDAM.some(avec)) ||
+    LEVIERS_QUOTIENT_FAMILIAL.every(avec)
   );
 }
 

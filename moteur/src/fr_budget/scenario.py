@@ -109,6 +109,7 @@ from fr_budget.agrege import (
     interactions,
     prime_activite,
     quotient_familial,
+    quotients_ir,
     remunerations,
 )
 from fr_budget.agrege.tva import HYPOTHESE_REPARTITION, fourchette_point_tva, taux_tva
@@ -175,6 +176,9 @@ LEVIER_IR_SEUILS = "ir_seuils_bareme"
 # 2026 (-1,0 %), indexation de 4,8 % de la LFI 2024.
 BORNE_IR_SEUILS = 3.0
 LEVIER_IR_QF = "ir_plafond_quotient_familial"
+LEVIER_IR_QF_EFFET = quotients_ir.LEVIER_QF
+LEVIER_IR_QC_EFFET = quotients_ir.LEVIER_QC
+LEVIERS_IR_QUOTIENTS = quotients_ir.LEVIERS
 LEVIER_IR_BAREME = "ir_bareme"
 """Levier générique du barème saisi sur le site : une unité = 1 Md€ de 2025 de recettes d'impôt
 sur le revenu en plus (effet calculé par ``fr_budget.agrege.bareme_ir.effet_site``)."""
@@ -396,6 +400,10 @@ def rendement_unitaire(levier: str) -> Fourchette:
         # Unité : hausse de 1 % des plafonds, qui coûte le rendement d'une baisse de 1 %.
         r = quotient_familial.rendement_un_pourcent()
         return encadrer(-r.central, [-r.bas, -r.haut])
+    if levier == LEVIER_IR_QF_EFFET:
+        return quotients_ir.rendement_point_qf()
+    if levier == LEVIER_IR_QC_EFFET:
+        return quotients_ir.rendement_point_qc()
     if levier == LEVIER_ALLEGEMENTS:
         cout = cotisations.cout_un_pourcent_allegements()
         return encadrer(-cout.central, [-cout.bas, -cout.haut])
@@ -537,6 +545,9 @@ def taux_reference(levier: str) -> float:
     if levier == LEVIER_IR_QF:
         # Plafond général par demi-part pour les revenus de 2025, en € (OpenFisca).
         return quotient_familial.plafond_general(quotient_familial.ANNEE_REFERENCE)
+    if levier in LEVIERS_IR_QUOTIENTS:
+        # Effet total du dispositif en 2025, valeur centrale, Md€ (Insee 2017 porté par le PIB).
+        return quotients_ir.BORNE * rendement_unitaire(levier).central
     if levier == LEVIER_COTISATIONS_TAUX:
         # Valeur d'un point en 2026 publiée par la CCSS, Md€ courants.
         return cotisations.valeur_point_prive(cotisations.ANNEE_POINT)
@@ -625,6 +636,8 @@ def bornes_levier(levier: str) -> tuple[float, float]:
         return -BORNE_IR_SEUILS, BORNE_IR_SEUILS
     if levier == LEVIER_IR_QF:
         return -quotient_familial.BORNE, quotient_familial.BORNE
+    if levier in LEVIERS_IR_QUOTIENTS:
+        return 0.0, quotients_ir.BORNE
     if levier == LEVIER_IR_BAREME:
         return -BORNE_IR_BAREME, BORNE_IR_BAREME
     if levier == LEVIER_ALLEGEMENTS:
@@ -811,6 +824,9 @@ def verifier_double_compte(mesures: Sequence[Mesure]) -> None:
     if LEVIER_ONDAM in leviers_regles and leviers_regles & {LEVIER_FRANCHISES, LEVIER_IJ_PLAFOND}:
         msg = "double compte : les franchises et les indemnités journalières font partie de l'ONDAM"
         raise ValueError(msg)
+    if {LEVIER_IR_QF, LEVIER_IR_QF_EFFET} <= {m.levier for m in reglees}:
+        msg = "double compte : le plafond du quotient familial et son effet sont réglés ensemble"
+        raise ValueError(msg)
     if {LEVIER_IR_BAREME, LEVIER_IR_SEUILS} <= {m.levier for m in reglees}:
         msg = "double compte : le barème saisi fixe déjà les seuils de l'impôt sur le revenu"
         raise ValueError(msg)
@@ -874,6 +890,7 @@ def categorie_croissance(levier: str) -> str:
         LEVIER_ALLEGEMENTS: module_croissance.COTISATIONS_EMPLOYEURS,
         LEVIER_IR_SEUILS: module_croissance.IMPOT_REVENU,
         LEVIER_IR_QF: module_croissance.IMPOT_REVENU,
+        **dict.fromkeys(LEVIERS_IR_QUOTIENTS, module_croissance.IMPOT_REVENU),
         LEVIER_IR_BAREME: module_croissance.IMPOT_REVENU,
         levier_depenses_fiscales_impot(
             IMPOT_REVENU_DEPENSES_FISCALES
@@ -1098,6 +1115,7 @@ LEVIERS_REGISTRE = {
     LEVIER_ALLEGEMENTS: "cotisations_patronales",
     LEVIER_IR_SEUILS: "impot_revenu",
     LEVIER_IR_QF: "impot_revenu_structure",
+    **dict.fromkeys(LEVIERS_IR_QUOTIENTS, "impot_revenu_structure"),
     LEVIER_IR_BAREME: "impot_revenu_structure",
     LEVIER_PA_PENTE: "minima_prime_activite",
     LEVIER_RETRAITES_AGE: "retraites",
@@ -1239,6 +1257,15 @@ PROVENANCE_IR_QF = (
     ),
     (),
 )
+PROVENANCE_IR_QUOTIENTS = (
+    (
+        "insee_economie_statistique_526_527",
+        "insee_analyses_53_2020",
+        "insee_comptes_nationaux_2025",
+        "plf2027_resf",
+    ),
+    (),
+)
 PROVENANCE_IR_BAREME = (
     (
         "dgfip_ir_tableaux_statistiques",
@@ -1351,6 +1378,8 @@ PROVENANCE_LEVIERS = {
     LEVIER_ALLEGEMENTS: PROVENANCE_COTISATIONS,
     LEVIER_IR_SEUILS: PROVENANCE_IR,
     LEVIER_IR_QF: PROVENANCE_IR_QF,
+    LEVIER_IR_QF_EFFET: PROVENANCE_IR_QUOTIENTS,
+    LEVIER_IR_QC_EFFET: PROVENANCE_IR_QUOTIENTS,
     LEVIER_IR_BAREME: PROVENANCE_IR_BAREME,
     LEVIER_PA_PENTE: PROVENANCE_PA,
     LEVIER_RETRAITES_AGE: PROVENANCE_RETRAITES,

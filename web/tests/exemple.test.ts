@@ -129,3 +129,10 @@ test("progression de l'ONDAM et mesures qu'il contient : refusées ensemble, com
   assert.ok(!incompatibles(["franchises_participations", "ij_plafond_smic"]));
   assert.ok(!exclue("tva_taux_normal", ["ondam_progression"]));
 });
+
+test("plafond et effet du quotient familial : refusés ensemble, comme dans le simulateur", async () => {
+  const { exclue, incompatibles } = await import("../lib/exemple.ts");
+  assert.ok(incompatibles(["ir_plafond_quotient_familial", "ir_quotient_familial_effet"]));
+  assert.ok(exclue("ir_quotient_familial_effet", ["ir_plafond_quotient_familial"]));
+  assert.ok(!incompatibles(["ir_quotient_familial_effet", "ir_quotient_conjugal_effet"]));
+});

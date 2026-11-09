@@ -109,12 +109,14 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
         "ij_plafond_1_8_1_4_plfss2025",
         "ij_plafond_lfss2025_ccomptes",
     }
+    attendues |= {"ir_insee_familialisation_2018", "ir_insee_conjugalisation_2018"}
     attendues |= {
         "tva_point_brut_ipp_2025_quatre_taux",
         "tva_point_net_ipp_2025_quatre_taux",
         "ir_gel_ipp_inflation_1_0_2026",
         "ir_gel_ipp_inflation_1_3_2026",
         "ir_gel_ofce_2026",
+        "ir_ofce_individualisation_optimisation_2016",
         "indexation_pensions_ipp_inflation_1_0_2026",
         "indexation_pensions_ipp_inflation_1_3_2026",
         "remunerations_point_1_fipeco_2026_total",

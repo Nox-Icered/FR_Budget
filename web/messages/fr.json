@@ -25,7 +25,8 @@
     "entreprises": "Entreprises",
     "groupe_simuler": "Simuler",
     "groupe_effets": "Effets sur les ménages et les entreprises",
-    "groupe_transparence": "Transparence"
+    "groupe_transparence": "Transparence",
+    "api": "API"
   },
   "accueil": {
     "titre": "Les comptes des administrations publiques",
@@ -1003,5 +1004,34 @@
         "non_atteint": "Après arrondi au pas des curseurs, l'exemple n'atteint pas la valeur choisie."
       }
     }
+  },
+  "api": {
+    "titre": "API publique",
+    "intro": "Les programmes (outils de journalistes, de chercheurs, autres sites) peuvent appeler le moteur du simulateur directement, sans passer par les curseurs : ils envoient des mesures et reçoivent les mêmes résultats que le site, en fourchette, avec leurs sources et la version du modèle.",
+    "pas_en_ligne": "L'API est prête mais pas encore en ligne : son hébergement reste à choisir. Le code et la documentation sont publics dans le dépôt du projet (docs/api.md).",
+    "en_ligne": "Documentation interactive : {adresse}",
+    "routes_titre": "Ce que l'API permet",
+    "routes": {
+      "leviers": "Liste des mesures réglables : libellé, unité, limites, statut, effet d'une unité, sources.",
+      "scenario": "Dette et solde primaire de 2025 à 2046 avec les mesures choisies.",
+      "deciles": "Effet sur le revenu des ménages, par dixième de niveau de vie.",
+      "objectif": "Réglage d'une mesure, prise seule, qui atteint une dette ou un solde choisi.",
+      "interactions": "Interactions entre mesures, chiffrées ou non.",
+      "baseline": "Trajectoire sans mesure.",
+      "validation": "Écarts du modèle aux chiffrages officiels, y compris hors tolérance.",
+      "registres": "Registres des sources, des données, des hypothèses et des chiffrages."
+    },
+    "exemple_titre": "Exemple",
+    "exemple_intro": "Hausse d'un point du taux normal de TVA à partir de 2027 :",
+    "regles_titre": "Règles",
+    "regles": {
+      "sans_etat": "Rien de ce qui est envoyé n'est stocké ni journalisé, et aucun message d'erreur ne le reprend.",
+      "fourchettes": "Chaque résultat est une fourchette (basse, centrale, haute) et porte la version du modèle et des données.",
+      "statut": "Les mesures marquées « bêta » ne sont pas validées ; les écarts sont publiés sur la page Validation.",
+      "neutralite": "L'API calcule ce qu'on lui demande : elle ne recommande ni ne classe aucune mesure.",
+      "limites": "Au plus 40 mesures et 32 Ko par requête ; le contrat de la version 1 ne change pas sans nouvelle version.",
+      "licences": "Code sous licence AGPL-3.0, données sous Licence Ouverte 2.0 (chaque source garde la sienne)."
+    },
+    "version": "Version du moteur : {moteur}."
   }
 }

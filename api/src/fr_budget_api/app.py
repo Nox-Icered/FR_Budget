@@ -7,7 +7,8 @@ désactivé par ``creer_application`` elle-même ; lancer avec ``python -m fr_bu
 
 Points d'entrée : ``/sante``, ``/version``, ``/journal``, ``/menages-types``,
 ``/registres/{nom}``, ``/comptes-apu``, ``/depenses-par-fonction``, ``/validation``,
-``/baseline``, ``/depenses-fiscales``, ``/credits-missions``, ``POST /scenario``.
+``/baseline``, ``/depenses-fiscales``, ``/credits-missions``, ``POST /scenario`` ; API publique
+versionnée sous ``/v1`` (``fr_budget_api.publique``).
 """
 
 from __future__ import annotations
@@ -48,7 +49,9 @@ from fr_budget.registres.acces import chiffrage as module_registre_chiffrage
 from fr_budget.registres.verification import RACINE_DEPOT, Rapport, charger
 from fr_budget.validation import comparaisons
 from pydantic import BaseModel, Field
+from starlette.types import ASGIApp, Receive, Scope, Send
 
+PREFIXE_API_PUBLIQUE = "/v1"
 SOURCE_COMPTES_APU = "insee_comptes_nationaux_2025"
 SOURCE_COFOG = "eurostat_gov_10a_exp"
 UNITE = "Md€"
@@ -1141,6 +1144,23 @@ def catalogue_credits_missions() -> dict[str, Any]:
     }
 
 
+class CorsDuSite:
+    """Règle CORS du site, appliquée à toutes les routes sauf l'API publique (``/v1``)."""
+
+    def __init__(self, app: ASGIApp, /, **options: Any) -> None:
+        self.app = app
+        self.cors = CORSMiddleware(app, **options)
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        chemin = scope.get("path", "")
+        if scope["type"] == "http" and (
+            chemin == PREFIXE_API_PUBLIQUE or chemin.startswith(PREFIXE_API_PUBLIQUE + "/")
+        ):
+            await self.app(scope, receive, send)
+            return
+        await self.cors(scope, receive, send)
+
+
 def creer_application() -> FastAPI:
     # Règle 5 : aucune requête (et donc aucun paramètre saisi) dans les journaux.
     logging.getLogger("uvicorn.access").disabled = True
@@ -1151,10 +1171,12 @@ def creer_application() -> FastAPI:
     )
     # Le site statique appelle POST /mon-menage depuis son propre domaine : origines permises
     # lues dans FR_BUDGET_ORIGINES (séparées par des virgules), aucune par défaut.
+    # L'API publique (/v1) a sa propre règle, ouverte à tout domaine : ces requêtes ne passent
+    # pas par la règle du site.
     origines = [o for o in os.environ.get("FR_BUDGET_ORIGINES", "").split(",") if o]
     if origines:
         app.add_middleware(
-            CORSMiddleware, allow_origins=origines, allow_methods=["POST"], allow_headers=["*"]
+            CorsDuSite, allow_origins=origines, allow_methods=["POST"], allow_headers=["*"]
         )
 
     @app.get("/sante")
@@ -1268,6 +1290,11 @@ def creer_application() -> FastAPI:
     def route_credits_missions() -> dict[str, Any]:
         """Missions du levier : crédits demandés au PLF 2026 et effet d'une hausse d'1 %."""
         return catalogue_credits_missions()
+
+    # API publique versionnée (fr_budget_api.publique), documentée sur /v1/docs.
+    from fr_budget_api.publique import creer_api_publique
+
+    app.mount(PREFIXE_API_PUBLIQUE, creer_api_publique())
 
     @app.post("/scenario")
     def route_scenario(entree: ScenarioEntree) -> dict[str, Any]:

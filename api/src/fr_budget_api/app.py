@@ -7,7 +7,8 @@ désactivé par ``creer_application`` elle-même ; lancer avec ``python -m fr_bu
 
 Points d'entrée : ``/sante``, ``/version``, ``/journal``, ``/menages-types``,
 ``/registres/{nom}``, ``/comptes-apu``, ``/depenses-par-fonction``, ``/validation``,
-``/baseline``, ``/depenses-fiscales``, ``/credits-missions``, ``POST /scenario``.
+``/baseline``, ``/depenses-fiscales``, ``/credits-missions``, ``POST /scenario`` ; API publique
+versionnée sous ``/v1`` (``fr_budget_api.publique``).
 """
 
 from __future__ import annotations
@@ -1268,6 +1269,11 @@ def creer_application() -> FastAPI:
     def route_credits_missions() -> dict[str, Any]:
         """Missions du levier : crédits demandés au PLF 2026 et effet d'une hausse d'1 %."""
         return catalogue_credits_missions()
+
+    # API publique versionnée (fr_budget_api.publique), documentée sur /v1/docs.
+    from fr_budget_api.publique import creer_api_publique
+
+    app.mount("/v1", creer_api_publique())
 
     @app.post("/scenario")
     def route_scenario(entree: ScenarioEntree) -> dict[str, Any]:

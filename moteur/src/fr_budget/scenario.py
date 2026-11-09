@@ -211,6 +211,10 @@ LEVIER_CHOMAGE_DUREE = "chomage_duree_indemnisation"
 # Leviers dont l'effet varie d'une année à l'autre (profil de l'Unédic), linéaires dans la valeur.
 LEVIERS_CHOMAGE_PROFIL = (LEVIER_CHOMAGE_REVALORISATION, LEVIER_CHOMAGE_DUREE)
 LEVIERS_CHOMAGE = (LEVIER_CHOMAGE_CONTRIBUTION, *LEVIERS_CHOMAGE_PROFIL)
+LEVIER_CHOMAGE_AFFILIATION = "chomage_affiliation_mois"
+LEVIER_CHOMAGE_DEGRESSIVITE = "chomage_degressivite_points"
+LEVIERS_CHOMAGE_REGLES = (LEVIER_CHOMAGE_AFFILIATION, LEVIER_CHOMAGE_DEGRESSIVITE)
+"""Deuxième étape : leviers dans un seul sens (assouplissement), le seul chiffré par l'Unédic."""
 LEVIER_ONDAM = assurance_maladie.LEVIER_ONDAM
 LEVIER_FRANCHISES = assurance_maladie.LEVIER_FRANCHISES
 LEVIER_IJ_PLAFOND = assurance_maladie.LEVIER_IJ
@@ -360,6 +364,10 @@ def rendement_unitaire(levier: str) -> Fourchette:
         return encadrer(f.central * k, [f.bas * k, f.haut * k])
     if levier == LEVIER_CHOMAGE_CONTRIBUTION:
         return assurance_chomage.rendement_point_contribution()
+    if levier == LEVIER_CHOMAGE_AFFILIATION:
+        return assurance_chomage.effet_affiliation_mois()
+    if levier == LEVIER_CHOMAGE_DEGRESSIVITE:
+        return assurance_chomage.effet_degressivite_point()
     if levier == LEVIER_ONDAM:
         return assurance_maladie.rendement_point_ondam()
     if levier == LEVIER_FRANCHISES:
@@ -512,6 +520,12 @@ def taux_reference(levier: str) -> float:
     if levier == LEVIER_CHOMAGE_DUREE:
         # Coefficient appliqué à la durée d'indemnisation en 2026, en %.
         return chiffrage("chomage_coefficient_duree_2026") * POURCENT
+    if levier == LEVIER_CHOMAGE_AFFILIATION:
+        # Durée de travail exigée pour ouvrir un droit, en mois.
+        return chiffrage("chomage_affiliation_mois_apres_2019")
+    if levier == LEVIER_CHOMAGE_DEGRESSIVITE:
+        # Baisse maximale de l'allocation au titre de la dégressivité, en %.
+        return chiffrage("chomage_degressivite_taux")
     if levier == LEVIER_ONDAM:
         # ONDAM 2025 voté en LFSS pour 2025, Md€.
         return assurance_maladie.ondam_reference()
@@ -598,6 +612,12 @@ def bornes_levier(levier: str) -> tuple[float, float]:
         return BORNES_RETRAITES_AGE
     if levier == LEVIER_CHOMAGE_CONTRIBUTION:
         return -BORNE_CHOMAGE_CONTRIBUTION, BORNE_CHOMAGE_CONTRIBUTION
+    if levier == LEVIER_CHOMAGE_AFFILIATION:
+        # De 6 mois exigés à 4 mois au plus : seul domaine chiffré.
+        return 0.0, assurance_chomage.ecart_affiliation_mois()
+    if levier == LEVIER_CHOMAGE_DEGRESSIVITE:
+        # De la dégressivité actuelle (30 %) à sa suppression.
+        return 0.0, chiffrage("chomage_degressivite_taux")
     if levier == LEVIER_ONDAM:
         borne = assurance_maladie.borne_ondam()
         return -borne, borne
@@ -720,6 +740,10 @@ def facteur_premiere_annee(levier: str) -> float:
     """
     if levier == LEVIER_INDEXATION:
         return indexation.part_effet_premiere_annee()
+    if levier == LEVIER_CHOMAGE_AFFILIATION:
+        return assurance_chomage.part_premiere_annee_affiliation()
+    if levier == LEVIER_CHOMAGE_DEGRESSIVITE:
+        return assurance_chomage.part_premiere_annee_degressivite()
     if levier == LEVIER_IJ_PLAFOND:
         return assurance_maladie.part_premiere_annee_ij()
     if interactions.est_interaction(levier):
@@ -894,6 +918,7 @@ def categorie_croissance(levier: str) -> str:
         LEVIER_CHOMAGE_CONTRIBUTION: module_croissance.COTISATIONS_EMPLOYEURS,
         LEVIER_CHOMAGE_REVALORISATION: module_croissance.PRESTATIONS,
         LEVIER_CHOMAGE_DUREE: module_croissance.PRESTATIONS,
+        **dict.fromkeys(LEVIERS_CHOMAGE_REGLES, module_croissance.PRESTATIONS),
         # Assurance maladie : prestations (soins remboursés, indemnités journalières).
         **dict.fromkeys(LEVIERS_ASSURANCE_MALADIE, module_croissance.PRESTATIONS),
     }
@@ -1103,6 +1128,7 @@ LEVIERS_REGISTRE = {
     LEVIER_RETRAITES_AGE: "retraites",
     LEVIER_RETRAITES_AGE_LEGAL: "retraites",
     **dict.fromkeys(LEVIERS_CHOMAGE, "assurance_chomage"),
+    **dict.fromkeys(LEVIERS_CHOMAGE_REGLES, "assurance_chomage"),
     **dict.fromkeys(LEVIERS_ASSURANCE_MALADIE, "assurance_maladie"),
 }
 
@@ -1358,6 +1384,25 @@ PROVENANCE_LEVIERS = {
     LEVIER_CHOMAGE_CONTRIBUTION: PROVENANCE_CHOMAGE,
     LEVIER_CHOMAGE_REVALORISATION: PROVENANCE_CHOMAGE_REVALORISATION,
     LEVIER_CHOMAGE_DUREE: PROVENANCE_CHOMAGE_DUREE,
+    LEVIER_CHOMAGE_AFFILIATION: (
+        (
+            "unedic_etude_impact_juillet_2021",
+            "unedic_etude_impact_reforme_2019",
+            "unedic_evaluation_reforme_2019_2021",
+            "openfisca_france_176_1_2",
+            "insee_comptes_nationaux_2025",
+        ),
+        (assurance_chomage.HYPOTHESE_RETOUR,),
+    ),
+    LEVIER_CHOMAGE_DEGRESSIVITE: (
+        (
+            "unedic_etude_impact_juillet_2021",
+            "unedic_evaluation_reforme_2019_2021",
+            "openfisca_france_176_1_2",
+            "insee_comptes_nationaux_2025",
+        ),
+        (assurance_chomage.HYPOTHESE_RETOUR,),
+    ),
     LEVIER_ONDAM: (("plfss2026_annexe5",), (assurance_maladie.HYPOTHESE_REALISATION,)),
     LEVIER_FRANCHISES: (("ccomptes_ralfss_mai2026", "ccss_mai2024_franchises"), ()),
     LEVIER_IJ_PLAFOND: (

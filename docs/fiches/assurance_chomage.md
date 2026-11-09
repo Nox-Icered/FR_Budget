@@ -95,3 +95,46 @@ Les trois leviers restent « bêta, non validé ».
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
 | 2026-10-30 | Première étape : trois leviers agrégés calés sur l'Unédic (plan validé par le mainteneur) | Ajout : 4 tests de validation, `tests/unitaires/test_assurance_chomage.py` ; `test_validation_resume` étendu aux 4 nouvelles références |
+
+## 9. Deuxième étape : condition d'affiliation et dégressivité
+
+Plan validé par le responsable du projet le 9 novembre 2026. Statut : **bêta, non validé**.
+
+**Sources** (fichiers dans `data/raw/assurance_chomage/`) :
+- étude d'impact de la réforme de 2019 ;
+- étude d'impact des règles au 1er juillet 2021 ;
+- synthèse de l'évaluation de la réforme 2019-2021 (mars 2025).
+
+**Leviers** (`moteur/src/fr_budget/agrege/assurance_chomage.py`, deuxième partie) :
+
+| Levier | Unité, curseur | Calage (valeur centrale) | Bornes |
+|---|---|---|---|
+| `chomage_affiliation_mois` | baisse de la durée de travail exigée, de 0 à 2 mois (de 6 vers 4 mois) | étude de 2021 : 800 M€ pour 2 mois, régime de croisière, euros de 2023 | étude de 2019 : 1 000 M€, euros de 2022 |
+| `chomage_degressivite_points` | réduction de la baisse de 30 %, de 0 à 30 points (30 = suppression) | étude de 2021 : 460 M€ pour 30 points, régime de croisière | évaluation de 2025 : 0,5 Md€ (estimation de 2021 arrondie) |
+
+- Les montants passent en euros de 2025 par le PIB nominal (Insee).
+- L'effet est net de la CSG et de la CRDS qui reviennent aux administrations publiques (hypothèse `chomage_retour_prelevements`, comme les autres leviers d'allocations).
+- Première année :
+  - affiliation : 90 % de l'effet de croisière (étude de 2019 : 900 M€ en 2020 pour 1 000 M€) ;
+  - dégressivité : 55 % (étude de 2021 : 250 à 260 M€ en 2022 pour 460 M€), car elle ne joue qu'à partir du 7e mois.
+
+**Hypothèses à relire** :
+- L'effet est proportionnel au réglage (mois ou points). L'Unédic n'a chiffré que le passage de 4 à 6 mois et la dégressivité de 30 %.
+- Le seuil et le mois de déclenchement de la dégressivité ne sont pas réglables.
+- Aucun durcissement au-delà des règles actuelles : aucun chiffrage.
+
+**Limite** : depuis la convention de 2024, les saisonniers et les primo-entrants ouvrent un droit après 108 jours de travail, environ 5 mois. Le calage sur 4 à 6 mois pour tous surestime un peu l'effet d'une baisse aujourd'hui.
+
+**Validation** (`moteur/tests/validation/test_levier_chomage_regles.py`, ±10 %) :
+
+| Référence | Modèle | Référence | Écart |
+|---|---|---|---|
+| Affiliation, étude de 2019 (2022) | 749 M€ | 1 000 M€ | −25 % (hors tolérance) |
+| Affiliation, étude de 2021 (calage) | 800 M€ | 800 M€ | 0 % |
+| Dégressivité, étude de 2021 (calage) | 460 M€ | 460 M€ | 0 % |
+| Dégressivité, évaluation de 2025 | 0,46 Md€ | 0,5 Md€ | −8 % |
+
+Les chiffres de l'évaluation de 2025 sont les estimations de 2021 arrondies : ce n'est pas une mesure indépendante. Aucune confrontation indépendante n'est disponible pour l'instant ; le rapport du comité d'évaluation de la DARES reste à exploiter.
+
+**Ménages types** : sans effet calculé, comme les autres leviers chômage. **Dixièmes de niveau de vie** : non répartis, car ni l'une ni l'autre mesure ne suit la répartition des allocations.
+

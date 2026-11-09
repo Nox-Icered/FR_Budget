@@ -1122,3 +1122,27 @@ datasets:
     empreinte_sha256: fc742dd7a219e209b08db6b7a04df6ed6286c57947c16b55ad0baccea595e7d9
     methode_transformation: aucune ; montants saisis dans registres/references/chiffrages.yaml (localisation indiquée pour chacun)
     telecharge_le: 2026-11-06
+
+  - id: unedic_etude_impact_reforme_2019_pdf
+    source: unedic_etude_impact_reforme_2019
+    description: "Note d'impact de la réforme 2019 (PDF, 58 pages)"
+    fichier: data/raw/assurance_chomage/unedic_etude_impact_reforme_2019.pdf
+    empreinte_sha256: 1f96e5cddc06e865f53b67a2eb9efeae6b6b0266ab5ffb5453d114b9050e89c9
+    methode_transformation: aucune ; montants saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-11-09
+
+  - id: unedic_etude_impact_juillet_2021_pdf
+    source: unedic_etude_impact_juillet_2021
+    description: "Étude d'impact des règles au 1er juillet 2021 (PDF, 39 pages)"
+    fichier: data/raw/assurance_chomage/unedic_etude_impact_juillet_2021.pdf
+    empreinte_sha256: 28cb30ee32d9c7ae98991ea310c15ea0e21f164c4bcb493760b572498cb38f8b
+    methode_transformation: aucune ; montants saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-11-09
+
+  - id: unedic_evaluation_reforme_2019_2021_pdf
+    source: unedic_evaluation_reforme_2019_2021
+    description: "Synthèse de l'évaluation de la réforme 2019-2021 (PDF)"
+    fichier: data/raw/assurance_chomage/unedic_evaluation_reforme_2019_2021_synthese_2025.pdf
+    empreinte_sha256: 45bb22c96ce59fddb2fe9631e19dabd332220a0db652c96da07228606eee6c03
+    methode_transformation: aucune ; montants saisis dans registres/references/chiffrages.yaml
+    telecharge_le: 2026-11-09

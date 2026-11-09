@@ -31,6 +31,7 @@ const GROUPES: { id: string; liens: [string, string][] }[] = [
       ["/validation/", "validation"],
       ["/journal/", "journal"],
       ["/relectures/", "relectures"],
+      ["/api/", "api"],
     ],
   },
 ];

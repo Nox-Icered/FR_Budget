@@ -138,6 +138,23 @@ def test_cors_origine_configuree(monkeypatch: pytest.MonkeyPatch) -> None:
     assert reponse.headers["access-control-allow-origin"] == "https://exemple.fr"
 
 
+def test_cors_du_site_ne_bloque_pas_l_api_publique(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Avec l'origine du site configurée, l'API publique reste ouverte à tout domaine."""
+    monkeypatch.setenv("FR_BUDGET_ORIGINES", "https://exemple.fr")
+    client = TestClient(creer_application())
+    reponse = client.options(
+        "/v1/scenario",
+        headers={"Origin": "https://autre.org", "Access-Control-Request-Method": "POST"},
+    )
+    assert reponse.status_code == 200
+    assert reponse.headers["access-control-allow-origin"] == "*"
+    autre = client.options(
+        "/mon-menage",
+        headers={"Origin": "https://autre.org", "Access-Control-Request-Method": "POST"},
+    )
+    assert "access-control-allow-origin" not in autre.headers
+
+
 def test_effet_levier_route(client: TestClient) -> None:
     reponse = client.get("/menages-types/effet", params={"levier": "csg_activite", "valeur": 1})
     assert reponse.status_code == 200

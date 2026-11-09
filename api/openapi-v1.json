@@ -1,0 +1,573 @@
+{
+ "components": {
+  "schemas": {
+   "DecilesV1": {
+    "properties": {
+     "mesures": {
+      "items": {
+       "$ref": "#/components/schemas/MesureV1"
+      },
+      "maxItems": 40,
+      "minItems": 1,
+      "title": "Mesures",
+      "type": "array"
+     }
+    },
+    "required": [
+     "mesures"
+    ],
+    "title": "DecilesV1",
+    "type": "object"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "title": "Detail",
+      "type": "array"
+     }
+    },
+    "title": "HTTPValidationError",
+    "type": "object"
+   },
+   "MesureV1": {
+    "properties": {
+     "annee": {
+      "description": "Année d'entrée en vigueur.",
+      "maximum": 2046.0,
+      "minimum": 2027.0,
+      "title": "Annee",
+      "type": "integer"
+     },
+     "levier": {
+      "description": "Identifiant du levier (/v1/leviers).",
+      "maxLength": 80,
+      "title": "Levier",
+      "type": "string"
+     },
+     "valeur": {
+      "description": "Réglage, dans l'unité et les bornes du levier.",
+      "title": "Valeur",
+      "type": "number"
+     }
+    },
+    "required": [
+     "levier",
+     "valeur",
+     "annee"
+    ],
+    "title": "MesureV1",
+    "type": "object"
+   },
+   "ObjectifV1": {
+    "properties": {
+     "annee": {
+      "maximum": 2046.0,
+      "minimum": 2027.0,
+      "title": "Annee",
+      "type": "integer"
+     },
+     "cible": {
+      "description": "Valeur à atteindre, en % du PIB.",
+      "maximum": 1000.0,
+      "minimum": -100.0,
+      "title": "Cible",
+      "type": "number"
+     },
+     "entree": {
+      "maximum": 2046.0,
+      "minimum": 2027.0,
+      "title": "Entree",
+      "type": "integer"
+     },
+     "indicateur": {
+      "enum": [
+       "dette",
+       "solde_primaire"
+      ],
+      "title": "Indicateur",
+      "type": "string"
+     },
+     "levier": {
+      "maxLength": 80,
+      "title": "Levier",
+      "type": "string"
+     }
+    },
+    "required": [
+     "levier",
+     "entree",
+     "indicateur",
+     "annee",
+     "cible"
+    ],
+    "title": "ObjectifV1",
+    "type": "object"
+   },
+   "ScenarioV1": {
+    "properties": {
+     "croissance": {
+      "default": false,
+      "description": "Effet sur l'activité (multiplicateur), désactivé par défaut.",
+      "title": "Croissance",
+      "type": "boolean"
+     },
+     "mesures": {
+      "items": {
+       "$ref": "#/components/schemas/MesureV1"
+      },
+      "maxItems": 40,
+      "title": "Mesures",
+      "type": "array"
+     }
+    },
+    "title": "ScenarioV1",
+    "type": "object"
+   },
+   "ValidationError": {
+    "properties": {
+     "ctx": {
+      "title": "Context",
+      "type": "object"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "title": "Location",
+      "type": "array"
+     },
+     "msg": {
+      "title": "Message",
+      "type": "string"
+     },
+     "type": {
+      "title": "Error Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError",
+    "type": "object"
+   }
+  }
+ },
+ "info": {
+  "description": "API publique du simulateur du budget des administrations publiques françaises. Sans état : aucune donnée envoyée n'est stockée ni journalisée. Chaque résultat est une fourchette (basse, centrale, haute) et porte la version du modèle et des données. Les leviers marqués « beta » ne sont pas validés ; les écarts aux références officielles sont dans /v1/validation. L'API calcule ce que l'appelant demande : elle ne recommande ni ne classe aucune mesure. Code sous licence AGPL-3.0-or-later, données sous Licence Ouverte 2.0.",
+  "license": {
+   "identifier": "AGPL-3.0-or-later",
+   "name": "AGPL-3.0-or-later"
+  },
+  "title": "Simulateur du budget des administrations publiques : API publique",
+  "version": "1"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/": {
+   "get": {
+    "description": "Présentation, version, licences et liste des routes.",
+    "operationId": "presentation__get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Presentation  Get",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Presentation"
+   }
+  },
+  "/baseline": {
+   "get": {
+    "description": "Trajectoire sans mesure, 2025-2046, en fourchette.",
+    "operationId": "route_baseline_baseline_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Route Baseline Baseline Get",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Route Baseline"
+   }
+  },
+  "/credits-missions": {
+   "get": {
+    "description": "Missions de l'État réglables une à une (levier ``credits_mission_<identifiant>``).",
+    "operationId": "route_credits_missions_credits_missions_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Route Credits Missions Credits Missions Get",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Route Credits Missions"
+   }
+  },
+  "/deciles": {
+   "post": {
+    "description": "Variation du revenu disponible par dixième de niveau de vie (Md€, euros par unité\nde consommation, % du revenu disponible), année pleine, euros de 2025.",
+    "operationId": "route_deciles_deciles_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/DecilesV1"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Route Deciles Deciles Post",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Route Deciles"
+   }
+  },
+  "/depenses-fiscales": {
+   "get": {
+    "description": "Dépenses fiscales réglables une à une (levier ``depense_fiscale_<code>``).",
+    "operationId": "route_depenses_fiscales_depenses_fiscales_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Route Depenses Fiscales Depenses Fiscales Get",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Route Depenses Fiscales"
+   }
+  },
+  "/interactions": {
+   "get": {
+    "description": "Termes croisés chiffrés entre leviers, et interactions connues non chiffrées.",
+    "operationId": "route_interactions_interactions_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Route Interactions Interactions Get",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Route Interactions"
+   }
+  },
+  "/leviers": {
+   "get": {
+    "description": "Leviers réglables : libellé, unité, bornes, statut, rendement d'une unité, sources.",
+    "operationId": "route_leviers_leviers_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "additionalProperties": true,
+          "type": "object"
+         },
+         "title": "Response Route Leviers Leviers Get",
+         "type": "array"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Route Leviers"
+   }
+  },
+  "/leviers/{levier}": {
+   "get": {
+    "operationId": "route_levier_leviers__levier__get",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "levier",
+      "required": true,
+      "schema": {
+       "title": "Levier",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Route Levier Leviers  Levier  Get",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Route Levier"
+   }
+  },
+  "/objectif": {
+   "post": {
+    "description": "Valeur d'un levier, pris seul, qui amène la dette ou le solde primaire à la cible\nl'année choisie, pour chaque borne des hypothèses. Aucun levier n'est proposé.",
+    "operationId": "route_objectif_objectif_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ObjectifV1"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Route Objectif Objectif Post",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Route Objectif"
+   }
+  },
+  "/registres/{nom}": {
+   "get": {
+    "description": "Registres : sources, jeux de données, hypothèses, leviers, chiffrages.",
+    "operationId": "route_registre_registres__nom__get",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "nom",
+      "required": true,
+      "schema": {
+       "title": "Nom",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "additionalProperties": true,
+          "type": "object"
+         },
+         "title": "Response Route Registre Registres  Nom  Get",
+         "type": "array"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Route Registre"
+   }
+  },
+  "/scenario": {
+   "post": {
+    "description": "Dette et solde primaire de 2025 à 2046 avec les mesures, en fourchette, avec les\ntermes croisés et les interactions non chiffrées.",
+    "operationId": "route_scenario_scenario_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ScenarioV1"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Route Scenario Scenario Post",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Route Scenario"
+   }
+  },
+  "/validation": {
+   "get": {
+    "description": "Écarts du modèle aux chiffrages de référence, y compris hors tolérance.",
+    "operationId": "route_validation_validation_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "items": {
+          "additionalProperties": true,
+          "type": "object"
+         },
+         "title": "Response Route Validation Validation Get",
+         "type": "array"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Route Validation"
+   }
+  },
+  "/version": {
+   "get": {
+    "description": "Version de l'API, du moteur et des données.",
+    "operationId": "route_version_version_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": {
+          "type": "string"
+         },
+         "title": "Response Route Version Version Get",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Route Version"
+   }
+  }
+ },
+ "servers": [
+  {
+   "url": "/v1"
+  }
+ ]
+}

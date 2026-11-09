@@ -27,7 +27,16 @@ export const SECTIONS: { id: string; leviers: string[] }[] = [
       "chomage_degressivite_points",
     ],
   },
-  { id: "assurance_maladie", leviers: ["ondam_progression", "franchises_participations", "ij_plafond_smic"] },
+  {
+    id: "assurance_maladie",
+    leviers: [
+      "ondam_progression",
+      "franchises_participations",
+      "ij_plafond_smic",
+      "ticket_moderateur_consultations",
+      "ticket_moderateur_dentaire",
+    ],
+  },
   {
     id: "fonction_publique_collectivites",
     leviers: [

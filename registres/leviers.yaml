@@ -110,7 +110,7 @@ leviers:
 
   - id: assurance_maladie
     libelle: Assurance maladie (première étape, leviers agrégés)
-    parametres_reglables: [Taux de progression de l'ONDAM, Montants et plafonds des franchises et participations forfaitaires, Plafond des revenus pris en compte pour les indemnités journalières]
+    parametres_reglables: [Taux de progression de l'ONDAM, Montants et plafonds des franchises et participations forfaitaires, Plafond des revenus pris en compte pour les indemnités journalières, Ticket modérateur des consultations des médecins et des sages-femmes, Ticket modérateur des soins dentaires]
     moteur: agrege
-    references_visees: [Annexes 5 des PLFSS (ONDAM et dépenses de santé), Commission des comptes de la sécurité sociale, Cour des comptes]
+    references_visees: [Annexes 5 des PLFSS (ONDAM et dépenses de santé), Commission des comptes de la sécurité sociale, Cour des comptes, rapports du Sénat sur le PLFSS]
     statut: beta

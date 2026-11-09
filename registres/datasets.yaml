@@ -1123,6 +1123,22 @@ datasets:
     methode_transformation: aucune ; montants saisis dans registres/references/chiffrages.yaml (localisation indiquée pour chacun)
     telecharge_le: 2026-11-06
 
+  - id: senat_avis_plfss2025_finances_pdf
+    source: senat_avis_plfss2025_finances
+    description: "Avis n° 130 (2024-2025) de la commission des finances du Sénat sur le PLFSS 2025 (PDF)"
+    fichier: data/raw/assurance_maladie/senat_avis130_plfss2025.pdf
+    empreinte_sha256: 141575d62d0f811599c6bac519e4b27abf61f6620d040b41b7dbf5ce8e5eedb4
+    methode_transformation: aucune ; montant saisi dans registres/references/chiffrages.yaml (localisation indiquée)
+    telecharge_le: 2026-11-09
+
+  - id: senat_cr_affaires_sociales_20241113_html
+    source: senat_cr_affaires_sociales_20241113
+    description: "Compte rendu de la commission des affaires sociales du Sénat, semaine du 11 novembre 2024 (page HTML)"
+    fichier: data/raw/assurance_maladie/senat_cr_affaires_sociales_20241113.html
+    empreinte_sha256: d926b7543fe3248d856f43111a4bcadd2eafffd3faf04fc72b7b32aec4b8b601
+    methode_transformation: aucune ; taux saisis dans registres/references/chiffrages.yaml (localisation indiquée)
+    telecharge_le: 2026-11-09
+
   - id: unedic_etude_impact_reforme_2019_pdf
     source: unedic_etude_impact_reforme_2019
     description: "Note d'impact de la réforme 2019 (PDF, 58 pages)"

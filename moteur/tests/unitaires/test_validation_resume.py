@@ -114,6 +114,8 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
         "franchises_pf_doublement_avec_plafonds_2026",
         "ij_plafond_1_8_1_4_plfss2025",
         "ij_plafond_lfss2025_ccomptes",
+        "tm_consultations_economie_senat_2025",
+        "tm_dentaire_economie_oct2023_dec2024",
     }
     attendues |= {
         "tva_point_brut_ipp_2025_quatre_taux",

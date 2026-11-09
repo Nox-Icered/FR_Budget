@@ -195,6 +195,11 @@ Module `fr_budget.menages.leviers` (`legislation_scenario`, `cascade_scenario`, 
 51. **Lecture de l'incidence dans le simulateur.** Quand une mesure touche les cotisations patronales, le panneau propose les deux lectures et donne, pour chaque ménage, l'écart du net après impôt dans les deux lectures (fourchette).
 52. **Lien vers « Mon ménage ».** Le simulateur transmet les mesures (et la lecture de l'incidence) dans l'adresse de la page « Mon ménage », jamais la saisie du ménage. La page refuse un lien que le service de calcul refuserait (levier inconnu, valeur hors bornes, lecture répercutée sans mesure sur les cotisations patronales, lecture inconnue) et le signale. La page envoie la saisie et les mesures au service de calcul, qui fait le calcul complet (sans approximation) ; rien n'est gardé ni journalisé.
 
+53. **Quotients familial et conjugal** (leviers `ir_quotient_familial_effet` et `ir_quotient_conjugal_effet`, de 0 à 100 % de l'effet supprimé).
+    - **Quotient familial.** La formule d'OpenFisca `ir_plaf_qf` (impôt après plafonnement) devient l'impôt réel plus x % de l'écart avec `ir_ss_qf` (impôt sur les seules parts des adultes). Les autres dispositifs liés aux personnes à charge (réductions et crédits majorés, abattements) ne changent pas. Contrôle : à 100 %, l'impôt du couple avec deux enfants égale, à 1 € près, celui du même couple sans enfant à charge.
+    - **Quotient conjugal.** Pour un couple, une seconde simulation déclare chaque adulte seul, au statut de célibataire. Les enfants sont à la charge de l'adulte qui a les revenus imposables les plus élevés (salaires, pensions, revenus d'indépendant ; convention à relire). L'impôt du couple devient l'impôt commun plus x % de l'écart avec la somme des deux impôts ; les prestations restent celles de la famille. Pour un couple de retraités, le revenu fiscal de référence d'avant la période est partagé à parts égales. Contrôle : à 100 %, l'impôt d'un couple cadre au 95e centile et salarié au SMIC égale, à 1 € près, la somme des impôts des deux personnes déclarant seules.
+    - **Grille exportée** : pas de 25 %, plus une unité. Ces leviers partent de zéro : la page des ménages types ne propose que la hausse d'une unité (la baisse est exportée à `null`).
+
 ## 6. Validation
 
 **Impôt sur le revenu.**
@@ -274,6 +279,7 @@ Le module reste en bêta.
 
 | Date | Changement | Tests qui ont bougé |
 |------|------------|---------------------|
+| 2026-11-09 | Effet des quotients familial et conjugal sur les ménages types (choix 53) ; export : baisse à `null` pour un levier qui part de zéro | 5 nouveaux tests (`test_menages_quotients.py`), tous réussis ; `test_grille_dans_les_bornes` modifié : un levier qui part de zéro commence à une unité (la référence est exclue de la grille) |
 | 2026-10-28 | Plages des trois hypothèses d'évolution des revenus (salaires −0,2 % à 0 %, pension 0 % à +1 %, indépendants −0,6 % à 0 %), à la demande du mainteneur ; ménages types calculés au revenu bas, central et haut ; fourchettes publiées (page Ménages types, effet d'une mesure, simulateur) | Valeurs centrales inchangées : aucun test de validation ne bouge. Nouvelles fourchettes du net après impôt : voir « Fourchette selon le revenu ». 1 test du moteur, 2 tests de l'API et 2 tests du site ajoutés |
 | 2026-10-28 | Minimum vieillesse et allocation de base de la PAJE comptés dans les prestations (`PRESTATIONS_MENSUELLES`) | aucun ménage type ne change (aucun n'y a droit) ; aucun test de validation ne bouge ; ménage saisi « retraité à 500 € par mois » : +6 411 € par an ; « parent au salaire de 2 000 €, enfant né en 2024 » : +2 361 € par an ; 1 test unitaire ajouté |
 | 2026-10-28 | Revue de code : prestations non comptées (minimum vieillesse, ASI, allocation de base de la PAJE) signalées au choix 5 ; test de validation qui échoue tant qu'aucun cas du simulateur officiel n'est relevé | 1 nouveau test de validation, en échec (aucun cas relevé) |

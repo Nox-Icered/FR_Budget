@@ -38,7 +38,11 @@ Les deux curseurs vont de 0 à 100 % de l'effet supprimé. Effet positif sur le 
 - **Ordre des effets.** L'Insee mesure le quotient conjugal sans les dispositifs familiaux, puis le quotient familial après le quotient conjugal. Les deux leviers à 100 % redonnent donc l'écart total (27,7 Md€ en 2017). En revanche, le quotient conjugal supprimé seul, dispositifs familiaux maintenus, n'est pas chiffré par la source.
 - **Double compte.** Le levier sur l'effet du quotient familial est refusé avec le levier sur son plafond.
 - **Interactions non chiffrées.** Les deux leviers sont ajoutés aux interactions signalées avec le barème et avec la CSG.
-- **Ménages types et dixièmes.** Pas encore calculés (raison affichée) ; pas de répartition.
+- **Ménages types** (calcul OpenFisca, `docs/fiches/menages_types.md`, choix 53).
+  - Quotient familial : l'impôt après plafonnement (`ir_plaf_qf`) est rapproché, de x % de l'écart, de l'impôt calculé sur les seules parts des adultes (`ir_ss_qf`).
+  - Quotient conjugal : pour un couple, l'impôt commun est rapproché, de x % de l'écart, de la somme des impôts des deux membres déclarant seuls. Les enfants sont rattachés à celui qui a le revenu le plus élevé.
+  - L'effet sur l'impôt d'un ménage n'est pas proportionnel au curseur (décote, tranches), contrairement au levier national.
+- **Dixièmes.** Pas de répartition.
 - **Comportements.** Aucun : pas de changement de déclaration ni de statut marital.
 
 ## 4. Validation

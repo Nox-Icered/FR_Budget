@@ -802,6 +802,12 @@
           "hausse": "Plafond du quotient familial relevé de 1 %",
           "baisse": "Plafond du quotient familial abaissé de 1 %"
         },
+        "ir_quotient_familial_effet": {
+          "hausse": "1 % de la réduction d'impôt liée aux enfants (quotient familial) supprimé"
+        },
+        "ir_quotient_conjugal_effet": {
+          "hausse": "1 % de la réduction d'impôt liée à l'imposition commune des couples (quotient conjugal) supprimé"
+        },
         "prime_activite_pente": {
           "hausse": "Hausse d'un point de la part des revenus d'activité prise en compte dans la prime d'activité",
           "baisse": "Baisse d'un point de la part des revenus d'activité prise en compte dans la prime d'activité"
@@ -822,7 +828,6 @@
         "structurel": "Âge de départ à la retraite : il change les carrières et les pensions futures, pas l'année simulée.",
         "catalogue": "Dépenses fiscales : chacune vise une situation particulière, absente de ces ménages types.",
         "bareme": "Barème de l'impôt sur le revenu saisi dans le simulateur : son effet sur les ménages types n'est pas encore calculé.",
-        "quotients": "Quotients familial et conjugal : leur suppression sur les ménages types n'est pas encore calculée.",
         "sante": "Assurance maladie : la cascade ne décrit ni les dépenses de santé ni les arrêts de travail."
       },
       "incidence": {

@@ -451,14 +451,18 @@ VARIANTES_BORNES = (module_menages.BAS, module_menages.HAUT)
 
 
 def _lectures_effets(effets: module_leviers_menages.Effets) -> dict[str, Any]:
-    """Hausse et baisse d'une unité (lecture comptable et répercutée) et grille exacte."""
+    """Hausse et baisse d'une unité (lecture comptable et répercutée) et grille exacte. Un sens
+    hors des bornes du levier (baisse d'un levier qui part de zéro) vaut ``null`` pour chaque
+    ménage."""
     sens = module_leviers_menages.SENS
+    hors_bornes = dict.fromkeys(module_menages.PROFILS)
 
     def lecture(incidence: str) -> dict[str, Any]:
         return {
             levier: {
                 ("hausse" if valeur > 0 else "baisse"): {
-                    i: _lignes_ou_rien(c) for i, c in par_incidence[incidence][valeur].items()
+                    i: _lignes_ou_rien(c)
+                    for i, c in par_incidence[incidence].get(valeur, hors_bornes).items()
                 }
                 for valeur in sens
             }

@@ -23,8 +23,12 @@ export function EffetsLeviers({
   menages: MenageType[];
 }) {
   const id = useId();
+  // Une unité dans chaque sens permis par les bornes du levier (un levier qui part de zéro
+  // n'a pas de baisse).
   const options = effets.leviers.flatMap((l) =>
-    (["hausse", "baisse"] as Sens[]).map((sens) => ({ levier: l.id, sens })),
+    (["hausse", "baisse"] as Sens[])
+      .filter((sens) => (sens === "hausse" ? l.bornes[1] >= 1 : l.bornes[0] <= -1))
+      .map((sens) => ({ levier: l.id, sens })),
   );
   const [choix, setChoix] = useState(0);
   const [menageId, setMenageId] = useState(menages[0].id);

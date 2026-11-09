@@ -31,6 +31,13 @@ Leviers traduits (unité du simulateur) :
 - ``ir_plafond_quotient_familial`` (%) : plafonds de l'avantage par demi-part pour charges de
   famille (``plaf_qf.plafond_avantages_procures_par_demi_part.general`` et ``.celib_enf``, les
   deux plafonds baissés par les lois de finances pour 2013 et 2014) multipliés par 1 + x ;
+- ``ir_quotient_familial_effet`` (%) : impôt après plafonnement du quotient familial
+  (``ir_plaf_qf``) rapproché, de x % de l'écart, de l'impôt calculé sur les seules parts des
+  adultes (``ir_sans_qf`` : ``ir_ss_qf``) ; les autres dispositifs liés aux personnes à charge
+  ne changent pas (``docs/fiches/quotients_ir.md``) ;
+- ``ir_quotient_conjugal_effet`` (%) : pour un couple, impôt commun rapproché, de x % de
+  l'écart, de la somme des impôts des deux membres déclarant seuls, enfants à la charge du
+  revenu le plus élevé (``fr_budget.menages.types.impot_individuel``) ; seul l'impôt change ;
 - ``prime_activite_pente`` (points) : fraction des revenus professionnels prise en compte
   (``ppa.pa_m.majoration_ressources_revenus_activite``) ;
 - ``indexation_pensions_prestations`` (points) : base mensuelle des allocations familiales, montant
@@ -113,6 +120,7 @@ ALLEGEMENTS = (
 Modification = Callable[[Reform, float, str], None]
 OPENFISCA = "openfisca_france_176_1_2"
 CCSS = "ccss_octobre_2026"
+QUOTIENTS = ("insee_economie_statistique_526_527", "insee_analyses_53_2020")
 
 
 def _transformer(parametre: Any, f: Callable[[float], float], debut: str) -> None:
@@ -199,6 +207,19 @@ def _envelopper(
     reforme.update_variable(avec_levier)
 
 
+def _quotient_familial_effet(reforme: Reform, valeur: float, debut: str) -> None:
+    part = valeur / POURCENT
+
+    def impot(foyer: Any, period: Any, v: Any) -> Any:
+        return v + part * (foyer("ir_ss_qf", period) - v)
+
+    _envelopper(reforme, "ir_plaf_qf", impot, debut)
+
+
+def _sans_modification(_reforme: Reform, _valeur: float, _debut: str) -> None:
+    """Levier appliqué hors du système socio-fiscal (``types.Legislation``)."""
+
+
 def _allegements(reforme: Reform, valeur: float, debut: str) -> None:
     facteur = 1 + valeur / POURCENT
     for nom in (TAUX_REDUCTION_GENERALE, *ALLEGEMENTS[1:]):
@@ -224,6 +245,9 @@ class LevierMenage:
     ecart_pension: bool = False
     """Le levier revalorise la part de base de la pension d'un retraité (donnée d'OpenFisca,
     changée hors du système socio-fiscal)."""
+    individualisation: bool = False
+    """Le levier supprime une part du quotient conjugal (impôt des couples recalculé hors de la
+    réforme, ``types.Legislation.individualisation``)."""
     non_chiffre: Callable[[types.Profil], bool] = lambda _p: False
     """Profils dont l'effet n'est pas chiffré, faute de source."""
     sources: tuple[str, ...] = (OPENFISCA,)
@@ -252,6 +276,12 @@ LEVIERS: dict[str, LevierMenage] = {
         _plafonds_qf,
         "%",
         sources=(OPENFISCA, "igf_igas_politiques_familiales_2026", "plf2014_projet_loi"),
+    ),
+    scenario.LEVIER_IR_QF_EFFET: LevierMenage(
+        _quotient_familial_effet, "%", sources=(OPENFISCA, *QUOTIENTS)
+    ),
+    scenario.LEVIER_IR_QC_EFFET: LevierMenage(
+        _sans_modification, "%", individualisation=True, sources=(OPENFISCA, *QUOTIENTS)
     ),
     scenario.LEVIER_PA_PENTE: LevierMenage(_points(PARAMETRE_PENTE, ppa=True), "points"),
     scenario.LEVIER_INDEXATION: LevierMenage(
@@ -283,7 +313,6 @@ SANS_EFFET: dict[str, str] = {
     scenario.LEVIER_DEPENSE_FISCALE_UNITE: "catalogue",
     scenario.LEVIER_CREDITS_UNITE: "administrations",
     scenario.LEVIER_IR_BAREME: "bareme",
-    **dict.fromkeys(scenario.LEVIERS_IR_QUOTIENTS, "quotients"),
     **dict.fromkeys(scenario.LEVIERS_ASSURANCE_MALADIE, "sante"),
 }
 
@@ -347,7 +376,13 @@ def legislation_scenario(mesures_: Mesures, annee: int = types.ANNEE) -> types.L
         for k, v in mesures_
         if LEVIERS[k].ecart_pension
     )
-    return types.Legislation(systeme=systeme, ecart_csg_activite=ecart, ecart_pension=pension)
+    individualisation = sum(v / POURCENT for k, v in mesures_ if LEVIERS[k].individualisation)
+    return types.Legislation(
+        systeme=systeme,
+        ecart_csg_activite=ecart,
+        ecart_pension=pension,
+        individualisation=individualisation,
+    )
 
 
 def legislation(levier: str, valeur: float, annee: int = types.ANNEE) -> types.Legislation:
@@ -547,10 +582,15 @@ def cascade_profil_reformee(
 
 SENS = (1.0, -1.0)
 """Hausse et baisse d'une unité du levier (point ou pourcent), publiées pour chaque ménage."""
-PAS_GRILLE: dict[str, float] = {scenario.LEVIER_ALLEGEMENTS: 10.0, scenario.LEVIER_IR_QF: 5.0}
+PAS_GRILLE: dict[str, float] = {
+    scenario.LEVIER_ALLEGEMENTS: 10.0,
+    scenario.LEVIER_IR_QF: 5.0,
+    **dict.fromkeys(scenario.LEVIERS_IR_QUOTIENTS, 25.0),
+}
 """Pas de la grille des effets exportés (une unité par défaut). Allègements : 10 %, leur effet
 sur le coût employeur étant proportionnel (et nul sur le net en lecture comptable). Plafond
-du quotient familial : 5 %, pour limiter le temps de calcul des 25 % de chaque côté."""
+du quotient familial : 5 %, pour limiter le temps de calcul des 25 % de chaque côté. Effet des
+quotients familial et conjugal : 25 %, l'effet étant proportionnel au réglage."""
 
 
 def grille(levier: str) -> tuple[float, ...]:

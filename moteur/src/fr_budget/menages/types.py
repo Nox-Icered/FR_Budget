@@ -245,6 +245,10 @@ class Legislation:
     ecart_pension: float = 0.0
     """Variation de la pension d'un retraité, en fraction, sur l'année simulée (revalorisation
     de sa part de base, ``fr_budget.menages.leviers``)."""
+    individualisation: float = 0.0
+    """Part supprimée de l'effet du quotient conjugal, en fraction : l'impôt d'un couple est
+    l'impôt commun plus cette part de l'écart avec l'imposition séparée des deux membres
+    (:func:`impot_individuel`)."""
 
 
 REFERENCE = Legislation()
@@ -474,6 +478,7 @@ def situation(
     rfr_anterieur: float | None = None,
     ecart_csg_independant: float = 0.0,
     ecart_pension: float = 0.0,
+    separe: int | None = None,
 ) -> dict[str, Any]:
     """Situation OpenFisca du ménage : salaires de l'année et de la précédente, déclaration
     commune pour un couple (marié), enfants à charge.
@@ -482,6 +487,10 @@ def situation(
     dépend du revenu fiscal de référence de l'avant-dernière année. Ce revenu dépend à son
     tour de la CSG : pour arrêter la chaîne, le revenu fiscal de référence des années
     ``annee - 4`` et ``annee - 3`` est donné (``rfr_anterieur``, voir :func:`_simulation`).
+
+    ``separe`` (couple) : chaque adulte déclare seul, comme une personne célibataire, et les
+    enfants sont à la charge de l'adulte de ce rang ; la famille et le ménage ne changent pas.
+    Le revenu fiscal de référence d'avant la période est alors partagé à parts égales.
     """
     retraite = _avec_retraite(profil)
     mois = (_mois(annee - 2) if retraite else []) + _mois(annee - 1) + _mois(annee)
@@ -497,7 +506,8 @@ def situation(
             **_categorie(a.cadre, mois),
         }
         if len(profil.adultes) > 1:
-            individus[nom]["statut_marital"] = dict.fromkeys(mois, "marie")
+            statut = "marie" if separe is None else "celibataire"
+            individus[nom]["statut_marital"] = dict.fromkeys(mois, statut)
     enfants = []
     for j, naissance in enumerate(profil.enfants):
         nom = f"enfant_{j + 1}"
@@ -508,9 +518,21 @@ def situation(
         foyer["caseT"] = {str(annee): True}
     if retraite and rfr_anterieur is not None:
         foyer["rfr"] = {str(annee - 4): rfr_anterieur, str(annee - 3): rfr_anterieur}
+    foyers: dict[str, Any] = {"foyer": foyer}
+    if separe is not None and len(adultes) > 1:
+        foyers = {}
+        for i, nom in enumerate(adultes):
+            seul: dict[str, Any] = {
+                "declarants": [nom],
+                "personnes_a_charge": enfants if i == separe else [],
+            }
+            if retraite and rfr_anterieur is not None:
+                part = rfr_anterieur / len(adultes)
+                seul["rfr"] = {str(annee - 4): part, str(annee - 3): part}
+            foyers[f"foyer_{i + 1}"] = seul
     return {
         "individus": individus,
-        "foyers_fiscaux": {"foyer": foyer},
+        "foyers_fiscaux": foyers,
         "familles": {"famille": {"parents": adultes, "enfants": enfants}},
         "menages": {
             "menage": {
@@ -527,11 +549,17 @@ def _construire(
     annee: int,
     rfr_anterieur: float | None,
     legislation: Legislation = REFERENCE,
+    separe: int | None = None,
 ) -> Simulation:
     simulation = SimulationBuilder().build_from_entities(
         _systeme(legislation),
         situation(
-            profil, annee, rfr_anterieur, legislation.ecart_csg_activite, legislation.ecart_pension
+            profil,
+            annee,
+            rfr_anterieur,
+            legislation.ecart_csg_activite,
+            legislation.ecart_pension,
+            separe,
         ),
     )
     if _avec_retraite(profil):
@@ -594,8 +622,10 @@ def cascade_profil(
     fiscal de référence d'avant la période est celui de la législation de référence : une
     réforme ne s'applique qu'à partir de l'année simulée.
     """
-    simulation = _construire(profil, annee, rfr_point_fixe(profil, annee), legislation)
-    return _cascade(profil, annee, simulation, legislation)
+    rfr = rfr_point_fixe(profil, annee)
+    simulation = _construire(profil, annee, rfr, legislation)
+    cascade = _cascade(profil, annee, simulation, legislation)
+    return _individualiser(cascade, profil, annee, rfr, legislation, simulation)
 
 
 def cascade_type_reformee(
@@ -604,10 +634,57 @@ def cascade_type_reformee(
     """Cascade annuelle d'un ménage type sous une législation réformée, dans la variante de
     revenu ``variante``."""
     profil = profil_type(identifiant, variante)
-    simulation = _construire(
-        profil, annee, _rfr_point_fixe(identifiant, annee, variante), legislation
-    )
-    return _cascade(profil, annee, simulation, legislation)
+    rfr = _rfr_point_fixe(identifiant, annee, variante)
+    simulation = _construire(profil, annee, rfr, legislation)
+    cascade = _cascade(profil, annee, simulation, legislation)
+    return _individualiser(cascade, profil, annee, rfr, legislation, simulation)
+
+
+REVENUS_INDIVIDUELS = ("revenu_assimile_salaire", "revenu_assimile_pension", "rpns_imposables")
+"""Revenus imposables de chaque adulte (OpenFisca), pour rattacher les enfants."""
+
+
+def rang_revenu_le_plus_eleve(simulation: Simulation, profil: Profil, annee: int) -> int:
+    """Rang de l'adulte aux revenus imposables les plus élevés (le premier en cas d'égalité) :
+    convention de rattachement des enfants dans l'imposition séparée (choix à relire)."""
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", RuntimeWarning)
+        revenus = sum(simulation.calculate(v, str(annee)) for v in REVENUS_INDIVIDUELS)
+    adultes = [float(revenus[i]) for i in range(len(profil.adultes))]
+    return adultes.index(max(adultes))
+
+
+def impot_individuel(
+    profil: Profil,
+    annee: int,
+    rfr_anterieur: float | None,
+    legislation: Legislation,
+    separe: int,
+) -> float:
+    """Impôt sur le revenu d'un couple dont chaque membre déclare seul, enfants à la charge de
+    l'adulte de rang ``separe``, en euros (somme des deux foyers)."""
+    simulation = _construire(profil, annee, rfr_anterieur, legislation, separe)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", RuntimeWarning)
+        return -float(simulation.calculate("impot_revenu_restant_a_payer", str(annee)).sum())
+
+
+def _individualiser(
+    cascade: CascadeMenage,
+    profil: Profil,
+    annee: int,
+    rfr_anterieur: float | None,
+    legislation: Legislation,
+    simulation: Simulation,
+) -> CascadeMenage:
+    """Applique la part supprimée du quotient conjugal à l'impôt d'un couple : seul l'impôt
+    change, les prestations restent celles de la famille."""
+    if legislation.individualisation == 0 or len(profil.adultes) < 2:  # noqa: PLR2004
+        return cascade
+    separe = rang_revenu_le_plus_eleve(simulation, profil, annee)
+    seul = impot_individuel(profil, annee, rfr_anterieur, legislation, separe)
+    impot = cascade.impot_revenu + legislation.individualisation * (seul - cascade.impot_revenu)
+    return replace(cascade, impot_revenu=impot)
 
 
 def _cascade(

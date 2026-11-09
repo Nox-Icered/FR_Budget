@@ -425,7 +425,8 @@ def test_grille_dans_les_bornes() -> None:
         bas, haut = scenario.bornes_levier(levier)
         valeurs = lv.grille(levier)
         assert 0 not in valeurs
-        assert min(valeurs) == bas
+        # Un levier qui part de zéro (la référence, jamais dans la grille) commence à une unité.
+        assert min(valeurs) == (bas if bas != 0 else 1.0)
         assert max(valeurs) == haut
         assert {1.0, -1.0} <= set(valeurs) | ({-1.0} if bas > -1 else set())
 

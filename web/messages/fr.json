@@ -25,7 +25,8 @@
     "entreprises": "Entreprises",
     "groupe_simuler": "Simuler",
     "groupe_effets": "Effets sur les ménages et les entreprises",
-    "groupe_transparence": "Transparence"
+    "groupe_transparence": "Transparence",
+    "api": "API"
   },
   "accueil": {
     "titre": "Les comptes des administrations publiques",
@@ -338,6 +339,16 @@
         "libelle": "Plafond du salaire pris en compte pour les indemnités journalières maladie ({reference} % du Smic depuis avril 2025)",
         "valeur": "+{valeur} pt de Smic",
         "explication": "Pendant un arrêt maladie, l'assurance maladie verse des indemnités calculées sur le salaire, dans la limite d'un plafond. Il est passé de 180 % à 140 % du Smic en 2025. Ce curseur le relève, jusqu'à 180 % : les salariés les mieux payés reçoivent plus, et les dépenses augmentent."
+      },
+      "chomage_affiliation_mois": {
+        "libelle": "Durée de travail exigée pour ouvrir un droit à l'allocation chômage ({reference} mois sur les 24 derniers)",
+        "valeur": "−{valeur} mois",
+        "explication": "Pour toucher l'allocation chômage, il faut avoir travaillé assez longtemps avant de perdre son emploi : 6 mois sur les 24 derniers mois depuis la réforme de 2019-2021 (4 mois avant). Ce curseur réduit cette durée, jusqu'à 4 mois : plus de personnes sont indemnisées, et les dépenses augmentent."
+      },
+      "chomage_degressivite_points": {
+        "libelle": "Dégressivité des allocations chômage les plus élevées (baisse de {reference} % à partir du 7e mois)",
+        "valeur": "−{valeur} pt",
+        "explication": "Depuis 2021, l'allocation des personnes de moins de 57 ans qui gagnaient plus de 4 800 € brut par mois (seuil de juin 2022) baisse jusqu'à 30 % à partir du 7e mois d'indemnisation. Ce curseur réduit cette baisse, jusqu'à la supprimer : ces allocataires reçoivent plus, et les dépenses augmentent."
       }
     },
     "limite_tva_accise": "La hausse de l'accise augmente aussi la TVA payée sur le carburant : cet effet n'est pas compté.",
@@ -517,7 +528,7 @@
     },
     "bloque_retraites": "Réglage impossible tant que l'autre levier de départ à la retraite est modifié : les deux mesurent le même effet.",
     "methode_retraites_age_legal": "Âge légal de départ (modèle par cohortes) : avec la population projetée par l'Insee et les taux de retraités par âge de la DREES, un an de plus sur l'âge légal améliore le solde des administrations publiques d'environ {effet} point de PIB une fois la mesure en place (moindres pensions et prélèvements sur ceux qui restent en emploi). L'écart est atteint génération par génération, en {duree} ans pour un an. Les prestations versées à ceux qui restent sans emploi ne sont pas comptées.",
-    "methode_assurance_chomage": "Assurance chômage (première étape, chiffrages de l'Unédic) : un point de contribution patronale rapporte {point} milliards d'euros par an ; un point de revalorisation des allocations coûte {revalorisation} milliard d'euros la première année pleine ; passer de 75 % à 80 % le coefficient appliqué à la durée coûte {duree} milliard d'euros par an une fois l'effet atteint. Les versements de l'assurance chômage à France Travail et aux retraites complémentaires restent entre administrations publiques et ne changent pas leur solde.",
+    "methode_assurance_chomage": "Assurance chômage (première étape, chiffrages de l'Unédic) : un point de contribution patronale rapporte {point} milliards d'euros par an ; un point de revalorisation des allocations coûte {revalorisation} milliard d'euros la première année pleine ; passer de 75 % à 80 % le coefficient appliqué à la durée coûte {duree} milliard d'euros par an une fois l'effet atteint. Les versements de l'assurance chômage à France Travail et aux retraites complémentaires restent entre administrations publiques et ne changent pas leur solde. Condition d'affiliation et dégressivité (bêta) : effets calés sur les études d'impact de l'Unédic de 2021 (régime de croisière), proportionnels au réglage, nets de la CSG et de la CRDS qui reviennent ; bornes tirées de l'étude de 2019 et de l'évaluation de 2025.",
     "en_savoir_plus": "À quoi sert ce curseur ?",
     "recherche": "Chercher une mesure (TVA, retraite, chômage…)",
     "recherche_libelle": "Chercher une mesure",
@@ -1005,5 +1016,34 @@
         "non_atteint": "Après arrondi au pas des curseurs, l'exemple n'atteint pas la valeur choisie."
       }
     }
+  },
+  "api": {
+    "titre": "API publique",
+    "intro": "Les programmes (outils de journalistes, de chercheurs, autres sites) peuvent appeler le moteur du simulateur directement, sans passer par les curseurs : ils envoient des mesures et reçoivent les mêmes résultats que le site, en fourchette, avec leurs sources et la version du modèle.",
+    "pas_en_ligne": "L'API est prête mais pas encore en ligne : son hébergement reste à choisir. Le code et la documentation sont publics dans le dépôt du projet (docs/api.md).",
+    "en_ligne": "Documentation interactive : {adresse}",
+    "routes_titre": "Ce que l'API permet",
+    "routes": {
+      "leviers": "Liste des mesures réglables : libellé, unité, limites, statut, effet d'une unité, sources.",
+      "scenario": "Dette et solde primaire de 2025 à 2046 avec les mesures choisies.",
+      "deciles": "Effet sur le revenu des ménages, par dixième de niveau de vie.",
+      "objectif": "Réglage d'une mesure, prise seule, qui atteint une dette ou un solde choisi.",
+      "interactions": "Interactions entre mesures, chiffrées ou non.",
+      "baseline": "Trajectoire sans mesure.",
+      "validation": "Écarts du modèle aux chiffrages officiels, y compris hors tolérance.",
+      "registres": "Registres des sources, des données, des hypothèses et des chiffrages."
+    },
+    "exemple_titre": "Exemple",
+    "exemple_intro": "Hausse d'un point du taux normal de TVA à partir de 2027 :",
+    "regles_titre": "Règles",
+    "regles": {
+      "sans_etat": "Rien de ce qui est envoyé n'est stocké ni journalisé, et aucun message d'erreur ne le reprend.",
+      "fourchettes": "Chaque résultat est une fourchette (basse, centrale, haute) et porte la version du modèle et des données.",
+      "statut": "Les mesures marquées « bêta » ne sont pas validées ; les écarts sont publiés sur la page Validation.",
+      "neutralite": "L'API calcule ce qu'on lui demande : elle ne recommande ni ne classe aucune mesure.",
+      "limites": "Au plus 40 mesures et 32 Ko par requête ; le contrat de la version 1 ne change pas sans nouvelle version.",
+      "licences": "Code sous licence AGPL-3.0, données sous Licence Ouverte 2.0 (chaque source garde la sienne)."
+    },
+    "version": "Version du moteur : {moteur}."
   }
 }

@@ -27,7 +27,13 @@ export const SECTIONS: { id: string; leviers: string[] }[] = [
   { id: "retraites", leviers: ["retraites_age_depart", "retraites_age_legal"] },
   {
     id: "assurance_chomage",
-    leviers: ["chomage_contribution_patronale", "chomage_revalorisation", "chomage_duree_indemnisation"],
+    leviers: [
+      "chomage_contribution_patronale",
+      "chomage_revalorisation",
+      "chomage_duree_indemnisation",
+      "chomage_affiliation_mois",
+      "chomage_degressivite_points",
+    ],
   },
   { id: "assurance_maladie", leviers: ["ondam_progression", "franchises_participations", "ij_plafond_smic"] },
   {

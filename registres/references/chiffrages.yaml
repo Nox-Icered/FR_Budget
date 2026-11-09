@@ -4210,7 +4210,6 @@ chiffrages:
     saisi_le: 2026-11-06
     relecture: a_relire
 
-
   - id: ir_insee_impot_individuel_2017
     levier: impot_revenu_structure
     source: insee_economie_statistique_526_527
@@ -4277,3 +4276,135 @@ chiffrages:
     saisi_le: 2026-11-09
     relecture: a_relire
     independante: true
+
+  - id: chomage_affiliation_croisiere_2019
+    levier: assurance_chomage
+    source: unedic_etude_impact_reforme_2019
+    millesime: "2022"
+    mesure: "Moindres dépenses d'allocations dues au passage de 4 à 6 mois de la condition d'ouverture de droit (régime de croisière)"
+    valeur: 1000
+    unite: "M€"
+    localisation: "Tableau 1, page 5 (13/58)"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: chomage_affiliation_2020_2019
+    levier: assurance_chomage
+    source: unedic_etude_impact_reforme_2019
+    millesime: "2020"
+    mesure: "Moindres dépenses d'allocations dues au passage de 4 à 6 mois de la condition d'ouverture de droit, première année pleine"
+    valeur: 900
+    unite: "M€"
+    localisation: "Tableau 1, page 5 (13/58)"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: chomage_degressivite_2022_2019
+    levier: assurance_chomage
+    source: unedic_etude_impact_reforme_2019
+    millesime: "2022 (montée en charge)"
+    mesure: "Moindres dépenses d'allocations dues à la dégressivité (réforme 2019, 7e mois), troisième année"
+    valeur: 220
+    unite: "M€"
+    localisation: "Tableau 1, page 5 (13/58)"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: chomage_affiliation_croisiere_2021
+    levier: assurance_chomage
+    source: unedic_etude_impact_juillet_2021
+    millesime: "régime de croisière"
+    mesure: "Moindres dépenses d'allocations dues au passage de 4 à 6 mois de la condition minimale d'affiliation"
+    valeur: 800
+    unite: "M€"
+    localisation: "Tableau des moindres dépenses, page 7"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: chomage_degressivite_croisiere_2021
+    levier: assurance_chomage
+    source: unedic_etude_impact_juillet_2021
+    millesime: "régime de croisière"
+    mesure: "Moindres dépenses d'allocations dues à la dégressivité appliquée au 7e mois"
+    valeur: 460
+    unite: "M€"
+    localisation: "Tableau des moindres dépenses, page 7"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: chomage_degressivite_2022_bas_2021
+    levier: assurance_chomage
+    source: unedic_etude_impact_juillet_2021
+    millesime: "2022 (minorant)"
+    mesure: "Moindres dépenses d'allocations dues à la dégressivité en 2022, borne basse de l'intervalle"
+    valeur: 250
+    unite: "M€"
+    localisation: "Tableau des moindres dépenses, page 7"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: chomage_degressivite_2022_haut_2021
+    levier: assurance_chomage
+    source: unedic_etude_impact_juillet_2021
+    millesime: "2022 (majorant)"
+    mesure: "Moindres dépenses d'allocations dues à la dégressivité en 2022, borne haute de l'intervalle"
+    valeur: 260
+    unite: "M€"
+    localisation: "Tableau des moindres dépenses, page 7"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: chomage_affiliation_croisiere_2025
+    levier: assurance_chomage
+    source: unedic_evaluation_reforme_2019_2021
+    millesime: "régime de croisière (estimation ex ante de 2021, confirmée par les observations)"
+    mesure: "Impact financier annuel des nouvelles conditions d'ouverture de droit"
+    valeur: -0.8
+    unite: "Md€"
+    localisation: "Tableau 1, page 4"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: chomage_degressivite_croisiere_2025
+    levier: assurance_chomage
+    source: unedic_evaluation_reforme_2019_2021
+    millesime: "régime de croisière (estimation ex ante de 2021, confirmée par les observations)"
+    mesure: "Impact financier annuel de la dégressivité des allocations"
+    valeur: -0.5
+    unite: "Md€"
+    localisation: "Tableau 1, page 4"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: chomage_degressivite_taux
+    levier: assurance_chomage
+    source: unedic_evaluation_reforme_2019_2021
+    millesime: "2025"
+    mesure: "Baisse maximale de l'allocation au titre de la dégressivité, à partir du 7e mois"
+    valeur: 30
+    unite: "%"
+    localisation: "Tableau 1, page 4"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+  - id: chomage_affiliation_mois_avant_2019
+    levier: assurance_chomage
+    source: unedic_evaluation_reforme_2019_2021
+    millesime: "avant la réforme 2019-2021"
+    mesure: "Durée de travail exigée pour ouvrir un droit, sur les 28 derniers mois"
+    valeur: 4
+    unite: "mois"
+    localisation: "Tableau 1, page 4"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: chomage_affiliation_mois_apres_2019
+    levier: assurance_chomage
+    source: unedic_evaluation_reforme_2019_2021
+    millesime: "après la réforme 2019-2021"
+    mesure: "Durée de travail exigée pour ouvrir un droit, sur les 24 derniers mois"
+    valeur: 6
+    unite: "mois"
+    localisation: "Tableau 1, page 4"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+

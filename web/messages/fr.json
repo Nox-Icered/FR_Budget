@@ -280,6 +280,16 @@
         "valeur": "{valeur} %",
         "explication": "Chaque enfant à charge ajoute une demi-part au calcul de l'impôt sur le revenu, ce qui le réduit. Cette réduction est plafonnée : au-delà d'un certain revenu, elle ne dépasse pas un montant fixe par demi-part. Ce curseur change ce plafond. Vers la gauche, le plafond baisse et l'impôt des familles aux revenus élevés augmente ; vers la droite, il baisse. Le plafond a été abaissé deux fois, en 2013 et en 2014."
       },
+      "ir_quotient_familial_effet": {
+        "libelle": "Réduction d'impôt liée aux enfants et autres personnes à charge (quotient familial ; environ {reference} milliards d'euros)",
+        "valeur": "{valeur} % supprimés",
+        "explication": "Les enfants et autres personnes à charge ajoutent des parts au calcul de l'impôt sur le revenu, ce qui le réduit. Ce curseur supprime une partie de cette réduction, jusqu'à sa totalité (100 %) : l'impôt des familles imposables augmente. Montant estimé par l'Insee pour 2017 et ramené à aujourd'hui."
+      },
+      "ir_quotient_conjugal_effet": {
+        "libelle": "Réduction d'impôt liée à l'imposition commune des couples mariés ou pacsés (quotient conjugal ; environ {reference} milliards d'euros)",
+        "valeur": "{valeur} % supprimés",
+        "explication": "Un couple marié ou pacsé déclare ses revenus ensemble et a deux parts : quand les deux revenus sont inégaux, l'impôt baisse. Ce curseur supprime une partie de cette baisse ; à 100 %, chaque membre du couple est imposé seul. L'impôt des couples aux revenus inégaux augmente. Montant estimé par l'Insee pour 2017 et ramené à aujourd'hui."
+      },
       "indexation_pensions_prestations": {
         "libelle": "Revalorisation des pensions de base et des prestations sociales, par rapport à la revalorisation prévue par la loi ({reference} milliards d'euros versés par an, montants de {annee})",
         "valeur": "{valeur} pt",
@@ -445,6 +455,7 @@
     "methode_ir": "Impôt sur le revenu : chaque année, les seuils du barème sont en général relevés comme l'inflation. Les relever de 1 % de moins rapporte {rendement} milliards d'euros, d'après le chiffrage de l'administration pour le projet de loi de finances pour 2025 ; un calcul à partir des statistiques de l'impôt par décile donne un montant plus faible, retenu comme borne basse.",
     "methode_ir_quotient_familial": "Plafond du quotient familial : l'abaisser de 1 % rapporte {rendement} milliard d'euros, d'après le chiffrage de l'Inspection générale des finances et de l'Inspection générale des affaires sociales (580 millions d'euros pour une baisse de 10 %, législation de 2026). Les baisses de 2013 et de 2014, chiffrées par le Gouvernement et ramenées à aujourd'hui, donnent un montant un peu plus faible, retenu comme borne basse.",
     "limite_ir": "Le rendement repose sur un seul chiffrage de l'administration, confirmé par celui du gel de 2026. Il ne tient pas compte des changements de comportement, ni des seuils sociaux et locaux qui suivent le barème.",
+    "methode_ir_quotients": "Quotients familial et conjugal (bêta) : supprimer 10 % de l'effet rapporte {qf} milliards d'euros pour le quotient familial et {qc} milliards d'euros pour le quotient conjugal. Ces montants viennent des simulations de l'Insee pour 2017 (André et Sireyjol, 2021), ramenés à aujourd'hui avec la croissance du PIB. La fourchette prend aussi l'estimation de l'Insee pour 2018 et, pour le quotient conjugal, celle de l'OFCE pour 2016 (imposition individuelle où les parents se partagent les parts des enfants). L'effet est supposé proportionnel au curseur, et les deux suppressions s'additionnent comme dans la méthode de l'Insee. Sans changement de comportement.",
     "limite_ir_quotient_familial": "Plafond du quotient familial : le rendement est supposé proportionnel à la baisse, ce qui n'est vrai que pour des variations modérées (une baisse plus forte touche davantage de familles). Le modèle reproduit le chiffrage de la baisse de 2014, mais dépasse de 16 % celui de la baisse de 2013. Aucun ménage type n'est concerné : le plafond ne joue qu'au-delà de revenus élevés.",
     "limite_remunerations": "Le coût est estimé à partir de la masse salariale des administrations publiques et de la part du traitement indiciaire dans le salaire des fonctionnaires ; il s'écarte des chiffrages officiels par fonction publique (voir la page Validation). Une baisse des effectifs ne tient compte ni des allocations chômage ni des services rendus.",
     "croissance": "Inclure l'effet de la mesure sur l'activité (multiplicateur)",
@@ -656,7 +667,7 @@
         "9": "9e dixième",
         "10": "10 % les plus aisés"
       },
-      "non_repartis": "{nombre} mesure(s) du scénario ne sont pas réparties : rémunérations publiques, dotations, crédits des missions, dépenses fiscales, plafond du quotient familial, âge de départ. Leur effet n'apparaît pas dans ce tableau.",
+      "non_repartis": "{nombre} mesure(s) du scénario ne sont pas réparties : rémunérations publiques, dotations, crédits des missions, dépenses fiscales, plafond et effet du quotient familial, quotient conjugal, âge de départ. Leur effet n'apparaît pas dans ce tableau.",
       "methode": "Méthode : l'effet national de chaque mesure est réparti selon la part de chaque dixième dans l'assiette qu'elle touche (par exemple, les pensions pour la CSG sur les retraites), d'après les comptes nationaux distribués {annee} de l'Insee. Pour le barème de l'impôt sur le revenu et ses seuils, l'écart d'impôt est calculé par dixième de foyers fiscaux (revenu par part), assimilé au dixième de niveau de vie de même rang. La fourchette prend les parts des années {premiere} à {annee}, une autre assiette quand elle existe (Budget de famille 2017 pour la TVA et les accises) et les bornes de l'effet national. Sans changement de comportement ; structure de {annee} appliquée aux années suivantes."
     },
     "methode_assurance_maladie": "Assurance maladie (bêta) : un point de progression de l'ONDAM vaut {point} Md€ (1 % de l'ONDAM 2025), réduit ou augmenté selon la part des économies prévues effectivement réalisées en 2024 et 2025 ; 10 % de hausse des franchises et participations (montants et plafonds) rapportent {franchises} Md€ (rendement de 2025, Cour des comptes) ; relever de 10 points de Smic (0,1 Smic) le plafond des indemnités journalières coûte {ij} Md€ en année pleine (économie de la baisse de 2025, annexes des PLFSS) ; un point de ticket modérateur rapporte {tm_consultations} Md€ sur les consultations (hausse de 10 points chiffrée pour 2025, annexe du PLFSS, non appliquée) et {tm_dentaire} Md€ sur les soins dentaires (hausse de 10 points de 2023, constat de la Cour des comptes ramené à un an). L'économie pour l'assurance maladie est surtout payée par les complémentaires santé, donc par leurs cotisations : cet effet n'est pas calculé."
@@ -811,6 +822,7 @@
         "structurel": "Âge de départ à la retraite : il change les carrières et les pensions futures, pas l'année simulée.",
         "catalogue": "Dépenses fiscales : chacune vise une situation particulière, absente de ces ménages types.",
         "bareme": "Barème de l'impôt sur le revenu saisi dans le simulateur : son effet sur les ménages types n'est pas encore calculé.",
+        "quotients": "Quotients familial et conjugal : leur suppression sur les ménages types n'est pas encore calculée.",
         "sante": "Assurance maladie : la cascade ne décrit ni les dépenses de santé ni les arrêts de travail."
       },
       "incidence": {
@@ -1006,7 +1018,7 @@
       "cotes": "Chaque mesure est rangée du côté des comptes publics que touche l'instrument modifié : impôts et cotisations en recettes ; rémunérations, prestations, pensions et dotations en dépenses. Les allègements généraux sont des cotisations en moins (recettes) ; la prime d'activité est une prestation et l'âge de départ modifie les pensions (dépenses).",
       "limites": "Les effets des mesures sont additionnés, avec les interactions chiffrées par le simulateur ; les autres interactions (par exemple entre la CSG et l'impôt sur le revenu) ne sont pas comptées. Sans effet sur l'activité (multiplicateur désactivé). Les statuts et les limites des mesures sont ceux du simulateur.",
       "problemes": {
-        "double_compte": "Ces mesures ne peuvent pas être cochées ensemble : âge effectif et âge légal de départ, ou progression de l'ONDAM avec les franchises, les indemnités journalières ou le ticket modérateur, qu'elle contient.",
+        "double_compte": "Ces mesures ne peuvent pas être cochées ensemble : âge effectif et âge légal de départ, ou progression de l'ONDAM avec les franchises, les indemnités journalières ou le ticket modérateur, qu'elle contient, ou plafond et effet du quotient familial.",
         "cote_vide_recettes": "Une part de l'écart revient aux recettes, mais aucune mesure sur les recettes n'est cochée.",
         "cote_vide_depenses": "Une part de l'écart revient aux dépenses, mais aucune mesure sur les dépenses n'est cochée.",
         "insuffisant_recettes": "Les mesures cochées sur les recettes ne portent pas leur part de l'écart dans les limites de leurs curseurs. La règle ne reporte rien sur les dépenses : cochez d'autres mesures ou déplacez le curseur.",

@@ -13,7 +13,15 @@ export const SECTIONS: { id: string; leviers: string[] }[] = [
   },
   {
     id: "prelevements_menages",
-    leviers: ["csg_activite", "csg_retraites", "csg_capital", "ir_seuils_bareme", "ir_plafond_quotient_familial"],
+    leviers: [
+      "csg_activite",
+      "csg_retraites",
+      "csg_capital",
+      "ir_seuils_bareme",
+      "ir_plafond_quotient_familial",
+      "ir_quotient_familial_effet",
+      "ir_quotient_conjugal_effet",
+    ],
   },
   { id: "prestations", leviers: ["indexation_pensions_prestations", "prime_activite_pente"] },
   { id: "retraites", leviers: ["retraites_age_depart", "retraites_age_legal"] },

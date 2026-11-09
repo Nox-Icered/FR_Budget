@@ -1123,6 +1123,22 @@ datasets:
     methode_transformation: aucune ; montants saisis dans registres/references/chiffrages.yaml (localisation indiquée pour chacun)
     telecharge_le: 2026-11-06
 
+  - id: insee_economie_statistique_526_527_pdf
+    source: insee_economie_statistique_526_527
+    description: "Insee, Économie et Statistique n° 526-527 (2021), numéro complet (PDF)"
+    fichier: data/raw/impot_revenu/insee_economie_statistique_526_527_2021.pdf
+    empreinte_sha256: b9aa5c6c09957bf55599a8d5e4bbd041fc173f0764742478cb38935178e7b30d
+    methode_transformation: aucune ; montants saisis dans registres/references/chiffrages.yaml (localisation indiquée pour chacun)
+    telecharge_le: 2026-11-09
+
+  - id: insee_analyses_53_2020_html
+    source: insee_analyses_53_2020
+    description: "Insee Analyses n° 53 (juin 2020), page HTML"
+    fichier: data/raw/impot_revenu/insee_analyses_53_2020.html
+    empreinte_sha256: fb6e002c8e419bd0b6d5c46e75b94458915d8e22fb800272b56c2fb67a7bc5c9
+    methode_transformation: aucune ; montants saisis dans registres/references/chiffrages.yaml (localisation indiquée pour chacun)
+    telecharge_le: 2026-11-09
+
   - id: senat_avis_plfss2025_finances_pdf
     source: senat_avis_plfss2025_finances
     description: "Avis n° 130 (2024-2025) de la commission des finances du Sénat sur le PLFSS 2025 (PDF)"

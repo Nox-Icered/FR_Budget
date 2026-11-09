@@ -1147,6 +1147,26 @@ sources:
     consulte_le: 2026-11-06
 
 
+  - id: insee_economie_statistique_526_527
+    nom: "Insee, Économie et Statistique n° 526-527, 2021 : M. André et A. Sireyjol, « Effets redistributifs de la conjugalisation et de la familialisation de l'impôt sur le revenu » ; G. Allègre, H. Périvier et M. Pucci (OFCE, Université Paris 1), « Imposition des couples et statut marital – Simulation de trois réformes du quotient conjugal en France »"
+    editeur: Insee
+    url: https://www.insee.fr/fr/statistiques/fichier/5432539/ES526-527_FR_web.pdf
+    licence: publication de l'Insee (réutilisation libre avec mention de la source)
+    date_publication: 2021-07-01
+    millesime: "législations 2017 (André et Sireyjol, Ines 2017 sur l'ERFS 2015) et 2016 (Allègre et al., Ines 2016 sur l'ERFS 2014)"
+    acces: direct
+    consulte_le: 2026-11-09
+
+  - id: insee_analyses_53_2020
+    nom: "Insee Analyses n° 53, M. André, « Les dispositifs conjugaux et familiaux réduisent l'impôt sur le revenu de 29,7 milliards d'euros », juin 2020"
+    editeur: Insee
+    url: https://www.insee.fr/fr/statistiques/4504961
+    licence: publication de l'Insee (réutilisation libre avec mention de la source)
+    date_publication: 2020-06-04
+    millesime: "législation 2018 (Ines 2018 sur l'ERFS 2016)"
+    acces: direct
+    consulte_le: 2026-11-09
+
   - id: senat_avis_plfss2025_finances
     nom: Avis n° 130 (2024-2025) sur le projet de loi de financement de la sécurité sociale pour 2025, par Vincent Delahaye, commission des finances du Sénat
     editeur: Sénat

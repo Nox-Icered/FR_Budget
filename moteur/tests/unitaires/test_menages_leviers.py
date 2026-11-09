@@ -52,6 +52,7 @@ def test_tous_les_leviers_du_simulateur_sont_classes() -> None:
         scenario.LEVIER_DEPENSE_FISCALE_UNITE,
         scenario.LEVIER_CREDITS_UNITE,
         *scenario.LEVIERS_ASSURANCE_MALADIE,
+        *scenario.LEVIERS_IR_QUOTIENTS,
     }
     assert set(lv.LEVIERS) | set(lv.SANS_EFFET) == leviers_simulateur
     assert not set(lv.LEVIERS) & set(lv.SANS_EFFET)

@@ -40,6 +40,8 @@ export const LEVIERS_SOLIDARITE = ["indexation_pensions_prestations", "prime_act
 export const MISSION_SOLIDARITE = "solidarite_insertion_et_egalite_des_chances";
 // Le barème saisi fixe déjà les seuils : le moteur refuse de le cumuler avec ce levier.
 export const LEVIER_IR_SEUILS = "ir_seuils_bareme";
+// Plafond du quotient familial et suppression de son effet : le moteur refuse de les cumuler.
+export const LEVIERS_QUOTIENT_FAMILIAL = ["ir_plafond_quotient_familial", "ir_quotient_familial_effet"];
 // Franchises, indemnités journalières et ticket modérateur font partie de l'ONDAM : le moteur refuse de les cumuler
 // avec le levier sur sa progression (scenario.verifier_double_compte).
 export const LEVIER_ONDAM = "ondam_progression";
@@ -72,6 +74,8 @@ export const LEVIERS_PUBLICS: { id: string; pas: number }[] = [
   { id: "allegements_generaux", pas: 1 },
   { id: "ir_seuils_bareme", pas: 0.1 },
   { id: "ir_plafond_quotient_familial", pas: 1 },
+  { id: "ir_quotient_familial_effet", pas: 5 },
+  { id: "ir_quotient_conjugal_effet", pas: 5 },
   { id: "prime_activite_pente", pas: 0.1 },
   { id: "retraites_age_depart", pas: 0.25 },
   { id: "retraites_age_legal", pas: 0.25 },
@@ -234,7 +238,8 @@ export function problemes(
     (regle(LEVIERS_SOLIDARITE) && (etat.parMission[MISSION_SOLIDARITE] ?? 0) !== 0) ||
     depenseChoisieDansImpot ||
     (etat.bareme !== undefined && regle([LEVIER_IR_SEUILS])) ||
-    (regle([LEVIER_ONDAM]) && regle(LEVIERS_DANS_ONDAM))
+    (regle([LEVIER_ONDAM]) && regle(LEVIERS_DANS_ONDAM)) ||
+    LEVIERS_QUOTIENT_FAMILIAL.every((id) => (etat.leviers[id] ?? 0) !== 0)
   ) {
     liste.push("double_compte");
   }

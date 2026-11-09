@@ -117,12 +117,14 @@ def test_memes_references_que_les_tests_de_validation_des_leviers() -> None:
         "tm_consultations_economie_senat_2025",
         "tm_dentaire_economie_oct2023_dec2024",
     }
+    attendues |= {"ir_insee_familialisation_2018", "ir_insee_conjugalisation_2018"}
     attendues |= {
         "tva_point_brut_ipp_2025_quatre_taux",
         "tva_point_net_ipp_2025_quatre_taux",
         "ir_gel_ipp_inflation_1_0_2026",
         "ir_gel_ipp_inflation_1_3_2026",
         "ir_gel_ofce_2026",
+        "ir_ofce_individualisation_optimisation_2016",
         "indexation_pensions_ipp_inflation_1_0_2026",
         "indexation_pensions_ipp_inflation_1_3_2026",
         "remunerations_point_1_fipeco_2026_total",

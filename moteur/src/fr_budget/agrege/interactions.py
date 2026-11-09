@@ -100,6 +100,8 @@ NON_CHIFFREES: tuple[NonChiffree, ...] = (
         (
             "ir_seuils_bareme",
             "ir_plafond_quotient_familial",
+            "ir_quotient_familial_effet",
+            "ir_quotient_conjugal_effet",
             "ir_bareme",
             "depenses_fiscales_impot_revenu",
         ),
@@ -114,7 +116,11 @@ NON_CHIFFREES: tuple[NonChiffree, ...] = (
     NonChiffree(
         "bareme_quotient_familial",
         ("ir_seuils_bareme", "ir_bareme"),
-        ("ir_plafond_quotient_familial",),
+        (
+            "ir_plafond_quotient_familial",
+            "ir_quotient_familial_effet",
+            "ir_quotient_conjugal_effet",
+        ),
         "foyers dont l'avantage du quotient familial est plafonné, par tranche",
     ),
     NonChiffree(

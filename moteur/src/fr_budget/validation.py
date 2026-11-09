@@ -14,7 +14,13 @@ from dataclasses import dataclass
 from functools import partial
 
 from fr_budget import retraites_cohortes
-from fr_budget.agrege import assurance_chomage, assurance_maladie, bareme_ir, quotient_familial
+from fr_budget.agrege import (
+    assurance_chomage,
+    assurance_maladie,
+    bareme_ir,
+    quotient_familial,
+    quotients_ir,
+)
 from fr_budget.agrege.accises import recette_brute
 from fr_budget.agrege.assurance_chomage import cout_revalorisation_cumule, effet_contribution
 from fr_budget.agrege.cotisations import cout_allegements, valeur_point_modele
@@ -307,6 +313,20 @@ def _tm_dentaire_constat() -> float:
     )
 
 
+def _definitions_quotients_ir() -> list[tuple[str, Callable[[], float]]]:
+    """Quotients familial et conjugal : suppression complète, modèle à l'année de la source."""
+    return [
+        (
+            "ir_insee_familialisation_2018",
+            partial(quotients_ir.suppression, quotients_ir.LEVIER_QF, 2018),
+        ),
+        (
+            "ir_insee_conjugalisation_2018",
+            partial(quotients_ir.suppression, quotients_ir.LEVIER_QC, 2018),
+        ),
+    ]
+
+
 def _definitions_assurance_maladie() -> list[tuple[str, Callable[[], float]]]:
     """Assurance maladie : mêmes calculs que les tests de validation du levier."""
     return [
@@ -416,6 +436,7 @@ def _definitions() -> list[tuple[str, Callable[[], float]]]:
     definitions += _definitions_chomage()
     definitions += _definitions_chomage_regles()
     definitions += _definitions_assurance_maladie()
+    definitions += _definitions_quotients_ir()
     definitions += _confrontations_independantes()
     return definitions
 
@@ -463,6 +484,10 @@ def _confrontations_independantes() -> list[tuple[str, Callable[[], float]]]:
             partial(_point_tva, 2022, 2025, "brut", "ensemble"),
         ),
         ("tva_point_net_ipp_2025_quatre_taux", partial(_point_tva, 2022, 2025, "net", "ensemble")),
+        (
+            "ir_ofce_individualisation_optimisation_2016",
+            partial(quotients_ir.suppression, quotients_ir.LEVIER_QC, 2016),
+        ),
         ("ir_gel_ipp_inflation_1_0_2026", partial(rendement_gel, 1.0, 2026)),
         ("ir_gel_ipp_inflation_1_3_2026", partial(rendement_gel, 1.3, 2026)),
         ("ir_gel_ofce_2026", partial(rendement_gel, 1.1, 2026)),

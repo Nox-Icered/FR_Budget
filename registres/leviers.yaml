@@ -102,10 +102,10 @@ leviers:
     statut: beta
 
   - id: impot_revenu_structure
-    libelle: Impôt sur le revenu, structure (plafond du quotient familial)
-    parametres_reglables: [Variation des plafonds de l'avantage procuré par le quotient familial]
+    libelle: Impôt sur le revenu, structure (quotient familial et quotient conjugal)
+    parametres_reglables: [Variation des plafonds de l'avantage procuré par le quotient familial, Part supprimée de l'effet du quotient familial, Part supprimée de l'effet du quotient conjugal]
     moteur: agrege
-    references_visees: [Revue de dépenses IGF-IGAS de juin 2026, projets de loi de finances pour 2013 et 2014, Cour des comptes (2023)]
+    references_visees: [Revue de dépenses IGF-IGAS de juin 2026, projets de loi de finances pour 2013 et 2014, Cour des comptes (2023), Insee (2020 et 2021), OFCE (2021)]
     statut: beta
 
   - id: assurance_maladie

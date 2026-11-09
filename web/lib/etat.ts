@@ -40,6 +40,10 @@ export const LEVIERS_SOLIDARITE = ["indexation_pensions_prestations", "prime_act
 export const MISSION_SOLIDARITE = "solidarite_insertion_et_egalite_des_chances";
 // Le barème saisi fixe déjà les seuils : le moteur refuse de le cumuler avec ce levier.
 export const LEVIER_IR_SEUILS = "ir_seuils_bareme";
+// Franchises et indemnités journalières font partie de l'ONDAM : le moteur refuse de les cumuler
+// avec le levier sur sa progression (scenario.verifier_double_compte).
+export const LEVIER_ONDAM = "ondam_progression";
+export const LEVIERS_DANS_ONDAM = ["franchises_participations", "ij_plafond_smic"];
 
 // Leviers proposés sur le site, dans l'ordre d'affichage, avec le pas de leur curseur (en
 // points ou en centimes par litre). Les autres réponses exportées (leviers génériques des
@@ -69,6 +73,9 @@ export const LEVIERS_PUBLICS: { id: string; pas: number }[] = [
   { id: "chomage_contribution_patronale", pas: 0.05 },
   { id: "chomage_revalorisation", pas: 0.1 },
   { id: "chomage_duree_indemnisation", pas: 5 },
+  { id: "ondam_progression", pas: 0.1 },
+  { id: "franchises_participations", pas: 5 },
+  { id: "ij_plafond_smic", pas: 5 },
 ];
 // Âge effectif et âge légal de départ : le moteur refuse de les cumuler (double compte).
 export const LEVIERS_RETRAITES = ["retraites_age_depart", "retraites_age_legal"];
@@ -217,7 +224,8 @@ export function problemes(
     LEVIERS_RETRAITES.filter((id) => (etat.leviers[id] ?? 0) !== 0).length > 1 ||
     (regle(LEVIERS_SOLIDARITE) && (etat.parMission[MISSION_SOLIDARITE] ?? 0) !== 0) ||
     depenseChoisieDansImpot ||
-    (etat.bareme !== undefined && regle([LEVIER_IR_SEUILS]))
+    (etat.bareme !== undefined && regle([LEVIER_IR_SEUILS])) ||
+    (regle([LEVIER_ONDAM]) && regle(LEVIERS_DANS_ONDAM))
   ) {
     liste.push("double_compte");
   }

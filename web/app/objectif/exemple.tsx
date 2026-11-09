@@ -6,10 +6,11 @@ import { useId, useState } from "react";
 import Link from "next/link";
 import { texte } from "../../lib/textes";
 import type { ReponsesUnitaires, Version } from "../../lib/donnees";
-import { empreinteVersion, encoder, LEVIERS_PUBLICS, LEVIERS_RETRAITES } from "../../lib/etat";
+import { empreinteVersion, encoder, LEVIERS_PUBLICS } from "../../lib/etat";
 import {
   construireExemple,
   COTES,
+  exclue,
   PART_RECETTES_DEFAUT,
   PAS_PART_RECETTES,
   type Cote,
@@ -45,9 +46,8 @@ export function ExempleScenario({
   const unite = (id: string, v: number) => texte(`simulateur.leviers.${id}.valeur`, { valeur: signe.format(v) });
   const basculer = (id: string, coche: boolean) =>
     setCoches((c) => (coche ? [...c, id] : c.filter((x) => x !== id)));
-  // Âge effectif et âge légal de départ ne se cumulent pas (comme dans le simulateur).
-  const exclu = (id: string) =>
-    LEVIERS_RETRAITES.includes(id) && LEVIERS_RETRAITES.some((l) => l !== id && coches.includes(l));
+  // Combinaisons refusées par le simulateur (double compte) : case grisée.
+  const exclu = (id: string) => exclue(id, coches);
   const exemple =
     valide && coches.length > 0
       ? construireExemple(donnees, { leviers: coches, partRecettes, entree, objectif, pas })

@@ -1083,3 +1083,42 @@ datasets:
     methode_transformation: pipelines/deciles/extraire_cnd.py → data/processed/deciles/validation_insee.csv
     telecharge_le: 2026-11-06
 
+  - id: plfss2024_annexe5_pdf
+    source: plfss2024_annexe5
+    description: "Annexe 5 du PLFSS 2024 (PDF)"
+    fichier: data/raw/assurance_maladie/plfss2024_annexe5.pdf
+    empreinte_sha256: e40ceb8774695b15a6da06c90e1501976287969d960d78f20b236190d6e2be9c
+    methode_transformation: aucune ; montants saisis dans registres/references/chiffrages.yaml (localisation indiquée pour chacun)
+    telecharge_le: 2026-11-06
+
+  - id: plfss2025_annexe5_pdf
+    source: plfss2025_annexe5
+    description: "Annexe 5 du PLFSS 2025 (PDF)"
+    fichier: data/raw/assurance_maladie/plfss2025_annexe5.pdf
+    empreinte_sha256: 61f8b55e8dedd6095949c491ec6a5a6330361c941fbb0917f8c2041045fa006f
+    methode_transformation: aucune ; montants saisis dans registres/references/chiffrages.yaml (localisation indiquée pour chacun)
+    telecharge_le: 2026-11-06
+
+  - id: plfss2026_annexe5_pdf
+    source: plfss2026_annexe5
+    description: "Annexe 5 du PLFSS 2026 (PDF)"
+    fichier: data/raw/assurance_maladie/plfss2026_annexe5.pdf
+    empreinte_sha256: 000a060af2a725d079527094153e09a1f900c39a0abfc4c7b7675d73decabe1e
+    methode_transformation: aucune ; montants saisis dans registres/references/chiffrages.yaml (localisation indiquée pour chacun)
+    telecharge_le: 2026-11-06
+
+  - id: ccss_mai2024_franchises_pdf
+    source: ccss_mai2024_franchises
+    description: "Fiche éclairage de la CCSS de mai 2024 sur les franchises et participations forfaitaires (PDF)"
+    fichier: data/raw/assurance_maladie/ccss_mai2024_franchises.pdf
+    empreinte_sha256: 33ceecd4d7677f138d75a0105cdf11d71aa3ebbe49be0fb8df1454838427c35e
+    methode_transformation: aucune ; montants saisis dans registres/references/chiffrages.yaml (localisation indiquée pour chacun)
+    telecharge_le: 2026-11-06
+
+  - id: ccomptes_ralfss_mai2026_pdf
+    source: ccomptes_ralfss_mai2026
+    description: "Rapport de la Cour des comptes sur l'application des LFSS, mai 2026 (PDF)"
+    fichier: data/raw/assurance_maladie/ccomptes_ralfss_mai2026.pdf
+    empreinte_sha256: fc742dd7a219e209b08db6b7a04df6ed6286c57947c16b55ad0baccea595e7d9
+    methode_transformation: aucune ; montants saisis dans registres/references/chiffrages.yaml (localisation indiquée pour chacun)
+    telecharge_le: 2026-11-06

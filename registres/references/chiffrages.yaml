@@ -3989,3 +3989,224 @@ chiffrages:
     localisation: "Tableau 3 « La hausse relative des décohabitations entre 2003 et 2022 », colonne « % de foyers unis (mariés-pacsés) », 2022, ligne « Ensemble », page 5"
     saisi_le: 2026-11-05
     relecture: a_relire
+
+  - id: ondam_objectif_initial_2023
+    levier: assurance_maladie
+    source: plfss2025_annexe5
+    millesime: "2023"
+    mesure: "ONDAM 2023 voté initialement en LFSS pour 2023"
+    valeur: 244.1
+    unite: "Md€"
+    localisation: "Partie I.2.1, page 8"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: ondam_constat_2023
+    levier: assurance_maladie
+    source: plfss2025_annexe5
+    millesime: "2023"
+    mesure: "Dépenses constatées dans le champ de l'ONDAM 2023"
+    valeur: 247.9
+    unite: "Md€"
+    localisation: "Partie I.2.1, page 8"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: ondam_objectif_initial_2024
+    levier: assurance_maladie
+    source: plfss2026_annexe5
+    millesime: "2024"
+    mesure: "ONDAM 2024 fixé par la LFSS pour 2024"
+    valeur: 254.9
+    unite: "Md€"
+    localisation: "Partie I.2.1, page 18"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: ondam_constat_2024
+    levier: assurance_maladie
+    source: plfss2026_annexe5
+    millesime: "2024"
+    mesure: "Dépenses dans le champ de l'ONDAM 2024 (dernières informations des régimes)"
+    valeur: 256.4
+    unite: "Md€"
+    localisation: "Partie I.2.1, page 18"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: ondam_objectif_initial_2025
+    levier: assurance_maladie
+    source: plfss2026_annexe5
+    millesime: "2025"
+    mesure: "ONDAM 2025 fixé initialement par la LFSS pour 2025"
+    valeur: 265.9
+    unite: "Md€"
+    localisation: "Partie I.3, page 9"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: ondam_ecart_execution_2025
+    levier: assurance_maladie
+    source: plfss2026_annexe5
+    millesime: "2025"
+    mesure: "Écart prévu de l'ONDAM 2025 à l'objectif de la LFSS pour 2025 (sous-exécution)"
+    valeur: -0.5
+    unite: "Md€"
+    localisation: "Synthèse, page 4"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: ondam_economies_2024
+    levier: assurance_maladie
+    source: plfss2026_annexe5
+    millesime: "2024"
+    mesure: "Mesures d'économies intégrées à la construction de l'ONDAM 2024"
+    valeur: 3.5
+    unite: "Md€"
+    localisation: "Partie I.3, page 9"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: ondam_economies_2025
+    levier: assurance_maladie
+    source: plfss2026_annexe5
+    millesime: "2025"
+    mesure: "Mesures d'économies intégrées à la construction de l'ONDAM 2025"
+    valeur: 4.3
+    unite: "Md€"
+    localisation: "Partie I.3, page 9"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: ondam_plfss_2026
+    levier: assurance_maladie
+    source: plfss2026_annexe5
+    millesime: "2026"
+    mesure: "ONDAM 2026 proposé par le PLFSS pour 2026"
+    valeur: 270.4
+    unite: "Md€"
+    localisation: "Synthèse, page 8"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: franchises_pf_rendement_rg_2023
+    levier: assurance_maladie
+    source: ccomptes_ralfss_mai2026
+    millesime: "2023"
+    mesure: "Rendement des participations forfaitaires et des franchises, régime général"
+    valeur: 1470
+    unite: "M€"
+    localisation: "Tableau n° 24, page 181"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: franchises_pf_rendement_rg_2025
+    levier: assurance_maladie
+    source: ccomptes_ralfss_mai2026
+    millesime: "2025 (provisoire)"
+    mesure: "Rendement des participations forfaitaires et des franchises, régime général"
+    valeur: 2290
+    unite: "M€"
+    localisation: "Tableau n° 24, page 181"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: franchises_pf_rendement_tous_regimes_2025
+    levier: assurance_maladie
+    source: ccomptes_ralfss_mai2026
+    millesime: "2025"
+    mesure: "Rendement des participations forfaitaires et des franchises, ensemble des régimes de base"
+    valeur: 2.5
+    unite: "Md€"
+    localisation: "Chapitre sur les franchises, texte précédant le tableau n° 24, page 181"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: franchises_pf_doublement_constate_rg
+    levier: assurance_maladie
+    source: ccomptes_ralfss_mai2026
+    millesime: "2025 par rapport à 2023"
+    mesure: "Hausse du rendement en année pleine après le doublement des montants unitaires de 2024, régime général"
+    valeur: 820
+    unite: "M€"
+    localisation: "Texte précédant le tableau n° 24, page 181"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: franchises_pf_doublement_ccss
+    levier: assurance_maladie
+    source: ccss_mai2024_franchises
+    millesime: "réforme de 2024, année pleine, données 2022"
+    mesure: "Rendement du doublement des montants des franchises et participations forfaitaires (plafonds annuels inchangés), brut du non-recouvrement, tous régimes"
+    valeur: 880
+    unite: "M€"
+    localisation: "Encadré 1 et tableau 4, page 4"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: franchises_pf_rendement_2022_ccss
+    levier: assurance_maladie
+    source: ccss_mai2024_franchises
+    millesime: "2022"
+    mesure: "Rendement des franchises et participations forfaitaires avant la réforme, tous régimes"
+    valeur: 1640
+    unite: "M€"
+    localisation: "Tableau 4, page 4"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: franchises_pf_doublement_avec_plafonds_2026
+    levier: assurance_maladie
+    source: ccomptes_ralfss_mai2026
+    millesime: "projet de 2026, année pleine"
+    mesure: "Atténuation de dépenses estimée pour le doublement des montants unitaires et des plafonds journaliers et annuels (projets de décrets de l'été 2025)"
+    valeur: 2.3
+    unite: "Md€"
+    localisation: "Encadré « Évolutions prévues par le PLFSS pour 2026 », page 189"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: ij_plafond_1_8_1_4_plfss2025
+    levier: assurance_maladie
+    source: plfss2025_annexe5
+    millesime: "2025"
+    mesure: "Économie de la baisse du plafond des revenus pris en compte pour les indemnités journalières de 1,8 à 1,4 SMIC"
+    valeur: 0.6
+    unite: "Md€"
+    localisation: "Partie I.6, page 34"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: ij_plafond_montee_charge_2026
+    levier: assurance_maladie
+    source: plfss2026_annexe5
+    millesime: "2026"
+    mesure: "Montée en charge en 2026 de l'économie de la baisse du plafond des revenus pris en compte pour les indemnités journalières"
+    valeur: 0.5
+    unite: "Md€"
+    localisation: "Partie I.3, page 11"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: ij_plafond_lfss2025_ccomptes
+    levier: assurance_maladie
+    source: ccomptes_ralfss_mai2026
+    millesime: "2025"
+    mesure: "Plafonnement du montant remboursé d'indemnités journalières inclus dans la LFSS pour 2025"
+    valeur: 0.4
+    unite: "Md€"
+    localisation: "Première partie, page 92"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+
+  - id: ondam_economies_2026
+    levier: assurance_maladie
+    source: plfss2026_annexe5
+    millesime: "2026"
+    mesure: "Mesures d'économies intégrées à la construction de l'ONDAM 2026"
+    valeur: 7.1
+    unite: "Md€"
+    localisation: "Partie I.3, page 10"
+    saisi_le: 2026-11-06
+    relecture: a_relire
+

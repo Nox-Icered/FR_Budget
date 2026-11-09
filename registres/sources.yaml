@@ -1096,3 +1096,53 @@ sources:
     acces: direct
     consulte_le: 2026-11-06
 
+  - id: plfss2024_annexe5
+    nom: "Projet de loi de financement de la sécurité sociale pour 2024, annexe 5 « ONDAM et dépenses de santé »"
+    editeur: Direction de la sécurité sociale, Assemblée nationale
+    url: https://www.assemblee-nationale.fr/dyn/content/download/706618/file/Annexe%205.pdf
+    licence: Licence Ouverte 2.0
+    date_publication: 2023-09-27
+    millesime: PLFSS 2024 (exécution 2022, prévision 2023, construction 2024)
+    acces: direct
+    consulte_le: 2026-11-06
+
+  - id: plfss2025_annexe5
+    nom: "Projet de loi de financement de la sécurité sociale pour 2025, annexe 5 « ONDAM et dépenses de santé »"
+    editeur: Direction de la sécurité sociale
+    url: https://www.securite-sociale.fr/files/live/sites/SSFR/files/medias/PLFSS/2025/PLFSS2025-Annexe05.pdf
+    licence: Licence Ouverte 2.0
+    date_publication: 2024-10-10
+    millesime: PLFSS 2025 (exécution 2023, prévision 2024, construction 2025)
+    acces: direct
+    consulte_le: 2026-11-06
+
+  - id: plfss2026_annexe5
+    nom: "Projet de loi de financement de la sécurité sociale pour 2026, annexe 5 « ONDAM et dépenses de santé »"
+    editeur: Direction de la sécurité sociale, Assemblée nationale
+    url: https://www.assemblee-nationale.fr/dyn/contenu/visualisation/1088682/file/PLFSS2026-Annexe5-2025-10-14_avec%20couverture-2.pdf
+    licence: Licence Ouverte 2.0
+    date_publication: 2025-10-14
+    millesime: PLFSS 2026 (exécution 2024, prévision 2025, construction 2026)
+    acces: direct
+    consulte_le: 2026-11-06
+
+  - id: ccss_mai2024_franchises
+    nom: "Les comptes de la sécurité sociale, mai 2024, fiche éclairage 3.3 « Panorama des participations forfaitaires et des franchises médicales »"
+    editeur: Commission des comptes de la sécurité sociale
+    url: https://www.securite-sociale.fr/files/live/sites/SSFR/files/medias/CCSS/2024/CCSS%20-%20Fiche%20%C3%A9clairage%20mai%202024_Panorama%20des%20participations%20forfaitaires%20et%20des%20franchises%20m%C3%A9dicales.pdf
+    licence: Licence Ouverte 2.0
+    date_publication: 2024-05-30
+    millesime: données 2022 (DCIR/SNDS), réforme de 2024 en année pleine
+    acces: direct
+    consulte_le: 2026-11-06
+
+  - id: ccomptes_ralfss_mai2026
+    nom: "Cour des comptes, La sécurité sociale, rapport sur l'application des lois de financement de la sécurité sociale, mai 2026"
+    editeur: Cour des comptes (publié par vie-publique.fr)
+    url: https://www.vie-publique.fr/files/rapport/pdf/303409.pdf
+    licence: Licence Ouverte 2.0
+    date_publication: 2026-05-27
+    millesime: exécution 2025
+    acces: direct
+    consulte_le: 2026-11-06
+

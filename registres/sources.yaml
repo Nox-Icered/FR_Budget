@@ -1166,3 +1166,34 @@ sources:
     millesime: PLFSS 2025
     acces: direct
     consulte_le: 2026-11-09
+
+  - id: unedic_etude_impact_reforme_2019
+    nom: "Unédic, Impact de la réforme de l'assurance chômage 2019 (note d'impact du décret du 26 juillet 2019)"
+    editeur: Unédic
+    url: https://www.unedic.org/publications/etude-dimpact-de-la-reforme-de-lassurance-chomage-2019
+    licence: Réutilisation libre avec mention de la source (unedic.org)
+    date_publication: 2019-09-24
+    millesime: règles de 2019, impact 2019-2022
+    acces: direct
+    consulte_le: 2026-11-09
+
+  - id: unedic_etude_impact_juillet_2021
+    nom: "Unédic, Impact de l'évolution des règles d'assurance chômage au 1er juillet 2021 (estimations de mars 2021)"
+    editeur: Unédic
+    url: https://www.unedic.org/publications/etude-dimpact-de-levolution-des-regles-dassurance-chomage-au-1er-juillet-2021
+    licence: Réutilisation libre avec mention de la source (unedic.org)
+    date_publication: 2021-04-01
+    millesime: décret du 30 mars 2021, impact 2021-2022 et régime de croisière
+    acces: direct
+    consulte_le: 2026-11-09
+
+  - id: unedic_evaluation_reforme_2019_2021
+    nom: "Unédic, Évaluation de la réforme d'assurance chômage 2019-2021, principaux enseignements (synthèse)"
+    editeur: Unédic
+    url: https://www.unedic.org/publications/evaluation-de-la-reforme-d-assurance-chomage-2019-2021
+    licence: Réutilisation libre avec mention de la source (unedic.org)
+    date_publication: 2025-03-19
+    millesime: observations jusqu'à mi-2024
+    acces: direct
+    consulte_le: 2026-11-09
+

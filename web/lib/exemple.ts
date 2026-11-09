@@ -38,6 +38,8 @@ export const COTES: Record<string, Cote> = {
   retraites_age_legal: "depenses",
   chomage_revalorisation: "depenses",
   chomage_duree_indemnisation: "depenses",
+  chomage_affiliation_mois: "depenses",
+  chomage_degressivite_points: "depenses",
   // Assurance maladie : franchises, indemnités journalières et ticket modérateur changent des
   // prestations (soins remboursés).
   ondam_progression: "depenses",

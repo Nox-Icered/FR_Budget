@@ -339,6 +339,16 @@
         "libelle": "Ticket modérateur des soins dentaires ({reference} % du tarif depuis octobre 2023)",
         "valeur": "{valeur} pt",
         "explication": "Le ticket modérateur est la part du tarif que l'assurance maladie ne rembourse pas. Elle est souvent payée par la complémentaire santé. Il est passé de 30 % à 40 % en octobre 2023 pour les soins dentaires. Vers la droite, l'assurance maladie rembourse moins : les complémentaires, et les patients sans complémentaire, paient plus."
+      },
+      "chomage_affiliation_mois": {
+        "libelle": "Durée de travail exigée pour ouvrir un droit à l'allocation chômage ({reference} mois sur les 24 derniers)",
+        "valeur": "−{valeur} mois",
+        "explication": "Pour toucher l'allocation chômage, il faut avoir travaillé assez longtemps avant de perdre son emploi : 6 mois sur les 24 derniers mois depuis la réforme de 2019-2021 (4 mois avant). Ce curseur réduit cette durée, jusqu'à 4 mois : plus de personnes sont indemnisées, et les dépenses augmentent."
+      },
+      "chomage_degressivite_points": {
+        "libelle": "Dégressivité des allocations chômage les plus élevées (baisse de {reference} % à partir du 7e mois)",
+        "valeur": "−{valeur} pt",
+        "explication": "Depuis 2021, l'allocation des personnes de moins de 57 ans qui gagnaient plus de 4 800 € brut par mois (seuil de juin 2022) baisse jusqu'à 30 % à partir du 7e mois d'indemnisation. Ce curseur réduit cette baisse, jusqu'à la supprimer : ces allocataires reçoivent plus, et les dépenses augmentent."
       }
     },
     "limite_tva_accise": "La hausse de l'accise augmente aussi la TVA payée sur le carburant : cet effet n'est pas compté.",
@@ -517,7 +527,7 @@
     },
     "bloque_retraites": "Réglage impossible tant que l'autre levier de départ à la retraite est modifié : les deux mesurent le même effet.",
     "methode_retraites_age_legal": "Âge légal de départ (modèle par cohortes) : avec la population projetée par l'Insee et les taux de retraités par âge de la DREES, un an de plus sur l'âge légal améliore le solde des administrations publiques d'environ {effet} point de PIB une fois la mesure en place (moindres pensions et prélèvements sur ceux qui restent en emploi). L'écart est atteint génération par génération, en {duree} ans pour un an. Les prestations versées à ceux qui restent sans emploi ne sont pas comptées.",
-    "methode_assurance_chomage": "Assurance chômage (première étape, chiffrages de l'Unédic) : un point de contribution patronale rapporte {point} milliards d'euros par an ; un point de revalorisation des allocations coûte {revalorisation} milliard d'euros la première année pleine ; passer de 75 % à 80 % le coefficient appliqué à la durée coûte {duree} milliard d'euros par an une fois l'effet atteint. Les versements de l'assurance chômage à France Travail et aux retraites complémentaires restent entre administrations publiques et ne changent pas leur solde.",
+    "methode_assurance_chomage": "Assurance chômage (première étape, chiffrages de l'Unédic) : un point de contribution patronale rapporte {point} milliards d'euros par an ; un point de revalorisation des allocations coûte {revalorisation} milliard d'euros la première année pleine ; passer de 75 % à 80 % le coefficient appliqué à la durée coûte {duree} milliard d'euros par an une fois l'effet atteint. Les versements de l'assurance chômage à France Travail et aux retraites complémentaires restent entre administrations publiques et ne changent pas leur solde. Condition d'affiliation et dégressivité (bêta) : effets calés sur les études d'impact de l'Unédic de 2021 (régime de croisière), proportionnels au réglage, nets de la CSG et de la CRDS qui reviennent ; bornes tirées de l'étude de 2019 et de l'évaluation de 2025.",
     "en_savoir_plus": "À quoi sert ce curseur ?",
     "recherche": "Chercher une mesure (TVA, retraite, chômage…)",
     "recherche_libelle": "Chercher une mesure",

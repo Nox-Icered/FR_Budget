@@ -34,6 +34,7 @@ from __future__ import annotations
 from functools import cache
 from typing import Any
 
+from fr_budget.agrege.indexation import facteur_pib
 from fr_budget.baseline import resf
 from fr_budget.fourchette import Fourchette, encadrer
 from fr_budget.menages.openfisca import systeme_socio_fiscal
@@ -235,3 +236,110 @@ def effet_duree(rang: int) -> Fourchette:
         for k in (rapport.plage.basse, rapport.plage.haute)
     ]
     return encadrer(central, extremes)
+
+
+# --- Deuxième étape : condition d'affiliation et dégressivité ---------------------------------
+#
+# Plan validé par le responsable du projet le 9 novembre 2026 (fiche, § « Deuxième étape »).
+# Valeur centrale : étude d'impact de l'Unédic de 2021 (régime de croisière), montants pris en
+# euros de 2023 ; bornes : étude de 2019 (affiliation, régime de croisière en 2022) et
+# synthèse de l'évaluation de 2025 (dégressivité : estimation de 2021 arrondie). Effet
+# proportionnel au réglage (hypothèse du lot, à relire) ; net du retour de CSG et de CRDS, comme
+# les autres leviers d'allocations.
+
+ANNEE_MONTANTS_2021 = 2023
+"""Année des montants de l'étude de 2021 (régime de croisière, après la crise sanitaire)."""
+ANNEE_MONTANTS_2019 = 2022
+"""Année du régime de croisière de l'étude de 2019."""
+
+
+def vers_euros_2025_depuis(montant: float, annee: int) -> float:
+    """Montant d'une année passée porté en euros de 2025 par le PIB nominal (Insee)."""
+    return montant * facteur_pib(2025) / facteur_pib(annee)
+
+
+def ecart_affiliation_mois() -> float:
+    """Écart chiffré par l'Unédic : de 4 à 6 mois de travail exigés."""
+    return chiffrage("chomage_affiliation_mois_apres_2019") - chiffrage(
+        "chomage_affiliation_mois_avant_2019"
+    )
+
+
+def economie_affiliation_brute() -> Fourchette:
+    """Moindres allocations par mois de condition d'affiliation en plus, Md€ de 2025, avant le
+    retour de CSG et de CRDS. Centrale : étude de 2021 ; bornes : études de 2019 et de 2021."""
+    ecart = ecart_affiliation_mois()
+    central = (
+        vers_euros_2025_depuis(
+            chiffrage("chomage_affiliation_croisiere_2021") / MILLIONS_PAR_MILLIARD,
+            ANNEE_MONTANTS_2021,
+        )
+        / ecart
+    )
+    etude_2019 = (
+        vers_euros_2025_depuis(
+            chiffrage("chomage_affiliation_croisiere_2019") / MILLIONS_PAR_MILLIARD,
+            ANNEE_MONTANTS_2019,
+        )
+        / ecart
+    )
+    return encadrer(central, [etude_2019])
+
+
+def economie_degressivite_brute() -> Fourchette:
+    """Moindres allocations par point de dégressivité, Md€ de 2025, avant le retour de CSG et
+    de CRDS. Centrale : étude de 2021 ; borne : évaluation de 2025 (0,5 Md€, arrondi)."""
+    taux = chiffrage("chomage_degressivite_taux")
+    central = (
+        vers_euros_2025_depuis(
+            chiffrage("chomage_degressivite_croisiere_2021") / MILLIONS_PAR_MILLIARD,
+            ANNEE_MONTANTS_2021,
+        )
+        / taux
+    )
+    evaluation = (
+        vers_euros_2025_depuis(
+            -chiffrage("chomage_degressivite_croisiere_2025"), ANNEE_MONTANTS_2021
+        )
+        / taux
+    )
+    return encadrer(central, [evaluation])
+
+
+def _cout_net(brut: Fourchette) -> Fourchette:
+    """Effet sur le solde d'une unité du levier (moins d'exigences : allocations en plus), net
+    du retour de CSG et de CRDS."""
+    retour_central, *retours = parts_retour()
+    central = -brut.central * (1 - retour_central)
+    extremes = [-b * (1 - r) for b in (brut.bas, brut.haut) for r in retours]
+    return encadrer(central, extremes)
+
+
+def effet_affiliation_mois() -> Fourchette:
+    """Effet sur le solde, en Md€ de 2025, d'une baisse d'un mois de la durée de travail exigée
+    pour ouvrir un droit (régime de croisière)."""
+    return _cout_net(economie_affiliation_brute())
+
+
+def effet_degressivite_point() -> Fourchette:
+    """Effet sur le solde, en Md€ de 2025, d'une réduction d'un point de la dégressivité
+    (régime de croisière)."""
+    return _cout_net(economie_degressivite_brute())
+
+
+def part_premiere_annee_affiliation() -> float:
+    """Part de l'effet de croisière atteinte la première année pleine (étude de 2019)."""
+    return chiffrage("chomage_affiliation_2020_2019") / chiffrage(
+        "chomage_affiliation_croisiere_2019"
+    )
+
+
+def part_premiere_annee_degressivite() -> float:
+    """Part de l'effet de croisière atteinte la première année (étude de 2021 : milieu de
+    l'intervalle de 2022 rapporté au régime de croisière) ; la dégressivité ne joue qu'à partir
+    du 7e mois d'indemnisation."""
+    milieu = (
+        chiffrage("chomage_degressivite_2022_bas_2021")
+        + chiffrage("chomage_degressivite_2022_haut_2021")
+    ) / 2
+    return milieu / chiffrage("chomage_degressivite_croisiere_2021")

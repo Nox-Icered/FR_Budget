@@ -38,10 +38,13 @@ export const COTES: Record<string, Cote> = {
   retraites_age_legal: "depenses",
   chomage_revalorisation: "depenses",
   chomage_duree_indemnisation: "depenses",
-  // Assurance maladie : les franchises et les indemnités journalières réduisent des prestations.
+  // Assurance maladie : franchises, indemnités journalières et ticket modérateur changent des
+  // prestations (soins remboursés).
   ondam_progression: "depenses",
   franchises_participations: "depenses",
   ij_plafond_smic: "depenses",
+  ticket_moderateur_consultations: "depenses",
+  ticket_moderateur_dentaire: "depenses",
 };
 
 // Combinaisons refusées par le simulateur (double compte, lib/etat.ts) : âge effectif et âge

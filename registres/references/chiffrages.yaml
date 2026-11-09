@@ -4210,3 +4210,124 @@ chiffrages:
     saisi_le: 2026-11-06
     relecture: a_relire
 
+
+  - id: tm_consultations_taux_2024
+    levier: assurance_maladie
+    source: senat_cr_affaires_sociales_20241113
+    millesime: "2024"
+    mesure: "Ticket modérateur sur les actes des médecins et des sages-femmes avant la hausse proposée pour 2025"
+    valeur: 30
+    unite: "%"
+    localisation: "Réunion du 13 novembre 2024, intervention de la rapporteure (branche maladie) : « augmenter de 30 % à 40 % le ticket modérateur sur les actes des médecins et des sages-femmes »"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: tm_consultations_taux_projet_2025
+    levier: assurance_maladie
+    source: senat_cr_affaires_sociales_20241113
+    millesime: "PLFSS 2025"
+    mesure: "Ticket modérateur sur les actes des médecins et des sages-femmes après la hausse proposée pour 2025 (mesure réglementaire)"
+    valeur: 40
+    unite: "%"
+    localisation: "Réunion du 13 novembre 2024, même passage"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: tm_consultations_economie_ville_plfss2025
+    levier: assurance_maladie
+    source: plfss2025_annexe5
+    millesime: "PLFSS 2025"
+    mesure: "Économie attendue de la hausse du ticket modérateur sur les consultations, soins de ville, construction de l'ONDAM 2025"
+    valeur: 1.0
+    unite: "Md€"
+    localisation: "Sous-objectif soins de ville, page 8 : « la hausse du ticket modérateur sur les consultations (1,0 Md€ en ville) »"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: tm_consultations_economie_etablissements_plfss2025
+    levier: assurance_maladie
+    source: plfss2025_annexe5
+    millesime: "PLFSS 2025"
+    mesure: "Économie attendue de la hausse du ticket modérateur sur les actes et consultations externes des établissements de santé"
+    valeur: 0.1
+    unite: "Md€"
+    localisation: "Sous-objectif établissements de santé, page 9 : « 0,1 Md€ émargeant sur les établissement au titre de la hausse du ticket modérateur sur les actes et consultations externes »"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: tm_consultations_economie_senat_2025
+    levier: assurance_maladie
+    source: senat_avis_plfss2025_finances
+    millesime: "PLFSS 2025"
+    mesure: "Rendement attendu de la hausse du ticket modérateur des médecins et des sages-femmes (part non remboursée d'une consultation de médecine générale de 7,95 € à 12 €)"
+    valeur: 1.1
+    unite: "Md€"
+    localisation: "Partie sur l'ONDAM, page 38"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: tm_dentaire_taux_avant_2023
+    levier: assurance_maladie
+    source: ccomptes_ralfss_mai2026
+    millesime: "2023"
+    mesure: "Ticket modérateur des soins dentaires avant la hausse décidée en LFSS pour 2023"
+    valeur: 30
+    unite: "%"
+    localisation: "Chapitre sur les soins dentaires, page 216"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: tm_dentaire_taux_apres_2023
+    levier: assurance_maladie
+    source: ccomptes_ralfss_mai2026
+    millesime: "2023"
+    mesure: "Ticket modérateur des soins dentaires depuis le 15 octobre 2023"
+    valeur: 40
+    unite: "%"
+    localisation: "Chapitre sur les soins dentaires, page 216"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: tm_dentaire_economie_oct2023_dec2024
+    levier: assurance_maladie
+    source: ccomptes_ralfss_mai2026
+    millesime: "octobre 2023 à décembre 2024"
+    mesure: "Économie constatée pour l'assurance maladie de la hausse du ticket modérateur des soins dentaires, du 15 octobre 2023 à décembre 2024"
+    valeur: 525
+    unite: "M€"
+    localisation: "Chapitre sur les soins dentaires, page 216"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: tm_dentaire_hausse_part_complementaires
+    levier: assurance_maladie
+    source: ccomptes_ralfss_mai2026
+    millesime: "2024"
+    mesure: "Hausse de la part des organismes complémentaires dans le financement des soins dentaires due à la hausse du ticket modérateur"
+    valeur: 2
+    unite: "points"
+    localisation: "Chapitre sur les soins dentaires, page 216"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: dentaire_depenses_complementaires_2024
+    levier: assurance_maladie
+    source: ccomptes_ralfss_mai2026
+    millesime: "2024"
+    mesure: "Dépenses de soins dentaires des organismes complémentaires (d'après la DREES)"
+    valeur: 7.4
+    unite: "Md€"
+    localisation: "Chapitre sur les soins dentaires, page 215"
+    saisi_le: 2026-11-09
+    relecture: a_relire
+
+  - id: dentaire_part_complementaires_2024
+    levier: assurance_maladie
+    source: ccomptes_ralfss_mai2026
+    millesime: "2024"
+    mesure: "Part des organismes complémentaires dans le financement des soins dentaires (d'après la DREES)"
+    valeur: 47
+    unite: "%"
+    localisation: "Chapitre sur les soins dentaires, page 215"
+    saisi_le: 2026-11-09
+    relecture: a_relire

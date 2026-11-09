@@ -24,11 +24,29 @@ en « bêta, non validé ».
   plafond (hypothèse du lot : la répartition des salaires entre 1,4 et 1,8 Smic n'est pas
   connue). Première année : part de l'économie de 2025 dans l'économie en année pleine.
 
-Les leviers sur les franchises et les indemnités journalières sont des façons d'atteindre
-l'ONDAM : leur combinaison avec le levier ONDAM est refusée (double compte).
+Deuxième étape (plan validé le 9 novembre 2026, option (a)) : deux leviers sur le ticket
+modérateur, en points (positif : hausse de la part non remboursée), de -10 à +10 points, seul
+domaine chiffré.
+
+- **Consultations des médecins et des sages-femmes** (``ticket_moderateur_consultations``) : la
+  hausse de 30 % à 40 % prévue pour 2025 devait rapporter 1,0 Md€ en ville et 0,1 Md€ dans les
+  établissements (annexe 5 du PLFSS pour 2025 ; 1,1 Md€ selon le Sénat), effet proportionnel
+  aux points. Estimation avant la mesure, qui n'a pas été appliquée : bornes de la part des
+  économies prévues effectivement réalisées (hypothèse ``ondam_realisation_economies``).
+- **Soins dentaires** (``ticket_moderateur_dentaire``) : la hausse de 30 % à 40 % appliquée le
+  15 octobre 2023 a économisé 525 M€ jusqu'à décembre 2024 (constat de la Cour des comptes, mai
+  2026), ramené à un an. Borne basse : hausse de deux points de la part des organismes
+  complémentaires dans le financement des soins dentaires de 2024, même source.
+
+Montants en euros de l'année du chiffrage, sans conversion (comme les franchises).
+
+Les leviers sur les franchises, les indemnités journalières et le ticket modérateur sont des
+façons d'atteindre l'ONDAM : leur combinaison avec le levier ONDAM est refusée (double compte).
 """
 
 from __future__ import annotations
+
+from datetime import date
 
 from fr_budget.fourchette import Fourchette, encadrer
 from fr_budget.registres.acces import chiffrage, hypothese
@@ -36,7 +54,12 @@ from fr_budget.registres.acces import chiffrage, hypothese
 LEVIER_ONDAM = "ondam_progression"
 LEVIER_FRANCHISES = "franchises_participations"
 LEVIER_IJ = "ij_plafond_smic"
-LEVIERS = (LEVIER_ONDAM, LEVIER_FRANCHISES, LEVIER_IJ)
+LEVIER_TM_CONSULTATIONS = "ticket_moderateur_consultations"
+LEVIER_TM_DENTAIRE = "ticket_moderateur_dentaire"
+LEVIERS_TICKET_MODERATEUR = (LEVIER_TM_CONSULTATIONS, LEVIER_TM_DENTAIRE)
+LEVIERS = (LEVIER_ONDAM, LEVIER_FRANCHISES, LEVIER_IJ, *LEVIERS_TICKET_MODERATEUR)
+LEVIERS_DANS_ONDAM = (LEVIER_FRANCHISES, LEVIER_IJ, *LEVIERS_TICKET_MODERATEUR)
+"""Mesures qui sont des façons d'atteindre l'ONDAM : refusées avec le levier ONDAM."""
 HYPOTHESE_REALISATION = "ondam_realisation_economies"
 
 POURCENT = 100.0
@@ -49,6 +72,11 @@ PLAFOND_ACTUEL_SMIC = 140.0
 ECART_PLAFONDS_SMIC = 40.0
 """Écart entre le plafond antérieur (180 % du Smic) et le plafond actuel (140 %), en points de
 Smic : seul domaine chiffré."""
+DEBUT_CONSTAT_DENTAIRE = date(2023, 10, 15)
+FIN_CONSTAT_DENTAIRE = date(2025, 1, 1)
+"""Période du constat de la Cour des comptes (mai 2026, page 216) : hausse appliquée le 15 octobre
+2023, économie mesurée jusqu'à fin décembre 2024 (borne exclue)."""
+JOURS_PAR_AN = 365.25
 
 
 def ondam_reference() -> float:
@@ -119,3 +147,61 @@ def part_premiere_annee_ij() -> float:
     montee = chiffrage("ij_plafond_montee_charge_2026")
     parts = [premiere / (premiere + montee) for premiere in _economies_ij()]
     return sum(parts) / len(parts)
+
+
+def ecart_tm_consultations() -> float:
+    """Hausse chiffrée du ticket modérateur des consultations, en points (de 30 % à 40 %)."""
+    return chiffrage("tm_consultations_taux_projet_2025") - chiffrage("tm_consultations_taux_2024")
+
+
+def ecart_tm_dentaire() -> float:
+    """Hausse du ticket modérateur des soins dentaires de 2023, en points (de 30 % à 40 %)."""
+    return chiffrage("tm_dentaire_taux_apres_2023") - chiffrage("tm_dentaire_taux_avant_2023")
+
+
+def economie_tm_consultations() -> float:
+    """Économie attendue de la hausse prévue pour 2025, en Md€ : soins de ville et établissements
+    (annexe 5 du PLFSS pour 2025, pages 8 et 9)."""
+    return chiffrage("tm_consultations_economie_ville_plfss2025") + chiffrage(
+        "tm_consultations_economie_etablissements_plfss2025"
+    )
+
+
+def rendement_point_tm_consultations() -> Fourchette:
+    """Rendement d'un point de ticket modérateur en plus sur les consultations des médecins et des
+    sages-femmes, en Md€ (positif : économie). Central : chiffrage du PLFSS pour 2025 rapporté aux
+    points ; bornes : part des économies prévues réalisées (``ondam_realisation_economies``)."""
+    point = economie_tm_consultations() / ecart_tm_consultations()
+    plage = hypothese(HYPOTHESE_REALISATION).plage
+    return encadrer(point, [point * plage.basse, point * plage.haute])
+
+
+def annees_constat_dentaire() -> float:
+    """Durée de la période du constat de la Cour des comptes, en années."""
+    return (FIN_CONSTAT_DENTAIRE - DEBUT_CONSTAT_DENTAIRE).days / JOURS_PAR_AN
+
+
+def economie_annuelle_tm_dentaire() -> float:
+    """Économie constatée de la hausse de 2023, ramenée à un an, en Md€ (Cour des comptes)."""
+    constat = chiffrage("tm_dentaire_economie_oct2023_dec2024") / MILLIONS_PAR_MILLIARD
+    return constat / annees_constat_dentaire()
+
+
+def economie_part_complementaires_dentaire() -> float:
+    """Économie de 2024 lue dans la hausse de la part des organismes complémentaires, en Md€ :
+    points de part gagnés fois les dépenses de soins dentaires de 2024 (dépenses des
+    complémentaires divisées par leur part ; Cour des comptes, d'après la DREES)."""
+    total = chiffrage("dentaire_depenses_complementaires_2024") / (
+        chiffrage("dentaire_part_complementaires_2024") / POURCENT
+    )
+    return chiffrage("tm_dentaire_hausse_part_complementaires") / POURCENT * total
+
+
+def rendement_point_tm_dentaire() -> Fourchette:
+    """Rendement d'un point de ticket modérateur en plus sur les soins dentaires, en Md€ (positif :
+    économie). Central : constat ramené à un an ; borne basse : hausse de la part des
+    complémentaires ; pas de borne haute sourcée au-delà du constat."""
+    ecart = ecart_tm_dentaire()
+    return encadrer(
+        economie_annuelle_tm_dentaire() / ecart, [economie_part_complementaires_dentaire() / ecart]
+    )

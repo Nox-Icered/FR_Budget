@@ -214,6 +214,8 @@ LEVIERS_CHOMAGE = (LEVIER_CHOMAGE_CONTRIBUTION, *LEVIERS_CHOMAGE_PROFIL)
 LEVIER_ONDAM = assurance_maladie.LEVIER_ONDAM
 LEVIER_FRANCHISES = assurance_maladie.LEVIER_FRANCHISES
 LEVIER_IJ_PLAFOND = assurance_maladie.LEVIER_IJ
+LEVIER_TM_CONSULTATIONS = assurance_maladie.LEVIER_TM_CONSULTATIONS
+LEVIER_TM_DENTAIRE = assurance_maladie.LEVIER_TM_DENTAIRE
 LEVIERS_ASSURANCE_MALADIE = assurance_maladie.LEVIERS
 # Bornes choisies au lot assurance chômage (à relire). Contribution : ±1 point (repères : la
 # contribution exceptionnelle de 0,05 point de 2017 à 2025 ; la modulation des taux par
@@ -366,6 +368,10 @@ def rendement_unitaire(levier: str) -> Fourchette:
         return assurance_maladie.rendement_pourcent_franchises()
     if levier == LEVIER_IJ_PLAFOND:
         return assurance_maladie.rendement_smic_plafond_ij()
+    if levier == LEVIER_TM_CONSULTATIONS:
+        return assurance_maladie.rendement_point_tm_consultations()
+    if levier == LEVIER_TM_DENTAIRE:
+        return assurance_maladie.rendement_point_tm_dentaire()
     if levier in LEVIERS_CHOMAGE_PROFIL:
         # Affichage : première année civile pleine (revalorisation), plein effet (durée).
         rang = (
@@ -521,6 +527,12 @@ def taux_reference(levier: str) -> float:
     if levier == LEVIER_IJ_PLAFOND:
         # Plafond actuel des revenus pris en compte, en % du Smic.
         return assurance_maladie.PLAFOND_ACTUEL_SMIC
+    if levier == LEVIER_TM_CONSULTATIONS:
+        # Ticket modérateur des consultations des médecins et des sages-femmes, en %.
+        return chiffrage("tm_consultations_taux_2024")
+    if levier == LEVIER_TM_DENTAIRE:
+        # Ticket modérateur des soins dentaires depuis le 15 octobre 2023, en %.
+        return chiffrage("tm_dentaire_taux_apres_2023")
     if levier in LEVIERS_DOTATIONS:
         return dotations.montant_levier(LEVIERS_DOTATIONS[levier])
     if levier in LEVIERS_REMUNERATIONS:
@@ -605,6 +617,14 @@ def bornes_levier(levier: str) -> tuple[float, float]:
         return -assurance_maladie.BORNE_FRANCHISES, assurance_maladie.BORNE_FRANCHISES
     if levier == LEVIER_IJ_PLAFOND:
         return 0.0, assurance_maladie.ECART_PLAFONDS_SMIC
+    if levier == LEVIER_TM_CONSULTATIONS:
+        # Seul domaine chiffré : la hausse de 10 points prévue pour 2025, dans les deux sens.
+        ecart = assurance_maladie.ecart_tm_consultations()
+        return -ecart, ecart
+    if levier == LEVIER_TM_DENTAIRE:
+        # Seul domaine chiffré : la hausse de 10 points de 2023, dans les deux sens.
+        ecart = assurance_maladie.ecart_tm_dentaire()
+        return -ecart, ecart
     if levier == LEVIER_CHOMAGE_REVALORISATION:
         return -BORNE_CHOMAGE_REVALORISATION, BORNE_CHOMAGE_REVALORISATION
     if levier == LEVIER_CHOMAGE_DUREE:
@@ -808,8 +828,13 @@ def verifier_double_compte(mesures: Sequence[Mesure]) -> None:
     # Une mesure à zéro ne change rien : elle ne bloque aucune combinaison.
     reglees = [m for m in mesures if m.valeur != 0]
     leviers_regles = {m.levier for m in reglees}
-    if LEVIER_ONDAM in leviers_regles and leviers_regles & {LEVIER_FRANCHISES, LEVIER_IJ_PLAFOND}:
-        msg = "double compte : les franchises et les indemnités journalières font partie de l'ONDAM"
+    if LEVIER_ONDAM in leviers_regles and leviers_regles & set(
+        assurance_maladie.LEVIERS_DANS_ONDAM
+    ):
+        msg = (
+            "double compte : les franchises, les indemnités journalières et le ticket modérateur"
+            " font partie de l'ONDAM"
+        )
         raise ValueError(msg)
     if {LEVIER_IR_BAREME, LEVIER_IR_SEUILS} <= {m.levier for m in reglees}:
         msg = "double compte : le barème saisi fixe déjà les seuils de l'impôt sur le revenu"
@@ -1364,6 +1389,16 @@ PROVENANCE_LEVIERS = {
         ("plfss2025_annexe5", "plfss2026_annexe5", "ccomptes_ralfss_mai2026"),
         (),
     ),
+    LEVIER_TM_CONSULTATIONS: (
+        (
+            "plfss2025_annexe5",
+            "senat_cr_affaires_sociales_20241113",
+            "senat_avis_plfss2025_finances",
+            "plfss2026_annexe5",
+        ),
+        (assurance_maladie.HYPOTHESE_REALISATION,),
+    ),
+    LEVIER_TM_DENTAIRE: (("ccomptes_ralfss_mai2026",), ()),
 }
 
 

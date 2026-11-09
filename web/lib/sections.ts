@@ -21,7 +21,16 @@ export const SECTIONS: { id: string; leviers: string[] }[] = [
     id: "assurance_chomage",
     leviers: ["chomage_contribution_patronale", "chomage_revalorisation", "chomage_duree_indemnisation"],
   },
-  { id: "assurance_maladie", leviers: ["ondam_progression", "franchises_participations", "ij_plafond_smic"] },
+  {
+    id: "assurance_maladie",
+    leviers: [
+      "ondam_progression",
+      "franchises_participations",
+      "ij_plafond_smic",
+      "ticket_moderateur_consultations",
+      "ticket_moderateur_dentaire",
+    ],
+  },
   {
     id: "fonction_publique_collectivites",
     leviers: [

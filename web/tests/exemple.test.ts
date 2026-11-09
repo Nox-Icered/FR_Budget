@@ -120,7 +120,12 @@ test("fourchette du résultat : basse ≤ centrale ≤ haute", () => {
 test("progression de l'ONDAM et mesures qu'il contient : refusées ensemble, comme dans le simulateur", async () => {
   const { exclue, incompatibles } = await import("../lib/exemple.ts");
   const o = objectif(-1);
-  for (const autre of ["franchises_participations", "ij_plafond_smic"]) {
+  for (const autre of [
+    "franchises_participations",
+    "ij_plafond_smic",
+    "ticket_moderateur_consultations",
+    "ticket_moderateur_dentaire",
+  ]) {
     const e = construireExemple(donnees, choix(["ondam_progression", autre], 0, o));
     assert.deepEqual(e.problemes, ["double_compte"]);
     assert.ok(exclue(autre, ["ondam_progression"]));

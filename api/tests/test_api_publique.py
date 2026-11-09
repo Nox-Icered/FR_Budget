@@ -162,3 +162,24 @@ def test_aucune_saisie_journalisee(client: TestClient, caplog: pytest.LogCapture
 def test_description_openapi_versionnee() -> None:
     """``api/openapi-v1.json`` est à jour : régénérer avec ``python -m fr_budget_api.openapi``."""
     assert FICHIER.read_text(encoding="utf-8") == texte()
+
+
+def test_corps_par_morceaux_trop_grand_refuse(client: TestClient) -> None:
+    """Sans ``Content-Length`` (envoi par morceaux), la limite compte les octets reçus."""
+
+    def morceaux() -> Any:
+        yield b'{"mesures": [], "x": "'
+        for _ in range(TAILLE_MAX // 1024 + 1):
+            yield b"a" * 1024
+        yield b'"}'
+
+    json = {"content-type": "application/json"}
+    r = client.post("/v1/scenario", content=morceaux(), headers=json)
+    assert r.status_code == 413
+    assert r.json()["erreur"]["code"] == "requete_trop_grande"
+
+    def petit() -> Any:
+        yield b'{"mesures": []}'
+
+    r = client.post("/v1/scenario", content=petit(), headers=json)
+    assert r.status_code == 200

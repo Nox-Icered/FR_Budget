@@ -23,11 +23,10 @@ from __future__ import annotations
 
 import json
 import math
-from collections.abc import Awaitable, Callable
 from functools import cache
 from typing import Any, Literal
 
-from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -40,6 +39,7 @@ from fr_budget.menages import leviers as module_leviers_menages
 from fr_budget.registres.verification import RACINE_DEPOT
 from pydantic import BaseModel, Field, field_validator
 from starlette.exceptions import HTTPException as StarletteHTTPException
+from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 # Import circulaire voulu : ``app`` monte cette sous-application dans ``creer_application`` ;
 # ses fonctions ne sont appelées qu'à la requête. Importer ``fr_budget_api.app`` en premier.
@@ -122,6 +122,53 @@ def _erreur(statut: int, code: str, message: str, champs: list[str] | None = Non
     )
 
 
+def _trop_grande() -> JSONResponse:
+    return _erreur(413, "requete_trop_grande", f"Corps limité à {TAILLE_MAX} octets.")
+
+
+class LimiteTaille:
+    """Refuse un corps de plus de ``TAILLE_MAX`` octets : d'après ``Content-Length`` s'il est
+    donné, sinon en comptant les octets reçus (envoi par morceaux), sans lire au-delà de la
+    limite. Le corps accepté est ensuite rejoué tel quel à l'application."""
+
+    def __init__(self, app: ASGIApp) -> None:
+        self.app = app
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+        longueur = dict(scope["headers"]).get(b"content-length")
+        if longueur is not None and (not longueur.isdigit() or int(longueur) > TAILLE_MAX):
+            await _trop_grande()(scope, receive, send)
+            return
+        morceaux: list[bytes] = []
+        total = 0
+        while True:
+            message = await receive()
+            if message["type"] != "http.request":
+                return  # client déconnecté
+            morceau = message.get("body", b"")
+            total += len(morceau)
+            if total > TAILLE_MAX:
+                await _trop_grande()(scope, receive, send)
+                return
+            morceaux.append(morceau)
+            if not message.get("more_body", False):
+                break
+        corps = b"".join(morceaux)
+        rejoue = False
+
+        async def rejouer() -> Message:
+            nonlocal rejoue
+            if not rejoue:
+                rejoue = True
+                return {"type": "http.request", "body": corps, "more_body": False}
+            return await receive()
+
+        await self.app(scope, rejouer, send)
+
+
 class ErreurV1(HTTPException):
     def __init__(self, statut: int, code: str, message: str) -> None:
         super().__init__(status_code=statut, detail=message)
@@ -201,14 +248,7 @@ def creer_api_publique() -> FastAPI:
         allow_credentials=False,
     )
 
-    @api.middleware("http")
-    async def limiter_taille(
-        requete: Request, suite: Callable[[Request], Awaitable[Response]]
-    ) -> Response:
-        longueur = requete.headers.get("content-length")
-        if longueur is not None and (not longueur.isdigit() or int(longueur) > TAILLE_MAX):
-            return _erreur(413, "requete_trop_grande", f"Corps limité à {TAILLE_MAX} octets.")
-        return await suite(requete)
+    api.add_middleware(LimiteTaille)
 
     @api.exception_handler(RequestValidationError)
     async def requete_invalide(_: Request, exc: RequestValidationError) -> JSONResponse:

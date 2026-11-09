@@ -55,3 +55,9 @@ def test_entrees_refusees() -> None:
         ob.resoudre("tva_taux_normal", ENTREE, ob.Objectif("dette", 2026, 100.0))
     with pytest.raises(ValueError, match="levier"):
         ob.resoudre("inconnu", ENTREE, ob.Objectif("dette", 2040, 100.0))
+
+
+def test_fourchette_quand_seule_la_trajectoire_centrale_atteint_la_cible() -> None:
+    s = ob.Solution(par_borne={"bas": None, "central": 1.5, "haut": None}, sans_mesure=100.0)
+    f = ob.fourchette_valeur(s)
+    assert f is not None and f.bas == f.central == f.haut == 1.5

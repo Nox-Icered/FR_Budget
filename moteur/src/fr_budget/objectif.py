@@ -99,4 +99,5 @@ def fourchette_valeur(s: Solution) -> Fourchette | None:
     if c is None:
         return None
     autres = [v for b, v in s.par_borne.items() if b != "central" and v is not None]
-    return Fourchette(min(c, *autres), c, max(c, *autres))
+    valeurs = [c, *autres]
+    return Fourchette(min(valeurs), c, max(valeurs))

@@ -149,6 +149,8 @@ export default function PageSimulateur() {
           franchises: deuxDecimales(10 * donnees.leviers.franchises_participations.rendement_unitaire),
           // Rendement d'un point de Smic ; 10 points valent 0,1 Smic.
           ij: deuxDecimales(-10 * donnees.leviers.ij_plafond_smic.rendement_unitaire),
+          tm_consultations: deuxDecimales(donnees.leviers.ticket_moderateur_consultations.rendement_unitaire),
+          tm_dentaire: deuxDecimales(donnees.leviers.ticket_moderateur_dentaire.rendement_unitaire),
         })}
       </p>
       {donnees.croissance && (

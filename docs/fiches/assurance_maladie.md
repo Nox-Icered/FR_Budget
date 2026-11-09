@@ -1,7 +1,7 @@
 ---
 levier: assurance_maladie
 statut: beta
-mise_a_jour: 2026-11-06
+mise_a_jour: 2026-11-09
 ---
 
 # Fiche : assurance maladie, première étape (leviers agrégés)
@@ -81,3 +81,39 @@ Confrontation indépendante : la Cour des comptes constate +820 M€ en année p
 - L'effet d'activité (multiplicateur, désactivé par défaut) prend la catégorie « prestations » pour les trois leviers.
 - Les bornes des curseurs.
 - L'effet proportionnel du plafond des indemnités journalières.
+
+## 6. Deuxième étape : ticket modérateur (plan validé le 9 novembre 2026, option a)
+
+Le ticket modérateur est la part du tarif que l'assurance maladie ne rembourse pas. Deux leviers bêta, en points, de −10 à +10 (positif : hausse de la part non remboursée, donc économie). Le domaine est celui des deux hausses de 10 points chiffrées.
+
+| Levier | Un point | Base du chiffrage | Fourchette d'un point |
+|---|---|---|---|
+| `ticket_moderateur_consultations` (médecins et sages-femmes, 30 % aujourd'hui) | 0,110 Md€ | Hausse de 30 % à 40 % prévue pour 2025 : 1,0 Md€ en ville et 0,1 Md€ dans les établissements (annexe 5 du PLFSS pour 2025, pages 8 et 9). Les taux viennent du Sénat (commission des affaires sociales, 13 novembre 2024) | de 0,063 à 0,123 Md€ : part des économies prévues réalisées (`ondam_realisation_economies`) |
+| `ticket_moderateur_dentaire` (40 % depuis le 15 octobre 2023) | 0,043 Md€ | Hausse de 30 % à 40 % du 15 octobre 2023 : 525 M€ économisés jusqu'à fin 2024 (Cour des comptes, mai 2026, page 216), ramenés à un an (14,6 mois) | de 0,031 à 0,043 Md€ : la borne basse vient de la hausse de 2 points de la part des complémentaires, sur 15,7 Md€ de soins dentaires en 2024 (7,4 Md€ payés par les complémentaires, 47 %), même page |
+
+- **Effet linéaire.** Même rendement par point dans les deux sens, sans changement de comportement.
+- **Qui paie.** L'économie pour l'assurance maladie est surtout payée par les complémentaires santé, donc par leurs cotisations, et par les patients sans complémentaire. Cet effet n'est pas calculé.
+- **Euros.** Montants en euros de l'année du chiffrage (2025 pour les consultations, 2023-2024 pour le dentaire), sans conversion, comme pour les franchises.
+- **Double compte.** La combinaison avec le levier ONDAM est refusée.
+- **Ménages types et dixièmes.** Comme pour les autres leviers d'assurance maladie : pas d'effet calculé, pas de répartition.
+
+### Validation
+
+| Référence | Modèle | Référence | Écart |
+|---|---|---|---|
+| Hausse de 10 points sur les consultations (avis n° 130 du Sénat sur le PLFSS 2025, page 38) | 1,10 Md€ | 1,1 Md€ | 0 % (calage) |
+| Hausse de 10 points sur les soins dentaires, d'octobre 2023 à fin 2024 (Cour des comptes) | 525 M€ | 525 M€ | 0 % (calage) |
+
+Les deux leviers restent en bêta :
+- **Consultations.** Le chiffre du Sénat reprend celui du gouvernement : ce n'est pas une source indépendante. La mesure n'a pas été appliquée, donc il n'existe pas de constat. Il n'y a qu'un seul millésime.
+- **Soins dentaires.** Le constat de la Cour des comptes est une source indépendante. En revanche, le chiffrage officiel avant la mesure est introuvable : l'annexe 5 du PLFSS pour 2023 n'en parle pas, et celle de 2024 l'inclut dans un total. La seconde lecture tirée de la Cour (part des complémentaires) donne 27 % de moins que le constat.
+
+### Choix à relire
+
+- **Fourchette des consultations.** Elle applique au chiffrage la part des économies réalisées sur l'ensemble de l'ONDAM (2024 et 2025). C'est une hypothèse : rien ne dit que cette mesure aurait été réalisée comme la moyenne.
+- **Fourchette du dentaire.**
+  - Pas de borne haute sourcée au-delà du constat.
+  - Le passage de 2 points de part à une économie suppose que le reste de la part n'ait pas bougé à cause de la mesure. Le chiffre est arrondi par la Cour.
+- **Durée du constat.** Du 15 octobre 2023 au 31 décembre 2024 : 444 jours, soit 14,6 mois.
+- **Bornes de ±10 points.** C'est le seul domaine chiffré.
+- **Hausse retirée.** La hausse sur les consultations a été réduite puis retirée pendant le débat de 2025. Ce retrait n'est documenté que par la presse, qui n'est pas utilisée ici.

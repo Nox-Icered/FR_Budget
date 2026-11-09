@@ -42,10 +42,15 @@ export const MISSION_SOLIDARITE = "solidarite_insertion_et_egalite_des_chances";
 export const LEVIER_IR_SEUILS = "ir_seuils_bareme";
 // Plafond du quotient familial et suppression de son effet : le moteur refuse de les cumuler.
 export const LEVIERS_QUOTIENT_FAMILIAL = ["ir_plafond_quotient_familial", "ir_quotient_familial_effet"];
-// Franchises et indemnités journalières font partie de l'ONDAM : le moteur refuse de les cumuler
+// Franchises, indemnités journalières et ticket modérateur font partie de l'ONDAM : le moteur refuse de les cumuler
 // avec le levier sur sa progression (scenario.verifier_double_compte).
 export const LEVIER_ONDAM = "ondam_progression";
-export const LEVIERS_DANS_ONDAM = ["franchises_participations", "ij_plafond_smic"];
+export const LEVIERS_DANS_ONDAM = [
+  "franchises_participations",
+  "ij_plafond_smic",
+  "ticket_moderateur_consultations",
+  "ticket_moderateur_dentaire",
+];
 
 // Leviers proposés sur le site, dans l'ordre d'affichage, avec le pas de leur curseur (en
 // points ou en centimes par litre). Les autres réponses exportées (leviers génériques des
@@ -82,6 +87,8 @@ export const LEVIERS_PUBLICS: { id: string; pas: number }[] = [
   { id: "ondam_progression", pas: 0.1 },
   { id: "franchises_participations", pas: 5 },
   { id: "ij_plafond_smic", pas: 5 },
+  { id: "ticket_moderateur_consultations", pas: 1 },
+  { id: "ticket_moderateur_dentaire", pas: 1 },
 ];
 // Âge effectif et âge légal de départ : le moteur refuse de les cumuler (double compte).
 export const LEVIERS_RETRAITES = ["retraites_age_depart", "retraites_age_legal"];

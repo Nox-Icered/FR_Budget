@@ -293,6 +293,26 @@ def _ij_plafond_premiere_annee() -> float:
     )
 
 
+def _tm_consultations_hausse() -> float:
+    """Hausse de 30 % à 40 % du ticket modérateur des consultations, en Md€ (calage sur le PLFSS
+    pour 2025)."""
+    return (
+        assurance_maladie.ecart_tm_consultations()
+        * assurance_maladie.rendement_point_tm_consultations().central
+    )
+
+
+def _tm_dentaire_constat() -> float:
+    """Hausse de 30 % à 40 % du ticket modérateur des soins dentaires, du 15 octobre 2023 à fin
+    2024, en M€ (calage sur le constat de la Cour des comptes)."""
+    return (
+        assurance_maladie.ecart_tm_dentaire()
+        * assurance_maladie.rendement_point_tm_dentaire().central
+        * assurance_maladie.annees_constat_dentaire()
+        * MILLIONS_PAR_MILLIARD
+    )
+
+
 def _definitions_quotients_ir() -> list[tuple[str, Callable[[], float]]]:
     """Quotients familial et conjugal : suppression complète, modèle à l'année de la source."""
     return [
@@ -313,6 +333,8 @@ def _definitions_assurance_maladie() -> list[tuple[str, Callable[[], float]]]:
         ("franchises_pf_doublement_avec_plafonds_2026", _franchises_doublement),
         ("ij_plafond_1_8_1_4_plfss2025", _ij_plafond_premiere_annee),
         ("ij_plafond_lfss2025_ccomptes", _ij_plafond_premiere_annee),
+        ("tm_consultations_economie_senat_2025", _tm_consultations_hausse),
+        ("tm_dentaire_economie_oct2023_dec2024", _tm_dentaire_constat),
     ]
 
 
